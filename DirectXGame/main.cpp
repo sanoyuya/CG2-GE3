@@ -77,6 +77,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//DirectX毎フレーム処理　ここまで
 	}
 
+
 	//ウインドウクラスを登録解除
 	UnregisterClass(w.lpszClassName, w.hInstance);
 
