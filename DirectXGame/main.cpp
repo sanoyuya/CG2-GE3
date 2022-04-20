@@ -441,11 +441,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 		
 		// ビューポート設定コマンド
-		/*const int Width = 960;
-		const int Height = 520;*/
+		const int Width = 960;
+		const int Height = 520;
 		D3D12_VIEWPORT viewport{};
-		viewport.Width = window_width;
-		viewport.Height = window_height;
+		viewport.Width = Width;
+		viewport.Height = Height;
 		viewport.TopLeftX = 0;
 		viewport.TopLeftY = 0;
 		viewport.MinDepth = 0.0f;
