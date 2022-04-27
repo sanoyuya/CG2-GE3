@@ -9,6 +9,7 @@ using namespace DirectX;
 #include <d3dcompiler.h>
 #define DIRECTINPUT_VERSION 0x0800	//DirectInputのバージョン指定
 #include<dinput.h>
+#include "Input.h"
 
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
@@ -203,23 +204,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 
-	//DirectInputの初期化
-	IDirectInput8* directInput = nullptr;
-	result = DirectInput8Create(w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
-	assert(SUCCEEDED(result));
-
-	//キーボードデバイスの生成
-	IDirectInputDevice8* keyboard = nullptr;
-	result = directInput->CreateDevice(GUID_SysKeyboard, &keyboard, NULL);
-	assert(SUCCEEDED(result));
-
-	//入力データ形式のセット
-	result = keyboard->SetDataFormat(&c_dfDIKeyboard);//標準形式
-	assert(SUCCEEDED(result));
-
-	//排他制御レベルのセット
-	result = keyboard->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
-	assert(SUCCEEDED(result));
+	Input input;
+	input.Initialize(result,hwnd,w);
 
 	//DirectX初期化処理 ここまで
 
@@ -488,14 +474,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 		//DirectX毎フレーム処理　ここから
 		 
-		//キーボード情報の取得開始
-		keyboard->Acquire();
-
-		//全キーの入力状態を取得する
-		for (int i = 0; i < _countof(oldkey); i++) {
-			oldkey[i] = key[i];
-		}
-		keyboard->GetDeviceState(sizeof(key), key);
+		input.Update();
 
 		//バックバッファの番号を取得(2つなので0か1番)
 		UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
@@ -518,6 +497,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 
 		//4.描画コマンドここから
+
+
 		
 		// ビューポート設定コマンド
 		D3D12_VIEWPORT viewport{};
@@ -555,6 +536,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		// 描画コマンド
 		commandList->DrawInstanced(_countof(vertices), 1, 0, 0); // 全ての頂点を使って描画
+
+		
+		if (input.TriggerPush(DIK_0)) {
+			FLOAT clearColor[] = { 1.0f,0.0f,0.25f,0.0f };//ピンクっぽい色
+			commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+		}
 
 		//4.描画コマンドここまで
 
@@ -596,8 +583,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//ウインドウクラスを登録解除
 	UnregisterClass(w.lpszClassName, w.hInstance);
-
-
 
 	return 0;
 }
