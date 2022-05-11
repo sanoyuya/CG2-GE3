@@ -204,8 +204,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 
-	Input input;
-	input.Initialize(result,hwnd,w);
+	Input input;//Inputクラス読み込み
+	input.Initialize(result,hwnd,w);//初期化処理
 
 	//DirectX初期化処理 ここまで
 
@@ -457,9 +457,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//描画初期化処理ここまで
 
-	BYTE oldkey[256] = {};
-	BYTE key[256] = {};
-
 	// ゲームループ
 	while (true) {
 		//メッセージがある？
@@ -474,6 +471,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 		//DirectX毎フレーム処理　ここから
 		 
+		//キー取得開始
 		input.Update();
 
 		//バックバッファの番号を取得(2つなので0か1番)
@@ -497,8 +495,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 
 		//4.描画コマンドここから
-
-
 		
 		// ビューポート設定コマンド
 		D3D12_VIEWPORT viewport{};
@@ -542,6 +538,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			FLOAT clearColor[] = { 1.0f,0.0f,0.25f,0.0f };//ピンクっぽい色
 			commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 		}
+
+		//三角形の色を毎フレーム変える
+		constMapMaterial->color.x -= 0.01f;
+		constMapMaterial->color.y += 0.01f;
 
 		//4.描画コマンドここまで
 
