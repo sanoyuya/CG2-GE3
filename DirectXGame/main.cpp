@@ -42,6 +42,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//DirectX毎フレーム処理　ここから
 
 		DirectX_.Update();
+		DirectX_.DrawUpdate();
 
 		//DirectX毎フレーム処理　ここまで
 

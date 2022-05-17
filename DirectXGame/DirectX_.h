@@ -112,7 +112,18 @@ private:
 	// シザー矩形
 	D3D12_RECT scissorRect{};
 
+	XMFLOAT3 vertices[4] = {
+		{-0.5f,-0.5f,0.0f},//左下
+		{-0.5f,+0.5f,0.0f},//左上
+		{+0.5f,-0.5f,0.0f},//右下
+		{+0.5f,+0.5f,0.0f},//右上
+	};
 
+	//インデックスデータ
+	uint16_t indices[6] = {
+		0,1,2,//三角形1つ目
+		1,2,3,//三角形2つ目
+	};
 
 	//1.リソースバリアで書き込み可能に変更
 	D3D12_RESOURCE_BARRIER barrierDesc{};

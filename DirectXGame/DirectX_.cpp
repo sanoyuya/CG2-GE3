@@ -235,6 +235,18 @@ void DirectX_::DrawInitiaize() {
 	pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID; // ポリゴン内塗りつぶし
 	pipelineDesc.RasterizerState.DepthClipEnable = true; // 深度クリッピングを有効に
 
+	//インデックスデータ全体のサイズ
+	UINT sizeIB = static_cast<UINT>(sizeof(uint16_t) * _countof(indices));
+
+	//リソース設定
+	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	resDesc.Width = sizeIB;//インデックス情報が入る分のサイズ
+	resDesc.Height = 1;
+	resDesc.DepthOrArraySize = 1;
+	resDesc.MipLevels = 1;
+	resDesc.SampleDesc.Count = 1;
+	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
 	//インデックスバッファの生成
 	result = device->CreateCommittedResource(
 		&heapProp,//ヒープ設定
@@ -373,8 +385,8 @@ void DirectX_::Update() {
 	commandList->IASetIndexBuffer(&ibView);
 
 	// 描画コマンド
-	//commandList->DrawInstanced(_countof(vertices), 1, 0, 0); // 全ての頂点を使って描画
-	//commandList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
+	commandList->DrawInstanced(_countof(vertices), 1, 0, 0); // 全ての頂点を使って描画
+	commandList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 
 
 	if (input.KeepPush(DIK_0)) {
@@ -425,19 +437,6 @@ void DirectX_::Update() {
 //描画初期化処理
 void DirectX_::DrawUpdate() {
 
-	XMFLOAT3 vertices[] = {
-		{-0.5f,-0.5f,0.0f},//左下
-		{-0.5f,+0.5f,0.0f},//左上
-		{+0.5f,-0.5f,0.0f},//右下
-		{+0.5f,+0.5f,0.0f},//右上
-	};
-
-	//インデックスデータ
-	uint16_t indices[] = {
-		0,1,2,//三角形1つ目
-		1,2,3,//三角形2つ目
-	};
-
 	//頂点データ全体サイズ = 頂点データ一つ分のサイズ * 頂点データの要素数
 	UINT sizeVB = static_cast<UINT>(sizeof(XMFLOAT3) * _countof(vertices));
 
@@ -447,15 +446,6 @@ void DirectX_::DrawUpdate() {
 	// リソース設定
 	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 	resDesc.Width = sizeVB; // 頂点データ全体のサイズ
-	resDesc.Height = 1;
-	resDesc.DepthOrArraySize = 1;
-	resDesc.MipLevels = 1;
-	resDesc.SampleDesc.Count = 1;
-	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-	//リソース設定
-	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = sizeIB;//インデックス情報が入る分のサイズ
 	resDesc.Height = 1;
 	resDesc.DepthOrArraySize = 1;
 	resDesc.MipLevels = 1;
