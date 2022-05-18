@@ -99,9 +99,6 @@ private:
 	D3D12_ROOT_PARAMETER rootParam = {};
 
 
-
-
-
 	//定数バッファ用データ構造体(マテリアル)
 	struct ConstBufferDataMaterial {
 		XMFLOAT4 color;//色(RGBA)
@@ -111,6 +108,12 @@ private:
 	D3D12_VIEWPORT viewport{};
 	// シザー矩形
 	D3D12_RECT scissorRect{};
+
+	//頂点データ全体サイズ = 頂点データ一つ分のサイズ * 頂点データの要素数
+	UINT sizeVB = static_cast<UINT>(sizeof(XMFLOAT3) * _countof(vertices));
+
+	//インデックスデータ全体のサイズ
+	UINT sizeIB = static_cast<UINT>(sizeof(uint16_t) * _countof(indices));
 
 	XMFLOAT3 vertices[4] = {
 		{-0.5f,-0.5f,0.0f},//左下

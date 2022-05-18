@@ -35,7 +35,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (!windowsApp.MessageWindow()) {
 			break;
 		}
-		windowsApp.MessageWindow();
 
 
 
