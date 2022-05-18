@@ -109,24 +109,34 @@ private:
 	// シザー矩形
 	D3D12_RECT scissorRect{};
 
+	//頂点データの構造体
+	struct Vertex {
+		XMFLOAT3 pos;
+		XMFLOAT2 uv;
+	};
+
+	//頂点データ
+	Vertex vertices[4] = {
+		//  x	  y   z		 u	  v
+		{{-0.4f,-0.7f,0.0f},{0.0f,1.0f}},//左下
+		{{-0.4f,+0.7f,0.0f},{0.0f,0.0f}},//左上
+		{{+0.4f,-0.7f,0.0f},{1.0f,1.0f}},//右下
+		{{+0.4f,+0.7f,0.0f},{1.0f,0.0f}},//右上
+	};
+
+	//インデックスデータ
+	unsigned short indices[6] = {
+		0,1,2,//三角形1つ目
+		1,2,3,//三角形2つ目
+	};
+
 	//頂点データ全体サイズ = 頂点データ一つ分のサイズ * 頂点データの要素数
-	UINT sizeVB = static_cast<UINT>(sizeof(XMFLOAT3) * _countof(vertices));
+	UINT sizeVB = static_cast<UINT>(sizeof(vertices[0]) * _countof(vertices));
 
 	//インデックスデータ全体のサイズ
 	UINT sizeIB = static_cast<UINT>(sizeof(uint16_t) * _countof(indices));
 
-	XMFLOAT3 vertices[4] = {
-		{-0.5f,-0.5f,0.0f},//左下
-		{-0.5f,+0.5f,0.0f},//左上
-		{+0.5f,-0.5f,0.0f},//右下
-		{+0.5f,+0.5f,0.0f},//右上
-	};
-
-	//インデックスデータ
-	uint16_t indices[6] = {
-		0,1,2,//三角形1つ目
-		1,2,3,//三角形2つ目
-	};
+	
 
 	//1.リソースバリアで書き込み可能に変更
 	D3D12_RESOURCE_BARRIER barrierDesc{};
