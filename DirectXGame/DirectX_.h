@@ -6,6 +6,7 @@
 #include<vector>
 #include<string>
 #include <d3dcompiler.h>
+#include<DirectXTex.h>
 
 class DirectX_
 {
@@ -148,14 +149,18 @@ private:
 
 	//テクスチャマッピングここから
 	
-	//横方向ピクセル数
-	const size_t textureWidth = 256;
-	//縦方向ピクセル数
-	const size_t textureHeight = 256;
-	//配列の要素数
-	const size_t imageDataCount = textureWidth * textureHeight;
-	//画像イメージデータ配列
-	XMFLOAT4* imageData = new XMFLOAT4[imageDataCount];//必ず後で解放する
+	////横方向ピクセル数
+	//const size_t textureWidth = 256;
+	////縦方向ピクセル数
+	//const size_t textureHeight = 256;
+	////配列の要素数
+	//const size_t imageDataCount = textureWidth * textureHeight;
+	////画像イメージデータ配列
+	//XMFLOAT4* imageData = new XMFLOAT4[imageDataCount];//必ず後で解放する
+
+	TexMetadata metadata{};
+	ScratchImage scratchImg{};
+	ScratchImage mipChain{};
 
 	//ヒープ設定
 	D3D12_HEAP_PROPERTIES textureHeapProp{};
