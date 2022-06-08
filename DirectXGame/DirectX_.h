@@ -94,13 +94,25 @@ private:
 
 
 
+	//定数バッファ用データ構造体(3D変換行列)
+	struct ConstBufferDataTransform {
+		XMMATRIX mat;//3D変換行列
+	};
 
+	//定数バッファの生成
+	ID3D12Resource* constBuffTransform = nullptr;
+	ConstBufferDataTransform* constMapTransform = nullptr;
+
+	//ヒープ設定
+	D3D12_HEAP_PROPERTIES cbHeapProp_{};
+	//リソース設定
+	D3D12_RESOURCE_DESC cbResourceDesc_{};
 
 
 
 
 	//ルートパラメータの設定
-	D3D12_ROOT_PARAMETER rootParams[2] = {};
+	D3D12_ROOT_PARAMETER rootParams[3] = {};
 
 
 	//定数バッファ用データ構造体(マテリアル)
@@ -122,10 +134,10 @@ private:
 	//頂点データ
 	Vertex vertices[4] = {
 		//  x	  y   z		 u	  v
-		{{-0.4f,-0.7f,0.0f},{0.0f,1.0f}},//左下
-		{{-0.4f,+0.7f,0.0f},{0.0f,0.0f}},//左上
-		{{+0.4f,-0.7f,0.0f},{1.0f,1.0f}},//右下
-		{{+0.4f,+0.7f,0.0f},{1.0f,0.0f}},//右上
+		{{0.0f,100.0f,0.0f},{0.0f,1.0f}},//左下
+		{{0.0f,0.0f,0.0f},{0.0f,0.0f}},//左上
+		{{100.0f,100.0f,0.0f},{1.0f,1.0f}},//右下
+		{{100.0f,0.0f,0.0f},{1.0f,0.0f}},//右上
 	};
 
 	//インデックスデータ
@@ -140,7 +152,6 @@ private:
 	//インデックスデータ全体のサイズ
 	UINT sizeIB = static_cast<UINT>(sizeof(uint16_t) * _countof(indices));
 
-	
 
 	//1.リソースバリアで書き込み可能に変更
 	D3D12_RESOURCE_BARRIER barrierDesc{};
@@ -190,6 +201,7 @@ private:
 	//テクスチャマッピングここまで
 
 	Input input;//Inputクラス読み込み
+	
 public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);
 	void DrawInitiaize();
