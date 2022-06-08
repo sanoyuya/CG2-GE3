@@ -130,10 +130,11 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 	input.Initialize(result, hwnd, w);//初期化処理
 }
 
-
-
-
-void DirectX_::DrawInitiaize() {
+void DirectX_::DrawInitialize() {
+	//カメラ生成
+	XMFLOAT3 eye(0, 0, -100);	//視点座標
+	XMFLOAT3 target(0, 0, 0);	//注視点座標
+	XMFLOAT3 up(0, 1, 0);		//上方向ベクトル
 	//描画初期化処理
 	//ヒープ設定
 	cbHeapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
@@ -203,18 +204,8 @@ void DirectX_::DrawInitiaize() {
 	//	0.1f, 1000.0f							//前端、奥端
 	//);
 
-	//射影変換行列(透視投影)
-	XMMATRIX matProjection = XMMatrixPerspectiveFovLH(XMConvertToRadians(45.0f),
-		(float)window_width / window_height,
-		0.1f, 1000.0f
-	);
-
-
-
-
-
-	//定数バッファに転送
-	constMapTransform->mat = matProjection;
+	////定数バッファに転送
+	//constMapTransform->mat = matProjection;
 
 	//値を書き込むと自動的に転送される
 	constMapMaterial->color = XMFLOAT4(1, 0, 0, 0.5);//RGBAで半透明の赤
@@ -534,6 +525,10 @@ void DirectX_::DrawInitiaize() {
 
 //DirectX毎フレーム処理
 void DirectX_::Update() {
+	//カメラ生成
+	XMFLOAT3 eye(0, 0, -100);	//視点座標
+	XMFLOAT3 target(0, 0, 0);	//注視点座標
+	XMFLOAT3 up(0, 1, 0);		//上方向ベクトル
 	//キー取得開始
 	input.Update();
 
@@ -604,6 +599,21 @@ void DirectX_::Update() {
 	//commandList->DrawInstanced(_countof(vertices), 1, 0, 0); // 全ての頂点を使って描画
 	commandList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 
+	if (input.KeepPush(DIK_D) || input.KeepPush(DIK_A)) {
+		if (input.KeepPush(DIK_D)) { angle += XMConvertToRadians(1.0f); }
+		else if (input.KeepPush(DIK_A)) { angle -= XMConvertToRadians(1.0f); }
+
+		//angleラジアンだけがY軸まわりに回転。半径は-100
+		eye.x = -100 * sinf(angle);
+		eye.z = -100 * cosf(angle);
+		//射影変換行列(透視投影)
+		XMMATRIX matProjection = XMMatrixPerspectiveFovLH(XMConvertToRadians(45.0f),
+			(float)window_width / window_height,
+			0.1f, 1000.0f
+		);
+	}
+	//定数バッファに転送
+	constMapTransform->mat = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up)) * XMMatrixPerspectiveFovLH(XMConvertToRadians(45.0f), (float)window_width / window_height, 0.1f, 1000.0f);
 
 	if (input.KeepPush(DIK_0)) {
 		FLOAT clearColor[] = { 1.0f,0.0f,0.25f,0.0f };//ピンクっぽい色

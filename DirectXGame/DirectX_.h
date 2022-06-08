@@ -134,10 +134,10 @@ private:
 	//頂点データ
 	Vertex vertices[4] = {
 		//  x	  y   z		 u	  v
-		{{-50.0f,-50.0f,500.0f},{0.0f,1.0f}},//左下
-		{{-50.0f,50.0f,500.0f},{0.0f,0.0f}},//左上
-		{{50.0f,-50.0f,500.0f},{1.0f,1.0f}},//右下
-		{{50.0f,50.0f,500.0f},{1.0f,0.0f}},//右上
+		{{-50.0f,-50.0f,0.0f},{0.0f,1.0f}},//左下
+		{{-50.0f,50.0f,0.0f},{0.0f,0.0f}},//左上
+		{{50.0f,-50.0f,0.0f},{1.0f,1.0f}},//右下
+		{{50.0f,50.0f,0.0f},{1.0f,0.0f}},//右上
 	};
 
 	//インデックスデータ
@@ -200,13 +200,19 @@ private:
 
 	//テクスチャマッピングここまで
 
+	//ビュー変換行列	
+	XMMATRIX matView;
+	float angle = 0.0f;//カメラの回転角
+
 	Input input;//Inputクラス読み込み
 	
 public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);
-	void DrawInitiaize();
+	void DrawInitialize();
 	void Update();
 	void DrawUpdate();
+	void CameraInitialize();
+	void CameraUpdate();
 	void SetHwnd();
 };
 

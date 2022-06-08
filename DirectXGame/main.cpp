@@ -23,7 +23,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚©‚ç
 
-	DirectX_.DrawInitiaize();
+	DirectX_.DrawInitialize();
 
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚Ü‚Å
 
