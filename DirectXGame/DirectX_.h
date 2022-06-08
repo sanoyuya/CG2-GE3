@@ -119,7 +119,7 @@ private:
 	struct ConstBufferDataMaterial {
 		XMFLOAT4 color;//色(RGBA)
 	};
-	
+
 	// ビューポート設定コマンド
 	D3D12_VIEWPORT viewport{};
 	// シザー矩形
@@ -159,7 +159,7 @@ private:
 
 
 	//テクスチャマッピングここから
-	
+
 	////横方向ピクセル数
 	//const size_t textureWidth = 256;
 	////縦方向ピクセル数
@@ -203,9 +203,13 @@ private:
 	//ビュー変換行列	
 	XMMATRIX matView;
 	float angle = 0.0f;//カメラの回転角
+	//カメラ生成
+	XMFLOAT3 eye = { 0, 0, -100 };	//視点座標
+	XMFLOAT3 target = { 0, 0, 0 };	//注視点座標
+	XMFLOAT3 up = { 0, 1, 0 };		//上方向ベクトル
 
 	Input input;//Inputクラス読み込み
-	
+
 public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);
 	void DrawInitialize();

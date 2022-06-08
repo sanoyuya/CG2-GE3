@@ -525,10 +525,7 @@ void DirectX_::DrawInitialize() {
 
 //DirectX毎フレーム処理
 void DirectX_::Update() {
-	//カメラ生成
-	XMFLOAT3 eye(0, 0, -100);	//視点座標
-	XMFLOAT3 target(0, 0, 0);	//注視点座標
-	XMFLOAT3 up(0, 1, 0);		//上方向ベクトル
+
 	//キー取得開始
 	input.Update();
 
