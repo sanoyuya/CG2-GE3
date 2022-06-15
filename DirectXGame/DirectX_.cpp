@@ -496,6 +496,56 @@ void DirectX_::DrawInitialize() {
 	device->CreateShaderResourceView(texBuff, &srvDesc, srvHandle);
 
 	//テクスチャマッピングここまで
+
+
+
+	//深度バッファここから
+	
+	//リソース設定
+	depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	depthResourceDesc.Width = window_width;//レンダーターゲットに合わせる
+	depthResourceDesc.Height = window_height;//レンダーターゲットに合わせる
+	depthResourceDesc.DepthOrArraySize = 1;
+	depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT;//深度値フォーマット
+	depthResourceDesc.SampleDesc.Count = 1;
+	depthResourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;//デプスステンシル
+
+	//深度値用ヒーププロパティ
+	depthHeapProp.Type = D3D12_HEAP_TYPE_DEFAULT;
+
+	//深度値のクリア設定
+	depthClearValue.DepthStencil.Depth = 1.0f;//深度値1.0f(最大値)でクリア
+	depthClearValue.Format = DXGI_FORMAT_D32_FLOAT;//深度値フォーマット
+
+	//リソース設定
+	result = device->CreateCommittedResource(
+		&depthHeapProp,
+		D3D12_HEAP_FLAG_NONE,
+		&depthResourceDesc,
+		D3D12_RESOURCE_STATE_DEPTH_WRITE,
+		&depthClearValue,
+		IID_PPV_ARGS(&depthBuff));
+	
+	//深度ビュー用デスクリプタヒープ作成
+	dsvHeapDesc.NumDescriptors = 1;
+	dsvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+	result = device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&dsvHeap));
+
+	//深度ビュー作成
+	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
+	device->CreateDepthStencilView(
+		depthBuff,
+		&dsvDesc,
+		dsvHeap->GetCPUDescriptorHandleForHeapStart());
+
+	//デプスステンシルステートの設定
+	pipelineDesc.DepthStencilState.DepthEnable = true;//深度テストを行う
+	pipelineDesc.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;//書き込み許可
+	pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS;//小さければ合格
+	pipelineDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;//深度値フォーマット
+
+	//深度バッファここまで
 }
 
 
@@ -519,11 +569,13 @@ void DirectX_::Update() {
 	//レンダーターゲットビューのハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
 	rtvHandle.ptr += bbIndex * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type);
-	commandList->OMSetRenderTargets(1, &rtvHandle, false, nullptr);
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	commandList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 
 	//3.画面クリア
 	FLOAT clearColor[] = { 0.1f,0.25f,0.5f,0.0f };//背景の色設定
 	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
 	//4.描画コマンドここから
 
@@ -583,12 +635,19 @@ void DirectX_::Update() {
 		commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 	}
 
+	if (input.KeepPush(DIK_W) || input.KeepPush(DIK_S) || input.KeepPush(DIK_D) || input.KeepPush(DIK_A)) {
+		//座標を移動する処理(Z座標)
+		if (input.KeepPush(DIK_W)) { position.z += 1.0f; }
+		else if (input.KeepPush(DIK_S)) { position.z -= 1.0f; }
+		if (input.KeepPush(DIK_D)) { position.x += 1.0f; }
+		else if (input.KeepPush(DIK_A)) { position.x -= 1.0f; }
+	}
 	if (input.KeepPush(DIK_UP) || input.KeepPush(DIK_DOWN) || input.KeepPush(DIK_RIGHT) || input.KeepPush(DIK_LEFT)) {
 		//座標を移動する処理(Z座標)
-		if (input.KeepPush(DIK_UP)) { position.z += 1.0f; }
-		else if (input.KeepPush(DIK_DOWN)) { position.z -= 1.0f; }
-		if (input.KeepPush(DIK_RIGHT)) { position.x += 1.0f; }
-		else if (input.KeepPush(DIK_LEFT)) { position.x -= 1.0f; }
+		if (input.KeepPush(DIK_UP)) { rotation.x += 1.0f; }
+		else if (input.KeepPush(DIK_DOWN)) { rotation.x -= 1.0f; }
+		if (input.KeepPush(DIK_RIGHT)) { rotation.y -= 1.0f; }
+		else if (input.KeepPush(DIK_LEFT)) { rotation.y += 1.0f; }
 	}
 
 	matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
