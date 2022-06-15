@@ -208,6 +208,17 @@ private:
 	XMFLOAT3 target = { 0, 0, 0 };	//注視点座標
 	XMFLOAT3 up = { 0, 1, 0 };		//上方向ベクトル
 
+	//ワールド変換行列
+	XMMATRIX matWorld;
+	//スケーリング行列
+	XMMATRIX matScale;
+	//回転行列
+	XMMATRIX matRot;
+	//平行移動行列
+	XMMATRIX matTrans;
+	//座標
+	XMFLOAT3 position = { 0.0f,0.0f,0.0f };
+
 	Input input;//Inputクラス読み込み
 
 public:
@@ -215,8 +226,6 @@ public:
 	void DrawInitialize();
 	void Update();
 	void DrawUpdate();
-	void CameraInitialize();
-	void CameraUpdate();
 	void SetHwnd();
 };
 
