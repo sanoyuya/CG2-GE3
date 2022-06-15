@@ -184,42 +184,6 @@ void DirectX_::DrawInitialize() {
 	result = constBuffTransform->Map(0, nullptr, (void**)&constMapTransform);//マッピング
 	assert(SUCCEEDED(result));
 
-	//単位行列を代入
-	constMapTransform->mat = XMMatrixIdentity();
-
-	////透視投影行列の計算
-	//constMapTransform->mat = XMMatrixPerspectiveFovLH(
-	//	XMConvertToRadians(45.0f),				//上下画角45度
-	//	(float)window_width / window_height,	//アスペクト比(画面横幅/画面縦幅)
-	//	0.1f, 1000.0f							//前端、奥端
-	//);
-	//射影変換行列(透視投影)
-	XMMATRIX matProjection = XMMatrixPerspectiveFovLH(XMConvertToRadians(45.0f),
-		(float)window_width / window_height,
-		0.1f, 1000.0f
-	);
-
-	matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
-
-	matWorld = XMMatrixIdentity();
-
-	matScale = XMMatrixScaling(1.0f, 0.5f, 1.0f);
-	matWorld *= matScale;//ワールド行列にスケーリング反映
-
-	matRot = XMMatrixIdentity();
-	matRot *= XMMatrixRotationZ(XMConvertToRadians(0.0f));//Z軸周りに45度回転
-	matRot *= XMMatrixRotationX(XMConvertToRadians(15.0f));//X軸周りに15度回転
-	matRot *= XMMatrixRotationY(XMConvertToRadians(30.0f));//Y軸周りに30度回転
-	matWorld *= matRot;//ワールド行列に回転を反映
-
-	matTrans = XMMatrixTranslation(-50.0f, 0, 0);//(-50.0f, 0, 0)平行移動
-	matWorld *= matTrans;//ワールド行列に平行移動を反映
-
-	//定数バッファに転送
-	constMapTransform->mat = matWorld * matView * matProjection;
-
-
-
 	//値を書き込むと自動的に転送される
 	constMapMaterial->color = XMFLOAT4(1, 0, 0, 0.5);//RGBAで半透明の赤
 
@@ -614,42 +578,37 @@ void DirectX_::Update() {
 
 
 
-	//if (input.KeepPush(DIK_0)) {
-	//	FLOAT clearColor[] = { 1.0f,0.0f,0.25f,0.0f };//ピンクっぽい色
-	//	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
-	//}
+	if (input.KeepPush(DIK_0)) {
+		FLOAT clearColor[] = { 1.0f,0.0f,0.25f,0.0f };//ピンクっぽい色
+		commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	}
 
-	//if (input.KeepPush(DIK_UP) || input.KeepPush(DIK_DOWN) || input.KeepPush(DIK_RIGHT) || input.KeepPush(DIK_LEFT)) {
-	//	//座標を移動する処理(Z座標)
-	//	if (input.KeepPush(DIK_UP)) { position.z += 1.0f; }
-	//	else if (input.KeepPush(DIK_DOWN)) { position.z -= 1.0f; }
-	//	if (input.KeepPush(DIK_RIGHT)) { position.x += 1.0f; }
-	//	else if (input.KeepPush(DIK_LEFT)) { position.x -= 1.0f; }
-	//}
+	if (input.KeepPush(DIK_UP) || input.KeepPush(DIK_DOWN) || input.KeepPush(DIK_RIGHT) || input.KeepPush(DIK_LEFT)) {
+		//座標を移動する処理(Z座標)
+		if (input.KeepPush(DIK_UP)) { position.z += 1.0f; }
+		else if (input.KeepPush(DIK_DOWN)) { position.z -= 1.0f; }
+		if (input.KeepPush(DIK_RIGHT)) { position.x += 1.0f; }
+		else if (input.KeepPush(DIK_LEFT)) { position.x -= 1.0f; }
+	}
 
-	////射影変換行列(透視投影)
-	//XMMATRIX matProjection = XMMatrixPerspectiveFovLH(XMConvertToRadians(45.0f),
-	//	(float)window_width / window_height,
-	//	0.1f, 1000.0f
-	//);
+	matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
 
-	//matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
-	//matWorld = XMMatrixIdentity();
+	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 
-	//matScale = XMMatrixScaling(1.0f, 0.5f, 1.0f);
-	//matWorld *= matScale;//ワールド行列にスケーリング反映
+	matRot = XMMatrixIdentity();
+	matRot *= XMMatrixRotationZ(XMConvertToRadians(rotation.z));
+	matRot *= XMMatrixRotationX(XMConvertToRadians(rotation.x));
+	matRot *= XMMatrixRotationY(XMConvertToRadians(rotation.y));
 
-	//matRot = XMMatrixIdentity();
-	//matRot *= XMMatrixRotationZ(XMConvertToRadians(0.0f));//Z軸周りに45度回転
-	//matRot *= XMMatrixRotationX(XMConvertToRadians(15.0f));//X軸周りに15度回転
-	//matRot *= XMMatrixRotationY(XMConvertToRadians(30.0f));//Y軸周りに30度回転
-	//matWorld *= matRot;//ワールド行列に回転を反映
+	matTrans = XMMatrixTranslation(position.x, position.y, position.z);
 
-	//matTrans = XMMatrixTranslation(position.x, position.y, position.z);//(-50.0f, 0, 0)平行移動
-	//matWorld *= matTrans;//ワールド行列に平行移動を反映
+	matWorld = XMMatrixIdentity();//変形リセット
+	matWorld *= matScale;//ワールド行列にスケーリング反映
+	matWorld *= matRot;//ワールド行列に回転を反映
+	matWorld *= matTrans;//ワールド行列に平行移動を反映
 
-	////定数バッファに転送
-	//constMapTransform->mat = matWorld * matView * matProjection;
+	//定数バッファに転送
+	constMapTransform->mat = matWorld * matView * matProjection;
 
 
 
