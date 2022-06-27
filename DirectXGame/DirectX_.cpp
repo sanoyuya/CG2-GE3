@@ -653,7 +653,17 @@ void DirectX_::Update() {
 		if (input.KeepPush(DIK_RIGHT)) { rotation.y -= 1.0f; }
 		else if (input.KeepPush(DIK_LEFT)) { rotation.y += 1.0f; }
 	}
-
+	if (input.KeepPush(DIK_U) || input.KeepPush(DIK_I) || input.KeepPush(DIK_J)|| input.KeepPush(DIK_K) || input.KeepPush(DIK_N) || input.KeepPush(DIK_M)) {
+		if (input.KeepPush(DIK_U)) { scale.x += 0.1f; }
+		else if (input.KeepPush(DIK_I)) { scale.x -= 0.1f; }
+		if (input.KeepPush(DIK_J)) { scale.y += 0.1f; }
+		else if (input.KeepPush(DIK_K)) { scale.y -= 0.1f; }
+		if (input.KeepPush(DIK_N)) { scale.z += 0.1f; }
+		else if (input.KeepPush(DIK_M)) { scale.z -= 0.1f; }
+		if (scale.x < 0.1) {scale.x = 0.1f;}
+		if (scale.y < 0.1) {scale.y = 0.1f;}
+		if (scale.z < 0.1) {scale.z = 0.1f;}
+	}
 	matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
 	
 	MATRIX4.MakeScaling(scale.x, scale.y, scale.z);
@@ -735,6 +745,29 @@ void DirectX_::DrawUpdate() {
 		nullptr,
 		IID_PPV_ARGS(&vertBuff));
 	assert(SUCCEEDED(result));
+
+	for (int i = 0; i < 36 / 3; i++) {
+		//三角形1つごとに計算していく
+		//三角形のインデックスを割り出して、一時的な変数に入れる
+		unsigned short indices0 = indices[i * 3 + 0];
+		unsigned short indices1 = indices[i * 3 + 1];
+		unsigned short indices2 = indices[i * 3 + 2];
+		//三角形を構成する頂点座標をベクトルに代入
+		XMVECTOR p0 = XMLoadFloat3(&vertices[indices0].pos);
+		XMVECTOR p1 = XMLoadFloat3(&vertices[indices1].pos);
+		XMVECTOR p2 = XMLoadFloat3(&vertices[indices2].pos);
+		//p0→p1ベクトル、p0→p2ベクトルを計算(ベクトルの減算)
+		XMVECTOR v1 = XMVectorSubtract(p1, p0);
+		XMVECTOR v2 = XMVectorSubtract(p2, p0);
+		//外積は両方から垂直なベクトル
+		XMVECTOR normal = XMVector3Cross(v1, v2);
+		//正規化(長さを1にする)
+		normal = XMVector3Normalize(normal);
+		//求めた法線を頂点データに代入
+		XMStoreFloat3(&vertices[indices0].normal, normal);
+		XMStoreFloat3(&vertices[indices1].normal, normal);
+		XMStoreFloat3(&vertices[indices2].normal, normal);
+	}
 
 	// GPU上のバッファに対応した仮想メモリ(メインメモリ上)を取得
 	Vertex* vertMap = nullptr;
