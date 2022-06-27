@@ -7,12 +7,18 @@
 #include<string>
 #include <d3dcompiler.h>
 #include<DirectXTex.h>
+#include <DirectXMath.h>
+#include"myMath.h"
+using namespace myMath;
+using namespace DirectX;
 
 class DirectX_
 {
 private:
 	const int window_width = 1280;//横幅
 	const int window_height = 720;//縦幅
+	Input input;//Inputクラス読み込み
+	Matrix4 MATRIX4;
 
 	HRESULT result;
 	ID3D12Device* device = nullptr;
@@ -252,19 +258,19 @@ private:
 	XMFLOAT3 up = { 0, 1, 0 };		//上方向ベクトル
 
 	//射影変換行列(透視投影)
-	XMMATRIX matProjection = XMMatrixPerspectiveFovLH(XMConvertToRadians(45.0f),
+	Matrix4 matProjection = XMMatrixPerspectiveFovLH(ChangeRadians(45.0f),
 		(float)window_width / window_height,
 		0.1f, 1000.0f
 	);
 
 	//ワールド変換行列
-	XMMATRIX matWorld;
+	Matrix4 matWorld;
 	//スケーリング行列
-	XMMATRIX matScale;
+	Matrix4 matScale;
 	//回転行列
-	XMMATRIX matRot;
+	Matrix4 matRot;
 	//平行移動行列
-	XMMATRIX matTrans;
+	Matrix4 matTrans;
 	//座標
 	XMFLOAT3 scale = { 1.0f,1.0f,1.0f };
 	//回転角
@@ -285,7 +291,6 @@ private:
 	ID3D12DescriptorHeap* dsvHeap = nullptr;
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 
-	Input input;//Inputクラス読み込み
 
 public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);

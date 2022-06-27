@@ -1,5 +1,6 @@
 #include "DirectX_.h"
 #include "Input.h"
+#include"myMath.h"
 
 #include<d3d12.h>
 #include<dxgi1_6.h>
@@ -654,20 +655,25 @@ void DirectX_::Update() {
 	}
 
 	matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
+	
+	MATRIX4.MakeScaling(scale.x, scale.y, scale.z);
+	matScale = MATRIX4;
 
-	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
+	matRot = MakeIdentity();
+	MATRIX4 = MakeIdentity();
+	MATRIX4.MakeRotation(ChangeRadians(rotation.x), ChangeRadians(rotation.y), ChangeRadians(rotation.z));
+	matRot *= MATRIX4;
 
-	matRot = XMMatrixIdentity();
-	matRot *= XMMatrixRotationZ(XMConvertToRadians(rotation.z));
-	matRot *= XMMatrixRotationX(XMConvertToRadians(rotation.x));
-	matRot *= XMMatrixRotationY(XMConvertToRadians(rotation.y));
+	MATRIX4 = MakeIdentity();
+	MATRIX4.MakeTranslation(position.x, position.y, position.z);
+	matTrans = MATRIX4;
 
-	matTrans = XMMatrixTranslation(position.x, position.y, position.z);
-
-	matWorld = XMMatrixIdentity();//変形リセット
+	matWorld = MakeIdentity();//変形リセット
 	matWorld *= matScale;//ワールド行列にスケーリング反映
 	matWorld *= matRot;//ワールド行列に回転を反映
 	matWorld *= matTrans;//ワールド行列に平行移動を反映
+
+	MATRIX4 = MakeIdentity();
 
 	//定数バッファに転送
 	constMapTransform->mat = matWorld * matView * matProjection;
