@@ -169,6 +169,8 @@ void DirectX_::DrawInitialize() {
 	cbResourceDesc_.SampleDesc.Count = 1;
 	cbResourceDesc_.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
+
+
 	//定数バッファの生成
 	result = device->CreateCommittedResource(
 		&cbHeapProp_,//ヒープ設定
@@ -176,12 +178,29 @@ void DirectX_::DrawInitialize() {
 		&cbResourceDesc_,//リソース設定
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(&constBuffTransform));
+		IID_PPV_ARGS(&constBuffTransform0));
 	assert(SUCCEEDED(result));
 
 	//定数バッファのマッピング
-	result = constBuffTransform->Map(0, nullptr, (void**)&constMapTransform);//マッピング
+	result = constBuffTransform0->Map(0, nullptr, (void**)&constMapTransform0);//マッピング
 	assert(SUCCEEDED(result));
+
+	//定数バッファの生成
+	result = device->CreateCommittedResource(
+		&cbHeapProp_,//ヒープ設定
+		D3D12_HEAP_FLAG_NONE,
+		&cbResourceDesc_,//リソース設定
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&constBuffTransform1));
+	assert(SUCCEEDED(result));
+
+	//定数バッファのマッピング
+	result = constBuffTransform1->Map(0, nullptr, (void**)&constMapTransform1);//マッピング
+	assert(SUCCEEDED(result));
+
+
+
 
 	//値を書き込むと自動的に転送される
 	constMapMaterial->color = XMFLOAT4(1, 0, 0, 0.5);//RGBAで半透明の赤
@@ -617,19 +636,20 @@ void DirectX_::UpdateClear() {
 	commandList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	//インデックスバッファビューの設定コマンド
 	commandList->IASetIndexBuffer(&ibView);
-	//定数バッファビュー(CBV)の設定コマンド
-	commandList->SetGraphicsRootConstantBufferView(2, constBuffTransform->GetGPUVirtualAddress());
+	//0番定数バッファビュー(CBV)の設定コマンド
+	commandList->SetGraphicsRootConstantBufferView(2, constBuffTransform0->GetGPUVirtualAddress());
+	// 描画コマンド
+	commandList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 
+	//1番定数バッファビュー(CBV)の設定コマンド
+	commandList->SetGraphicsRootConstantBufferView(2, constBuffTransform1->GetGPUVirtualAddress());
 	// 描画コマンド
 	commandList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 
 	//4.描画コマンドここまで
 }
 
-void DirectX_::UpdateEnd(Matrix4 matWorld, Matrix4 matView, Matrix4 matProjection){
-	
-	//定数バッファに転送
-	constMapTransform->mat = matWorld * matView * matProjection;
+void DirectX_::UpdateEnd(){
 
 	//5.リソースバリアを戻す
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態から
@@ -731,3 +751,14 @@ void DirectX_::DrawUpdate() {
 	ibView.Format = DXGI_FORMAT_R16_UINT;
 	ibView.SizeInBytes = sizeIB;
 }
+
+void DirectX_::Send0(Matrix4 matWorld, XMMATRIX matView, Matrix4 matProjection){
+	//定数バッファに転送
+	constMapTransform0->mat = matWorld * matView * matProjection;
+}
+
+void DirectX_::Send1(Matrix4 matWorld, XMMATRIX matView, Matrix4 matProjection){
+	//定数バッファに転送
+	constMapTransform1->mat = matWorld * matView * matProjection;
+}
+

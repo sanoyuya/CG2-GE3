@@ -105,8 +105,11 @@ private:
 	};
 
 	//定数バッファの生成
-	ID3D12Resource* constBuffTransform = nullptr;
-	ConstBufferDataTransform* constMapTransform = nullptr;
+	ID3D12Resource* constBuffTransform0 = nullptr;
+	ConstBufferDataTransform* constMapTransform0 = nullptr;
+
+	ID3D12Resource* constBuffTransform1 = nullptr;
+	ConstBufferDataTransform* constMapTransform1 = nullptr;
 
 	//ヒープ設定
 	D3D12_HEAP_PROPERTIES cbHeapProp_{};
@@ -268,8 +271,9 @@ public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);
 	void DrawInitialize();
 	void UpdateClear();
-	void UpdateEnd(Matrix4 matWorld, Matrix4 matView, Matrix4 matProjection);
+	void UpdateEnd();
 	void DrawUpdate();
-	void SetHwnd();
+	void Send0(Matrix4 matWorld, XMMATRIX matView, Matrix4 matProjection);
+	void Send1(Matrix4 matWorld, XMMATRIX matView, Matrix4 matProjection);
 };
 

@@ -43,12 +43,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//ワールド変換行列
 	Matrix4 matWorld;
+	Matrix4 matWorld1;
 	//スケーリング行列
 	Matrix4 matScale;
+	Matrix4 matScale1 = XMMatrixScaling(1.0f, 1.0f, 1.0f);
 	//回転行列
 	Matrix4 matRot;
+	Matrix4 matRot1 = XMMatrixRotationY(XM_PI / 4.0f);
 	//平行移動行列
 	Matrix4 matTrans;
+	Matrix4 matTrans1 = XMMatrixTranslation(-20.0f, 0, 0);
 	//座標
 	XMFLOAT3 scale = { 1.0f,1.0f,1.0f };
 	//回転角
@@ -60,7 +64,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	XMMATRIX matView;
 	float angle = 0.0f;//カメラの回転角
 	//カメラ生成
-	XMFLOAT3 eye = { 0, 0, -100 };	//視点座標
+	XMFLOAT3 eye = { 0, 30, -100 };	//視点座標
 	XMFLOAT3 target = { 0, 0, 0 };	//注視点座標
 	XMFLOAT3 up = { 0, 1, 0 };		//上方向ベクトル
 
@@ -131,11 +135,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		MATRIX4 = MakeIdentity();
 
+		//ワールド行列を合成
+		matWorld1 = matScale1 * matRot1 * matTrans1;
+
+		DirectX_.Send0(matWorld, matView, matProjection);
+		DirectX_.Send1(matWorld1, matView, matProjection);
+
 		//描画処理
 
 
 
-		DirectX_.UpdateEnd(matWorld, matView, matProjection);
+		DirectX_.UpdateEnd();
 
 		DirectX_.DrawUpdate();
 	}
