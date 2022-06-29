@@ -10,8 +10,10 @@ private:
 	BYTE oldkey[256] = {};
 	BYTE key[256] = {};
 
+	HRESULT result;
+
 public:
-	void Initialize(HRESULT result, HWND hwnd, WNDCLASSEX w);
+	void Initialize(HWND hwnd, WNDCLASSEX w);
 	void Update();
 
 	bool TriggerPush(int keyName);

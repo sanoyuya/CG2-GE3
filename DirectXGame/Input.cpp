@@ -1,5 +1,5 @@
 #include "Input.h"
-#define DIRECTINPUT_VERSION 0x0800	//DirectInputのバージョン指定
+//#define DIRECTINPUT_VERSION 0x0800	//DirectInputのバージョン指定
 #include<dinput.h>
 #include<DirectXMath.h>
 using namespace DirectX;
@@ -7,7 +7,7 @@ using namespace DirectX;
 #pragma comment(lib,"dinput8.lib")
 #pragma comment(lib,"dxguid.lib")
 
-void Input::Initialize(HRESULT result, HWND hwnd, WNDCLASSEX w){//初期化
+void Input::Initialize(HWND hwnd, WNDCLASSEX w){//初期化
 	//DirectInputの初期化
 	result = DirectInput8Create(w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
 	assert(SUCCEEDED(result));

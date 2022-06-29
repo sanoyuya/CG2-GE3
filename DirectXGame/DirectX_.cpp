@@ -127,8 +127,6 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 	}
 
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
-
-	input.Initialize(result, hwnd, w);//初期化処理
 }
 
 void DirectX_::DrawInitialize() {
@@ -555,10 +553,7 @@ void DirectX_::DrawInitialize() {
 
 
 //DirectX毎フレーム処理
-void DirectX_::Update() {
-
-	//キー取得開始
-	input.Update();
+void DirectX_::UpdateClear() {
 
 	//バックバッファの番号を取得(2つなので0か1番)
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
@@ -626,78 +621,15 @@ void DirectX_::Update() {
 	commandList->SetGraphicsRootConstantBufferView(2, constBuffTransform->GetGPUVirtualAddress());
 
 	// 描画コマンド
-	//commandList->DrawInstanced(_countof(vertices), 1, 0, 0); // 全ての頂点を使って描画
 	commandList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 
+	//4.描画コマンドここまで
+}
 
-
-
-
-
-	if (input.KeepPush(DIK_0)) {
-		FLOAT clearColor[] = { 1.0f,0.0f,0.25f,0.0f };//ピンクっぽい色
-		commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
-	}
-
-	if (input.KeepPush(DIK_W) || input.KeepPush(DIK_S) || input.KeepPush(DIK_D) || input.KeepPush(DIK_A)) {
-		//座標を移動する処理(Z座標)
-		if (input.KeepPush(DIK_W)) { position.z += 1.0f; }
-		else if (input.KeepPush(DIK_S)) { position.z -= 1.0f; }
-		if (input.KeepPush(DIK_D)) { position.x += 1.0f; }
-		else if (input.KeepPush(DIK_A)) { position.x -= 1.0f; }
-	}
-	if (input.KeepPush(DIK_UP) || input.KeepPush(DIK_DOWN) || input.KeepPush(DIK_RIGHT) || input.KeepPush(DIK_LEFT)) {
-		//座標を移動する処理(Z座標)
-		if (input.KeepPush(DIK_UP)) { rotation.x += 1.0f; }
-		else if (input.KeepPush(DIK_DOWN)) { rotation.x -= 1.0f; }
-		if (input.KeepPush(DIK_RIGHT)) { rotation.y -= 1.0f; }
-		else if (input.KeepPush(DIK_LEFT)) { rotation.y += 1.0f; }
-	}
-	if (input.KeepPush(DIK_U) || input.KeepPush(DIK_I) || input.KeepPush(DIK_J)|| input.KeepPush(DIK_K) || input.KeepPush(DIK_N) || input.KeepPush(DIK_M)) {
-		if (input.KeepPush(DIK_U)) { scale.x += 0.1f; }
-		else if (input.KeepPush(DIK_I)) { scale.x -= 0.1f; }
-		if (input.KeepPush(DIK_J)) { scale.y += 0.1f; }
-		else if (input.KeepPush(DIK_K)) { scale.y -= 0.1f; }
-		if (input.KeepPush(DIK_N)) { scale.z += 0.1f; }
-		else if (input.KeepPush(DIK_M)) { scale.z -= 0.1f; }
-		if (scale.x < 0.1) {scale.x = 0.1f;}
-		if (scale.y < 0.1) {scale.y = 0.1f;}
-		if (scale.z < 0.1) {scale.z = 0.1f;}
-	}
-	matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
+void DirectX_::UpdateEnd(Matrix4 matWorld, Matrix4 matView, Matrix4 matProjection){
 	
-	MATRIX4.MakeScaling(scale.x, scale.y, scale.z);
-	matScale = MATRIX4;
-
-	matRot = MakeIdentity();
-	MATRIX4 = MakeIdentity();
-	MATRIX4.MakeRotation(ChangeRadians(rotation.x), ChangeRadians(rotation.y), ChangeRadians(rotation.z));
-	matRot *= MATRIX4;
-
-	MATRIX4 = MakeIdentity();
-	MATRIX4.MakeTranslation(position.x, position.y, position.z);
-	matTrans = MATRIX4;
-
-	matWorld = MakeIdentity();//変形リセット
-	matWorld *= matScale;//ワールド行列にスケーリング反映
-	matWorld *= matRot;//ワールド行列に回転を反映
-	matWorld *= matTrans;//ワールド行列に平行移動を反映
-
-	MATRIX4 = MakeIdentity();
-
 	//定数バッファに転送
 	constMapTransform->mat = matWorld * matView * matProjection;
-
-
-
-
-
-
-	//三角形の色を毎フレーム変える
-	/*constMapMaterial->color.x -= 0.01f;
-	constMapMaterial->color.y += 0.01f;*/
-
-	//4.描画コマンドここまで
 
 	//5.リソースバリアを戻す
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態から
@@ -728,8 +660,6 @@ void DirectX_::Update() {
 	// 再びコマンドリストを貯める準備
 	result = commandList->Reset(commandAllocator, nullptr);
 	assert(SUCCEEDED(result));
-
-
 }
 
 
