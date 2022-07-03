@@ -104,12 +104,12 @@ private:
 		XMMATRIX mat;//3D変換行列
 	};
 
-	//定数バッファの生成
-	ID3D12Resource* constBuffTransform0 = nullptr;
-	ConstBufferDataTransform* constMapTransform0 = nullptr;
+	////定数バッファの生成
+	//ID3D12Resource* constBuffTransform0 = nullptr;
+	//ConstBufferDataTransform* constMapTransform0 = nullptr;
 
-	ID3D12Resource* constBuffTransform1 = nullptr;
-	ConstBufferDataTransform* constMapTransform1 = nullptr;
+	//ID3D12Resource* constBuffTransform1 = nullptr;
+	//ConstBufferDataTransform* constMapTransform1 = nullptr;
 
 	//ヒープ設定
 	D3D12_HEAP_PROPERTIES cbHeapProp_{};
@@ -267,13 +267,58 @@ private:
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 
 
+
+
+	Matrix4 MATRIX4;
+
+
+
+	//ビュー変換行列	
+	XMMATRIX matView;
+	float angle = 0.0f;//カメラの回転角
+	//カメラ生成
+	XMFLOAT3 eye = { 0, 0, 0 };	//視点座標
+	XMFLOAT3 target = { 0, 0, 0 };	//注視点座標
+	XMFLOAT3 up = { 0, 1, 0 };		//上方向ベクトル
+
+	//射影変換行列(透視投影)
+	XMMATRIX matProjection = XMMatrixPerspectiveFovLH(ChangeRadians(45.0f),
+		(float)window_width / window_height,
+		0.1f, 1000.0f
+	);
+
+
+
+	//3Dオブジェクト型
+	struct Object3d
+	{
+		//定数バッファ(行列用)
+		ID3D12Resource* constBuffTransform;
+		//定数バッファマップ(行列用)
+		ConstBufferDataTransform* constMapTransform;
+		//アフィン変換情報
+		XMFLOAT3 scale = { 1,1,1 };
+		XMFLOAT3 rotation = { 0,0,0 };
+		XMFLOAT3 position = { 0,0,0 };
+		//ワールド変換行列
+		XMMATRIX matWorld;
+		//親オブジェクトへのポインタ
+		Object3d* parent = nullptr;
+	};
+
+	//3Dオブジェクトの数
+	const size_t kObjectCount = 50;
+	//3Dオブジェクトの配列
+	Object3d object3ds[50];
+
 public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);
 	void DrawInitialize();
 	void UpdateClear();
 	void UpdateEnd();
 	void DrawUpdate();
-	void Send0(Matrix4 matWorld, XMMATRIX matView, Matrix4 matProjection);
-	void Send1(Matrix4 matWorld, XMMATRIX matView, Matrix4 matProjection);
+	void InitializeObject3d(Object3d* object, ID3D12Device* device);
+	void UpdateObject3d(Object3d* object, XMMATRIX& matView, XMMATRIX& matProjection);
+	void DrawObject3d(Object3d* object, ID3D12GraphicsCommandList* commandList, D3D12_VERTEX_BUFFER_VIEW& vbView, D3D12_INDEX_BUFFER_VIEW& ibView, UINT numIndices);
 };
 
