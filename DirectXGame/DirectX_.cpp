@@ -129,8 +129,8 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
 
-void DirectX_::DrawInitialize() {
-
+void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
+	input.KeyboardInitialize(hwnd, w);//初期化処理
 	//描画初期化処理
 	//ヒープ設定
 	cbHeapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
@@ -178,7 +178,7 @@ void DirectX_::DrawInitialize() {
 		//先頭以外なら
 		if (i > 0) {
 			//一つ前のオブジェクトを親オブジェクトとする
-			//object3ds[i].parent=&object3ds[i-1];
+			object3ds[i].parent=&object3ds[i-1];
 			//親オブジェクトの9割の大きさ
 			object3ds[i].scale = { 0.9f,0.9f,0.9f };
 			//親オブジェクトに対してz軸周りに30度回転
@@ -560,7 +560,7 @@ void DirectX_::DrawInitialize() {
 
 //DirectX毎フレーム処理
 void DirectX_::UpdateClear() {
-
+	input.KeyboardUpdate();
 	//バックバッファの番号を取得(2つなので0か1番)
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
 
@@ -624,6 +624,7 @@ void DirectX_::UpdateClear() {
 	//インデックスバッファビューの設定コマンド
 	commandList->IASetIndexBuffer(&ibView);
 
+	matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
 
 	for (size_t i = 0; i < _countof(object3ds); i++) {
 		UpdateObject3d(&object3ds[i], matView, matProjection);
@@ -632,6 +633,22 @@ void DirectX_::UpdateClear() {
 	//全オブジェクトについての処理
 	for (int i = 0; i < _countof(object3ds); i++) {
 		DrawObject3d(&object3ds[i], commandList, vbView, ibView, _countof(indices));
+	}
+
+	if (input.KeyboardKeepPush(DIK_W) || input.KeyboardKeepPush(DIK_S) || input.KeyboardKeepPush(DIK_D) || input.KeyboardKeepPush(DIK_A)) {
+		//座標を移動する処理(Z座標)
+		if (input.KeyboardKeepPush(DIK_W)) { object3ds[0].position.y += 1.0f; }
+		else if (input.KeyboardKeepPush(DIK_S)) { object3ds[0].position.y -= 1.0f; }
+		if (input.KeyboardKeepPush(DIK_D)) { object3ds[0].position.x += 1.0f; }
+		else if (input.KeyboardKeepPush(DIK_A)) { object3ds[0].position.x -= 1.0f; }
+	}
+
+	if (input.KeyboardKeepPush(DIK_UP) || input.KeyboardKeepPush(DIK_DOWN) || input.KeyboardKeepPush(DIK_RIGHT) || input.KeyboardKeepPush(DIK_LEFT)) {
+		//座標を移動する処理(Z座標)
+		if (input.KeyboardKeepPush(DIK_UP)) { object3ds->rotation.x += 0.05f; }
+		else if (input.KeyboardKeepPush(DIK_DOWN)) { object3ds->rotation.x -= 0.05f; }
+		if (input.KeyboardKeepPush(DIK_RIGHT)) { object3ds->rotation.y -= 0.05f; }
+		else if (input.KeyboardKeepPush(DIK_LEFT)) { object3ds->rotation.y += 0.05f; }
 	}
 	//4.描画コマンドここまで
 }
@@ -777,7 +794,7 @@ void DirectX_::UpdateObject3d(Object3d* object, XMMATRIX& matView, XMMATRIX& mat
 	XMMATRIX matScale, matRot, matTrans;
 
 	//スケール、回線、平行移動行列の計算
-	matScale = XMMatrixScaling(object->scale.x, object->scale.y, object->position.z);
+	matScale = XMMatrixScaling(object->scale.x, object->scale.y, object->scale.z);
 	matRot = XMMatrixIdentity();
 	matRot *= XMMatrixRotationZ(object->rotation.z);
 	matRot *= XMMatrixRotationX(object->rotation.x);

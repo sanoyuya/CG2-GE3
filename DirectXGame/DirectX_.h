@@ -277,7 +277,7 @@ private:
 	XMMATRIX matView;
 	float angle = 0.0f;//カメラの回転角
 	//カメラ生成
-	XMFLOAT3 eye = { 0, 0, 0 };	//視点座標
+	XMFLOAT3 eye = { 0, 0, -100 };	//視点座標
 	XMFLOAT3 target = { 0, 0, 0 };	//注視点座標
 	XMFLOAT3 up = { 0, 1, 0 };		//上方向ベクトル
 
@@ -313,7 +313,7 @@ private:
 
 public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);
-	void DrawInitialize();
+	void DrawInitialize(HWND hwnd, WNDCLASSEX w);
 	void UpdateClear();
 	void UpdateEnd();
 	void DrawUpdate();
