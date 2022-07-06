@@ -228,8 +228,11 @@ private:
 	D3D12_HEAP_PROPERTIES textureHeapProp{};
 	//リソース設定
 	D3D12_RESOURCE_DESC textureResourceDesc{};
+	D3D12_RESOURCE_DESC textureResourceDesc2{};
+
 	//テクスチャバッファの生成
 	ID3D12Resource* texBuff = nullptr;
+	ID3D12Resource* texBuff2 = nullptr;
 
 	//SRVの最大個数
 	const size_t kMaxSRVCount = 2056;
@@ -245,6 +248,7 @@ private:
 
 	//シェーダーリソースビュー設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};//設定構造体
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc2{};//設定構造体
 
 	//デスクリプタレンジの設定
 	D3D12_DESCRIPTOR_RANGE descriptorRange{};
@@ -311,6 +315,12 @@ private:
 	//3Dオブジェクトの配列
 	Object3d object3ds[50];
 
+	//2枚目用に別の変数を用意しておく
+	TexMetadata metadata2{};
+	ScratchImage scratchImg2{};
+
+	
+	
 public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);
 	void DrawInitialize(HWND hwnd, WNDCLASSEX w);

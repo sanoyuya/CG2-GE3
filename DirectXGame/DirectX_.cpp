@@ -130,6 +130,7 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 }
 
 void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
+	UINT incrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	input.KeyboardInitialize(hwnd, w);//初期化処理
 	//描画初期化処理
 	//ヒープ設定
@@ -178,7 +179,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 		//先頭以外なら
 		if (i > 0) {
 			//一つ前のオブジェクトを親オブジェクトとする
-			object3ds[i].parent=&object3ds[i-1];
+			//object3ds[i].parent=&object3ds[i-1];
 			//親オブジェクトの9割の大きさ
 			object3ds[i].scale = { 0.9f,0.9f,0.9f };
 			//親オブジェクトに対してz軸周りに30度回転
@@ -427,15 +428,6 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	textureHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
 	textureHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
-	////リソース設定
-	//textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	//textureResourceDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	//textureResourceDesc.Width = textureWidth;//幅
-	//textureResourceDesc.Height = textureHeight;//高さ
-	//textureResourceDesc.DepthOrArraySize = 1;
-	//textureResourceDesc.MipLevels = 1;
-	//textureResourceDesc.SampleDesc.Count = 1;
-
 	//リソース設定
 	textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
 	textureResourceDesc.Format = metadata.format;
@@ -492,12 +484,6 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	//SRVヒープの先頭ハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE srvHandle = srvHeap->GetCPUDescriptorHandleForHeapStart();
 
-	////シェーダーリソースビュー設定
-	//srvDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;//RGBA float
-	//srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	//srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;//2Dテクスチャ
-	//srvDesc.Texture2D.MipLevels = 1;
-
 	//シェーダーリソースビュー設定
 	srvDesc.Format = resDesc.Format;//RGBA float
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -509,8 +495,68 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	//ハンドルの指す位置にシェーダーリソースビュー作成
 	device->CreateShaderResourceView(texBuff, &srvDesc, srvHandle);
 
+	//一つハンドルを進める
+	srvHandle.ptr += incrementSize;
+
+
+	//シェーダーリソースビュー設定
+	srvDesc2.Format = textureResourceDesc2.Format;//RGBA float
+	srvDesc2.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc2.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;//2Dテクスチャ
+	srvDesc2.Texture2D.MipLevels = textureResourceDesc2.MipLevels;
+
+	//WICテクスチャロード
+	result = LoadFromWICFile(
+		L"Resources/reimu.png",
+		WIC_FLAGS_NONE,
+		&metadata2, scratchImg2);
+
+	//ミニマップの生成2
+	result = GenerateMipMaps(
+		scratchImg2.GetImages(), scratchImg2.GetImageCount(), scratchImg2.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
+	if (SUCCEEDED(result)) {
+		scratchImg2 = std::move(mipChain);
+		metadata2 = scratchImg2.GetMetadata();
+	}
+
+	metadata2.format = MakeSRGB(metadata2.format);
+
+	//リソース設定2
+	textureResourceDesc2.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	textureResourceDesc2.Format = metadata2.format;
+	textureResourceDesc2.Width = metadata2.width;//幅
+	textureResourceDesc2.Height = (UINT)metadata2.height;//高さ
+	textureResourceDesc2.DepthOrArraySize = (UINT16)metadata2.arraySize;
+	textureResourceDesc2.MipLevels = (UINT16)metadata2.mipLevels;
+	textureResourceDesc2.SampleDesc.Count = 1;
+
+	//テクスチャバッファの生成2
+	result = device->CreateCommittedResource(
+		&textureHeapProp,
+		D3D12_HEAP_FLAG_NONE,
+		&textureResourceDesc2,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&texBuff2));
+
 	//テクスチャマッピングここまで
 
+	//全ミップマップについて
+	for (size_t i = 0; i < metadata2.mipLevels; i++) {
+		//ミップマップレベルを指定してイメージを取得
+		const Image* img = scratchImg2.GetImage(i, 0, 0);
+		//テクスチャバッファにデータ転送
+		result = texBuff2->WriteToSubresource(
+			(UINT)i,
+			nullptr,				//全領域へコピー
+			img->pixels,			//元データアドレス
+			(UINT)img->rowPitch,	//1ラインサイズ
+			(UINT)img->slicePitch	//1枚サイズ
+		);
+	}
+
+
+	device->CreateShaderResourceView(texBuff2, &srvDesc, srvHandle);
 
 
 	//深度バッファここから
@@ -560,6 +606,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 
 //DirectX毎フレーム処理
 void DirectX_::UpdateClear() {
+	UINT incrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	input.KeyboardUpdate();
 	//バックバッファの番号を取得(2つなので0か1番)
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
@@ -619,6 +666,9 @@ void DirectX_::UpdateClear() {
 	commandList->SetDescriptorHeaps(1, &srvHeap);
 	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
 	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
+	if (input.KeyboardKeepPush(DIK_SPACE)) {
+		srvGpuHandle.ptr += incrementSize;
+	}
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	commandList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	//インデックスバッファビューの設定コマンド
@@ -650,6 +700,8 @@ void DirectX_::UpdateClear() {
 		if (input.KeyboardKeepPush(DIK_RIGHT)) { object3ds->rotation.y -= 0.05f; }
 		else if (input.KeyboardKeepPush(DIK_LEFT)) { object3ds->rotation.y += 0.05f; }
 	}
+
+	
 	//4.描画コマンドここまで
 }
 
