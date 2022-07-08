@@ -9,32 +9,39 @@
 #include<DirectXTex.h>
 #include <DirectXMath.h>
 #include"myMath.h"
+#include<wrl.h>
+
 using namespace myMath;
 using namespace DirectX;
 
 class DirectX_
 {
+public:
+	//エイリアステンプレート
+	template<class T>using ComPtr = Microsoft::WRL::ComPtr<T>;
 private:
 	const int window_width = 1280;//横幅
 	const int window_height = 720;//縦幅
 	Input input;//Inputクラス読み込み
 
 	HRESULT result;
-	ID3D12Device* device = nullptr;
-	IDXGIFactory7* dxgiFactory = nullptr;
-	IDXGISwapChain4* swapChain = nullptr;
-	ID3D12CommandAllocator* commandAllocator = nullptr;
-	ID3D12GraphicsCommandList* commandList = nullptr;
-	ID3D12CommandQueue* commandQueue = nullptr;
-	ID3D12DescriptorHeap* rtvHeap = nullptr;
+	ComPtr <ID3D12Device> device;
+	ComPtr<IDXGIFactory7> dxgiFactory;
+	ComPtr<IDXGISwapChain4> swapChain;
+	ComPtr<ID3D12CommandAllocator> commandAllocator;
+	ComPtr<ID3D12GraphicsCommandList> commandList;
+	ComPtr<ID3D12CommandQueue> commandQueue;
+	ComPtr<ID3D12DescriptorHeap> rtvHeap;
 	//スワップチェーンの設定
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
+	//IDXGISwapChain1のComPtrを用意
+	ComPtr<IDXGISwapChain1>swapChain1;
 	//デスクリプタヒープの設定
 	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc{};
 	//バックバッファ
-	std::vector<ID3D12Resource*>backBuffers;
+	std::vector<ComPtr<ID3D12Resource>>backBuffers;
 	//フェンスの生成
-	ID3D12Fence* fence = nullptr;
+	ComPtr<ID3D12Fence> fence;
 	UINT64 fenceVal = 0;
 
 
@@ -46,7 +53,7 @@ private:
 	//リソース設定
 	D3D12_RESOURCE_DESC cbResourceDesc{};
 
-	ID3D12Resource* constBuffMaterial = nullptr;
+	ComPtr<ID3D12Resource> constBuffMaterial;
 
 	// 頂点バッファの設定
 	D3D12_HEAP_PROPERTIES heapProp{}; // ヒープ設定
@@ -55,7 +62,7 @@ private:
 	D3D12_RESOURCE_DESC resDesc{};
 
 	// 頂点バッファの生成
-	ID3D12Resource* vertBuff = nullptr;
+	ComPtr<ID3D12Resource> vertBuff;
 
 	// GPU上のバッファに対応した仮想メモリ(メインメモリ上)を取得
 	XMFLOAT3* vertMap = nullptr;
@@ -70,7 +77,7 @@ private:
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC pipelineDesc{};
 
 	//インデックスバッファの生成
-	ID3D12Resource* indexBuff = nullptr;
+	ComPtr<ID3D12Resource> indexBuff = nullptr;
 
 	//インデックスバッファをマッピング
 	uint16_t* indexMap = nullptr;
@@ -85,16 +92,16 @@ private:
 	D3D12_STATIC_SAMPLER_DESC samplerDesc{};
 
 	// ルートシグネチャ
-	ID3D12RootSignature* rootSignature;
+	ComPtr<ID3D12RootSignature> rootSignature;
 
 	// ルートシグネチャの設定
 	D3D12_ROOT_SIGNATURE_DESC rootSignatureDesc{};
 
 	// ルートシグネチャのシリアライズ
-	ID3DBlob* rootSigBlob = nullptr;
+	ComPtr<ID3DBlob> rootSigBlob = nullptr;
 
 	// パイプランステートの生成
-	ID3D12PipelineState* pipelineState = nullptr;
+	ComPtr<ID3D12PipelineState> pipelineState = nullptr;
 
 
 
@@ -231,8 +238,8 @@ private:
 	D3D12_RESOURCE_DESC textureResourceDesc2{};
 
 	//テクスチャバッファの生成
-	ID3D12Resource* texBuff = nullptr;
-	ID3D12Resource* texBuff2 = nullptr;
+	ComPtr<ID3D12Resource> texBuff = nullptr;
+	ComPtr<ID3D12Resource> texBuff2 = nullptr;
 
 	//SRVの最大個数
 	const size_t kMaxSRVCount = 2056;
@@ -265,9 +272,9 @@ private:
 	D3D12_RESOURCE_DESC depthResourceDesc{};
 	D3D12_HEAP_PROPERTIES depthHeapProp{};
 	D3D12_CLEAR_VALUE depthClearValue{};
-	ID3D12Resource* depthBuff = nullptr;
+	ComPtr<ID3D12Resource> depthBuff = nullptr;
 	D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc{};
-	ID3D12DescriptorHeap* dsvHeap = nullptr;
+	ComPtr<ID3D12DescriptorHeap> dsvHeap;
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
 
 
@@ -327,8 +334,8 @@ public:
 	void UpdateClear();
 	void UpdateEnd();
 	void DrawUpdate();
-	void InitializeObject3d(Object3d* object, ID3D12Device* device);
+	void InitializeObject3d(Object3d* object, ComPtr<ID3D12Device> device);
 	void UpdateObject3d(Object3d* object, XMMATRIX& matView, XMMATRIX& matProjection);
-	void DrawObject3d(Object3d* object, ID3D12GraphicsCommandList* commandList, D3D12_VERTEX_BUFFER_VIEW& vbView, D3D12_INDEX_BUFFER_VIEW& ibView, UINT numIndices);
+	void DrawObject3d(Object3d* object, ComPtr<ID3D12GraphicsCommandList> commandList, D3D12_VERTEX_BUFFER_VIEW& vbView, D3D12_INDEX_BUFFER_VIEW& ibView, UINT numIndices);
 };
 

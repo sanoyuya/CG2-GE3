@@ -28,7 +28,7 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 	assert(SUCCEEDED(result));
 
 	//アダプターの列挙用
-	std::vector<IDXGIAdapter4*>adapters;
+	std::vector<ComPtr<IDXGIAdapter4>>adapters;
 	//ここに特定の名前を持つアダプターオブジェクトが入る
 	IDXGIAdapter4* tmpAdapter = nullptr;
 
@@ -47,7 +47,7 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 		//ソフトウェアデバイスを回避
 		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE)) {
 			//デバイスを採用してループを抜ける
-			tmpAdapter = adapters[i];
+			tmpAdapter = adapters[i].Get();
 			break;
 		}
 	}
@@ -77,7 +77,7 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 	assert(SUCCEEDED(result));
 
 	//コマンドリストを生成
-	result = device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator, nullptr, IID_PPV_ARGS(&commandList));
+	result = device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator.Get(), nullptr, IID_PPV_ARGS(&commandList));
 	assert(SUCCEEDED(result));
 
 	//コマンドキューの設定
@@ -96,7 +96,10 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;//フリップ後は破棄
 	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	//スワップチェーンの生成
-	result = dxgiFactory->CreateSwapChainForHwnd(commandQueue, hwnd, &swapChainDesc, nullptr, nullptr, (IDXGISwapChain1**)&swapChain);
+	result = dxgiFactory->CreateSwapChainForHwnd(commandQueue.Get(), hwnd, &swapChainDesc, nullptr, nullptr, (IDXGISwapChain1**)&swapChain1);
+
+	//生成したIDXGISwapChain1のオブジェクトをIDXGISwapChain4に変換する
+	swapChain1.As(&swapChain);
 	assert(SUCCEEDED(result));
 
 	//デスクリプタヒープの設定
@@ -123,7 +126,7 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 		rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 		rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
 		//レンダーターゲットビューの生成
-		device->CreateRenderTargetView(backBuffers[i], &rtvDesc, rtvHandle);
+		device->CreateRenderTargetView(backBuffers[i].Get(), &rtvDesc, rtvHandle);
 	}
 
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
@@ -179,7 +182,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 		//先頭以外なら
 		if (i > 0) {
 			//一つ前のオブジェクトを親オブジェクトとする
-			//object3ds[i].parent=&object3ds[i-1];
+			object3ds[i].parent=&object3ds[i-1];
 			//親オブジェクトの9割の大きさ
 			object3ds[i].scale = { 0.9f,0.9f,0.9f };
 			//親オブジェクトに対してz軸周りに30度回転
@@ -377,9 +380,9 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	assert(SUCCEEDED(result));
 	result = device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootSignature));
 	assert(SUCCEEDED(result));
-	rootSigBlob->Release();
+	
 	// パイプラインにルートシグネチャをセット
-	pipelineDesc.pRootSignature = rootSignature;
+	pipelineDesc.pRootSignature = rootSignature.Get();
 
 	//デプスステンシルステートの設定
 	pipelineDesc.DepthStencilState.DepthEnable = true;//深度テストを行う
@@ -493,7 +496,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	srvHeap->GetCPUDescriptorHandleForHeapStart();
 
 	//ハンドルの指す位置にシェーダーリソースビュー作成
-	device->CreateShaderResourceView(texBuff, &srvDesc, srvHandle);
+	device->CreateShaderResourceView(texBuff.Get(), &srvDesc, srvHandle);
 
 	//一つハンドルを進める
 	srvHandle.ptr += incrementSize;
@@ -556,7 +559,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	}
 
 
-	device->CreateShaderResourceView(texBuff2, &srvDesc, srvHandle);
+	device->CreateShaderResourceView(texBuff2.Get(), &srvDesc, srvHandle);
 
 
 	//深度バッファここから
@@ -595,7 +598,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 	device->CreateDepthStencilView(
-		depthBuff,
+		depthBuff.Get(),
 		&dsvDesc,
 		dsvHeap->GetCPUDescriptorHandleForHeapStart());
 
@@ -612,7 +615,7 @@ void DirectX_::UpdateClear() {
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
 
 	//1.リソースバリアで書き込み可能に変更
-	barrierDesc.Transition.pResource = backBuffers[bbIndex];//バックバッファを指定
+	barrierDesc.Transition.pResource = backBuffers[bbIndex].Get();//バックバッファを指定
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;//表示状態から
 	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態へ
 	commandList->ResourceBarrier(1, &barrierDesc);
@@ -651,8 +654,8 @@ void DirectX_::UpdateClear() {
 	commandList->RSSetScissorRects(1, &scissorRect);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	commandList->SetPipelineState(pipelineState);
-	commandList->SetGraphicsRootSignature(rootSignature);
+	commandList->SetPipelineState(pipelineState.Get());
+	commandList->SetGraphicsRootSignature(rootSignature.Get());
 
 	// プリミティブ形状の設定コマンド
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
@@ -716,14 +719,14 @@ void DirectX_::UpdateEnd(){
 	result = commandList->Close();
 	assert(SUCCEEDED(result));
 	// コマンドリストの実行
-	ID3D12CommandList* commandLists[] = { commandList };
+	ID3D12CommandList* commandLists[] = { commandList.Get() };
 	commandQueue->ExecuteCommandLists(1, commandLists);
 	// 画面に表示するバッファをフリップ(裏表の入替え)
 	result = swapChain->Present(1, 0);
 	assert(SUCCEEDED(result));
 
 	// コマンドの実行完了を待つ
-	commandQueue->Signal(fence, ++fenceVal);
+	commandQueue->Signal(fence.Get(), ++fenceVal);
 	if (fence->GetCompletedValue() != fenceVal) {
 		HANDLE event = CreateEvent(nullptr, false, false, nullptr);
 		fence->SetEventOnCompletion(fenceVal, event);
@@ -734,7 +737,7 @@ void DirectX_::UpdateEnd(){
 	result = commandAllocator->Reset();
 	assert(SUCCEEDED(result));
 	// 再びコマンドリストを貯める準備
-	result = commandList->Reset(commandAllocator, nullptr);
+	result = commandList->Reset(commandAllocator.Get(), nullptr);
 	assert(SUCCEEDED(result));
 }
 
@@ -809,7 +812,7 @@ void DirectX_::DrawUpdate() {
 }
 
 //3Dオブジェクトの初期化
-void DirectX_::InitializeObject3d(Object3d* object, ID3D12Device* device)
+void DirectX_::InitializeObject3d(Object3d* object, ComPtr<ID3D12Device> device)
 {
 	HRESULT result;
 
@@ -869,7 +872,7 @@ void DirectX_::UpdateObject3d(Object3d* object, XMMATRIX& matView, XMMATRIX& mat
 	object->constMapTransform->mat = object->matWorld * matView * matProjection;
 }
 
-void DirectX_::DrawObject3d(Object3d* object, ID3D12GraphicsCommandList* commandList, D3D12_VERTEX_BUFFER_VIEW& vbView, D3D12_INDEX_BUFFER_VIEW& ibView, UINT numIndices)
+void DirectX_::DrawObject3d(Object3d* object, ComPtr<ID3D12GraphicsCommandList> commandList, D3D12_VERTEX_BUFFER_VIEW& vbView, D3D12_INDEX_BUFFER_VIEW& ibView, UINT numIndices)
 {
 	//頂点バッファの設定
 	commandList->IASetVertexBuffers(0, 1, &vbView);
