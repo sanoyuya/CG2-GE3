@@ -70,9 +70,9 @@ private:
 	// 頂点バッファビューの作成
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 
-	ID3DBlob* vsBlob = nullptr; // 頂点シェーダオブジェクト
-	ID3DBlob* psBlob = nullptr; // ピクセルシェーダオブジェクト
-	ID3DBlob* errorBlob = nullptr; // エラーオブジェクト
+	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
+	ComPtr<ID3DBlob> psBlob; // ピクセルシェーダオブジェクト
+	ComPtr<ID3DBlob> errorBlob; // エラーオブジェクト
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC pipelineDesc{};
 
@@ -304,7 +304,7 @@ private:
 	struct Object3d
 	{
 		//定数バッファ(行列用)
-		ID3D12Resource* constBuffTransform;
+		ComPtr<ID3D12Resource> constBuffTransform;
 		//定数バッファマップ(行列用)
 		ConstBufferDataTransform* constMapTransform;
 		//アフィン変換情報
