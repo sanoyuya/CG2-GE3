@@ -478,7 +478,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	//デスクリプタヒープの設定
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;//シェーダから見えるように
-	srvHeapDesc.NumDescriptors = kMaxSRVCount;
+	srvHeapDesc.NumDescriptors = static_cast<UINT>(kMaxSRVCount);
 
 	//設定を元にSRV用デスクリプタヒープを生成
 	result = device->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&srvHeap));
@@ -611,6 +611,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 void DirectX_::UpdateClear() {
 	UINT incrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	input.KeyboardUpdate();
+	controller.Update();
 	//バックバッファの番号を取得(2つなので0か1番)
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
 
@@ -635,8 +636,8 @@ void DirectX_::UpdateClear() {
 	//4.描画コマンドここから
 
 	// ビューポート設定コマンド
-	viewport.Width = window_width;
-	viewport.Height = window_height;
+	viewport.Width = static_cast<float>(window_width);
+	viewport.Height = static_cast<float>(window_height);
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -704,7 +705,15 @@ void DirectX_::UpdateClear() {
 		else if (input.KeyboardKeepPush(DIK_LEFT)) { object3ds->rotation.y += 0.05f; }
 	}
 
-	
+	if (controller.Input(controller.L_LEFT)) {object3ds->position.x -= 1.0f;}
+	if (controller.Input(controller.L_RIGHT)) {object3ds->position.x += 1.0f;}
+	if (controller.Input(controller.L_UP)) {object3ds->position.y += 1.0f;}
+	if (controller.Input(controller.L_DOWN)) {object3ds->position.y -= 1.0f;}
+
+	if (controller.Input(controller.R_LEFT)) {object3ds->rotation.y -= 0.05f;}
+	if (controller.Input(controller.R_RIGHT)) {object3ds->rotation.y += 0.05f;}
+	if (controller.Input(controller.R_UP)) {object3ds->rotation.x += 0.05f;}
+	if (controller.Input(controller.R_DOWN)) {object3ds->rotation.x -= 0.05f;}
 	//4.描画コマンドここまで
 }
 
@@ -730,8 +739,10 @@ void DirectX_::UpdateEnd(){
 	if (fence->GetCompletedValue() != fenceVal) {
 		HANDLE event = CreateEvent(nullptr, false, false, nullptr);
 		fence->SetEventOnCompletion(fenceVal, event);
-		WaitForSingleObject(event, INFINITE);
-		CloseHandle(event);
+		if (event != 0) {
+			WaitForSingleObject(event, INFINITE);
+			CloseHandle(event);
+		}
 	}
 	// キューをクリア
 	result = commandAllocator->Reset();

@@ -10,6 +10,8 @@
 #include <DirectXMath.h>
 #include"myMath.h"
 #include<wrl.h>
+#include"Controller.h"
+
 
 using namespace myMath;
 using namespace DirectX;
@@ -23,6 +25,7 @@ private:
 	const int window_width = 1280;//横幅
 	const int window_height = 720;//縦幅
 	Input input;//Inputクラス読み込み
+	Controller controller;//Inputクラス読み込み
 
 	HRESULT result;
 	ComPtr <ID3D12Device> device;
