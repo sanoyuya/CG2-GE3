@@ -73,50 +73,167 @@ private:
 public:
 	Input();
 	~Input();
+	//全体の初期化処理
 	void Initialize();
+	//全体の更新処理
 	void Update();
 
 #pragma region	キーボード
 
+	//初期化処理(普段使わない)
 	void KeyboardInitialize();
+	//更新処理(普段使わない)
 	void KeyboardUpdate();
+
+	/// <summary>
+	/// keyNameで指定したキーを押した瞬間
+	/// </summary>
+	/// <param name="keyName">DIK_〇〇</param>
+	/// <returns></returns>
 	bool KeyboardTriggerPush(int keyName);
+
+	/// <summary>
+	/// keyNameで指定したキーを押している間
+	/// </summary>
+	/// <param name="keyName">DIK_〇〇</param>
+	/// <returns></returns>
 	bool KeyboardKeepPush(int keyName);
+
+	/// <summary>
+	/// keyNameで指定したキーを離した瞬間
+	/// </summary>
+	/// <param name="keyName">DIK_〇〇</param>
+	/// <returns></returns>
 	bool KeyboardTriggerRelease(int keyName);
+
+	/// <summary>
+	/// keyNameで指定したキーを押していない間
+	/// </summary>
+	/// <param name="keyName">DIK_〇〇</param>
+	/// <returns></returns>
 	bool KeyboardKeepRelease(int keyName);
 
 #pragma endregion
 
 #pragma region マウス
 
+	//初期化処理(普段使わない)
 	void MouseInitialize();
+	//更新処理(普段使わない)
 	void MouseUpdate();
+
+	/// <summary>
+	/// buttonで指定したボタンを押した瞬間
+	/// </summary>
+	/// <param name="button">LEFT,RIGHT,CENTERのどれか</param>
+	/// <returns></returns>
 	bool MouseTriggerPush(MouseButton button);
+
+	/// <summary>
+	/// buttonで指定したボタンを押している間
+	/// </summary>
+	/// <param name="button">LEFT,RIGHT,CENTERのどれか</param>
+	/// <returns></returns>
 	bool MouseKeepPush(MouseButton button);
+
+	/// <summary>
+	/// buttonで指定したボタンを離した瞬間
+	/// </summary>
+	/// <param name="button">LEFT,RIGHT,CENTERのどれか</param>
+	/// <returns></returns>
 	bool MouseTriggerRelease(MouseButton button);
+
+	/// <summary>
+	/// buttonで指定したボタンを押していない間
+	/// </summary>
+	/// <param name="button">LEFT,RIGHT,CENTERのどれか</param>
+	/// <returns></returns>
 	bool MouseKeepRelease(MouseButton button);
+
+	//マウスの座標取得
 	myMath::Vector2 GetmousePos();
 
 #pragma endregion
 
 #pragma region	ゲームパッド
 
+	//更新処理(普段使わない)
 	void JoyPadUpdate();
+
+	/// <summary>
+	/// buttonで指定したボタンを押した瞬間
+	/// </summary>
+	/// <param name="button">AやLB等</param>
+	/// <returns></returns>
 	bool JoyPadButtonTriggerPush(ControllerButton button);
+
+	/// <summary>
+	/// buttonで指定したボタンを押している間
+	/// </summary>
+	/// <param name="button">AやLB等</param>
+	/// <returns></returns>
 	bool JoyPadButtonKeepPush(ControllerButton button);
+
+	/// <summary>
+	/// buttonで指定したボタンを離した瞬間
+	/// </summary>
+	/// <param name="button">AやLB等</param>
+	/// <returns></returns>
 	bool JoyPadButtonTriggerRelease(ControllerButton button);
+
+	/// <summary>
+	/// buttonで指定したボタンを押していない間
+	/// </summary>
+	/// <param name="button">AやLB等</param>
+	/// <returns></returns>
 	bool JoyPadButtonKeepRelease(ControllerButton button);
-	bool JoyPadStickTriggerPush(ControllerStick stickInput, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
-	bool JoyPadStickKeepPush(ControllerStick stickInput, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
-	bool JoyPadStickTriggerRelease(ControllerStick stickInput, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
-	bool JoyPadStickKeepRelease(ControllerStick stickInput, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
+
+	/// <summary>
+	/// stickで指定した方向に倒した瞬間
+	/// </summary>
+	/// <param name="stick">左スティックならL_〇〇,右スティックならR_〇〇</param>
+	/// <param name="deadRange"></param>
+	/// <param name="deadRate"></param>
+	/// <returns></returns>
+	bool JoyPadStickTriggerPush(ControllerStick stick, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
+
+	/// <summary>
+	/// stickで指定した方向に倒している間
+	/// </summary>
+	/// <param name="stick">左スティックならL_〇〇,右スティックならR_〇〇</param>
+	/// <param name="deadRange"></param>
+	/// <param name="deadRate"></param>
+	/// <returns></returns>
+	bool JoyPadStickKeepPush(ControllerStick stick, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
+
+	/// <summary>
+	/// stickで指定した方向から戻した瞬間
+	/// </summary>
+	/// <param name="stick">左スティックならL_〇〇,右スティックならR_〇〇</param>
+	/// <param name="deadRange"></param>
+	/// <param name="deadRate"></param>
+	/// <returns></returns>
+	bool JoyPadStickTriggerRelease(ControllerStick stick, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
+
+	/// <summary>
+	/// stickで指定した方向に倒していない間
+	/// </summary>
+	/// <param name="stick">左スティックならL_〇〇,右スティックならR_〇〇</param>
+	/// <param name="deadRange"></param>
+	/// <param name="deadRate"></param>
+	/// <returns></returns>
+	bool JoyPadStickKeepRelease(ControllerStick stick, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
+
+	//Lスティックの傾きの取得
 	myMath::Vector2 GetLeftStickVec(const myMath::Vector2& deadRate = { 1.0f,1.0f });
+	//Rスティックの傾きの取得
 	myMath::Vector2 GetRightStickVec(const myMath::Vector2& deadRate = { 1.0f,1.0f });
+	//ゲームパッドの振動
 	void ShakeController(const float& power, const int& span);
 
 #pragma endregion
 
-	//ゲッター
+	//シングルトン
 	static Input* GetInstance();
 };
 

@@ -8,6 +8,8 @@ private:
 	//クラス読み込み
 	Input* input = nullptr;
 
+	int hoge = 0;
+
 public:
 	GameScene();
 	~GameScene();
@@ -15,6 +17,6 @@ public:
 	void Update();
 	void Draw();
 
-	//ゲッター
+	//シングルトン
 	static GameScene* GetInstance();
 };

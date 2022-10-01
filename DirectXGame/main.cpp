@@ -46,11 +46,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		directX_.UpdateClear();
 
 		//XVˆ—
-
 		gameScene->Update();
 
 		//•`‰æˆ—
-
 		gameScene->Draw();
 
 		directX_.UpdateEnd();

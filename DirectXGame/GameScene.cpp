@@ -15,6 +15,25 @@ void GameScene::Initialize()
 
 void GameScene::Update()
 {
+	if (input->KeyboardTriggerPush(DIK_0))
+	{
+		hoge++;
+	}
+
+	if (input->MouseTriggerPush(LEFT))
+	{
+		hoge++;
+	}
+
+	if (input->JoyPadButtonTriggerPush(A))
+	{
+		hoge++;
+	}
+
+	if (input->JoyPadStickTriggerPush(L_UP))
+	{
+		hoge++;
+	}
 }
 
 void GameScene::Draw()

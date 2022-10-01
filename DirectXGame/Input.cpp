@@ -100,13 +100,10 @@ void Input::MouseInitialize() {
 }
 
 void Input::MouseUpdate() {
-	for (int i = 0; i < _countof(oldkey); i++) {
-		oldkey[i] = key[i];
-	}
 	//マウス情報の取得開始
 	mouse->Acquire();
 	oldMouseState = mouseState;
-	mouse->GetDeviceState(sizeof(key), key);
+	mouse->GetDeviceState(sizeof(mouseState), &mouseState);
 
 	POINT point;
 	GetCursorPos(&point);

@@ -19,6 +19,6 @@ public:
 	int GetWidth();
 	int GetHeight();
 
-	//ゲッター
+	//シングルトン
 	static WindowsApp* GetInstance();
 };
