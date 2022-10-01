@@ -3,6 +3,7 @@
 #include "DirectX_.h"
 #include "WindowsApp.h"
 #include"myMath.h"
+#include"GameScene.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -24,18 +25,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//DirectX‰Šú‰»ˆ— ‚±‚±‚Ü‚Å
 
-
-
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚©‚ç
 
 	directX_.DrawInitialize(windowsApp->GetHwnd(), windowsApp->GetW());
 
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚Ü‚Å
 
-
-
-	//éŒ¾
-
+	GameScene* gameScene = GameScene::GetInstance();
+	gameScene->Initialize();
 
 	// ƒQ[ƒ€ƒ‹[ƒv
 	while (true) {
@@ -49,15 +46,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		directX_.UpdateClear();
 
 		//XVˆ—
-		
-	
 
+		gameScene->Update();
 
 		//•`‰æˆ—
 
+		gameScene->Draw();
 
 		directX_.UpdateEnd();
-
 		directX_.DrawUpdate();
 	}
 	windowsApp->Break();
