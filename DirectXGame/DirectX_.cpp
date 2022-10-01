@@ -134,7 +134,7 @@ DirectX_::DirectX_(HWND hwnd, WNDCLASSEX w) {
 
 void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 	UINT incrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	input.KeyboardInitialize(hwnd, w);//初期化処理
+	
 	//描画初期化処理
 	//ヒープ設定
 	cbHeapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
@@ -610,8 +610,7 @@ void DirectX_::DrawInitialize(HWND hwnd, WNDCLASSEX w) {
 //DirectX毎フレーム処理
 void DirectX_::UpdateClear() {
 	UINT incrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	input.KeyboardUpdate();
-	controller.Update();
+	
 	//バックバッファの番号を取得(2つなので0か1番)
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
 
@@ -670,50 +669,14 @@ void DirectX_::UpdateClear() {
 	commandList->SetDescriptorHeaps(1, &srvHeap);
 	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
 	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
-	if (input.KeyboardKeepPush(DIK_SPACE)) {
-		srvGpuHandle.ptr += incrementSize;
-	}
+	
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	commandList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	//インデックスバッファビューの設定コマンド
 	commandList->IASetIndexBuffer(&ibView);
 
 	matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
-
-	for (size_t i = 0; i < _countof(object3ds); i++) {
-		UpdateObject3d(&object3ds[i], matView, matProjection);
-	}
-
-	//全オブジェクトについての処理
-	for (int i = 0; i < _countof(object3ds); i++) {
-		DrawObject3d(&object3ds[i], commandList, vbView, ibView, _countof(indices));
-	}
-
-	if (input.KeyboardKeepPush(DIK_W) || input.KeyboardKeepPush(DIK_S) || input.KeyboardKeepPush(DIK_D) || input.KeyboardKeepPush(DIK_A)) {
-		//座標を移動する処理(Z座標)
-		if (input.KeyboardKeepPush(DIK_W)) { object3ds[0].position.y += 1.0f; }
-		else if (input.KeyboardKeepPush(DIK_S)) { object3ds[0].position.y -= 1.0f; }
-		if (input.KeyboardKeepPush(DIK_D)) { object3ds[0].position.x += 1.0f; }
-		else if (input.KeyboardKeepPush(DIK_A)) { object3ds[0].position.x -= 1.0f; }
-	}
-
-	if (input.KeyboardKeepPush(DIK_UP) || input.KeyboardKeepPush(DIK_DOWN) || input.KeyboardKeepPush(DIK_RIGHT) || input.KeyboardKeepPush(DIK_LEFT)) {
-		//座標を移動する処理(Z座標)
-		if (input.KeyboardKeepPush(DIK_UP)) { object3ds->rotation.x += 0.05f; }
-		else if (input.KeyboardKeepPush(DIK_DOWN)) { object3ds->rotation.x -= 0.05f; }
-		if (input.KeyboardKeepPush(DIK_RIGHT)) { object3ds->rotation.y -= 0.05f; }
-		else if (input.KeyboardKeepPush(DIK_LEFT)) { object3ds->rotation.y += 0.05f; }
-	}
-
-	if (controller.Input(controller.L_LEFT)) {object3ds->position.x -= 1.0f;}
-	if (controller.Input(controller.L_RIGHT)) {object3ds->position.x += 1.0f;}
-	if (controller.Input(controller.L_UP)) {object3ds->position.y += 1.0f;}
-	if (controller.Input(controller.L_DOWN)) {object3ds->position.y -= 1.0f;}
-
-	if (controller.Input(controller.R_LEFT)) {object3ds->rotation.y -= 0.05f;}
-	if (controller.Input(controller.R_RIGHT)) {object3ds->rotation.y += 0.05f;}
-	if (controller.Input(controller.R_UP)) {object3ds->rotation.x += 0.05f;}
-	if (controller.Input(controller.R_DOWN)) {object3ds->rotation.x -= 0.05f;}
+	
 	//4.描画コマンドここまで
 }
 
@@ -894,4 +857,20 @@ void DirectX_::DrawObject3d(Object3d* object, ComPtr<ID3D12GraphicsCommandList> 
 
 	//描画コマンド
 	commandList->DrawIndexedInstanced(numIndices, 1, 0, 0, 0);
+}
+
+Microsoft::WRL::ComPtr<ID3D12Device> DirectX_::GetDevice() {
+	return device;
+}
+
+const int DirectX_::GetWindow_width(){
+	return window_width;
+}
+
+const int DirectX_::GetWindow_height(){
+	return window_height;
+}
+
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> DirectX_::GetCommandList() {
+	return commandList;
 }

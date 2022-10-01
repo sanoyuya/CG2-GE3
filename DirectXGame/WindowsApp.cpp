@@ -16,7 +16,6 @@ LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 }
 
 void WindowsApp::CreatWindow() {
-
 	//ウインドウクラスの設定
 	w.cbSize = sizeof(WNDCLASSEX);
 	w.lpfnWndProc = (WNDPROC)WindowProc;//ウインドウプロシージャを設定
@@ -47,7 +46,6 @@ void WindowsApp::CreatWindow() {
 
 	//ウインドウを表示状態にする
 	ShowWindow(hwnd, SW_SHOW);
-
 }
 
 bool WindowsApp::MessageWindow() {
@@ -80,6 +78,22 @@ void WindowsApp::SetW(WNDCLASSEX W) {
 HWND WindowsApp::GetHwnd() {
 	return hwnd;
 }
+
 void WindowsApp::SetHwnd(HWND Hwnd) {
 	hwnd = Hwnd;
+}
+
+int WindowsApp::GetWidth()
+{
+	return window_width;
+}
+
+int WindowsApp::GetHeight()
+{
+	return window_height;
+}
+
+WindowsApp* WindowsApp::GetInstance(){
+	static WindowsApp instance;
+	return &instance;
 }

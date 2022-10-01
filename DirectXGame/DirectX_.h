@@ -10,8 +10,6 @@
 #include <DirectXMath.h>
 #include"myMath.h"
 #include<wrl.h>
-#include"Controller.h"
-
 
 using namespace myMath;
 using namespace DirectX;
@@ -24,8 +22,6 @@ public:
 private:
 	const int window_width = 1280;//横幅
 	const int window_height = 720;//縦幅
-	Input input;//Inputクラス読み込み
-	Controller controller;//Inputクラス読み込み
 
 	HRESULT result;
 	ComPtr <ID3D12Device> device;
@@ -333,6 +329,7 @@ private:
 	
 public:
 	DirectX_(HWND hwnd, WNDCLASSEX w);
+	DirectX_() = default;
 	void DrawInitialize(HWND hwnd, WNDCLASSEX w);
 	void UpdateClear();
 	void UpdateEnd();
@@ -340,5 +337,10 @@ public:
 	void InitializeObject3d(Object3d* object, ComPtr<ID3D12Device> device);
 	void UpdateObject3d(Object3d* object, XMMATRIX& matView, XMMATRIX& matProjection);
 	void DrawObject3d(Object3d* object, ComPtr<ID3D12GraphicsCommandList> commandList, D3D12_VERTEX_BUFFER_VIEW& vbView, D3D12_INDEX_BUFFER_VIEW& ibView, UINT numIndices);
-};
 
+	//ゲッター
+	Microsoft::WRL::ComPtr<ID3D12Device> GetDevice();
+	ComPtr<ID3D12GraphicsCommandList> GetCommandList();
+	const int GetWindow_width();
+	const int GetWindow_height();
+};

@@ -16,4 +16,9 @@ public:
 	void SetW(WNDCLASSEX W);
 	HWND GetHwnd();
 	void SetHwnd(HWND Hwnd);
+	int GetWidth();
+	int GetHeight();
+
+	//ÉQÉbÉ^Å[
+	static WindowsApp* GetInstance();
 };

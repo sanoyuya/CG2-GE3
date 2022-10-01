@@ -11,18 +11,16 @@ using namespace DirectX;
 //Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
-	WindowsApp windowsApp;//WindowsAppクラス読み込み
-	windowsApp.CreatWindow();
-
-
+	WindowsApp* windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
+	windowsApp->CreatWindow();
 
 	//DirectX初期化処理 ここから
 
-	DirectX_ DirectX_(windowsApp.GetHwnd(), windowsApp.GetW());//DirectXクラス読み込み
+	DirectX_ directX_(windowsApp->GetHwnd(), windowsApp->GetW());//DirectXクラス読み込み
+
 	//キー取得開始
-	Input input;
-	input.KeyboardInitialize(windowsApp.GetHwnd(), windowsApp.GetW());//初期化処理
-	input.MouseInitialize(windowsApp.GetHwnd(), windowsApp.GetW());
+	Input* input = Input::GetInstance();
+	input->Initialize();
 
 	//DirectX初期化処理 ここまで
 
@@ -30,7 +28,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//描画初期化処理ここから
 
-	DirectX_.DrawInitialize(windowsApp.GetHwnd(), windowsApp.GetW());
+	directX_.DrawInitialize(windowsApp->GetHwnd(), windowsApp->GetW());
 
 	//描画初期化処理ここまで
 
@@ -42,14 +40,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// ゲームループ
 	while (true) {
 
-		if (!windowsApp.MessageWindow()) {
+		if (!windowsApp->MessageWindow()) {
 			break;
 		}
 
-		input.KeyboardUpdate();
-		input.MouseUpdate();
+		input->Update();
 
-		DirectX_.UpdateClear();
+		directX_.UpdateClear();
 
 		//更新処理
 		
@@ -59,12 +56,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//描画処理
 
 
+		directX_.UpdateEnd();
 
-		DirectX_.UpdateEnd();
-
-		DirectX_.DrawUpdate();
+		directX_.DrawUpdate();
 	}
-	windowsApp.Break();
+	windowsApp->Break();
 
 	return 0;
 }
