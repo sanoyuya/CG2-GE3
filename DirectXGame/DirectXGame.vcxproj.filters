@@ -1,97 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{666f530b-cdcf-497a-b6b9-3ae0cfb27599}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Engine\ソースファイル">
+      <UniqueIdentifier>{6d54335b-ee21-4d4a-8ec9-aa0b69057921}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル">
+    <Filter Include="Engine\ヘッダーファイル">
+      <UniqueIdentifier>{beedab40-ecc1-4641-934c-84acd2a8f693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\DirectXCore">
+      <UniqueIdentifier>{b166f882-9217-44af-b930-a61a52df1a06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Input">
+      <UniqueIdentifier>{93057e27-e27e-409e-b229-d0ab6d791380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\DirectXcore">
+      <UniqueIdentifier>{afb5612f-903c-4ff3-a264-bd7eb7621577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Input">
+      <UniqueIdentifier>{1d7c7829-05b0-4497-b87c-1f0fe2d6ed1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\Input">
-      <UniqueIdentifier>{93057e27-e27e-409e-b229-d0ab6d791380}</UniqueIdentifier>
+    <Filter Include="User">
+      <UniqueIdentifier>{4ec7cd33-328d-4238-8eef-697120ab8bdb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Input">
-      <UniqueIdentifier>{1d7c7829-05b0-4497-b87c-1f0fe2d6ed1f}</UniqueIdentifier>
+    <Filter Include="User\ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DirectX_.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowsApp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="myMath.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Keyboard.cpp">
-      <Filter>ソース ファイル\Input</Filter>
+      <Filter>Engine\ソースファイル\Input</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
-      <Filter>ソース ファイル\Input</Filter>
+      <Filter>Engine\ソースファイル\Input</Filter>
     </ClCompile>
     <ClCompile Include="Controller.cpp">
-      <Filter>ソース ファイル\Input</Filter>
+      <Filter>Engine\ソースファイル\Input</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>ソース ファイル\Input</Filter>
+      <Filter>Engine\ソースファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX_.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsApp.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    </ClCompile>
+    <ClCompile Include="myMath.cpp">
+      <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicPS.hlsl">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="BasicVS.hlsl">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="Draw2DVS.hlsl">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="Draw2DPS.hlsl">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DirectX_.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowsApp.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="myMath.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Keyboard.h">
-      <Filter>ヘッダー ファイル\Input</Filter>
+      <Filter>Engine\ヘッダーファイル\Input</Filter>
     </ClInclude>
     <ClInclude Include="Mouse.h">
-      <Filter>ヘッダー ファイル\Input</Filter>
+      <Filter>Engine\ヘッダーファイル\Input</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
-      <Filter>ヘッダー ファイル\Input</Filter>
+      <Filter>Engine\ヘッダーファイル\Input</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>ヘッダー ファイル\Input</Filter>
+      <Filter>Engine\ヘッダーファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX_.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsApp.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    </ClInclude>
+    <ClInclude Include="myMath.h">
+      <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.hlsli">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル</Filter>
     </None>
   </ItemGroup>
 </Project>
