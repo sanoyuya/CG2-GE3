@@ -1,5 +1,4 @@
 #include "DirectX_.h"
-#include "Input.h"
 #include"myMath.h"
 
 #include<d3d12.h>

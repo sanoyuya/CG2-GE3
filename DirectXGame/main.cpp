@@ -1,5 +1,5 @@
 #include<Windows.h>
-#include "Input.h"
+#include "InputManager.h"
 #include "DirectX_.h"
 #include "WindowsApp.h"
 #include"myMath.h"
@@ -20,7 +20,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DirectX_ directX_(windowsApp->GetHwnd(), windowsApp->GetW());//DirectXクラス読み込み
 
 	//キー取得開始
-	Input* input = Input::GetInstance();
+	InputManager* input = InputManager::GetInstance();
 	input->Initialize();
 
 	//DirectX初期化処理 ここまで

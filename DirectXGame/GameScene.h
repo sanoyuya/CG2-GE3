@@ -1,12 +1,12 @@
 #pragma once
-#include"Input.h"
+#include"InputManager.h"
 
 class GameScene
 {
 private:
 
 	//ƒNƒ‰ƒX“Ç‚İ‚İ
-	Input* input = nullptr;
+	InputManager* input = nullptr;
 
 	int hoge = 0;
 

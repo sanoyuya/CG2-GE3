@@ -10,7 +10,7 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
-	input = Input::GetInstance();
+	input = InputManager::GetInstance();
 }
 
 void GameScene::Update()
@@ -25,12 +25,12 @@ void GameScene::Update()
 		hoge++;
 	}
 
-	if (input->JoyPadButtonTriggerPush(A))
+	if (input->ControllerButtonTriggerPush(A))
 	{
 		hoge++;
 	}
 
-	if (input->JoyPadStickTriggerPush(L_UP))
+	if (input->ControllerStickTriggerPush(L_UP))
 	{
 		hoge++;
 	}
