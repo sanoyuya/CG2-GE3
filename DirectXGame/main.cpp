@@ -10,14 +10,15 @@
 using namespace DirectX;
 
 //Windowsアプリでのエントリーポイント(main関数)
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
-
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+{
 	WindowsApp* windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
 	windowsApp->CreatWindow();
 
 	//DirectX初期化処理 ここから
 
-	DirectX_ directX_(windowsApp->GetHwnd(), windowsApp->GetW());//DirectXクラス読み込み
+	DirectX_* directX = DirectX_::GetInstance();//DirectX_クラス読み込み
+	directX->Initialize();
 
 	//キー取得開始
 	InputManager* input = InputManager::GetInstance();
@@ -27,23 +28,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//描画初期化処理ここから
 
-	directX_.DrawInitialize(windowsApp->GetHwnd(), windowsApp->GetW());
-
 	//描画初期化処理ここまで
 
 	GameScene* gameScene = GameScene::GetInstance();
 	gameScene->Initialize();
 
 	// ゲームループ
-	while (true) {
-
-		if (!windowsApp->MessageWindow()) {
+	while (true)
+	{
+		if (!windowsApp->MessageWindow())
+		{
 			break;
 		}
 
 		input->Update();
 
-		directX_.UpdateClear();
+		directX->UpdateClear();
 
 		//更新処理
 		gameScene->Update();
@@ -51,8 +51,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//描画処理
 		gameScene->Draw();
 
-		directX_.UpdateEnd();
-		directX_.DrawUpdate();
+		directX->UpdateEnd();
 	}
 	windowsApp->Break();
 

@@ -30,9 +30,9 @@ void InputManager::Initialize()
 
 void InputManager::Update()
 {
-	keyboard->Update();
-	mouse->Update();
-	controller->Update();
+	keyboard->Update();//キーボードの更新処理
+	mouse->Update();//マウスの更新処理
+	controller->Update();//コントローラーの更新処理
 }
 
 bool InputManager::KeyboardTriggerPush(int keyName)
