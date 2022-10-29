@@ -1,7 +1,10 @@
 #include "WindowsApp.h"
+#include <string>
+#pragma comment(lib,"winmm.lib")
 
 //ウインドウプロシージャ
-LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
+LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
+{
 	//メッセージに応じてゲーム固有の処理を行う
 	switch (msg) {
 		//ウインドウが破棄された
@@ -15,7 +18,11 @@ LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-void WindowsApp::CreatWindow() {
+void WindowsApp::CreatWindow(const wchar_t* title)
+{
+	//システムタイマーの分解能を上げる
+	timeBeginPeriod(1);
+
 	//ウインドウクラスの設定
 	w.cbSize = sizeof(WNDCLASSEX);
 	w.lpfnWndProc = (WNDPROC)WindowProc;//ウインドウプロシージャを設定
@@ -33,7 +40,7 @@ void WindowsApp::CreatWindow() {
 
 	//ウインドウオブジェクトの生成
 	hwnd = CreateWindow(w.lpszClassName,//クラス名
-		L"DirectXGame",				//タイトルバーの文字
+		title,				//タイトルバーの文字
 		WS_OVERLAPPEDWINDOW,		//標準的なウインドウスタイル
 		CW_USEDEFAULT,				//表示X座標(OSに任せる)
 		CW_USEDEFAULT,				//表示Y座標(OSに任せる)
@@ -48,7 +55,8 @@ void WindowsApp::CreatWindow() {
 	ShowWindow(hwnd, SW_SHOW);
 }
 
-bool WindowsApp::MessageWindow() {
+bool WindowsApp::MessageWindow()
+{
 	//メッセージがある？
 	if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
 		TranslateMessage(&msg); //キー入力メッセージの処理

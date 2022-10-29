@@ -9,7 +9,7 @@ private:
 	const int window_width = 1280;//â°ïù
 	const int window_height = 720;//ècïù
 public:
-	void CreatWindow();
+	void CreatWindow(const wchar_t* title = L"DirectXGame");
 	bool MessageWindow();
 	void Break();
 	WNDCLASSEX GetW();

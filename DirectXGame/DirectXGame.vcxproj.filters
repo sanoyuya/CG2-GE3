@@ -37,6 +37,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Engine\ヘッダーファイル\2D">
+      <UniqueIdentifier>{b64c42fd-fd7d-4007-9d9b-d2d6010faab6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\2D">
+      <UniqueIdentifier>{5fce9086-91bc-48f3-b75b-40e4ed1d23fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,6 +72,15 @@
     <ClCompile Include="myMath.cpp">
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="FPS.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicPS.hlsl">
@@ -74,10 +89,16 @@
     <FxCompile Include="BasicVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Draw2DVS.hlsl">
+    <FxCompile Include="SpriteVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Draw2DPS.hlsl">
+    <FxCompile Include="SpritePS.hlsl">
+      <Filter>Engine\リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="MeshPS.hlsl">
+      <Filter>Engine\リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="MeshVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>
@@ -106,9 +127,24 @@
     <ClInclude Include="myMath.h">
       <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="FPS.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.hlsli">
+      <Filter>Engine\リソース ファイル</Filter>
+    </None>
+    <None Include="Sprite.hlsli">
+      <Filter>Engine\リソース ファイル</Filter>
+    </None>
+    <None Include="Mesh.hlsli">
       <Filter>Engine\リソース ファイル</Filter>
     </None>
   </ItemGroup>

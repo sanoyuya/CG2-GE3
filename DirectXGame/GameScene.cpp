@@ -38,6 +38,7 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
+
 }
 
 GameScene* GameScene::GetInstance()

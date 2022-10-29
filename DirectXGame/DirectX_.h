@@ -4,15 +4,8 @@
 #include<cassert>
 #include<vector>
 #include<string>
-#include <d3dcompiler.h>
-#include<DirectXTex.h>
-#include <DirectXMath.h>
-#include"myMath.h"
 #include<wrl.h>
 #include"WindowsApp.h"
-
-using namespace myMath;
-using namespace DirectX;
 
 class DirectX_
 {
@@ -36,8 +29,7 @@ private:
 	ComPtr<ID3D12DescriptorHeap> rtvHeap;
 	//スワップチェーンの設定
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
-	//IDXGISwapChain1のComPtrを用意
-	ComPtr<IDXGISwapChain1>swapChain1;
+	
 	//デスクリプタヒープの設定
 	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc{};
 	//バックバッファ
@@ -55,12 +47,22 @@ public:
 	void Initialize();
 	void UpdateClear();
 	void UpdateEnd();
-	void DebugLayer();
+
+#pragma region 初期化関連
+
+	void DeviceInitialize();
 	void DebugInfo();
+	void DebugLayer();
+	void CommandInitialize();
+	void SwapChainInitialize();
+	void RenderTargetInitialize();
+
+#pragma endregion
 
 	//ゲッター
-	Microsoft::WRL::ComPtr<ID3D12Device> GetDevice();
+	ComPtr<ID3D12Device> GetDevice();
 	ComPtr<ID3D12GraphicsCommandList> GetCommandList();
+	ComPtr<ID3D12DescriptorHeap>GetRtvHeap();
 	const int GetWindow_width();
 	const int GetWindow_height();
 

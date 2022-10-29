@@ -1,5 +1,7 @@
 #pragma once
 #include"InputManager.h"
+#include<memory>
+//#include"Sprite.h"
 
 class GameScene
 {
@@ -7,6 +9,7 @@ private:
 
 	//ƒNƒ‰ƒX“Ç‚İ‚İ
 	InputManager* input = nullptr;
+	//Sprite* sprite = nullptr;
 
 	int hoge = 0;
 

@@ -2,8 +2,12 @@
 #include "InputManager.h"
 #include "DirectX_.h"
 #include "WindowsApp.h"
+#include"FPS.h"
 #include"myMath.h"
 #include"GameScene.h"
+#include <memory>
+#include"TextureManager.h"
+//#include"Sprite.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -13,7 +17,11 @@ using namespace DirectX;
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	WindowsApp* windowsApp = WindowsApp::GetInstance();//WindowsAppƒNƒ‰ƒX“Ç‚Ýž‚Ý
-	windowsApp->CreatWindow();
+	windowsApp->CreatWindow(L"DirectXGame");
+
+	std::unique_ptr<FPS>fps;
+	fps = std::make_unique<FPS>();
+	fps->Initialize();
 
 	//DirectX‰Šú‰»ˆ— ‚±‚±‚©‚ç
 
@@ -27,6 +35,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//DirectX‰Šú‰»ˆ— ‚±‚±‚Ü‚Å
 
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚©‚ç
+
+	TextureManager* textureManager = TextureManager::GetInstance();
+	textureManager->Initialize();
 
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚Ü‚Å
 
@@ -44,6 +55,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		input->Update();
 
 		directX->UpdateClear();
+		/*sprite->SpriteCommonBigin();*/
 
 		//XVˆ—
 		gameScene->Update();
@@ -52,6 +64,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		gameScene->Draw();
 
 		directX->UpdateEnd();
+
+		fps->Update();
 	}
 	windowsApp->Break();
 
