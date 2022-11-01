@@ -7,17 +7,15 @@
 #include"GameScene.h"
 #include <memory>
 #include"TextureManager.h"
-//#include"Sprite.h"
+#include"Sprite.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
-
-using namespace DirectX;
 
 //Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	WindowsApp* windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
-	windowsApp->CreatWindow(L"DirectXGame");
+	windowsApp->CreatWindow(L"DirectXGame");//ウィンドウ作成
 
 	std::unique_ptr<FPS>fps;
 	fps = std::make_unique<FPS>();
@@ -65,9 +63,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		directX->UpdateEnd();
 
+		//FPS制御
 		fps->Update();
 	}
 	windowsApp->Break();
+	directX->Destroy();
 
 	return 0;
 }

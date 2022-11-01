@@ -47,6 +47,7 @@ public:
 	void Initialize();
 	void UpdateClear();
 	void UpdateEnd();
+	void Destroy();
 
 #pragma region ‰Šú‰»ŠÖ˜A
 

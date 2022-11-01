@@ -43,6 +43,12 @@
     <Filter Include="Engine\ソースファイル\2D">
       <UniqueIdentifier>{5fce9086-91bc-48f3-b75b-40e4ed1d23fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Camera">
+      <UniqueIdentifier>{073af99b-e0f9-4597-9d0e-f1b202ebd3c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Camera">
+      <UniqueIdentifier>{5be7caff-bb91-42c2-a967-e35aa6c52c87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,14 +78,17 @@
     <ClCompile Include="myMath.cpp">
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\ソースファイル\2D</Filter>
-    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
     </ClCompile>
     <ClCompile Include="FPS.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\ソースファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,12 +102,6 @@
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="SpritePS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="MeshPS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="MeshVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>
@@ -127,14 +130,17 @@
     <ClInclude Include="myMath.h">
       <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine\ヘッダーファイル\2D</Filter>
-    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Engine\ヘッダーファイル\2D</Filter>
     </ClInclude>
     <ClInclude Include="FPS.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine\ヘッダーファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -142,9 +148,6 @@
       <Filter>Engine\リソース ファイル</Filter>
     </None>
     <None Include="Sprite.hlsli">
-      <Filter>Engine\リソース ファイル</Filter>
-    </None>
-    <None Include="Mesh.hlsli">
       <Filter>Engine\リソース ファイル</Filter>
     </None>
   </ItemGroup>

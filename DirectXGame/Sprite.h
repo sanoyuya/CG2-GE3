@@ -3,6 +3,7 @@
 #include"DirectX_.h"
 #include"WindowsApp.h"
 #include"TextureManager.h"
+#include"Camera.h"
 
 struct PosUvColor
 {
@@ -14,6 +15,7 @@ struct PosUvColor
 class Sprite
 {
 private:
+
 	HRESULT result;
 	char PADING[4];
 	Microsoft::WRL::ComPtr<ID3D12Device>device;
@@ -39,12 +41,22 @@ private:
 	//定数バッファのマッピング用ポインタ
 	myMath::Matrix4* constBuffMap = nullptr;
 
+	Microsoft::WRL::ComPtr<ID3DBlob>vsBlob; // 頂点シェーダオブジェクト
+	Microsoft::WRL::ComPtr<ID3DBlob>psBlob; // ピクセルシェーダオブジェクト
+
+	// ルートシグネチャ
+	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature;
+	// パイプランステートの生成
+	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
+
 public:
 	Sprite();
 	~Sprite();
 	void Initialize();
-	void Draw(TextureData& textureData,myMath::Vector3 position, myMath::Vector3 scale, myMath::Vector3 rotation, myMath::Vector3 anchorpoint);
+	void Draw(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
 
 	void CreateVertexIndexBuffer();
 	void CreateConstBuff();
+	void CreatePipline();
+	void LoadShader();
 };

@@ -106,6 +106,7 @@ TextureData TextureManager::LoadTexture(const std::string& filePath)
 	//SRVヒープの先頭ハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	tmp.gpuHandle = dsvHeap->GetGPUDescriptorHandleForHeapStart();
+	tmp.srvHeap = dsvHeap;
 
 	UINT incrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 

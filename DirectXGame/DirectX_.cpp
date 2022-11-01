@@ -8,6 +8,8 @@
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 
+DirectX_* directX = nullptr;
+
 DirectX_::DirectX_()
 {	
 }
@@ -50,24 +52,44 @@ void DirectX_::UpdateClear()
 	//バックバッファの番号を取得(2つなので0か1番)
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
 
-	//1.リソースバリアで書き込み可能に変更
+	//リソースバリアで書き込み可能に変更
 	barrierDesc.Transition.pResource = backBuffers[bbIndex].Get();//バックバッファを指定
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;//表示状態から
 	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態へ
 	commandList->ResourceBarrier(1, &barrierDesc);
 
-	//2.描画先の変更
+	//描画先の変更
 	//レンダーターゲットビューのハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
 	rtvHandle.ptr += bbIndex * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type);
 	//D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	commandList->OMSetRenderTargets(1, &rtvHandle, false, nullptr);
 
-	//3.画面クリア
+	//画面クリア
 	FLOAT clearColor[] = { 0.1f,0.25f,0.5f,0.0f };//背景の色(水色)設定
 	//FLOAT clearColor[] = { 0.0f,0.0f,0.0f,0.0f };//背景の色(黒)設定
 	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 	//commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	//描画コマンド
+	D3D12_VIEWPORT viewport{};
+	viewport.Width = window_width;
+	viewport.Height = window_height;
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+	//ビューポート設定のコマンドをコマンドリストに積む
+	commandList->RSSetViewports(1, &viewport);
+
+	//シザー矩形
+	D3D12_RECT scissorRect{};
+	scissorRect.left = 0;
+	scissorRect.right = scissorRect.left + window_width;
+	scissorRect.top = 0;
+	scissorRect.bottom = scissorRect.top + window_height;
+	//シザー矩形設定コマンドをコマンドリストに積む
+	commandList->RSSetScissorRects(1, &scissorRect);
 }
 
 void DirectX_::UpdateEnd()
@@ -103,6 +125,11 @@ void DirectX_::UpdateEnd()
 	// 再びコマンドリストを貯める準備
 	result = commandList->Reset(commandAllocator.Get(), nullptr);
 	assert(SUCCEEDED(result));
+}
+
+void DirectX_::Destroy()
+{
+	delete directX;
 }
 
 void DirectX_::DebugLayer()

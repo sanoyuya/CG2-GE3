@@ -1,7 +1,9 @@
 #pragma once
 #include"InputManager.h"
 #include<memory>
-//#include"Sprite.h"
+#include"Camera.h"
+#include"Sprite.h"
+#include"TextureManager.h"
 
 class GameScene
 {
@@ -9,9 +11,15 @@ private:
 
 	//ÉNÉâÉXì«Ç›çûÇ›
 	InputManager* input = nullptr;
-	//Sprite* sprite = nullptr;
+	std::unique_ptr<Camera>camera;
 
-	int hoge = 0;
+	TextureData tex;
+	std::unique_ptr<Sprite>sprite;
+	TextureData tex2;
+	std::unique_ptr<Sprite>sprite2;
+
+	float angle = 0.0f;
+	myMath::Vector2 hoge = { 0,0 };
 
 public:
 	GameScene();
