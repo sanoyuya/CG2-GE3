@@ -21,7 +21,7 @@ void Sprite::SpriteInitialize()
 	CreatePipline();
 }
 
-void Sprite::DrawGraph(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale, myMath::Vector3 rotation, myMath::Vector3 anchorpoint)
+void Sprite::DrawSprite(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale, myMath::Vector3 rotation, myMath::Vector3 anchorpoint)
 {
 	float left = (0.0f - anchorpoint.x) * textureData.width;
 	float right = (1.0f - anchorpoint.x) * textureData.width;

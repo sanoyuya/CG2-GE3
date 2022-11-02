@@ -67,7 +67,7 @@ public:
 	/// <param name="scale">ëÂÇ´Ç≥(x,y,z)</param>
 	/// <param name="rotation">âÒì](x,y,z)</param>
 	/// <param name="anchorpoint">íÜêSì_(x,y,z)</param>
-	void DrawGraph(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
+	void DrawSprite(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
 
 private:
 	void CreateVertexIndexBuffer();

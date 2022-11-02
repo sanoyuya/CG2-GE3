@@ -55,6 +55,12 @@
     <Filter Include="Engine\ヘッダーファイル\Draw\2D">
       <UniqueIdentifier>{b64c42fd-fd7d-4007-9d9b-d2d6010faab6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Audio">
+      <UniqueIdentifier>{2d26bf9f-44a9-4555-ba4d-f583f71c88ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Audio">
+      <UniqueIdentifier>{e4eed88b-2f12-4891-afac-aeb9dbe33d75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -98,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="DrawManager.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Engine\ソースファイル\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +156,9 @@
     </ClInclude>
     <ClInclude Include="DrawManager.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Engine\ヘッダーファイル\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include"InputManager.h"
+#include"AudioManager.h"
 #include<memory>
 #include"Camera.h"
 #include"Sprite.h"
@@ -13,6 +14,7 @@ private:
 
 	//ÉNÉâÉXì«Ç›çûÇ›
 	InputManager* input = nullptr;
+	AudioManager* audioManager = nullptr;
 
 	std::unique_ptr<Camera>camera;
 
@@ -20,6 +22,8 @@ private:
 	TextureData tex;
 	std::unique_ptr<DrawManager>draw2;
 	TextureData tex2;
+
+	uint32_t titleBGM;
 
 	float angle = 0.0f;
 	myMath::Vector2 hoge = { 0,0 };

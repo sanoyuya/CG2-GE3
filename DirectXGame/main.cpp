@@ -8,6 +8,7 @@
 #include <memory>
 #include"TextureManager.h"
 #include"Sprite.h"
+#include "AudioManager.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -28,6 +29,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//キー取得開始
 	InputManager* input = InputManager::GetInstance();
 	input->Initialize();
+
+	// オーディオの初期化
+	AudioManager* audioManager = AudioManager::GetInstance();
+	audioManager->Initialize();
 
 	//DirectX初期化処理 ここまで
 
@@ -50,6 +55,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 
 		input->Update();
+		audioManager->Update();
 
 		directX->UpdateClear();
 
@@ -66,6 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 	windowsApp->Break();
 	directX->Destroy();
+	audioManager->Destroy();
 
 	return 0;
 }
