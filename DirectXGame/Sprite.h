@@ -52,6 +52,10 @@ private:
 public:
 	Sprite(){}
 	virtual ~Sprite(){}
+
+	/// <summary>
+	/// スプライトの初期化処理
+	/// </summary>
 	void SpriteInitialize();
 
 	/// <summary>
@@ -65,6 +69,7 @@ public:
 	/// <param name="anchorpoint">中心点(x,y,z)</param>
 	void DrawGraph(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
 
+private:
 	void CreateVertexIndexBuffer();
 	void CreateConstBuff();
 	void CreatePipline();
