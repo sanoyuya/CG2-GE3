@@ -108,6 +108,9 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Engine\ソースファイル\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="DrawCommon.cpp">
+      <Filter>Engine\ソースファイル\Draw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -159,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Engine\ヘッダーファイル\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawCommon.h">
+      <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

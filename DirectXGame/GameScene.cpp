@@ -20,17 +20,17 @@ void GameScene::Initialize()
 	tex2 = draw2->LoadTexture("Resources/A.jpg");
 
 	draw = std::make_unique<DrawManager>();
+	//draw->SetBlendMode(BlendMode::Add);
 	draw->SpriteInitialize();
 	draw2 = std::make_unique<DrawManager>();
 	draw2->SpriteInitialize();
 
 	titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//タイトルシーンBGM読み込み
-	audioManager->PlayWave(titleBGM, true);//BGMを再生
+	//audioManager->PlayWave(titleBGM, true);//BGMを再生
 }
 
 void GameScene::Update()
 {
-
 	if (input->KeyboardKeepPush(DIK_UP))
 	{
 		hoge.y -= 5;
@@ -59,6 +59,6 @@ void GameScene::Draw()
 	{
 		audioManager->StopWave(titleBGM);
 	}
-	draw2->DrawSprite(tex2, camera.get(), {306.0f,255.0f,0});
-	draw->DrawSprite(tex, camera.get(), { 640.0f + hoge.x,360.0f + hoge.y,0 }, { 1,1,1 }, { 0, 0, angle });
+	draw2->DrawSprite(tex2, {306.0f,255.0f,0});
+	draw->DrawSprite(tex, { 640.0f + hoge.x,360.0f + hoge.y,0 }, {1,1,1,1}, { 1, 1, 1 }, { 0, 0, 0 });
 }

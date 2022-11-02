@@ -147,6 +147,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DirectX_.cpp" />
+    <ClCompile Include="DrawCommon.cpp" />
     <ClCompile Include="DrawManager.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DirectX_.h" />
+    <ClInclude Include="DrawCommon.h" />
     <ClInclude Include="DrawManager.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="GameScene.h" />

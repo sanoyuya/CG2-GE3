@@ -21,7 +21,7 @@ void Sprite::SpriteInitialize()
 	CreatePipline();
 }
 
-void Sprite::DrawSprite(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale, myMath::Vector3 rotation, myMath::Vector3 anchorpoint)
+void Sprite::DrawSprite(TextureData& textureData, myMath::Vector3 position, myMath::Vector4 color, myMath::Vector3 scale, myMath::Vector3 rotation, myMath::Vector3 anchorpoint)
 {
 	float left = (0.0f - anchorpoint.x) * textureData.width;
 	float right = (1.0f - anchorpoint.x) * textureData.width;
@@ -31,10 +31,10 @@ void Sprite::DrawSprite(TextureData& textureData, Camera* camera, myMath::Vector
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{0.0f,0.0f},{1.0f,1.0f,1.0f,1.0f}},//左上インデックス0
-		{{left,bottom,0.0f},{0.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}},//左下インデックス1
-		{{right,top,0.0f},{1.0f,0.0f},{1.0f,1.0f,1.0f,1.0f}},//右上インデックス2
-		{{right,bottom,0.0f},{1.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}},//右下インデックス3
+		{{left,top,0.0f},{0.0f,0.0f},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{0.0f,1.0f},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{1.0f,0.0f},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{1.0f,1.0f},{color.x, color.y, color.z, color.w}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -65,7 +65,7 @@ void Sprite::DrawSprite(TextureData& textureData, Camera* camera, myMath::Vector
 	//ワールド行列
 	matWorld = mScale * mRot * mTrans;
 
-	*constBuffMap = matWorld * camera->GetMatViewInverse() * camera->GetMatProjection();
+	*constBuffMap = matWorld * matProjection;
 
 	// パイプラインステートとルートシグネチャの設定コマンド
 	cmdList->SetPipelineState(pipelineState.Get());
@@ -87,6 +87,11 @@ void Sprite::DrawSprite(TextureData& textureData, Camera* camera, myMath::Vector
 
 	// 描画コマンド
 	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
+}
+
+void Sprite::SetBlendMode(BlendMode mode)
+{
+	blendMode = uint8_t(mode);
 }
 
 void Sprite::CreateVertexIndexBuffer()
@@ -253,12 +258,16 @@ void Sprite::CreatePipline()
 
 	// 頂点レイアウト
 	D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
-		{//xyz座標
+		{	//xyz座標
 			"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,D3D12_APPEND_ALIGNED_ELEMENT,D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
 		{
 			//セマンティック名,同じセマンティック名が複数ある時に使うインデックス(0で良い),要素数とビット数を表す,入力スロットインデックス(0で良い),データのオフセット値,入力データ種別,一度に描画するインスタンス数(0で良い)
 			"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0,D3D12_APPEND_ALIGNED_ELEMENT,D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
+		{
+			//color
+			"COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0,D3D12_APPEND_ALIGNED_ELEMENT,D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
 	};
 
@@ -277,18 +286,70 @@ void Sprite::CreatePipline()
 
 	// ブレンドステート
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = pipelineDesc.BlendState.RenderTarget[0];// RBGA全てのチャンネルを描画
-	//アルファ値の計算式の設定
+	//共通設定
 	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
-	blenddesc.BlendEnable = true;					//ブレンドを有効にする
 	blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;	//加算
 	blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;		//ソースの値を100%使う
 	blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;	//デストの値を0%使う
 
-	//RGB値の計算式の設定
-	//半透明合成
-	blenddesc.BlendOp = D3D12_BLEND_OP_ADD;				//加算
-	blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;			//ソースのアルファ値
-	blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;	//1.0f-	ソースのアルファ値
+	switch (blendMode)
+	{
+	case (int)BlendMode::None:
+
+		blenddesc.BlendEnable = false;//ブレンドを無効にする
+
+		break;
+
+	case (int)BlendMode::Alpha:
+
+		blenddesc.BlendEnable = true;//ブレンドを有効にする
+		//半透明合成
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;				//加算
+		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;			//ソースのアルファ値
+		blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;	//1.0f-	ソースのアルファ値
+
+		break;
+
+	case (int)BlendMode::Add:
+
+		blenddesc.BlendEnable = true;// ブレンドを有効
+		// 加算合成
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;// 加算
+		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;// ソースの値を100% 使う
+		blenddesc.DestBlend = D3D12_BLEND_ONE;// デストの値を100% 使う
+
+		break;
+
+	case (int)BlendMode::Sub:
+
+		blenddesc.BlendEnable = true;// ブレンドを有効
+		// 減算合成
+		blenddesc.BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;// デストからソースを減算
+		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;// ソースの値を100% 使う
+		blenddesc.DestBlend = D3D12_BLEND_ONE;// デストの値を100% 使う
+
+		break;
+
+	case (int)BlendMode::Mul:
+
+		blenddesc.BlendEnable = true;// ブレンドを有効
+		//乗算
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
+		blenddesc.SrcBlend = D3D12_BLEND_ZERO;
+		blenddesc.DestBlend = D3D12_BLEND_SRC_COLOR;
+
+		break;
+
+	case (int)BlendMode::Inv:
+
+		blenddesc.BlendEnable = true;// ブレンドを有効
+		// 色反転
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;// 加算
+		blenddesc.SrcBlend = D3D12_BLEND_INV_DEST_COLOR;// 1.0f-デストカラーの値
+		blenddesc.DestBlend = D3D12_BLEND_ZERO;// 使わない
+
+		break;
+	}
 
 	// 頂点レイアウトの設定
 	pipelineDesc.InputLayout.pInputElementDescs = inputLayout;

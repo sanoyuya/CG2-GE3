@@ -4,6 +4,7 @@
 #include"WindowsApp.h"
 #include"TextureManager.h"
 #include"Camera.h"
+#include"DrawCommon.h"
 
 struct PosUvColor
 {
@@ -49,7 +50,10 @@ private:
 	// パイプランステートの生成
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
 
+	uint8_t blendMode = (uint8_t)BlendMode::Alpha;//初期値半透明合成
+
 public:
+
 	Sprite(){}
 	virtual ~Sprite(){}
 
@@ -62,12 +66,18 @@ public:
 	/// スプライトの描画
 	/// </summary>
 	/// <param name="textureData">テクスチャデータ</param>
-	/// <param name="camera">カメラ</param>
-	/// <param name="position">座標(x,y,z)</param>
-	/// <param name="scale">大きさ(x,y,z)</param>
-	/// <param name="rotation">回転(x,y,z)</param>
-	/// <param name="anchorpoint">中心点(x,y,z)</param>
-	void DrawSprite(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
+	/// <param name="position">座標</param>
+	/// <param name="color">色</param>
+	/// <param name="scale">大きさ</param>
+	/// <param name="rotation">回転</param>
+	/// <param name="anchorpoint">中心点</param>
+	void DrawSprite(TextureData& textureData, myMath::Vector3 position, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
+
+	/// <summary>
+	/// ブレンドモードのセット
+	/// </summary>
+	/// <param name="mode">モード</param>
+	void SetBlendMode(BlendMode mode);
 
 private:
 	void CreateVertexIndexBuffer();
