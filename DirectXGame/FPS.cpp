@@ -36,7 +36,7 @@ void FPS::Update(float fixedFps, bool flag)
 		if (elapsed < minCheckTime)
 		{
 			//1/fixedFps秒経過するまで微小なスリープを繰り返す
-			while (std::chrono::steady_clock::now() - reference < minTime)
+			while (std::chrono::steady_clock::now() - reference < minCheckTime)
 			{
 				//1マイクロ秒スリープ
 				std::this_thread::sleep_for(std::chrono::microseconds(1));

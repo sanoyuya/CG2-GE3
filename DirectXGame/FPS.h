@@ -17,6 +17,6 @@ public:
 	/// </summary>
 	/// <param name="fixedFps">fps固定値</param>
 	/// <param name="flag">半端なモニターかどうか(半端ならtrue)</param>
-	void Update(float fixedFps = 60.0f, bool flag = false);
+	void Update(float fixedFps = 60.0f, bool flag = true);
 
 };

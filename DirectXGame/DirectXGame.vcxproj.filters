@@ -37,17 +37,23 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Engine\ヘッダーファイル\2D">
-      <UniqueIdentifier>{b64c42fd-fd7d-4007-9d9b-d2d6010faab6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ソースファイル\2D">
-      <UniqueIdentifier>{5fce9086-91bc-48f3-b75b-40e4ed1d23fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ソースファイル\Camera">
       <UniqueIdentifier>{073af99b-e0f9-4597-9d0e-f1b202ebd3c1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\ヘッダーファイル\Camera">
       <UniqueIdentifier>{5be7caff-bb91-42c2-a967-e35aa6c52c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Draw">
+      <UniqueIdentifier>{391cb05a-f90c-4363-92bd-3704079ac79d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Draw\2D">
+      <UniqueIdentifier>{5fce9086-91bc-48f3-b75b-40e4ed1d23fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Draw">
+      <UniqueIdentifier>{5b73f316-99aa-4055-b046-bc3070fa7eef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Draw\2D">
+      <UniqueIdentifier>{b64c42fd-fd7d-4007-9d9b-d2d6010faab6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +85,7 @@
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Engine\ソースファイル\2D</Filter>
+      <Filter>Engine\ソースファイル\Draw\2D</Filter>
     </ClCompile>
     <ClCompile Include="FPS.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
@@ -88,20 +94,17 @@
       <Filter>Engine\ソースファイル\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\ソースファイル\2D</Filter>
+      <Filter>Engine\ソースファイル\Draw\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawManager.cpp">
+      <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="BasicPS.hlsl">
+    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="BasicVS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="SpriteVS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="SpritePS.hlsl">
+    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>
@@ -131,7 +134,7 @@
       <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Engine\ヘッダーファイル\2D</Filter>
+      <Filter>Engine\ヘッダーファイル\Draw\2D</Filter>
     </ClInclude>
     <ClInclude Include="FPS.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
@@ -140,14 +143,14 @@
       <Filter>Engine\ヘッダーファイル\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Engine\ヘッダーファイル\2D</Filter>
+      <Filter>Engine\ヘッダーファイル\Draw\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawManager.h">
+      <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Basic.hlsli">
-      <Filter>Engine\リソース ファイル</Filter>
-    </None>
-    <None Include="Sprite.hlsli">
+    <None Include="Resources\shaders\Sprite.hlsli">
       <Filter>Engine\リソース ファイル</Filter>
     </None>
   </ItemGroup>

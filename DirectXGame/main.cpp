@@ -17,8 +17,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	WindowsApp* windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
 	windowsApp->CreatWindow(L"DirectXGame");//ウィンドウ作成
 
-	std::unique_ptr<FPS>fps;
-	fps = std::make_unique<FPS>();
+	std::unique_ptr<FPS>fps = std::make_unique<FPS>();
 	fps->Initialize();
 
 	//DirectX初期化処理 ここから
@@ -39,7 +38,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//描画初期化処理ここまで
 
-	GameScene* gameScene = GameScene::GetInstance();
+	std::unique_ptr<GameScene>gameScene = std::make_unique<GameScene>();
 	gameScene->Initialize();
 
 	// ゲームループ
@@ -53,7 +52,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		input->Update();
 
 		directX->UpdateClear();
-		/*sprite->SpriteCommonBigin();*/
 
 		//更新処理
 		gameScene->Update();

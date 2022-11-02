@@ -15,17 +15,18 @@ void GameScene::Initialize()
 	camera = std::make_unique<Camera>();
 	camera->Initialize(false);
 
-	tex = TextureManager::GetInstance()->LoadTexture("Resources/reimu.png");
-	tex2= TextureManager::GetInstance()->LoadTexture("Resources/A.jpg");
+	tex = draw->LoadTexture("Resources/reimu.png");
+	tex2 = draw2->LoadTexture("Resources/A.jpg");
 
-	sprite = std::make_unique<Sprite>();
-	sprite->Initialize();
-	sprite2 = std::make_unique<Sprite>();
-	sprite2->Initialize();
+	draw = std::make_unique<DrawManager>();
+	draw->SpriteInitialize();
+	draw2 = std::make_unique<DrawManager>();
+	draw2->SpriteInitialize();
 }
 
 void GameScene::Update()
 {
+
 	if (input->KeyboardKeepPush(DIK_UP))
 	{
 		hoge.y -= 5;
@@ -43,19 +44,13 @@ void GameScene::Update()
 		hoge.x += 5;
 	}
 
-	angle += 0.02f;
+	angle += 0.1f;
 
 	camera->Update(false);
 }
 
 void GameScene::Draw()
 {
-	sprite->Draw(tex, camera.get(), { 640.0f + hoge.x,360.0f + hoge.y,0 });
-	sprite2->Draw(tex2, camera.get(), { 306.0f / 2,255.0f / 2,0 }, { 0.5f,0.5f,0.5f });
-}
-
-GameScene* GameScene::GetInstance()
-{
-	static GameScene instance;
-	return &instance;
+	draw->DrawGraph(tex, camera.get(), { 640.0f + hoge.x,360.0f + hoge.y,0 }, {1,1,1} ,{0, 0, 0});
+	draw2->DrawGraph(tex2, camera.get(), {306.0f,255.0f,0});
 }

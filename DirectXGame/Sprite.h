@@ -50,10 +50,20 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
 
 public:
-	Sprite();
-	~Sprite();
-	void Initialize();
-	void Draw(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
+	Sprite(){}
+	virtual ~Sprite(){}
+	void SpriteInitialize();
+
+	/// <summary>
+	/// スプライトの描画
+	/// </summary>
+	/// <param name="textureData">テクスチャデータ</param>
+	/// <param name="camera">カメラ</param>
+	/// <param name="position">座標(x,y,z)</param>
+	/// <param name="scale">大きさ(x,y,z)</param>
+	/// <param name="rotation">回転(x,y,z)</param>
+	/// <param name="anchorpoint">中心点(x,y,z)</param>
+	void DrawGraph(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
 
 	void CreateVertexIndexBuffer();
 	void CreateConstBuff();

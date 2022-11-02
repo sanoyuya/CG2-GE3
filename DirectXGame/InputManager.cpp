@@ -87,17 +87,17 @@ bool InputManager::ControllerButtonTriggerPush(ControllerButton button)
 
 bool InputManager::ControllerButtonKeepPush(ControllerButton button)
 {
-	return controller->ButtonKeepPush(button);;
+	return controller->ButtonKeepPush(button);
 }
 
 bool InputManager::ControllerButtonTriggerRelease(ControllerButton button)
 {
-	return controller->ButtonTriggerRelease(button);;
+	return controller->ButtonTriggerRelease(button);
 }
 
 bool InputManager::ControllerButtonKeepRelease(ControllerButton button)
 {
-	return controller->ButtonKeepRelease(button);;
+	return controller->ButtonKeepRelease(button);
 }
 
 bool InputManager::ControllerStickTriggerPush(ControllerStick stick, const float& deadRange, const myMath::Vector2& deadRate)
@@ -107,17 +107,17 @@ bool InputManager::ControllerStickTriggerPush(ControllerStick stick, const float
 
 bool InputManager::ControllerStickKeepPush(ControllerStick stick, const float& deadRange, const myMath::Vector2& deadRate)
 {
-	return controller->StickKeepPush(stick, deadRange, deadRate);;
+	return controller->StickKeepPush(stick, deadRange, deadRate);
 }
 
 bool InputManager::ControllerStickTriggerRelease(ControllerStick stick, const float& deadRange, const myMath::Vector2& deadRate)
 {
-	return controller->StickTriggerRelease(stick, deadRange, deadRate);;
+	return controller->StickTriggerRelease(stick, deadRange, deadRate);
 }
 
 bool InputManager::ControllerStickKeepRelease(ControllerStick stick, const float& deadRange, const myMath::Vector2& deadRate)
 {
-	return controller->StickKeepRelease(stick, deadRange, deadRate);;
+	return controller->StickKeepRelease(stick, deadRange, deadRate);
 }
 
 void InputManager::ShakeController(const float& power, const int& span)

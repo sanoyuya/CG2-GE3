@@ -2,15 +2,7 @@
 #include <d3dcompiler.h>
 #include"Camera.h"
 
-Sprite::Sprite()
-{
-}
-
-Sprite::~Sprite()
-{
-}
-
-void Sprite::Initialize()
+void Sprite::SpriteInitialize()
 {
 	device = DirectX_::GetInstance()->GetDevice();
 	cmdList = DirectX_::GetInstance()->GetCommandList();
@@ -29,7 +21,7 @@ void Sprite::Initialize()
 	CreatePipline();
 }
 
-void Sprite::Draw(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale, myMath::Vector3 rotation, myMath::Vector3 anchorpoint)
+void Sprite::DrawGraph(TextureData& textureData, Camera* camera, myMath::Vector3 position, myMath::Vector3 scale, myMath::Vector3 rotation, myMath::Vector3 anchorpoint)
 {
 	float left = (0.0f - anchorpoint.x) * textureData.width;
 	float right = (1.0f - anchorpoint.x) * textureData.width;
@@ -210,7 +202,7 @@ void Sprite::LoadShader()
 
 	// 頂点シェーダの読み込みとコンパイル
 	result = D3DCompileFromFile(
-		L"SpriteVS.hlsl", // シェーダファイル名
+		L"Resources/shaders/SpriteVS.hlsl", // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "vs_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -232,7 +224,7 @@ void Sprite::LoadShader()
 	}
 	// ピクセルシェーダの読み込みとコンパイル
 	result = D3DCompileFromFile(
-		L"SpritePS.hlsl", // シェーダファイル名
+		L"Resources/shaders/SpritePS.hlsl", // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "ps_5_0", // エントリーポイント名、シェーダーモデル指定
