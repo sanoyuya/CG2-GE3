@@ -119,12 +119,55 @@ public:
 
 	void Initialize();
 	void Update();
+
+	/// <summary>
+	/// 再生されているか
+	/// </summary>
+	/// <param name="handle">サウンドデータ</param>
+	/// <returns></returns>
 	bool NowPlay(const uint32_t& handle);
+
+	/// <summary>
+	/// 音量変更
+	/// </summary>
+	/// <param name="handle">サウンドデータ</param>
+	/// <param name="volume">音の大きさ ( 0 ～ 1.0f )</param>
 	void ChangeVolume(const uint32_t& handle, float volume);
+
+	/// <summary>
+	/// 現在の音量の取得
+	/// </summary>
+	/// <param name="handle">サウンドデータ</param>
+	/// <returns></returns>
 	float GetVolume(const uint32_t& handle);
+
+	/// <summary>
+	/// サウンド読み込み
+	/// </summary>
+	/// <param name="fileName">サウンドデータ</param>
+	/// <param name="volume">音の大きさ ( 0 ～ 1.0f )</param>
+	/// <returns></returns>
 	uint32_t LoadAudio(std::string fileName, const float& volume = 1.0f);
+
+	/// <summary>
+	/// サウンドを再生する
+	/// </summary>
+	/// <param name="handle">サウンドデータ</param>
+	/// <param name="loopFlag">ループするかしないか(ループするならtrue)</param>
+	/// <returns></returns>
 	int32_t PlayWave(const uint32_t& handle, bool loopFlag = false);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="handles">サウンドデータ</param>
+	/// <returns></returns>
 	int32_t PlayWaveArray(const std::vector<uint32_t>& handles);
+
+	/// <summary>
+	/// サウンドを止める
+	/// </summary>
+	/// <param name="handle">サウンドデータ</param>
 	void StopWave(const uint32_t& handle);
 
 private:

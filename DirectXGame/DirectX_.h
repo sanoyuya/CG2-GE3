@@ -55,12 +55,38 @@ private:
 
 #pragma region 初期化関連
 
+	/// <summary>
+	/// デバイスの初期化
+	/// </summary>
 	void DeviceInitialize();
+
+	/// <summary>
+	/// 
+	/// </summary>
 	void DebugInfo();
+
+	/// <summary>
+	/// デバッグレイヤーをオンに
+	/// </summary>
 	void DebugLayer();
+	/// <summary>
+	/// コマンドアロケータの初期化
+	/// </summary>
 	void CommandInitialize();
+
+	/// <summary>
+	/// スワップチェーンの初期化
+	/// </summary>
 	void SwapChainInitialize();
+
+	/// <summary>
+	/// レンダーターゲットの初期化
+	/// </summary>
 	void RenderTargetInitialize();
+
+	/// <summary>
+	/// 深度テスト
+	/// </summary>
 	void DepthInitialize();
 
 #pragma endregion

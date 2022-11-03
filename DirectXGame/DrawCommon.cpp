@@ -4,7 +4,7 @@
 
 namespace DrawCommon
 {
-	ID3DBlob* DrawCommon::ShaderCompile(const wchar_t* shaderFilename, LPCSTR entrypointname, LPCSTR shaderModelName, ID3DBlob* blob)
+	ID3DBlob* ShaderCompile(const wchar_t* shaderFilename, LPCSTR entrypointName, LPCSTR shaderModelName, ID3DBlob* blob)
 	{
 		HRESULT result;
 		Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
@@ -14,7 +14,7 @@ namespace DrawCommon
 			shaderFilename,	//シェーダファイル名
 			nullptr,
 			D3D_COMPILE_STANDARD_FILE_INCLUDE,	//デバッグ用設定
-			entrypointname, shaderModelName,	//エントリーポイント名、シェーダーモデル指定
+			entrypointName, shaderModelName,	//エントリーポイント名、シェーダーモデル指定
 			D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,	//デバッグ用設定
 			0,
 			&blob, &errorBlob);

@@ -42,7 +42,7 @@ public:
 	void UpdateMatView();
 
 	/// <summary>
-	/// 
+	/// “Š‰eŒvZ
 	/// </summary>
 	/// <param name="projectionFlag">•½s“Š‰e‚Æ“§‹“Š‰e‚ğØ‚è‘Ö‚¦‚éƒtƒ‰ƒO</param>
 	void UpdateMatProjection(bool projectionFlag);

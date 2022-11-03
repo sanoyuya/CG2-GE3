@@ -40,6 +40,10 @@ private:
 
 public:
 	void Initialize();
+
+	/// <summary>
+	/// テクスチャ読み込み
+	/// </summary>
 	TextureData LoadTexture(const std::string& filePath);
 
 	/// <summary>
