@@ -73,6 +73,12 @@
     <Filter Include="Engine\ソースファイル\Math\Vector">
       <UniqueIdentifier>{e74037cc-e4e2-4296-b2af-0e913a29d3c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Draw\3D">
+      <UniqueIdentifier>{074245bf-6869-48a7-97e8-d6b8f5db36e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Draw\3D">
+      <UniqueIdentifier>{8a75d6b8-bb47-41cd-ac7d-265612da09a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -98,9 +104,6 @@
     </ClCompile>
     <ClCompile Include="WindowsApp.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Engine\ソースファイル\Draw\2D</Filter>
     </ClCompile>
     <ClCompile Include="FPS.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
@@ -135,6 +138,9 @@
     <ClCompile Include="Matrix4.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Engine\ソースファイル\Draw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -165,9 +171,6 @@
     </ClInclude>
     <ClInclude Include="WindowsApp.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Engine\ヘッダーファイル\Draw\2D</Filter>
     </ClInclude>
     <ClInclude Include="FPS.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
@@ -201,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="Matrix4.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

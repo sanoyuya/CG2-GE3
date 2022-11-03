@@ -6,10 +6,10 @@ private:
 	WNDCLASSEX w{};
 	HWND hwnd;
 	MSG msg{};//メッセージ
-	const int window_width = 1280;//横幅
-	const int window_height = 720;//縦幅
+	float window_width = 1280;//横幅
+	float window_height = 720;//縦幅
 public:
-	void CreatWindow(const wchar_t* title = L"DirectXGame");
+	void CreatWindow(const wchar_t* title = L"DirectXGame", const int width = 1280, const int height = 720);
 	bool MessageWindow();
 	void Break();
 	WNDCLASSEX GetW();

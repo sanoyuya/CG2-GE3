@@ -36,8 +36,16 @@ private:
 
 	UINT texCount;
 
+	static TextureManager* textureManager;
+
 public:
 	void Initialize();
 	TextureData LoadTexture(const std::string& filePath);
+
+	/// <summary>
+	/// インスタンスを解放
+	/// </summary>
+	void Destroy();
+
 	static TextureManager* GetInstance();
 };

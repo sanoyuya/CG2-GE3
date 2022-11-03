@@ -57,6 +57,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		input->Update();
 		audioManager->Update();
 
+		directX->SetClearColor();//背景色を設定 初期値(水色)
 		directX->UpdateClear();
 
 		//更新処理
@@ -72,6 +73,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 	windowsApp->Break();
 	directX->Destroy();
+	textureManager->Destroy();
 	audioManager->Destroy();
 
 	return 0;

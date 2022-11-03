@@ -6,6 +6,7 @@
 #include<string>
 #include<wrl.h>
 #include"WindowsApp.h"
+#include"myMath.h"
 
 class DirectX_
 {
@@ -34,9 +35,13 @@ private:
 	//フェンスの生成
 	ComPtr<ID3D12Fence> fence;
 	UINT64 fenceVal = 0;
-	//1.リソースバリアで書き込み可能に変更
+	//リソースバリアの設定
 	D3D12_RESOURCE_BARRIER barrierDesc{};
+	ComPtr<ID3D12Resource>depthBuff = nullptr;
 	ComPtr<ID3D12DescriptorHeap> dsvHeap;
+
+	//背景のクリアカラー
+	FLOAT clearColor[4] = { 0.1f,0.25f,0.5f,0.0f };//背景の色(水色)設定
 
 public:
 	DirectX_();
@@ -46,6 +51,8 @@ public:
 	void UpdateEnd();
 	void Destroy();
 
+private:
+
 #pragma region 初期化関連
 
 	void DeviceInitialize();
@@ -54,13 +61,24 @@ public:
 	void CommandInitialize();
 	void SwapChainInitialize();
 	void RenderTargetInitialize();
+	void DepthInitialize();
 
 #pragma endregion
+
+public:
 
 	//ゲッター
 	ComPtr<ID3D12Device> GetDevice();
 	ComPtr<ID3D12GraphicsCommandList> GetCommandList();
 	ComPtr<ID3D12DescriptorHeap>GetRtvHeap();
+
+	//セッター
+	
+	/// <summary>
+	/// 背景の色をセット
+	/// </summary>
+	/// <param name="color">RGBA(初期値 { 0.1f , 0.25f , 0.5f , 0.0f } )</param>
+	void SetClearColor(myMath::Vector4 color = { 0.1f,0.25f,0.5f,0.0f });
 
 	//シングルトン
 	static DirectX_* GetInstance();

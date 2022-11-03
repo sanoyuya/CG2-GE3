@@ -1,5 +1,7 @@
 #pragma once
 #include"myMath.h"
+#include <d3dcompiler.h>
+#pragma comment(lib,"d3dcompiler.lib")
 
 struct PosUvColor
 {
@@ -18,6 +20,7 @@ enum class BlendMode
 	Inv//êFîΩì]
 };
 
-class DrawCommon
+namespace DrawCommon
 {
-};
+	ID3DBlob* ShaderCompile(const wchar_t* shaderFileName,LPCSTR entrypointname, LPCSTR shaderModelName, ID3DBlob* blob);
+}

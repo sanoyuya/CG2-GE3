@@ -1,6 +1,8 @@
 #include "TextureManager.h"
 #include"DirectXTex.h"
 
+TextureManager* TextureManager::textureManager = nullptr;
+
 void TextureManager::Initialize()
 {
 	HRESULT result;
@@ -17,7 +19,7 @@ void TextureManager::Initialize()
 	D3D12_DESCRIPTOR_HEAP_DESC srvDesc = {};
 	srvDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-	srvDesc.NumDescriptors = maxCount;
+	srvDesc.NumDescriptors = (UINT)maxCount;
 
 	//デスクリプタヒープの生成
 	result = device->CreateDescriptorHeap(&srvDesc, IID_PPV_ARGS(dsvHeap.ReleaseAndGetAddressOf()));
@@ -130,6 +132,11 @@ TextureData TextureManager::LoadTexture(const std::string& filePath)
 	texCount++;
 
 	return tmp;
+}
+
+void TextureManager::Destroy()
+{
+	delete textureManager;
 }
 
 TextureManager* TextureManager::GetInstance()

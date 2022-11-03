@@ -18,8 +18,11 @@ LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-void WindowsApp::CreatWindow(const wchar_t* title)
+void WindowsApp::CreatWindow(const wchar_t* title, const int width, const int height)
 {
+	window_width = width;
+	window_height = height;
+
 	//システムタイマーの分解能を上げる
 	timeBeginPeriod(1);
 
