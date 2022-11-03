@@ -16,9 +16,6 @@ private:
 
 	WindowsApp* windowsApp = nullptr;
 
-	const int window_width = 1280;//‰¡•
-	const int window_height = 720;//c•
-
 	HRESULT result;
 	ComPtr<ID3D12Device> device;
 	ComPtr<IDXGIFactory7> dxgiFactory;
@@ -64,8 +61,6 @@ public:
 	ComPtr<ID3D12Device> GetDevice();
 	ComPtr<ID3D12GraphicsCommandList> GetCommandList();
 	ComPtr<ID3D12DescriptorHeap>GetRtvHeap();
-	const int GetWindow_width();
-	const int GetWindow_height();
 
 	//ƒVƒ“ƒOƒ‹ƒgƒ“
 	static DirectX_* GetInstance();

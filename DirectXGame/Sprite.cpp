@@ -21,7 +21,7 @@ void Sprite::SpriteInitialize()
 	CreatePipline();
 }
 
-void Sprite::DrawSprite(TextureData& textureData, myMath::Vector3 position, myMath::Vector4 color, myMath::Vector3 scale, myMath::Vector3 rotation, myMath::Vector3 anchorpoint)
+void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint)
 {
 	float left = (0.0f - anchorpoint.x) * textureData.width;
 	float right = (1.0f - anchorpoint.x) * textureData.width;
@@ -57,11 +57,11 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector3 position, myMa
 
 	myMath::Matrix4 mTrans, mRot, mScale, matWorld;
 	//平行移動行列
-	mTrans.MakeTranslation(position);
+	mTrans.MakeTranslation({ position.x,position.y,0.0f });
 	//回転行列
-	mRot.MakeRotation(rotation);
+	mRot.MakeRotation({0.0f,0.0f,rotation});
 	//スケール行列
-	mScale.MakeScaling(scale);
+	mScale.MakeScaling({ scale.x,scale.y,1.0f });
 	//ワールド行列
 	matWorld = mScale * mRot * mTrans;
 
@@ -91,7 +91,7 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector3 position, myMa
 
 void Sprite::SetBlendMode(BlendMode mode)
 {
-	blendMode = uint8_t(mode);
+	blendMode = int(mode);
 }
 
 void Sprite::CreateVertexIndexBuffer()

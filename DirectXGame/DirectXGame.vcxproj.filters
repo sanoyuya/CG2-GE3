@@ -61,6 +61,18 @@
     <Filter Include="Engine\ヘッダーファイル\Audio">
       <UniqueIdentifier>{e4eed88b-2f12-4891-afac-aeb9dbe33d75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Math">
+      <UniqueIdentifier>{05e01e35-18a4-4f9c-aee5-49d362b1fcff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Math">
+      <UniqueIdentifier>{2513bd8c-2787-43dc-8e6a-994502a51c00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Math\Vector">
+      <UniqueIdentifier>{118c7207-da33-4bd5-b770-9811a9c8de07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Math\Vector">
+      <UniqueIdentifier>{e74037cc-e4e2-4296-b2af-0e913a29d3c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -87,9 +99,6 @@
     <ClCompile Include="WindowsApp.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
-    <ClCompile Include="myMath.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Engine\ソースファイル\Draw\2D</Filter>
     </ClCompile>
@@ -110,6 +119,21 @@
     </ClCompile>
     <ClCompile Include="DrawCommon.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="myMath.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Engine\ソースファイル\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Engine\ソースファイル\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Engine\ソースファイル\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,9 +166,6 @@
     <ClInclude Include="WindowsApp.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
-    <ClInclude Include="myMath.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
-    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Engine\ヘッダーファイル\Draw\2D</Filter>
     </ClInclude>
@@ -165,6 +186,21 @@
     </ClInclude>
     <ClInclude Include="DrawCommon.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="myMath.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Engine\ヘッダーファイル\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Engine\ヘッダーファイル\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Engine\ヘッダーファイル\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

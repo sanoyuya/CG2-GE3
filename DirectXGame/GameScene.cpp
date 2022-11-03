@@ -59,6 +59,6 @@ void GameScene::Draw()
 	{
 		audioManager->StopWave(titleBGM);
 	}
-	draw2->DrawSprite(tex2, {306.0f,255.0f,0});
-	draw->DrawSprite(tex, { 640.0f + hoge.x,360.0f + hoge.y,0 }, {1,1,1,1}, { 1, 1, 1 }, { 0, 0, 0 });
+	draw2->DrawSprite(tex2, {306.0f,255.0f});
+	draw->DrawSprite(tex, { 640.0f + hoge.x,360.0f + hoge.y}, {1,1,1,1});
 }

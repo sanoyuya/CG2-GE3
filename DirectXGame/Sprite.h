@@ -3,15 +3,7 @@
 #include"DirectX_.h"
 #include"WindowsApp.h"
 #include"TextureManager.h"
-#include"Camera.h"
 #include"DrawCommon.h"
-
-struct PosUvColor
-{
-	myMath::Vector3 pos;//座標
-	myMath::Vector2 uv;//uv座標
-	myMath::Vector4 color;//色
-};
 
 class Sprite
 {
@@ -50,7 +42,7 @@ private:
 	// パイプランステートの生成
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
 
-	uint8_t blendMode = (uint8_t)BlendMode::Alpha;//初期値半透明合成
+	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
 
 public:
 
@@ -71,7 +63,7 @@ public:
 	/// <param name="scale">大きさ</param>
 	/// <param name="rotation">回転</param>
 	/// <param name="anchorpoint">中心点</param>
-	void DrawSprite(TextureData& textureData, myMath::Vector3 position, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector3 scale = { 1.0f,1.0f,1.0f }, myMath::Vector3 rotation = { 0.0f,0.0f,0.0f }, myMath::Vector3 anchorpoint = { 0.5f,0.5f,0.5f });
+	void DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f });
 
 	/// <summary>
 	/// ブレンドモードのセット

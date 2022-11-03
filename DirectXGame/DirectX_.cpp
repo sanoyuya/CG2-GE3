@@ -46,9 +46,7 @@ void DirectX_::Initialize()
 
 //DirectX毎フレーム処理
 void DirectX_::UpdateClear()
-{
-	UINT incrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	
+{	
 	//バックバッファの番号を取得(2つなので0か1番)
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
 
@@ -73,8 +71,8 @@ void DirectX_::UpdateClear()
 
 	//描画コマンド
 	D3D12_VIEWPORT viewport{};
-	viewport.Width = window_width;
-	viewport.Height = window_height;
+	viewport.Width = windowsApp->GetWidth();
+	viewport.Height = windowsApp->GetHeight();
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -85,9 +83,9 @@ void DirectX_::UpdateClear()
 	//シザー矩形
 	D3D12_RECT scissorRect{};
 	scissorRect.left = 0;
-	scissorRect.right = scissorRect.left + window_width;
+	scissorRect.right = scissorRect.left + windowsApp->GetWidth();
 	scissorRect.top = 0;
-	scissorRect.bottom = scissorRect.top + window_height;
+	scissorRect.bottom = scissorRect.top + windowsApp->GetHeight();
 	//シザー矩形設定コマンドをコマンドリストに積む
 	commandList->RSSetScissorRects(1, &scissorRect);
 }
@@ -310,16 +308,6 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> DirectX_::GetCommandList()
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> DirectX_::GetRtvHeap()
 {
 	return rtvHeap;
-}
-
-const int DirectX_::GetWindow_width()
-{
-	return window_width;
-}
-
-const int DirectX_::GetWindow_height()
-{
-	return window_height;
 }
 
 DirectX_* DirectX_::GetInstance()
