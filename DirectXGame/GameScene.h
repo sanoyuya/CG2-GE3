@@ -28,6 +28,8 @@ private:
 	float angle = 0.0f;
 	myMath::Vector2 hoge = { 0,0 };
 
+	float timeY = 0;
+
 public:
 	GameScene();
 	~GameScene();

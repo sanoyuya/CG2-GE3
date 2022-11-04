@@ -141,6 +141,9 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsMath.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -207,6 +210,9 @@
     </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsMath.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -159,6 +159,7 @@
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="myMath.cpp" />
+    <ClCompile Include="PhysicsMath.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="myMath.h" />
+    <ClInclude Include="PhysicsMath.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Vector2.h" />
