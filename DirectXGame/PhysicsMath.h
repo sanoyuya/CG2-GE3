@@ -6,12 +6,11 @@ namespace PhysicsMath
 	/// <summary>
 	/// ’PU“®‚ğ‚µ‚½’l‚ğ•Ô‚·
 	/// </summary>
-	/// <param name="time">ŠÔ</param>
+	/// <param name="time">Œo‰ßŠÔ</param>
 	/// <param name="amplitude">U•</param>
-	/// <param name="timeSpeed">ŠÔ‚Ì‘‚¦‚é‘¬“x</param>
 	/// <param name="period">üŠú</param>
 	/// <returns></returns>
-	float SimpleHarmonicMotion(float& time,float amplitude = 10.0f, float timeSpeed = 1.0f, float period = 100.0f);
+	float SimpleHarmonicMotion(float time,float amplitude = 10.0f, float period = 60.0f);
 
 	/// <summary>
 	/// ‰~‰^“®‚ğ‚µ‚½’l‚ğ•Ô‚·(•¡‘f””Å)

@@ -50,6 +50,10 @@ void GameScene::Update()
 	}
 
 	angle += 0.1f;
+	if (angle > myMath::AX_2PIF)
+	{
+		angle = 0.0f;
+	}
 
 	camera->Update(false);
 }
@@ -60,6 +64,8 @@ void GameScene::Draw()
 	{
 		audioManager->StopWave(titleBGM);
 	}
-	draw2->DrawSprite(tex2, {306.0f,255.0f});
-	draw->DrawSprite(tex, { 640.0f + hoge.x + PhysicsMath::CircularMotion({640.0f,360.0f},100,angle).x,hoge.y + 360.0f + PhysicsMath::CircularMotion({640.0f,360.0f},100,angle).y }, {1,1,1,1});
+	aTime++;
+	reimuTime++;
+	draw2->DrawSprite(tex2, { 306.0f,255.0f }, { 1,1,1,1 }, {0.5f,0.5f }, PhysicsMath::SimpleHarmonicMotion(aTime, 1.0f,60.0f));
+	draw->DrawSprite(tex, { 640.0f + PhysicsMath::CircularMotion({640.0f,360.0f},100.0f,angle).x, 360.0f + PhysicsMath::CircularMotion({640.0f,360.0f},100.0f,angle).y }, { 1,1,1,1 }, { 1.0f+ PhysicsMath::SimpleHarmonicMotion(reimuTime, 1.0f,60.0f),1.0f+ PhysicsMath::SimpleHarmonicMotion(reimuTime, 1.0f,60.0f) }, angle);
 }

@@ -1,12 +1,10 @@
 #include "PhysicsMath.h"
 #include<cmath>
-#include"myMath.h"
 
 namespace PhysicsMath
 {
-	float SimpleHarmonicMotion(float& time ,float amplitude, float timeSpeed, float period)
+	float SimpleHarmonicMotion(float time ,float amplitude, float period)
 	{
-		time += timeSpeed;
 		return amplitude * sinf(myMath::AX_2PI * time / period);
 	}
 
