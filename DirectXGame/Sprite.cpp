@@ -21,12 +21,18 @@ void Sprite::SpriteInitialize()
 	CreatePipline();
 }
 
-void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint)
+void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
-	float left = (0.0f - anchorpoint.x) * textureData.width;
-	float right = (1.0f - anchorpoint.x) * textureData.width;
-	float top = (0.0f - anchorpoint.y) * textureData.height;
-	float bottom = (1.0f - anchorpoint.y) * textureData.height;
+	int isFlipX, isFlipY;
+	if (flipX == false)isFlipX = 1;
+	else isFlipX = -1;
+	if (flipY == false)isFlipY = 1;
+	else isFlipY = -1;
+
+	float left = ((0.0f - anchorpoint.x) * textureData.width) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * textureData.width) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * textureData.height) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * textureData.height) * isFlipY;
 
 	//頂点データ
 	PosUvColor vertices[] =
@@ -79,12 +85,18 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMa
 	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 }
 
-void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position, float radiusX, uint16_t& num, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint)
+void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position, float radiusX, uint16_t& num, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
-	float left = (0.0f - anchorpoint.x) * radiusX;
-	float right = (1.0f - anchorpoint.x) * radiusX;
-	float top = (0.0f - anchorpoint.y) * textureData.height;
-	float bottom = (1.0f - anchorpoint.y) * textureData.height;
+	int isFlipX, isFlipY;
+	if (flipX == false)isFlipX = 1;
+	else isFlipX = -1;
+	if (flipY == false)isFlipY = 1;
+	else isFlipY = -1;
+
+	float left = ((0.0f - anchorpoint.x) * radiusX) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * radiusX) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * textureData.height) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * textureData.height) * isFlipY;
 
 	float animationNum = textureData.width / radiusX;//分割数
 
@@ -144,12 +156,18 @@ void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 posi
 	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 }
 
-void Sprite::DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 position, float radiusY, uint16_t& num, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint)
+void Sprite::DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 position, float radiusY, uint16_t& num, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
-	float left = (0.0f - anchorpoint.x) * textureData.width;
-	float right = (1.0f - anchorpoint.x) * textureData.width;
-	float top = (0.0f - anchorpoint.y) * radiusY;
-	float bottom = (1.0f - anchorpoint.y) * radiusY;
+	int isFlipX, isFlipY;
+	if (flipX == false)isFlipX = 1;
+	else isFlipX = -1;
+	if (flipY == false)isFlipY = 1;
+	else isFlipY = -1;
+
+	float left = ((0.0f - anchorpoint.x) * textureData.width) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * textureData.width) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * radiusY) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * radiusY) * isFlipY;
 
 	float animationNum = textureData.height / radiusY;//分割数
 

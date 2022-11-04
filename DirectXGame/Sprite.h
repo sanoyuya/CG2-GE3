@@ -46,8 +46,8 @@ private:
 
 public:
 
-	Sprite(){}
-	virtual ~Sprite(){}
+	Sprite() {}
+	virtual ~Sprite() {}
 
 	/// <summary>
 	/// スプライトの初期化処理
@@ -63,7 +63,9 @@ public:
 	/// <param name="scale">大きさ</param>
 	/// <param name="rotation">回転</param>
 	/// <param name="anchorpoint">中心点</param>
-	void DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f });
+	/// <param name="flipX">X反転</param>
+	/// <param name="flipY">Y反転</param>
+	void DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
 	/// 横連番スプライト描画
@@ -76,7 +78,9 @@ public:
 	/// <param name="scale">大きさ</param>
 	/// <param name="rotation">回転</param>
 	/// <param name="anchorpoint">中心点</param>
-	void DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position,float radiusX, uint16_t& num, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f });
+	/// <param name="flipX">X反転</param>
+	/// <param name="flipY">Y反転</param>
+	void DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position, float radiusX, uint16_t& num, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
 	/// 縦連番スプライト描画
@@ -89,7 +93,9 @@ public:
 	/// <param name="scale">大きさ</param>
 	/// <param name="rotation">回転</param>
 	/// <param name="anchorpoint">中心点</param>
-	void DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 position, float radiusY, uint16_t& num, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f });
+	/// <param name="flipX">X反転</param>
+	/// <param name="flipY">Y反転</param>
+	void DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 position, float radiusY, uint16_t& num, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
 	/// ブレンドモードのセット
