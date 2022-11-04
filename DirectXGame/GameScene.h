@@ -22,6 +22,12 @@ private:
 	TextureData tex;
 	std::unique_ptr<DrawManager>draw2;
 	TextureData tex2;
+	std::unique_ptr<DrawManager>draw3;
+	TextureData tex3;
+	std::unique_ptr<DrawManager>draw4;
+	TextureData tex4;
+	float flame = 0.0f;
+	uint16_t num = 0;
 
 	uint32_t titleBGM;
 

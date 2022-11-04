@@ -19,12 +19,18 @@ void GameScene::Initialize()
 
 	tex = draw->LoadTexture("Resources/reimu.png");
 	tex2 = draw2->LoadTexture("Resources/A.jpg");
+	tex3= draw3->LoadTexture("Resources/boss2.png");
+	tex4 = draw4->LoadTexture("Resources/ファレグ.jpg");
 
 	draw = std::make_unique<DrawManager>();
 	//draw->SetBlendMode(BlendMode::Add);
 	draw->SpriteInitialize();
 	draw2 = std::make_unique<DrawManager>();
 	draw2->SpriteInitialize();
+	draw3 = std::make_unique<DrawManager>();
+	draw3->SpriteInitialize();
+	draw4 = std::make_unique<DrawManager>();
+	draw4->SpriteInitialize();
 
 	titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//タイトルシーンBGM読み込み
 	//audioManager->PlayWave(titleBGM, true);//BGMを再生
@@ -68,4 +74,12 @@ void GameScene::Draw()
 	reimuTime++;
 	draw2->DrawSprite(tex2, { 306.0f,255.0f }, { 1,1,1,1 }, {0.5f,0.5f }, PhysicsMath::SimpleHarmonicMotion(aTime, 1.0f,60.0f));
 	draw->DrawSprite(tex, { 640.0f + PhysicsMath::CircularMotion({640.0f,360.0f},100.0f,angle).x, 360.0f + PhysicsMath::CircularMotion({640.0f,360.0f},100.0f,angle).y }, { 1,1,1,1 }, { 1.0f+ PhysicsMath::SimpleHarmonicMotion(reimuTime, 1.0f,60.0f),1.0f+ PhysicsMath::SimpleHarmonicMotion(reimuTime, 1.0f,60.0f) }, angle);
+	flame++;
+	if (flame > 2)
+	{
+		num++;
+		flame = 0;
+	}
+	draw3->DrawAnimationSpriteX(tex3, { 640.0f,360.0f }, 128.0f, num);
+	draw4->DrawAnimationSpriteY(tex4, { 640.0f+ hoge.x,360.0f+ hoge.y }, 900.0f, num,{ 1.0f,1.0f,1.0f,1.0f },{1.0f,1.0f },-myMath::AX_PI/2);
 }

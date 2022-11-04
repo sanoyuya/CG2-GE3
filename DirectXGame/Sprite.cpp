@@ -55,17 +55,137 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMa
 		indexMap[i] = indices[i];//インデックスをコピー
 	}
 
-	myMath::Matrix4 mTrans, mRot, mScale, matWorld;
-	//平行移動行列
-	mTrans.MakeTranslation({ position.x,position.y,0.0f });
-	//回転行列
-	mRot.MakeRotation({0.0f,0.0f,rotation});
-	//スケール行列
-	mScale.MakeScaling({ scale.x,scale.y,1.0f });
-	//ワールド行列
-	matWorld = mScale * mRot * mTrans;
+	Update(position, scale, rotation);
 
-	*constBuffMap = matWorld * matProjection;
+	// パイプラインステートとルートシグネチャの設定コマンド
+	cmdList->SetPipelineState(pipelineState.Get());
+	cmdList->SetGraphicsRootSignature(rootSignature.Get());
+	// プリミティブ形状の設定コマンド
+	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
+	// 頂点バッファビューの設定コマンド
+	cmdList->IASetVertexBuffers(0, 1, &vbView);
+	//定数バッファビュー(CBV)の設定コマンド
+	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
+	//SRVヒープの設定コマンド
+	cmdList->SetDescriptorHeaps(1, textureData.srvHeap.GetAddressOf());
+	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = textureData.gpuHandle;
+	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
+	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
+	//インデックスバッファビューの設定コマンド
+	cmdList->IASetIndexBuffer(&ibView);
+
+	// 描画コマンド
+	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
+}
+
+void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position, float radiusX, uint16_t& num, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint)
+{
+	float left = (0.0f - anchorpoint.x) * radiusX;
+	float right = (1.0f - anchorpoint.x) * radiusX;
+	float top = (0.0f - anchorpoint.y) * textureData.height;
+	float bottom = (1.0f - anchorpoint.y) * textureData.height;
+
+	float animationNum = textureData.width / radiusX;//分割数
+
+	if (num + 1 > animationNum)
+	{
+		num = 0;//0枚目に戻す処理
+	}
+
+	//頂点データ
+	PosUvColor vertices[] =
+	{
+		{{left,top,0.0f},{num / animationNum,0.0f},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{num / animationNum,1.0f},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{(num + 1) / animationNum,0.0f},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{(num + 1) / animationNum,1.0f},{color.x, color.y, color.z, color.w}},//右下インデックス3
+	};
+
+	//インデックスデータ
+	uint16_t indices[] =
+	{
+		1,0,3,//三角形1つ目
+		2,3,0,//三角形2つ目
+	};
+
+	//頂点バッファへのデータ転送
+	for (int i = 0; i < _countof(vertices); i++)
+	{
+		vertMap[i] = vertices[i];//インデックスをコピー
+	}
+
+	for (int i = 0; i < _countof(indices); i++)
+	{
+		indexMap[i] = indices[i];//インデックスをコピー
+	}
+
+	Update(position, scale, rotation);
+
+	// パイプラインステートとルートシグネチャの設定コマンド
+	cmdList->SetPipelineState(pipelineState.Get());
+	cmdList->SetGraphicsRootSignature(rootSignature.Get());
+	// プリミティブ形状の設定コマンド
+	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
+	// 頂点バッファビューの設定コマンド
+	cmdList->IASetVertexBuffers(0, 1, &vbView);
+	//定数バッファビュー(CBV)の設定コマンド
+	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
+	//SRVヒープの設定コマンド
+	cmdList->SetDescriptorHeaps(1, textureData.srvHeap.GetAddressOf());
+	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = textureData.gpuHandle;
+	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
+	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
+	//インデックスバッファビューの設定コマンド
+	cmdList->IASetIndexBuffer(&ibView);
+
+	// 描画コマンド
+	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
+}
+
+void Sprite::DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 position, float radiusY, uint16_t& num, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint)
+{
+	float left = (0.0f - anchorpoint.x) * textureData.width;
+	float right = (1.0f - anchorpoint.x) * textureData.width;
+	float top = (0.0f - anchorpoint.y) * radiusY;
+	float bottom = (1.0f - anchorpoint.y) * radiusY;
+
+	float animationNum = textureData.height / radiusY;//分割数
+
+	if (num + 1 > animationNum)
+	{
+		num = 0;//0枚目に戻す処理
+	}
+
+	//頂点データ
+	PosUvColor vertices[] =
+	{
+		{{left,top,0.0f},{0.0f,num / animationNum},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{0.0f,(num + 1) / animationNum},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{1.0f,num / animationNum},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{1.0f,(num + 1) / animationNum},{color.x, color.y, color.z, color.w}},//右下インデックス3
+	};
+
+	//インデックスデータ
+	uint16_t indices[] =
+	{
+		1,0,3,//三角形1つ目
+		2,3,0,//三角形2つ目
+	};
+
+	//頂点バッファへのデータ転送
+	for (int i = 0; i < _countof(vertices); i++)
+	{
+		vertMap[i] = vertices[i];//インデックスをコピー
+	}
+
+	for (int i = 0; i < _countof(indices); i++)
+	{
+		indexMap[i] = indices[i];//インデックスをコピー
+	}
+
+	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
 	cmdList->SetPipelineState(pipelineState.Get());
@@ -369,4 +489,19 @@ void Sprite::CreatePipline()
 	// パイプランステートの生成
 	result = device->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
 	assert(SUCCEEDED(result));
+}
+
+void Sprite::Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation)
+{
+	myMath::Matrix4 mTrans, mRot, mScale, matWorld;
+	//平行移動行列
+	mTrans.MakeTranslation({ position.x,position.y,0.0f });
+	//回転行列
+	mRot.MakeRotation({ 0.0f,0.0f,rotation });
+	//スケール行列
+	mScale.MakeScaling({ scale.x,scale.y,1.0f });
+	//ワールド行列
+	matWorld = mScale * mRot * mTrans;
+
+	*constBuffMap = matWorld * matProjection;
 }

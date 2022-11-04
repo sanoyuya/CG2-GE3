@@ -66,6 +66,32 @@ public:
 	void DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f });
 
 	/// <summary>
+	/// 横連番スプライト描画
+	/// </summary>
+	/// <param name="textureData">テクスチャデータ</param>
+	/// <param name="position">座標</param>
+	/// <param name="radiusX">一枚の横の長さ</param>
+	/// <param name="num">何枚目か</param>
+	/// <param name="color">色</param>
+	/// <param name="scale">大きさ</param>
+	/// <param name="rotation">回転</param>
+	/// <param name="anchorpoint">中心点</param>
+	void DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position,float radiusX, uint16_t& num, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f });
+
+	/// <summary>
+	/// 縦連番スプライト描画
+	/// </summary>
+	/// <param name="textureData">テクスチャデータ</param>
+	/// <param name="position">座標</param>
+	/// <param name="radiusY">一枚の縦の長さ</param>
+	/// <param name="num">何枚目か</param>
+	/// <param name="color">色</param>
+	/// <param name="scale">大きさ</param>
+	/// <param name="rotation">回転</param>
+	/// <param name="anchorpoint">中心点</param>
+	void DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 position, float radiusY, uint16_t& num, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f });
+
+	/// <summary>
 	/// ブレンドモードのセット
 	/// </summary>
 	/// <param name="mode">モード</param>
@@ -76,4 +102,5 @@ private:
 	void CreateConstBuff();
 	void CreatePipline();
 	void LoadShader();
+	void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
 };
