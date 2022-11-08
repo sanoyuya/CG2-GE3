@@ -29,12 +29,12 @@ public:
 	template<class T>using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 private:
-	ComPtr<ID3D12Device> device;
-	ComPtr<ID3D12DescriptorHeap> dsvHeap;
-	D3D12_DESCRIPTOR_RANGE dsvRange;
-	D3D12_HEAP_PROPERTIES prop;
+	ComPtr<ID3D12Device> device = 0;
+	ComPtr<ID3D12DescriptorHeap> dsvHeap=0;
+	D3D12_DESCRIPTOR_RANGE dsvRange = {};
+	D3D12_HEAP_PROPERTIES prop = {};
 
-	UINT texCount;
+	UINT texCount = 0;
 
 	static TextureManager* textureManager;
 
@@ -52,4 +52,13 @@ public:
 	void Destroy();
 
 	static TextureManager* GetInstance();
+
+private:
+
+	TextureManager() = default;
+	~TextureManager() = default;
+
+	//コピーコンストラクタ・代入演算子削除
+	TextureManager& operator=(const TextureManager&) = delete;
+	TextureManager(const TextureManager&) = delete;
 };

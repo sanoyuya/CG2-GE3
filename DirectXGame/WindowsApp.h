@@ -34,4 +34,13 @@ public:
 
 	//シングルトン
 	static WindowsApp* GetInstance();
+
+private:
+
+	WindowsApp() = default;
+	~WindowsApp() = default;
+
+	//コピーコンストラクタ・代入演算子削除
+	WindowsApp& operator=(const WindowsApp&) = delete;
+	WindowsApp(const WindowsApp&) = delete;
 };

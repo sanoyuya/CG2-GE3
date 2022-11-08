@@ -151,7 +151,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DirectX_.cpp" />
     <ClCompile Include="DrawCommon.cpp" />
-    <ClCompile Include="DrawManager.cpp" />
+    <ClCompile Include="DrawOversight.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -160,6 +160,7 @@
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="myMath.cpp" />
+    <ClCompile Include="Obj.cpp" />
     <ClCompile Include="PhysicsMath.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -188,7 +189,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DirectX_.h" />
     <ClInclude Include="DrawCommon.h" />
-    <ClInclude Include="DrawManager.h" />
+    <ClInclude Include="DrawOversight.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="InputManager.h" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="myMath.h" />
+    <ClInclude Include="Obj.h" />
     <ClInclude Include="PhysicsMath.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextureManager.h" />

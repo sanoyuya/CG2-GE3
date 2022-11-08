@@ -2,7 +2,14 @@
 #include <d3dcompiler.h>
 #include"Camera.h"
 
-void Sprite::SpriteInitialize()
+Microsoft::WRL::ComPtr<ID3D12Device>Sprite::device;
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>Sprite::cmdList;
+myMath::Matrix4 Sprite::matProjection;
+Microsoft::WRL::ComPtr<ID3DBlob>Sprite::vsBlob; // 頂点シェーダオブジェクト
+Microsoft::WRL::ComPtr<ID3DBlob>Sprite::psBlob; // ピクセルシェーダオブジェクト
+std::array<Pipeline, 6> Sprite::pipeline;
+
+void Sprite::Initialize()
 {
 	device = DirectX_::GetInstance()->GetDevice();
 	cmdList = DirectX_::GetInstance()->GetCommandList();
@@ -12,13 +19,19 @@ void Sprite::SpriteInitialize()
 
 	myMath::MakeOrthogonalL(0.0f, width, height, 0.0f, 0.0f, 1.0f, matProjection);
 
+	LoadShader();
+
+	for (int i = 0; i < pipeline.size(); i++)
+	{
+		CreatePipline(i);
+	}
+}
+
+void Sprite::SpriteInitialize()
+{
 	CreateVertexIndexBuffer();
 
 	CreateConstBuff();
-
-	LoadShader();
-
-	CreatePipline();
 }
 
 void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
@@ -64,8 +77,50 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMa
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	cmdList->SetPipelineState(pipelineState.Get());
-	cmdList->SetGraphicsRootSignature(rootSignature.Get());
+	switch (blendMode)
+	{
+	case (int)BlendMode::None:
+
+		cmdList->SetPipelineState(pipeline[0].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[0].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Alpha:
+
+		cmdList->SetPipelineState(pipeline[1].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[1].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Add:
+
+		cmdList->SetPipelineState(pipeline[2].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[2].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Sub:
+
+		cmdList->SetPipelineState(pipeline[3].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[3].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Mul:
+
+		cmdList->SetPipelineState(pipeline[4].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[4].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Inv:
+
+		cmdList->SetPipelineState(pipeline[5].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[5].rootSignature.Get());
+
+		break;
+	}
 	// プリミティブ形状の設定コマンド
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 頂点バッファビューの設定コマンド
@@ -135,8 +190,50 @@ void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 posi
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	cmdList->SetPipelineState(pipelineState.Get());
-	cmdList->SetGraphicsRootSignature(rootSignature.Get());
+	switch (blendMode)
+	{
+	case (int)BlendMode::None:
+
+		cmdList->SetPipelineState(pipeline[0].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[0].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Alpha:
+
+		cmdList->SetPipelineState(pipeline[1].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[1].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Add:
+
+		cmdList->SetPipelineState(pipeline[2].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[2].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Sub:
+
+		cmdList->SetPipelineState(pipeline[3].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[3].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Mul:
+
+		cmdList->SetPipelineState(pipeline[4].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[4].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Inv:
+
+		cmdList->SetPipelineState(pipeline[5].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[5].rootSignature.Get());
+
+		break;
+	}
 	// プリミティブ形状の設定コマンド
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 頂点バッファビューの設定コマンド
@@ -206,8 +303,50 @@ void Sprite::DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 posi
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	cmdList->SetPipelineState(pipelineState.Get());
-	cmdList->SetGraphicsRootSignature(rootSignature.Get());
+	switch (blendMode)
+	{
+	case (int)BlendMode::None:
+
+		cmdList->SetPipelineState(pipeline[0].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[0].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Alpha:
+
+		cmdList->SetPipelineState(pipeline[1].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[1].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Add:
+
+		cmdList->SetPipelineState(pipeline[2].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[2].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Sub:
+
+		cmdList->SetPipelineState(pipeline[3].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[3].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Mul:
+
+		cmdList->SetPipelineState(pipeline[4].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[4].rootSignature.Get());
+
+		break;
+
+	case (int)BlendMode::Inv:
+
+		cmdList->SetPipelineState(pipeline[5].pipelineState.Get());
+		cmdList->SetGraphicsRootSignature(pipeline[5].rootSignature.Get());
+
+		break;
+	}
 	// プリミティブ形状の設定コマンド
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 頂点バッファビューの設定コマンド
@@ -347,8 +486,10 @@ void Sprite::LoadShader()
 	psBlob = DrawCommon::ShaderCompile(L"Resources/shaders/SpritePS.hlsl", "main", "ps_5_0", psBlob.Get());
 }
 
-void Sprite::CreatePipline()
+void Sprite::CreatePipline(int blend)
 {
+	HRESULT result;
+
 	Microsoft::WRL::ComPtr<ID3DBlob>rootSigBlob;
 	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob; // エラーオブジェクト
 
@@ -388,7 +529,7 @@ void Sprite::CreatePipline()
 	blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;		//ソースの値を100%使う
 	blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;	//デストの値を0%使う
 
-	switch (blendMode)
+	switch (blend)
 	{
 	case (int)BlendMode::None:
 
@@ -499,13 +640,14 @@ void Sprite::CreatePipline()
 	// ルートシグネチャのシリアライズ
 	result = D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
 	assert(SUCCEEDED(result));
-	result = device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootSignature));
+	result = device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&pipeline[blend].rootSignature));
 	assert(SUCCEEDED(result));
 
 	// パイプラインにルートシグネチャをセット
-	pipelineDesc.pRootSignature = rootSignature.Get();
+	pipelineDesc.pRootSignature = pipeline[blend].rootSignature.Get();
+
 	// パイプランステートの生成
-	result = device->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
+	result = device->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipeline[blend].pipelineState));
 	assert(SUCCEEDED(result));
 }
 

@@ -41,6 +41,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	TextureManager* textureManager = TextureManager::GetInstance();
 	textureManager->Initialize();
 
+	Sprite::Initialize();
+
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚Ü‚Å
 
 	std::unique_ptr<GameScene>gameScene = std::make_unique<GameScene>();

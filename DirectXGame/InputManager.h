@@ -17,8 +17,6 @@ private:
 
 public:
 
-	InputManager();
-	~InputManager();
 	void Initialize();
 	void Update();
 
@@ -180,4 +178,13 @@ public:
 
 	//シングルトン
 	static InputManager* GetInstance();
+
+	private:
+
+		InputManager() = default;
+		~InputManager() = default;
+
+		//コピーコンストラクタ・代入演算子削除
+		InputManager& operator=(const InputManager&) = delete;
+		InputManager(const InputManager&) = delete;
 };

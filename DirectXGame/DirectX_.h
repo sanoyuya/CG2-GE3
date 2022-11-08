@@ -44,8 +44,7 @@ private:
 	FLOAT clearColor[4] = { 0.1f,0.25f,0.5f,0.0f };//背景の色(水色)設定
 
 public:
-	DirectX_();
-	~DirectX_();
+	
 	void Initialize();
 	void UpdateClear();
 	void UpdateEnd();
@@ -108,4 +107,13 @@ public:
 
 	//シングルトン
 	static DirectX_* GetInstance();
+
+private:
+
+	DirectX_() = default;
+	~DirectX_() = default;
+
+	//コピーコンストラクタ・代入演算子削除
+	DirectX_& operator=(const DirectX_&) = delete;
+	DirectX_(const DirectX_&) = delete;
 };

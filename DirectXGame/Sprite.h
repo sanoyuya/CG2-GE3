@@ -4,6 +4,7 @@
 #include"WindowsApp.h"
 #include"TextureManager.h"
 #include"DrawCommon.h"
+#include<array>
 
 class Sprite
 {
@@ -11,8 +12,8 @@ private:
 
 	HRESULT result;
 	char PADING[4];
-	Microsoft::WRL::ComPtr<ID3D12Device>device;
-	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>cmdList = nullptr;
+	static Microsoft::WRL::ComPtr<ID3D12Device>device;
+	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>cmdList;
 
 	//頂点バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource>vertBuff;
@@ -27,20 +28,17 @@ private:
 	//インデックスバッファビューの作成
 	D3D12_INDEX_BUFFER_VIEW ibView{};
 	//プロジェクション行列
-	myMath::Matrix4 matProjection;
+	static myMath::Matrix4 matProjection;
 
 	//定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource>constBuff;
 	//定数バッファのマッピング用ポインタ
 	myMath::Matrix4* constBuffMap = nullptr;
 
-	Microsoft::WRL::ComPtr<ID3DBlob>vsBlob; // 頂点シェーダオブジェクト
-	Microsoft::WRL::ComPtr<ID3DBlob>psBlob; // ピクセルシェーダオブジェクト
+	static Microsoft::WRL::ComPtr<ID3DBlob>vsBlob; // 頂点シェーダオブジェクト
+	static Microsoft::WRL::ComPtr<ID3DBlob>psBlob; // ピクセルシェーダオブジェクト
 
-	// ルートシグネチャ
-	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature;
-	// パイプランステートの生成
-	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
+	static std::array<Pipeline, 6> pipeline;
 
 	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
 
@@ -48,6 +46,8 @@ public:
 
 	Sprite() {}
 	virtual ~Sprite() {}
+
+	static void Initialize();
 
 	/// <summary>
 	/// スプライトの初期化処理
@@ -106,7 +106,7 @@ public:
 private:
 	void CreateVertexIndexBuffer();
 	void CreateConstBuff();
-	void CreatePipline();
-	void LoadShader();
+	static void CreatePipline(int blend);
+	static void LoadShader();
 	void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
 };

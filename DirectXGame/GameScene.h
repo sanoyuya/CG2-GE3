@@ -6,7 +6,7 @@
 #include"Camera.h"
 #include"Sprite.h"
 #include"TextureManager.h"
-#include"DrawManager.h"
+#include"DrawOversight.h"
 
 class GameScene
 {
@@ -18,13 +18,13 @@ private:
 
 	std::unique_ptr<Camera>camera;
 
-	std::unique_ptr<DrawManager>draw;
+	std::unique_ptr<DrawOversight>draw;
 	TextureData tex;
-	std::unique_ptr<DrawManager>draw2;
+	std::unique_ptr<DrawOversight>draw2;
 	TextureData tex2;
-	std::unique_ptr<DrawManager>draw3;
+	std::unique_ptr<DrawOversight>draw3;
 	TextureData tex3;
-	std::unique_ptr<DrawManager>draw4;
+	std::unique_ptr<DrawOversight>draw4;
 	TextureData tex4;
 	float flame = 0.0f;
 	uint16_t num = 0;

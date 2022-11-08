@@ -2,14 +2,6 @@
 #pragma comment(lib,"dinput8.lib")
 #pragma comment(lib,"dxguid.lib")
 
-InputManager::InputManager()
-{
-}
-
-InputManager::~InputManager()
-{
-}
-
 void InputManager::Initialize()
 {
 	HRESULT result;

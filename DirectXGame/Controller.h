@@ -136,4 +136,13 @@ public:
 
 	//シングルトン
 	static Controller* GetInstance();
+
+	private:
+
+		Controller() = default;
+		~Controller() = default;
+
+		//コピーコンストラクタ・代入演算子削除
+		Controller& operator=(const Controller&) = delete;
+		Controller(const Controller&) = delete;
 };

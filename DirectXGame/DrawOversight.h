@@ -2,7 +2,7 @@
 #include"TextureManager.h"
 #include"Sprite.h"
 
-class DrawManager:public Sprite
+class DrawOversight :public Sprite
 {
 public:
 

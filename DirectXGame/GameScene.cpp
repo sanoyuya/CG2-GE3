@@ -20,16 +20,17 @@ void GameScene::Initialize()
 	tex = draw->LoadTexture("Resources/reimu.png");
 	tex2 = draw2->LoadTexture("Resources/A.jpg");
 	tex3 = draw3->LoadTexture("Resources/boss2.png");
-	tex4 = draw4->LoadTexture("Resources/ファレグ.jpg");
+	tex4 = draw4->LoadTexture("Resources/ファレグ1_1.jpg");
 
-	draw = std::make_unique<DrawManager>();
+	draw = std::make_unique<DrawOversight>();
 	//draw->SetBlendMode(BlendMode::Add);
 	draw->SpriteInitialize();
-	draw2 = std::make_unique<DrawManager>();
+	draw2 = std::make_unique<DrawOversight>();
 	draw2->SpriteInitialize();
-	draw3 = std::make_unique<DrawManager>();
+	draw3 = std::make_unique<DrawOversight>();
 	draw3->SpriteInitialize();
-	draw4 = std::make_unique<DrawManager>();
+	draw4 = std::make_unique<DrawOversight>();
+	draw4->SetBlendMode(BlendMode::Add);
 	draw4->SpriteInitialize();
 
 	titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//タイトルシーンBGM読み込み

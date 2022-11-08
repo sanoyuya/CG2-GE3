@@ -10,14 +10,6 @@
 
 DirectX_* directX = nullptr;
 
-DirectX_::DirectX_()
-{	
-}
-
-DirectX_::~DirectX_()
-{
-}
-
 void DirectX_::Initialize()
 {
 	//ƒNƒ‰ƒX“Ç‚İ‚İ
