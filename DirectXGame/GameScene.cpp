@@ -17,13 +17,15 @@ void GameScene::Initialize()
 	camera = std::make_unique<Camera>();
 	camera->Initialize(false);
 
-	tex = draw->LoadTexture("Resources/reimu.png");
-	tex2 = draw2->LoadTexture("Resources/A.jpg");
+	tex = draw->LoadTexture("Resources/visual (1).png");
+	tex2 = draw2->LoadTexture("Resources/visual.png");
 	tex3 = draw3->LoadTexture("Resources/boss2.png");
 	tex4 = draw4->LoadTexture("Resources/ファレグ1_1.jpg");
+	violetTex = draw->LoadTexture("Resources/title_violet.png");
+	pokeTex= draw->LoadTexture("Resources/20221015085220.png");
 
 	draw = std::make_unique<DrawOversight>();
-	//draw->SetBlendMode(BlendMode::Add);
+	draw->SetBlendMode(BlendMode::Add);
 	draw->SpriteInitialize();
 	draw2 = std::make_unique<DrawOversight>();
 	draw2->SpriteInitialize();
@@ -32,6 +34,10 @@ void GameScene::Initialize()
 	draw4 = std::make_unique<DrawOversight>();
 	draw4->SetBlendMode(BlendMode::Add);
 	draw4->SpriteInitialize();
+	violet = std::make_unique<DrawOversight>();
+	violet->SpriteInitialize();
+	poke = std::make_unique<DrawOversight>();
+	poke->SpriteInitialize();
 
 	//titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//タイトルシーンBGM読み込み
 	//audioManager->PlayWave(titleBGM, true);//BGMを再生
@@ -73,7 +79,7 @@ void GameScene::Draw()
 	}
 	aTime++;
 	reimuTime++;
-	draw2->DrawSprite(tex2, { 306.0f,255.0f }, { 1,1,1,1 }, { 0.5f,0.5f }, PhysicsMath::SimpleHarmonicMotion(aTime, 1.0f, 60.0f), { 0.5f,0.5f }, false, true);
+	draw2->DrawSprite(tex2, { 306.0f,255.0f }, { 1,1,1,1 }, { 0.5f,0.5f }, PhysicsMath::SimpleHarmonicMotion(aTime, 1.0f, 60.0f), { 0.5f,0.5f }, false, false);
 	draw->DrawSprite(tex, { 640.0f + PhysicsMath::CircularMotion({640.0f,360.0f},100.0f,angle).x, 360.0f + PhysicsMath::CircularMotion({640.0f,360.0f},100.0f,angle).y }, { 1,1,1,1 }, { 1.0f + PhysicsMath::SimpleHarmonicMotion(reimuTime, 1.0f,60.0f),1.0f + PhysicsMath::SimpleHarmonicMotion(reimuTime, 1.0f,60.0f) }, angle);
 	flame++;
 	if (flame > 2)
@@ -81,6 +87,15 @@ void GameScene::Draw()
 		num++;
 		flame = 0;
 	}
-	draw3->DrawAnimationSpriteX(tex3, { 640.0f,360.0f }, 128.0f, num);
-	draw4->DrawAnimationSpriteY(tex4, { 640.0f + hoge.x,360.0f + hoge.y }, 900.0f, num, { 1.0f,1.0f,1.0f,1.0f }, { 1.0f,1.0f }, -myMath::AX_PI / 2);
+	//draw3->DrawAnimationSpriteX(tex3, { 640.0f,360.0f }, 19, num);
+	//draw4->DrawAnimationSpriteY(tex4, { 640.0f + hoge.x,360.0f + hoge.y }, 16, num, { 1.0f,1.0f,1.0f,1.0f }, { 1.0f,1.0f }, -myMath::AX_PI / 2);
+	violet->DrawSprite(violetTex, { 1280 - 290 / 2,720 - 170 / 2 }, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+
+	pokeFlame++;
+	if (pokeFlame > 60)
+	{
+		pokeNum++;
+		pokeFlame = 0;
+	}
+	poke->DrawAnimationSpriteXY(pokeTex, { 640,360 }, 5,7, pokeNum);
 }

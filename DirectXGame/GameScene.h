@@ -26,6 +26,12 @@ private:
 	TextureData tex3;
 	std::unique_ptr<DrawOversight>draw4;
 	TextureData tex4;
+	std::unique_ptr<DrawOversight>violet;
+	TextureData violetTex;
+	std::unique_ptr<DrawOversight>poke;
+	TextureData pokeTex;
+	float pokeFlame = 0.0f;
+	uint16_t pokeNum = 0;
 	float flame = 0.0f;
 	uint16_t num = 0;
 
