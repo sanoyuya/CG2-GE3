@@ -5,8 +5,7 @@
 Microsoft::WRL::ComPtr<ID3D12Device>Sprite::device;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>Sprite::cmdList;
 myMath::Matrix4 Sprite::matProjection;
-Microsoft::WRL::ComPtr<ID3DBlob>Sprite::vsBlob; // 頂点シェーダオブジェクト
-Microsoft::WRL::ComPtr<ID3DBlob>Sprite::psBlob; // ピクセルシェーダオブジェクト
+Blob Sprite::blob;//シェーダオブジェクト
 std::array<PipelineSet, 6> Sprite::pip;
 
 void Sprite::Initialize()
@@ -23,7 +22,7 @@ void Sprite::Initialize()
 
 	for (int i = 0; i < pip.size(); i++)
 	{
-		Pipeline::CreateSpritePipline(vsBlob.Get(), psBlob.Get(), (BlendMode)i, device.Get(), pip);
+		Pipeline::CreateSpritePipline(blob, (BlendMode)i, device.Get(), pip);
 	}
 }
 
@@ -355,9 +354,9 @@ void Sprite::CreateConstBuff()
 void Sprite::LoadShader()
 {
 	//頂点シェーダの読み込みとコンパイル
-	vsBlob = DrawCommon::ShaderCompile(L"Resources/shaders/SpriteVS.hlsl", "main", "vs_5_0", vsBlob.Get());
+	blob.vs = DrawCommon::ShaderCompile(L"Resources/shaders/SpriteVS.hlsl", "main", "vs_5_0", blob.vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	psBlob = DrawCommon::ShaderCompile(L"Resources/shaders/SpritePS.hlsl", "main", "ps_5_0", psBlob.Get());
+	blob.ps = DrawCommon::ShaderCompile(L"Resources/shaders/SpritePS.hlsl", "main", "ps_5_0", blob.ps.Get());
 }
 
 void Sprite::Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation)

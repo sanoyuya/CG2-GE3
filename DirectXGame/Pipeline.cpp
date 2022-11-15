@@ -1,7 +1,7 @@
 #include "Pipeline.h"
 #include <cassert>
 
-void Pipeline::CreateSpritePipline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6> &pip)
+void Pipeline::CreateSpritePipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6> &pip)
 {
 	HRESULT result;
 
@@ -25,10 +25,10 @@ void Pipeline::CreateSpritePipline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC pipelineDesc{};
 	// シェーダーの設定
-	pipelineDesc.VS.pShaderBytecode = vsBlob->GetBufferPointer();
-	pipelineDesc.VS.BytecodeLength = vsBlob->GetBufferSize();
-	pipelineDesc.PS.pShaderBytecode = psBlob->GetBufferPointer();
-	pipelineDesc.PS.BytecodeLength = psBlob->GetBufferSize();
+	pipelineDesc.VS.pShaderBytecode = blob.vs->GetBufferPointer();
+	pipelineDesc.VS.BytecodeLength = blob.vs->GetBufferSize();
+	pipelineDesc.PS.pShaderBytecode = blob.ps->GetBufferPointer();
+	pipelineDesc.PS.BytecodeLength = blob.ps->GetBufferSize();
 	// サンプルマスクの設定
 	pipelineDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK; // 標準設定
 	// ラスタライザの設定

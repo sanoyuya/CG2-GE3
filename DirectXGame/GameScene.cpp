@@ -33,7 +33,7 @@ void GameScene::Initialize()
 	draw4->SetBlendMode(BlendMode::Add);
 	draw4->SpriteInitialize();
 
-	titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//タイトルシーンBGM読み込み
+	//titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//タイトルシーンBGM読み込み
 	//audioManager->PlayWave(titleBGM, true);//BGMを再生
 }
 
@@ -69,7 +69,7 @@ void GameScene::Draw()
 {
 	if (input->KeyboardTriggerPush(DIK_SPACE))
 	{
-		audioManager->StopWave(titleBGM);
+		//audioManager->StopWave(titleBGM);
 	}
 	aTime++;
 	reimuTime++;

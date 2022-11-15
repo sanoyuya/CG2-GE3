@@ -36,8 +36,7 @@ private:
 	//定数バッファのマッピング用ポインタ
 	myMath::Matrix4* constBuffMap = nullptr;
 
-	static Microsoft::WRL::ComPtr<ID3DBlob>vsBlob; // 頂点シェーダオブジェクト
-	static Microsoft::WRL::ComPtr<ID3DBlob>psBlob; // ピクセルシェーダオブジェクト
+	static Blob blob;//シェーダオブジェクト
 
 	static std::array<PipelineSet, 6> pip;
 
