@@ -250,7 +250,7 @@ void Sprite::DrawAnimationSpriteXY(TextureData& textureData, myMath::Vector2 pos
 
 	uint16_t animationXYNum = sheetsNumX * sheetsNumY;//•ªŠ„”(‘‡Œv)
 	uint16_t x = nowNum % sheetsNumX;
-	uint16_t y = nowNum / sheetsNumY;
+	uint16_t y = nowNum / sheetsNumX;
 
 	if (nowNum + 1 > animationXYNum)
 	{
