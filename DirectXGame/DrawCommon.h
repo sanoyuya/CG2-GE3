@@ -1,10 +1,7 @@
 #pragma once
 #include"myMath.h"
 #include <d3dcompiler.h>
-#include <d3d12.h>
 #pragma comment(lib,"d3dcompiler.lib")
-#include<wrl.h>
-#include<memory>
 
 struct PosUvColor
 {
@@ -18,24 +15,6 @@ struct PosNormalUv
 	myMath::Vector3 pos;//座標
 	myMath::Vector3 normal;//法線
 	myMath::Vector2 uv;//uv座標
-};
-
-struct Pipeline
-{
-	// ルートシグネチャ
-	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature;
-	// パイプランステートの生成
-	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
-};
-
-enum class BlendMode
-{
-	None,//ノーブレンド
-	Alpha,//半透明合成
-	Add,//加算合成
-	Sub,//減算合成
-	Mul,//乗算合成
-	Inv//色反転
 };
 
 namespace DrawCommon

@@ -5,6 +5,7 @@
 #include"TextureManager.h"
 #include"DrawCommon.h"
 #include<array>
+#include"Pipeline.h"
 
 class Sprite
 {
@@ -38,7 +39,7 @@ private:
 	static Microsoft::WRL::ComPtr<ID3DBlob>vsBlob; // 頂点シェーダオブジェクト
 	static Microsoft::WRL::ComPtr<ID3DBlob>psBlob; // ピクセルシェーダオブジェクト
 
-	static std::array<Pipeline, 6> pipeline;
+	static std::array<PipelineSet, 6> pip;
 
 	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
 
@@ -106,7 +107,7 @@ public:
 private:
 	void CreateVertexIndexBuffer();
 	void CreateConstBuff();
-	static void CreatePipline(int blend);
 	static void LoadShader();
 	void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
+	void BlendSet(BlendMode mode);
 };
