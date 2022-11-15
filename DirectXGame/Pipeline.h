@@ -35,5 +35,4 @@ class Pipeline
 public:
 
 	static void CreateSpritePipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
-
 };
