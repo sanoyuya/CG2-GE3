@@ -97,7 +97,7 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMa
 	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 }
 
-void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
+void Sprite::DrawSpriteClip(TextureData& textureData, myMath::Vector2 position, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, myMath::Vector4 color, myMath::Vector2 scale, float rotation, bool flipX, bool flipY)
 {
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;
@@ -105,23 +105,18 @@ void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 posi
 	if (flipY == false)isFlipY = 1;
 	else isFlipY = -1;
 
-	float left = ((0.0f - anchorpoint.x) * textureData.width/ sheetsNum) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * textureData.width / sheetsNum) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * textureData.height) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * textureData.height) * isFlipY;
-
-	if (nowNum + 1 > sheetsNum)
-	{
-		nowNum = 0;//0枚目に戻す処理
-	}
+	float left = -clipRadius.x * isFlipX;
+	float right = clipRadius.x * isFlipX;
+	float top = -clipRadius.y * isFlipY;
+	float bottom = clipRadius.y * isFlipY;
 
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{(float)nowNum / (float)sheetsNum,0.0f},{color.x, color.y, color.z, color.w}},//左上インデックス0
-		{{left,bottom,0.0f},{(float)nowNum / (float)sheetsNum,1.0f},{color.x, color.y, color.z, color.w}},//左下インデックス1
-		{{right,top,0.0f},{((float)nowNum + 1) / (float)sheetsNum,0.0f},{color.x, color.y, color.z, color.w}},//右上インデックス2
-		{{right,bottom,0.0f},{((float)nowNum + 1) / (float)sheetsNum,1.0f},{color.x, color.y, color.z, color.w}},//右下インデックス3
+		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) /textureData.width,(clipCenter.y - clipRadius.y)/ textureData.height},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / textureData.width,(clipCenter.y + clipRadius.y) / textureData.height},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / textureData.width,(clipCenter.y - clipRadius.y) / textureData.height},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / textureData.width,(clipCenter.y + clipRadius.y) / textureData.height},{color.x, color.y, color.z, color.w}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -166,73 +161,14 @@ void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 posi
 	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 }
 
+void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
+{
+	DrawAnimationSpriteXY(textureData, position, sheetsNum, 1, nowNum, color, scale, rotation, anchorpoint, flipX, flipY);
+}
+
 void Sprite::DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
-	int isFlipX, isFlipY;
-	if (flipX == false)isFlipX = 1;
-	else isFlipX = -1;
-	if (flipY == false)isFlipY = 1;
-	else isFlipY = -1;
-
-	float left = ((0.0f - anchorpoint.x) * textureData.width) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * textureData.width) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * textureData.height/ sheetsNum) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * textureData.height / sheetsNum) * isFlipY;
-
-	if (nowNum + 1 > sheetsNum)
-	{
-		nowNum = 0;//0枚目に戻す処理
-	}
-
-	//頂点データ
-	PosUvColor vertices[] =
-	{
-		{{left,top,0.0f},{0.0f,(float)nowNum / (float)sheetsNum},{color.x, color.y, color.z, color.w}},//左上インデックス0
-		{{left,bottom,0.0f},{0.0f,((float)nowNum + 1) / (float)sheetsNum},{color.x, color.y, color.z, color.w}},//左下インデックス1
-		{{right,top,0.0f},{1.0f,(float)nowNum / (float)sheetsNum},{color.x, color.y, color.z, color.w}},//右上インデックス2
-		{{right,bottom,0.0f},{1.0f,((float)nowNum + 1) / (float)sheetsNum},{color.x, color.y, color.z, color.w}},//右下インデックス3
-	};
-
-	//インデックスデータ
-	uint16_t indices[] =
-	{
-		1,0,3,//三角形1つ目
-		2,3,0,//三角形2つ目
-	};
-
-	//頂点バッファへのデータ転送
-	for (int i = 0; i < _countof(vertices); i++)
-	{
-		vertMap[i] = vertices[i];//インデックスをコピー
-	}
-
-	for (int i = 0; i < _countof(indices); i++)
-	{
-		indexMap[i] = indices[i];//インデックスをコピー
-	}
-
-	Update(position, scale, rotation);
-
-	// パイプラインステートとルートシグネチャの設定コマンド
-	BlendSet((BlendMode)blendMode);
-
-	// プリミティブ形状の設定コマンド
-	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
-	// 頂点バッファビューの設定コマンド
-	cmdList->IASetVertexBuffers(0, 1, &vbView);
-	//定数バッファビュー(CBV)の設定コマンド
-	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
-	//SRVヒープの設定コマンド
-	cmdList->SetDescriptorHeaps(1, textureData.srvHeap.GetAddressOf());
-	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = textureData.gpuHandle;
-	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
-	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
-	//インデックスバッファビューの設定コマンド
-	cmdList->IASetIndexBuffer(&ibView);
-
-	// 描画コマンド
-	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
+	DrawAnimationSpriteXY(textureData, position, 1, sheetsNum, nowNum, color, scale, rotation, anchorpoint, flipX, flipY);
 }
 
 void Sprite::DrawAnimationSpriteXY(TextureData& textureData, myMath::Vector2 position, uint16_t sheetsNumX, uint16_t sheetsNumY, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)

@@ -6,7 +6,7 @@
 #include <cassert>
 #include"myMath.h"
 
-//void Obj::Initialize()
+//void Object::Initialize()
 //{
 //	cmdList = DirectX_::GetInstance()->GetCommandList();
 //
@@ -85,11 +85,11 @@
 //	file.close();
 //}
 //
-//void Obj::Update()
+//void Object::Update()
 //{
 //}
 //
-//void Obj::Draw()
+//void Object::Draw()
 //{
 //	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 //}

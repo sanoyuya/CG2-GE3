@@ -20,27 +20,27 @@ void GameScene::Initialize()
 	tex = draw->LoadTexture("Resources/visual (1).png");
 	tex2 = draw2->LoadTexture("Resources/visual.png");
 	tex3 = draw3->LoadTexture("Resources/boss2.png");
-	tex4 = draw4->LoadTexture("Resources/ƒtƒ@ƒŒƒO1_1.jpg");
+	tex4 = draw4->LoadTexture("Resources/GodQueenProject/faleg/1_1.jpg");
 	violetTex = draw->LoadTexture("Resources/title_violet.png");
-	pokeTex= draw->LoadTexture("Resources/20221015085220.png");
+	pokeTex = draw->LoadTexture("Resources/ad5a403d7b1e498d5c5b2a6c609782cc.png");
 
 	draw = std::make_unique<DrawOversight>();
-	draw->SetBlendMode(BlendMode::Add);
+	//draw->SetBlendMode(BlendMode::Add);
 	draw->SpriteInitialize();
 	draw2 = std::make_unique<DrawOversight>();
 	draw2->SpriteInitialize();
 	draw3 = std::make_unique<DrawOversight>();
 	draw3->SpriteInitialize();
 	draw4 = std::make_unique<DrawOversight>();
-	draw4->SetBlendMode(BlendMode::Add);
+	//draw4->SetBlendMode(BlendMode::Add);
 	draw4->SpriteInitialize();
 	violet = std::make_unique<DrawOversight>();
 	violet->SpriteInitialize();
 	poke = std::make_unique<DrawOversight>();
 	poke->SpriteInitialize();
 
-	//titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//ƒ^ƒCƒgƒ‹ƒV[ƒ“BGM“Ç‚Ýž‚Ý
-	//audioManager->PlayWave(titleBGM, true);//BGM‚ðÄ¶
+	//titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//ï¿½^ï¿½Cï¿½gï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½BGMï¿½Ç‚Ýï¿½ï¿½ï¿½
+	//audioManager->PlayWave(titleBGM, true);//BGMï¿½ï¿½Äï¿½
 }
 
 void GameScene::Update()
@@ -87,15 +87,15 @@ void GameScene::Draw()
 		num++;
 		flame = 0;
 	}
-	//draw3->DrawAnimationSpriteX(tex3, { 640.0f,360.0f }, 19, num);
-	//draw4->DrawAnimationSpriteY(tex4, { 640.0f + hoge.x,360.0f + hoge.y }, 16, num, { 1.0f,1.0f,1.0f,1.0f }, { 1.0f,1.0f }, -myMath::AX_PI / 2);
+	draw3->DrawAnimationSpriteX(tex3, { 640.0f,360.0f }, 19, num);
+	draw4->DrawAnimationSpriteY(tex4, { 640.0f + hoge.x,360.0f + hoge.y }, 16, num, { 1.0f,1.0f,1.0f,1.0f }, { 1.0f,1.0f }, -myMath::AX_PI / 2);
 	violet->DrawSprite(violetTex, { 1280 - 290 / 2,720 - 170 / 2 }, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 	pokeFlame++;
-	if (pokeFlame > 60)
+	if (pokeFlame > 10)
 	{
 		pokeNum++;
 		pokeFlame = 0;
 	}
-	poke->DrawAnimationSpriteXY(pokeTex, { 640,360 }, 5,7, pokeNum);
+	poke->DrawAnimationSpriteXY(pokeTex, { 640 + hoge.x,360 + hoge.y }, 25, 26, pokeNum, { 1.0f,1.0f,1.0f,1.0f }, { 2.5f,2.5f });
 }

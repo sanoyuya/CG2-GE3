@@ -2,7 +2,7 @@
 #include"DrawCommon.h"
 #include"DirectX_.h"
 #include<vector>
-class Obj
+class Object
 {
 private:
 

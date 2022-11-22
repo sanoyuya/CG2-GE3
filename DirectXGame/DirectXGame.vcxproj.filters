@@ -150,6 +150,9 @@
     <ClCompile Include="Pipeline.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Engine\ソースファイル\Draw\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -225,6 +228,9 @@
     </ClInclude>
     <ClInclude Include="Pipeline.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

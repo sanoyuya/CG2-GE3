@@ -67,6 +67,8 @@ public:
 	/// <param name="flipY">Y反転</param>
 	void DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
+	void DrawSpriteClip(TextureData& textureData, myMath::Vector2 position, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, bool flipX = false, bool flipY = false);
+
 	/// <summary>
 	/// 横連番スプライト描画
 	/// </summary>
