@@ -84,10 +84,10 @@ bool Controller::ButtonTriggerRelease(ControllerButton button)
 {
 	//ÉgÉäÉKÅ[
 	if (button == LT) {
-		return oldControllerState.Gamepad.bLeftTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD && ButtonKeepPush(button);
+		return oldControllerState.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD && !ButtonKeepPush(button);
 	}
 	else if (button == RT) {
-		return oldControllerState.Gamepad.bRightTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD && ButtonKeepPush(button);
+		return oldControllerState.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD && !ButtonKeepPush(button);
 	}
 	else {
 		return oldControllerState.Gamepad.wButtons & button && !ButtonKeepPush(button);
@@ -97,10 +97,10 @@ bool Controller::ButtonTriggerRelease(ControllerButton button)
 bool Controller::ButtonKeepRelease(ControllerButton button)
 {
 	if (button == LT) {
-		return !XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState.Gamepad.bLeftTrigger;
+		return !(XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState.Gamepad.bLeftTrigger);
 	}
 	else if (button == RT) {
-		return !XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState.Gamepad.bRightTrigger;
+		return !(XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState.Gamepad.bRightTrigger);
 	}
 	else {
 		return !(controllerState.Gamepad.wButtons & button);
