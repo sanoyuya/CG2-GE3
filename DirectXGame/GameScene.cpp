@@ -39,18 +39,17 @@ void GameScene::Initialize()
 	poke = std::make_unique<DrawOversight>();
 	poke->SpriteInitialize(pokeTex);
 
-	//titleBGM = audioManager->LoadAudio("Resources/sound/title.mp3");//�^�C�g���V�[��BGM�ǂݍ���
-	//audioManager->PlayWave(titleBGM, true);//BGM��Đ�
-
 	model = std::make_unique<DrawOversight>();
 	modelTex = Model::CreateObjModel("Resources/skydome");
 	model->SetModel(modelTex);
 	modelTrans.Initialize();
 
 	f = std::make_unique<DrawOversight>();
-	fTex = Model::CreateObjModel("Resources/F-15");
+	fTex = Model::CreateObjModel("Resources/sphere");
 	f->SetModel(fTex);
 	fTrans.Initialize();
+	fTrans.translation.y = -5.0f;
+	fTrans.translation.z = -20.0f;
 }
 
 void GameScene::Update()

@@ -47,8 +47,6 @@ struct ModelMaterial
 	//スペキュラー影響度
 	myMath::Vector3 specular = { 0.0f,0.0f,0.0f };
 
-	myMath::Vector3 emission = { 0.0f,0.0f,0.0f };
-
 	float shininess = 1.0f;
 	//アルファ
 	float alpha = 1.0f;
