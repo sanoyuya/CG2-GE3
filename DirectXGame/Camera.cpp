@@ -6,7 +6,7 @@ void Camera::Initialize(bool projectionFlag)
 	eye = { 0,0,-distance };//視点座標
 	target = { 0,0,0 };//注視点座標
 	up = { 0,1,0 };//上方向ベクトル
-	aspect = static_cast<float>(WindowsApp::GetInstance()->GetWidth() / WindowsApp::GetInstance()->GetHeight());
+	aspect = static_cast<float>(WindowsApp::GetInstance()->GetWidth()) / static_cast<float>(WindowsApp::GetInstance()->GetHeight());
 	nearClip = 0.1f;
 	farClip = 1000.0f;
 

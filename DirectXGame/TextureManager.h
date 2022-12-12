@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void StaticInitialize();
 
 	/// <summary>
 	/// インスタンスを所得

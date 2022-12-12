@@ -92,7 +92,7 @@ uint32_t TextureManager::LoadTexture(const std::string& path)
 	}
 }
 
-void TextureManager::Initialize()
+void TextureManager::StaticInitialize()
 {
 	directX_ = DirectX_::GetInstance();
 

@@ -23,23 +23,22 @@ private:
 	uint32_t tex2 = 0;
 	std::unique_ptr<DrawOversight>draw3;
 	uint32_t tex3 = 0;
-	std::unique_ptr<DrawOversight>draw4;
-	uint32_t tex4 = 0;
+	std::unique_ptr<DrawOversight>kami;
+	uint32_t kamiTex = 0;
 	std::unique_ptr<DrawOversight>violet;
 	uint32_t violetTex = 0;
 	std::unique_ptr<DrawOversight>poke;
 	uint32_t pokeTex = 0;
-	float pokeFlame = 0.0f;
-	uint16_t pokeNum = 0;
 	float flame = 0.0f;
-	uint16_t num = 0;
+	uint16_t pokeNum = 0;
+	uint16_t kamiNum = 0;
 
 	uint32_t titleBGM = 0;
 
 	float angle = 0.0f;
 	myMath::Vector2 hoge = { 0,0 };
 
-	float aTime = 0.0f;
+	float kamiTime = 0.0f;
 	float reimuTime = 0.0f;
 
 	float mTime = 0.0f;

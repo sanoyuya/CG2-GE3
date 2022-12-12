@@ -40,7 +40,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚©‚ç
 
 	TextureManager* textureManager = TextureManager::GetInstance();
-	textureManager->Initialize();
+	textureManager->StaticInitialize();
 
 	Sprite::StaticInitialize();
 
