@@ -148,12 +148,16 @@
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="DescriptorHeap.cpp" />
     <ClCompile Include="DirectX_.cpp" />
     <ClCompile Include="DrawCommon.cpp" />
     <ClCompile Include="DrawOversight.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
@@ -166,12 +170,26 @@
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vector4.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="WindowsApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ModelBasicVS.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
@@ -188,12 +206,16 @@
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="DescriptorHeap.h" />
     <ClInclude Include="DirectX_.h" />
     <ClInclude Include="DrawCommon.h" />
     <ClInclude Include="DrawOversight.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Matrix4.h" />
@@ -205,12 +227,15 @@
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector4.h" />
+    <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="WindowsApp.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\shaders\ModelBasic.hlsli" />
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>

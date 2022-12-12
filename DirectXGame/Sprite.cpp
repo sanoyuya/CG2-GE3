@@ -8,7 +8,7 @@ myMath::Matrix4 Sprite::matProjection;
 Blob Sprite::blob;//シェーダオブジェクト
 std::array<PipelineSet, 6> Sprite::pip;
 
-void Sprite::Initialize()
+void Sprite::StaticInitialize()
 {
 	device = DirectX_::GetInstance()->GetDevice();
 	cmdList = DirectX_::GetInstance()->GetCommandList();
@@ -26,14 +26,14 @@ void Sprite::Initialize()
 	}
 }
 
-void Sprite::SpriteInitialize()
+void Sprite::SpriteInitialize(uint32_t handle)
 {
+	texture = TextureManager::GetTextureData(handle);
 	CreateVertexIndexBuffer();
-
 	CreateConstBuff();
 }
 
-void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
+void Sprite::DrawSprite(myMath::Vector2 position, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;
@@ -41,10 +41,10 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMa
 	if (flipY == false)isFlipY = 1;
 	else isFlipY = -1;
 
-	float left = ((0.0f - anchorpoint.x) * textureData.width) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * textureData.width) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * textureData.height) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * textureData.height) * isFlipY;
+	float left = ((0.0f - anchorpoint.x) * texture->width) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * texture->width) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * texture->height) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * texture->height) * isFlipY;
 
 	//頂点データ
 	PosUvColor vertices[] =
@@ -56,38 +56,36 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMa
 	};
 
 	//インデックスデータ
-	uint16_t indices[] =
+	uint32_t indices[] =
 	{
 		1,0,3,//三角形1つ目
 		2,3,0,//三角形2つ目
 	};
 
 	//頂点バッファへのデータ転送
-	for (int i = 0; i < _countof(vertices); i++)
-	{
-		vertMap[i] = vertices[i];//インデックスをコピー
-	}
+	vertexBuffer->Update(vertices);
 
-	for (int i = 0; i < _countof(indices); i++)
-	{
-		indexMap[i] = indices[i];//インデックスをコピー
-	}
+	//インデックスバッファへのデータ転送
+	indexBuffer->Update(indices);
 
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
 	BlendSet((BlendMode)blendMode);
 
+	vbView = vertexBuffer->GetView();
+	ibView = indexBuffer->GetView();
+
 	// プリミティブ形状の設定コマンド
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 頂点バッファビューの設定コマンド
 	cmdList->IASetVertexBuffers(0, 1, &vbView);
 	//定数バッファビュー(CBV)の設定コマンド
-	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
+	cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetAddress());
 	//SRVヒープの設定コマンド
-	cmdList->SetDescriptorHeaps(1, textureData.srvHeap.GetAddressOf());
+	cmdList->SetDescriptorHeaps(1, texture->srvHeap.GetAddressOf());
 	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = textureData.gpuHandle;
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture->gpuHandle;
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	//インデックスバッファビューの設定コマンド
@@ -97,7 +95,7 @@ void Sprite::DrawSprite(TextureData& textureData, myMath::Vector2 position, myMa
 	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 }
 
-void Sprite::DrawSpriteClip(TextureData& textureData, myMath::Vector2 position, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, myMath::Vector4 color, myMath::Vector2 scale, float rotation, bool flipX, bool flipY)
+void Sprite::DrawSpriteClip(myMath::Vector2 position, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, myMath::Vector4 color, myMath::Vector2 scale, float rotation, bool flipX, bool flipY)
 {
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;
@@ -113,45 +111,43 @@ void Sprite::DrawSpriteClip(TextureData& textureData, myMath::Vector2 position, 
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) /textureData.width,(clipCenter.y - clipRadius.y)/ textureData.height},{color.x, color.y, color.z, color.w}},//左上インデックス0
-		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / textureData.width,(clipCenter.y + clipRadius.y) / textureData.height},{color.x, color.y, color.z, color.w}},//左下インデックス1
-		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / textureData.width,(clipCenter.y - clipRadius.y) / textureData.height},{color.x, color.y, color.z, color.w}},//右上インデックス2
-		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / textureData.width,(clipCenter.y + clipRadius.y) / textureData.height},{color.x, color.y, color.z, color.w}},//右下インデックス3
+		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) / texture->width,(clipCenter.y - clipRadius.y)/ texture->height},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / texture->width,(clipCenter.y + clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / texture->width,(clipCenter.y - clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / texture->width,(clipCenter.y + clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//右下インデックス3
 	};
 
 	//インデックスデータ
-	uint16_t indices[] =
+	uint32_t indices[] =
 	{
 		1,0,3,//三角形1つ目
 		2,3,0,//三角形2つ目
 	};
 
 	//頂点バッファへのデータ転送
-	for (int i = 0; i < _countof(vertices); i++)
-	{
-		vertMap[i] = vertices[i];//インデックスをコピー
-	}
+	vertexBuffer->Update(vertices);
 
-	for (int i = 0; i < _countof(indices); i++)
-	{
-		indexMap[i] = indices[i];//インデックスをコピー
-	}
+	//インデックスバッファへのデータ転送
+	indexBuffer->Update(indices);
 
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
 	BlendSet((BlendMode)blendMode);
 
+	vbView = vertexBuffer->GetView();
+	ibView = indexBuffer->GetView();
+
 	// プリミティブ形状の設定コマンド
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 頂点バッファビューの設定コマンド
 	cmdList->IASetVertexBuffers(0, 1, &vbView);
 	//定数バッファビュー(CBV)の設定コマンド
-	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
+	cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetAddress());
 	//SRVヒープの設定コマンド
-	cmdList->SetDescriptorHeaps(1, textureData.srvHeap.GetAddressOf());
+	cmdList->SetDescriptorHeaps(1, texture->srvHeap.GetAddressOf());
 	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = textureData.gpuHandle;
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture->gpuHandle;
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	//インデックスバッファビューの設定コマンド
@@ -161,17 +157,17 @@ void Sprite::DrawSpriteClip(TextureData& textureData, myMath::Vector2 position, 
 	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 }
 
-void Sprite::DrawAnimationSpriteX(TextureData& textureData, myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
+void Sprite::DrawAnimationSpriteX(myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
-	DrawAnimationSpriteXY(textureData, position, sheetsNum, 1, nowNum, color, scale, rotation, anchorpoint, flipX, flipY);
+	DrawAnimationSpriteXY(position, sheetsNum, 1, nowNum, color, scale, rotation, anchorpoint, flipX, flipY);
 }
 
-void Sprite::DrawAnimationSpriteY(TextureData& textureData, myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
+void Sprite::DrawAnimationSpriteY(myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
-	DrawAnimationSpriteXY(textureData, position, 1, sheetsNum, nowNum, color, scale, rotation, anchorpoint, flipX, flipY);
+	DrawAnimationSpriteXY(position, 1, sheetsNum, nowNum, color, scale, rotation, anchorpoint, flipX, flipY);
 }
 
-void Sprite::DrawAnimationSpriteXY(TextureData& textureData, myMath::Vector2 position, uint16_t sheetsNumX, uint16_t sheetsNumY, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
+void Sprite::DrawAnimationSpriteXY(myMath::Vector2 position, uint16_t sheetsNumX, uint16_t sheetsNumY, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;
@@ -179,10 +175,10 @@ void Sprite::DrawAnimationSpriteXY(TextureData& textureData, myMath::Vector2 pos
 	if (flipY == false)isFlipY = 1;
 	else isFlipY = -1;
 
-	float left = ((0.0f - anchorpoint.x) * textureData.width/ sheetsNumX) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * textureData.width / sheetsNumX) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * textureData.height/ sheetsNumY) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * textureData.height / sheetsNumY) * isFlipY;
+	float left = ((0.0f - anchorpoint.x) * texture->width/ sheetsNumX) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * texture->width / sheetsNumX) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * texture->height/ sheetsNumY) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * texture->height / sheetsNumY) * isFlipY;
 
 	uint16_t animationXYNum = sheetsNumX * sheetsNumY;//分割数(総合計)
 	uint16_t x = nowNum % sheetsNumX;
@@ -203,38 +199,36 @@ void Sprite::DrawAnimationSpriteXY(TextureData& textureData, myMath::Vector2 pos
 	};
 
 	//インデックスデータ
-	uint16_t indices[] =
+	uint32_t indices[] =
 	{
 		1,0,3,//三角形1つ目
 		2,3,0,//三角形2つ目
 	};
 
 	//頂点バッファへのデータ転送
-	for (int i = 0; i < _countof(vertices); i++)
-	{
-		vertMap[i] = vertices[i];//インデックスをコピー
-	}
+	vertexBuffer->Update(vertices);
 
-	for (int i = 0; i < _countof(indices); i++)
-	{
-		indexMap[i] = indices[i];//インデックスをコピー
-	}
+	//インデックスバッファへのデータ転送
+	indexBuffer->Update(indices);
 
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
 	BlendSet((BlendMode)blendMode);
 
+	vbView = vertexBuffer->GetView();
+	ibView = indexBuffer->GetView();
+
 	// プリミティブ形状の設定コマンド
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 頂点バッファビューの設定コマンド
 	cmdList->IASetVertexBuffers(0, 1, &vbView);
 	//定数バッファビュー(CBV)の設定コマンド
-	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
+	cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetAddress());
 	//SRVヒープの設定コマンド
-	cmdList->SetDescriptorHeaps(1, textureData.srvHeap.GetAddressOf());
+	cmdList->SetDescriptorHeaps(1, texture->srvHeap.GetAddressOf());
 	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = textureData.gpuHandle;
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture->gpuHandle;
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	//インデックスバッファビューの設定コマンド
@@ -251,109 +245,17 @@ void Sprite::SetBlendMode(BlendMode mode)
 
 void Sprite::CreateVertexIndexBuffer()
 {
-	//ヒープ設定
-	D3D12_HEAP_PROPERTIES heapProp{};
-	//リソース設定
-	D3D12_RESOURCE_DESC resDesc{};
+	vertexBuffer = std::make_unique<VertexBuffer>();
+	vertexBuffer->Create(4, sizeof(PosUvColor));
 
-	//頂点データ全体のサイズ = 頂点データサイズ一つ分のサイズ * 頂点データの要素数
-	UINT sizeVB = static_cast<UINT>(sizeof(PosUvColor) * 4);
-
-	//頂点バッファの設定
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
-	//リソース設定
-	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = sizeVB;
-	resDesc.Height = 1;
-	resDesc.DepthOrArraySize = 1;
-	resDesc.MipLevels = 1;
-	resDesc.SampleDesc.Count = 1;
-	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-	//頂点バッファの生成
-	result = device->CreateCommittedResource(
-		&heapProp,//リソース設定
-		D3D12_HEAP_FLAG_NONE,
-		&resDesc,//リソース設定
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(vertBuff.ReleaseAndGetAddressOf()));
-	assert(SUCCEEDED(result));
-
-	//GPU上のバッファに対応した仮想メモリ(メインメモリ上)を取得
-	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
-	assert(SUCCEEDED(result));
-
-	//頂点バッファビューの作成
-	//GPU仮想アドレス
-	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
-	//頂点バッファのサイズ
-	vbView.SizeInBytes = sizeVB;
-	//頂点1つ分のデータサイズ
-	vbView.StrideInBytes = sizeof(PosUvColor);
-
-	//インデックスデータのサイズ
-	UINT sizeIB = static_cast<UINT>(sizeof(uint16_t) * 6);
-	//頂点バッファの設定
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
-	//リソース設定　
-	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = sizeIB;
-	resDesc.Height = 1;
-	resDesc.DepthOrArraySize = 1;
-	resDesc.MipLevels = 1;
-	resDesc.SampleDesc.Count = 1;
-	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-	//インデックスバッファの生成
-	result = device->CreateCommittedResource(
-		&heapProp,//ヒープ設定
-		D3D12_HEAP_FLAG_NONE,
-		&resDesc,//リソース設定
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(indexBuff.ReleaseAndGetAddressOf()));
-
-	//インデックスバッファのマッピング
-	result = indexBuff->Map(0, nullptr, (void**)&indexMap);
-	//マッピング解除
-	indexBuff->Unmap(0, nullptr);
-
-	//インデックスバッファビューの作成
-	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
-	ibView.Format = DXGI_FORMAT_R16_UINT;
-	ibView.SizeInBytes = sizeIB;
-	assert(SUCCEEDED(result));
+	indexBuffer = std::make_unique<IndexBuffer>();
+	indexBuffer->Create(6);
 }
 
 void Sprite::CreateConstBuff()
 {
-	//頂点バッファの設定
-	D3D12_HEAP_PROPERTIES heapProp{};//ヒープ設定
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
-	//リソース設定
-	D3D12_RESOURCE_DESC resDesc{};
-	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = (sizeof(myMath::Matrix4) + 0xff) & ~0xff;//頂点データ全体のサイズ
-	resDesc.Height = 1;
-	resDesc.DepthOrArraySize = 1;
-	resDesc.MipLevels = 1;
-	resDesc.SampleDesc.Count = 1;
-	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-	//定数バッファの生成
-	result = device->CreateCommittedResource(
-		&heapProp,
-		D3D12_HEAP_FLAG_NONE,
-		&resDesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(constBuff.ReleaseAndGetAddressOf()));
-	assert(SUCCEEDED(result));
-
-	//定数バッファのマッピング
-	result = constBuff->Map(0, nullptr, (void**)&constBuffMap);//マッピング
-	assert(SUCCEEDED(result));
+	constBuffMaterial = std::make_unique<ConstantBuffer>();
+	constBuffMaterial->Create(sizeof(myMath::Matrix4));
 }
 
 void Sprite::LoadShader()
@@ -376,7 +278,8 @@ void Sprite::Update(myMath::Vector2 position, myMath::Vector2 scale, float rotat
 	//ワールド行列
 	matWorld = mScale * mRot * mTrans;
 
-	*constBuffMap = matWorld * matProjection;
+	constBuffMap = matWorld * matProjection;
+	constBuffMaterial->Update(&constBuffMap);
 }
 
 void Sprite::BlendSet(BlendMode mode)

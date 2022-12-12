@@ -59,4 +59,6 @@ public:
 	void SetEye(const myMath::Vector3& eye_);
 	void SetTarget(const myMath::Vector3& target_);
 	void SetUp(const myMath::Vector3& up_);
+	void SetNearClip(const float& nearClip_);
+	void SetFarClip(const float& farClip_);
 };

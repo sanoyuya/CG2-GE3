@@ -1,8 +1,9 @@
 #pragma once
 #include"TextureManager.h"
 #include"Sprite.h"
+#include"Model.h"
 
-class DrawOversight :public Sprite
+class DrawOversight :public Sprite, public Model
 {
 public:
 
@@ -11,5 +12,5 @@ public:
 	/// </summary>
 	/// <param name="filePath">ƒtƒ@ƒCƒ‹–¼</param>
 	/// <returns></returns>
-	TextureData LoadTexture(const std::string& filePath);
+	uint32_t LoadTexture(const std::string& filePath);
 };

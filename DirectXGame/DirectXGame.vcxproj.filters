@@ -79,6 +79,12 @@
     <Filter Include="Engine\ヘッダーファイル\Draw\3D">
       <UniqueIdentifier>{8a75d6b8-bb47-41cd-ac7d-265612da09a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダーファイル\DirectXcore\Buffer">
+      <UniqueIdentifier>{71e6685c-695c-4c6e-8251-568f18ac84c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\DirectXCore\Buffer">
+      <UniqueIdentifier>{6fe923e0-3b70-4736-a71c-9efaa461e29b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -153,12 +159,36 @@
     <ClCompile Include="Model.cpp">
       <Filter>Engine\ソースファイル\Draw\3D</Filter>
     </ClCompile>
+    <ClCompile Include="DescriptorHeap.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Engine\ソースファイル\Draw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
+      <Filter>Engine\リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
+      <Filter>Engine\リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ModelBasicVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>
@@ -189,9 +219,6 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Engine\ヘッダーファイル\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine\ヘッダーファイル\Draw\2D</Filter>
     </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Engine\ヘッダーファイル\Audio</Filter>
@@ -232,9 +259,33 @@
     <ClInclude Include="Model.h">
       <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
     </ClInclude>
+    <ClInclude Include="DescriptorHeap.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\ヘッダーファイル\Draw\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli">
+      <Filter>Engine\リソース ファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\ModelBasic.hlsli">
       <Filter>Engine\リソース ファイル</Filter>
     </None>
   </ItemGroup>

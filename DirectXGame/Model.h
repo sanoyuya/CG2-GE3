@@ -1,5 +1,141 @@
 #pragma once
-class Model
+#include <unordered_map>
+#include"DrawCommon.h"
+#include"TextureManager.h"
+#include"VertexBuffer.h"
+#include"IndexBuffer.h"
+#include"ConstantBuffer.h"
+#include"Transform.h"
+#include"Pipeline.h"
+
+struct ModelData
 {
+	ModelData() = default;
+	~ModelData() = default;
+
+	std::string filePath;
+	uint32_t modelHandle;
+
+private:
+	char PADING1[4] = {};
+public:
+
+	TextureData* textureData;
+
+	//頂点バッファ
+	std::unique_ptr<VertexBuffer> vertexBuffer;
+	//インデックスバッファ
+	std::unique_ptr<IndexBuffer> indexBuffer;
+
+private:
+
+	char PADING2[4] = {};
+
+public:
+
+	//インデックスの数
+	UINT maxIndex = 0u;
+
+private:
+
+	char PADING3[4] = {};
+
+public:
+
+	//頂点の数
+	UINT maxVert = 0u;
+	//ワールド行列
+	myMath::Matrix4 matWorld;
+	//頂点データ
+	std::vector<PosNormalUv>vertices;
+	//頂点インデックス
+	std::vector<uint32_t> indices;
+	//頂点法線スムージング用データ
+	std::unordered_map<uint32_t, std::vector<uint32_t>>smoothData;
+	//マテリアル
+	ModelMaterial modelMaterial{};
+	// 定数バッファ
+	std::unique_ptr<ConstantBuffer> constBuffMaterial;
+
+	// 定数バッファビューの設定
+	D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferView = {};
+
+private:
+
+	//コピーコンストラクタ・代入演算子削除
+	ModelData& operator=(const ModelData&) = delete;
+	ModelData(const ModelData&) = delete;
 };
 
+
+class Model
+{
+protected:
+
+	static Microsoft::WRL::ComPtr<ID3D12Device> device;
+	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cmdList;
+
+	static std::vector<std::string>filePaths;
+
+	static std::unordered_map<std::string, std::unique_ptr<ModelData>> modelDatas;
+
+	static uint32_t modelCount;
+
+	static const uint32_t maxModel = 1024;
+
+	ModelData* modelData;
+
+private:
+
+	static Blob blob;//シェーダオブジェクト
+
+	static std::array<PipelineSet, 6> pip;
+
+	int blendMode = (int)BlendMode::None;//初期値半透明合成
+
+public:
+
+	/// <summary>
+	/// ワールド行列の取得
+	/// </summary>
+	/// <returns>ワールド行列</returns>
+	myMath::Matrix4& GetMatWorld();
+
+	/// <summary>
+	/// 頂点座標を取得
+	/// </summary>
+	/// <returns>頂点座標配列</returns>
+	const std::vector<PosNormalUv>GetVertices();
+
+	/// <summary>
+	/// インデックスを取得
+	/// </summary>
+	/// <returns>インデックス座標配列</returns>
+	const std::vector<uint32_t>GetIndices();
+
+	void SetModel(uint32_t modelHandle);
+
+	/// <summary>
+	/// ブレンドモードのセット
+	/// </summary>
+	/// <param name="mode">モード</param>
+	void SetBlendMode(BlendMode mode);
+
+	Model() = default;
+	~Model() = default;
+
+	void Draw(Transform* transform);
+
+	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
+
+	static void StaticInitialize();
+
+private:
+
+	static void LoadShader();
+	void BlendSet(BlendMode mode);
+
+	//コピーコンストラクタ・代入演算子削除
+	Model& operator=(const Model&) = delete;
+	Model(const Model&) = delete;
+};

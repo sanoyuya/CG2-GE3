@@ -4,6 +4,15 @@
 namespace PhysicsMath
 {
 	/// <summary>
+	/// 補完(等速)
+	/// </summary>
+	/// <param name="x1">移動したい変数</param>
+	/// <param name="x2">移動したい距離</param>
+	/// <param name="flame">時間</param>
+	/// <returns>補完後の値</returns>
+	float Complement(float& x1, float& x2, float flame);
+
+	/// <summary>
 	/// 単振動をした値を返す
 	/// </summary>
 	/// <param name="time">経過時間</param>

@@ -4,9 +4,8 @@
 #include"AudioManager.h"
 #include<memory>
 #include"Camera.h"
-#include"Sprite.h"
-#include"TextureManager.h"
 #include"DrawOversight.h"
+#include"Transform.h"
 
 class GameScene
 {
@@ -19,29 +18,41 @@ private:
 	std::unique_ptr<Camera>camera;
 
 	std::unique_ptr<DrawOversight>draw;
-	TextureData tex;
+	uint32_t tex = 0;
 	std::unique_ptr<DrawOversight>draw2;
-	TextureData tex2;
+	uint32_t tex2 = 0;
 	std::unique_ptr<DrawOversight>draw3;
-	TextureData tex3;
+	uint32_t tex3 = 0;
 	std::unique_ptr<DrawOversight>draw4;
-	TextureData tex4;
+	uint32_t tex4 = 0;
 	std::unique_ptr<DrawOversight>violet;
-	TextureData violetTex;
+	uint32_t violetTex = 0;
 	std::unique_ptr<DrawOversight>poke;
-	TextureData pokeTex;
+	uint32_t pokeTex = 0;
 	float pokeFlame = 0.0f;
 	uint16_t pokeNum = 0;
 	float flame = 0.0f;
 	uint16_t num = 0;
 
-	uint32_t titleBGM;
+	uint32_t titleBGM = 0;
 
 	float angle = 0.0f;
 	myMath::Vector2 hoge = { 0,0 };
 
 	float aTime = 0.0f;
 	float reimuTime = 0.0f;
+
+	float mTime = 0.0f;
+
+	std::unique_ptr<DrawOversight>model;
+	Transform modelTrans;
+	uint32_t modelTex;
+
+	std::unique_ptr<DrawOversight>f;
+	Transform fTrans;
+	uint32_t fTex;
+
+	myMath::Vector3 cameraPos;
 
 public:
 	GameScene();

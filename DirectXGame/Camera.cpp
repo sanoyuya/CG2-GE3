@@ -84,3 +84,13 @@ void Camera::SetUp(const myMath::Vector3& up_)
 {
 	up = up_;
 }
+
+void Camera::SetNearClip(const float& nearClip_)
+{
+	nearClip = nearClip_;
+}
+
+void Camera::SetFarClip(const float& farClip_)
+{
+	farClip = farClip_;
+}

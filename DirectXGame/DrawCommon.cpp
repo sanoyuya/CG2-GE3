@@ -37,3 +37,13 @@ namespace DrawCommon
 		return blob;
 	}
 }
+
+ConstBuffDataMaterial ModelMaterial::GetConstBuffMaterial()
+{
+	ConstBuffDataMaterial rsult;
+	rsult.ambient = ambient;
+	rsult.diffuse = diffuse;
+	rsult.specular = specular;
+	rsult.alpha = alpha;
+	return rsult;
+}

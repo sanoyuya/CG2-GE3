@@ -1,64 +1,97 @@
 #pragma once
 #include"DirectX_.h"
+#include <memory>
+#include<DirectXTex.h>
 
 struct TextureData
 {
 	//テクスチャバッファ
-	Microsoft::WRL::ComPtr<ID3D12Resource>texBuff;
+	Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
 
-	//デスクリプタヒープ
-	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>srvHeap;
+	//デスクプリタヒープ
+	Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> srvHeap;
 
-	//GPUデスクリプタハンドル
+	//GPUデスクプリタハンドル
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle{};
 
-	//デスクリプタレンジ
-	D3D12_DESCRIPTOR_RANGE descriptorRange{};
-
-	char PADING[4];
 	//横幅
 	size_t width = 0;
 	//縦幅
 	size_t height = 0;
+
+	//カラー
+	myMath::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
+
+	std::string path;
+
+	uint32_t textureHandle;
+
+private:
+	char PADING[4]{};
 };
 
 class TextureManager
 {
-public:
-	//エイリアステンプレート
-	template<class T>using ComPtr = Microsoft::WRL::ComPtr<T>;
-
 private:
-	ComPtr<ID3D12Device> device = 0;
-	ComPtr<ID3D12DescriptorHeap> dsvHeap=0;
-	D3D12_DESCRIPTOR_RANGE dsvRange = {};
-	D3D12_HEAP_PROPERTIES prop = {};
 
-	UINT texCount = 0;
+	DirectX_* directX_;
 
 	static TextureManager* textureManager;
 
+	//テクスチャ数
+	uint32_t nextTexture;
+
+	// ヒープ設定
+	D3D12_HEAP_PROPERTIES textureHeapProp{};
+
+	static std::vector<std::string>filePaths;
+
+	static std::unordered_map<std::string, std::unique_ptr<TextureData>> textureDatas;
+
 public:
+
+	/// <summary>
+	/// テクスチャをロードします
+	/// </summary>
+	/// <param name="filepath">テクスチャのファイルパス</param>
+	/// <returns>テクスチャハンドル</returns>
+	uint32_t LoadTexture(const std::string& path);
+
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// テクスチャ読み込み
+	/// インスタンスを所得
 	/// </summary>
-	TextureData LoadTexture(const std::string& filePath);
+	/// <returns>インスタンス</returns>
+	static TextureManager* GetInstance();
 
 	/// <summary>
 	/// インスタンスを解放
 	/// </summary>
 	void Destroy();
 
-	static TextureManager* GetInstance();
+	/// <summary>
+	/// テクスチャをロードします
+	/// </summary>
+	/// <param name="filepath">テクスチャのファイルパス</param>
+	/// <returns>テクスチャハンドル</returns>
+	static uint32_t Load(const std::string& path);
+
+	static TextureData* GetTextureData(uint32_t handle);
 
 private:
 
 	TextureManager() = default;
 	~TextureManager() = default;
 
-	//コピーコンストラクタ・代入演算子削除
-	TextureManager& operator=(const TextureManager&) = delete;
-	TextureManager(const TextureManager&) = delete;
+	Microsoft::WRL::ComPtr<ID3D12Resource>CreateTexBuff(DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg);
+
+	D3D12_GPU_DESCRIPTOR_HANDLE CreateShaderResourceView(ID3D12Resource* texBuff, DirectX::TexMetadata& metadata);
+
+	void LoadFile(const std::string& path, DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg);
+
+	TextureData* FromTextureData(const std::string& path);
 };

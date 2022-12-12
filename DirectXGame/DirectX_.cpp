@@ -36,6 +36,9 @@ void DirectX_::Initialize()
 
 	//フェンスの生成
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
+
+	descriptorHeap = std::make_unique<DescriptorHeap>();
+	descriptorHeap->Initialize();
 }
 
 //DirectX毎フレーム処理
@@ -345,6 +348,11 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> DirectX_::GetCommandList()
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> DirectX_::GetRtvHeap()
 {
 	return rtvHeap;
+}
+
+DescriptorHeap* DirectX_::GetDescriptorHeap()
+{
+	return descriptorHeap.get();
 }
 
 void DirectX_::SetClearColor(myMath::Vector4 color)

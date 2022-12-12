@@ -7,6 +7,8 @@
 #include<wrl.h>
 #include"WindowsApp.h"
 #include"myMath.h"
+#include<memory>
+#include"DescriptorHeap.h"
 
 class DirectX_
 {
@@ -39,6 +41,9 @@ private:
 	D3D12_RESOURCE_BARRIER barrierDesc{};
 	ComPtr<ID3D12Resource>depthBuff = nullptr;
 	ComPtr<ID3D12DescriptorHeap> dsvHeap;
+
+	//デスクプリタヒープ
+	std::unique_ptr<DescriptorHeap> descriptorHeap;
 
 	//背景のクリアカラー
 	FLOAT clearColor[4] = { 0.1f,0.25f,0.5f,0.0f };//背景の色(水色)設定
@@ -96,6 +101,7 @@ public:
 	ComPtr<ID3D12Device> GetDevice();
 	ComPtr<ID3D12GraphicsCommandList> GetCommandList();
 	ComPtr<ID3D12DescriptorHeap>GetRtvHeap();
+	DescriptorHeap* GetDescriptorHeap();
 
 	//セッター
 	
