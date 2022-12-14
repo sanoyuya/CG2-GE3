@@ -139,7 +139,7 @@ public:
 	/// ブレンドモードのセット
 	/// </summary>
 	/// <param name="mode">モード</param>
-	void SetBlendMode(BlendMode mode);
+	void SetSpriteBlendMode(BlendMode mode);
 
 private:
 	void CreateVertexIndexBuffer();

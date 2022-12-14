@@ -119,12 +119,12 @@ public:
 	/// ブレンドモードのセット
 	/// </summary>
 	/// <param name="mode">モード</param>
-	void SetBlendMode(BlendMode mode);
+	void SetModelBlendMode(BlendMode mode);
 
 	Model() = default;
 	~Model() = default;
 
-	void Draw(Transform* transform);
+	void DrawModel(Transform* transform);
 
 	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
 

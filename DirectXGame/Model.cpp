@@ -122,7 +122,7 @@ uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
 	}
 }
 
-void Model::Draw(Transform* transform)
+void Model::DrawModel(Transform* transform)
 {
 	D3D12_VERTEX_BUFFER_VIEW vbView = modelData->vertexBuffer->GetView();
 	D3D12_INDEX_BUFFER_VIEW ibView = modelData->indexBuffer->GetView();
@@ -172,7 +172,7 @@ void Model::SetModel(uint32_t modelHandle)
 	modelData = modelDatas[filePaths[modelHandle]].get();
 }
 
-void Model::SetBlendMode(BlendMode mode)
+void Model::SetModelBlendMode(BlendMode mode)
 {
 	blendMode = int(mode);
 }
