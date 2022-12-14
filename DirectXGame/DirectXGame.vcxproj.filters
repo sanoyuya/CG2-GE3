@@ -177,6 +177,12 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
+    <ClCompile Include="FbxLoder.cpp">
+      <Filter>Engine\ソースファイル\Draw\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="FbxModel.cpp">
+      <Filter>Engine\ソースファイル\Draw\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -279,6 +285,12 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxModel.h">
+      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxLoder.h">
+      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

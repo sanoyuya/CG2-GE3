@@ -17,41 +17,37 @@ private:
 
 	std::unique_ptr<Camera>camera;
 
-	std::unique_ptr<DrawOversight>draw;
-	uint32_t tex = 0;
-	std::unique_ptr<DrawOversight>draw2;
-	uint32_t tex2 = 0;
-	std::unique_ptr<DrawOversight>draw3;
-	uint32_t tex3 = 0;
 	std::unique_ptr<DrawOversight>kami;
 	uint32_t kamiTex = 0;
+	uint16_t kamiNum = 0;
+	float kamiTime = 0.0f;
+	myMath::Vector2 hoge = { 0,0 };
+
+	//右下のパッケージタイトル
 	std::unique_ptr<DrawOversight>violet;
 	uint32_t violetTex = 0;
+
+	//左上のポケモン
 	std::unique_ptr<DrawOversight>poke;
 	uint32_t pokeTex = 0;
 	float flame = 0.0f;
 	uint16_t pokeNum = 0;
-	uint16_t kamiNum = 0;
 
-	uint32_t titleBGM = 0;
-
-	float angle = 0.0f;
-	myMath::Vector2 hoge = { 0,0 };
-
-	float kamiTime = 0.0f;
-	float reimuTime = 0.0f;
-
-	float mTime = 0.0f;
-
+	//天球
 	std::unique_ptr<DrawOversight>model;
 	Transform modelTrans;
 	uint32_t modelTex;
 
-	std::unique_ptr<DrawOversight>f;
-	Transform fTrans;
-	uint32_t fTex;
+	//戦闘機のやつ
+	std::unique_ptr<DrawOversight>fModel;
+	Transform fModelTrans;
+	uint32_t fModelTex;
+	uint32_t fModel2Tex;
+	float angle = 0.0f;
 
 	myMath::Vector3 cameraPos;
+
+	//uint32_t titleBGM = 0;
 
 public:
 	GameScene();
