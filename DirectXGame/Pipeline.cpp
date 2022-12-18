@@ -198,6 +198,10 @@ void Pipeline::CreateModelPipline(Blob& blob, BlendMode blend, ID3D12Device* dev
 
 	// ブレンドステート
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = pipelineDesc.BlendState.RenderTarget[0];// RBGA全てのチャンネルを描画
+	//ブレンドステートの設定
+	pipelineDesc.BlendState.AlphaToCoverageEnable = TRUE;
+	pipelineDesc.BlendState.IndependentBlendEnable = FALSE;
+
 	//共通設定
 	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
 	blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;	//加算
@@ -214,11 +218,21 @@ void Pipeline::CreateModelPipline(Blob& blob, BlendMode blend, ID3D12Device* dev
 
 	case BlendMode::Alpha:
 
-		blenddesc.BlendEnable = true;//ブレンドを有効にする
-		//半透明合成
-		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;				//加算
-		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;			//ソースのアルファ値
-		blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;	//1.0f-	ソースのアルファ値
+		for (int i = 0; i < _countof(pipelineDesc.BlendState.RenderTarget); ++i)
+		{
+			//見やすくするため変数化
+			auto rt = pipelineDesc.BlendState.RenderTarget[i];
+			rt.BlendEnable = TRUE;
+			rt.LogicOpEnable = FALSE;
+			rt.SrcBlend = D3D12_BLEND_SRC_ALPHA;
+			rt.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+			rt.BlendOp = D3D12_BLEND_OP_ADD;
+			rt.SrcBlendAlpha = D3D12_BLEND_SRC_ALPHA;
+			rt.DestBlendAlpha = D3D12_BLEND_INV_SRC_ALPHA;
+			rt.BlendOpAlpha = D3D12_BLEND_OP_ADD;
+			rt.LogicOp = D3D12_LOGIC_OP_NOOP;
+			rt.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
+		}
 
 		break;
 
