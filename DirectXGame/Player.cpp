@@ -109,18 +109,18 @@ void Player::Move()
 {
 	if (input->KeyboardKeepPush(DIK_W))
 	{
-		playerPos.translation.z -= 0.05f;
+		playerPos.translation.z -= 0.25f;
 	}
 	if (input->KeyboardKeepPush(DIK_S))
 	{
-		playerPos.translation.z += 0.05f;
+		playerPos.translation.z += 0.25f;
 	}
 	if (input->KeyboardKeepPush(DIK_A))
 	{
-		playerPos.translation.x += 0.05f;
+		playerPos.translation.x += 0.25f;
 	}
 	if (input->KeyboardKeepPush(DIK_D))
 	{
-		playerPos.translation.x -= 0.05f;
+		playerPos.translation.x -= 0.25f;
 	}
 }
