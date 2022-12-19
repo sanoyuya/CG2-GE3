@@ -18,6 +18,9 @@ void GameScene::Initialize()
 	camera->Initialize(true);
 	cameraPos = { 0.0f,length,length/4 };
 
+	player = std::make_unique<Player>();
+	player->Initialize();
+
 	//天球
 	model = std::make_unique<DrawOversight>();
 	//model->SetModelBlendMode(BlendMode::Sub);
@@ -29,7 +32,7 @@ void GameScene::Initialize()
 	cube= std::make_unique<DrawOversight>();
 	cubeTex = Model::CreateObjModel("Resources/cube");
 	cube->SetModel(cubeTex);
-	cubeTrans.scale = { 25.0f / 2,25.0f / 2 ,25.0f / 2 };
+	cubeTrans.scale = { 25.0f,1.0f ,25.0f };
 	cubeTrans.Initialize();
 }
 
@@ -38,12 +41,14 @@ void GameScene::Update()
 	CamMove();
 	modelTrans.TransUpdate(camera.get());//天球
 	cubeTrans.TransUpdate(camera.get());//ステージキューブ
+	player->Update(camera.get());
 }
 
 void GameScene::Draw()
 {
 	model->DrawModel(&modelTrans);
 	cube->DrawModel(&cubeTrans);
+	player->Draw(camera.get());
 }
 
 void GameScene::Rotation()

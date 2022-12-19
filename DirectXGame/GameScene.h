@@ -7,6 +7,8 @@
 #include"DrawOversight.h"
 #include"Transform.h"
 
+#include"Player.h"
+
 class GameScene
 {
 private:
@@ -33,6 +35,8 @@ private:
 	const float length = 50.0f;
 
 	uint8_t scene = 0;
+
+	std::unique_ptr<Player>player;
 
 public:
 	GameScene();
