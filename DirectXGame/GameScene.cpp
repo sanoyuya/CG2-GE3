@@ -16,7 +16,7 @@ void GameScene::Initialize()
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
-	cameraPos = { 0.0f,length,length/4 };
+	cameraPos = { 0.0f,10.0f,-10.0f };
 
 	//天球
 	model = std::make_unique<DrawOversight>();
@@ -29,26 +29,42 @@ void GameScene::Initialize()
 	cube= std::make_unique<DrawOversight>();
 	cubeTex = Model::CreateObjModel("Resources/cube");
 	cube->SetModel(cubeTex);
-	cubeTrans.scale = { 25.0f / 2,25.0f / 2 ,25.0f / 2 };
+	cubeTrans.scale = { 25.0f,1.0f ,25.0f };
 	cubeTrans.Initialize();
+
+	//球
+	sphere= std::make_unique<DrawOversight>();
+	sphereTex= Model::CreateObjModel("Resources/sphere");
+	sphere->SetModel(sphereTex);
+	sphereTrans.Initialize();
 }
 
 void GameScene::Update()
 {
 	CamMove();
+	Rotation();
 	modelTrans.TransUpdate(camera.get());//天球
 	cubeTrans.TransUpdate(camera.get());//ステージキューブ
+	sphereTrans.TransUpdate(camera.get());//球
 }
 
 void GameScene::Draw()
 {
 	model->DrawModel(&modelTrans);
-	cube->DrawModel(&cubeTrans);
+	//cube->DrawModel(&cubeTrans);
+	sphere->DrawModel(&sphereTrans);
 }
 
 void GameScene::Rotation()
 {
-
+	if (input->KeyboardKeepPush(DIK_A))
+	{
+		sphereTrans.rotation.y -= 0.02f;
+	}
+	if (input->KeyboardKeepPush(DIK_D))
+	{
+		sphereTrans.rotation.y += 0.02f;
+	}
 }
 
 void GameScene::CamMove()

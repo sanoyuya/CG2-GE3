@@ -27,6 +27,11 @@ private:
 	Transform cubeTrans;
 	uint32_t cubeTex;
 
+	//‹…
+	std::unique_ptr<DrawOversight>sphere;
+	Transform sphereTrans;
+	uint32_t sphereTex;
+
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;
 	float angleY = 0.0f;
