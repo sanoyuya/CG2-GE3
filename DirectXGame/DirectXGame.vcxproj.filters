@@ -117,7 +117,7 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\ソースファイル\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
+    <ClCompile Include="Sprite2D.cpp">
       <Filter>Engine\ソースファイル\Draw\2D</Filter>
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
@@ -181,6 +181,12 @@
       <Filter>Engine\ソースファイル\Draw\3D</Filter>
     </ClCompile>
     <ClCompile Include="FbxModel.cpp">
+      <Filter>Engine\ソースファイル\Draw\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\ソースファイル\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite3D.cpp">
       <Filter>Engine\ソースファイル\Draw\3D</Filter>
     </ClCompile>
   </ItemGroup>
@@ -280,7 +286,7 @@
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
+    <ClInclude Include="Sprite2D.h">
       <Filter>Engine\ヘッダーファイル\Draw\2D</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
@@ -290,6 +296,12 @@
       <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
     </ClInclude>
     <ClInclude Include="FbxLoder.h">
+      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite3D.h">
       <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
     </ClInclude>
   </ItemGroup>

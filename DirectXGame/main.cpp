@@ -7,7 +7,7 @@
 #include"GameScene.h"
 #include <memory>
 #include"TextureManager.h"
-#include"Sprite.h"
+#include"Sprite2D.h"
 #include "AudioManager.h"
 #include"Model.h"
 
@@ -42,7 +42,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	TextureManager* textureManager = TextureManager::GetInstance();
 	textureManager->StaticInitialize();
 
-	Sprite::StaticInitialize();
+	Sprite2D::StaticInitialize();
 
 	Model::StaticInitialize();
 

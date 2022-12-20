@@ -175,6 +175,8 @@
     <ClCompile Include="PhysicsMath.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Sprite2D.cpp" />
+    <ClCompile Include="Sprite3D.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -234,6 +236,8 @@
     <ClInclude Include="PhysicsMath.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Sprite2D.h" />
+    <ClInclude Include="Sprite3D.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />

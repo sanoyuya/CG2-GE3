@@ -6,6 +6,7 @@
 #include"Camera.h"
 #include"DrawOversight.h"
 #include"Transform.h"
+#include"Sprite.h"
 
 class GameScene
 {
@@ -31,6 +32,9 @@ private:
 	std::unique_ptr<DrawOversight>sphere;
 	Transform sphereTrans;
 	uint32_t sphereTex;
+
+	std::unique_ptr<Sprite>sprite;
+	uint32_t spriteTex;
 
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;

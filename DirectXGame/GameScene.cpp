@@ -37,6 +37,10 @@ void GameScene::Initialize()
 	sphereTex= Model::CreateObjModel("Resources/sphere");
 	sphere->SetModel(sphereTex);
 	sphereTrans.Initialize();
+
+	sprite = std::make_unique<Sprite>();
+	spriteTex = sprite->LoadTexture("Resources/visual.png");
+	sprite->Sprite2DInitialize(spriteTex);
 }
 
 void GameScene::Update()
@@ -53,6 +57,7 @@ void GameScene::Draw()
 	model->DrawModel(&modelTrans);
 	//cube->DrawModel(&cubeTrans);
 	sphere->DrawModel(&sphereTrans);
+	//sprite->DrawSprite2D({ 640.0f,360.0f });
 }
 
 void GameScene::Rotation()
