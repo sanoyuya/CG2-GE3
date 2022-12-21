@@ -91,7 +91,11 @@ private:
 
 	static std::array<PipelineSet, 6> pip;
 
-	int blendMode = (int)BlendMode::None;//初期値半透明合成
+	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
+
+	std::unique_ptr<ConstantBuffer> col;
+
+	myMath::Vector4 tmp;
 
 public:
 
@@ -121,10 +125,10 @@ public:
 	/// <param name="mode">モード</param>
 	void SetModelBlendMode(BlendMode mode);
 
-	Model() = default;
+	Model();
 	~Model() = default;
 
-	void DrawModel(Transform* transform);
+	void DrawModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f });
 
 	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
 
@@ -136,6 +140,6 @@ private:
 	void BlendSet(BlendMode mode);
 
 	//コピーコンストラクタ・代入演算子削除
-	Model& operator=(const Model&) = delete;
-	Model(const Model&) = delete;
+	/*Model& operator=(const Model&) = delete;
+	Model(const Model&) = delete;*/
 };

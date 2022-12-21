@@ -199,8 +199,8 @@ void Pipeline::CreateModelPipline(Blob& blob, BlendMode blend, ID3D12Device* dev
 	// ブレンドステート
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = pipelineDesc.BlendState.RenderTarget[0];// RBGA全てのチャンネルを描画
 	//ブレンドステートの設定
-	pipelineDesc.BlendState.AlphaToCoverageEnable = TRUE;
-	pipelineDesc.BlendState.IndependentBlendEnable = FALSE;
+	/*pipelineDesc.BlendState.AlphaToCoverageEnable = TRUE;
+	pipelineDesc.BlendState.IndependentBlendEnable = FALSE;*/
 
 	//共通設定
 	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
@@ -218,21 +218,27 @@ void Pipeline::CreateModelPipline(Blob& blob, BlendMode blend, ID3D12Device* dev
 
 	case BlendMode::Alpha:
 
-		for (int i = 0; i < _countof(pipelineDesc.BlendState.RenderTarget); ++i)
-		{
-			//見やすくするため変数化
-			auto rt = pipelineDesc.BlendState.RenderTarget[i];
-			rt.BlendEnable = TRUE;
-			rt.LogicOpEnable = FALSE;
-			rt.SrcBlend = D3D12_BLEND_SRC_ALPHA;
-			rt.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
-			rt.BlendOp = D3D12_BLEND_OP_ADD;
-			rt.SrcBlendAlpha = D3D12_BLEND_SRC_ALPHA;
-			rt.DestBlendAlpha = D3D12_BLEND_INV_SRC_ALPHA;
-			rt.BlendOpAlpha = D3D12_BLEND_OP_ADD;
-			rt.LogicOp = D3D12_LOGIC_OP_NOOP;
-			rt.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
-		}
+		//for (int i = 0; i < _countof(pipelineDesc.BlendState.RenderTarget); ++i)
+		//{
+		//	//見やすくするため変数化
+		//	auto rt = pipelineDesc.BlendState.RenderTarget[i];
+		//	rt.BlendEnable = TRUE;
+		//	rt.LogicOpEnable = FALSE;
+		//	rt.SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		//	rt.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+		//	rt.BlendOp = D3D12_BLEND_OP_ADD;
+		//	rt.SrcBlendAlpha = D3D12_BLEND_SRC_ALPHA;
+		//	rt.DestBlendAlpha = D3D12_BLEND_INV_SRC_ALPHA;
+		//	rt.BlendOpAlpha = D3D12_BLEND_OP_ADD;
+		//	rt.LogicOp = D3D12_LOGIC_OP_NOOP;
+		//	rt.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
+		//}
+
+		blenddesc.BlendEnable = true;//ブレンドを有効にする
+		//半透明合成
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;				//加算
+		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;			//ソースのアルファ値
+		blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;	//1.0f-	ソースのアルファ値
 
 		break;
 
@@ -293,17 +299,25 @@ void Pipeline::CreateModelPipline(Blob& blob, BlendMode blend, ID3D12Device* dev
 	pipelineDesc.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
 
 	//ルートパラメータの設定
-	D3D12_ROOT_PARAMETER rootParams[3] = {};
+	D3D12_ROOT_PARAMETER rootParams[4] = {};
 	//ルートパラメータの設定
+	//行列
 	rootParams[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//定数バッファビュー
 	rootParams[0].Descriptor.ShaderRegister = 0;					//定数バッファ番号
 	rootParams[0].Descriptor.RegisterSpace = 0;						//デフォルト値
 	rootParams[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	//全てのシェーダから見える
 
+	//陰影
 	rootParams[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//定数バッファビュー
 	rootParams[1].Descriptor.ShaderRegister = 1;					//定数バッファ番号
 	rootParams[1].Descriptor.RegisterSpace = 0;						//デフォルト値
 	rootParams[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	//全てのシェーダから見える
+
+	//色
+	rootParams[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//定数バッファビュー
+	rootParams[2].Descriptor.ShaderRegister = 2;					//定数バッファ番号
+	rootParams[2].Descriptor.RegisterSpace = 0;						//デフォルト値
+	rootParams[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	//全てのシェーダから見える
 
 	//デスクリプタレンジの設定
 	D3D12_DESCRIPTOR_RANGE descriptorRange{};
@@ -312,10 +326,10 @@ void Pipeline::CreateModelPipline(Blob& blob, BlendMode blend, ID3D12Device* dev
 	descriptorRange.BaseShaderRegister = 0;
 	descriptorRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 	//テクスチャレジスタ3番
-	rootParams[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;	//種類
-	rootParams[2].DescriptorTable.pDescriptorRanges = &descriptorRange;			//デスクリプタレンジ
-	rootParams[2].DescriptorTable.NumDescriptorRanges = 1;						//デスクリプタレンジ数
-	rootParams[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;				//全てのシェーダから見える
+	rootParams[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;	//種類
+	rootParams[3].DescriptorTable.pDescriptorRanges = &descriptorRange;			//デスクリプタレンジ
+	rootParams[3].DescriptorTable.NumDescriptorRanges = 1;						//デスクリプタレンジ数
+	rootParams[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;				//全てのシェーダから見える
 
 	//テクスチャサンプラーの設定
 	D3D12_STATIC_SAMPLER_DESC samplerDesc{};

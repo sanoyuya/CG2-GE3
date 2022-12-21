@@ -122,10 +122,13 @@ uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
 	}
 }
 
-void Model::DrawModel(Transform* transform)
+void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 {
 	D3D12_VERTEX_BUFFER_VIEW vbView = modelData->vertexBuffer->GetView();
 	D3D12_INDEX_BUFFER_VIEW ibView = modelData->indexBuffer->GetView();
+
+	tmp = color;
+	col->Update(&tmp);
 
 	BlendSet(static_cast<BlendMode>(blendMode));
 
@@ -141,12 +144,13 @@ void Model::DrawModel(Transform* transform)
 	// 定数バッファビュー(CBV)の設定コマンド
 	cmdList->SetGraphicsRootConstantBufferView(0, transform->GetconstBuff()->GetGPUVirtualAddress());
 	cmdList->SetGraphicsRootConstantBufferView(1, modelData->constBuffMaterial->GetAddress());
+	cmdList->SetGraphicsRootConstantBufferView(2, col->GetAddress());
 
 	// SRVヒープの設定コマンド
 	cmdList->SetDescriptorHeaps(1, modelData->textureData->srvHeap.GetAddressOf());
 
-	// SRVヒープの先頭にあるSRVをルートパラメータ2番に設定
-	cmdList->SetGraphicsRootDescriptorTable(2, modelData->textureData->gpuHandle);
+	// SRVヒープの先頭にあるSRVをルートパラメータ3番に設定
+	cmdList->SetGraphicsRootDescriptorTable(3, modelData->textureData->gpuHandle);
 
 	// 描画コマンド
 	cmdList->DrawIndexedInstanced(modelData->maxIndex, 1, 0, 0, 0);
@@ -175,4 +179,10 @@ void Model::SetModel(uint32_t modelHandle)
 void Model::SetModelBlendMode(BlendMode mode)
 {
 	blendMode = int(mode);
+}
+
+Model::Model()
+{
+	col = std::make_unique<ConstantBuffer>();
+	col->Create(sizeof(myMath::Vector4));
 }

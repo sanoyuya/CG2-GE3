@@ -56,7 +56,8 @@ void GameScene::Draw()
 {
 	model->DrawModel(&modelTrans);
 	//cube->DrawModel(&cubeTrans);
-	sphere->DrawModel(&sphereTrans);
+	sphere->DrawModel(&sphereTrans,{0.25f,1.0f,0.25f,0.5f});
+	//sphere->DrawModel(&sphereTrans);
 	//sprite->DrawSprite2D({ 640.0f,360.0f });
 }
 
