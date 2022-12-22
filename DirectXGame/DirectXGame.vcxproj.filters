@@ -46,14 +46,8 @@
     <Filter Include="Engine\ソースファイル\Draw">
       <UniqueIdentifier>{391cb05a-f90c-4363-92bd-3704079ac79d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ソースファイル\Draw\2D">
-      <UniqueIdentifier>{5fce9086-91bc-48f3-b75b-40e4ed1d23fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ヘッダーファイル\Draw">
       <UniqueIdentifier>{5b73f316-99aa-4055-b046-bc3070fa7eef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ヘッダーファイル\Draw\2D">
-      <UniqueIdentifier>{b64c42fd-fd7d-4007-9d9b-d2d6010faab6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\ソースファイル\Audio">
       <UniqueIdentifier>{2d26bf9f-44a9-4555-ba4d-f583f71c88ca}</UniqueIdentifier>
@@ -73,17 +67,23 @@
     <Filter Include="Engine\ソースファイル\Math\Vector">
       <UniqueIdentifier>{e74037cc-e4e2-4296-b2af-0e913a29d3c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ソースファイル\Draw\3D">
-      <UniqueIdentifier>{074245bf-6869-48a7-97e8-d6b8f5db36e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ヘッダーファイル\Draw\3D">
-      <UniqueIdentifier>{8a75d6b8-bb47-41cd-ac7d-265612da09a6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ヘッダーファイル\DirectXcore\Buffer">
       <UniqueIdentifier>{71e6685c-695c-4c6e-8251-568f18ac84c4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\ソースファイル\DirectXCore\Buffer">
       <UniqueIdentifier>{6fe923e0-3b70-4736-a71c-9efaa461e29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Draw\Sprite">
+      <UniqueIdentifier>{2f99f724-b4b1-4f39-bc56-c4397d81ae9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Draw\Model">
+      <UniqueIdentifier>{3692a651-a71a-40da-b6ff-f7bc67b4e73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Draw\Sprite">
+      <UniqueIdentifier>{c1a45008-d064-4000-87f9-acfd152e65bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Draw\Model">
+      <UniqueIdentifier>{eecd0e1e-693f-4d74-a4b8-9fe60eafe2b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,9 +117,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\ソースファイル\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite2D.cpp">
-      <Filter>Engine\ソースファイル\Draw\2D</Filter>
-    </ClCompile>
     <ClCompile Include="AudioManager.cpp">
       <Filter>Engine\ソースファイル\Audio</Filter>
     </ClCompile>
@@ -147,17 +144,11 @@
     <ClCompile Include="PhysicsMath.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Obj.cpp">
-      <Filter>Engine\ソースファイル\Draw\3D</Filter>
-    </ClCompile>
     <ClCompile Include="DrawOversight.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
     <ClCompile Include="Pipeline.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Engine\ソースファイル\Draw\3D</Filter>
     </ClCompile>
     <ClCompile Include="DescriptorHeap.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
@@ -177,17 +168,29 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="FbxLoder.cpp">
-      <Filter>Engine\ソースファイル\Draw\3D</Filter>
+    <ClCompile Include="Sprite3D.cpp">
+      <Filter>Engine\ソースファイル\Draw\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="FbxModel.cpp">
-      <Filter>Engine\ソースファイル\Draw\3D</Filter>
+    <ClCompile Include="Sprite2D.cpp">
+      <Filter>Engine\ソースファイル\Draw\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteCommon.cpp">
+      <Filter>Engine\ソースファイル\Draw\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\ソースファイル\Draw</Filter>
+      <Filter>Engine\ソースファイル\Draw\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite3D.cpp">
-      <Filter>Engine\ソースファイル\Draw\3D</Filter>
+    <ClCompile Include="Obj.cpp">
+      <Filter>Engine\ソースファイル\Draw\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Engine\ソースファイル\Draw\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="FbxModel.cpp">
+      <Filter>Engine\ソースファイル\Draw\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="FbxLoder.cpp">
+      <Filter>Engine\ソースファイル\Draw\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,17 +262,11 @@
     <ClInclude Include="PhysicsMath.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Obj.h">
-      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
-    </ClInclude>
     <ClInclude Include="DrawOversight.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
     <ClInclude Include="Pipeline.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
     </ClInclude>
     <ClInclude Include="DescriptorHeap.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
@@ -286,23 +283,32 @@
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite2D.h">
-      <Filter>Engine\ヘッダーファイル\Draw\2D</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="FbxModel.h">
-      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="FbxLoder.h">
-      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    <ClInclude Include="Sprite2D.h">
+      <Filter>Engine\ヘッダーファイル\Draw\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="Sprite3D.h">
-      <Filter>Engine\ヘッダーファイル\Draw\3D</Filter>
+      <Filter>Engine\ヘッダーファイル\Draw\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\ヘッダーファイル\Draw\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteCommon.h">
+      <Filter>Engine\ヘッダーファイル\Draw\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>Engine\ヘッダーファイル\Draw\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Engine\ヘッダーファイル\Draw\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxModel.h">
+      <Filter>Engine\ヘッダーファイル\Draw\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxLoder.h">
+      <Filter>Engine\ヘッダーファイル\Draw\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -33,8 +33,14 @@ private:
 	Transform sphereTrans;
 	uint32_t sphereTex;
 
+	//2Dスプライト
 	std::unique_ptr<Sprite>sprite;
 	uint32_t spriteTex;
+
+	//3Dスプライト
+	std::unique_ptr<Sprite>sprite3D;
+	Transform sprite3DTrans;
+	uint32_t sprite3DTex;
 
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;

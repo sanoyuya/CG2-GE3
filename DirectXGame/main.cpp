@@ -10,6 +10,7 @@
 #include"Sprite2D.h"
 #include "AudioManager.h"
 #include"Model.h"
+#include"SpriteCommon.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -42,6 +43,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	TextureManager* textureManager = TextureManager::GetInstance();
 	textureManager->StaticInitialize();
 
+	SpriteCommon::Initialize();
 	Sprite2D::StaticInitialize();
 
 	Model::StaticInitialize();

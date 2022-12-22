@@ -9,6 +9,7 @@
 #include"IndexBuffer.h"
 #include"VertexBuffer.h"
 #include"ConstantBuffer.h"
+#include"SpriteCommon.h"
 
 class Sprite2D
 {
@@ -16,8 +17,6 @@ private:
 
 	HRESULT result;
 	char PADING[4];
-	static Microsoft::WRL::ComPtr<ID3D12Device>device;
-	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>cmdList;
 
 	//頂点バッファ
 	std::unique_ptr<VertexBuffer> vertexBuffer;
@@ -41,10 +40,6 @@ private:
 
 	//定数バッファのマッピング用ポインタ
 	myMath::Matrix4 constBuffMap;
-
-	static Blob blob;//シェーダオブジェクト
-
-	static std::array<PipelineSet, 6> pip;
 
 	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
 
@@ -139,12 +134,10 @@ public:
 	/// ブレンドモードのセット
 	/// </summary>
 	/// <param name="mode">モード</param>
-	void SetSpriteBlendMode(BlendMode mode);
+	void SetSprite2DBlendMode(BlendMode mode);
 
 private:
 	void CreateVertexIndexBuffer();
 	void CreateConstBuff();
-	static void LoadShader();
 	void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
-	void BlendSet(BlendMode mode);
 };

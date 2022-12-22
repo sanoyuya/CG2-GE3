@@ -2,28 +2,14 @@
 #include <d3dcompiler.h>
 #include"Camera.h"
 
-Microsoft::WRL::ComPtr<ID3D12Device>Sprite2D::device;
-Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>Sprite2D::cmdList;
 myMath::Matrix4 Sprite2D::matProjection;
-Blob Sprite2D::blob;//シェーダオブジェクト
-std::array<PipelineSet, 6> Sprite2D::pip;
 
 void Sprite2D::StaticInitialize()
 {
-	device = DirectX_::GetInstance()->GetDevice();
-	cmdList = DirectX_::GetInstance()->GetCommandList();
-
 	float width = static_cast<float>(WindowsApp::GetInstance()->GetWidth());
 	float height = static_cast<float>(WindowsApp::GetInstance()->GetHeight());
 
 	myMath::MakeOrthogonalL(0.0f, width, height, 0.0f, 0.0f, 1.0f, matProjection);
-
-	LoadShader();
-
-	for (int i = 0; i < pip.size(); i++)
-	{
-		Pipeline::CreateSpritePipline(blob, (BlendMode)i, device.Get(), pip);
-	}
 }
 
 void Sprite2D::Sprite2DInitialize(uint32_t handle)
@@ -71,28 +57,13 @@ void Sprite2D::DrawSprite2D(myMath::Vector2 position, myMath::Vector4 color, myM
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet((BlendMode)blendMode);
 
 	vbView = vertexBuffer->GetView();
 	ibView = indexBuffer->GetView();
 
-	// プリミティブ形状の設定コマンド
-	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
-	// 頂点バッファビューの設定コマンド
-	cmdList->IASetVertexBuffers(0, 1, &vbView);
-	//定数バッファビュー(CBV)の設定コマンド
-	cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetAddress());
-	//SRVヒープの設定コマンド
-	cmdList->SetDescriptorHeaps(1, texture->srvHeap.GetAddressOf());
-	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture->gpuHandle;
-	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
-	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
-	//インデックスバッファビューの設定コマンド
-	cmdList->IASetIndexBuffer(&ibView);
-
-	// 描画コマンド
-	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
+	//描画コマンド
+	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
 }
 
 void Sprite2D::DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, myMath::Vector4 color, myMath::Vector2 scale, float rotation, bool flipX, bool flipY)
@@ -133,28 +104,13 @@ void Sprite2D::DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCe
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet((BlendMode)blendMode);
 
 	vbView = vertexBuffer->GetView();
 	ibView = indexBuffer->GetView();
 
-	// プリミティブ形状の設定コマンド
-	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
-	// 頂点バッファビューの設定コマンド
-	cmdList->IASetVertexBuffers(0, 1, &vbView);
-	//定数バッファビュー(CBV)の設定コマンド
-	cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetAddress());
-	//SRVヒープの設定コマンド
-	cmdList->SetDescriptorHeaps(1, texture->srvHeap.GetAddressOf());
-	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture->gpuHandle;
-	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
-	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
-	//インデックスバッファビューの設定コマンド
-	cmdList->IASetIndexBuffer(&ibView);
-
-	// 描画コマンド
-	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
+	//描画コマンド
+	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
 }
 
 void Sprite2D::DrawAnimationSpriteX2D(myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
@@ -214,33 +170,18 @@ void Sprite2D::DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheets
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet((BlendMode)blendMode);
 
 	vbView = vertexBuffer->GetView();
 	ibView = indexBuffer->GetView();
 
-	// プリミティブ形状の設定コマンド
-	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
-	// 頂点バッファビューの設定コマンド
-	cmdList->IASetVertexBuffers(0, 1, &vbView);
-	//定数バッファビュー(CBV)の設定コマンド
-	cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetAddress());
-	//SRVヒープの設定コマンド
-	cmdList->SetDescriptorHeaps(1, texture->srvHeap.GetAddressOf());
-	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture->gpuHandle;
-	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
-	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
-	//インデックスバッファビューの設定コマンド
-	cmdList->IASetIndexBuffer(&ibView);
-
-	// 描画コマンド
-	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
+	//描画コマンド
+	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
 }
 
-void Sprite2D::SetSpriteBlendMode(BlendMode mode)
+void Sprite2D::SetSprite2DBlendMode(BlendMode mode)
 {
-	blendMode = int(mode);
+	blendMode = static_cast<int>(mode);
 }
 
 void Sprite2D::CreateVertexIndexBuffer()
@@ -258,14 +199,6 @@ void Sprite2D::CreateConstBuff()
 	constBuffMaterial->Create(sizeof(myMath::Matrix4));
 }
 
-void Sprite2D::LoadShader()
-{
-	//頂点シェーダの読み込みとコンパイル
-	blob.vs = DrawCommon::ShaderCompile(L"Resources/shaders/SpriteVS.hlsl", "main", "vs_5_0", blob.vs.Get());
-	//ピクセルシェーダの読み込みとコンパイル
-	blob.ps = DrawCommon::ShaderCompile(L"Resources/shaders/SpritePS.hlsl", "main", "ps_5_0", blob.ps.Get());
-}
-
 void Sprite2D::Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation)
 {
 	myMath::Matrix4 mTrans, mRot, mScale, matWorld;
@@ -280,52 +213,4 @@ void Sprite2D::Update(myMath::Vector2 position, myMath::Vector2 scale, float rot
 
 	constBuffMap = matWorld * matProjection;
 	constBuffMaterial->Update(&constBuffMap);
-}
-
-void Sprite2D::BlendSet(BlendMode mode)
-{
-	switch (mode)
-	{
-	case BlendMode::None:
-
-		cmdList->SetPipelineState(pip[0].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[0].rootSignature.Get());
-
-		break;
-
-	case BlendMode::Alpha:
-
-		cmdList->SetPipelineState(pip[1].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[1].rootSignature.Get());
-
-		break;
-
-	case BlendMode::Add:
-
-		cmdList->SetPipelineState(pip[2].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[2].rootSignature.Get());
-
-		break;
-
-	case BlendMode::Sub:
-
-		cmdList->SetPipelineState(pip[3].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[3].rootSignature.Get());
-
-		break;
-
-	case BlendMode::Mul:
-
-		cmdList->SetPipelineState(pip[4].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[4].rootSignature.Get());
-
-		break;
-
-	case BlendMode::Inv:
-
-		cmdList->SetPipelineState(pip[5].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[5].rootSignature.Get());
-
-		break;
-	}
 }
