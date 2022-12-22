@@ -77,20 +77,20 @@ void SpriteCommon::BlendSet(BlendMode mode)
 void SpriteCommon::DrawCommand(TextureData* textureData, D3D12_VERTEX_BUFFER_VIEW vbView, D3D12_INDEX_BUFFER_VIEW ibView, ConstantBuffer* constBuff)
 {
 	// プリミティブ形状の設定コマンド
-	SpriteCommon::cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
+	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 頂点バッファビューの設定コマンド
-	SpriteCommon::cmdList->IASetVertexBuffers(0, 1, &vbView);
+	cmdList->IASetVertexBuffers(0, 1, &vbView);
 	//定数バッファビュー(CBV)の設定コマンド
-	SpriteCommon::cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetAddress());
+	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetAddress());
 	//SRVヒープの設定コマンド
-	SpriteCommon::cmdList->SetDescriptorHeaps(1, textureData->srvHeap.GetAddressOf());
+	cmdList->SetDescriptorHeaps(1, textureData->srvHeap.GetAddressOf());
 	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
 	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = textureData->gpuHandle;
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
-	SpriteCommon::cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
+	cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	//インデックスバッファビューの設定コマンド
-	SpriteCommon::cmdList->IASetIndexBuffer(&ibView);
+	cmdList->IASetIndexBuffer(&ibView);
 
 	// 描画コマンド
-	SpriteCommon::cmdList->DrawIndexedInstanced(6, 1, 0, 0, 0);
+	cmdList->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }

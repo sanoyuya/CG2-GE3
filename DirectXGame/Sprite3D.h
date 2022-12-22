@@ -29,18 +29,12 @@ private:
 	std::unique_ptr<VertexBuffer> vertexBuffer;
 	//頂点マップ
 	PosUvColor* vertMap;
-	//頂点バッファビュー
-	D3D12_VERTEX_BUFFER_VIEW vbView{};
 
 	//インデックスバッファ
 	std::unique_ptr<IndexBuffer> indexBuffer;
 
 	//インデックスバッファをマッピング
 	uint16_t* indexMap;
-	//インデックスバッファビューの作成
-	D3D12_INDEX_BUFFER_VIEW ibView{};
-	//プロジェクション行列
-	static myMath::Matrix4 matProjection;
 
 	// 定数バッファ
 	std::unique_ptr<ConstantBuffer> constBuffMaterial;
