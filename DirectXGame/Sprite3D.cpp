@@ -47,11 +47,8 @@ void Sprite3D::DrawSprite3D(Camera* camera, Transform& transform, BillboardFlag 
 	// パイプラインステートとルートシグネチャの設定コマンド
 	SpriteCommon::BlendSet((BlendMode)blendMode);
 
-	vbView = vertexBuffer->GetView();
-	ibView = indexBuffer->GetView();
-
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
 }
 
 void Sprite3D::DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, BillboardFlag billboardFlag, myMath::Vector4 color, bool flipX, bool flipY)
@@ -94,11 +91,8 @@ void Sprite3D::DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Ve
 	// パイプラインステートとルートシグネチャの設定コマンド
 	SpriteCommon::BlendSet((BlendMode)blendMode);
 
-	vbView = vertexBuffer->GetView();
-	ibView = indexBuffer->GetView();
-
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
 }
 
 void Sprite3D::DrawAnimationSpriteX3D(Camera* camera, Transform& transform, uint16_t sheetsNum, uint16_t& nowNum, BillboardFlag billboardFlag, myMath::Vector4 color, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
@@ -160,11 +154,8 @@ void Sprite3D::DrawAnimationSpriteXY3D(Camera* camera, Transform& transform, uin
 	// パイプラインステートとルートシグネチャの設定コマンド
 	SpriteCommon::BlendSet((BlendMode)blendMode);
 
-	vbView = vertexBuffer->GetView();
-	ibView = indexBuffer->GetView();
-
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
 }
 
 void Sprite3D::SetSprite3DBlendMode(BlendMode mode)

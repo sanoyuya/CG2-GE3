@@ -59,11 +59,8 @@ void Sprite2D::DrawSprite2D(myMath::Vector2 position, myMath::Vector4 color, myM
 	// パイプラインステートとルートシグネチャの設定コマンド
 	SpriteCommon::BlendSet((BlendMode)blendMode);
 
-	vbView = vertexBuffer->GetView();
-	ibView = indexBuffer->GetView();
-
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
 }
 
 void Sprite2D::DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, myMath::Vector4 color, myMath::Vector2 scale, float rotation, bool flipX, bool flipY)
@@ -106,11 +103,8 @@ void Sprite2D::DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCe
 	// パイプラインステートとルートシグネチャの設定コマンド
 	SpriteCommon::BlendSet((BlendMode)blendMode);
 
-	vbView = vertexBuffer->GetView();
-	ibView = indexBuffer->GetView();
-
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
 }
 
 void Sprite2D::DrawAnimationSpriteX2D(myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
@@ -172,11 +166,8 @@ void Sprite2D::DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheets
 	// パイプラインステートとルートシグネチャの設定コマンド
 	SpriteCommon::BlendSet((BlendMode)blendMode);
 
-	vbView = vertexBuffer->GetView();
-	ibView = indexBuffer->GetView();
-
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vbView, ibView, constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
 }
 
 void Sprite2D::SetSprite2DBlendMode(BlendMode mode)

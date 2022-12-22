@@ -66,7 +66,7 @@ void GameScene::Draw()
 	//sphere->DrawModel(&sphereTrans);
 	sprite->DrawSprite2D({ 640.0f,360.0f });
 
-	sprite3D->DrawSprite3D(camera.get(), sprite3DTrans,BillboardFlag::XYBillboard);
+	//sprite3D->DrawSprite3D(camera.get(), sprite3DTrans,BillboardFlag::XYBillboard);
 }
 
 void GameScene::Rotation()
