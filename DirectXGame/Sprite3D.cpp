@@ -12,8 +12,8 @@ void Sprite3D::DrawSprite3D(Camera* camera, Transform& transform, BillboardFlag 
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;
 	else isFlipX = -1;
-	if (flipY == false)isFlipY = 1;
-	else isFlipY = -1;
+	if (flipY == false)isFlipY = -1;
+	else isFlipY = 1;
 
 	float left = ((0.0f - anchorpoint.x) * texture->width) * isFlipX;
 	float right = ((1.0f - anchorpoint.x) * texture->width) * isFlipX;
@@ -56,8 +56,8 @@ void Sprite3D::DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Ve
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;
 	else isFlipX = -1;
-	if (flipY == false)isFlipY = 1;
-	else isFlipY = -1;
+	if (flipY == false)isFlipY = -1;
+	else isFlipY = 1;
 
 	float left = -clipRadius.x * isFlipX;
 	float right = clipRadius.x * isFlipX;
@@ -110,8 +110,8 @@ void Sprite3D::DrawAnimationSpriteXY3D(Camera* camera, Transform& transform, uin
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;
 	else isFlipX = -1;
-	if (flipY == false)isFlipY = 1;
-	else isFlipY = -1;
+	if (flipY == false)isFlipY = -1;
+	else isFlipY = 1;
 
 	float left = ((0.0f - anchorpoint.x) * texture->width / sheetsNumX) * isFlipX;
 	float right = ((1.0f - anchorpoint.x) * texture->width / sheetsNumX) * isFlipX;

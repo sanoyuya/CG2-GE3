@@ -16,7 +16,7 @@ void GameScene::Initialize()
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
-	cameraPos = { 0.0f,0.0f,-100.0f };
+	cameraPos = { 0.0f,0.0f,-500.0f };
 
 	//“V‹…
 	model = std::make_unique<DrawOversight>();
@@ -40,13 +40,13 @@ void GameScene::Initialize()
 
 	sprite = std::make_unique<Sprite>();
 	spriteTex = sprite->LoadTexture("Resources/visual.png");
-	sprite->Sprite2DInitialize(spriteTex);
+	
 
 	sprite3D= std::make_unique<Sprite>();
 	sprite3DTex=sprite->LoadTexture("Resources/visual (1).png");
 	sprite3D->Sprite3DInitialize(sprite3DTex);
 	sprite3DTrans.Initialize();
-	//sprite3DTrans.translation.x = myMath::AX_PI;
+	sprite->Sprite2DInitialize(sprite3DTex);
 }
 
 void GameScene::Update()
@@ -60,13 +60,13 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	//model->DrawModel(&modelTrans);
-	//cube->DrawModel(&cubeTrans);
-	//sphere->DrawModel(&sphereTrans,{0.25f,1.0f,0.25f,0.5f});
-	//sphere->DrawModel(&sphereTrans);
+	model->DrawModel(&modelTrans);
+	cube->DrawModel(&cubeTrans);
+	sphere->DrawModel(&sphereTrans,{0.25f,1.0f,0.25f,0.5f});
+	sphere->DrawModel(&sphereTrans);
 	sprite->DrawSprite2D({ 640.0f,360.0f });
 
-	//sprite3D->DrawSprite3D(camera.get(), sprite3DTrans,BillboardFlag::XYBillboard);
+	sprite3D->DrawSprite3D(camera.get(), sprite3DTrans,BillboardFlag::XYBillboard);
 }
 
 void GameScene::Rotation()
