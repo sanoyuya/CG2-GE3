@@ -16,7 +16,7 @@ void Player::Initialize()
 	minDiceTex = Model::CreateObjModel("Resources/greenDice");
 	maxDiceTex = Model::CreateObjModel("Resources/purpleDice");
 	model->SetModel(minDiceTex);
-	playerPos.translation.y = 1.0f;
+	playerPos.translation.y = 2.0f;
 	playerPos.Initialize();
 }
 
@@ -27,7 +27,7 @@ void Player::Update(Camera* camera)
 	playerPos.TransUpdate(camera);
 }
 
-void Player::Draw(Camera* camera)
+void Player::Draw()
 {
 	model->DrawModel(&playerPos);
 }
@@ -50,9 +50,11 @@ void Player::Attack()
 	playerPos.translation.y += gravity;
 	if (jumpFlag == true && playerPos.translation.y <= 1.0f)
 	{
+		//着地
+		
 		//ここでダメージ判定
 		//攻撃範囲*サイコロの目で判定を取る
-		playerPos.translation.y = 1.0f;
+		playerPos.translation.y = 2.0f;
 		gravity = 0.0f;
 
 		attackPower = static_cast<uint8_t>(myMath::GetRand(1, 6));

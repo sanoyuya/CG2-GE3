@@ -28,7 +28,7 @@ public:
 
 	void Initialize();
 	void Update(Camera* camera);
-	void Draw(Camera* camera);
+	void Draw();
 
 private:
 

@@ -8,6 +8,7 @@
 #include"Transform.h"
 #include"Sprite.h"
 #include"Player.h"
+#include"Enemy.h"
 
 class GameScene
 {
@@ -18,6 +19,8 @@ private:
 	AudioManager* audioManager = nullptr;
 
 	std::unique_ptr<Camera>camera;
+
+	std::unique_ptr<Player>player;
 
 	//“V‹…
 	std::unique_ptr<DrawOversight>model;
@@ -32,12 +35,14 @@ private:
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;
 	float angleY = 0.0f;
-	const float length = 50.0f;
+	const float length = 40.0f;
 
 	uint8_t scene = 0;
 
-	std::unique_ptr<Player>player;
-
+	uint32_t enemyTex;
+	//“GƒŠƒXƒg
+	std::list<std::unique_ptr<Enemy>> enemys;
+	float coolTime = 0.0f;
 
 public:
 	GameScene();
@@ -61,5 +66,8 @@ public:
 private:
 	void Rotation();
 	void CamMove();
+	void EnemyDead();
+	void EnemyUpdate();
+	void EnemyDraw();
 	void Reset();
 };
