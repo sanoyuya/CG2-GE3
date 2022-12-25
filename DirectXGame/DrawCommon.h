@@ -66,15 +66,8 @@ struct worldViewpojCamera
 	myMath::Vector3 cameraPos;
 };
 
-namespace DrawCommon
+class DrawCommon
 {
-	/// <summary>
-	/// シェーダの読み込みとコンパイル
-	/// </summary>
-	/// <param name="shaderFileName">ファイルの名前</param>
-	/// <param name="entrypointName">エントリーポイントの名前</param>
-	/// <param name="shaderModelName">シェーダーモデル指定</param>
-	/// <param name="blob">シェーダオブジェクト</param>
-	/// <returns>シェーダの読み込みとコンパイルをしたシェーダオブジェクト</returns>
-	ID3DBlob* ShaderCompile(const wchar_t* shaderFileName,LPCSTR entrypointName, LPCSTR shaderModelName, ID3DBlob* blob);
-}
+public:
+	static ID3DBlob* ShaderCompile(const wchar_t* shaderFileName, LPCSTR entrypointName, LPCSTR shaderModelName, ID3DBlob* blob);
+};

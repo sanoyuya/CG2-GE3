@@ -28,6 +28,8 @@ struct Blob
 	Microsoft::WRL::ComPtr<ID3DBlob>vs;
 	//ピクセルシェーダオブジェクト
 	Microsoft::WRL::ComPtr<ID3DBlob>ps;
+	//ジオメトリシェーダオブジェクト
+	Microsoft::WRL::ComPtr<ID3DBlob>gs;
 };
 
 class Pipeline
