@@ -20,9 +20,13 @@ void GameScene::Initialize()
 
 	player = std::make_unique<Player>();
 	player->Initialize();
+	playerTex.minDice = Model::CreateObjModel("Resources/greenDice");
+	playerTex.maxDice = Model::CreateObjModel("Resources/purpleDice");
+	playerTex.direction = TextureManager::GetInstance()->LoadTexture("Resources/playerDirection.png");
+	Player::LoadTexture(playerTex);//プレイヤーのテクスチャデータ読み込み
 
-	enemyTex = Model::CreateObjModel("Resources/cube");
-	Enemy::LoadTexture(enemyTex);
+	enemyTex = TextureManager::GetInstance()->LoadTexture("Resources/enemy.png");
+	Enemy::LoadTexture(enemyTex);//敵のテクスチャデータ読み込み
 
 	//天球
 	model = std::make_unique<DrawOversight>();
@@ -31,29 +35,56 @@ void GameScene::Initialize()
 	model->SetModel(modelTex);
 	modelTrans.Initialize();
 
-	//ステージキューブ
-	cube = std::make_unique<DrawOversight>();
-	cubeTex = Model::CreateObjModel("Resources/cube");
-	cube->SetModel(cubeTex);
-	cubeTrans.scale = { 25.0f,1.0f ,25.0f };
-	cubeTrans.Initialize();
+	//背景
+	backSprite = std::make_unique<Sprite>();
+	backSpriteTex = backSprite->LoadTexture("Resources/white1x1.png");
+	backSprite->Sprite3DInitialize(backSpriteTex);
+	backSpriteTrans.Initialize();
+	backSpriteTrans.translation = { 0.0f,0.0f ,0.0f };
+	backSpriteTrans.scale = { 90.0f,50.0f,0.0f };
+	backSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
+
+	backDiceTex = TextureManager::GetInstance()->LoadTexture("Resources/backDice.png");
+	BackDice::LoadTexture(backDiceTex);
+
+	shadowSprite = std::make_unique<Sprite>();
+	shadowSpriteTex = shadowSprite->LoadTexture("Resources/shadow.png");
+	shadowSprite->Sprite3DInitialize(shadowSpriteTex);
+	shadowSpriteTrans.Initialize();
+	shadowSpriteTrans.translation = { 0.0f,0.0f ,0.0f };
+	shadowSpriteTrans.scale = { 50.0f,50.0f ,0.0f };
+	shadowSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
 }
 
 void GameScene::Update()
 {
+	if (input->KeyboardTriggerPush(DIK_R))
+	{
+		Reset();
+	}
 	EnemyDead();
-	EnemyUpdate();
+	BackDiceDead();
 
+	BackDiceUpdate();
 	CamMove();
 	modelTrans.TransUpdate(camera.get());//天球
-	cubeTrans.TransUpdate(camera.get());//ステージキューブ
 	player->Update(camera.get());
+	EnemyUpdate();
 }
 
 void GameScene::Draw()
 {
+	colorTime++;
+	colorR = 0.25f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 200.0f);
+	colorG = 0.15f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 400.0f);
+	colorB = 0.25f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 600.0f);
+	backSprite->DrawSprite3D(camera.get(), backSpriteTrans, BillboardFlag::NonBillboard, { colorR,colorG,colorB,1.0f });
+
+	shadowSprite->DrawSprite3D(camera.get(), shadowSpriteTrans);
+
+	BackDiceDraw();
+
 	model->DrawModel(&modelTrans);
-	cube->DrawModel(&cubeTrans);
 	EnemyDraw();
 	player->Draw();
 }
@@ -94,6 +125,44 @@ void GameScene::CamMove()
 	camera->Update(true);
 }
 
+void GameScene::BackDiceDead()
+{
+	backDices.remove_if([](std::unique_ptr<BackDice>& backDice) { return backDice->GetIsDead(); });
+}
+
+void GameScene::BackDiceUpdate()
+{
+	//背景サイコロの生成処理
+	backDiceCoolTime++;
+	if (backDiceCoolTime > 75)
+	{
+		myMath::Vector3 position = { static_cast<float>(myMath::GetRand(-20.0f,20.0f)),0.0f,static_cast<float>(myMath::GetRand(25.0f,30.0f)) };
+		uint16_t num = static_cast<uint16_t>(myMath::GetRand(1, 6));
+
+		//背景サイコロを生成し、初期化
+		std::unique_ptr<BackDice> newBackDice = std::make_unique<BackDice>();
+		newBackDice->Initialize(position, num);
+		//背景サイコロを登録する
+		backDices.push_back(std::move(newBackDice));
+
+		backDiceCoolTime = 0.0f;
+	}
+
+	//背景サイコロの更新処理
+	for (const std::unique_ptr<BackDice>& backDice : backDices)
+	{
+		backDice->Update(camera.get());
+	}
+}
+
+void GameScene::BackDiceDraw()
+{
+	for (const std::unique_ptr<BackDice>& backDice : backDices)
+	{
+		backDice->Draw(camera.get(), { colorR ,colorG ,colorB ,1.0f });//背景のサイコロ
+	}
+}
+
 void GameScene::EnemyDead()
 {
 	enemys.remove_if([](std::unique_ptr<Enemy>& enemy_) { return enemy_->GetIsDead(); });
@@ -103,9 +172,9 @@ void GameScene::EnemyUpdate()
 {
 	//敵の生成処理
 	coolTime++;
-	if (coolTime > 10)
+	if (coolTime > 50)
 	{
-		myMath::Vector3 position = { 0.0f,2.0f,0.0f };
+		myMath::Vector3 position = { static_cast<float>(myMath::GetRand(-23.0f,23.0f)),0.0f,static_cast<float>(myMath::GetRand(-23.0f,23.0f)) };
 		//Enemyを生成し、初期化
 		std::unique_ptr<Enemy> newEnemy = std::make_unique<Enemy>();
 		newEnemy->Initialize(position);
@@ -118,7 +187,7 @@ void GameScene::EnemyUpdate()
 	//敵の更新処理
 	for (const std::unique_ptr<Enemy>& enemy : enemys)
 	{
-		enemy->Update(camera.get());
+		enemy->Update(camera.get(),player.get());
 	}
 }
 
@@ -126,11 +195,12 @@ void GameScene::EnemyDraw()
 {
 	for (const std::unique_ptr<Enemy>& enemy : enemys)
 	{
-		enemy->Draw();//プレイヤーに向かってくる敵
+		enemy->Draw(camera.get());//プレイヤーに向かってくる敵
 	}
 }
 
 void GameScene::Reset()
 {
-	cameraPos = { 0.0f,length,0.0f };
+	cameraPos = { 0.0f,length,0.000001f };
+	enemys.clear();
 }

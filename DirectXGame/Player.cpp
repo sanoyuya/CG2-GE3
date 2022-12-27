@@ -1,11 +1,22 @@
 #include "Player.h"
 
+uint32_t Player::minDiceTex;
+uint32_t Player::maxDiceTex;
+uint32_t Player::directionTex;
+
 Player::Player()
 {
 }
 
 Player::~Player()
 {
+}
+
+const void Player::LoadTexture(PlayerTexData& texture)
+{
+	minDiceTex = texture.minDice;
+	maxDiceTex = texture.maxDice;
+	directionTex = texture.direction;
 }
 
 void Player::Initialize()
@@ -18,18 +29,66 @@ void Player::Initialize()
 	model->SetModel(minDiceTex);
 	playerPos.translation.y = 2.0f;
 	playerPos.Initialize();
+	radius = 1.0f;
+	hp = 3;
 }
 
 void Player::Update(Camera* camera)
 {
 	Move();
+	Movelimit();
 	Attack();
 	playerPos.TransUpdate(camera);
+}
+
+void Player::Movelimit()
+{
+	if (playerPos.translation.x <= -23.0f)
+	{
+		playerPos.translation.x = -23.0f;
+	}
+	else if (playerPos.translation.x >= 23.0f)
+	{
+		playerPos.translation.x = 23.0f;
+	}
+	if (playerPos.translation.z <= -23.0f)
+	{
+		playerPos.translation.z = -23.0f;
+	}
+	else if (playerPos.translation.z >= 23.0f)
+	{
+		playerPos.translation.z = 23.0f;
+	}
 }
 
 void Player::Draw()
 {
 	model->DrawModel(&playerPos);
+}
+
+const Transform& Player::GetTransform()
+{
+	return playerPos;
+}
+
+const float& Player::GetRadius()
+{
+	return radius;
+}
+
+const uint8_t& Player::GetHp()
+{
+	return hp;
+}
+
+const bool& Player::GetJumpFlag()
+{
+	return jumpFlag;
+}
+
+void Player::SetHp(const uint8_t hp)
+{
+	this->hp = hp;
 }
 
 void Player::Attack()
@@ -43,9 +102,9 @@ void Player::Attack()
 	if (jumpFlag == true)
 	{
 		gravity -= 0.25f;
-		playerPos.rotation.x += myMath::GetRand(-0.5f, 0.5f);
-		playerPos.rotation.y += myMath::GetRand(-0.5f, 0.5f);
-		playerPos.rotation.z += myMath::GetRand(-0.5f, 0.5f);
+		playerPos.rotation.x += static_cast<float>(myMath::GetRand(-0.5f, 0.5f));
+		playerPos.rotation.y += static_cast<float>(myMath::GetRand(-0.5f, 0.5f));
+		playerPos.rotation.z += static_cast<float>(myMath::GetRand(-0.5f, 0.5f));
 	}
 	playerPos.translation.y += gravity;
 	if (jumpFlag == true && playerPos.translation.y <= 1.0f)
@@ -71,35 +130,35 @@ void Player::Attack()
 		case 2:
 
 			model->SetModel(minDiceTex);
-			playerPos.rotation = { -myMath::AX_PI / 2,0.0f ,0.0f };//2‚Ì–Ú
+			playerPos.rotation = { -myMath::AX_PIF / 2,0.0f ,0.0f };//2‚Ì–Ú
 
 			break;
 
 		case 3:
 
 			model->SetModel(minDiceTex);
-			playerPos.rotation = { 0.0f,0.0f ,myMath::AX_PI / 2 };//3‚Ì–Ú
+			playerPos.rotation = { 0.0f,0.0f ,myMath::AX_PIF / 2 };//3‚Ì–Ú
 
 			break;
 
 		case 4:
 
 			model->SetModel(maxDiceTex);
-			playerPos.rotation = { 0.0f,0.0f ,-myMath::AX_PI / 2 };//4‚Ì–Ú
+			playerPos.rotation = { 0.0f,0.0f ,-myMath::AX_PIF / 2 };//4‚Ì–Ú
 
 			break;
 
 		case 5:
 
 			model->SetModel(maxDiceTex);
-			playerPos.rotation = { myMath::AX_PI,0.0f ,0.0f };//5‚Ì–Ú
+			playerPos.rotation = { myMath::AX_PIF,0.0f ,0.0f };//5‚Ì–Ú
 
 			break;
 
 		case 6:
 
 			model->SetModel(maxDiceTex);
-			playerPos.rotation = { myMath::AX_PI,0.0f ,0.0f };//6‚Ì–Ú
+			playerPos.rotation = { myMath::AX_PIF,0.0f ,0.0f };//6‚Ì–Ú
 
 			break;
 		}

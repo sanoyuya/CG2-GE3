@@ -9,6 +9,7 @@
 #include"Sprite.h"
 #include"Player.h"
 #include"Enemy.h"
+#include"BackDice.h"
 
 class GameScene
 {
@@ -20,24 +21,37 @@ private:
 
 	std::unique_ptr<Camera>camera;
 
-	std::unique_ptr<Player>player;
+	myMath::Vector3 cameraPos;
+	float angleX = 0.0f;
+	float angleY = 0.0f;
+	const float length = 42.5f;
 
 	//天球
 	std::unique_ptr<DrawOversight>model;
 	Transform modelTrans;
 	uint32_t modelTex;
 
-	//ステージキューブ
-	std::unique_ptr<DrawOversight>cube;
-	Transform cubeTrans;
-	uint32_t cubeTex;
+	//背景
+	std::unique_ptr<Sprite>backSprite;
+	Transform backSpriteTrans;
+	uint32_t backSpriteTex;
+	float colorR = 0.0f;
+	float colorG = 0.0f;
+	float colorB = 0.0f;
+	float colorTime = 0.0f;
 
-	myMath::Vector3 cameraPos;
-	float angleX = 0.0f;
-	float angleY = 0.0f;
-	const float length = 40.0f;
+	std::unique_ptr<Sprite>shadowSprite;
+	Transform shadowSpriteTrans;
+	uint32_t shadowSpriteTex;
+
+	std::list<std::unique_ptr<BackDice>>backDices;
+	uint32_t backDiceTex;
+	float backDiceCoolTime = 0.0f;
 
 	uint8_t scene = 0;
+
+	std::unique_ptr<Player>player;
+	PlayerTexData playerTex;
 
 	uint32_t enemyTex;
 	//敵リスト
@@ -66,6 +80,9 @@ public:
 private:
 	void Rotation();
 	void CamMove();
+	void BackDiceDead();
+	void BackDiceUpdate();
+	void BackDiceDraw();
 	void EnemyDead();
 	void EnemyUpdate();
 	void EnemyDraw();
