@@ -75,11 +75,12 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	colorTime++;
-	colorR = 0.25f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 200.0f);
-	colorG = 0.15f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 400.0f);
-	colorB = 0.25f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 600.0f);
+	colorR = 0.25f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 1200.0f);
+	colorG = 0.15f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 800.0f);
+	colorB = 0.25f + PhysicsMath::SimpleHarmonicMotion(colorTime, 0.025f, 400.0f);
 	backSprite->DrawSprite3D(camera.get(), backSpriteTrans, BillboardFlag::NonBillboard, { colorR,colorG,colorB,1.0f });
 
+	shadowSprite->DrawSprite3D(camera.get(), shadowSpriteTrans);
 	shadowSprite->DrawSprite3D(camera.get(), shadowSpriteTrans);
 
 	BackDiceDraw();
@@ -202,5 +203,6 @@ void GameScene::EnemyDraw()
 void GameScene::Reset()
 {
 	cameraPos = { 0.0f,length,0.000001f };
+	backDices.clear();
 	enemys.clear();
 }
