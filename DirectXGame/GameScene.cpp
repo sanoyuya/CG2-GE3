@@ -20,10 +20,6 @@ void GameScene::Initialize()
 
 	player = std::make_unique<Player>();
 	player->Initialize();
-	playerTex.minDice = Model::CreateObjModel("Resources/greenDice");
-	playerTex.maxDice = Model::CreateObjModel("Resources/purpleDice");
-	playerTex.direction = TextureManager::GetInstance()->LoadTexture("Resources/playerDirection.png");
-	Player::LoadTexture(playerTex);//プレイヤーのテクスチャデータ読み込み
 
 	enemyTex = TextureManager::GetInstance()->LoadTexture("Resources/enemy.png");
 	Enemy::LoadTexture(enemyTex);//敵のテクスチャデータ読み込み
@@ -44,6 +40,20 @@ void GameScene::Initialize()
 	backSpriteTrans.scale = { 90.0f,50.0f,0.0f };
 	backSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
 
+	backLeftSprite = std::make_unique<Sprite>();
+	backLeftSprite->Sprite3DInitialize(backSpriteTex);
+	backLeftSpriteTrans.Initialize();
+	backLeftSpriteTrans.translation = { 35.0f,0.0f ,0.0f };
+	backLeftSpriteTrans.scale = { 20.0f,50.0f,0.0f };
+	backLeftSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
+
+	backRightSprite = std::make_unique<Sprite>();
+	backRightSprite->Sprite3DInitialize(backSpriteTex);
+	backRightSpriteTrans.Initialize();
+	backRightSpriteTrans.translation = { -35.0f,0.0f ,0.0f };
+	backRightSpriteTrans.scale = { 20.0f,50.0f,0.0f };
+	backRightSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
+
 	backDiceTex = TextureManager::GetInstance()->LoadTexture("Resources/backDice.png");
 	BackDice::LoadTexture(backDiceTex);
 
@@ -61,6 +71,7 @@ void GameScene::Update()
 	if (input->KeyboardTriggerPush(DIK_R))
 	{
 		Reset();
+		player->Reset();
 	}
 	EnemyDead();
 	BackDiceDead();
@@ -68,6 +79,16 @@ void GameScene::Update()
 	BackDiceUpdate();
 	CamMove();
 	modelTrans.TransUpdate(camera.get());//天球
+
+	backSpriteTrans.translation = { player->GetShakeAdd(),player->GetShakeAdd() ,0.0f };
+	backSpriteTrans.Update();
+	shadowSpriteTrans.translation = { player->GetShakeAdd(),player->GetShakeAdd() ,0.0f };
+	shadowSpriteTrans.Update();
+	backLeftSpriteTrans.translation = { 35.0f + player->GetShakeAdd(),player->GetShakeAdd() ,0.0f };
+	backLeftSpriteTrans.Update();
+	backRightSpriteTrans.translation = { -35.0f + player->GetShakeAdd(),player->GetShakeAdd() ,0.0f };
+	backRightSpriteTrans.Update();
+
 	player->Update(camera.get());
 	EnemyUpdate();
 }
@@ -85,9 +106,14 @@ void GameScene::Draw()
 
 	BackDiceDraw();
 
+	player->AttackRangeDraw(camera.get());
+
+	backLeftSprite->DrawSprite3D(camera.get(), backLeftSpriteTrans, BillboardFlag::NonBillboard, { colorR,colorG,colorB,1.0f });
+	backRightSprite->DrawSprite3D(camera.get(), backRightSpriteTrans, BillboardFlag::NonBillboard, { colorR,colorG,colorB,1.0f });
+
 	model->DrawModel(&modelTrans);
 	EnemyDraw();
-	player->Draw();
+	player->Draw(camera.get());
 }
 
 void GameScene::Rotation()

@@ -5,14 +5,6 @@
 #include"Camera.h"
 #include"InputManager.h"
 
-struct PlayerTexData
-{
-	uint32_t minDice;
-	uint32_t maxDice;
-	uint32_t direction;
-};
-
-
 class Player
 {
 private:
@@ -22,39 +14,66 @@ private:
 
 	std::unique_ptr<DrawOversight>model;
 	Transform playerPos;
-	static uint32_t minDiceTex;
-	static uint32_t maxDiceTex;
-	static uint32_t directionTex;
+
+	std::unique_ptr<Sprite>attackRangeCircle;
+	Transform attackRangeCircleTrans;
+
+	std::unique_ptr<Sprite>directionTriangle;
+	Transform directionTriangleTrans;
+
+	std::array<std::unique_ptr<Sprite>, 3>hert;
+	std::array<Transform, 3>hertTrans;
+
+	uint32_t minDiceTex;
+	uint32_t maxDiceTex;
+	uint32_t attackRangeTex;
+	uint32_t directionTex;
+	uint32_t hertTex;
 
 	bool jumpFlag = false;
 	float gravity = 0.0f;
-	uint8_t attackPower = 0;
+	uint16_t attackPower = 0;
 	float radius = 0.0f;
-	uint8_t hp = 0;
+	int hp = 0;
+	float angle = 0.0f;
+	bool stickFlag = false;
+
+	bool shakeFlag = false;
+	const float shakePower = 0.5f;
+	float shakeAdd = 0.0f;
+	float shakeTimer = 0.0f;
+
+	const float directionTriangleDistance = 3.0f;
+
+	bool attackFlag = false;
 
 public:
 
 	Player();
 	~Player();
 
-	static const void LoadTexture(PlayerTexData& texture);
 	void Initialize();
 	void Update(Camera* camera);
 	void Movelimit();
-	void Draw();
+	void Draw(Camera* camera);
+	void AttackRangeDraw(Camera* camera);
+	void Reset();
 
 	//ゲッター
 	const Transform& GetTransform();
 	const float& GetRadius();
-	const uint8_t& GetHp();
+	const int& GetHp();
 	const bool& GetJumpFlag();
+	const float& GetShakeAdd();
+	const bool& GetAttackFlag();
 
 	//セッター
-	void SetHp(const uint8_t hp);
+	void SetHp(const int hp);
 
 private:
 
 	void Move();
 	void Attack();
+	void Rotation();
 
 };

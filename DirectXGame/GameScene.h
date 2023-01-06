@@ -35,6 +35,14 @@ private:
 	std::unique_ptr<Sprite>backSprite;
 	Transform backSpriteTrans;
 	uint32_t backSpriteTex;
+
+	std::unique_ptr<Sprite>backLeftSprite;
+	Transform backLeftSpriteTrans;
+	uint32_t backLeftSpriteTex;
+
+	std::unique_ptr<Sprite>backRightSprite;
+	Transform backRightSpriteTrans;
+	uint32_t backRightSpriteTex;
 	float colorR = 0.0f;
 	float colorG = 0.0f;
 	float colorB = 0.0f;
@@ -51,7 +59,6 @@ private:
 	uint8_t scene = 0;
 
 	std::unique_ptr<Player>player;
-	PlayerTexData playerTex;
 
 	uint32_t enemyTex;
 	//“GƒŠƒXƒg

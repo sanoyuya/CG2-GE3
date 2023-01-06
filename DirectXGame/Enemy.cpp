@@ -27,7 +27,14 @@ void Enemy::Update(Camera* camera, Player* player)
 	{
 		if (((player->GetRadius() + radius) * (player->GetRadius() + radius)) >= ((enemyTrans.translation.x - player->GetTransform().translation.x) * (enemyTrans.translation.x - player->GetTransform().translation.x)) + ((enemyTrans.translation.z - player->GetTransform().translation.z) * (enemyTrans.translation.z - player->GetTransform().translation.z)))
 		{
-			player->SetHp(player->GetHp() - 1);//プレイヤーダメージ処理
+			if (!player->GetAttackFlag())
+			{
+				player->SetHp(player->GetHp() - 1);//プレイヤーダメージ処理
+			}
+			else
+			{
+				//スコア増加処理
+			}
 			isDead = true;//死ぬ処理
 		}
 	}
