@@ -12,11 +12,12 @@
 #include "AudioManager.h"
 #include"Model.h"
 #include"SpriteCommon.h"
+#include"YFramework.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
 //ゲーム全体
-class MyGame
+class MyGame :public YFramework
 {
 private:
 
@@ -28,17 +29,21 @@ private:
 	TextureManager* textureManager = nullptr;
 	std::unique_ptr<GameScene>gameScene;
 
+	static bool endRequest;
+
 public:
 
 	//初期化処理
-	void Initialize();
+	void Initialize()override;
 
 	//終了処理
-	void Destroy();
+	void Destroy()override;
 
 	//更新処理
-	void Update();
+	void Update()override;
 
 	//描画処理
-	void Draw();
+	void Draw()override;
+
+	static const bool& GetEndRequest();
 };

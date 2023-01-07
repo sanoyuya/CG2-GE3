@@ -1,7 +1,12 @@
 #include "MyGame.h"
 
+bool MyGame::endRequest;
+
 void MyGame::Initialize()
 {
+	//基底クラスの初期化処理
+	YFramework::Initialize();
+
 	windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
 	windowsApp->CreatWindow(L"DirectXGame");//ウィンドウ作成
 
@@ -45,10 +50,21 @@ void MyGame::Destroy()
 	directX->Destroy();
 	textureManager->Destroy();
 	audioManager->Destroy();
+
+	//基底クラスの終了処理
+	YFramework::Destroy();
 }
 
 void MyGame::Update()
 {
+	//基底クラスの更新処理
+	YFramework::Update();
+
+	if (!windowsApp->MessageWindow())
+	{
+		endRequest = true;
+	}
+
 	input->Update();
 	audioManager->Update();
 
@@ -67,4 +83,9 @@ void MyGame::Draw()
 
 	//FPS制御
 	fps->Update();
+}
+
+const bool& MyGame::GetEndRequest()
+{
+	return endRequest;
 }

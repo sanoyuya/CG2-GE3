@@ -186,6 +186,7 @@
     <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="WindowsApp.cpp" />
+    <ClCompile Include="YFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
@@ -249,6 +250,7 @@
     <ClInclude Include="Vector4.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="WindowsApp.h" />
+    <ClInclude Include="YFramework.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\ModelBasic.hlsli" />

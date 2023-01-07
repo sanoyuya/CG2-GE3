@@ -195,6 +195,9 @@
     <ClCompile Include="MyGame.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="YFramework.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -315,6 +318,9 @@
     </ClInclude>
     <ClInclude Include="MyGame.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YFramework.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
