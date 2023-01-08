@@ -1,5 +1,6 @@
 #pragma once
 #include"BaseScene.h"
+#include"AbstractSceneFactory.h"
 
 //シーン管理
 class SceneManager
@@ -9,6 +10,9 @@ private:
 	//現在のシーン
 	BaseScene* scene = nullptr;
 	BaseScene* nextScene = nullptr;
+
+	//シーンファクトリー
+	AbstractSceneFactory* sceneFactory = nullptr;
 
 public:
 
@@ -23,6 +27,8 @@ public:
 
 	//次シーン予約
 	void SetNextScene(BaseScene* nextScene);
+
+	void SetSceneFactory(AbstractSceneFactory* sceneFactory);
 
 	//シングルトン
 	static SceneManager* GetInstance();

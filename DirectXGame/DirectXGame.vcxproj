@@ -176,6 +176,7 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="PhysicsMath.cpp" />
     <ClCompile Include="Pipeline.cpp" />
+    <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprite2D.cpp" />
@@ -218,6 +219,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Camera.h" />
@@ -243,6 +245,7 @@
     <ClInclude Include="Obj.h" />
     <ClInclude Include="PhysicsMath.h" />
     <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprite2D.h" />

@@ -1,5 +1,6 @@
 #include "MyGame.h"
 #include"TitleScene.h"
+#include"SceneFactory.h"
 
 bool MyGame::endRequest;
 
@@ -45,6 +46,7 @@ void MyGame::Initialize()
 	/*gameScene = std::make_unique<GameScene>();
 	gameScene->Initialize();*/
 
+	
 	//最初のシーンを生成
 	BaseScene* titleScene = new TitleScene();
 	//シーンマネージャーに最初のシーンをセット

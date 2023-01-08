@@ -39,6 +39,11 @@ void SceneManager::SetNextScene(BaseScene* nextScene)
 	this->nextScene = nextScene;
 }
 
+void SceneManager::SetSceneFactory(AbstractSceneFactory* sceneFactory)
+{
+	this->sceneFactory = sceneFactory;
+}
+
 SceneManager* SceneManager::GetInstance()
 {
 	static SceneManager instance;
