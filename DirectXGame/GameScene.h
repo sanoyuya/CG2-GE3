@@ -7,6 +7,9 @@
 #include"DrawOversight.h"
 #include"Transform.h"
 #include"Sprite.h"
+#include"Player.h"
+#include"Enemy.h"
+#include"BackDice.h"
 #include"BaseScene.h"
 
 class GameScene :public BaseScene
@@ -19,36 +22,49 @@ private:
 
 	std::unique_ptr<Camera>camera;
 
+	myMath::Vector3 cameraPos;
+	float angleX = 0.0f;
+	float angleY = 0.0f;
+	const float length = 42.5f;
+
 	//天球
 	std::unique_ptr<DrawOversight>model;
 	Transform modelTrans;
 	uint32_t modelTex;
 
-	//ステージキューブ
-	std::unique_ptr<DrawOversight>cube;
-	Transform cubeTrans;
-	uint32_t cubeTex;
+	//背景
+	std::unique_ptr<Sprite>backSprite;
+	Transform backSpriteTrans;
+	uint32_t backSpriteTex;
 
-	//球
-	std::unique_ptr<DrawOversight>sphere;
-	Transform sphereTrans;
-	uint32_t sphereTex;
+	std::unique_ptr<Sprite>backLeftSprite;
+	Transform backLeftSpriteTrans;
+	uint32_t backLeftSpriteTex;
 
-	//2Dスプライト
-	std::unique_ptr<Sprite>sprite;
-	uint32_t spriteTex;
+	std::unique_ptr<Sprite>backRightSprite;
+	Transform backRightSpriteTrans;
+	uint32_t backRightSpriteTex;
+	float colorR = 0.0f;
+	float colorG = 0.0f;
+	float colorB = 0.0f;
+	float colorTime = 0.0f;
 
-	//3Dスプライト
-	std::unique_ptr<Sprite>sprite3D;
-	Transform sprite3DTrans;
-	uint32_t sprite3DTex;
+	std::unique_ptr<Sprite>shadowSprite;
+	Transform shadowSpriteTrans;
+	uint32_t shadowSpriteTex;
 
-	myMath::Vector3 cameraPos;
-	float angleX = 0.0f;
-	float angleY = 0.0f;
-	const float length = 50.0f;
+	std::list<std::unique_ptr<BackDice>>backDices;
+	uint32_t backDiceTex;
+	float backDiceCoolTime = 0.0f;
 
 	uint8_t scene = 0;
+
+	std::unique_ptr<Player>player;
+
+	uint32_t enemyTex;
+	//敵リスト
+	std::list<std::unique_ptr<Enemy>> enemys;
+	float coolTime = 0.0f;
 
 public:
 
@@ -67,5 +83,11 @@ public:
 private:
 	void Rotation();
 	void CamMove();
+	void BackDiceDead();
+	void BackDiceUpdate();
+	void BackDiceDraw();
+	void EnemyDead();
+	void EnemyUpdate();
+	void EnemyDraw();
 	void Reset();
 };
