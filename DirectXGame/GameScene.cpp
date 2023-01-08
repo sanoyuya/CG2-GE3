@@ -1,9 +1,11 @@
 #include "GameScene.h"
 #include"PhysicsMath.h"
+#include"ResultScene.h"
 
 void GameScene::Initialize()
 {
 	input = InputManager::GetInstance();
+	sceneManager = SceneManager::GetInstance();
 	audioManager = audioManager->GetInstance();
 
 	camera = std::make_unique<Camera>();
@@ -58,12 +60,14 @@ void GameScene::Initialize()
 	shadowSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
 }
 
-void GameScene::Destroy()
-{
-}
-
 void GameScene::Update()
 {
+	if (player->GetHp()<=0)
+	{
+		BaseScene* scene = new ResultScene();
+		sceneManager->SetNextScene(scene);
+	}
+
 	if (input->KeyboardTriggerPush(DIK_R))
 	{
 		Reset();
@@ -110,6 +114,10 @@ void GameScene::Draw()
 	model->DrawModel(&modelTrans);
 	EnemyDraw();
 	player->Draw(camera.get());
+}
+
+void GameScene::Destroy()
+{
 }
 
 void GameScene::Rotation()

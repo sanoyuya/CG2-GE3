@@ -3,8 +3,7 @@
 #include"InputManager.h"
 #include"SceneManager.h"
 
-//タイトルシーン
-class TitleScene :public BaseScene
+class ResultScene :public BaseScene
 {
 private:
 
@@ -26,3 +25,4 @@ public:
 	//終了処理
 	void Destroy()override;
 };
+

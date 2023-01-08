@@ -11,6 +11,7 @@
 #include"Enemy.h"
 #include"BackDice.h"
 #include"BaseScene.h"
+#include"SceneManager.h"
 
 class GameScene :public BaseScene
 {
@@ -18,6 +19,7 @@ private:
 
 	//クラス読み込み
 	InputManager* input = nullptr;
+	SceneManager* sceneManager = nullptr;
 	AudioManager* audioManager = nullptr;
 
 	std::unique_ptr<Camera>camera;
@@ -71,14 +73,14 @@ public:
 	//初期化処理
 	void Initialize()override;
 
-	//終了処理
-	void Destroy()override;
-
 	//更新処理
 	void Update()override;
 
 	//描画処理
 	void Draw()override;
+
+	//終了処理
+	void Destroy()override;
 
 private:
 	void Rotation();

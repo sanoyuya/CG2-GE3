@@ -179,6 +179,7 @@
     <ClCompile Include="PhysicsMath.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -251,6 +252,7 @@
     <ClInclude Include="PhysicsMath.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ResultScene.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />

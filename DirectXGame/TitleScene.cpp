@@ -7,19 +7,19 @@ void TitleScene::Initialize()
 	sceneManager = SceneManager::GetInstance();
 }
 
-void TitleScene::Destroy()
-{
-}
-
 void TitleScene::Update()
 {
 	if (input->KeyboardTriggerPush(DIK_SPACE))
 	{
-		BaseScene* gemeScene = new GameScene();
-		sceneManager->SetNextScene(gemeScene);
+		BaseScene* scene = new GameScene();
+		sceneManager->SetNextScene(scene);
 	}
 }
 
 void TitleScene::Draw()
+{
+}
+
+void TitleScene::Destroy()
 {
 }
