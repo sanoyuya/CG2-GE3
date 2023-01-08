@@ -7,8 +7,9 @@
 #include"DrawOversight.h"
 #include"Transform.h"
 #include"Sprite.h"
+#include"BaseScene.h"
 
-class GameScene
+class GameScene :public BaseScene
 {
 private:
 
@@ -50,23 +51,18 @@ private:
 	uint8_t scene = 0;
 
 public:
-	GameScene();
-	~GameScene();
 
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	void Initialize();
+	//初期化処理
+	void Initialize()override;
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void Update();
+	//終了処理
+	void Destroy()override;
 
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	void Draw();
+	//更新処理
+	void Update()override;
+
+	//描画処理
+	void Draw()override;
 
 private:
 	void Rotation();

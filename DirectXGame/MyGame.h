@@ -13,6 +13,7 @@
 #include"Model.h"
 #include"SpriteCommon.h"
 #include"YFramework.h"
+#include"SceneManager.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -27,7 +28,8 @@ private:
 	InputManager* input = nullptr;
 	AudioManager* audioManager = nullptr;
 	TextureManager* textureManager = nullptr;
-	std::unique_ptr<GameScene>gameScene;
+	//std::unique_ptr<GameScene>gameScene;
+	SceneManager* sceneManager = nullptr;
 
 	static bool endRequest;
 

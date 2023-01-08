@@ -1,11 +1,7 @@
 #include "GameScene.h"
 #include"PhysicsMath.h"
 
-GameScene::GameScene()
-{
-}
-
-GameScene::~GameScene()
+void GameScene::Destroy()
 {
 }
 

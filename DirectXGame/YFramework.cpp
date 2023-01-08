@@ -3,14 +3,18 @@
 
 void YFramework::Initialize()
 {
+	sceneManager = SceneManager::GetInstance();
 }
 
 void YFramework::Destroy()
 {
+	sceneManager->Destroy();
 }
 
 void YFramework::Update()
 {
+	//シーンマネージャーの更新処理
+	sceneManager->Update();
 }
 
 void YFramework::Run()

@@ -1,8 +1,13 @@
 #pragma once
+#include"SceneManager.h"
 
 //ƒQ[ƒ€‘S‘Ì
 class YFramework
 {
+private:
+
+	SceneManager* sceneManager = nullptr;
+
 public:
 
 	virtual ~YFramework() = default;

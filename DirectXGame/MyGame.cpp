@@ -1,4 +1,5 @@
 #include "MyGame.h"
+#include"TitleScene.h"
 
 bool MyGame::endRequest;
 
@@ -6,6 +7,7 @@ void MyGame::Initialize()
 {
 	//基底クラスの初期化処理
 	YFramework::Initialize();
+	sceneManager = SceneManager::GetInstance();
 
 	windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
 	windowsApp->CreatWindow(L"DirectXGame");//ウィンドウ作成
@@ -40,8 +42,13 @@ void MyGame::Initialize()
 
 	//描画初期化処理ここまで
 
-	gameScene = std::make_unique<GameScene>();
-	gameScene->Initialize();
+	/*gameScene = std::make_unique<GameScene>();
+	gameScene->Initialize();*/
+
+	//最初のシーンを生成
+	BaseScene* titleScene = new TitleScene();
+	//シーンマネージャーに最初のシーンをセット
+	sceneManager->SetNextScene(titleScene);
 }
 
 void MyGame::Destroy()
@@ -72,12 +79,13 @@ void MyGame::Update()
 	directX->UpdateClear();
 
 	//更新処理
-	gameScene->Update();
+	//gameScene->Update();
 }
 
 void MyGame::Draw()
 {
-	gameScene->Draw();
+	sceneManager->Draw();
+	//gameScene->Draw();
 
 	directX->UpdateEnd();
 

@@ -4,11 +4,9 @@
 //Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-	YFramework* game = new MyGame();
+	std::unique_ptr<YFramework>game = std::make_unique<MyGame>();
 
 	game->Run();
-
-	delete game;
 
 	return 0;
 }

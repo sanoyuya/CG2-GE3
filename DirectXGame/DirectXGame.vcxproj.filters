@@ -198,6 +198,15 @@
     <ClCompile Include="YFramework.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
+    <ClCompile Include="BaseScene.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -321,6 +330,15 @@
     </ClInclude>
     <ClInclude Include="YFramework.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
