@@ -32,20 +32,19 @@ private:
 	//“V‹…
 	std::unique_ptr<DrawOversight>model;
 	Transform modelTrans;
-	uint32_t modelTex;
+	uint32_t modelTex = 0;
 
 	//”wŒi
 	std::unique_ptr<Sprite>backSprite;
 	Transform backSpriteTrans;
-	uint32_t backSpriteTex;
+	uint32_t backSpriteTex = 0;
 
 	std::unique_ptr<Sprite>backLeftSprite;
 	Transform backLeftSpriteTrans;
-	uint32_t backLeftSpriteTex;
 
 	std::unique_ptr<Sprite>backRightSprite;
 	Transform backRightSpriteTrans;
-	uint32_t backRightSpriteTex;
+	
 	float colorR = 0.0f;
 	float colorG = 0.0f;
 	float colorB = 0.0f;
@@ -53,7 +52,7 @@ private:
 
 	std::unique_ptr<Sprite>shadowSprite;
 	Transform shadowSpriteTrans;
-	uint32_t shadowSpriteTex;
+	uint32_t shadowSpriteTex = 0;
 
 	std::list<std::unique_ptr<BackDice>>backDices;
 	uint32_t backDiceTex;
@@ -63,7 +62,6 @@ private:
 
 	std::unique_ptr<Player>player;
 
-	uint32_t enemyTex;
 	//“GƒŠƒXƒg
 	std::list<std::unique_ptr<Enemy>> enemys;
 	float coolTime = 0.0f;

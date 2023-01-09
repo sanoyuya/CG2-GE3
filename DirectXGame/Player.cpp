@@ -17,15 +17,15 @@ void Player::Initialize()
 	minDiceTex = Model::CreateObjModel("Resources/greenDice");
 	maxDiceTex = Model::CreateObjModel("Resources/purpleDice");
 	model->SetModel(minDiceTex);
-	playerPos.translation.y = 2.0f;
 	playerPos.Initialize();
+	playerPos.translation.y = 2.0f;
 
 	//プレイヤーの攻撃範囲の円
 	attackRangeCircle = std::make_unique<Sprite>();
 	attackRangeTex = attackRangeCircle->LoadTexture("Resources/circle.png");
 	attackRangeCircle->Sprite3DInitialize(attackRangeTex);
 	attackRangeCircleTrans.Initialize();
-	attackRangeCircleTrans.rotation.x = myMath::AX_PI / 2;
+	attackRangeCircleTrans.rotation.x = myMath::AX_PIF / 2;
 	attackRangeCircleTrans.scale = { 1.0f / 20.0f,1.0f / 20.0f ,1.0f };
 
 	//プレイヤーの向いてる方向を指す矢印
@@ -41,17 +41,9 @@ void Player::Initialize()
 	for (int i = 0; i < hert.size(); i++)
 	{
 		hert[i] = std::make_unique<Sprite>();
-		hert[i]->Sprite3DInitialize(hertTex);
-		hertTrans[i].Initialize();
-		hertTrans[i].translation.z = -15.0f;
-		hertTrans[i].rotation.x = myMath::AX_PI / 2;
-		hertTrans[i].rotation.y = myMath::AX_PI;
-		hertTrans[i].scale = { 1.0f / 15,1.0f / 15 ,1.0f };
+		hert[i]->Sprite2DInitialize(hertTex);
 	}
-	hertTrans[0].translation.x = 40.0f;
-	hertTrans[1].translation.x = 35.0f;
-	hertTrans[2].translation.x = 30.0f;
-
+	
 	radius = 1.0f;
 	hp = 3;
 	attackPower = 1;
@@ -79,12 +71,25 @@ void Player::Update(Camera* camera)
 	directionTriangleTrans.rotation.y = angle;
 	directionTriangleTrans.TransUpdate(camera);
 
-	hertTrans[0].translation.x = 40.0f + shakeAdd;
-	hertTrans[1].translation.x = 35.0f + shakeAdd;
-	hertTrans[2].translation.x = 30.0f + shakeAdd;
-	for (int i = 0; i < hert.size(); i++)
+	if (damageFlag == true)
 	{
-		hertTrans[i].translation.z = -15.0f + shakeAdd;
+		damageCoolTime++;
+
+		if (damageCoolTime < 5 || damageCoolTime / 5 == 2 || damageCoolTime / 5 == 4 || damageCoolTime / 5 == 6 || damageCoolTime / 5 == 8 || damageCoolTime / 5 == 10 || damageCoolTime / 5 == 12 || damageCoolTime / 5 == 14)
+		{
+			drawFlag = false;
+		}
+		else if(damageCoolTime / 5 == 1 || damageCoolTime / 5 == 3 || damageCoolTime / 5 == 5 || damageCoolTime / 5 == 7 || damageCoolTime / 5 == 9 || damageCoolTime / 5 == 11 || damageCoolTime / 5 == 13 || damageCoolTime / 5 == 15)
+		{
+			drawFlag = true;
+		}
+
+		if (damageCoolTime > 60)
+		{
+			drawFlag = true;
+			damageFlag = false;
+			damageCoolTime = 0.0f;
+		}
 	}
 }
 
@@ -110,11 +115,14 @@ void Player::Movelimit()
 
 void Player::Draw(Camera* camera)
 {
-	model->DrawModel(&playerPos);
+	if (drawFlag == true)
+	{
+		model->DrawModel(&playerPos);
+	}
 
-	if (hp >= 1)hert[0]->DrawSprite3D(camera, hertTrans[0]);
-	if (hp >= 2)hert[1]->DrawSprite3D(camera, hertTrans[1]);
-	if (hp >= 3)hert[2]->DrawSprite3D(camera, hertTrans[2]);
+	if (hp >= 1)hert[0]->DrawSprite2D({ 50 + shakeAdd,100 + shakeAdd });
+	if (hp >= 2)hert[1]->DrawSprite2D({ 125 + shakeAdd,100 + shakeAdd });
+	if (hp >= 3)hert[2]->DrawSprite2D({ 200 + shakeAdd,100 + shakeAdd });
 }
 
 void Player::AttackRangeDraw(Camera* camera)
@@ -129,7 +137,7 @@ void Player::AttackRangeDraw(Camera* camera)
 void Player::Reset()
 {
 	playerPos.translation = { 0.0f,2.0f ,0.0f };
-	directionTriangleTrans.rotation.x = myMath::AX_PI / 2;
+	directionTriangleTrans.rotation.x = myMath::AX_PIF / 2;
 	radius = 1.0f;
 	hp = 3;
 	attackPower = 1;
@@ -166,9 +174,19 @@ const bool& Player::GetAttackFlag()
 	return attackFlag;
 }
 
+const bool& Player::GetDamageFlag()
+{
+	return damageFlag;
+}
+
 void Player::SetHp(const int hp)
 {
 	this->hp = hp;
+}
+
+void Player::SetDamageFlag(const bool damageFlag)
+{
+	this->damageFlag = damageFlag;
 }
 
 void Player::Attack()

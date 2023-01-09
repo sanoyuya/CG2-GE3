@@ -156,6 +156,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="DeathCube.cpp" />
     <ClCompile Include="DescriptorHeap.cpp" />
     <ClCompile Include="DirectX_.cpp" />
     <ClCompile Include="DrawCommon.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="DeathCube.h" />
     <ClInclude Include="DescriptorHeap.h" />
     <ClInclude Include="DirectX_.h" />
     <ClInclude Include="DrawCommon.h" />

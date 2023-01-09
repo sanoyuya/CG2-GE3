@@ -9,7 +9,7 @@ private:
 
 	std::unique_ptr<Sprite>backDice;
 	Transform backDiceTrans;
-	static uint32_t backDiceTex;
+	uint32_t backDiceTex;
 
 	float angle = 0.0f;
 	bool isDead = false;

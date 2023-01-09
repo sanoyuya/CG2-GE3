@@ -1,15 +1,9 @@
 #include "BackDice.h"
 
-uint32_t BackDice::backDiceTex;
-
-const void BackDice::LoadTexture(uint32_t& texture)
-{
-    backDiceTex = texture;
-}
-
 void BackDice::Initialize(const myMath::Vector3 position, const uint16_t num)
 {
     backDice = std::make_unique<Sprite>();
+    backDiceTex = backDice->LoadTexture("Resources/backDice.png");
     backDice->Sprite3DInitialize(backDiceTex);
     backDiceTrans.Initialize();
     backDiceTrans.translation = position;

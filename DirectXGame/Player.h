@@ -22,19 +22,21 @@ private:
 	Transform directionTriangleTrans;
 
 	std::array<std::unique_ptr<Sprite>, 3>hert;
-	std::array<Transform, 3>hertTrans;
 
-	uint32_t minDiceTex;
-	uint32_t maxDiceTex;
-	uint32_t attackRangeTex;
-	uint32_t directionTex;
-	uint32_t hertTex;
+	uint32_t minDiceTex = 0;
+	uint32_t maxDiceTex = 0;
+	uint32_t attackRangeTex = 0;
+	uint32_t directionTex = 0;
+	uint32_t hertTex = 0;
 
 	bool jumpFlag = false;
 	float gravity = 0.0f;
 	uint16_t attackPower = 0;
 	float radius = 0.0f;
 	int hp = 0;
+	bool damageFlag = false;
+	float damageCoolTime = 0.0f;
+	bool drawFlag = true;
 	float angle = 0.0f;
 	bool stickFlag = false;
 
@@ -66,9 +68,11 @@ public:
 	const bool& GetJumpFlag();
 	const float& GetShakeAdd();
 	const bool& GetAttackFlag();
+	const bool& GetDamageFlag();
 
 	//セッター
 	void SetHp(const int hp);
+	void SetDamageFlag(const bool damageFlag);
 
 private:
 

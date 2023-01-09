@@ -6,7 +6,7 @@ void GameScene::Initialize()
 {
 	input = InputManager::GetInstance();
 	sceneManager = SceneManager::GetInstance();
-	audioManager = audioManager->GetInstance();
+	audioManager = AudioManager::GetInstance();
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
@@ -14,9 +14,6 @@ void GameScene::Initialize()
 
 	player = std::make_unique<Player>();
 	player->Initialize();
-
-	enemyTex = TextureManager::GetInstance()->LoadTexture("Resources/enemy.png");
-	Enemy::LoadTexture(enemyTex);//敵のテクスチャデータ読み込み
 
 	//天球
 	model = std::make_unique<DrawOversight>();
@@ -47,9 +44,6 @@ void GameScene::Initialize()
 	backRightSpriteTrans.translation = { -35.0f,0.0f ,0.0f };
 	backRightSpriteTrans.scale = { 20.0f,50.0f,0.0f };
 	backRightSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
-
-	backDiceTex = TextureManager::GetInstance()->LoadTexture("Resources/backDice.png");
-	BackDice::LoadTexture(backDiceTex);
 
 	shadowSprite = std::make_unique<Sprite>();
 	shadowSpriteTex = shadowSprite->LoadTexture("Resources/shadow.png");
@@ -118,6 +112,8 @@ void GameScene::Draw()
 
 void GameScene::Destroy()
 {
+	backDices.clear();
+	enemys.clear();
 }
 
 void GameScene::Rotation()
@@ -203,7 +199,7 @@ void GameScene::EnemyUpdate()
 {
 	//敵の生成処理
 	coolTime++;
-	if (coolTime > 50)
+	if (coolTime > 60)
 	{
 		myMath::Vector3 position = { static_cast<float>(myMath::GetRand(-23.0f,23.0f)),0.0f,static_cast<float>(myMath::GetRand(-23.0f,23.0f)) };
 		//Enemyを生成し、初期化
@@ -226,7 +222,7 @@ void GameScene::EnemyDraw()
 {
 	for (const std::unique_ptr<Enemy>& enemy : enemys)
 	{
-		enemy->Draw(camera.get());//プレイヤーに向かってくる敵
+		enemy->Draw(camera.get(), { colorR ,colorG ,colorB ,1.0f });//プレイヤーに向かってくる敵
 	}
 }
 

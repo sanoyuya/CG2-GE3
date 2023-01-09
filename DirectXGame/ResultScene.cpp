@@ -9,7 +9,7 @@ void ResultScene::Initialize()
 
 void ResultScene::Update()
 {
-	if (input->KeyboardTriggerPush(DIK_SPACE))
+	if (input->KeyboardTriggerPush(DIK_SPACE) || input->ControllerButtonTriggerPush(A))
 	{
 		BaseScene* scene = new TitleScene();
 		sceneManager->SetNextScene(scene);

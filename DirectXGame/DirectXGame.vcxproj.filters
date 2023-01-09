@@ -222,6 +222,9 @@
     <ClCompile Include="ResultScene.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="DeathCube.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -371,6 +374,9 @@
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ResultScene.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathCube.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -42,10 +42,6 @@ void MyGame::Initialize()
 	Model::StaticInitialize();
 
 	//描画初期化処理ここまで
-
-	/*gameScene = std::make_unique<GameScene>();
-	gameScene->Initialize();*/
-
 	
 	//最初のシーンを生成
 	BaseScene* titleScene = new TitleScene();
@@ -79,15 +75,11 @@ void MyGame::Update()
 
 	directX->SetClearColor();//背景色を設定 初期値(水色)
 	directX->UpdateClear();
-
-	//更新処理
-	//gameScene->Update();
 }
 
 void MyGame::Draw()
 {
 	sceneManager->Draw();
-	//gameScene->Draw();
 
 	directX->UpdateEnd();
 
