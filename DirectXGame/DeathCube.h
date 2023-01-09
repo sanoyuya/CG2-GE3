@@ -13,7 +13,7 @@ private:
 	uint32_t cubeTex = 0;
 
 	myMath::Vector3 frontVec = { 0.0f,0.0f ,0.0f };
-	const float speed = 1.0f;
+	const float speed = 0.75f;
 	float scale = 1.0f;
 
 	bool isDead = false;

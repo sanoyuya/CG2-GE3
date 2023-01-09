@@ -4,6 +4,7 @@
 #include"Transform.h"
 #include"Camera.h"
 #include"InputManager.h"
+#include"DeathCube.h"
 
 class Player
 {
@@ -49,6 +50,13 @@ private:
 
 	bool attackFlag = false;
 
+	bool deathAnimationFlag = false;
+	float deathAnimationCoolTime = 0.0f;
+	bool deathFlag = false;
+
+	std::list<std::unique_ptr<DeathCube>> deathCubes;
+	bool generationFlag = false;
+
 public:
 
 	Player();
@@ -69,6 +77,8 @@ public:
 	const float& GetShakeAdd();
 	const bool& GetAttackFlag();
 	const bool& GetDamageFlag();
+	const bool& GetDeathFlag();
+	const bool& GetDeathAnimationFlag();
 
 	//セッター
 	void SetHp(const int hp);
@@ -79,5 +89,6 @@ private:
 	void Move();
 	void Attack();
 	void Rotation();
+	void DeathAnimation(Camera* camera);
 
 };

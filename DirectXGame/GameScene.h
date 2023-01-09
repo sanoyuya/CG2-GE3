@@ -28,6 +28,9 @@ private:
 	float angleX = 0.0f;
 	float angleY = 0.0f;
 	const float length = 42.5f;
+	float zoomLengthX = 0.0f;
+	float zoomLengthY = 0.0f;
+	float zoomLengthZ = 0.0f;
 
 	//“V‹…
 	std::unique_ptr<DrawOversight>model;

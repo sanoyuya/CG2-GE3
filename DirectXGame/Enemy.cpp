@@ -17,6 +17,8 @@ void Enemy::Initialize(const myMath::Vector3 position)
 	radius = 64.0f / 24.0f;
 
 	animationFlag = true;
+
+	alpha = 1.0f;
 }
 
 void Enemy::Update(Camera* camera, Player* player)
@@ -75,7 +77,7 @@ void Enemy::Draw(Camera* camera, myMath::Vector4 color)
 	}
 	else
 	{
-		DeathAnimation(camera);
+		DeathAnimation(camera, color);
 	}
 }
 
@@ -98,11 +100,12 @@ void Enemy::Move(Player* player)
 	enemyTrans.rotation.y = angle;//ìGÇÃêiçsï˚å¸Ç…å¸Ç´ÇçáÇÌÇπÇÈ
 }
 
-void Enemy::DeathAnimation(Camera* camera)
+void Enemy::DeathAnimation(Camera* camera, myMath::Vector4 color)
 {
 	deathTimer++;
 	if (deathTimer > 180)
 	{
+		deathCubes.clear();
 		isDead = true;//éÄÇ èàóù
 	}
 
@@ -127,8 +130,10 @@ void Enemy::DeathAnimation(Camera* camera)
 		deathCube->Update(camera, { 1.0f ,1.0f ,1.0f });
 	}
 
+	alpha -= 1.0f / 50;
+
 	for (const std::unique_ptr<DeathCube>& deathCube : deathCubes)
 	{
-		deathCube->Draw({ 1.0f ,1.0f ,1.0f ,1.0f });//îwåiÇÃÉTÉCÉRÉç
+		deathCube->Draw({ 1.0f - color.x * 3,1.0f - color.y * 3,1.0f - color.z * 3 ,alpha });//îwåiÇÃÉTÉCÉRÉç
 	}
 }

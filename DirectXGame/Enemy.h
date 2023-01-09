@@ -31,7 +31,8 @@ private:
 
 	std::list<std::unique_ptr<DeathCube>> deathCubes;
 	bool generationFlag = false;
-	float scale = 1.0f;
+
+	float alpha = 0.0f;
 
 public:
 
@@ -44,5 +45,5 @@ public:
 private:
 
 	void Move(Player* player);
-	void DeathAnimation(Camera* camera);
+	void DeathAnimation(Camera* camera, myMath::Vector4 color);
 };

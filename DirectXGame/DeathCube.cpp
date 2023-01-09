@@ -13,7 +13,7 @@ void DeathCube::Initialize(myMath::Vector3 position)
 void DeathCube::Update(Camera* camera, myMath::Vector3 rotation)
 {
 	cubeTrans.translation += frontVec * speed;
-	scale -= 1.0f / 100;
+	scale -= 1.0f / 50;
 	cubeTrans.scale = { scale ,scale ,scale };
 	cubeTrans.rotation = rotation;
 	cubeTrans.TransUpdate(camera);

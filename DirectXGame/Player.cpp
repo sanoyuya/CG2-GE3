@@ -1,4 +1,5 @@
 #include "Player.h"
+#include"PhysicsMath.h"
 
 Player::Player()
 {
@@ -52,44 +53,54 @@ void Player::Initialize()
 
 void Player::Update(Camera* camera)
 {
-	if (jumpFlag == false)
+	if (hp > 0)
 	{
-		Rotation();
-		Move();
+		if (jumpFlag == false)
+		{
+			Rotation();
+			Move();
+		}
+		Movelimit();
+		Attack();
+
+		attackRangeCircleTrans.translation.x = playerPos.translation.x;
+		attackRangeCircleTrans.translation.z = playerPos.translation.z;
+
+		directionTriangleTrans.translation.x = playerPos.translation.x + sinf(angle) * directionTriangleDistance;
+		directionTriangleTrans.translation.z = playerPos.translation.z + cosf(angle) * directionTriangleDistance;
+		directionTriangleTrans.rotation.y = angle;
+
+		if (damageFlag == true)
+		{
+			damageCoolTime++;
+
+			if (damageCoolTime < 5 || damageCoolTime / 5 == 2 || damageCoolTime / 5 == 4 || damageCoolTime / 5 == 6 || damageCoolTime / 5 == 8 || damageCoolTime / 5 == 10 || damageCoolTime / 5 == 12 || damageCoolTime / 5 == 14)
+			{
+				drawFlag = false;
+			}
+			else if (damageCoolTime / 5 == 1 || damageCoolTime / 5 == 3 || damageCoolTime / 5 == 5 || damageCoolTime / 5 == 7 || damageCoolTime / 5 == 9 || damageCoolTime / 5 == 11 || damageCoolTime / 5 == 13 || damageCoolTime / 5 == 15)
+			{
+				drawFlag = true;
+			}
+
+			if (damageCoolTime > 60)
+			{
+				drawFlag = true;
+				damageFlag = false;
+				damageCoolTime = 0.0f;
+			}
+		}
 	}
-	Movelimit();
-	Attack();
-	if (hp <= 0)hp = 0;
+	else
+	{
+		deathAnimationFlag = true;
+	}
+
 	playerPos.TransUpdate(camera);
 
-	attackRangeCircleTrans.translation.x = playerPos.translation.x;
-	attackRangeCircleTrans.translation.z = playerPos.translation.z;
-	attackRangeCircleTrans.TransUpdate(camera);
-
-	directionTriangleTrans.translation.x = playerPos.translation.x + sinf(angle) * directionTriangleDistance;
-	directionTriangleTrans.translation.z = playerPos.translation.z + cosf(angle) * directionTriangleDistance;
-	directionTriangleTrans.rotation.y = angle;
-	directionTriangleTrans.TransUpdate(camera);
-
-	if (damageFlag == true)
+	if (deathAnimationFlag == true)
 	{
-		damageCoolTime++;
-
-		if (damageCoolTime < 5 || damageCoolTime / 5 == 2 || damageCoolTime / 5 == 4 || damageCoolTime / 5 == 6 || damageCoolTime / 5 == 8 || damageCoolTime / 5 == 10 || damageCoolTime / 5 == 12 || damageCoolTime / 5 == 14)
-		{
-			drawFlag = false;
-		}
-		else if(damageCoolTime / 5 == 1 || damageCoolTime / 5 == 3 || damageCoolTime / 5 == 5 || damageCoolTime / 5 == 7 || damageCoolTime / 5 == 9 || damageCoolTime / 5 == 11 || damageCoolTime / 5 == 13 || damageCoolTime / 5 == 15)
-		{
-			drawFlag = true;
-		}
-
-		if (damageCoolTime > 60)
-		{
-			drawFlag = true;
-			damageFlag = false;
-			damageCoolTime = 0.0f;
-		}
+		DeathAnimation(camera);
 	}
 }
 
@@ -120,6 +131,11 @@ void Player::Draw(Camera* camera)
 		model->DrawModel(&playerPos);
 	}
 
+	for (const std::unique_ptr<DeathCube>& deathCube : deathCubes)
+	{
+		deathCube->Draw({ 1.0f ,1.0f ,1.0f ,1.0f });//”wŒi‚ÌƒTƒCƒRƒ
+	}
+
 	if (hp >= 1)hert[0]->DrawSprite2D({ 50 + shakeAdd,100 + shakeAdd });
 	if (hp >= 2)hert[1]->DrawSprite2D({ 125 + shakeAdd,100 + shakeAdd });
 	if (hp >= 3)hert[2]->DrawSprite2D({ 200 + shakeAdd,100 + shakeAdd });
@@ -127,7 +143,7 @@ void Player::Draw(Camera* camera)
 
 void Player::AttackRangeDraw(Camera* camera)
 {
-	if (jumpFlag == false)
+	if (jumpFlag == false&& deathAnimationFlag==false)
 	{
 		directionTriangle->DrawSprite3D(camera, directionTriangleTrans);
 		attackRangeCircle->DrawAnimationSpriteX3D(camera, attackRangeCircleTrans, 6, attackPower);
@@ -177,6 +193,16 @@ const bool& Player::GetAttackFlag()
 const bool& Player::GetDamageFlag()
 {
 	return damageFlag;
+}
+
+const bool& Player::GetDeathFlag()
+{
+	return deathFlag;
+}
+
+const bool& Player::GetDeathAnimationFlag()
+{
+	return deathAnimationFlag;
 }
 
 void Player::SetHp(const int hp)
@@ -331,4 +357,41 @@ void Player::Rotation()
 		angle = -atan2(input->GetLeftStickVec().x, input->GetLeftStickVec().y);
 	}
 	playerPos.rotation.y = angle;
+}
+
+void Player::DeathAnimation(Camera* camera)
+{
+	deathAnimationCoolTime++;
+	if (deathAnimationCoolTime > 180)
+	{
+		deathCubes.clear();
+		deathFlag = true;
+	}
+
+	if (deathAnimationCoolTime > 60)
+	{
+		//”š”­‰‰o
+		drawFlag = false;
+
+		deathCubes.remove_if([](std::unique_ptr<DeathCube>& deathCube) { return deathCube->GetIsDead(); });
+
+		if (generationFlag == false)
+		{
+			for (int i = 0; i < 500; i++)
+			{
+				//”wŒiƒTƒCƒRƒ‚ğ¶¬‚µA‰Šú‰»
+				std::unique_ptr<DeathCube> newdeathCube = std::make_unique<DeathCube>();
+				newdeathCube->Initialize(playerPos.translation);
+				//”wŒiƒTƒCƒRƒ‚ğ“o˜^‚·‚é
+				deathCubes.push_back(std::move(newdeathCube));
+			}
+			generationFlag = true;
+		}
+
+		//”wŒiƒTƒCƒRƒ‚ÌXVˆ—
+		for (const std::unique_ptr<DeathCube>& deathCube : deathCubes)
+		{
+			deathCube->Update(camera, { 1.0f ,1.0f ,1.0f });
+		}
+	}
 }

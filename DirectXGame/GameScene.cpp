@@ -10,7 +10,7 @@ void GameScene::Initialize()
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
-	cameraPos = { 0.0f,length,0.000001f };
+	cameraPos = { 0.0f,length,0.0000001f };
 
 	player = std::make_unique<Player>();
 	player->Initialize();
@@ -28,21 +28,21 @@ void GameScene::Initialize()
 	backSprite->Sprite3DInitialize(backSpriteTex);
 	backSpriteTrans.Initialize();
 	backSpriteTrans.translation = { 0.0f,0.0f ,0.0f };
-	backSpriteTrans.scale = { 90.0f,50.0f,0.0f };
+	backSpriteTrans.scale = { 90.0f,75.0f,0.0f };
 	backSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
 
 	backLeftSprite = std::make_unique<Sprite>();
 	backLeftSprite->Sprite3DInitialize(backSpriteTex);
 	backLeftSpriteTrans.Initialize();
 	backLeftSpriteTrans.translation = { 35.0f,0.0f ,0.0f };
-	backLeftSpriteTrans.scale = { 20.0f,50.0f,0.0f };
+	backLeftSpriteTrans.scale = { 20.0f,75.0f,0.0f };
 	backLeftSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
 
 	backRightSprite = std::make_unique<Sprite>();
 	backRightSprite->Sprite3DInitialize(backSpriteTex);
 	backRightSpriteTrans.Initialize();
 	backRightSpriteTrans.translation = { -35.0f,0.0f ,0.0f };
-	backRightSpriteTrans.scale = { 20.0f,50.0f,0.0f };
+	backRightSpriteTrans.scale = { 20.0f,75.0f,0.0f };
 	backRightSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
 
 	shadowSprite = std::make_unique<Sprite>();
@@ -50,13 +50,13 @@ void GameScene::Initialize()
 	shadowSprite->Sprite3DInitialize(shadowSpriteTex);
 	shadowSpriteTrans.Initialize();
 	shadowSpriteTrans.translation = { 0.0f,0.0f ,0.0f };
-	shadowSpriteTrans.scale = { 50.0f,50.0f ,0.0f };
+	shadowSpriteTrans.scale = { 50.0f,75.0f ,0.0f };
 	shadowSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
 }
 
 void GameScene::Update()
 {
-	if (player->GetHp()<=0)
+	if (player->GetDeathFlag())
 	{
 		BaseScene* scene = new ResultScene();
 		sceneManager->SetNextScene(scene);
@@ -70,9 +70,20 @@ void GameScene::Update()
 	EnemyDead();
 	BackDiceDead();
 
-	BackDiceUpdate();
-	CamMove();
-	modelTrans.TransUpdate(camera.get());//“V‹…
+	player->Update(camera.get());
+
+	if (player->GetDeathAnimationFlag())
+	{
+		CamMove();
+	}
+	else
+	{
+		BackDiceUpdate();
+		EnemyUpdate();
+	}
+
+	camera->SetEye(cameraPos);
+	camera->Update(true);
 
 	backSpriteTrans.translation = { player->GetShakeAdd(),player->GetShakeAdd() ,0.0f };
 	backSpriteTrans.Update();
@@ -82,9 +93,6 @@ void GameScene::Update()
 	backLeftSpriteTrans.Update();
 	backRightSpriteTrans.translation = { -35.0f + player->GetShakeAdd(),player->GetShakeAdd() ,0.0f };
 	backRightSpriteTrans.Update();
-
-	player->Update(camera.get());
-	EnemyUpdate();
 }
 
 void GameScene::Draw()
@@ -130,26 +138,15 @@ void GameScene::Rotation()
 
 void GameScene::CamMove()
 {
-	if (input->KeyboardKeepPush(DIK_UP))
-	{
-		cameraPos.y += 0.5f;
-	}
-	if (input->KeyboardKeepPush(DIK_DOWN))
-	{
-		cameraPos.y -= 0.5f;
-	}
-	if (input->KeyboardKeepPush(DIK_RIGHT))
-	{
-		cameraPos.x += 0.05f;
-	}
-	if (input->KeyboardKeepPush(DIK_LEFT))
-	{
-		cameraPos.x -= 0.05f;
-	}
+	zoomLengthX = player->GetTransform().translation.x;
+	zoomLengthY = 15.0f;
+	zoomLengthZ = player->GetTransform().translation.z;
 
-	camera->SetEye(cameraPos);
-	camera->SetTarget({ 0.0f,0.0f ,0.0f });
-	camera->Update(true);
+	PhysicsMath::Complement(cameraPos.x, zoomLengthX, 30.0f);
+	PhysicsMath::Complement(cameraPos.y, zoomLengthY, 30.0f);
+	PhysicsMath::Complement(cameraPos.z, zoomLengthZ, 30.0f);
+
+	camera->SetTarget({ cameraPos.x,0.0f ,cameraPos.z - 0.000001f });
 }
 
 void GameScene::BackDiceDead()
