@@ -35,8 +35,8 @@ void GameScene::Initialize()
 	sphereTrans.Initialize();
 
 	sprite = std::make_unique<Sprite>();
-	spriteTex = sprite->LoadTexture("Resources/visual.png");
-	
+	spriteTex = sprite->LoadTexture("Resources/GodQueenProject/ru/1_1.jpg");
+	sprite->Sprite2DInitialize(spriteTex);
 
 	sprite3D= std::make_unique<Sprite>();
 	sprite3DTex=sprite->LoadTexture("Resources/GodQueenProject/faleg/1_1.jpg");
@@ -66,6 +66,7 @@ void GameScene::Draw()
 		kamiTime = 0;
 	}
 	sprite3D->DrawAnimationSpriteY3D(camera.get(), sprite3DTrans,16,animationNum);
+	sprite->DrawAnimationSpriteY2D({ 150,107 }, 16, animationNum, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f / 3,1.0f / 3 }, -myMath::AX_PIF / 2);
 
 	//cube->DrawModel(&cubeTrans);
 	sphere->DrawModel(&sphereTrans,{0.25f,1.0f,0.25f,0.5f});
