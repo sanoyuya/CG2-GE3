@@ -48,7 +48,8 @@ private:
 	float angleY = 0.0f;
 	const float length = 50.0f;
 
-	uint8_t scene = 0;
+	uint16_t animationNum = 0;
+	float kamiTime = 0.0f;
 
 public:
 

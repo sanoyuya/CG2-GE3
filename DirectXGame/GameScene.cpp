@@ -12,7 +12,7 @@ void GameScene::Initialize()
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
-	cameraPos = { 0.0f,0.0f,-30.0f };
+	cameraPos = { 0.0f,0.0f,-10.0f };
 
 	//“V‹…
 	model = std::make_unique<DrawOversight>();
@@ -39,12 +39,11 @@ void GameScene::Initialize()
 	
 
 	sprite3D= std::make_unique<Sprite>();
-	sprite3DTex=sprite->LoadTexture("Resources/visual (1).png");
+	sprite3DTex=sprite->LoadTexture("Resources/GodQueenProject/faleg/1_1.jpg");
 	sprite3D->Sprite3DInitialize(sprite3DTex);
 	sprite3DTrans.Initialize();
-	sprite3DTrans.translation.z = 5.0f;
-	sprite3DTrans.scale = { 1.0f / 100.0f,1.0f / 100.0f ,1.0f / 100.0f };
-	sprite->Sprite2DInitialize(sprite3DTex);
+	sprite3DTrans.rotation.z = myMath::AX_PIF / 2;
+	sprite3DTrans.scale = { 1.0f / 100,1.0f / 100 ,1.0f / 100 };
 }
 
 void GameScene::Update()
@@ -59,7 +58,15 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	model->DrawModel(&modelTrans);
-	sprite3D->DrawSprite3D(camera.get(), sprite3DTrans);
+
+	kamiTime++;
+	if (kamiTime > 1)
+	{
+		animationNum++;
+		kamiTime = 0;
+	}
+	sprite3D->DrawAnimationSpriteY3D(camera.get(), sprite3DTrans,16,animationNum);
+
 	//cube->DrawModel(&cubeTrans);
 	sphere->DrawModel(&sphereTrans,{0.25f,1.0f,0.25f,0.5f});
 	sphere->DrawModel(&sphereTrans);
@@ -82,11 +89,11 @@ void GameScene::CamMove()
 {
 	if (input->KeyboardKeepPush(DIK_UP))
 	{
-		cameraPos.y += 0.5f;
+		cameraPos.y += 0.05f;
 	}
 	if (input->KeyboardKeepPush(DIK_DOWN))
 	{
-		cameraPos.y -= 0.5f;
+		cameraPos.y -= 0.05f;
 	}
 	if (input->KeyboardKeepPush(DIK_RIGHT))
 	{
