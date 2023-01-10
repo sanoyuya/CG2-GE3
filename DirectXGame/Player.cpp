@@ -377,7 +377,7 @@ void Player::DeathAnimation(Camera* camera)
 
 		if (generationFlag == false)
 		{
-			for (int i = 0; i < 500; i++)
+			for (int i = 0; i < 100; i++)
 			{
 				//”wŒiƒTƒCƒRƒ‚ð¶¬‚µA‰Šú‰»
 				std::unique_ptr<DeathCube> newdeathCube = std::make_unique<DeathCube>();

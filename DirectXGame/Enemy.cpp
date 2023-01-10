@@ -113,7 +113,7 @@ void Enemy::DeathAnimation(Camera* camera, myMath::Vector4 color)
 
 	if (generationFlag == false)
 	{
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 20; i++)
 		{
 			//”wŒiƒTƒCƒRƒ‚ð¶¬‚µA‰Šú‰»
 			std::unique_ptr<DeathCube> newdeathCube = std::make_unique<DeathCube>();

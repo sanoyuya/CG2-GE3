@@ -17,9 +17,9 @@ private:
 
 	char PADING[4];
 
-	size_t maxSRV = 65536;
-	size_t maxUAV = 65536;
-	size_t maxCBV = 65536;
+	size_t maxSRV = 333333;
+	size_t maxUAV = 333333;
+	size_t maxCBV = 333334;
 
 	size_t countSRV = 0;
 	size_t countUAV = 0;
