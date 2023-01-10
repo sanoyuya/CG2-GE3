@@ -12,6 +12,7 @@
 #include"BackDice.h"
 #include"BaseScene.h"
 #include"SceneManager.h"
+#include"Score.h"
 
 class GameScene :public BaseScene
 {
@@ -21,6 +22,7 @@ private:
 	InputManager* input = nullptr;
 	SceneManager* sceneManager = nullptr;
 	AudioManager* audioManager = nullptr;
+	Score* score = nullptr;
 
 	std::unique_ptr<Camera>camera;
 

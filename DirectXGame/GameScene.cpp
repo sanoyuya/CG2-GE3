@@ -7,6 +7,9 @@ void GameScene::Initialize()
 	input = InputManager::GetInstance();
 	sceneManager = SceneManager::GetInstance();
 	audioManager = AudioManager::GetInstance();
+	score = Score::GetInstance();
+	score->Initialize();
+	score->SetTimePos({1200,200});
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
@@ -80,6 +83,7 @@ void GameScene::Update()
 	{
 		BackDiceUpdate();
 		EnemyUpdate();
+		score->Update();
 	}
 
 	camera->SetEye(cameraPos);
@@ -116,6 +120,8 @@ void GameScene::Draw()
 	model->DrawModel(&modelTrans);
 	EnemyDraw();
 	player->Draw(camera.get());
+
+	score->Draw({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
 }
 
 void GameScene::Destroy()

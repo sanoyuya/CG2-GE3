@@ -2,6 +2,7 @@
 #include"BaseScene.h"
 #include"InputManager.h"
 #include"SceneManager.h"
+#include"Score.h"
 
 class ResultScene :public BaseScene
 {
@@ -10,6 +11,7 @@ private:
 	//ƒNƒ‰ƒX“Ç‚İ‚İ
 	InputManager* input = nullptr;
 	SceneManager* sceneManager = nullptr;
+	Score* score = nullptr;
 
 public:
 

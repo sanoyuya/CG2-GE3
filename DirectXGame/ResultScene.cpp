@@ -5,6 +5,8 @@ void ResultScene::Initialize()
 {
 	input = InputManager::GetInstance();
 	sceneManager = SceneManager::GetInstance();
+	score = Score::GetInstance();
+	score->SetTimePos({ 640,360 });
 }
 
 void ResultScene::Update()
@@ -18,8 +20,10 @@ void ResultScene::Update()
 
 void ResultScene::Draw()
 {
+	score->Draw({ 1.0f,1.0f ,1.0f ,1.0f }, 0.0f);
 }
 
 void ResultScene::Destroy()
 {
+	score->Reset();
 }
