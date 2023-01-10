@@ -362,13 +362,13 @@ void Player::Rotation()
 void Player::DeathAnimation(Camera* camera)
 {
 	deathAnimationCoolTime++;
-	if (deathAnimationCoolTime > 180)
+	if (deathAnimationCoolTime >= 180)
 	{
 		deathCubes.clear();
 		deathFlag = true;
 	}
 
-	if (deathAnimationCoolTime > 60)
+	if (deathAnimationCoolTime > 80)
 	{
 		//”š”­‰‰o
 		drawFlag = false;
