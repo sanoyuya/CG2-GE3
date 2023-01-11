@@ -117,6 +117,10 @@ public:
 	/// <returns>インデックス座標配列</returns>
 	const std::vector<uint32_t>GetIndices();
 
+	/// <summary>
+	/// モデルデータのセット
+	/// </summary>
+	/// <param name="modelHandle">モデルのハンドル</param>
 	void SetModel(uint32_t modelHandle);
 
 	/// <summary>
@@ -128,6 +132,11 @@ public:
 	Model();
 	~Model() = default;
 
+	/// <summary>
+	/// モデルの描画
+	/// </summary>
+	/// <param name="transform">Transformのデータ</param>
+	/// <param name="color">色(初期値:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
 	void DrawModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f });
 
 	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
