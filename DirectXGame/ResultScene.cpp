@@ -20,7 +20,7 @@ void ResultScene::Update()
 
 void ResultScene::Draw()
 {
-	score->Draw({ 1.0f,1.0f ,1.0f ,1.0f }, 0.0f);
+	score->TimeDraw({ 1.0f,1.0f ,1.0f ,1.0f }, 0.0f);
 }
 
 void ResultScene::Destroy()

@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include<cmath>
+#include"Score.h"
 
 void Enemy::Initialize(const myMath::Vector3 position)
 {
@@ -53,6 +54,7 @@ void Enemy::Update(Camera* camera, Player* player)
 					else
 					{
 						//スコア増加処理
+						Score::GetInstance()->EnemyKillAdd();
 						deathFlag = true;//死ぬ演出開始
 					}
 				}

@@ -121,7 +121,8 @@ void GameScene::Draw()
 	EnemyDraw();
 	player->Draw(camera.get());
 
-	score->Draw({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
+	score->TimeDraw({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
+	score->SetEnemyKillNumSpritePos({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
 }
 
 void GameScene::Destroy()

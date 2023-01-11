@@ -5,29 +5,37 @@ class Score
 {
 private:
 
+	uint32_t numberTex = 0;
+
 	uint16_t flameTimer = 0;
 	uint16_t nowTime = 0;
-
-	uint32_t numberTex = 0;
-	std::array<std::unique_ptr<Sprite>, 4>number;
-
+	std::array<std::unique_ptr<Sprite>, 4>timeSprite;
 	std::array<uint16_t, 4> timeDigts = { 0 };//4桁
 	int nowTimeDigts = 0;
-	myMath::Vector2 scorePos = { 0.0f,0.0f };
 	myMath::Vector2 timePos = { 0.0f,0.0f };
+
+	uint16_t enemyKillNum = 0;
+	int nowEnemyKillNumDigts = 0;
+	std::array<std::unique_ptr<Sprite>, 6>enemyKillNumSprite;//6桁
+	std::array<uint16_t, 6> enemyKillNumDigts = { 0 };//6桁
+	myMath::Vector2 enemyKillNumPos = { 0.0f,0.0f };
+
+	uint16_t score = 0;
 
 public:
 
 	void Initialize();
 	void Update();
-	void Draw(myMath::Vector4 color,float shakeAdd);
+	void TimeDraw(myMath::Vector4 color, float shakeAdd);
+	void EnemyKillNumDraw(myMath::Vector4 color, float shakeAdd);
+	void EnemyKillAdd();
 	void Reset();
 
 	//ゲッター
 
 	//セッター
-	void SetScorePos(const myMath::Vector2 scorePos);
 	void SetTimePos(const myMath::Vector2 timePos);
+	void SetEnemyKillNumSpritePos(const myMath::Vector2 scorePos);
 
 	//シングルトン
 	static Score* GetInstance();
