@@ -1,6 +1,8 @@
 #pragma once
 #include"BaseScene.h"
 #include"AbstractSceneFactory.h"
+#include"SceneChangeAnimation.h"
+#include"Score.h"
 
 //シーン管理
 class SceneManager
@@ -15,6 +17,9 @@ private:
 	AbstractSceneFactory* sceneFactory = nullptr;
 
 public:
+
+	//初期化処理
+	void Initialize();
 
 	//更新処理
 	void Update();

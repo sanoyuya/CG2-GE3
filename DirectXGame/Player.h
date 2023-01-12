@@ -12,6 +12,7 @@ private:
 
 	//ÉNÉâÉXì«Ç›çûÇ›
 	InputManager* input = nullptr;
+	bool controllerFlag = false;
 
 	std::unique_ptr<DrawOversight>model;
 	Transform playerPos;
@@ -39,7 +40,6 @@ private:
 	float damageCoolTime = 0.0f;
 	bool drawFlag = true;
 	float angle = 0.0f;
-	bool stickFlag = false;
 
 	bool shakeFlag = false;
 	const float shakePower = 0.5f;

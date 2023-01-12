@@ -11,6 +11,11 @@ void TitleScene::Update()
 {
 	if (input->KeyboardTriggerPush(DIK_SPACE) || input->ControllerButtonTriggerPush(A))
 	{
+		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
+	}
+
+	if (SceneChangeAnimation::GetInstance()->GetAnimationTimer() == 30)
+	{
 		BaseScene* scene = new GameScene();
 		sceneManager->SetNextScene(scene);
 	}

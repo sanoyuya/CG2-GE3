@@ -5,6 +5,8 @@ class Score
 {
 private:
 
+	bool initializeFlag = false;//‚æ‚­‚È‚¢
+
 	uint32_t numberTex = 0;
 
 	uint16_t flameTimer = 0;

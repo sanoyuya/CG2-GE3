@@ -2,11 +2,22 @@
 
 void Score::Initialize()
 {
-	numberTex = timeSprite[0]->LoadTexture("Resources/number.png");
-	for (int i = 0; i < 4; i++)
+	if (initializeFlag == false)
 	{
-		timeSprite[i] = std::make_unique<Sprite>();
-		timeSprite[i]->Sprite2DInitialize(numberTex);
+		numberTex = timeSprite[0]->LoadTexture("Resources/number.png");
+		for (int i = 0; i < 4; i++)
+		{
+			timeSprite[i] = std::make_unique<Sprite>();
+			timeSprite[i]->Sprite2DInitialize(numberTex);
+		}
+
+		for (int i = 0; i < 6; i++)
+		{
+			enemyKillNumSprite[i] = std::make_unique<Sprite>();
+			enemyKillNumSprite[i]->Sprite2DInitialize(numberTex);
+		}
+
+		initializeFlag = true;
 	}
 }
 
@@ -45,23 +56,23 @@ void Score::TimeDraw(myMath::Vector4 color, float shakeAdd)
 
 void Score::EnemyKillNumDraw(myMath::Vector4 color, float shakeAdd)
 {
-	if (enemyKillNum <= 9)enemyKillNum = 1;
+	if (enemyKillNum <= 9)nowEnemyKillNumDigts = 1;
 	else if (10 <= enemyKillNum && enemyKillNum < 100)nowEnemyKillNumDigts = 2;
 	else if (100 <= enemyKillNum && enemyKillNum < 1000)nowEnemyKillNumDigts = 3;
 	else if (1000 <= enemyKillNum && enemyKillNum < 10000)nowEnemyKillNumDigts = 4;
 	else if (10000 <= enemyKillNum && enemyKillNum < 100000)nowEnemyKillNumDigts = 5;
 	else nowEnemyKillNumDigts = 6;
 
-	enemyKillNumDigts[0] = nowTime % 10;
-	enemyKillNumDigts[1] = nowTime / 10 % 10;
-	enemyKillNumDigts[2] = nowTime / 100 % 10;
-	enemyKillNumDigts[3] = nowTime / 1000 % 10;
-	enemyKillNumDigts[4] = nowTime / 10000 % 10;
-	enemyKillNumDigts[5] = nowTime / 100000;
+	enemyKillNumDigts[0] = enemyKillNum % 10;
+	enemyKillNumDigts[1] = enemyKillNum / 10 % 10;
+	enemyKillNumDigts[2] = enemyKillNum / 100 % 10;
+	enemyKillNumDigts[3] = enemyKillNum / 1000 % 10;
+	enemyKillNumDigts[4] = enemyKillNum / 10000 % 10;
+	enemyKillNumDigts[5] = enemyKillNum / 100000;
 
 	for (int i = 0; i < nowEnemyKillNumDigts; i++)
 	{
-		timeSprite[i]->DrawAnimationSpriteX2D({ enemyKillNumPos.x - i * 32 + shakeAdd,enemyKillNumPos.y + shakeAdd }, 10, enemyKillNumDigts[i], color);
+		enemyKillNumSprite[i]->DrawAnimationSpriteX2D({ enemyKillNumPos.x - i * 32 + shakeAdd,enemyKillNumPos.y + shakeAdd }, 10, enemyKillNumDigts[i], color);
 	}
 }
 
@@ -74,6 +85,7 @@ void Score::Reset()
 {
 	nowTime = 0;
 	flameTimer = 0;
+	enemyKillNum = 0;
 }
 
 void Score::SetTimePos(const myMath::Vector2 timePos)

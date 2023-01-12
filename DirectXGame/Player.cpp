@@ -224,6 +224,9 @@ void Player::Attack()
 		attackFlag = false;
 	}
 
+	if (input->KeyboardTriggerPush(DIK_W)|| input->KeyboardTriggerPush(DIK_A) || input->KeyboardTriggerPush(DIK_S) || input->KeyboardTriggerPush(DIK_D) || input->KeyboardTriggerPush(DIK_SPACE))controllerFlag = false;
+	if (input->ControllerButtonTriggerPush(A)||input->GetLeftStickVec().x != 0.0f && input->GetLeftStickVec().y != 0.0f)controllerFlag = true;
+
 	if (jumpFlag == false && (input->KeyboardTriggerPush(DIK_SPACE) || input->ControllerButtonTriggerPush(A)))
 	{
 		jumpFlag = true;
@@ -326,23 +329,30 @@ void Player::Move()
 {
 	const float speed = 0.25f;
 
-	//キーボード
-	if (input->KeyboardKeepPush(DIK_W))
+	if (input->KeyboardKeepPush(DIK_W) && input->KeyboardKeepPush(DIK_A))
 	{
-		playerPos.translation.z -= speed;
+		playerPos.translation.x += speed / 2;
+		playerPos.translation.z -= speed / 2;
 	}
-	if (input->KeyboardKeepPush(DIK_S))
+	else if (input->KeyboardKeepPush(DIK_W) && input->KeyboardKeepPush(DIK_D))
 	{
-		playerPos.translation.z += speed;
+		playerPos.translation.x -= speed / 2;
+		playerPos.translation.z -= speed / 2;
 	}
-	if (input->KeyboardKeepPush(DIK_A))
+	else if (input->KeyboardKeepPush(DIK_S) && input->KeyboardKeepPush(DIK_A))
 	{
-		playerPos.translation.x += speed;
+		playerPos.translation.x += speed / 2;
+		playerPos.translation.z += speed / 2;
 	}
-	if (input->KeyboardKeepPush(DIK_D))
+	else if (input->KeyboardKeepPush(DIK_S) && input->KeyboardKeepPush(DIK_D))
 	{
-		playerPos.translation.x -= speed;
+		playerPos.translation.x -= speed / 2;
+		playerPos.translation.z += speed / 2;
 	}
+	else if (input->KeyboardKeepPush(DIK_W))playerPos.translation.z -= speed;
+	else if (input->KeyboardKeepPush(DIK_S))playerPos.translation.z += speed;
+	else if (input->KeyboardKeepPush(DIK_A))playerPos.translation.x += speed;
+	else if (input->KeyboardKeepPush(DIK_D))playerPos.translation.x -= speed;
 
 	//コントローラー
 	playerPos.translation.x -= input->GetLeftStickVec().x * speed;
@@ -351,11 +361,28 @@ void Player::Move()
 
 void Player::Rotation()
 {
-	//コントローラー
-	if (input->GetLeftStickVec().x != 0.0f || input->GetLeftStickVec().y != 0.0f)
+	//キーボード
+	if (controllerFlag == false)
 	{
-		angle = -atan2(input->GetLeftStickVec().x, input->GetLeftStickVec().y);
+		if (input->KeyboardKeepPush(DIK_W) && input->KeyboardKeepPush(DIK_A))angle = myMath::AX_PIF * 3 / 4;
+		else if (input->KeyboardKeepPush(DIK_W) && input->KeyboardKeepPush(DIK_D))angle = -myMath::AX_PIF * 3 / 4;
+		else if (input->KeyboardKeepPush(DIK_S) && input->KeyboardKeepPush(DIK_A))angle = myMath::AX_PIF / 4;
+		else if (input->KeyboardKeepPush(DIK_S) && input->KeyboardKeepPush(DIK_D))angle = -myMath::AX_PIF / 4;
+		else if (input->KeyboardKeepPush(DIK_W))angle = myMath::AX_PIF;
+		else if (input->KeyboardKeepPush(DIK_S))angle = myMath::AX_PIF * 2;
+		else if (input->KeyboardKeepPush(DIK_A))angle = myMath::AX_PIF / 2;
+		else if (input->KeyboardKeepPush(DIK_D))angle = -myMath::AX_PIF / 2;
 	}
+
+	//コントローラー
+	else
+	{
+		if (input->GetLeftStickVec().x != 0.0f || input->GetLeftStickVec().y != 0.0f)
+		{
+			angle = -atan2(input->GetLeftStickVec().x, input->GetLeftStickVec().y);
+		}
+	}
+	
 	playerPos.rotation.y = angle;
 }
 

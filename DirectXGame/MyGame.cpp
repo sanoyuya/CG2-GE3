@@ -8,7 +8,6 @@ void MyGame::Initialize()
 {
 	//基底クラスの初期化処理
 	YFramework::Initialize();
-	sceneManager = SceneManager::GetInstance();
 
 	windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
 	windowsApp->CreatWindow(L"DirectXGame");//ウィンドウ作成
@@ -43,6 +42,8 @@ void MyGame::Initialize()
 
 	//描画初期化処理ここまで
 	
+	sceneManager = SceneManager::GetInstance();
+	sceneManager->Initialize();
 	//最初のシーンを生成
 	BaseScene* titleScene = new TitleScene();
 	//シーンマネージャーに最初のシーンをセット

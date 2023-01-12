@@ -3,6 +3,7 @@
 #include"InputManager.h"
 #include"SceneManager.h"
 #include"Score.h"
+#include"SceneChangeAnimation.h"
 
 class ResultScene :public BaseScene
 {

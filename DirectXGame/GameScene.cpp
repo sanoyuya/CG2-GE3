@@ -8,8 +8,8 @@ void GameScene::Initialize()
 	sceneManager = SceneManager::GetInstance();
 	audioManager = AudioManager::GetInstance();
 	score = Score::GetInstance();
-	score->Initialize();
 	score->SetTimePos({1200,200});
+	score->SetEnemyKillNumSpritePos({ 1250,500 });
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
@@ -60,6 +60,11 @@ void GameScene::Initialize()
 void GameScene::Update()
 {
 	if (player->GetDeathFlag())
+	{
+		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
+	}
+
+	if (SceneChangeAnimation::GetInstance()->GetAnimationTimer() == 30)
 	{
 		BaseScene* scene = new ResultScene();
 		sceneManager->SetNextScene(scene);
@@ -121,8 +126,11 @@ void GameScene::Draw()
 	EnemyDraw();
 	player->Draw(camera.get());
 
-	score->TimeDraw({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
-	score->SetEnemyKillNumSpritePos({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
+	if (!player->GetDeathAnimationFlag())
+	{
+		score->TimeDraw({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
+		score->EnemyKillNumDraw({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
+	}
 }
 
 void GameScene::Destroy()

@@ -1,5 +1,11 @@
 #include "SceneManager.h"
 
+void SceneManager::Initialize()
+{
+	SceneChangeAnimation::GetInstance()->Initialize();
+	Score::GetInstance()->Initialize();
+}
+
 void SceneManager::Update()
 {
 	//ŽŸƒV[ƒ“‚Ì—\–ñ‚ª‚ ‚é‚È‚ç
@@ -21,11 +27,13 @@ void SceneManager::Update()
 	}
 
 	scene->Update();
+	SceneChangeAnimation::GetInstance()->Update();
 }
 
 void SceneManager::Draw()
 {
 	scene->Draw();
+	SceneChangeAnimation::GetInstance()->Draw();
 }
 
 void SceneManager::Destroy()

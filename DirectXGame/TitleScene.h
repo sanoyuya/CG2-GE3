@@ -2,6 +2,7 @@
 #include"BaseScene.h"
 #include"InputManager.h"
 #include"SceneManager.h"
+#include"SceneChangeAnimation.h"
 
 //タイトルシーン
 class TitleScene :public BaseScene

@@ -85,12 +85,15 @@
     <Filter Include="Engine\ソースファイル\Draw\Model">
       <UniqueIdentifier>{eecd0e1e-693f-4d74-a4b8-9fe60eafe2b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\Scene">
+      <UniqueIdentifier>{43a5fc17-67d6-4c7b-ba80-4325dee40b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{ad5ea017-83ed-48c8-8c1d-f26d4dde3394}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Keyboard.cpp">
@@ -198,9 +201,6 @@
     <ClCompile Include="YFramework.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="BaseScene.cpp">
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
@@ -219,14 +219,23 @@
     <ClCompile Include="BackDice.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ResultScene.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="DeathCube.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneChangeAnimation.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,9 +253,6 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameScene.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>Engine\ヘッダーファイル\Input</Filter>
     </ClInclude>
@@ -352,9 +358,6 @@
     <ClInclude Include="YFramework.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="AbstractSceneFactory.h">
       <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
@@ -376,14 +379,23 @@
     <ClInclude Include="BackDice.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ResultScene.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="DeathCube.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneChangeAnimation.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
