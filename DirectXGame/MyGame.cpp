@@ -10,7 +10,7 @@ void MyGame::Initialize()
 	YFramework::Initialize();
 
 	windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
-	windowsApp->CreatWindow(L"DirectXGame");//ウィンドウ作成
+	windowsApp->CreatWindow(L"JumpingDice");//ウィンドウ作成
 
 	fps = std::make_unique<FPS>();
 	fps->Initialize();
