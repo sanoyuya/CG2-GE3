@@ -18,13 +18,6 @@ void GameScene::Initialize()
 	player = std::make_unique<Player>();
 	player->Initialize();
 
-	//“V‹…
-	model = std::make_unique<DrawOversight>();
-	//model->SetModelBlendMode(BlendMode::Sub);
-	modelTex = Model::CreateObjModel("Resources/skydome2");
-	model->SetModel(modelTex);
-	modelTrans.Initialize();
-
 	//”wŒi
 	backSprite = std::make_unique<Sprite>();
 	backSpriteTex = backSprite->LoadTexture("Resources/white1x1.png");
@@ -131,7 +124,6 @@ void GameScene::Draw()
 
 	player->AttackRangeDraw(camera.get());
 
-	model->DrawModel(&modelTrans);
 	EnemyDraw();
 
 	backLeftSprite->DrawSprite3D(camera.get(), backLeftSpriteTrans, BillboardFlag::NonBillboard, { colorR,colorG,colorB,1.0f });

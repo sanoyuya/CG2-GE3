@@ -35,11 +35,6 @@ private:
 	float zoomLengthY = 0.0f;
 	float zoomLengthZ = 0.0f;
 
-	//“V‹…
-	std::unique_ptr<DrawOversight>model;
-	Transform modelTrans;
-	uint32_t modelTex = 0;
-
 	//”wŒi
 	std::unique_ptr<Sprite>backSprite;
 	Transform backSpriteTrans;
