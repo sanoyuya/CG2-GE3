@@ -91,6 +91,12 @@
     <Filter Include="User\ヘッダー ファイル\Scene">
       <UniqueIdentifier>{ad5ea017-83ed-48c8-8c1d-f26d4dde3394}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\Enemy">
+      <UniqueIdentifier>{c55558b7-f701-4860-8e75-11d3b17ccb24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Enemy">
+      <UniqueIdentifier>{6dcb436c-fdd3-4f1b-b4ab-a4358c9bacb8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -213,9 +219,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="BackDice.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
@@ -236,6 +239,15 @@
     </ClCompile>
     <ClCompile Include="ResultScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>User\ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
+      <Filter>User\ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="OmnidirectionalBulletEnemy.cpp">
+      <Filter>User\ソース ファイル\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -373,9 +385,6 @@
     <ClInclude Include="Player.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="BackDice.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
@@ -396,6 +405,15 @@
     </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>User\ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="OmnidirectionalBulletEnemy.h">
+      <Filter>User\ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
+      <Filter>User\ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

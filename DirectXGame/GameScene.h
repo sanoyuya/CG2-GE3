@@ -13,6 +13,7 @@
 #include"BaseScene.h"
 #include"SceneManager.h"
 #include"Score.h"
+#include"OmnidirectionalBulletEnemy.h"
 
 class GameScene :public BaseScene
 {
@@ -70,6 +71,9 @@ private:
 	//“GƒŠƒXƒg
 	std::list<std::unique_ptr<Enemy>> enemys;
 	float coolTime = 0.0f;
+
+	std::list<std::unique_ptr<OmnidirectionalBulletEnemy>> omnidirectionalBulletEnemys;
+	float omnidirectionalBulletEnemyCoolTime = 0.0f;
 
 public:
 

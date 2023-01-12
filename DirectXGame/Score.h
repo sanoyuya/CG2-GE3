@@ -5,8 +5,6 @@ class Score
 {
 private:
 
-	bool initializeFlag = false;//‚æ‚­‚È‚¢
-
 	uint32_t numberTex = 0;
 
 	uint16_t flameTimer = 0;
@@ -21,6 +19,12 @@ private:
 	std::array<std::unique_ptr<Sprite>, 6>enemyKillNumSprite;//6Œ…
 	std::array<uint16_t, 6> enemyKillNumDigts = { 0 };//6Œ…
 	myMath::Vector2 enemyKillNumPos = { 0.0f,0.0f };
+
+	std::unique_ptr<Sprite>kill;
+	uint16_t killTex = 0;
+
+	std::unique_ptr<Sprite>time;
+	uint16_t timeTex = 0;
 
 	uint16_t score = 0;
 

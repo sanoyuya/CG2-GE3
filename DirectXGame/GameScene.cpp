@@ -9,7 +9,7 @@ void GameScene::Initialize()
 	audioManager = AudioManager::GetInstance();
 	score = Score::GetInstance();
 	score->SetTimePos({1200,200});
-	score->SetEnemyKillNumSpritePos({ 1250,500 });
+	score->SetEnemyKillNumSpritePos({ 1200,500 });
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
@@ -55,6 +55,8 @@ void GameScene::Initialize()
 	shadowSpriteTrans.translation = { 0.0f,0.0f ,0.0f };
 	shadowSpriteTrans.scale = { 50.0f,75.0f ,0.0f };
 	shadowSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
+
+	coolTime = 30.0f;
 }
 
 void GameScene::Update()
@@ -119,11 +121,12 @@ void GameScene::Draw()
 
 	player->AttackRangeDraw(camera.get());
 
+	model->DrawModel(&modelTrans);
+	EnemyDraw();
+
 	backLeftSprite->DrawSprite3D(camera.get(), backLeftSpriteTrans, BillboardFlag::NonBillboard, { colorR,colorG,colorB,1.0f });
 	backRightSprite->DrawSprite3D(camera.get(), backRightSpriteTrans, BillboardFlag::NonBillboard, { colorR,colorG,colorB,1.0f });
 
-	model->DrawModel(&modelTrans);
-	EnemyDraw();
 	player->Draw(camera.get());
 
 	if (!player->GetDeathAnimationFlag())
@@ -205,13 +208,14 @@ void GameScene::BackDiceDraw()
 void GameScene::EnemyDead()
 {
 	enemys.remove_if([](std::unique_ptr<Enemy>& enemy_) { return enemy_->GetIsDead(); });
+	omnidirectionalBulletEnemys.remove_if([](std::unique_ptr<OmnidirectionalBulletEnemy>& omnidirectionalBulletEnemy) { return omnidirectionalBulletEnemy->GetIsDead(); });
 }
 
 void GameScene::EnemyUpdate()
 {
 	//敵の生成処理
 	coolTime++;
-	if (coolTime > 60)
+	if (coolTime > 120)
 	{
 		myMath::Vector3 position = { static_cast<float>(myMath::GetRand(-23.0f,23.0f)),0.0f,static_cast<float>(myMath::GetRand(-23.0f,23.0f)) };
 		//Enemyを生成し、初期化
@@ -228,6 +232,25 @@ void GameScene::EnemyUpdate()
 	{
 		enemy->Update(camera.get(), player.get());
 	}
+
+	omnidirectionalBulletEnemyCoolTime++;
+	if (omnidirectionalBulletEnemyCoolTime > 150)
+	{
+		myMath::Vector3 position = { static_cast<float>(myMath::GetRand(-23.0f,23.0f)),0.0f,static_cast<float>(myMath::GetRand(-23.0f,23.0f)) };
+		//Enemyを生成し、初期化
+		std::unique_ptr<OmnidirectionalBulletEnemy> newEnemy = std::make_unique<OmnidirectionalBulletEnemy>();
+		newEnemy->Initialize(position);
+		//Enemyを登録する
+		omnidirectionalBulletEnemys.push_back(std::move(newEnemy));
+
+		omnidirectionalBulletEnemyCoolTime = 0.0f;
+	}
+
+	//敵の更新処理
+	for (const std::unique_ptr<OmnidirectionalBulletEnemy>& omnidirectionalBulletEnemy : omnidirectionalBulletEnemys)
+	{
+		omnidirectionalBulletEnemy->Update(camera.get(), player.get());
+	}
 }
 
 void GameScene::EnemyDraw()
@@ -235,6 +258,11 @@ void GameScene::EnemyDraw()
 	for (const std::unique_ptr<Enemy>& enemy : enemys)
 	{
 		enemy->Draw(camera.get(), { colorR ,colorG ,colorB ,1.0f });//プレイヤーに向かってくる敵
+	}
+
+	for (const std::unique_ptr<OmnidirectionalBulletEnemy>& omnidirectionalBulletEnemy : omnidirectionalBulletEnemys)
+	{
+		omnidirectionalBulletEnemy->Draw(camera.get(), { colorR ,colorG ,colorB ,1.0f });//プレイヤーに向かってくる敵
 	}
 }
 
