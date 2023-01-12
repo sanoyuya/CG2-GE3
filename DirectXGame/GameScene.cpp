@@ -56,7 +56,16 @@ void GameScene::Initialize()
 	shadowSpriteTrans.scale = { 50.0f,75.0f ,0.0f };
 	shadowSpriteTrans.rotation = { myMath::AX_PIF / 2,0.0f,0.0f };
 
+	operation = std::make_unique<Sprite>();
+	operationTex = operation->LoadTexture("Resources/operation.png");
+	operation->Sprite2DInitialize(operationTex);
+
+
 	coolTime = 30.0f;
+
+	gameBGM = audioManager->LoadAudio("Resources/Sound/1~10.mp3");
+	audioManager->ChangeVolume(gameBGM, 0.05f);
+	audioManager->PlayWave(gameBGM);
 }
 
 void GameScene::Update()
@@ -68,6 +77,7 @@ void GameScene::Update()
 
 	if (SceneChangeAnimation::GetInstance()->GetAnimationTimer() == 30)
 	{
+		audioManager->StopWave(gameBGM);
 		BaseScene* scene = new ResultScene();
 		sceneManager->SetNextScene(scene);
 	}
@@ -133,6 +143,7 @@ void GameScene::Draw()
 	{
 		score->TimeDraw({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
 		score->EnemyKillNumDraw({ 1.0f - colorR * 3,1.0f - colorG * 3,1.0f - colorB * 3,1.0f }, player->GetShakeAdd());
+		operation->DrawSprite2D({ 120.0f,500.0f });
 	}
 }
 
@@ -234,7 +245,7 @@ void GameScene::EnemyUpdate()
 	}
 
 	omnidirectionalBulletEnemyCoolTime++;
-	if (omnidirectionalBulletEnemyCoolTime > 150)
+	if (omnidirectionalBulletEnemyCoolTime > 240)
 	{
 		myMath::Vector3 position = { static_cast<float>(myMath::GetRand(-23.0f,23.0f)),0.0f,static_cast<float>(myMath::GetRand(-23.0f,23.0f)) };
 		//Enemy‚ğ¶¬‚µA‰Šú‰»

@@ -5,6 +5,7 @@
 #include"Camera.h"
 #include"InputManager.h"
 #include"DeathCube.h"
+#include"AudioManager.h"
 
 class Player
 {
@@ -56,6 +57,9 @@ private:
 
 	std::list<std::unique_ptr<DeathCube>> deathCubes;
 	bool generationFlag = false;
+
+	AudioManager* audioManager = nullptr;
+	uint32_t landing = 0;
 
 public:
 

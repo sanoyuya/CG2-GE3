@@ -4,6 +4,7 @@
 #include"SceneManager.h"
 #include"Score.h"
 #include"SceneChangeAnimation.h"
+#include"AudioManager.h"
 
 class ResultScene :public BaseScene
 {
@@ -12,7 +13,22 @@ private:
 	//ƒNƒ‰ƒX“Ç‚İ‚İ
 	InputManager* input = nullptr;
 	SceneManager* sceneManager = nullptr;
+	AudioManager* audioManager = nullptr;
+
 	Score* score = nullptr;
+
+	std::unique_ptr<Sprite>resultBack;
+	uint16_t resultBackTex = 0;
+
+	std::unique_ptr<Sprite>thanks;
+	uint16_t thanksTex = 0;
+
+	std::unique_ptr<Sprite>press;
+	uint16_t pressTex = 0;
+
+	float timer = 0.0f;
+
+	uint32_t resultBGM = 0;
 
 public:
 
@@ -28,4 +44,3 @@ public:
 	//I—¹ˆ—
 	void Destroy()override;
 };
-

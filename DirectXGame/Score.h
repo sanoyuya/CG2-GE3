@@ -14,6 +14,9 @@ private:
 	int nowTimeDigts = 0;
 	myMath::Vector2 timePos = { 0.0f,0.0f };
 
+	std::unique_ptr<Sprite>time;
+	uint16_t timeTex = 0;
+
 	uint16_t enemyKillNum = 0;
 	int nowEnemyKillNumDigts = 0;
 	std::array<std::unique_ptr<Sprite>, 6>enemyKillNumSprite;//6åÖ
@@ -23,10 +26,14 @@ private:
 	std::unique_ptr<Sprite>kill;
 	uint16_t killTex = 0;
 
-	std::unique_ptr<Sprite>time;
-	uint16_t timeTex = 0;
+	uint16_t scorePoint = 0;
+	int nowScoreDigts = 0;
+	std::array<std::unique_ptr<Sprite>, 6>scoreSprite;
+	std::array<uint16_t, 6> scoreDigts = { 0 };//6åÖ
+	myMath::Vector2 scorePos = { 0.0f,0.0f };
 
-	uint16_t score = 0;
+	std::unique_ptr<Sprite>score;
+	uint16_t scoreTex = 0;
 
 public:
 
@@ -36,6 +43,7 @@ public:
 	void EnemyKillNumDraw(myMath::Vector4 color, float shakeAdd);
 	void EnemyKillAdd();
 	void Reset();
+	void ScoreDraw();
 
 	//ÉQÉbÉ^Å[
 

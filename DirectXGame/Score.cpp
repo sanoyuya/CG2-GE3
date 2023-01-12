@@ -8,10 +8,7 @@ void Score::Initialize()
 	{
 		timeSprite[i] = std::make_unique<Sprite>();
 		timeSprite[i]->Sprite2DInitialize(numberTex);
-	}
 
-	for (int i = 0; i < 6; i++)
-	{
 		enemyKillNumSprite[i] = std::make_unique<Sprite>();
 		enemyKillNumSprite[i]->Sprite2DInitialize(numberTex);
 	}
@@ -23,6 +20,17 @@ void Score::Initialize()
 	timeTex = time->LoadTexture("Resources/time.png");
 	time = std::make_unique<Sprite>();
 	time->Sprite2DInitialize(timeTex);
+
+	for (int i = 0; i < 6; i++)
+	{
+		scoreSprite[i] = std::make_unique<Sprite>();
+		scoreSprite[i]->Sprite2DInitialize(numberTex);
+	}
+	scorePos = { 672,448 };
+
+	scoreTex = score->LoadTexture("Resources/score.png");
+	score = std::make_unique<Sprite>();
+	score->Sprite2DInitialize(scoreTex);
 }
 
 void Score::Update()
@@ -88,6 +96,36 @@ void Score::Reset()
 	nowTime = 0;
 	flameTimer = 0;
 	enemyKillNum = 0;
+	scorePoint = 0;
+}
+
+void Score::ScoreDraw()
+{
+	scorePoint = nowTime * enemyKillNum;
+	if (scorePoint >= 999999)
+	{
+		scorePoint = 999999;
+	}
+
+	if (scorePoint <= 9)nowScoreDigts = 1;
+	else if (10 <= scorePoint && scorePoint < 100)nowScoreDigts = 2;
+	else if (100 <= scorePoint && scorePoint < 1000)nowScoreDigts = 3;
+	else if (1000 <= scorePoint && scorePoint < 10000)nowScoreDigts = 4;
+	else if (10000 <= scorePoint && scorePoint < 100000)nowScoreDigts = 5;
+	else nowScoreDigts = 6;
+
+	scoreDigts[0] = scorePoint % 10;
+	scoreDigts[1] = scorePoint / 10 % 10;
+	scoreDigts[2] = scorePoint / 100 % 10;
+	scoreDigts[3] = scorePoint / 1000 % 10;
+	scoreDigts[4] = scorePoint / 10000 % 10;
+	scoreDigts[5] = scorePoint / 100000;
+
+	for (int i = 0; i < nowScoreDigts; i++)
+	{
+		timeSprite[i]->DrawAnimationSpriteX2D({ scorePos.x - i * 32,scorePos.y }, 10, scoreDigts[i]);
+	}
+	score->DrawSprite2D({ scorePos.x - 160,scorePos.y - 128 });
 }
 
 void Score::SetTimePos(const myMath::Vector2 timePos)

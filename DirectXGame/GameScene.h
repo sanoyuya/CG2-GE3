@@ -75,6 +75,11 @@ private:
 	std::list<std::unique_ptr<OmnidirectionalBulletEnemy>> omnidirectionalBulletEnemys;
 	float omnidirectionalBulletEnemyCoolTime = 0.0f;
 
+	std::unique_ptr<Sprite>operation;
+	uint32_t operationTex = 0;
+
+	uint32_t gameBGM = 0;
+
 public:
 
 	//‰Šú‰»ˆ—

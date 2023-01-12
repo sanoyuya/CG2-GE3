@@ -49,6 +49,10 @@ void Player::Initialize()
 	hp = 3;
 	attackPower = 1;
 	angle = myMath::AX_PIF;
+
+	audioManager = AudioManager::GetInstance();
+	landing = audioManager->LoadAudio("Resources/Sound/damage.mp3");
+	audioManager->ChangeVolume(landing, 0.1f);
 }
 
 void Player::Update(Camera* camera)
@@ -249,6 +253,7 @@ void Player::Attack()
 	if (jumpFlag == true && playerPos.translation.y <= 1.0f)
 	{
 		//着地
+		audioManager->PlayWave(landing, false);
 
 		//ここでダメージ判定
 		attackFlag = true;
