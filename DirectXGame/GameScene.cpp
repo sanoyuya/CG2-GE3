@@ -22,17 +22,18 @@ void GameScene::Initialize()
 	modelTrans.Initialize();
 
 	//ステージキューブ
-	cube= std::make_unique<DrawOversight>();
+	cube = std::make_unique<DrawOversight>();
 	cubeTex = Model::CreateObjModel("Resources/cube");
 	cube->SetModel(cubeTex);
-	cubeTrans.scale = { 25.0f,1.0f ,25.0f };
 	cubeTrans.Initialize();
+	cubeTrans.translation.x = -2.0f;
 
 	//球
 	sphere= std::make_unique<DrawOversight>();
 	sphereTex= Model::CreateObjModel("Resources/sphere");
 	sphere->SetModel(sphereTex);
 	sphereTrans.Initialize();
+	sphereTrans.translation.x = 2.0f;
 
 	sprite = std::make_unique<Sprite>();
 	spriteTex = sprite->LoadTexture("Resources/GodQueenProject/ru/1_1.jpg");
@@ -44,6 +45,7 @@ void GameScene::Initialize()
 	sprite3DTrans.Initialize();
 	sprite3DTrans.rotation.z = myMath::AX_PIF / 2;
 	sprite3DTrans.scale = { 1.0f / 100,1.0f / 100 ,1.0f / 100 };
+	sprite3DTrans.translation.z = 2.0f;
 }
 
 void GameScene::Update()
@@ -68,8 +70,8 @@ void GameScene::Draw()
 	sprite3D->DrawAnimationSpriteY3D(camera.get(), sprite3DTrans,16,animationNum);
 	sprite->DrawAnimationSpriteY2D({ 150,107 }, 16, animationNum, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f / 3,1.0f / 3 }, -myMath::AX_PIF / 2);
 
-	//cube->DrawModel(&cubeTrans);
-	sphere->DrawModel(&sphereTrans,{0.25f,1.0f,0.25f,0.5f});
+	time++;
+	cube->DrawModel(&cubeTrans, { PhysicsMath::SimpleHarmonicMotion(time, 0.25f, 180.0f) + 0.25f,0.8f,0.8f,0.75f });
 	sphere->DrawModel(&sphereTrans);
 	//sprite->DrawSprite2D({ 640.0f,360.0f });
 }

@@ -51,6 +51,8 @@ private:
 	uint16_t animationNum = 0;
 	float kamiTime = 0.0f;
 
+	float time = 0.0f;
+
 public:
 
 	//‰Šú‰»ˆ—
