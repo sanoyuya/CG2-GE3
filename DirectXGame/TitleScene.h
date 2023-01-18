@@ -1,7 +1,6 @@
 #pragma once
 #include"BaseScene.h"
 #include"InputManager.h"
-#include"SceneManager.h"
 
 //タイトルシーン
 class TitleScene :public BaseScene
@@ -10,7 +9,6 @@ private:
 
 	//クラス読み込み
 	InputManager* input = nullptr;
-	SceneManager* sceneManager = nullptr;
 
 public:
 

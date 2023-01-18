@@ -76,15 +76,11 @@ void MyGame::Update()
 
 	directX->SetClearColor();//背景色を設定 初期値(水色)
 	directX->UpdateClear();
-
-	//更新処理
-	//gameScene->Update();
 }
 
 void MyGame::Draw()
 {
 	sceneManager->Draw();
-	//gameScene->Draw();
 
 	directX->UpdateEnd();
 

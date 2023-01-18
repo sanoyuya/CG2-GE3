@@ -201,9 +201,6 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="BaseScene.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneFactory.cpp">
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
