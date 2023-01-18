@@ -1,5 +1,4 @@
 #include "TitleScene.h"
-#include"GameScene.h"
 
 void TitleScene::Initialize()
 {
@@ -15,8 +14,7 @@ void TitleScene::Update()
 {
 	if (input->KeyboardTriggerPush(DIK_SPACE))
 	{
-		BaseScene* gemeScene = new GameScene();
-		sceneManager->SetNextScene(gemeScene);
+		sceneManager->ChangeScene("GAME");
 	}
 }
 

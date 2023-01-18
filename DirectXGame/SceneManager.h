@@ -26,7 +26,7 @@ public:
 	void Destroy();
 
 	//ŸƒV[ƒ“—\–ñ
-	void SetNextScene(BaseScene* nextScene);
+	void ChangeScene(const std::string& sceneName);
 
 	void SetSceneFactory(AbstractSceneFactory* sceneFactory);
 

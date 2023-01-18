@@ -1,5 +1,4 @@
 #include "MyGame.h"
-#include"TitleScene.h"
 #include"SceneFactory.h"
 
 bool MyGame::endRequest;
@@ -43,14 +42,12 @@ void MyGame::Initialize()
 
 	//描画初期化処理ここまで
 
-	/*gameScene = std::make_unique<GameScene>();
-	gameScene->Initialize();*/
+	//シーンファクトリーを生成し、マネージャにセット
+	AbstractSceneFactory* sceneFactory = new SceneFactory();
+	SceneManager::GetInstance()->SetSceneFactory(sceneFactory);
 
-	
-	//最初のシーンを生成
-	BaseScene* titleScene = new TitleScene();
 	//シーンマネージャーに最初のシーンをセット
-	sceneManager->SetNextScene(titleScene);
+	SceneManager::GetInstance()->ChangeScene("TITLE");
 }
 
 void MyGame::Destroy()

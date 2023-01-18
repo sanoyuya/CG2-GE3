@@ -1,6 +1,7 @@
 #pragma once
 #include"SceneManager.h"
 #include"AbstractSceneFactory.h"
+#include<memory>
 
 //ゲーム全体
 class YFramework
@@ -9,7 +10,7 @@ private:
 
 	SceneManager* sceneManager = nullptr;
 	//シーンファクトリー
-	//std::unique_ptr<AbstractSceneFactory>sceneFactory;
+	std::unique_ptr<AbstractSceneFactory>sceneFactory;
 
 public:
 
