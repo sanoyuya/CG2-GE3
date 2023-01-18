@@ -32,8 +32,7 @@ void MyGame::Initialize()
 
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚©‚ç
 
-	textureManager = TextureManager::GetInstance();
-	textureManager->StaticInitialize();
+	TextureManager::GetInstance()->StaticInitialize();
 
 	SpriteCommon::Initialize();
 	Sprite2D::StaticInitialize();
