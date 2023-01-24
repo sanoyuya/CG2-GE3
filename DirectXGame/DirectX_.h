@@ -102,6 +102,7 @@ public:
 	ComPtr<ID3D12GraphicsCommandList> GetCommandList();
 	ComPtr<ID3D12DescriptorHeap>GetRtvHeap();
 	DescriptorHeap* GetDescriptorHeap();
+	size_t GetBackBuffer()const;
 
 	//セッター
 	

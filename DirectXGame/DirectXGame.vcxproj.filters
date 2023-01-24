@@ -201,11 +201,11 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneFactory.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneFactory.cpp">
+      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,9 +328,6 @@
     <ClInclude Include="MyGame.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="YFramework.h">
-      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
-    </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
@@ -340,10 +337,13 @@
     <ClInclude Include="BaseScene.h">
       <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneFactory.h">
+    <ClInclude Include="SceneManager.h">
       <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
+    <ClInclude Include="SceneFactory.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YFramework.h">
       <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>

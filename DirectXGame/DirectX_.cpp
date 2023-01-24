@@ -355,6 +355,11 @@ DescriptorHeap* DirectX_::GetDescriptorHeap()
 	return descriptorHeap.get();
 }
 
+size_t DirectX_::GetBackBuffer() const
+{
+	return backBuffers.size();
+}
+
 void DirectX_::SetClearColor(myMath::Vector4 color)
 {
 	clearColor[0] = color.x;
