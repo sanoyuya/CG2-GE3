@@ -1,5 +1,5 @@
 #include "ConstantBuffer.h"
-#include"DirectX_.h"
+#include"DirectXBase.h"
 
 void ConstantBuffer::Create(size_t size)
 {
@@ -19,7 +19,7 @@ void ConstantBuffer::Create(size_t size)
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	// ƒŠƒ\[ƒX‚ð¶¬
-	HRESULT result = DirectX_::GetInstance()->GetDevice()->CreateCommittedResource(
+	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&resDesc,
@@ -33,7 +33,7 @@ void ConstantBuffer::Create(size_t size)
 	constantBufferView.BufferLocation = buffer->GetGPUVirtualAddress();
 	constantBufferView.SizeInBytes = resDesc.Width;
 
-	DirectX_::GetInstance()->GetDescriptorHeap()->CreateCBV(constantBufferView);
+	DirectXBase::GetInstance()->GetDescriptorHeap()->CreateCBV(constantBufferView);
 
 	isValid = true;
 }

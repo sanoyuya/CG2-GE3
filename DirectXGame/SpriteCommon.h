@@ -1,7 +1,7 @@
 #pragma once
 #include"DrawCommon.h"
 #include"Pipeline.h"
-#include"DirectX_.h"
+#include"DirectXBase.h"
 #include <wrl.h>
 #include <d3d12.h>
 #include "TextureManager.h"

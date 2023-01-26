@@ -1,5 +1,5 @@
 #include "VertexBuffer.h"
-#include "DirectX_.h"
+#include "DirectXBase.h"
 
 void VertexBuffer::Create(size_t length, size_t singleSize, const void* data)
 {
@@ -23,7 +23,7 @@ void VertexBuffer::Create(size_t length, size_t singleSize, const void* data)
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	// ƒŠƒ\[ƒX‚ð¶¬
-	HRESULT result = DirectX_::GetInstance()->GetDevice()->CreateCommittedResource(
+	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&resDesc,

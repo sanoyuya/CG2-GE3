@@ -1,5 +1,5 @@
 #pragma once
-#include"DirectX_.h"
+#include"DirectXBase.h"
 #include <memory>
 #include<DirectXTex.h>
 
@@ -34,7 +34,7 @@ class TextureManager
 {
 private:
 
-	DirectX_* directX_;
+	DirectXBase* directX_;
 
 	static TextureManager* textureManager;
 

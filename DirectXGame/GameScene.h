@@ -37,11 +37,13 @@ private:
 	//2Dスプライト
 	std::unique_ptr<Sprite>sprite;
 	uint32_t spriteTex;
+	myMath::Vector2 sprite2DPos = { 100.0f ,100.0f };
 
 	//3Dスプライト
 	std::unique_ptr<Sprite>sprite3D;
 	Transform sprite3DTrans;
 	uint32_t sprite3DTex;
+	myMath::Vector3 sprite3DPos;
 
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;

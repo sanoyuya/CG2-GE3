@@ -10,7 +10,7 @@
 #include<memory>
 #include"DescriptorHeap.h"
 
-class DirectX_
+class DirectXBase
 {
 public:
 	//エイリアステンプレート
@@ -113,14 +113,14 @@ public:
 	void SetClearColor(myMath::Vector4 color = { 0.1f,0.25f,0.5f,0.0f });
 
 	//シングルトン
-	static DirectX_* GetInstance();
+	static DirectXBase* GetInstance();
 
 private:
 
-	DirectX_() = default;
-	~DirectX_() = default;
+	DirectXBase() = default;
+	~DirectXBase() = default;
 
 	//コピーコンストラクタ・代入演算子削除
-	DirectX_& operator=(const DirectX_&) = delete;
-	DirectX_(const DirectX_&) = delete;
+	DirectXBase& operator=(const DirectXBase&) = delete;
+	DirectXBase(const DirectXBase&) = delete;
 };

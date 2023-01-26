@@ -1,5 +1,5 @@
 #include "Model.h"
-#include"DirectX_.h"
+#include"DirectXBase.h"
 #include"Obj.h"
 
 Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
@@ -12,8 +12,8 @@ std::array<PipelineSet, 6> Model::pip;
 
 void Model::StaticInitialize()
 {
-	device = DirectX_::GetInstance()->GetDevice();
-	cmdList = DirectX_::GetInstance()->GetCommandList();
+	device = DirectXBase::GetInstance()->GetDevice();
+	cmdList = DirectXBase::GetInstance()->GetCommandList();
 
 	LoadShader();
 

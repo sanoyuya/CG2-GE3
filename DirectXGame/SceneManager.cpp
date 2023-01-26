@@ -3,24 +3,6 @@
 
 void SceneManager::Update()
 {
-	//次シーンの予約があるなら
-	if (nextScene)
-	{
-		//旧シーン終了
-		if (scene)
-		{
-			scene->Destroy();
-			delete scene;
-		}
-
-		//シーン切り替え
-		scene = nextScene;
-		nextScene = nullptr;
-
-		//次シーンを初期化する
-		scene->Initialize();
-	}
-
 	scene->Update();
 }
 
@@ -42,6 +24,24 @@ void SceneManager::ChangeScene(const std::string& sceneName)
 
 	//次シーンを生成
 	nextScene = sceneFactory->CreateScene(sceneName);
+
+	//次シーンの予約があるなら
+	if (nextScene)
+	{
+		//旧シーン終了
+		if (scene)
+		{
+			scene->Destroy();
+			delete scene;
+		}
+
+		//シーン切り替え
+		scene = nextScene;
+		nextScene = nullptr;
+
+		//次シーンを初期化する
+		scene->Initialize();
+	}
 }
 
 void SceneManager::SetSceneFactory(AbstractSceneFactory* sceneFactory)

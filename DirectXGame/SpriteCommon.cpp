@@ -7,8 +7,8 @@ std::array<PipelineSet, 6> SpriteCommon::pip;
 
 void SpriteCommon::Initialize()
 {
-	device = DirectX_::GetInstance()->GetDevice();
-	cmdList = DirectX_::GetInstance()->GetCommandList();
+	device = DirectXBase::GetInstance()->GetDevice();
+	cmdList = DirectXBase::GetInstance()->GetCommandList();
 
 	LoadShader();
 

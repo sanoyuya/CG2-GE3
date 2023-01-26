@@ -1,6 +1,6 @@
 #pragma once
 #include"myMath.h"
-#include"DirectX_.h"
+#include"DirectXBase.h"
 #include"WindowsApp.h"
 #include"TextureManager.h"
 #include"DrawCommon.h"

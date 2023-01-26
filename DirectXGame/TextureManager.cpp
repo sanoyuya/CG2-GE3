@@ -94,7 +94,7 @@ uint32_t TextureManager::LoadTexture(const std::string& path)
 
 void TextureManager::StaticInitialize()
 {
-	directX_ = DirectX_::GetInstance();
+	directX_ = DirectXBase::GetInstance();
 
 	// ÉqÅ[Évê›íË
 	textureHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;

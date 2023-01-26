@@ -1,4 +1,4 @@
-#include "DirectX_.h"
+#include "DirectXBase.h"
 #include"myMath.h"
 
 #include<d3d12.h>
@@ -8,9 +8,9 @@
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 
-DirectX_* directX = nullptr;
+DirectXBase* directX = nullptr;
 
-void DirectX_::Initialize()
+void DirectXBase::Initialize()
 {
 	//クラス読み込み
 	windowsApp = WindowsApp::GetInstance();
@@ -42,7 +42,7 @@ void DirectX_::Initialize()
 }
 
 //DirectX毎フレーム処理
-void DirectX_::UpdateClear()
+void DirectXBase::UpdateClear()
 {	
 	//バックバッファの番号を取得(2つなので0か1番)
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
@@ -86,7 +86,7 @@ void DirectX_::UpdateClear()
 	commandList->RSSetScissorRects(1, &scissorRect);
 }
 
-void DirectX_::UpdateEnd()
+void DirectXBase::UpdateEnd()
 {
 	//5.リソースバリアを戻す
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態から
@@ -121,12 +121,12 @@ void DirectX_::UpdateEnd()
 	assert(SUCCEEDED(result));
 }
 
-void DirectX_::Destroy()
+void DirectXBase::Destroy()
 {
 	delete directX;
 }
 
-void DirectX_::DebugLayer()
+void DirectXBase::DebugLayer()
 {
 #ifdef _DEBUG
 	//デバッグレイヤーをオンに
@@ -138,7 +138,7 @@ void DirectX_::DebugLayer()
 #endif
 }
 
-void DirectX_::DeviceInitialize()
+void DirectXBase::DeviceInitialize()
 {
 	//DXGIファクトリーの作成
 	result = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
@@ -190,7 +190,7 @@ void DirectX_::DeviceInitialize()
 	}
 }
 
-void DirectX_::DebugInfo()
+void DirectXBase::DebugInfo()
 {
 #ifdef _DEBUG
 	ComPtr<ID3D12InfoQueue> infoQueue;
@@ -222,7 +222,7 @@ void DirectX_::DebugInfo()
 #endif
 }
 
-void DirectX_::CommandInitialize()
+void DirectXBase::CommandInitialize()
 {
 	//コマンドアロケータを生成
 	result = device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&commandAllocator));
@@ -239,7 +239,7 @@ void DirectX_::CommandInitialize()
 	assert(SUCCEEDED(result));
 }
 
-void DirectX_::SwapChainInitialize()
+void DirectXBase::SwapChainInitialize()
 {
 	//IDXGISwapChain1のComPtrを用意
 	ComPtr<IDXGISwapChain1>swapChain1;
@@ -261,7 +261,7 @@ void DirectX_::SwapChainInitialize()
 	assert(SUCCEEDED(result));
 }
 
-void DirectX_::RenderTargetInitialize()
+void DirectXBase::RenderTargetInitialize()
 {
 	//デスクリプタヒープの設定
 	rtvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;//レンダーターゲットビュー
@@ -291,7 +291,7 @@ void DirectX_::RenderTargetInitialize()
 	}
 }
 
-void DirectX_::DepthInitialize()
+void DirectXBase::DepthInitialize()
 {
 	D3D12_RESOURCE_DESC depthResourceDesc{};
 	depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
@@ -335,32 +335,32 @@ void DirectX_::DepthInitialize()
 		dsvHeap->GetCPUDescriptorHandleForHeapStart());
 }
 
-Microsoft::WRL::ComPtr<ID3D12Device> DirectX_::GetDevice()
+Microsoft::WRL::ComPtr<ID3D12Device> DirectXBase::GetDevice()
 {
 	return device;
 }
 
-Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> DirectX_::GetCommandList()
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> DirectXBase::GetCommandList()
 {
 	return commandList;
 }
 
-Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> DirectX_::GetRtvHeap()
+Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> DirectXBase::GetRtvHeap()
 {
 	return rtvHeap;
 }
 
-DescriptorHeap* DirectX_::GetDescriptorHeap()
+DescriptorHeap* DirectXBase::GetDescriptorHeap()
 {
 	return descriptorHeap.get();
 }
 
-size_t DirectX_::GetBackBuffer() const
+size_t DirectXBase::GetBackBuffer() const
 {
 	return backBuffers.size();
 }
 
-void DirectX_::SetClearColor(myMath::Vector4 color)
+void DirectXBase::SetClearColor(myMath::Vector4 color)
 {
 	clearColor[0] = color.x;
 	clearColor[1] = color.y;
@@ -368,8 +368,8 @@ void DirectX_::SetClearColor(myMath::Vector4 color)
 	clearColor[3] = color.w;
 }
 
-DirectX_* DirectX_::GetInstance()
+DirectXBase* DirectXBase::GetInstance()
 {
-	static DirectX_ instance;
+	static DirectXBase instance;
 	return &instance;
 }

@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include"PhysicsMath.h"
+#include<imgui.h>
 
 void GameScene::Destroy()
 {
@@ -55,6 +56,10 @@ void GameScene::Update()
 	modelTrans.TransUpdate(camera.get());//天球
 	cubeTrans.TransUpdate(camera.get());//ステージキューブ
 	sphereTrans.TransUpdate(camera.get());//球
+
+	ImGui::SliderFloat2("sprite2D", &sprite2DPos.x, 100.0f, 300, "%f", 1.0f);
+	ImGui::SetWindowSize({ 400,300 });
+	ImGui::SliderFloat3("sprite3D", &sprite3DTrans.translation.x, -5.0f, 5.0f);
 }
 
 void GameScene::Draw()
@@ -68,7 +73,7 @@ void GameScene::Draw()
 		kamiTime = 0;
 	}
 	sprite3D->DrawAnimationSpriteY3D(camera.get(), sprite3DTrans,16,animationNum);
-	sprite->DrawAnimationSpriteY2D({ 150,107 }, 16, animationNum, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f / 3,1.0f / 3 }, -myMath::AX_PIF / 2);
+	sprite->DrawAnimationSpriteY2D(sprite2DPos, 16, animationNum, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f / 3,1.0f / 3 }, -myMath::AX_PIF / 2);
 
 	time++;
 	cube->DrawModel(&cubeTrans, { PhysicsMath::SimpleHarmonicMotion(time, 0.25f, 180.0f) + 0.25f,0.8f,0.8f,0.75f });

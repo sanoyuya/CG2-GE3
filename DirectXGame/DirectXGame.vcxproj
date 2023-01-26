@@ -155,7 +155,7 @@
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DescriptorHeap.cpp" />
-    <ClCompile Include="DirectX_.cpp" />
+    <ClCompile Include="DirectXBase.cpp" />
     <ClCompile Include="DrawCommon.cpp" />
     <ClCompile Include="DrawOversight.cpp" />
     <ClCompile Include="FbxLoder.cpp" />
@@ -163,6 +163,7 @@
     <ClCompile Include="File.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="ImGuiManager.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -225,7 +226,7 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DescriptorHeap.h" />
-    <ClInclude Include="DirectX_.h" />
+    <ClInclude Include="DirectXBase.h" />
     <ClInclude Include="DrawCommon.h" />
     <ClInclude Include="DrawOversight.h" />
     <ClInclude Include="FbxLoder.h" />
@@ -233,6 +234,7 @@
     <ClInclude Include="File.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="ImGuiManager.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />

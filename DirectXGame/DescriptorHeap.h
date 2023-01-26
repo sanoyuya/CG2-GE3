@@ -17,6 +17,11 @@ private:
 
 	char PADING[4];
 
+	D3D12_CPU_DESCRIPTOR_HANDLE	startCpuHandle;
+	D3D12_GPU_DESCRIPTOR_HANDLE	startGpuHandle;
+
+	UINT incrementSize;
+
 	size_t maxSRV = 2048;
 	size_t maxUAV = 2048;
 	size_t maxCBV = 2048;
@@ -24,6 +29,14 @@ private:
 	size_t countSRV = 0;
 	size_t countUAV = 0;
 	size_t countCBV = 0;
+
+public:
+
+	struct DescriptorHeapViewHandle
+	{
+		D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle;
+		D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle;
+	};
 
 public:
 
@@ -55,8 +68,10 @@ public:
 	/// <returns>GPUハンドル(UINT64)</returns>
 	UINT64 CreateCBV(D3D12_CONSTANT_BUFFER_VIEW_DESC& desc);
 
+	DescriptorHeapViewHandle AddSRV();
+
 	/// <summary>
 	/// デスクプリタヒープを取得
 	/// </summary>
-	ID3D12DescriptorHeap* GetHeap();
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetHeap();
 };
