@@ -57,9 +57,14 @@ void GameScene::Update()
 	cubeTrans.TransUpdate(camera.get());//ステージキューブ
 	sphereTrans.TransUpdate(camera.get());//球
 
-	ImGui::SliderFloat2("sprite2D", &sprite2DPos.x, 100.0f, 300, "%f", 1.0f);
-	ImGui::SetWindowSize({ 400,300 });
+	ImGui::Begin("Exercise");
+	ImGui::SetWindowSize({ 500,100 });
+	ImGui::SliderFloat2("position", &sprite2DPos.x, 0.0f, 500.0f, "%.1f");
+	ImGui::End();
+
+	/*ImGui::Begin("Debug2");
 	ImGui::SliderFloat3("sprite3D", &sprite3DTrans.translation.x, -5.0f, 5.0f);
+	ImGui::End();*/
 }
 
 void GameScene::Draw()
