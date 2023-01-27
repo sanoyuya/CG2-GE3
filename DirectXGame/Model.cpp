@@ -7,8 +7,8 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Model::cmdList;
 std::vector<std::string>Model::filePaths;
 std::unordered_map<std::string, std::unique_ptr<ModelData>> Model::modelDatas;
 uint32_t Model::modelCount;
-Blob Model::blob;//シェーダオブジェクト
-std::array<PipelineSet, 6> Model::pip;
+std::array <Blob, 3> Model::blob;//シェーダオブジェクト
+std::array <std::array<PipelineSet, 6>, 3> Model::pip;
 
 void Model::StaticInitialize()
 {
@@ -19,7 +19,7 @@ void Model::StaticInitialize()
 
 	for (int i = 0; i < pip.size(); i++)
 	{
-		Pipeline::CreateModelPipline(blob, (BlendMode)i, device.Get(), pip);
+		Pipeline::CreateBasicModelPipline(blob[0], (BlendMode)i, device.Get(), pip[0]);
 	}
 
 	filePaths.resize(maxModel);
@@ -28,54 +28,120 @@ void Model::StaticInitialize()
 void Model::LoadShader()
 {
 	//頂点シェーダの読み込みとコンパイル
-	blob.vs = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicVS.hlsl", "main", "vs_5_0", blob.vs.Get());
+	blob[0].vs = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicVS.hlsl", "main", "vs_5_0", blob[0].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	blob.ps = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicPS.hlsl", "main", "ps_5_0", blob.ps.Get());
+	blob[0].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicPS.hlsl", "main", "ps_5_0", blob[0].ps.Get());
 }
 
-void Model::BlendSet(BlendMode mode)
+void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 {
-	switch (mode)
+	switch (bMode)
 	{
 	case BlendMode::None:
 
-		cmdList->SetPipelineState(pip[0].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[0].rootSignature.Get());
+		switch (sMode)
+		{
+		case ShaderMode::Basic:
+
+			cmdList->SetPipelineState(pip[0][0].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[0][0].rootSignature.Get());
+
+			break;
+		case ShaderMode::Phong:
+			break;
+		case ShaderMode::Lambert:
+			break;
+		}
 
 		break;
 
 	case BlendMode::Alpha:
 
-		cmdList->SetPipelineState(pip[1].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[1].rootSignature.Get());
+		switch (sMode)
+		{
+		case ShaderMode::Basic:
+
+			cmdList->SetPipelineState(pip[0][1].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[0][1].rootSignature.Get());
+
+			break;
+		case ShaderMode::Phong:
+			break;
+		case ShaderMode::Lambert:
+			break;
+		}
 
 		break;
 
 	case BlendMode::Add:
 
-		cmdList->SetPipelineState(pip[2].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[2].rootSignature.Get());
+		switch (sMode)
+		{
+		case ShaderMode::Basic:
+
+			cmdList->SetPipelineState(pip[0][2].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[0][2].rootSignature.Get());
+
+			break;
+		case ShaderMode::Phong:
+			break;
+		case ShaderMode::Lambert:
+			break;
+		}
 
 		break;
 
 	case BlendMode::Sub:
 
-		cmdList->SetPipelineState(pip[3].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[3].rootSignature.Get());
+		switch (sMode)
+		{
+		case ShaderMode::Basic:
+
+			cmdList->SetPipelineState(pip[0][3].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[0][3].rootSignature.Get());
+
+			break;
+		case ShaderMode::Phong:
+			break;
+		case ShaderMode::Lambert:
+			break;
+		}
 
 		break;
 
 	case BlendMode::Mul:
 
-		cmdList->SetPipelineState(pip[4].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[4].rootSignature.Get());
+		switch (sMode)
+		{
+		case ShaderMode::Basic:
+
+			cmdList->SetPipelineState(pip[0][4].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[0][4].rootSignature.Get());
+
+			break;
+		case ShaderMode::Phong:
+			break;
+		case ShaderMode::Lambert:
+			break;
+		}
 
 		break;
 
 	case BlendMode::Inv:
 
-		cmdList->SetPipelineState(pip[5].pipelineState.Get());
-		cmdList->SetGraphicsRootSignature(pip[5].rootSignature.Get());
+		switch (sMode)
+		{
+		case ShaderMode::Basic:
+
+			cmdList->SetPipelineState(pip[0][5].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[0][5].rootSignature.Get());
+
+			break;
+		case ShaderMode::Phong:
+			break;
+		case ShaderMode::Lambert:
+			break;
+		}
 
 		break;
 	}
@@ -130,7 +196,7 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	tmp = color;
 	col->Update(&tmp);
 
-	BlendSet(static_cast<BlendMode>(blendMode));
+	PiplineSet(static_cast<BlendMode>(blendMode),static_cast<ShaderMode>(shaderMode));
 
 	// プリミティブ形状の設定コマンド
 	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
@@ -178,7 +244,12 @@ void Model::SetModel(uint32_t modelHandle)
 
 void Model::SetModelBlendMode(BlendMode mode)
 {
-	blendMode = int(mode);
+	blendMode = static_cast<int>(mode);
+}
+
+void Model::SetShaderMode(ShaderMode mode)
+{
+	shaderMode = static_cast<int>(mode);
 }
 
 Model::Model()

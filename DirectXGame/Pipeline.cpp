@@ -166,7 +166,7 @@ void Pipeline::CreateSpritePipline(Blob& blob, BlendMode blend, ID3D12Device* de
 	assert(SUCCEEDED(result));
 }
 
-void Pipeline::CreateModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip)
+void Pipeline::CreateBasicModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip)
 {
 	HRESULT result;
 

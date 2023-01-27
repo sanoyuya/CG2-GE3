@@ -14,6 +14,13 @@ enum class BlendMode
 	Inv//色反転
 };
 
+enum class ShaderMode
+{
+	Basic,//標準
+	Phong,//フォンシェーディング
+	Lambert,//ランバートシェーディング
+};
+
 struct PipelineSet
 {
 	//ルートシグネチャ
@@ -34,8 +41,12 @@ struct Blob
 
 class Pipeline
 {
-public:
+public://スプライト
 
 	static void CreateSpritePipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
-	static void CreateModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
+
+public://モデル
+
+	static void CreateBasicModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
+	
 };

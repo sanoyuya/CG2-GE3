@@ -67,7 +67,6 @@ private:
 	ModelData(const ModelData&) = delete;
 };
 
-
 class Model
 {
 protected:
@@ -87,11 +86,13 @@ protected:
 
 private:
 
-	static Blob blob;//シェーダオブジェクト
+	static std::array<Blob,3> blob;//シェーダオブジェクト
 
-	static std::array<PipelineSet, 6> pip;
+	static std::array<std::array<PipelineSet, 6>,3> pip;
 
 	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
+
+	int shaderMode = (int)ShaderMode::Basic;//標準
 
 	std::unique_ptr<ConstantBuffer> col;
 
@@ -126,8 +127,14 @@ public:
 	/// <summary>
 	/// ブレンドモードのセット
 	/// </summary>
-	/// <param name="mode">モード</param>
+	/// <param name="mode">ブレンドモード</param>
 	void SetModelBlendMode(BlendMode mode);
+
+	/// <summary>
+	/// シェーダーモードのセット
+	/// </summary>
+	/// <param name="mode">シェーダーモード</param>
+	void SetShaderMode(ShaderMode mode);
 
 	Model();
 	~Model() = default;
@@ -152,7 +159,7 @@ public:
 private:
 
 	static void LoadShader();
-	void BlendSet(BlendMode mode);
+	void PiplineSet(BlendMode bMode, ShaderMode sMode);
 
 	//コピーコンストラクタ・代入演算子削除
 	/*Model& operator=(const Model&) = delete;
