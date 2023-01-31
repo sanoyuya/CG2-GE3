@@ -87,7 +87,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Engine\Other\main.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="User\GameScene.cpp">
