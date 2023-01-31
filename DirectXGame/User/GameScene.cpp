@@ -9,7 +9,7 @@ void GameScene::Destroy()
 void GameScene::Initialize()
 {
 	input = InputManager::GetInstance();
-	audioManager = audioManager->GetInstance();
+	audioManager = AudioManager::GetInstance();
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);

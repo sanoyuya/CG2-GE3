@@ -2,11 +2,8 @@
 
 #include"InputManager.h"
 #include"AudioManager.h"
-#include<memory>
 #include"Camera.h"
 #include"DrawOversight.h"
-#include"Transform.h"
-#include"Sprite.h"
 #include"BaseScene.h"
 
 class GameScene :public BaseScene

@@ -14,10 +14,10 @@ void MyGame::Initialize()
 
 void MyGame::Destroy()
 {
+	SceneManager::GetInstance()->Destroy();
+
 	//Šî’êƒNƒ‰ƒX‚ÌI—¹ˆ—
 	YFramework::Destroy();
-
-	SceneManager::GetInstance()->Destroy();
 }
 
 void MyGame::Update()
