@@ -123,6 +123,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\Model;$(ProjectDir)Engine\Draw\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,6 +141,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\Model;$(ProjectDir)Engine\Draw\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,47 +152,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="ConstantBuffer.cpp" />
-    <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="DescriptorHeap.cpp" />
-    <ClCompile Include="DirectXBase.cpp" />
-    <ClCompile Include="DrawCommon.cpp" />
-    <ClCompile Include="DrawOversight.cpp" />
-    <ClCompile Include="FbxLoder.cpp" />
-    <ClCompile Include="FbxModel.cpp" />
-    <ClCompile Include="File.cpp" />
-    <ClCompile Include="FPS.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="ImGuiManager.cpp" />
-    <ClCompile Include="IndexBuffer.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Engine\Camera\Camera.cpp" />
+    <ClCompile Include="Engine\DirectXCore\Buffer\ConstantBuffer.cpp" />
+    <ClCompile Include="Engine\Input\Controller.cpp" />
+    <ClCompile Include="Engine\DirectXCore\DescriptorHeap.cpp" />
+    <ClCompile Include="Engine\DirectXCore\DirectXBase.cpp" />
+    <ClCompile Include="Engine\Draw\DrawCommon.cpp" />
+    <ClCompile Include="Engine\Draw\DrawOversight.cpp" />
+    <ClCompile Include="Engine\Audio\AudioManager.cpp" />
+    <ClCompile Include="Engine\Draw\Model\FbxLoder.cpp" />
+    <ClCompile Include="Engine\Draw\Model\FbxModel.cpp" />
+    <ClCompile Include="Engine\Draw\File.cpp" />
+    <ClCompile Include="Engine\DirectXCore\FPS.cpp" />
+    <ClCompile Include="Engine\Input\InputManager.cpp" />
+    <ClCompile Include="User\GameScene.cpp" />
+    <ClCompile Include="Engine\ImGui\ImGuiManager.cpp" />
+    <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp" />
+    <ClCompile Include="Engine\Input\Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Matrix4.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="MyGame.cpp" />
-    <ClCompile Include="myMath.cpp" />
-    <ClCompile Include="Obj.cpp" />
-    <ClCompile Include="PhysicsMath.cpp" />
-    <ClCompile Include="Pipeline.cpp" />
-    <ClCompile Include="SceneFactory.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Sprite2D.cpp" />
-    <ClCompile Include="Sprite3D.cpp" />
-    <ClCompile Include="SpriteCommon.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="Vector2.cpp" />
-    <ClCompile Include="Vector3.cpp" />
-    <ClCompile Include="Vector4.cpp" />
-    <ClCompile Include="VertexBuffer.cpp" />
-    <ClCompile Include="WindowsApp.cpp" />
-    <ClCompile Include="YFramework.cpp" />
+    <ClCompile Include="Engine\Math\Matrix4.cpp" />
+    <ClCompile Include="Engine\Draw\Model\Model.cpp" />
+    <ClCompile Include="Engine\Input\Mouse.cpp" />
+    <ClCompile Include="User\MyGame.cpp" />
+    <ClCompile Include="Engine\Math\myMath.cpp" />
+    <ClCompile Include="Engine\Draw\Model\Obj.cpp" />
+    <ClCompile Include="Engine\Math\PhysicsMath.cpp" />
+    <ClCompile Include="Engine\Draw\Pipeline.cpp" />
+    <ClCompile Include="User\SceneFactory.cpp" />
+    <ClCompile Include="Engine\Other\SceneManager.cpp" />
+    <ClCompile Include="Engine\Draw\Sprite\Sprite.cpp" />
+    <ClCompile Include="Engine\Draw\Sprite\Sprite2D.cpp" />
+    <ClCompile Include="Engine\Draw\Sprite\Sprite3D.cpp" />
+    <ClCompile Include="Engine\Draw\Sprite\SpriteCommon.cpp" />
+    <ClCompile Include="Engine\Draw\TextureManager.cpp" />
+    <ClCompile Include="User\TitleScene.cpp" />
+    <ClCompile Include="Engine\Draw\Transform.cpp" />
+    <ClCompile Include="Engine\Math\Vector2.cpp" />
+    <ClCompile Include="Engine\Math\Vector3.cpp" />
+    <ClCompile Include="Engine\Math\Vector4.cpp" />
+    <ClCompile Include="Engine\DirectXCore\Buffer\VertexBuffer.cpp" />
+    <ClCompile Include="Engine\DirectXCore\WindowsApp.cpp" />
+    <ClCompile Include="Engine\Other\YFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
@@ -219,48 +221,48 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractSceneFactory.h" />
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="BaseScene.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="ConstantBuffer.h" />
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="DescriptorHeap.h" />
-    <ClInclude Include="DirectXBase.h" />
-    <ClInclude Include="DrawCommon.h" />
-    <ClInclude Include="DrawOversight.h" />
-    <ClInclude Include="FbxLoder.h" />
-    <ClInclude Include="FbxModel.h" />
-    <ClInclude Include="File.h" />
-    <ClInclude Include="FPS.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="ImGuiManager.h" />
-    <ClInclude Include="IndexBuffer.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="Matrix4.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Mouse.h" />
-    <ClInclude Include="MyGame.h" />
-    <ClInclude Include="myMath.h" />
-    <ClInclude Include="Obj.h" />
-    <ClInclude Include="PhysicsMath.h" />
-    <ClInclude Include="Pipeline.h" />
-    <ClInclude Include="SceneFactory.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Sprite2D.h" />
-    <ClInclude Include="Sprite3D.h" />
-    <ClInclude Include="SpriteCommon.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Vector2.h" />
-    <ClInclude Include="Vector3.h" />
-    <ClInclude Include="Vector4.h" />
-    <ClInclude Include="VertexBuffer.h" />
-    <ClInclude Include="WindowsApp.h" />
-    <ClInclude Include="YFramework.h" />
+    <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />
+    <ClInclude Include="Engine\Other\BaseScene.h" />
+    <ClInclude Include="Engine\Camera\Camera.h" />
+    <ClInclude Include="Engine\DirectXCore\Buffer\ConstantBuffer.h" />
+    <ClInclude Include="Engine\Input\Controller.h" />
+    <ClInclude Include="Engine\DirectXCore\DescriptorHeap.h" />
+    <ClInclude Include="Engine\DirectXCore\DirectXBase.h" />
+    <ClInclude Include="Engine\Draw\DrawCommon.h" />
+    <ClInclude Include="Engine\Draw\DrawOversight.h" />
+    <ClInclude Include="Engine\Audio\AudioManager.h" />
+    <ClInclude Include="Engine\Draw\Model\FbxLoder.h" />
+    <ClInclude Include="Engine\Draw\Model\FbxModel.h" />
+    <ClInclude Include="Engine\Draw\File.h" />
+    <ClInclude Include="Engine\DirectXCore\FPS.h" />
+    <ClInclude Include="Engine\Input\InputManager.h" />
+    <ClInclude Include="User\GameScene.h" />
+    <ClInclude Include="Engine\ImGui\ImGuiManager.h" />
+    <ClInclude Include="Engine\DirectXCore\Buffer\IndexBuffer.h" />
+    <ClInclude Include="Engine\Input\Keyboard.h" />
+    <ClInclude Include="Engine\Math\Matrix4.h" />
+    <ClInclude Include="Engine\Draw\Model\Model.h" />
+    <ClInclude Include="Engine\Input\Mouse.h" />
+    <ClInclude Include="Engine\Other\MyGame.h" />
+    <ClInclude Include="Engine\Math\myMath.h" />
+    <ClInclude Include="Engine\Draw\Model\Obj.h" />
+    <ClInclude Include="Engine\Math\PhysicsMath.h" />
+    <ClInclude Include="Engine\Draw\Pipeline.h" />
+    <ClInclude Include="Engine\Other\SceneFactory.h" />
+    <ClInclude Include="Engine\Other\SceneManager.h" />
+    <ClInclude Include="Engine\Draw\Sprite\Sprite.h" />
+    <ClInclude Include="Engine\Draw\Sprite\Sprite2D.h" />
+    <ClInclude Include="Engine\Draw\Sprite\Sprite3D.h" />
+    <ClInclude Include="Engine\Draw\Sprite\SpriteCommon.h" />
+    <ClInclude Include="Engine\Draw\TextureManager.h" />
+    <ClInclude Include="User\TitleScene.h" />
+    <ClInclude Include="Engine\Draw\Transform.h" />
+    <ClInclude Include="Engine\Math\Vector2.h" />
+    <ClInclude Include="Engine\Math\Vector3.h" />
+    <ClInclude Include="Engine\Math\Vector4.h" />
+    <ClInclude Include="Engine\DirectXCore\Buffer\VertexBuffer.h" />
+    <ClInclude Include="Engine\DirectXCore\WindowsApp.h" />
+    <ClInclude Include="Engine\Other\YFramework.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\ModelBasic.hlsli" />

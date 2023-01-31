@@ -179,12 +179,12 @@ public:
 	//シングルトン
 	static InputManager* GetInstance();
 
-	private:
+private:
 
-		InputManager() = default;
-		~InputManager() = default;
+	InputManager() = default;
+	~InputManager() = default;
 
-		//コピーコンストラクタ・代入演算子削除
-		InputManager& operator=(const InputManager&) = delete;
-		InputManager(const InputManager&) = delete;
+	//コピーコンストラクタ・代入演算子削除
+	InputManager& operator=(const InputManager&) = delete;
+	InputManager(const InputManager&) = delete;
 };
