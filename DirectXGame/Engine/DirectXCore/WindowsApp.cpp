@@ -27,7 +27,7 @@ LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-void WindowsApp::CreatWindow(const wchar_t* title, const int width, const int height)
+void WindowsApp::CreatWindow(const wchar_t* title, const float width, const float height)
 {
 	window_width = width;
 	window_height = height;
@@ -46,7 +46,7 @@ void WindowsApp::CreatWindow(const wchar_t* title, const int width, const int he
 	RegisterClassEx(&w);
 
 	//ウインドウサイズ{X座標　Y座標 横幅　縦幅}
-	RECT wrc = { 0,0,window_width,window_height };
+	RECT wrc = { 0,0,static_cast<LONG>(window_width),static_cast<LONG>(window_height) };
 	//自動でサイズを補正する
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
@@ -103,12 +103,12 @@ void WindowsApp::SetHwnd(HWND Hwnd) {
 	hwnd = Hwnd;
 }
 
-int WindowsApp::GetWidth()
+float WindowsApp::GetWidth()
 {
 	return window_width;
 }
 
-int WindowsApp::GetHeight()
+float WindowsApp::GetHeight()
 {
 	return window_height;
 }

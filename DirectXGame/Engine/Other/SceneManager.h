@@ -28,7 +28,7 @@ public:
 	//次シーン予約
 	void ChangeScene(const std::string& sceneName);
 
-	void SetSceneFactory(AbstractSceneFactory* sceneFactory);
+	void SetSceneFactory(AbstractSceneFactory* sceneFactory_);
 
 	//シングルトン
 	static SceneManager* GetInstance();

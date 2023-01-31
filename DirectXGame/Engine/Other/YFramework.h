@@ -22,9 +22,9 @@ class YFramework
 {
 protected:
 
-	std::wstring title;
-	float window_width = 0;//横幅
-	float window_height = 0;//縦幅
+	std::wstring title = L"";
+	float window_width = 0.0f;//横幅
+	float window_height = 0.0f;//縦幅
 
 	bool endRequest = false;
 
@@ -62,7 +62,7 @@ public:
 	/// <param name="title">タイトルバーの名前</param>
 	/// <param name="width">ウィンドウの横幅</param>
 	/// <param name="height">ウィンドウの縦幅</param>
-	void SetWindowData(const std::string& title = "DirectXGame", const int width = 1280, const int height = 720);
+	void SetWindowData(const std::string& title_ = "DirectXGame", const float width = 1280.0f, const float height = 720.0f);
 
 	//実行処理
 	void Run();

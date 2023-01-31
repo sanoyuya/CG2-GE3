@@ -12,8 +12,7 @@ void DescriptorHeap::Initialize()
 	srvHeapDesc.NumDescriptors = static_cast<UINT>(maxSRV + maxUAV + maxCBV);
 
 	// 設定を元にSRV用デスクリプタヒープを生成
-	HRESULT result = device->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(descriptorHeap.ReleaseAndGetAddressOf()));
-	assert(SUCCEEDED(result));
+	device->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(descriptorHeap.ReleaseAndGetAddressOf()));
 
     startCpuHandle = descriptorHeap->GetCPUDescriptorHandleForHeapStart();
 	startGpuHandle = descriptorHeap->GetGPUDescriptorHandleForHeapStart();

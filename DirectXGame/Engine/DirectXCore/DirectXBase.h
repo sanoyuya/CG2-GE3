@@ -19,7 +19,7 @@ private:
 
 	WindowsApp* windowsApp = nullptr;
 
-	HRESULT result;
+	HRESULT result = S_OK;
 	ComPtr<ID3D12Device> device;
 	ComPtr<IDXGIFactory7> dxgiFactory;
 	ComPtr<IDXGISwapChain4> swapChain;

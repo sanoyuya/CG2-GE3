@@ -1,10 +1,7 @@
 #include "GameScene.h"
+#include"SceneManager.h"
 #include"PhysicsMath.h"
 #include<imgui.h>
-
-void GameScene::Destroy()
-{
-}
 
 void GameScene::Initialize()
 {
@@ -22,12 +19,19 @@ void GameScene::Initialize()
 	model->SetModel(modelTex);
 	modelTrans.Initialize();
 
-	//ステージキューブ
-	cube = std::make_unique<DrawOversight>();
+	object = std::make_unique<DrawOversight>();
 	cubeTex = Model::CreateObjModel("Resources/cube");
-	cube->SetModel(cubeTex);
-	cubeTrans.Initialize();
-	cubeTrans.translation.x = -2.0f;
+	objectTex = Model::CreateObjModel("Resources/F-35E");
+	object->SetModel(cubeTex);
+	objectTrans.Initialize();
+	objectTrans.translation.x = -2.0f;
+	objectColor = { 1.0f,1.0f ,1.0f ,1.0f };
+
+	object2 = std::make_unique<DrawOversight>();
+	object2->SetModel(cubeTex);
+	object2->SetModelBlendMode(BlendMode::Add);
+	objectTrans2.Initialize();
+	objectTrans2.translation.y = 3.0f;
 
 	//球
 	sphere= std::make_unique<DrawOversight>();
@@ -36,66 +40,110 @@ void GameScene::Initialize()
 	sphereTrans.Initialize();
 	sphereTrans.translation.x = 2.0f;
 
-	sprite = std::make_unique<Sprite>();
-	spriteTex = sprite->LoadTexture("Resources/GodQueenProject/ru/1_1.jpg");
-	sprite->Sprite2DInitialize(spriteTex);
+	bgmVolume = 0.025f;
+	bgm = audioManager->LoadAudio("Resources/Sound/1~10.mp3", bgmVolume);
+	audioManager->PlayWave(bgm, true);
+	bgmFlag = true;
+}
 
-	sprite3D= std::make_unique<Sprite>();
-	sprite3DTex=sprite->LoadTexture("Resources/GodQueenProject/faleg/1_1.jpg");
-	sprite3D->Sprite3DInitialize(sprite3DTex);
-	sprite3DTrans.Initialize();
-	sprite3DTrans.rotation.z = myMath::AX_PIF / 2;
-	sprite3DTrans.scale = { 1.0f / 100,1.0f / 100 ,1.0f / 100 };
-	sprite3DTrans.translation.z = 2.0f;
+void GameScene::Destroy()
+{
+	audioManager->StopWave(bgm);
 }
 
 void GameScene::Update()
 {
+	if (input->KeyboardTriggerPush(DIK_SPACE))
+	{
+		SceneManager::GetInstance()->ChangeScene("TITLE");
+	}
+
 	CamMove();
 	Rotation();
+
 	modelTrans.TransUpdate(camera.get());//天球
-	cubeTrans.TransUpdate(camera.get());//ステージキューブ
+	objectTrans.TransUpdate(camera.get());
+	objectTrans2.TransUpdate(camera.get());
 	sphereTrans.TransUpdate(camera.get());//球
 
-	ImGui::Begin("Exercise");
-	ImGui::SetWindowSize({ 500,100 });
-	ImGui::SliderFloat2("position", &sprite2DPos.x, 0.0f, 500.0f, "%.1f");
+	if (input->KeyboardTriggerPush(DIK_H) || input->MouseTriggerPush(RIGHT) || input->ControllerButtonTriggerPush(A))
+	{
+		if (texFlag == false)
+		{
+			object->SetModel(objectTex);
+			object2->SetModel(objectTex);
+			texFlag = true;
+		}
+		else
+		{
+			object->SetModel(cubeTex);
+			object2->SetModel(cubeTex);
+			texFlag = false;
+		}
+	}
+
+	ImGui::Begin("object");
+	ImGui::SetWindowSize({ 500,150 });
+	ImGui::SliderFloat3("position", &objectTrans.translation.x, -50.0f, 50.0f, "%.1f");
+	ImGui::SliderFloat3("rotation", &objectTrans.rotation.x, -myMath::AX_PIF / 2, myMath::AX_PIF / 2, "%.1f");
+	ImGui::SliderFloat3("scale", &objectTrans.scale.x, 0.5f, 2.0f, "%.1f");
+	ImGui::SliderFloat4("color", &objectColor.x, 0.0f, 1.0f, "%.1f");
+	if (ImGui::Button("modelChange"))
+	{
+		if (texFlag == false)
+		{
+			object->SetModel(objectTex);
+			object2->SetModel(objectTex);
+			texFlag = true;
+		}
+		else
+		{
+			object->SetModel(cubeTex);
+			object2->SetModel(objectTex);
+			texFlag = false;
+		}
+	}
 	ImGui::End();
 
-	/*ImGui::Begin("Debug2");
-	ImGui::SliderFloat3("sprite3D", &sprite3DTrans.translation.x, -5.0f, 5.0f);
-	ImGui::End();*/
+	ImGui::Begin("camera");
+	ImGui::SetWindowSize({ 300,100 });
+	ImGui::SliderFloat3("position", &cameraPos.x, -25.0f, 25.0f, "%.1f");
+	ImGui::End();
+
+	ImGui::Begin("audio");
+	ImGui::SetWindowSize({ 200,80 });
+	ImGui::SliderFloat("volume", &bgmVolume, 0.0f, 1.0f, "%.3f");
+	if (ImGui::Button("soundPlay"))
+	{
+		if (bgmFlag == true)
+		{
+			audioManager->StopWave(bgm);
+			bgmFlag = false;
+		}
+		else
+		{
+			audioManager->PlayWave(bgm, true);
+			bgmFlag = true;
+		}
+	}
+	ImGui::End();
 }
 
 void GameScene::Draw()
 {
 	model->DrawModel(&modelTrans);
 
-	kamiTime++;
-	if (kamiTime > 1)
-	{
-		animationNum++;
-		kamiTime = 0;
-	}
-	sprite3D->DrawAnimationSpriteY3D(camera.get(), sprite3DTrans,16,animationNum);
-	sprite->DrawAnimationSpriteY2D(sprite2DPos, 16, animationNum, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f / 3,1.0f / 3 }, -myMath::AX_PIF / 2);
-
 	time++;
-	cube->DrawModel(&cubeTrans, { PhysicsMath::SimpleHarmonicMotion(time, 0.25f, 180.0f) + 0.25f,0.8f,0.8f,0.75f });
+	object->DrawModel(&objectTrans, objectColor);
+	object2->DrawModel(&objectTrans2);
 	sphere->DrawModel(&sphereTrans);
-	//sprite->DrawSprite2D({ 640.0f,360.0f });
+	
 }
 
 void GameScene::Rotation()
 {
-	if (input->KeyboardKeepPush(DIK_A))
-	{
-		sphereTrans.rotation.y -= 0.02f;
-	}
-	if (input->KeyboardKeepPush(DIK_D))
-	{
-		sphereTrans.rotation.y += 0.02f;
-	}
+	objectTrans2.rotation.y += 0.02f;
+	sphereTrans.rotation.y -= 0.02f;
 }
 
 void GameScene::CamMove()

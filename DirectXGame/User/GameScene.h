@@ -21,36 +21,31 @@ private:
 	Transform modelTrans;
 	uint32_t modelTex;
 
-	//ステージキューブ
-	std::unique_ptr<DrawOversight>cube;
-	Transform cubeTrans;
+	std::unique_ptr<DrawOversight>object;
+	Transform objectTrans;
 	uint32_t cubeTex;
+	uint32_t objectTex;
+	myMath::Vector4 objectColor = {};
+	bool texFlag = false;
+
+	std::unique_ptr<DrawOversight>object2;
+	Transform objectTrans2;
 
 	//球
 	std::unique_ptr<DrawOversight>sphere;
 	Transform sphereTrans;
 	uint32_t sphereTex;
 
-	//2Dスプライト
-	std::unique_ptr<Sprite>sprite;
-	uint32_t spriteTex;
-	myMath::Vector2 sprite2DPos = { 100.0f ,100.0f };
-
-	//3Dスプライト
-	std::unique_ptr<Sprite>sprite3D;
-	Transform sprite3DTrans;
-	uint32_t sprite3DTex;
-	myMath::Vector3 sprite3DPos;
-
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;
 	float angleY = 0.0f;
 	const float length = 50.0f;
 
-	uint16_t animationNum = 0;
-	float kamiTime = 0.0f;
-
 	float time = 0.0f;
+
+	uint32_t bgm = 0;
+	float bgmVolume = 0.0f;
+	bool bgmFlag = false;
 
 public:
 

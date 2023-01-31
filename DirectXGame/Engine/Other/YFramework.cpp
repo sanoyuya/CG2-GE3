@@ -70,14 +70,13 @@ void YFramework::Update()
 	directX->UpdateClear();
 }
 
-void YFramework::SetWindowData(const std::string& title, const int width, const int height)
+void YFramework::SetWindowData(const std::string& title_, const float width, const float height)
 {
 	wchar_t wtitle[256];
-	HRESULT result = 0;
 
-	MultiByteToWideChar(CP_ACP, 0, title.c_str(), -1, wtitle, _countof(wtitle));
+	MultiByteToWideChar(CP_ACP, 0, title_.c_str(), -1, wtitle, _countof(wtitle));
 
-	this->title = wtitle;
+	title = wtitle;
 	window_width = width;//‰¡•
 	window_height = height;//c•
 }

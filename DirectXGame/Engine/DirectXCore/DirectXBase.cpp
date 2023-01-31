@@ -56,7 +56,7 @@ void DirectXBase::UpdateClear()
 	//描画先の変更
 	//レンダーターゲットビューのハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
-	rtvHandle.ptr += bbIndex * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type);
+	rtvHandle.ptr += static_cast<SIZE_T>(bbIndex * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type));
 	//深度ステンシルビュー用デスクリプタヒープのハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	commandList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
@@ -79,9 +79,9 @@ void DirectXBase::UpdateClear()
 	//シザー矩形
 	D3D12_RECT scissorRect{};
 	scissorRect.left = 0;
-	scissorRect.right = scissorRect.left + windowsApp->GetWidth();
+	scissorRect.right = static_cast<LONG>(scissorRect.left + windowsApp->GetWidth());
 	scissorRect.top = 0;
-	scissorRect.bottom = scissorRect.top + windowsApp->GetHeight();
+	scissorRect.bottom = static_cast<LONG>(scissorRect.top + windowsApp->GetHeight());
 	//シザー矩形設定コマンドをコマンドリストに積む
 	commandList->RSSetScissorRects(1, &scissorRect);
 }
@@ -245,8 +245,8 @@ void DirectXBase::SwapChainInitialize()
 	ComPtr<IDXGISwapChain1>swapChain1;
 
 	//スワップチェーンの設定
-	swapChainDesc.Width = windowsApp->GetWidth();
-	swapChainDesc.Height = windowsApp->GetHeight();
+	swapChainDesc.Width = static_cast<UINT64>(windowsApp->GetWidth());
+	swapChainDesc.Height = static_cast<UINT64>(windowsApp->GetHeight());
 	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;//色情報の書式
 	swapChainDesc.SampleDesc.Count = 1;//マルチサンプルしない
 	swapChainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;//バックバッファ用
@@ -295,8 +295,8 @@ void DirectXBase::DepthInitialize()
 {
 	D3D12_RESOURCE_DESC depthResourceDesc{};
 	depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	depthResourceDesc.Width = windowsApp->GetWidth();//レンダーターゲットに合わせる
-	depthResourceDesc.Height = windowsApp->GetHeight();//レンダーターゲットに合わせる
+	depthResourceDesc.Width = static_cast<UINT64>(windowsApp->GetWidth());//レンダーターゲットに合わせる
+	depthResourceDesc.Height = static_cast<UINT64>(windowsApp->GetHeight());//レンダーターゲットに合わせる
 	depthResourceDesc.DepthOrArraySize = 1;
 	depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT;//深度値フォーマット
 	depthResourceDesc.SampleDesc.Count = 1;

@@ -22,29 +22,29 @@ class Sprite3D
 {
 private:
 
-	HRESULT result;
-	char PADING[4];
+	HRESULT result = S_OK;
+	char PADING[4] = {};
 
 	//頂点バッファ
-	std::unique_ptr<VertexBuffer> vertexBuffer;
+	std::unique_ptr<VertexBuffer> vertexBuffer = {};
 	//頂点マップ
-	PosUvColor* vertMap;
+	PosUvColor* vertMap = {};
 
 	//インデックスバッファ
-	std::unique_ptr<IndexBuffer> indexBuffer;
+	std::unique_ptr<IndexBuffer> indexBuffer = {};
 
 	//インデックスバッファをマッピング
-	uint16_t* indexMap;
+	uint16_t* indexMap = 0;
 
 	// 定数バッファ
-	std::unique_ptr<ConstantBuffer> constBuffMaterial;
+	std::unique_ptr<ConstantBuffer> constBuffMaterial = {};
 
 	//定数バッファのマッピング用ポインタ
-	myMath::Matrix4 constBuffMap;
+	myMath::Matrix4 constBuffMap = {};
 
 	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
 
-	TextureData* texture;
+	TextureData* texture = {};
 
 public:
 
