@@ -106,9 +106,11 @@ void YFramework::Run()
 
 #ifdef _DEBUG
 
-		imGuiManager->Draw();
+		
 
 #endif // DEBUG
+
+		imGuiManager->Draw();//AL‚Ì•]‰¿‰Û‘èo‚·‚Ü‚Å‚Í‚±‚Á‚¿
 
 		directX->UpdateEnd();
 
