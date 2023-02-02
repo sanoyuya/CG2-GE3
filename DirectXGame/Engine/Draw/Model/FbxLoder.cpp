@@ -1,6 +1,6 @@
 #include "FbxLoder.h"
-#include<assimp/Importer.hpp>
-#include<assimp/scene.h>
-#include<assimp/postprocess.h>
-#include<assimp/cimport.h>
+#include<Importer.hpp>
+#include<scene.h>
+#include<postprocess.h>
+#include<cimport.h>
 

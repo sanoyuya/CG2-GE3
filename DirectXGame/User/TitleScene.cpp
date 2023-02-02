@@ -8,51 +8,45 @@ void TitleScene::Initialize()
 	input = InputManager::GetInstance();
 	audioManager = AudioManager::GetInstance();
 
-	//カメラの生成
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
-	cameraPos = { 0.0f,0.0f,-10.0f };
+	cameraPos = { 0.0f,3.0f,-10.0f };
 
 	//天球
-	skyDome = std::make_unique<DrawOversight>();
+	model = std::make_unique<DrawOversight>();
 	//model->SetModelBlendMode(BlendMode::Sub);
-	skyDomeTex = Model::CreateObjModel("Resources/skydome2");
-	skyDome->SetModel(skyDomeTex);
-	skyDomeTrans.Initialize();
+	modelTex = Model::CreateObjModel("Resources/skydome2");
+	model->SetModel(modelTex);
+	modelTrans.Initialize();
 
-	violetSprite2D = std::make_unique<Sprite>();
-	violetSprite2DTex= violetSprite2D->LoadTexture("Resources/title_violet.png");
-	violetSprite2D->Sprite2DInitialize(violetSprite2DTex);
+	//球
+	sphere = std::make_unique<DrawOversight>();
+	sphereTex = Model::CreateObjModel("Resources/sphere");
+	sphere->SetModel(sphereTex);
+	sphereTrans.Initialize();
 
-	pokeSprite3D = std::make_unique<Sprite>();
-	pokeSprite3DTex = pokeSprite3D->LoadTexture("Resources/ad5a403d7b1e498d5c5b2a6c609782cc.png");
-	pokeSprite3D->Sprite3DInitialize(pokeSprite3DTex);
-	pokeSprite3DTrans.Initialize();
-	pokeSprite3DTrans.translation.z = 50.0f;
+	//床
+	plane = std::make_unique<DrawOversight>();
+	planeTex = Model::CreateObjModel("Resources/ground");
+	plane->SetModel(planeTex);
+	planeTrans.Initialize();
 
-	pokeSprite3D2 = std::make_unique<Sprite>();
-	pokeSprite3D2->SetSprite3DBlendMode(BlendMode::Add);
-	pokeSprite3D2->Sprite3DInitialize(pokeSprite3DTex);
-	pokeSprite3D2Trans.Initialize();
-	pokeSprite3D2Trans.translation.x = -20.0f;
-	pokeSprite3D2Trans.translation.z = 49.0f;
+	//球の初期値を設定
+	spherePos.center = { 0.0f,2.0f,0.0f,1.0f };
+	spherePos.radius = 1.0f;//半径
 
-	pokeSprite3D3 = std::make_unique<Sprite>();
-	pokeSprite3D3->SetSprite3DBlendMode(BlendMode::Sub);
-	pokeSprite3D3->Sprite3DInitialize(pokeSprite3DTex);
-	pokeSprite3D3Trans.Initialize();
-	pokeSprite3D3Trans.translation.x = 20.0f;
-	pokeSprite3D3Trans.translation.z = 49.0f;
+	//平面の初期値を設定
+	planePos.normal = { 0.0f,1.0f,0.0f ,0.0f };//法線ベクトル
+	planePos.destance = 0.0f;//原点(0,0,0)からの距離
+}
 
-	bgmVolume = 0.025f;
-	bgm = audioManager->LoadAudio("Resources/Sound/title.mp3", bgmVolume);
-	audioManager->PlayWave(bgm,true);
-	bgmFlag = true;
+void TitleScene::Rotation()
+{
+	sphereTrans.rotation.y -= 0.02f;
 }
 
 void TitleScene::Destroy()
 {
-	audioManager->StopWave(bgm);
 }
 
 void TitleScene::Update()
@@ -62,89 +56,58 @@ void TitleScene::Update()
 		SceneManager::GetInstance()->ChangeScene("GAME");
 	}
 
-	skyDomeTrans.TransUpdate(camera.get());//天球
-	pokeSprite3DTrans.TransUpdate(camera.get());//3Dスプライト
-
-	pokeTime++;
-	if (pokeTime > 30)
-	{
-		pokeNowNum++;
-		pokeNum++;
-		pokeTime = 0;
-	}
-	uintPokeNowNum = static_cast<uint16_t>(pokeNowNum);
-
-	violetTime++;
-
 	camUpdate();
+	Rotation();
 
-	audioManager->ChangeVolume(bgm, bgmVolume);
+	modelTrans.TransUpdate(camera.get());//天球
+	planeTrans.TransUpdate(camera.get());
 
-	ImGui::Begin("camera");
-	ImGui::SetWindowSize({ 300,100 });
-	ImGui::SliderFloat3("position", &cameraPos.x, -50.0f, 50.0f, "%.1f");
-	ImGui::End();
+	sphereTime++;
+	spherePos.center.y = PhysicsMath::SimpleHarmonicMotion(sphereTime, 2.0f, 120.0f);
+	sphereTrans.translation.y = spherePos.center.y;
+	sphereTrans.TransUpdate(camera.get());//球
 
-	ImGui::Begin("pokemonSprite3D");
-	ImGui::SetWindowSize({ 500,250 });
-	ImGui::SliderFloat3("position", &pokeSprite3DTrans.translation.x, -50.0f, 50.0f, "%.1f");
-	ImGui::SliderFloat3("rotation", &pokeSprite3DTrans.rotation.x, -myMath::AX_PIF/2, myMath::AX_PIF/2, "%.1f");
-	ImGui::SliderFloat3("scale", &pokeSprite3DTrans.scale.x, 0.5f, 2.0f, "%.1f");
-	ImGui::SliderFloat4("color", &pokeColor.x, 0.0f, 1.0f, "%.1f");
-	ImGui::SliderInt("pokeNum", &pokeNowNum, 0, 648);
-	ImGui::SliderInt("billboardFlag", &nowBillboard, 0, 4);
-	ImGui::Checkbox("flipX", &flipX);
-	ImGui::Checkbox("flipY", &flipY);
-	ImGui::End();
-
-	ImGui::Begin("audio");
-	ImGui::SetWindowSize({ 200,80 });
-	ImGui::SliderFloat("volume", &bgmVolume, 0.0f, 1.0f, "%.3f");
-	if (ImGui::Button("soundPlay"))
+	if (Collision::SphereToPlane(spherePos, planePos))
 	{
-		if (bgmFlag == true)
-		{
-			audioManager->StopWave(bgm);
-			bgmFlag = false;
-		}
-		else
-		{
-			audioManager->PlayWave(bgm, true);
-			bgmFlag = true;
-		}
+		color = { 1.0f,0.0f,0.0f,1.0f };
 	}
+	else
+	{
+		color = { 1.0f,1.0f,1.0f,1.0f };
+	}
+
+	ImGui::Begin("test");
+	ImGui::Text("pos:%f", sphereTrans.translation.y);
 	ImGui::End();
 }
 
 void TitleScene::Draw()
 {
-	skyDome->DrawModel(&skyDomeTrans);
-	pokeSprite3D->DrawAnimationSpriteXY3D(camera.get(), pokeSprite3DTrans, 25, 26, uintPokeNowNum, static_cast<BillboardFlag>(nowBillboard), pokeColor, { 0.5f,0.5 }, flipX, flipY);
-	pokeSprite3D2->DrawAnimationSpriteXY3D(camera.get(), pokeSprite3D2Trans, 25, 26, pokeNum);
-	pokeSprite3D3->DrawAnimationSpriteXY3D(camera.get(), pokeSprite3D3Trans, 25, 26, pokeNum);
-	violetSprite2D->DrawSprite2D({ 290 / 2,635 }, { 0.5f + PhysicsMath::SimpleHarmonicMotion(violetTime,0.5f,300.0f),1.0f ,1.0f ,1.0f }, { 0.5f,0.5f });
+	plane->DrawModel(&planeTrans);
+	model->DrawModel(&modelTrans);
+	sphere->DrawModel(&sphereTrans, color);
 }
 
 void TitleScene::camUpdate()
 {
 	if (input->KeyboardKeepPush(DIK_UP))
 	{
-		cameraPos.y += 0.2f;
+		cameraPos.y += 0.05f;
 	}
 	if (input->KeyboardKeepPush(DIK_DOWN))
 	{
-		cameraPos.y -= 0.2f;
+		cameraPos.y -= 0.05f;
 	}
 	if (input->KeyboardKeepPush(DIK_RIGHT))
 	{
-		cameraPos.x += 0.2f;
+		cameraPos.x += 0.05f;
 	}
 	if (input->KeyboardKeepPush(DIK_LEFT))
 	{
-		cameraPos.x -= 0.2f;
+		cameraPos.x -= 0.05f;
 	}
 
 	camera->SetEye(cameraPos);
-	camera->SetTarget({ 0.0f,0.0f,50.0f });
+	camera->SetTarget({ 0.0f,0.0f ,0.0f });
 	camera->Update(true);
 }

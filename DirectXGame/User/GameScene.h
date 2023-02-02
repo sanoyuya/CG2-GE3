@@ -5,6 +5,7 @@
 #include"Camera.h"
 #include"DrawOversight.h"
 #include"BaseScene.h"
+#include"Collision.h"
 
 class GameScene :public BaseScene
 {
@@ -21,31 +22,25 @@ private:
 	Transform modelTrans;
 	uint32_t modelTex;
 
-	std::unique_ptr<DrawOversight>object;
-	Transform objectTrans;
-	uint32_t cubeTex;
-	uint32_t objectTex;
-	myMath::Vector4 objectColor = {};
-	bool texFlag = false;
-
-	std::unique_ptr<DrawOversight>object2;
-	Transform objectTrans2;
-
 	//ãÖ
 	std::unique_ptr<DrawOversight>sphere;
 	Transform sphereTrans;
 	uint32_t sphereTex;
+	uint32_t sphereTex2;
+	Sphere spherePos;
+	float sphereTime;
+	myMath::Vector4 color = { 0.0f,0.0f,0.0f ,0.0f };
+
+	//è∞
+	std::unique_ptr<DrawOversight>triangle;
+	Triangle trianglePos;
+	Transform triangleTrans;
+	uint32_t triangleTex = 0;
 
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;
 	float angleY = 0.0f;
 	const float length = 50.0f;
-
-	float time = 0.0f;
-
-	uint32_t bgm = 0;
-	float bgmVolume = 0.0f;
-	bool bgmFlag = false;
 
 public:
 
@@ -64,5 +59,4 @@ public:
 private:
 	void Rotation();
 	void CamMove();
-	void Reset();
 };

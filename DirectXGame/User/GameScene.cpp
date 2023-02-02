@@ -19,36 +19,33 @@ void GameScene::Initialize()
 	model->SetModel(modelTex);
 	modelTrans.Initialize();
 
-	object = std::make_unique<DrawOversight>();
-	cubeTex = Model::CreateObjModel("Resources/cube");
-	objectTex = Model::CreateObjModel("Resources/F-35E");
-	object->SetModel(cubeTex);
-	objectTrans.Initialize();
-	objectTrans.translation.x = -2.0f;
-	objectColor = { 1.0f,1.0f ,1.0f ,1.0f };
-
-	object2 = std::make_unique<DrawOversight>();
-	object2->SetModel(cubeTex);
-	object2->SetModelBlendMode(BlendMode::Add);
-	objectTrans2.Initialize();
-	objectTrans2.translation.y = 3.0f;
-
 	//‹…
-	sphere= std::make_unique<DrawOversight>();
-	sphereTex= Model::CreateObjModel("Resources/sphere");
+	sphere = std::make_unique<DrawOversight>();
+	sphereTex = Model::CreateObjModel("Resources/sphere");
 	sphere->SetModel(sphereTex);
 	sphereTrans.Initialize();
-	sphereTrans.translation.x = 2.0f;
 
-	bgmVolume = 0.025f;
-	bgm = audioManager->LoadAudio("Resources/Sound/1~10.mp3", bgmVolume);
-	audioManager->PlayWave(bgm, true);
-	bgmFlag = true;
+	//‹…‚Ì‰Šú’l‚ğİ’è
+	spherePos.center = { 0.0f,-1.0f,0.0f,1.0f };
+	spherePos.radius = 1.0f;//”¼Œa
+	sphereTrans.translation.y = spherePos.center.y;
+
+	//°
+	triangle = std::make_unique<DrawOversight>();
+	triangleTex = Model::CreateObjModel("Resources/triangle");
+	triangle->SetModel(triangleTex);
+	triangleTrans.Initialize();
+	triangleTrans.rotation.x = -myMath::AX_PIF/2;
+
+	//•½–Ê‚Ì‰Šú’l‚ğİ’è
+	trianglePos.p0 = { -1.000000f, 1.000000f, 0.000000f,1.0f };
+	trianglePos.p1 = { -1.000000f, -1.000000f, 0.000000f,1.0f };
+	trianglePos.p2 = { 1.000000f, 1.000000f, 0.000000f,1.0f };
+	trianglePos.normal = { 0.0f,0.0f ,0.0f ,0.0f };
 }
 
 void GameScene::Destroy()
 {
-	audioManager->StopWave(bgm);
 }
 
 void GameScene::Update()
@@ -62,87 +59,36 @@ void GameScene::Update()
 	Rotation();
 
 	modelTrans.TransUpdate(camera.get());//“V‹…
-	objectTrans.TransUpdate(camera.get());
-	objectTrans2.TransUpdate(camera.get());
+	triangleTrans.TransUpdate(camera.get());
+
+	sphereTime++;
+	spherePos.center.x = PhysicsMath::SimpleHarmonicMotion(sphereTime, 3.0f, 120.0f);
+	sphereTrans.translation.x = spherePos.center.x;
 	sphereTrans.TransUpdate(camera.get());//‹…
 
-	if (input->KeyboardTriggerPush(DIK_H) || input->MouseTriggerPush(RIGHT) || input->ControllerButtonTriggerPush(A))
+	if (Collision::SphereToTriangle(spherePos, trianglePos))
 	{
-		if (texFlag == false)
-		{
-			object->SetModel(objectTex);
-			object2->SetModel(objectTex);
-			texFlag = true;
-		}
-		else
-		{
-			object->SetModel(cubeTex);
-			object2->SetModel(cubeTex);
-			texFlag = false;
-		}
+		color = { 1.0f,0.0f,0.0f,1.0f };
+	}
+	else
+	{
+		color = { 1.0f,1.0f,1.0f,1.0f };
 	}
 
-	ImGui::Begin("object");
-	ImGui::SetWindowSize({ 500,150 });
-	ImGui::SliderFloat3("position", &objectTrans.translation.x, -50.0f, 50.0f, "%.1f");
-	ImGui::SliderFloat3("rotation", &objectTrans.rotation.x, -myMath::AX_PIF / 2, myMath::AX_PIF / 2, "%.1f");
-	ImGui::SliderFloat3("scale", &objectTrans.scale.x, 0.5f, 2.0f, "%.1f");
-	ImGui::SliderFloat4("color", &objectColor.x, 0.0f, 1.0f, "%.1f");
-	if (ImGui::Button("modelChange"))
-	{
-		if (texFlag == false)
-		{
-			object->SetModel(objectTex);
-			object2->SetModel(objectTex);
-			texFlag = true;
-		}
-		else
-		{
-			object->SetModel(cubeTex);
-			object2->SetModel(objectTex);
-			texFlag = false;
-		}
-	}
-	ImGui::End();
-
-	ImGui::Begin("camera");
-	ImGui::SetWindowSize({ 300,100 });
-	ImGui::SliderFloat3("position", &cameraPos.x, -25.0f, 25.0f, "%.1f");
-	ImGui::End();
-
-	ImGui::Begin("audio");
-	ImGui::SetWindowSize({ 200,80 });
-	ImGui::SliderFloat("volume", &bgmVolume, 0.0f, 1.0f, "%.3f");
-	if (ImGui::Button("soundPlay"))
-	{
-		if (bgmFlag == true)
-		{
-			audioManager->StopWave(bgm);
-			bgmFlag = false;
-		}
-		else
-		{
-			audioManager->PlayWave(bgm, true);
-			bgmFlag = true;
-		}
-	}
+	ImGui::Begin("test");
+	ImGui::Text("pos:%f", sphereTrans.translation.y);
 	ImGui::End();
 }
 
 void GameScene::Draw()
 {
+	triangle->DrawModel(&triangleTrans);
 	model->DrawModel(&modelTrans);
-
-	time++;
-	object->DrawModel(&objectTrans, objectColor);
-	object2->DrawModel(&objectTrans2);
-	sphere->DrawModel(&sphereTrans);
-	
+	sphere->DrawModel(&sphereTrans, color);
 }
 
 void GameScene::Rotation()
 {
-	objectTrans2.rotation.y += 0.02f;
 	sphereTrans.rotation.y -= 0.02f;
 }
 
@@ -168,9 +114,4 @@ void GameScene::CamMove()
 	camera->SetEye(cameraPos);
 	camera->SetTarget({ 0.0f,0.0f ,0.0f });
 	camera->Update(true);
-}
-
-void GameScene::Reset()
-{
-	cameraPos = { 0.0f,0.0f,-10.0f };
 }

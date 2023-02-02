@@ -4,6 +4,7 @@
 #include"DrawOversight.h"
 #include"Camera.h"
 #include"AudioManager.h"
+#include"Collision.h"
 
 //タイトルシーン
 class TitleScene :public BaseScene
@@ -15,43 +16,32 @@ private:
 	AudioManager* audioManager = nullptr;
 
 	std::unique_ptr<Camera>camera;
-	myMath::Vector3 cameraPos;
-	myMath::Vector3 cameraTarget;
-	float angle = 0.0f;
 
 	//天球
-	std::unique_ptr<DrawOversight>skyDome;
-	Transform skyDomeTrans;
-	uint32_t skyDomeTex = 0;
+	std::unique_ptr<DrawOversight>model;
+	Transform modelTrans;
+	uint32_t modelTex;
 
-	std::unique_ptr<Sprite>violetSprite2D;
-	uint32_t violetSprite2DTex = 0;
-	float violetTime = 0.0f;
+	//球
+	std::unique_ptr<DrawOversight>sphere;
+	Transform sphereTrans;
+	uint32_t sphereTex;
+	uint32_t sphereTex2;
+	Sphere spherePos;
+	float sphereTime;
+	myMath::Vector4 color = { 0.0f,0.0f,0.0f ,0.0f };
 
-	//3Dスプライト
-	std::unique_ptr<Sprite>pokeSprite3D;
-	Transform pokeSprite3DTrans;
-	uint32_t pokeSprite3DTex = 0;
-	myMath::Vector3 pokeSprite3DPos = {};
-	myMath::Vector4 pokeColor = { 1.0f,1.0f ,1.0f ,1.0f };
-	bool flipX = false;
-	bool flipY = false;
-	int pokeNowNum = 0;
-	int nowBillboard = 0;
-	uint16_t pokeNum = 0;
-	uint16_t uintPokeNowNum = 0;
-	uint8_t pokeTime = 0;
+	//床
+	std::unique_ptr<DrawOversight>plane;
+	Transform planeTrans;
+	uint32_t planeTex = 0;
+	Plane planePos;
 
-	//3Dスプライト
-	std::unique_ptr<Sprite>pokeSprite3D2;
-	Transform pokeSprite3D2Trans;
+	myMath::Vector3 cameraPos;
+	float angleX = 0.0f;
+	float angleY = 0.0f;
+	const float length = 50.0f;
 
-	std::unique_ptr<Sprite>pokeSprite3D3;
-	Transform pokeSprite3D3Trans;
-
-	uint32_t bgm = 0;
-	float bgmVolume = 0.0f;
-	bool bgmFlag = false;
 
 public:
 
@@ -68,6 +58,6 @@ public:
 	void Draw()override;
 
 private:
-
+	void Rotation();
 	void camUpdate();
 };

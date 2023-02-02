@@ -158,6 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Other\Collision.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Engine\Input\Controller.cpp" />
@@ -227,6 +228,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Other\Collision.h" />
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />
     <ClInclude Include="Engine\Other\BaseScene.h" />
     <ClInclude Include="Engine\Camera\Camera.h" />

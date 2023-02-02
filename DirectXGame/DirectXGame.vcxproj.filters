@@ -210,6 +210,9 @@
     <ClCompile Include="Engine\Input\InputManager.cpp">
       <Filter>Engine\ソースファイル\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Other\Collision.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -351,6 +354,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Input\InputManager.h">
       <Filter>Engine\ヘッダーファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Other\Collision.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
