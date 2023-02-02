@@ -52,7 +52,7 @@ void GameScene::Update()
 {
 	if (input->KeyboardTriggerPush(DIK_SPACE))
 	{
-		SceneManager::GetInstance()->ChangeScene("TITLE");
+		SceneManager::GetInstance()->ChangeScene("SCENE3");
 	}
 
 	CamMove();
@@ -74,10 +74,6 @@ void GameScene::Update()
 	{
 		color = { 1.0f,1.0f,1.0f,1.0f };
 	}
-
-	ImGui::Begin("test");
-	ImGui::Text("pos:%f", sphereTrans.translation.y);
-	ImGui::End();
 }
 
 void GameScene::Draw()

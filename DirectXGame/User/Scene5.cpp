@@ -1,12 +1,11 @@
-#include "TitleScene.h"
+#include"Scene5.h"
 #include"SceneManager.h"
 #include<imgui.h>
 #include"PhysicsMath.h"
 
-void TitleScene::Initialize()
+void Scene5::Initialize()
 {
 	input = InputManager::GetInstance();
-	audioManager = AudioManager::GetInstance();
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize(true);
@@ -19,55 +18,54 @@ void TitleScene::Initialize()
 	model->SetModel(modelTex);
 	modelTrans.Initialize();
 
+	//レイ
+	ray = std::make_unique<DrawOversight>();
+	rayTex = Model::CreateObjModel("Resources/cube");
+	ray->SetModel(rayTex);
+	rayTrans.Initialize();
+	rayTrans.scale = { 0.1f,3.0f,0.1f };
+
+	//レイの初期値を設定
+	rayPos.start = { 0.0f,3.0f,0.0f,1.0f };
+	rayPos.dir = { 0.0f,-1.0f,0.0f,0.0f };
+
+	cube = std::make_unique<DrawOversight>();
+	cube->SetModel(rayTex);
+	cubeTrans.Initialize();
+	cubeTrans.translation.y = 3.0f;
+
 	//球
 	sphere = std::make_unique<DrawOversight>();
 	sphereTex = Model::CreateObjModel("Resources/sphere");
 	sphere->SetModel(sphereTex);
 	sphereTrans.Initialize();
-
-	//床
-	plane = std::make_unique<DrawOversight>();
-	planeTex = Model::CreateObjModel("Resources/ground");
-	plane->SetModel(planeTex);
-	planeTrans.Initialize();
-
-	//球の初期値を設定
-	spherePos.center = { 0.0f,2.0f,0.0f,1.0f };
-	spherePos.radius = 1.0f;//半径
-
-	//平面の初期値を設定
-	planePos.normal = { 0.0f,1.0f,0.0f ,0.0f };//法線ベクトル
-	planePos.destance = 0.0f;//原点(0,0,0)からの距離
 }
 
-void TitleScene::Rotation()
-{
-	sphereTrans.rotation.y -= 0.02f;
-}
-
-void TitleScene::Destroy()
+void Scene5::Destroy()
 {
 }
 
-void TitleScene::Update()
+void Scene5::Update()
 {
 	if (input->KeyboardTriggerPush(DIK_SPACE))
 	{
-		SceneManager::GetInstance()->ChangeScene("GAME");
+		SceneManager::GetInstance()->ChangeScene("TITLE");
 	}
 
-	camUpdate();
+	CamUpdate();
 	Rotation();
 
 	modelTrans.TransUpdate(camera.get());//天球
-	planeTrans.TransUpdate(camera.get());
-
-	sphereTime++;
-	spherePos.center.y = PhysicsMath::SimpleHarmonicMotion(sphereTime, 2.0f, 120.0f);
-	sphereTrans.translation.y = spherePos.center.y;
 	sphereTrans.TransUpdate(camera.get());//球
 
-	if (Collision::SphereToPlane(spherePos, planePos))
+	rayTime++;
+	rayPos.start.x = PhysicsMath::SimpleHarmonicMotion(rayTime, 3.0f, 120.0f);
+	rayTrans.translation.x = rayPos.start.x;
+	rayTrans.TransUpdate(camera.get());//レイ
+	cubeTrans.translation.x = rayPos.start.x;
+	cubeTrans.TransUpdate(camera.get());
+
+	if (Collision::RayToSphere(rayPos, spherePos))
 	{
 		color = { 1.0f,0.0f,0.0f,1.0f };
 	}
@@ -77,14 +75,20 @@ void TitleScene::Update()
 	}
 }
 
-void TitleScene::Draw()
+void Scene5::Draw()
 {
-	plane->DrawModel(&planeTrans);
+	sphere->DrawModel(&sphereTrans);
 	model->DrawModel(&modelTrans);
-	sphere->DrawModel(&sphereTrans, color);
+	ray->DrawModel(&rayTrans, color);
+	cube->DrawModel(&cubeTrans);
 }
 
-void TitleScene::camUpdate()
+void Scene5::Rotation()
+{
+	rayTrans.rotation.y -= 0.02f;
+}
+
+void Scene5::CamUpdate()
 {
 	if (input->KeyboardKeepPush(DIK_UP))
 	{

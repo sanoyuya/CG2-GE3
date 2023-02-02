@@ -213,6 +213,15 @@
     <ClCompile Include="Engine\Other\Collision.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="User\Scene3.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Scene4.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Scene5.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -356,6 +365,15 @@
       <Filter>Engine\ヘッダーファイル\Input</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Other\Collision.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Scene3.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Scene4.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Scene5.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
