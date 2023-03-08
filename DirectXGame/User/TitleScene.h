@@ -22,21 +22,6 @@ private:
 	Transform modelTrans;
 	uint32_t modelTex;
 
-	//ãÖ
-	std::unique_ptr<DrawOversight>sphere;
-	Transform sphereTrans;
-	uint32_t sphereTex;
-	uint32_t sphereTex2;
-	Sphere spherePos;
-	float sphereTime;
-	myMath::Vector4 color = { 0.0f,0.0f,0.0f ,0.0f };
-
-	//è∞
-	std::unique_ptr<DrawOversight>plane;
-	Transform planeTrans;
-	uint32_t planeTex = 0;
-	Plane planePos;
-
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;
 	float angleY = 0.0f;
@@ -58,6 +43,6 @@ public:
 	void Draw()override;
 
 private:
-	void Rotation();
+	
 	void camUpdate();
 };

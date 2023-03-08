@@ -216,17 +216,11 @@
     <ClCompile Include="Engine\Input\InputManager.cpp">
       <Filter>Engine\ソースファイル\Input</Filter>
     </ClCompile>
-    <ClCompile Include="User\Scene3.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Scene4.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Scene5.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Collision\Collision.cpp">
       <Filter>Engine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Other\EngineOP.cpp">
+      <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,17 +364,11 @@
     <ClInclude Include="Engine\Input\InputManager.h">
       <Filter>Engine\ヘッダーファイル\Input</Filter>
     </ClInclude>
-    <ClInclude Include="User\Scene3.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Scene4.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Scene5.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Collision\Collision.h">
       <Filter>Engine\ヘッダーファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Other\EngineOP.h">
+      <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

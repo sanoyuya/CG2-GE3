@@ -62,9 +62,6 @@ void WindowsApp::CreatWindow(const wchar_t* title, const float width, const floa
 		nullptr,					//メニューハンドル
 		w.hInstance,				//呼び出しアプリケーションハンドル
 		nullptr);					//オプション
-
-	//ウインドウを表示状態にする
-	ShowWindow(hwnd, SW_SHOW);
 }
 
 bool WindowsApp::MessageWindow()
@@ -85,6 +82,12 @@ bool WindowsApp::MessageWindow()
 void WindowsApp::Break() {
 	//ウインドウクラスを登録解除
 	UnregisterClass(w.lpszClassName, w.hInstance);
+}
+
+void WindowsApp::Appearance()
+{
+	//ウインドウを表示状態にする
+	ShowWindow(hwnd, SW_SHOW);
 }
 
 WNDCLASSEX WindowsApp::GetW() {

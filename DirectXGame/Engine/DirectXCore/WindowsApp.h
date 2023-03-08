@@ -21,6 +21,7 @@ public:
 	void CreatWindow(const wchar_t* title = L"DirectXGame", const float width = 1280.0f, const float height = 720.0f);
 	bool MessageWindow();
 	void Break();
+	void Appearance();
 
 	//ÉQÉbÉ^Å[
 	WNDCLASSEX GetW();

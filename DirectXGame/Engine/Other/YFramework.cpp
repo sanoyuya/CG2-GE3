@@ -42,6 +42,8 @@ void YFramework::Initialize()
 
 	//描画初期化処理ここまで
 
+	windowsApp->Appearance();
+
 	//シーンファクトリーを生成し、マネージャにセット
 	AbstractSceneFactory* sceneFactory = new SceneFactory();
 	SceneManager::GetInstance()->SetSceneFactory(sceneFactory);

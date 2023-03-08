@@ -9,7 +9,7 @@ void MyGame::Initialize()
 	YFramework::Initialize();
 
 	//シーンマネージャーに最初のシーンをセット
-	SceneManager::GetInstance()->ChangeScene("TITLE");
+	SceneManager::GetInstance()->ChangeScene("EngineOP");
 }
 
 void MyGame::Destroy()

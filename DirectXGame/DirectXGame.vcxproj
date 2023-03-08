@@ -158,6 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Other\EngineOP.cpp" />
     <ClCompile Include="Engine\Collision\Collision.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\ConstantBuffer.cpp" />
@@ -172,9 +173,6 @@
     <ClCompile Include="Engine\Draw\File.cpp" />
     <ClCompile Include="Engine\DirectXCore\FPS.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp" />
-    <ClCompile Include="User\Scene5.cpp" />
-    <ClCompile Include="User\Scene4.cpp" />
-    <ClCompile Include="User\Scene3.cpp" />
     <ClCompile Include="User\GameScene.cpp" />
     <ClCompile Include="Engine\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp" />
@@ -231,6 +229,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Other\EngineOP.h" />
     <ClInclude Include="Engine\Collision\Collision.h" />
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />
     <ClInclude Include="Engine\Other\BaseScene.h" />
@@ -247,9 +246,6 @@
     <ClInclude Include="Engine\Draw\File.h" />
     <ClInclude Include="Engine\DirectXCore\FPS.h" />
     <ClInclude Include="Engine\Input\InputManager.h" />
-    <ClInclude Include="User\Scene5.h" />
-    <ClInclude Include="User\Scene4.h" />
-    <ClInclude Include="User\Scene3.h" />
     <ClInclude Include="User\GameScene.h" />
     <ClInclude Include="Engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\IndexBuffer.h" />

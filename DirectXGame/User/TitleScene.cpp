@@ -18,31 +18,6 @@ void TitleScene::Initialize()
 	modelTex = Model::CreateObjModel("Resources/skydome2");
 	model->SetModel(modelTex);
 	modelTrans.Initialize();
-
-	//球
-	sphere = std::make_unique<DrawOversight>();
-	sphereTex = Model::CreateObjModel("Resources/sphere");
-	sphere->SetModel(sphereTex);
-	sphereTrans.Initialize();
-
-	//床
-	plane = std::make_unique<DrawOversight>();
-	planeTex = Model::CreateObjModel("Resources/ground");
-	plane->SetModel(planeTex);
-	planeTrans.Initialize();
-
-	//球の初期値を設定
-	spherePos.center = { 0.0f,2.0f,0.0f,1.0f };
-	spherePos.radius = 1.0f;//半径
-
-	//平面の初期値を設定
-	planePos.normal = { 0.0f,1.0f,0.0f ,0.0f };//法線ベクトル
-	planePos.destance = 0.0f;//原点(0,0,0)からの距離
-}
-
-void TitleScene::Rotation()
-{
-	sphereTrans.rotation.y -= 0.02f;
 }
 
 void TitleScene::Destroy()
@@ -57,31 +32,13 @@ void TitleScene::Update()
 	}
 
 	camUpdate();
-	Rotation();
 
 	modelTrans.TransUpdate(camera.get());//天球
-	planeTrans.TransUpdate(camera.get());
-
-	sphereTime++;
-	spherePos.center.y = PhysicsMath::SimpleHarmonicMotion(sphereTime, 2.0f, 120.0f);
-	sphereTrans.translation.y = spherePos.center.y;
-	sphereTrans.TransUpdate(camera.get());//球
-
-	if (Collision::SphereToPlane(spherePos, planePos))
-	{
-		color = { 1.0f,0.0f,0.0f,1.0f };
-	}
-	else
-	{
-		color = { 1.0f,1.0f,1.0f,1.0f };
-	}
 }
 
 void TitleScene::Draw()
 {
-	plane->DrawModel(&planeTrans);
 	model->DrawModel(&modelTrans);
-	sphere->DrawModel(&sphereTrans, color);
 }
 
 void TitleScene::camUpdate()

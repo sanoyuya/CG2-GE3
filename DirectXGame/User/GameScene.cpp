@@ -52,7 +52,7 @@ void GameScene::Update()
 {
 	if (input->KeyboardTriggerPush(DIK_SPACE))
 	{
-		SceneManager::GetInstance()->ChangeScene("SCENE3");
+		SceneManager::GetInstance()->ChangeScene("TITLE");
 	}
 
 	CamMove();
