@@ -8,8 +8,19 @@ void MyGame::Initialize()
 	//基底クラスの初期化処理
 	YFramework::Initialize();
 
+#ifdef _DEBUG
+
+	//シーンマネージャーに最初のシーンをセット
+	SceneManager::GetInstance()->ChangeScene("TITLE");
+
+#endif
+
+#ifndef _DEBUG
+
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("EngineOP");
+
+#endif 
 }
 
 void MyGame::Destroy()
