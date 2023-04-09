@@ -236,6 +236,12 @@
     <FxCompile Include="Resources\shaders\ModelBasicVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\shaders\PhoneVS.hlsl">
+      <Filter>Engine\リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PhonePS.hlsl">
+      <Filter>Engine\リソース ファイル</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User\GameScene.h">
@@ -376,6 +382,9 @@
       <Filter>Engine\リソース ファイル</Filter>
     </None>
     <None Include="Resources\shaders\ModelBasic.hlsli">
+      <Filter>Engine\リソース ファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\PhoneShader.hlsli">
       <Filter>Engine\リソース ファイル</Filter>
     </None>
   </ItemGroup>

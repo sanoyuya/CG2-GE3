@@ -5,7 +5,7 @@ void ConstantBuffer::Create(size_t size)
 {
 	bufferSize = size;
 
-	//頂点バッファの設定
+	//定数バッファの設定
 	D3D12_HEAP_PROPERTIES heapProp{};//ヒープ設定
 	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
 	//リソース設定
@@ -18,7 +18,7 @@ void ConstantBuffer::Create(size_t size)
 	resDesc.SampleDesc.Count = 1;
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	// リソースを生成
+	//定数バッファの生成
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
