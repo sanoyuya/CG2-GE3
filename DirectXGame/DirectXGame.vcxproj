@@ -127,7 +127,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\Model;$(ProjectDir)Engine\Draw\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\Model;$(ProjectDir)Engine\Draw\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,7 +146,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\Model;$(ProjectDir)Engine\Draw\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\Model;$(ProjectDir)Engine\Draw\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -173,6 +173,7 @@
     <ClCompile Include="Engine\Draw\File.cpp" />
     <ClCompile Include="Engine\DirectXCore\FPS.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp" />
+    <ClCompile Include="Engine\Light\LightManager.cpp" />
     <ClCompile Include="User\GameScene.cpp" />
     <ClCompile Include="Engine\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="Engine\Draw\File.h" />
     <ClInclude Include="Engine\DirectXCore\FPS.h" />
     <ClInclude Include="Engine\Input\InputManager.h" />
+    <ClInclude Include="Engine\Light\LightManager.h" />
     <ClInclude Include="User\GameScene.h" />
     <ClInclude Include="Engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\IndexBuffer.h" />

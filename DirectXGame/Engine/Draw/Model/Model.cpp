@@ -250,6 +250,12 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	cmdList->SetGraphicsRootConstantBufferView(1, modelData->constBuffMaterial->GetAddress());
 	cmdList->SetGraphicsRootConstantBufferView(2, col->GetAddress());
 
+	//ライトの描画
+	if (shaderMode != ShaderMode::Basic)
+	{
+
+	}
+
 	// SRVヒープの設定コマンド
 	cmdList->SetDescriptorHeaps(1, modelData->textureData->srvHeap.GetAddressOf());
 
@@ -282,12 +288,12 @@ void Model::SetModel(uint32_t modelHandle)
 
 void Model::SetModelBlendMode(BlendMode mode)
 {
-	blendMode = static_cast<int>(mode);
+	blendMode = mode;
 }
 
 void Model::SetShaderMode(ShaderMode mode)
 {
-	shaderMode = static_cast<int>(mode);
+	shaderMode = mode;
 }
 
 Model::Model()

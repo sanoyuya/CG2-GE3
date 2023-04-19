@@ -85,11 +85,17 @@
     <Filter Include="Engine\ソースファイル\Draw\Model">
       <UniqueIdentifier>{eecd0e1e-693f-4d74-a4b8-9fe60eafe2b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Collision">
-      <UniqueIdentifier>{18d18fed-3942-445d-a21f-a647b50d176c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ヘッダーファイル\Collision">
       <UniqueIdentifier>{57b651fa-cc46-4174-9bbf-2e382ad89bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Collision">
+      <UniqueIdentifier>{18d18fed-3942-445d-a21f-a647b50d176c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Light">
+      <UniqueIdentifier>{f9d05b02-41ab-4b1a-9850-4d9ecaabf3a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Light">
+      <UniqueIdentifier>{7ad63905-94e1-4208-9325-97560865285b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -217,10 +223,13 @@
       <Filter>Engine\ソースファイル\Input</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Collision\Collision.cpp">
-      <Filter>Engine\Collision</Filter>
+      <Filter>Engine\ソースファイル\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Other\EngineOP.cpp">
       <Filter>Engine\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Light\LightManager.cpp">
+      <Filter>Engine\ソースファイル\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -375,6 +384,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Other\EngineOP.h">
       <Filter>Engine\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Light\LightManager.h">
+      <Filter>Engine\ヘッダーファイル\Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

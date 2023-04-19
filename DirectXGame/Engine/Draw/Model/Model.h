@@ -90,9 +90,9 @@ private:
 
 	static std::array<std::array<PipelineSet, 6>,3> pip;
 
-	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
+	BlendMode blendMode = BlendMode::Alpha;//初期値半透明合成
 
-	int shaderMode = (int)ShaderMode::Basic;//標準
+	ShaderMode shaderMode = ShaderMode::Basic;//標準
 
 	std::unique_ptr<ConstantBuffer> col;
 

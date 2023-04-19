@@ -1,7 +1,7 @@
 cbuffer cbuff0 : register(b0)
 {
-    matrix viewproj; //ビュープロジェクション行列
     matrix world; //ワールド行列
+    matrix matWorld; //ワールド座標
     float3 cameraPos; //カメラ座標
 };
 
@@ -57,7 +57,7 @@ struct CircleShadow
     uint active;
 };
 
-cbuffer cbuff2 : register(b2)
+cbuffer cbuff2 : register(b3)
 {
     float3 ambientColor;
     DirLight dirLights[DIRLIGHT_NUM];
