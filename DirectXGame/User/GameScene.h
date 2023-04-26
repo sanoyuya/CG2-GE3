@@ -6,6 +6,7 @@
 #include"DrawOversight.h"
 #include"BaseScene.h"
 #include"Collision.h"
+#include"LightManager.h"
 
 class GameScene :public BaseScene
 {
@@ -41,6 +42,8 @@ private:
 	float angleX = 0.0f;
 	float angleY = 0.0f;
 	const float length = 50.0f;
+
+	std::unique_ptr<LightManager>lightManager;
 
 public:
 

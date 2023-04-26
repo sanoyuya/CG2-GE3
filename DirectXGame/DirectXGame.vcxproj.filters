@@ -189,10 +189,10 @@
     <ClCompile Include="Engine\Draw\Model\Model.cpp">
       <Filter>Engine\ソースファイル\Draw\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Draw\Model\FbxModel.cpp">
+    <ClCompile Include="Engine\Draw\Model\AssimpModel.cpp">
       <Filter>Engine\ソースファイル\Draw\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Draw\Model\FbxLoder.cpp">
+    <ClCompile Include="Engine\Draw\Model\AssimpLoder.cpp">
       <Filter>Engine\ソースファイル\Draw\Model</Filter>
     </ClCompile>
     <ClCompile Include="User\MyGame.cpp">
@@ -245,10 +245,10 @@
     <FxCompile Include="Resources\shaders\ModelBasicVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhoneVS.hlsl">
+    <FxCompile Include="Resources\shaders\PhongVS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhonePS.hlsl">
+    <FxCompile Include="Resources\shaders\PhongPS.hlsl">
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>
@@ -340,10 +340,10 @@
     <ClInclude Include="Engine\Draw\Model\Model.h">
       <Filter>Engine\ヘッダーファイル\Draw\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Draw\Model\FbxModel.h">
+    <ClInclude Include="Engine\Draw\Model\AssimpModel.h">
       <Filter>Engine\ヘッダーファイル\Draw\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Draw\Model\FbxLoder.h">
+    <ClInclude Include="Engine\Draw\Model\AssimpLoder.h">
       <Filter>Engine\ヘッダーファイル\Draw\Model</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Other\MyGame.h">
@@ -388,6 +388,18 @@
     <ClInclude Include="Engine\Light\LightManager.h">
       <Filter>Engine\ヘッダーファイル\Light</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Light\PointLight.h">
+      <Filter>Engine\ヘッダーファイル\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Light\DirectionalLight.h">
+      <Filter>Engine\ヘッダーファイル\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Light\SpotLight.h">
+      <Filter>Engine\ヘッダーファイル\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Light\CircleShadow.h">
+      <Filter>Engine\ヘッダーファイル\Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli">
@@ -396,7 +408,7 @@
     <None Include="Resources\shaders\ModelBasic.hlsli">
       <Filter>Engine\リソース ファイル</Filter>
     </None>
-    <None Include="Resources\shaders\PhoneShader.hlsli">
+    <None Include="Resources\shaders\PhongShader.hlsli">
       <Filter>Engine\リソース ファイル</Filter>
     </None>
   </ItemGroup>

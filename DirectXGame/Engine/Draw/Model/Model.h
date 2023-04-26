@@ -7,6 +7,7 @@
 #include"ConstantBuffer.h"
 #include"Transform.h"
 #include"Pipeline.h"
+#include"LightManager.h"
 
 struct ModelData
 {
@@ -98,6 +99,9 @@ private:
 
 	myMath::Vector4 tmp;
 
+	//ライト
+	static LightManager* lightManager;
+
 public:
 
 	/// <summary>
@@ -155,6 +159,12 @@ public:
 	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
 
 	static void StaticInitialize();
+
+	/// <summary>
+	/// ライトのセット
+	/// </summary>
+	/// <param name="light">ライト</param>
+	static void SetLight(LightManager* lightManager_);
 
 private:
 

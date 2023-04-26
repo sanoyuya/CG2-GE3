@@ -168,8 +168,8 @@
     <ClCompile Include="Engine\Draw\DrawCommon.cpp" />
     <ClCompile Include="Engine\Draw\DrawOversight.cpp" />
     <ClCompile Include="Engine\Audio\AudioManager.cpp" />
-    <ClCompile Include="Engine\Draw\Model\FbxLoder.cpp" />
-    <ClCompile Include="Engine\Draw\Model\FbxModel.cpp" />
+    <ClCompile Include="Engine\Draw\Model\AssimpLoder.cpp" />
+    <ClCompile Include="Engine\Draw\Model\AssimpModel.cpp" />
     <ClCompile Include="Engine\Draw\File.cpp" />
     <ClCompile Include="Engine\DirectXCore\FPS.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp" />
@@ -204,7 +204,7 @@
     <ClCompile Include="Engine\Other\YFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\shaders\PhonePS.hlsl">
+    <FxCompile Include="Resources\shaders\PhongPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -212,7 +212,7 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhoneVS.hlsl">
+    <FxCompile Include="Resources\shaders\PhongVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -246,6 +246,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Light\CircleShadow.h" />
+    <ClInclude Include="Engine\Light\DirectionalLight.h" />
     <ClInclude Include="Engine\Other\EngineOP.h" />
     <ClInclude Include="Engine\Collision\Collision.h" />
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />
@@ -258,12 +260,14 @@
     <ClInclude Include="Engine\Draw\DrawCommon.h" />
     <ClInclude Include="Engine\Draw\DrawOversight.h" />
     <ClInclude Include="Engine\Audio\AudioManager.h" />
-    <ClInclude Include="Engine\Draw\Model\FbxLoder.h" />
-    <ClInclude Include="Engine\Draw\Model\FbxModel.h" />
+    <ClInclude Include="Engine\Draw\Model\AssimpLoder.h" />
+    <ClInclude Include="Engine\Draw\Model\AssimpModel.h" />
     <ClInclude Include="Engine\Draw\File.h" />
     <ClInclude Include="Engine\DirectXCore\FPS.h" />
     <ClInclude Include="Engine\Input\InputManager.h" />
     <ClInclude Include="Engine\Light\LightManager.h" />
+    <ClInclude Include="Engine\Light\PointLight.h" />
+    <ClInclude Include="Engine\Light\SpotLight.h" />
     <ClInclude Include="User\GameScene.h" />
     <ClInclude Include="Engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\IndexBuffer.h" />
@@ -293,7 +297,7 @@
     <ClInclude Include="Engine\Other\YFramework.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shaders\PhoneShader.hlsli" />
+    <None Include="Resources\shaders\PhongShader.hlsli" />
     <None Include="Resources\shaders\ModelBasic.hlsli" />
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>

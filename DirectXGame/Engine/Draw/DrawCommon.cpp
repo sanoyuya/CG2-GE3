@@ -4,12 +4,12 @@
 
 ConstBuffDataMaterial ModelMaterial::GetConstBuffMaterial()
 {
-	ConstBuffDataMaterial rsult;
-	rsult.ambient = ambient;
-	rsult.diffuse = diffuse;
-	rsult.specular = specular;
-	rsult.alpha = alpha;
-	return rsult;
+	ConstBuffDataMaterial result;
+	result.ambient = ambient;
+	result.diffuse = diffuse;
+	result.specular = specular;
+	result.alpha = alpha;
+	return result;
 }
 
 ID3DBlob* DrawCommon::ShaderCompile(const wchar_t* shaderFileName, LPCSTR entrypointName, LPCSTR shaderModelName, ID3DBlob* blob)

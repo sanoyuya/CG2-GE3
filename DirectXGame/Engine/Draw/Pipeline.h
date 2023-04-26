@@ -48,5 +48,6 @@ public://スプライト
 public://モデル
 
 	static void CreateBasicModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
+	static void CreatePhoneModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 	
 };

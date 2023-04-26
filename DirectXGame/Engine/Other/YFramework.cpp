@@ -3,6 +3,7 @@
 #include"SceneFactory.h"
 #include"SceneManager.h"
 #include"imgui.h"
+#include"LightManager.h"
 
 void YFramework::Initialize()
 {
@@ -39,6 +40,8 @@ void YFramework::Initialize()
 	Sprite2D::StaticInitialize();
 
 	Model::StaticInitialize();
+
+	LightManager::StaticInitialize(DirectXBase::GetInstance()->GetDevice().Get());
 
 	//•`‰æ‰Šú‰»ˆ—‚±‚±‚Ü‚Å
 

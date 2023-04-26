@@ -6,6 +6,7 @@ Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Model::cmdList;
 std::vector<std::string>Model::filePaths;
 std::unordered_map<std::string, std::unique_ptr<ModelData>> Model::modelDatas;
+LightManager* Model::lightManager = nullptr;
 uint32_t Model::modelCount;
 std::array <Blob, 3> Model::blob;//シェーダオブジェクト
 std::array <std::array<PipelineSet, 6>, 3> Model::pip;
@@ -20,10 +21,15 @@ void Model::StaticInitialize()
 	for (int i = 0; i < pip.size(); i++)
 	{
 		Pipeline::CreateBasicModelPipline(blob[0], (BlendMode)i, device.Get(), pip[0]);//Basicシェーダー用
-		Pipeline::CreateBasicModelPipline(blob[1], (BlendMode)i, device.Get(), pip[1]);//Phongシェーダー用
+		Pipeline::CreatePhoneModelPipline(blob[1], (BlendMode)i, device.Get(), pip[1]);//Phongシェーダー用
 	}
 
 	filePaths.resize(maxModel);
+}
+
+void Model::SetLight(LightManager* lightManager_)
+{
+	Model::lightManager = lightManager_;
 }
 
 void Model::LoadShader()
@@ -40,9 +46,9 @@ void Model::LoadShader()
 #pragma region Phongシェーダー用
 
 	//頂点シェーダの読み込みとコンパイル
-	blob[1].vs = DrawCommon::ShaderCompile(L"Resources/shaders/PhoneVS.hlsl", "main", "vs_5_0", blob[1].vs.Get());
+	blob[1].vs = DrawCommon::ShaderCompile(L"Resources/shaders/PhongVS.hlsl", "main", "vs_5_0", blob[1].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	blob[1].ps = DrawCommon::ShaderCompile(L"Resources/shaders/PhonePS.hlsl", "main", "ps_5_0", blob[1].ps.Get());
+	blob[1].ps = DrawCommon::ShaderCompile(L"Resources/shaders/PhongPS.hlsl", "main", "ps_5_0", blob[1].ps.Get());
 
 #pragma endregion Phongシェーダー用
 }
@@ -248,12 +254,17 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	// 定数バッファビュー(CBV)の設定コマンド
 	cmdList->SetGraphicsRootConstantBufferView(0, transform->GetconstBuff()->GetGPUVirtualAddress());
 	cmdList->SetGraphicsRootConstantBufferView(1, modelData->constBuffMaterial->GetAddress());
-	cmdList->SetGraphicsRootConstantBufferView(2, col->GetAddress());
 
 	//ライトの描画
 	if (shaderMode != ShaderMode::Basic)
 	{
-
+		//ルートパラメータ2番にライト情報を設定
+		lightManager->Draw(cmdList.Get(), 2);
+	}
+	else
+	{
+		//ルートパラメータ2番に色情報を設定
+		cmdList->SetGraphicsRootConstantBufferView(2, col->GetAddress());
 	}
 
 	// SRVヒープの設定コマンド

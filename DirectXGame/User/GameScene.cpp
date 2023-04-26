@@ -12,8 +12,12 @@ void GameScene::Initialize()
 	camera->Initialize(true);
 	cameraPos = { 0.0f,0.0f,-10.0f };
 
+	lightManager.reset(lightManager->Create());
+	Model::SetLight(lightManager.get());
+
 	//天球
 	model = std::make_unique<DrawOversight>();
+	model->SetShaderMode(ShaderMode::Phong);
 	//model->SetModelBlendMode(BlendMode::Sub);
 	modelTex = Model::CreateObjModel("Resources/skydome2");
 	model->SetModel(modelTex);
@@ -21,6 +25,7 @@ void GameScene::Initialize()
 
 	//球
 	sphere = std::make_unique<DrawOversight>();
+	sphere->SetShaderMode(ShaderMode::Phong);
 	sphereTex = Model::CreateObjModel("Resources/sphere");
 	sphere->SetModel(sphereTex);
 	sphereTrans.Initialize();
@@ -58,6 +63,14 @@ void GameScene::Update()
 	CamMove();
 	Rotation();
 
+	lightManager->Update();
+
+	//ポイントライト
+	lightManager->SetPointLightActive(0, true);
+	lightManager->SetPointLightPos(0, { 0.0f,0.0f ,-2.0f });
+	lightManager->SetPointLightColor(0, { 1.0f,1.0f ,1.0f });
+	lightManager->SetPointLightAtten(0, { 0.3f,0.1f,0.1f });
+
 	modelTrans.TransUpdate(camera.get());//天球
 	triangleTrans.TransUpdate(camera.get());
 
@@ -80,7 +93,7 @@ void GameScene::Draw()
 {
 	triangle->DrawModel(&triangleTrans);
 	model->DrawModel(&modelTrans);
-	sphere->DrawModel(&sphereTrans, color);
+	sphere->DrawModel(&sphereTrans);
 }
 
 void GameScene::Rotation()
