@@ -26,6 +26,8 @@ protected:
 	float window_width = 0.0f;//横幅
 	float window_height = 0.0f;//縦幅
 
+	myMath::Vector4 windowColor = { 0.0f ,0.0f ,0.0f ,0.0f };
+
 	bool endRequest = false;
 
 	WindowsApp* windowsApp = nullptr;
@@ -63,6 +65,8 @@ public:
 	/// <param name="width">ウィンドウの横幅</param>
 	/// <param name="height">ウィンドウの縦幅</param>
 	void SetWindowData(const std::string& title_ = "DirectXGame", const float width = 1280.0f, const float height = 720.0f);
+
+	void SetWindowColor(const myMath::Vector4& color = { 0.1f,0.25f,0.5f,0.0f });
 
 	//実行処理
 	void Run();

@@ -4,6 +4,7 @@
 void MyGame::Initialize()
 {
 	YFramework::SetWindowData();
+	YFramework::SetWindowColor();
 
 	//Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
 	YFramework::Initialize();

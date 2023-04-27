@@ -86,6 +86,11 @@ void YFramework::SetWindowData(const std::string& title_, const float width, con
 	window_height = height;//c•
 }
 
+void YFramework::SetWindowColor(const myMath::Vector4& color)
+{
+	DirectXBase::GetInstance()->SetClearColor(color);
+}
+
 void YFramework::Run()
 {
 	//‰Šú‰»ˆ—

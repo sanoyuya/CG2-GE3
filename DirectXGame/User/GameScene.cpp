@@ -19,14 +19,14 @@ void GameScene::Initialize()
 	model = std::make_unique<DrawOversight>();
 	model->SetShaderMode(ShaderMode::Phong);
 	//model->SetModelBlendMode(BlendMode::Sub);
-	modelTex = Model::CreateObjModel("Resources/skydome2");
+	modelTex = Model::CreateObjModel("Resources/skydome");
 	model->SetModel(modelTex);
 	modelTrans.Initialize();
 
 	//‹…
 	sphere = std::make_unique<DrawOversight>();
 	sphere->SetShaderMode(ShaderMode::Phong);
-	sphereTex = Model::CreateObjModel("Resources/sphere");
+	sphereTex = Model::CreateObjModel("Resources/sphere",true);
 	sphere->SetModel(sphereTex);
 	sphereTrans.Initialize();
 
