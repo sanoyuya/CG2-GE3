@@ -21,7 +21,7 @@ void Model::StaticInitialize()
 	for (int i = 0; i < pip.size(); i++)
 	{
 		Pipeline::CreateBasicModelPipline(blob[0], (BlendMode)i, device.Get(), pip[0]);//Basicシェーダー用
-		Pipeline::CreatePhoneModelPipline(blob[1], (BlendMode)i, device.Get(), pip[1]);//Phongシェーダー用
+		Pipeline::CreatePhongModelPipline(blob[1], (BlendMode)i, device.Get(), pip[1]);//Phongシェーダー用
 	}
 
 	filePaths.resize(maxModel);
@@ -254,17 +254,14 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	// 定数バッファビュー(CBV)の設定コマンド
 	cmdList->SetGraphicsRootConstantBufferView(0, transform->GetconstBuff()->GetGPUVirtualAddress());
 	cmdList->SetGraphicsRootConstantBufferView(1, modelData->constBuffMaterial->GetAddress());
+	//ルートパラメータ2番に色情報を設定
+	cmdList->SetGraphicsRootConstantBufferView(2, col->GetAddress());
 
 	//ライトの描画
 	if (shaderMode != ShaderMode::Basic)
 	{
 		//ルートパラメータ2番にライト情報を設定
-		lightManager->Draw(cmdList.Get(), 2);
-	}
-	else
-	{
-		//ルートパラメータ2番に色情報を設定
-		cmdList->SetGraphicsRootConstantBufferView(2, col->GetAddress());
+		lightManager->Draw(cmdList.Get(), 4);
 	}
 
 	// SRVヒープの設定コマンド

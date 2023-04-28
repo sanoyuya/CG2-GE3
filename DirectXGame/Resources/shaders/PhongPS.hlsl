@@ -124,5 +124,5 @@ float4 main(VSOutput input) : SV_TARGET
     }
 
     //シェーディングによる色で描画
-    return shaderColor * texcolor;
+    return shaderColor * texcolor * color;
 }

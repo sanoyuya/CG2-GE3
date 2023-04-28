@@ -14,6 +14,9 @@ void GameScene::Initialize()
 
 	lightManager.reset(lightManager->Create());
 	Model::SetLight(lightManager.get());
+	lightPos = { 0.0f,2.0f,0.0f };
+	lightColor = { 1.0f,1.0f ,1.0f };
+	lightAtten = { 0.3f,0.1f,0.1f };
 
 	//天球
 	model = std::make_unique<DrawOversight>();
@@ -67,9 +70,9 @@ void GameScene::Update()
 
 	//ポイントライト
 	lightManager->SetPointLightActive(0, true);
-	lightManager->SetPointLightPos(0, { 0.0f,0.0f ,-2.0f });
-	lightManager->SetPointLightColor(0, { 1.0f,1.0f ,1.0f });
-	lightManager->SetPointLightAtten(0, { 0.3f,0.1f,0.1f });
+	lightManager->SetPointLightPos(0, lightPos);
+	lightManager->SetPointLightColor(0, lightColor);
+	lightManager->SetPointLightAtten(0, lightAtten);
 
 	modelTrans.TransUpdate(camera.get());//天球
 	triangleTrans.TransUpdate(camera.get());
@@ -79,21 +82,23 @@ void GameScene::Update()
 	sphereTrans.translation.x = spherePos.center.x;
 	sphereTrans.TransUpdate(camera.get());//球
 
-	if (Collision::SphereToTriangle(spherePos, trianglePos))
+	/*if (Collision::SphereToTriangle(spherePos, trianglePos))
 	{
 		color = { 1.0f,0.0f,0.0f,1.0f };
 	}
 	else
 	{
 		color = { 1.0f,1.0f,1.0f,1.0f };
-	}
+	}*/
+
+	ImGuiUpdate();
 }
 
 void GameScene::Draw()
 {
 	triangle->DrawModel(&triangleTrans);
 	model->DrawModel(&modelTrans);
-	sphere->DrawModel(&sphereTrans);
+	sphere->DrawModel(&sphereTrans, color);
 }
 
 void GameScene::Rotation()
@@ -123,4 +128,16 @@ void GameScene::CamMove()
 	camera->SetEye(cameraPos);
 	camera->SetTarget({ 0.0f,0.0f ,0.0f });
 	camera->Update(true);
+}
+
+void GameScene::ImGuiUpdate()
+{
+	ImGui::Begin("sphere");
+	ImGui::ColorEdit4("color", &color.x);
+	ImGui::End();
+	ImGui::Begin("light");
+	ImGui::SliderFloat3("position", &lightPos.x, -10.0f, 10.0f);
+	ImGui::ColorEdit3("color", &lightColor.x);
+	ImGui::SliderFloat3("ateen", &lightAtten.x, 0.0f, 1.0f);
+	ImGui::End();
 }

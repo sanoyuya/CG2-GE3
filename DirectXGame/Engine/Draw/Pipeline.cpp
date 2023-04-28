@@ -364,7 +364,7 @@ void Pipeline::CreateBasicModelPipline(Blob& blob, BlendMode blend, ID3D12Device
 	assert(SUCCEEDED(result));
 }
 
-void Pipeline::CreatePhoneModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip)
+void Pipeline::CreatePhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip)
 {
 	HRESULT result;
 
@@ -497,7 +497,7 @@ void Pipeline::CreatePhoneModelPipline(Blob& blob, BlendMode blend, ID3D12Device
 	pipelineDesc.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
 
 	//ルートパラメータの設定
-	D3D12_ROOT_PARAMETER rootParams[4] = {};
+	D3D12_ROOT_PARAMETER rootParams[5] = {};
 	//ルートパラメータの設定
 	//行列
 	rootParams[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//定数バッファビュー
@@ -511,7 +511,7 @@ void Pipeline::CreatePhoneModelPipline(Blob& blob, BlendMode blend, ID3D12Device
 	rootParams[1].Descriptor.RegisterSpace = 0;						//デフォルト値
 	rootParams[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	//全てのシェーダから見える
 
-	//ライト情報
+	//色
 	rootParams[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//定数バッファビュー
 	rootParams[2].Descriptor.ShaderRegister = 2;					//定数バッファ番号
 	rootParams[2].Descriptor.RegisterSpace = 0;						//デフォルト値
@@ -528,6 +528,12 @@ void Pipeline::CreatePhoneModelPipline(Blob& blob, BlendMode blend, ID3D12Device
 	rootParams[3].DescriptorTable.pDescriptorRanges = &descriptorRange;			//デスクリプタレンジ
 	rootParams[3].DescriptorTable.NumDescriptorRanges = 1;						//デスクリプタレンジ数
 	rootParams[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;				//全てのシェーダから見える
+
+	//ライト情報
+	rootParams[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//定数バッファビュー
+	rootParams[4].Descriptor.ShaderRegister = 4;					//定数バッファ番号
+	rootParams[4].Descriptor.RegisterSpace = 0;						//デフォルト値
+	rootParams[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	//全てのシェーダから見える
 
 	//テクスチャサンプラーの設定
 	D3D12_STATIC_SAMPLER_DESC samplerDesc{};

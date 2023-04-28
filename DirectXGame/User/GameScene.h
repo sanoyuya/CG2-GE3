@@ -17,6 +17,10 @@ private:
 	AudioManager* audioManager = nullptr;
 
 	std::unique_ptr<Camera>camera;
+	std::unique_ptr<LightManager>lightManager;
+	myMath::Vector3 lightPos = { 0.0f,0.0f ,0.0f };
+	myMath::Vector3 lightColor = { 0.0f,0.0f ,0.0f };
+	myMath::Vector3 lightAtten = { 0.0f,0.0f ,0.0f };
 
 	//“V‹…
 	std::unique_ptr<DrawOversight>model;
@@ -30,7 +34,7 @@ private:
 	uint32_t sphereTex2;
 	Sphere spherePos;
 	float sphereTime;
-	myMath::Vector4 color = { 0.0f,0.0f,0.0f ,0.0f };
+	myMath::Vector4 color = { 0.0f,1.0f,1.0f ,1.0f };
 
 	//ŽOŠpŒ`
 	std::unique_ptr<DrawOversight>triangle;
@@ -42,8 +46,6 @@ private:
 	float angleX = 0.0f;
 	float angleY = 0.0f;
 	const float length = 50.0f;
-
-	std::unique_ptr<LightManager>lightManager;
 
 public:
 
@@ -60,6 +62,8 @@ public:
 	void Draw()override;
 
 private:
+
 	void Rotation();
 	void CamMove();
+	void ImGuiUpdate();
 };

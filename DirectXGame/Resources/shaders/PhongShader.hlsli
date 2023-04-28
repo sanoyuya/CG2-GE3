@@ -13,6 +13,11 @@ cbuffer cbuff1 : register(b1)
     float m_alpha : packoffset(c2.w); // ƒAƒ‹ƒtƒ@
 }
 
+cbuffer cbuff2 : register(b2)
+{
+    float4 color;
+}
+
 static const int DIRLIGHT_NUM = 3;
 
 struct DirLight
@@ -57,7 +62,7 @@ struct CircleShadow
     uint active;
 };
 
-cbuffer cbuff2 : register(b2)
+cbuffer cbuff3 : register(b4)
 {
     float3 ambientColor;
     DirLight dirLights[DIRLIGHT_NUM];
