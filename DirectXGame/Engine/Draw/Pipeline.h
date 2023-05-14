@@ -18,7 +18,7 @@ enum class ShaderMode
 {
 	Basic,//標準
 	Phong,//フォンシェーディング
-	Lambert,//ランバートシェーディング
+	Toon,//トゥーンシェーディング
 };
 
 struct PipelineSet

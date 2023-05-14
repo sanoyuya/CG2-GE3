@@ -23,24 +23,24 @@ private:
 	myMath::Vector3 lightAtten = { 0.0f,0.0f ,0.0f };
 
 	//天球
-	std::unique_ptr<DrawOversight>model;
+	std::unique_ptr<Model>model;
 	Transform modelTrans;
 	uint32_t modelTex;
 
 	//球
-	std::unique_ptr<DrawOversight>sphere;
+	std::unique_ptr<Model>sphere;
 	Transform sphereTrans;
 	uint32_t sphereTex;
 	uint32_t sphereTex2;
 	Sphere spherePos;
 	float sphereTime;
-	myMath::Vector4 color = { 0.0f,1.0f,1.0f ,1.0f };
+	myMath::Vector4 color = { 0.5f,0.0f,0.0f ,1.0f };
+	bool texFlag = false;
 
-	//三角形
-	std::unique_ptr<DrawOversight>triangle;
-	Triangle trianglePos;
-	Transform triangleTrans;
-	uint32_t triangleTex = 0;
+	//飛行機
+	std::unique_ptr<Model>sphere2;
+	Transform sphere2Trans;
+	uint32_t sphere2Tex = 0;
 
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;

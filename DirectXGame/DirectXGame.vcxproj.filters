@@ -97,6 +97,18 @@
     <Filter Include="Engine\ヘッダーファイル\Light">
       <UniqueIdentifier>{7ad63905-94e1-4208-9325-97560865285b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\リソース ファイル\Model">
+      <UniqueIdentifier>{8dc07167-c61a-4f20-a696-0a25fd5a5199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\リソース ファイル\Model\Basic">
+      <UniqueIdentifier>{1cb0fd7a-b27e-4df4-af3e-00959b676a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\リソース ファイル\Model\Phong">
+      <UniqueIdentifier>{b7be16ba-3da8-4bea-9e17-db6d66109dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\リソース ファイル\Model\Toon">
+      <UniqueIdentifier>{4a135746-7a25-4adc-af52-9f5f054f94cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -240,16 +252,22 @@
       <Filter>Engine\リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\ModelBasicVS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongVS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\PhongPS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル\Model\Phong</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PhongVS.hlsl">
+      <Filter>Engine\リソース ファイル\Model\Phong</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ToonPS.hlsl">
+      <Filter>Engine\リソース ファイル\Model\Toon</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ToonVS.hlsl">
+      <Filter>Engine\リソース ファイル\Model\Toon</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,10 +424,13 @@
       <Filter>Engine\リソース ファイル</Filter>
     </None>
     <None Include="Resources\shaders\ModelBasic.hlsli">
-      <Filter>Engine\リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </None>
     <None Include="Resources\shaders\PhongShader.hlsli">
-      <Filter>Engine\リソース ファイル</Filter>
+      <Filter>Engine\リソース ファイル\Model\Phong</Filter>
+    </None>
+    <None Include="Resources\shaders\ToonShader.hlsli">
+      <Filter>Engine\リソース ファイル\Model\Toon</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -14,42 +14,33 @@ void GameScene::Initialize()
 
 	lightManager.reset(lightManager->Create());
 	Model::SetLight(lightManager.get());
-	lightPos = { 0.0f,2.0f,0.0f };
+	lightPos = { 0.0f,0.0f,-2.0f };
 	lightColor = { 1.0f,1.0f ,1.0f };
 	lightAtten = { 0.3f,0.1f,0.1f };
 
 	//天球
-	model = std::make_unique<DrawOversight>();
-	model->SetShaderMode(ShaderMode::Phong);
+	model = std::make_unique<Model>();
 	//model->SetModelBlendMode(BlendMode::Sub);
 	modelTex = Model::CreateObjModel("Resources/skydome");
 	model->SetModel(modelTex);
 	modelTrans.Initialize();
 
-	//球
-	sphere = std::make_unique<DrawOversight>();
+	sphereTex = Model::CreateObjModel("Resources/sphere", true);
+	sphere2Tex = Model::CreateObjModel("Resources/sphere2",true);
+	
+	//左側の球
+	sphere = std::make_unique<Model>();
 	sphere->SetShaderMode(ShaderMode::Phong);
-	sphereTex = Model::CreateObjModel("Resources/sphere",true);
 	sphere->SetModel(sphereTex);
 	sphereTrans.Initialize();
+	sphereTrans.translation.x = -2.0f;
 
-	//球の初期値を設定
-	spherePos.center = { 0.0f,-1.0f,0.0f,1.0f };
-	spherePos.radius = 1.0f;//半径
-	sphereTrans.translation.y = spherePos.center.y;
-
-	//床
-	triangle = std::make_unique<DrawOversight>();
-	triangleTex = Model::CreateObjModel("Resources/triangle");
-	triangle->SetModel(triangleTex);
-	triangleTrans.Initialize();
-	triangleTrans.rotation.x = -myMath::AX_PIF/2;
-
-	//平面の初期値を設定
-	trianglePos.p0 = { -1.000000f, 1.000000f, 0.000000f,1.0f };
-	trianglePos.p1 = { -1.000000f, -1.000000f, 0.000000f,1.0f };
-	trianglePos.p2 = { 1.000000f, 1.000000f, 0.000000f,1.0f };
-	trianglePos.normal = { 0.0f,0.0f ,0.0f ,0.0f };
+	//右側の球
+	sphere2 = std::make_unique<Model>();
+	sphere2->SetShaderMode(ShaderMode::Toon);
+	sphere2->SetModel(sphereTex);
+	sphere2Trans.Initialize();
+	sphere2Trans.translation.x = 2.0f;
 }
 
 void GameScene::Destroy()
@@ -58,10 +49,10 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
-	if (input->KeyboardTriggerPush(DIK_SPACE))
+	/*if (input->KeyboardTriggerPush(DIK_SPACE))
 	{
 		SceneManager::GetInstance()->ChangeScene("TITLE");
-	}
+	}*/
 
 	CamMove();
 	Rotation();
@@ -75,28 +66,15 @@ void GameScene::Update()
 	lightManager->SetPointLightAtten(0, lightAtten);
 
 	modelTrans.TransUpdate(camera.get());//天球
-	triangleTrans.TransUpdate(camera.get());
-
-	sphereTime++;
-	spherePos.center.x = PhysicsMath::SimpleHarmonicMotion(sphereTime, 3.0f, 120.0f);
-	sphereTrans.translation.x = spherePos.center.x;
 	sphereTrans.TransUpdate(camera.get());//球
-
-	/*if (Collision::SphereToTriangle(spherePos, trianglePos))
-	{
-		color = { 1.0f,0.0f,0.0f,1.0f };
-	}
-	else
-	{
-		color = { 1.0f,1.0f,1.0f,1.0f };
-	}*/
+	sphere2Trans.TransUpdate(camera.get());
 
 	ImGuiUpdate();
 }
 
 void GameScene::Draw()
 {
-	triangle->DrawModel(&triangleTrans);
+	sphere2->DrawModel(&sphere2Trans, color);
 	model->DrawModel(&modelTrans);
 	sphere->DrawModel(&sphereTrans, color);
 }
@@ -104,6 +82,7 @@ void GameScene::Draw()
 void GameScene::Rotation()
 {
 	sphereTrans.rotation.y -= 0.02f;
+	sphere2Trans.rotation.y -= 0.02f;
 }
 
 void GameScene::CamMove()
@@ -134,6 +113,21 @@ void GameScene::ImGuiUpdate()
 {
 	ImGui::Begin("sphere");
 	ImGui::ColorEdit4("color", &color.x);
+	if(ImGui::Button("texFlag"))
+	{
+		if (texFlag == false)
+		{
+			sphere->SetModel(sphereTex);
+			sphere2->SetModel(sphereTex);
+			texFlag = true;
+		}
+		else
+		{
+			sphere->SetModel(sphere2Tex);
+			sphere2->SetModel(sphere2Tex);
+			texFlag = false;
+		}
+	}
 	ImGui::End();
 	ImGui::Begin("light");
 	ImGui::SliderFloat3("position", &lightPos.x, -10.0f, 10.0f);

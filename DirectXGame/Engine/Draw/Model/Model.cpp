@@ -8,8 +8,8 @@ std::vector<std::string>Model::filePaths;
 std::unordered_map<std::string, std::unique_ptr<ModelData>> Model::modelDatas;
 LightManager* Model::lightManager = nullptr;
 uint32_t Model::modelCount;
-std::array <Blob, 3> Model::blob;//シェーダオブジェクト
-std::array <std::array<PipelineSet, 6>, 3> Model::pip;
+std::array <Blob, 5> Model::blob;//シェーダオブジェクト
+std::array <std::array<PipelineSet, 6>, 5> Model::pip;
 
 void Model::StaticInitialize()
 {
@@ -22,6 +22,7 @@ void Model::StaticInitialize()
 	{
 		Pipeline::CreateBasicModelPipline(blob[0], (BlendMode)i, device.Get(), pip[0]);//Basicシェーダー用
 		Pipeline::CreatePhongModelPipline(blob[1], (BlendMode)i, device.Get(), pip[1]);//Phongシェーダー用
+		Pipeline::CreatePhongModelPipline(blob[2], (BlendMode)i, device.Get(), pip[2]);//Toonシェーダー用
 	}
 
 	filePaths.resize(maxModel);
@@ -51,6 +52,15 @@ void Model::LoadShader()
 	blob[1].ps = DrawCommon::ShaderCompile(L"Resources/shaders/PhongPS.hlsl", "main", "ps_5_0", blob[1].ps.Get());
 
 #pragma endregion Phongシェーダー用
+
+#pragma region Toonシェーダー用
+
+	//頂点シェーダの読み込みとコンパイル
+	blob[2].vs = DrawCommon::ShaderCompile(L"Resources/shaders/ToonVS.hlsl", "main", "vs_5_0", blob[2].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	blob[2].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ToonPS.hlsl", "main", "ps_5_0", blob[2].ps.Get());
+
+#pragma endregion Toonシェーダー用
 }
 
 void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
@@ -73,7 +83,11 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[1][0].rootSignature.Get());
 
 			break;
-		case ShaderMode::Lambert:
+		case ShaderMode::Toon:
+
+			cmdList->SetPipelineState(pip[2][0].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[2][0].rootSignature.Get());
+
 			break;
 		}
 
@@ -95,7 +109,11 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[1][1].rootSignature.Get());
 
 			break;
-		case ShaderMode::Lambert:
+		case ShaderMode::Toon:
+
+			cmdList->SetPipelineState(pip[2][1].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[2][1].rootSignature.Get());
+
 			break;
 		}
 
@@ -117,7 +135,11 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[1][2].rootSignature.Get());
 
 			break;
-		case ShaderMode::Lambert:
+		case ShaderMode::Toon:
+
+			cmdList->SetPipelineState(pip[2][2].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[2][2].rootSignature.Get());
+
 			break;
 		}
 
@@ -139,7 +161,11 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[1][3].rootSignature.Get());
 
 			break;
-		case ShaderMode::Lambert:
+		case ShaderMode::Toon:
+
+			cmdList->SetPipelineState(pip[2][3].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[2][3].rootSignature.Get());
+
 			break;
 		}
 
@@ -161,7 +187,11 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[1][4].rootSignature.Get());
 
 			break;
-		case ShaderMode::Lambert:
+		case ShaderMode::Toon:
+
+			cmdList->SetPipelineState(pip[2][4].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[2][4].rootSignature.Get());
+
 			break;
 		}
 
@@ -183,7 +213,11 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[1][5].rootSignature.Get());
 
 			break;
-		case ShaderMode::Lambert:
+		case ShaderMode::Toon:
+
+			cmdList->SetPipelineState(pip[2][5].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[2][5].rootSignature.Get());
+
 			break;
 		}
 
