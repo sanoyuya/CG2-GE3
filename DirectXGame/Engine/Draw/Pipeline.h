@@ -19,6 +19,7 @@ enum class ShaderMode
 	Basic,//標準
 	Phong,//フォンシェーディング
 	Toon,//トゥーンシェーディング
+	RimLight,//リムライト
 };
 
 struct PipelineSet

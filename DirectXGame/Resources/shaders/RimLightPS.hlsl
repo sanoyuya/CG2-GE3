@@ -1,4 +1,4 @@
-#include"Toon.hlsli"
+#include"RimLight.hlsli"
 
 Texture2D<float4> tex : register(t0); // 0番スロットに設定されたテクスチャ
 SamplerState smp : register(s0); // 0番スロットに設定されたサンプラー
@@ -57,8 +57,11 @@ float4 main(VSOutput input) : SV_TARGET
             float3 diffuse = smoothstep(0.45, 0.5, saturate(dot(normalize(input.normal), lightv))) * texcolor.rgb * color.rgb * pointLights[i].lightColor;
             //鏡面反射光
             float3 specular = smoothstep(0.45, 0.5, pow(saturate(dot(reflect, eyedir)), shininess * m_diffuse)) * m_specular * pointLights[i].lightColor;
+            
+            float rim = 1 - step(0.3, dot(lightv, input.normal));
+            
             //全て加算する
-            shaderColor.rgb += atten * saturate(diffuse + specular);
+            shaderColor.rgb += atten * saturate(rim + diffuse + specular);
         }
     }
     
@@ -88,8 +91,11 @@ float4 main(VSOutput input) : SV_TARGET
             float3 diffuse = smoothstep(0.45, 0.5, saturate(dot(normalize(input.normal), lightv))) * texcolor.rgb * color.rgb * spotLights[i].lightColor;
             //鏡面反射光
             float3 specular = smoothstep(0.45, 0.5, pow(saturate(dot(reflect, eyedir)), shininess * m_diffuse)) * m_specular * spotLights[i].lightColor;
+            
+            float rim = 1 - step(0.3, dot(lightv, input.normal));
+            
             //全て加算する
-            shaderColor.rgb += atten * (diffuse + specular) * spotLights[i].lightColor;
+            shaderColor.rgb += atten * (rim + diffuse + specular) * spotLights[i].lightColor;
         }
     }
     

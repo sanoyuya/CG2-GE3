@@ -23,6 +23,7 @@ void Model::StaticInitialize()
 		Pipeline::CreateBasicModelPipline(blob[0], (BlendMode)i, device.Get(), pip[0]);//Basicシェーダー用
 		Pipeline::CreatePhongModelPipline(blob[1], (BlendMode)i, device.Get(), pip[1]);//Phongシェーダー用
 		Pipeline::CreatePhongModelPipline(blob[2], (BlendMode)i, device.Get(), pip[2]);//Toonシェーダー用
+		Pipeline::CreatePhongModelPipline(blob[3], (BlendMode)i, device.Get(), pip[3]);//リムライト用
 	}
 
 	filePaths.resize(maxModel);
@@ -61,6 +62,15 @@ void Model::LoadShader()
 	blob[2].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ToonPS.hlsl", "main", "ps_5_0", blob[2].ps.Get());
 
 #pragma endregion Toonシェーダー用
+
+#pragma region リムライト用
+
+	//頂点シェーダの読み込みとコンパイル
+	blob[3].vs = DrawCommon::ShaderCompile(L"Resources/shaders/RimLightVS.hlsl", "main", "vs_5_0", blob[3].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	blob[3].ps = DrawCommon::ShaderCompile(L"Resources/shaders/RimLightPS.hlsl", "main", "ps_5_0", blob[3].ps.Get());
+
+#pragma endregion リムライト用
 }
 
 void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
@@ -89,6 +99,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[2][0].rootSignature.Get());
 
 			break;
+		case ShaderMode::RimLight:
+
+			cmdList->SetPipelineState(pip[3][0].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[3][0].rootSignature.Get());
+
+			break;
 		}
 
 		break;
@@ -113,6 +129,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 
 			cmdList->SetPipelineState(pip[2][1].pipelineState.Get());
 			cmdList->SetGraphicsRootSignature(pip[2][1].rootSignature.Get());
+
+			break;
+		case ShaderMode::RimLight:
+
+			cmdList->SetPipelineState(pip[3][1].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[3][1].rootSignature.Get());
 
 			break;
 		}
@@ -141,6 +163,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[2][2].rootSignature.Get());
 
 			break;
+		case ShaderMode::RimLight:
+
+			cmdList->SetPipelineState(pip[3][2].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[3][2].rootSignature.Get());
+
+			break;
 		}
 
 		break;
@@ -165,6 +193,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 
 			cmdList->SetPipelineState(pip[2][3].pipelineState.Get());
 			cmdList->SetGraphicsRootSignature(pip[2][3].rootSignature.Get());
+
+			break;
+		case ShaderMode::RimLight:
+
+			cmdList->SetPipelineState(pip[3][3].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[3][3].rootSignature.Get());
 
 			break;
 		}
@@ -193,6 +227,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			cmdList->SetGraphicsRootSignature(pip[2][4].rootSignature.Get());
 
 			break;
+		case ShaderMode::RimLight:
+
+			cmdList->SetPipelineState(pip[3][4].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[3][4].rootSignature.Get());
+
+			break;
 		}
 
 		break;
@@ -217,6 +257,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 
 			cmdList->SetPipelineState(pip[2][5].pipelineState.Get());
 			cmdList->SetGraphicsRootSignature(pip[2][5].rootSignature.Get());
+
+			break;
+		case ShaderMode::RimLight:
+
+			cmdList->SetPipelineState(pip[3][5].pipelineState.Get());
+			cmdList->SetGraphicsRootSignature(pip[3][5].rootSignature.Get());
 
 			break;
 		}

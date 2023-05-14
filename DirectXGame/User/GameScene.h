@@ -27,7 +27,7 @@ private:
 	Transform modelTrans;
 	uint32_t modelTex;
 
-	//球
+	//Phong球
 	std::unique_ptr<Model>sphere;
 	Transform sphereTrans;
 	uint32_t sphereTex;
@@ -37,10 +37,18 @@ private:
 	myMath::Vector4 color = { 0.5f,0.0f,0.0f ,1.0f };
 	bool texFlag = false;
 
-	//飛行機
+	//Toon球
 	std::unique_ptr<Model>sphere2;
 	Transform sphere2Trans;
 	uint32_t sphere2Tex = 0;
+
+	//リムライト球
+	std::unique_ptr<Model>sphere3;
+	Transform sphere3Trans;
+
+	std::unique_ptr<Model>lightSphere;
+	Transform lightSphereTrans;
+	bool lightDisplayFlag = false;
 
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;

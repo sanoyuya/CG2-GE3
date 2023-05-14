@@ -109,6 +109,12 @@
     <Filter Include="Engine\リソース ファイル\Model\Toon">
       <UniqueIdentifier>{4a135746-7a25-4adc-af52-9f5f054f94cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\リソース ファイル\Sprite">
+      <UniqueIdentifier>{fa06dded-f5ff-4703-8350-c1c9f99b718b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\リソース ファイル\Model\RimLight">
+      <UniqueIdentifier>{488cf6c5-ef61-4bbf-affc-685378b4a19c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -245,12 +251,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
-      <Filter>Engine\リソース ファイル</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
       <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </FxCompile>
@@ -268,6 +268,18 @@
     </FxCompile>
     <FxCompile Include="Resources\shaders\ToonVS.hlsl">
       <Filter>Engine\リソース ファイル\Model\Toon</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
+      <Filter>Engine\リソース ファイル\Sprite</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
+      <Filter>Engine\リソース ファイル\Sprite</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\RimLightPS.hlsl">
+      <Filter>Engine\リソース ファイル\Model\RimLight</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\RimLightVS.hlsl">
+      <Filter>Engine\リソース ファイル\Model\RimLight</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -420,16 +432,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shaders\Sprite.hlsli">
-      <Filter>Engine\リソース ファイル</Filter>
-    </None>
     <None Include="Resources\shaders\ModelBasic.hlsli">
       <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </None>
     <None Include="Resources\shaders\PhongShader.hlsli">
       <Filter>Engine\リソース ファイル\Model\Phong</Filter>
     </None>
-    <None Include="Resources\shaders\ToonShader.hlsli">
+    <None Include="Resources\shaders\Sprite.hlsli">
+      <Filter>Engine\リソース ファイル\Sprite</Filter>
+    </None>
+    <None Include="Resources\shaders\RimLight.hlsli">
+      <Filter>Engine\リソース ファイル\Model\RimLight</Filter>
+    </None>
+    <None Include="Resources\shaders\Toon.hlsli">
       <Filter>Engine\リソース ファイル\Model\Toon</Filter>
     </None>
   </ItemGroup>

@@ -28,19 +28,32 @@ void GameScene::Initialize()
 	sphereTex = Model::CreateObjModel("Resources/sphere", true);
 	sphere2Tex = Model::CreateObjModel("Resources/sphere2",true);
 	
-	//左側の球
+	//左の球
 	sphere = std::make_unique<Model>();
 	sphere->SetShaderMode(ShaderMode::Phong);
 	sphere->SetModel(sphereTex);
 	sphereTrans.Initialize();
-	sphereTrans.translation.x = -2.0f;
+	sphereTrans.translation.x = -3.0f;
 
-	//右側の球
+	//真ん中の球
 	sphere2 = std::make_unique<Model>();
 	sphere2->SetShaderMode(ShaderMode::Toon);
 	sphere2->SetModel(sphereTex);
 	sphere2Trans.Initialize();
-	sphere2Trans.translation.x = 2.0f;
+
+	//右の球
+	sphere3 = std::make_unique<Model>();
+	sphere3->SetShaderMode(ShaderMode::RimLight);
+	sphere3->SetModel(sphereTex);
+	sphere3Trans.Initialize();
+	sphere3Trans.translation.x = 3.0f;
+
+	lightSphere = std::make_unique<Model>();
+	lightSphere->SetModel(sphereTex);
+	lightSphereTrans.Initialize();
+	lightSphereTrans.scale.x = 0.25f;
+	lightSphereTrans.scale.y = 0.25f;
+	lightSphereTrans.scale.z = 0.25f;
 }
 
 void GameScene::Destroy()
@@ -65,24 +78,33 @@ void GameScene::Update()
 	lightManager->SetPointLightColor(0, lightColor);
 	lightManager->SetPointLightAtten(0, lightAtten);
 
+	ImGuiUpdate();
+
 	modelTrans.TransUpdate(camera.get());//天球
 	sphereTrans.TransUpdate(camera.get());//球
 	sphere2Trans.TransUpdate(camera.get());
-
-	ImGuiUpdate();
+	sphere3Trans.TransUpdate(camera.get());
+	lightSphereTrans.translation = lightPos;
+	lightSphereTrans.TransUpdate(camera.get());
 }
 
 void GameScene::Draw()
 {
-	sphere2->DrawModel(&sphere2Trans, color);
 	model->DrawModel(&modelTrans);
 	sphere->DrawModel(&sphereTrans, color);
+	sphere2->DrawModel(&sphere2Trans, color);
+	sphere3->DrawModel(&sphere3Trans, color);
+	if (lightDisplayFlag)
+	{
+		lightSphere->DrawModel(&lightSphereTrans, { lightColor.x,lightColor.y,lightColor.z,0.5f });
+	}
 }
 
 void GameScene::Rotation()
 {
 	sphereTrans.rotation.y -= 0.02f;
 	sphere2Trans.rotation.y -= 0.02f;
+	sphere3Trans.rotation.y -= 0.02f;
 }
 
 void GameScene::CamMove()
@@ -119,12 +141,14 @@ void GameScene::ImGuiUpdate()
 		{
 			sphere->SetModel(sphereTex);
 			sphere2->SetModel(sphereTex);
+			sphere3->SetModel(sphereTex);
 			texFlag = true;
 		}
 		else
 		{
 			sphere->SetModel(sphere2Tex);
 			sphere2->SetModel(sphere2Tex);
+			sphere3->SetModel(sphere2Tex);
 			texFlag = false;
 		}
 	}
@@ -132,6 +156,17 @@ void GameScene::ImGuiUpdate()
 	ImGui::Begin("light");
 	ImGui::SliderFloat3("position", &lightPos.x, -10.0f, 10.0f);
 	ImGui::ColorEdit3("color", &lightColor.x);
-	ImGui::SliderFloat3("ateen", &lightAtten.x, 0.0f, 1.0f);
+	ImGui::SliderFloat3("atten", &lightAtten.x, 0.0f, 1.0f);
+	if (ImGui::Button("lightDisplayFlag"))
+	{
+		if (lightDisplayFlag == false)
+		{
+			lightDisplayFlag = true;
+		}
+		else
+		{
+			lightDisplayFlag = false;
+		}
+	}
 	ImGui::End();
 }
