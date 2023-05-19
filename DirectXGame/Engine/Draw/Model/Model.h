@@ -108,7 +108,7 @@ public:
 	/// ワールド行列の取得
 	/// </summary>
 	/// <returns>ワールド行列</returns>
-	myMath::Matrix4& GetMatWorld();
+	const myMath::Matrix4& GetMatWorld();
 
 	/// <summary>
 	/// 頂点座標を取得
@@ -126,19 +126,19 @@ public:
 	/// モデルデータのセット
 	/// </summary>
 	/// <param name="modelHandle">モデルのハンドル</param>
-	void SetModel(uint32_t modelHandle);
+	void SetModel(const uint32_t& modelHandle);
 
 	/// <summary>
 	/// ブレンドモードのセット
 	/// </summary>
 	/// <param name="mode">ブレンドモード</param>
-	void SetModelBlendMode(BlendMode mode);
+	void SetModelBlendMode(const BlendMode& mode);
 
 	/// <summary>
 	/// シェーダーモードのセット
 	/// </summary>
 	/// <param name="mode">シェーダーモード</param>
-	void SetShaderMode(ShaderMode mode);
+	void SetShaderMode(const ShaderMode& mode);
 
 	Model();
 	~Model() = default;

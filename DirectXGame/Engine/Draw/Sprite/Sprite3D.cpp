@@ -45,7 +45,7 @@ void Sprite3D::DrawSprite3D(Camera* camera, Transform& transform, BillboardFlag 
 	Update(camera, transform, flag);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet(blendMode);
 
 	//描画コマンド
 	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
@@ -89,7 +89,7 @@ void Sprite3D::DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Ve
 	Update(camera, transform, billboardFlag);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet(blendMode);
 
 	//描画コマンド
 	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
@@ -152,15 +152,15 @@ void Sprite3D::DrawAnimationSpriteXY3D(Camera* camera, Transform& transform, uin
 	Update(camera, transform, billboardFlag);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet(blendMode);
 
 	//描画コマンド
 	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
 }
 
-void Sprite3D::SetSprite3DBlendMode(BlendMode mode)
+void Sprite3D::SetSprite3DBlendMode(const BlendMode& mode)
 {
-	blendMode = static_cast<int>(mode);
+	blendMode = mode;
 }
 
 void Sprite3D::CreateVertexIndexBuffer()
@@ -181,6 +181,7 @@ void Sprite3D::CreateConstBuff()
 void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 {
 	myMath::Matrix4 mTrans, mRot, mScale;
+	myMath::Matrix4 mat = camera->GetMatView();
 
 	//平行移動行列
 	mTrans.MakeTranslation(transform.translation);
@@ -196,75 +197,60 @@ void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 		break;
 	case BillboardFlag::AllBillboard:
 
-		{
-			myMath::Matrix4 Allmat = camera->GetMatView();
+		mat.m[3][0] = 0;
+		mat.m[3][1] = 0;
+		mat.m[3][2] = 0;
+		mat.m[3][3] = 1;
 
-			Allmat.m[3][0] = 0;
-			Allmat.m[3][1] = 0;
-			Allmat.m[3][2] = 0;
-			Allmat.m[3][3] = 1;
+		transform.matWorld = mScale * mRot * mat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
 
-			transform.matWorld = mScale * mRot * Allmat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
-			break;
-		}
+		break;
 
 	case BillboardFlag::XBillboard:
 
-		{
-			myMath::Matrix4 Xmat = camera->GetMatView();
+		mat.m[1][0] = 0;
+		mat.m[1][1] = 1;
+		mat.m[1][2] = 0;
+		mat.m[1][3] = 0;
 
-			Xmat.m[1][0] = 0;
-			Xmat.m[1][1] = 1;
-			Xmat.m[1][2] = 0;
-			Xmat.m[1][3] = 0;
+		mat.m[3][0] = 0;
+		mat.m[3][1] = 0;
+		mat.m[3][2] = 0;
+		mat.m[3][3] = 1;
 
-			Xmat.m[3][0] = 0;
-			Xmat.m[3][1] = 0;
-			Xmat.m[3][2] = 0;
-			Xmat.m[3][3] = 1;
-
-			transform.matWorld = mScale * mRot * Xmat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
-			break;
-		}
+		transform.matWorld = mScale * mRot * mat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		break;
 
 	case BillboardFlag::YBillboard:
 
-		{
-			myMath::Matrix4 Ymat = camera->GetMatView();
+		mat.m[0][0] = 1;
+		mat.m[0][1] = 0;
+		mat.m[0][2] = 0;
+		mat.m[0][3] = 0;
 
-			Ymat.m[0][0] = 1;
-			Ymat.m[0][1] = 0;
-			Ymat.m[0][2] = 0;
-			Ymat.m[0][3] = 0;
-
-			Ymat.m[3][0] = 0;
-			Ymat.m[3][1] = 0;
-			Ymat.m[3][2] = 0;
-			Ymat.m[3][3] = 1;
+		mat.m[3][0] = 0;
+		mat.m[3][1] = 0;
+		mat.m[3][2] = 0;
+		mat.m[3][3] = 1;
 
 
-			transform.matWorld = mScale * mRot * Ymat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
-			break;
-		}
+		transform.matWorld = mScale * mRot * mat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		break;
 
 	case BillboardFlag::XYBillboard:
 
-		{
-			myMath::Matrix4 XYmat = camera->GetMatView();
+		mat.m[2][0] = 0;
+		mat.m[2][1] = 0;
+		mat.m[2][2] = 1;
+		mat.m[2][3] = 0;
 
-			XYmat.m[2][0] = 0;
-			XYmat.m[2][1] = 0;
-			XYmat.m[2][2] = 1;
-			XYmat.m[2][3] = 0;
+		mat.m[3][0] = 0;
+		mat.m[3][1] = 0;
+		mat.m[3][2] = 0;
+		mat.m[3][3] = 1;
 
-			XYmat.m[3][0] = 0;
-			XYmat.m[3][1] = 0;
-			XYmat.m[3][2] = 0;
-			XYmat.m[3][3] = 1;
-
-			transform.matWorld = mScale * mRot * XYmat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
-			break;
-		}
+		transform.matWorld = mScale * mRot * mat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		break;
 	}
 
 	transform.Update();

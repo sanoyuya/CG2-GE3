@@ -38,7 +38,7 @@ private:
 	//プロジェクション行列
 	static myMath::Matrix4 matProjection;
 
-	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
+	BlendMode blendMode = BlendMode::Alpha;//初期値半透明合成
 
 	TextureData* texture = {};
 
@@ -127,7 +127,7 @@ public:
 	/// ブレンドモードのセット(2D)
 	/// </summary>
 	/// <param name="mode">モード</param>
-	void SetSprite2DBlendMode(BlendMode mode);
+	void SetSprite2DBlendMode(const BlendMode& mode);
 
 private:
 	void CreateVertexIndexBuffer();

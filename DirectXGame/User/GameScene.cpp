@@ -37,7 +37,7 @@ void GameScene::Initialize()
 
 	//^‚ñ’†‚Ì‹…
 	sphere2 = std::make_unique<Model>();
-	sphere2->SetShaderMode(ShaderMode::Toon);
+	
 	sphere2->SetModel(sphereTex);
 	sphere2Trans.Initialize();
 
@@ -66,6 +66,7 @@ void GameScene::Update()
 	{
 		SceneManager::GetInstance()->ChangeScene("TITLE");
 	}*/
+	sphere2->SetShaderMode(ShaderMode::Toon);
 
 	CamMove();
 	Rotation();

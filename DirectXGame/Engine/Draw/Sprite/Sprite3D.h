@@ -42,7 +42,7 @@ private:
 	//定数バッファのマッピング用ポインタ
 	myMath::Matrix4 constBuffMap = {};
 
-	int blendMode = (int)BlendMode::Alpha;//初期値半透明合成
+	BlendMode blendMode = BlendMode::Alpha;//初期値半透明合成
 
 	TextureData* texture = {};
 
@@ -128,7 +128,7 @@ public:
 	/// ブレンドモードのセット(3D)
 	/// </summary>
 	/// <param name="mode">モード</param>
-	void SetSprite3DBlendMode(BlendMode mode);
+	void SetSprite3DBlendMode(const BlendMode& mode);
 
 private:
 	void CreateVertexIndexBuffer();

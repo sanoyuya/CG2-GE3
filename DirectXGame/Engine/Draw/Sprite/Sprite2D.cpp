@@ -57,7 +57,7 @@ void Sprite2D::DrawSprite2D(myMath::Vector2 position, myMath::Vector4 color, myM
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet(blendMode);
 
 	//描画コマンド
 	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
@@ -101,7 +101,7 @@ void Sprite2D::DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCe
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet(blendMode);
 
 	//描画コマンド
 	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
@@ -142,10 +142,10 @@ void Sprite2D::DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheets
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{(float)x / (float)sheetsNumX,(float)y / (float)sheetsNumY},{color.x, color.y, color.z, color.w}},//左上インデックス0
-		{{left,bottom,0.0f},{(float)x / (float)sheetsNumX,((float)y + 1) / (float)sheetsNumY},{color.x, color.y, color.z, color.w}},//左下インデックス1
-		{{right,top,0.0f},{((float)x + 1) / (float)sheetsNumX,(float)y / (float)sheetsNumY},{color.x, color.y, color.z, color.w}},//右上インデックス2
-		{{right,bottom,0.0f},{((float)x + 1) / (float)sheetsNumX,((float)y + 1) / (float)sheetsNumY},{color.x, color.y, color.z, color.w}},//右下インデックス3
+		{{left,top,0.0f},{static_cast<float>(x / sheetsNumX),static_cast<float>(y / sheetsNumY)},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{static_cast<float>(x / sheetsNumX),static_cast<float>((y + 1) / sheetsNumY)},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{static_cast<float>((x + 1) / sheetsNumX),static_cast<float>(y / sheetsNumY)},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{static_cast<float>((x + 1) / sheetsNumX),static_cast<float>((y + 1) / sheetsNumY)},{color.x, color.y, color.z, color.w}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -164,15 +164,15 @@ void Sprite2D::DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheets
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet((BlendMode)blendMode);
+	SpriteCommon::BlendSet(blendMode);
 
 	//描画コマンド
 	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
 }
 
-void Sprite2D::SetSprite2DBlendMode(BlendMode mode)
+void Sprite2D::SetSprite2DBlendMode(const BlendMode& mode)
 {
-	blendMode = static_cast<int>(mode);
+	blendMode = mode;
 }
 
 void Sprite2D::CreateVertexIndexBuffer()

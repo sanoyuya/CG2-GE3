@@ -354,7 +354,7 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	cmdList->DrawIndexedInstanced(modelData->maxIndex, 1, 0, 0, 0);
 }
 
-myMath::Matrix4& Model::GetMatWorld()
+const myMath::Matrix4& Model::GetMatWorld()
 {
 	return modelData->matWorld;
 }
@@ -369,17 +369,17 @@ const std::vector<uint32_t> Model::GetIndices()
 	return modelData->indices;
 }
 
-void Model::SetModel(uint32_t modelHandle)
+void Model::SetModel(const uint32_t& modelHandle)
 {
 	modelData = modelDatas[filePaths[modelHandle]].get();
 }
 
-void Model::SetModelBlendMode(BlendMode mode)
+void Model::SetModelBlendMode(const BlendMode& mode)
 {
 	blendMode = mode;
 }
 
-void Model::SetShaderMode(ShaderMode mode)
+void Model::SetShaderMode(const ShaderMode& mode)
 {
 	shaderMode = mode;
 }
