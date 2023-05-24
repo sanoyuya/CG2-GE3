@@ -252,6 +252,9 @@
     <ClCompile Include="Engine\DirectXCore\LevelEditor.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\DirectXCore\EditorObject.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
@@ -434,6 +437,9 @@
       <Filter>Engine\ヘッダーファイル\Light</Filter>
     </ClInclude>
     <ClInclude Include="Engine\DirectXCore\LevelEditor.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectXCore\EditorObject.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
   </ItemGroup>

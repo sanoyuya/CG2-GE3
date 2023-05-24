@@ -29,8 +29,8 @@ void TitleScene::Initialize()
 	for (auto& objectData : levelData->objects)
 	{
 		//ƒtƒ@ƒCƒ‹–¼‚©‚ç“o˜^Ï‚Ýƒ‚ƒfƒ‹‚ðŒŸõ
-		Model* model = model = new Model;
-		Transform transform;
+		EditorObject* model = new EditorObject;
+		model->Initialize();
 		decltype(models)::iterator it = models.find(objectData.fileName);
 		if (it != models.end())
 		{
@@ -49,17 +49,15 @@ void TitleScene::Initialize()
 		{
 			model->SetModel(tex);
 		}
-		transform.Initialize();
 
 		//À•W
-		transform.translation = objectData.translation;
+		model->SetPos(objectData.translation);
 		//‰ñ“]Šp
-		transform.rotation = objectData.rotation;
+		model->SetRot(objectData.rotation);
 		//Šgk
-		transform.scale = objectData.scaling;
+		model->SetScale(objectData.scaling);
 
 		objects.push_back(model);
-		transforms.push_back(transform);
 	}
 }
 
@@ -80,10 +78,7 @@ void TitleScene::Update()
 
 	for (auto& object : objects)
 	{
-		for (auto& transform : transforms)
-		{
-			transform.TransUpdate(camera.get());
-		}
+		object->Update(camera.get());
 	}
 }
 
@@ -92,10 +87,7 @@ void TitleScene::Draw()
 	skyDome->DrawModel(&skyDomeTrans);
 	for (auto& object : objects)
 	{
-		for (auto& transform : transforms)
-		{
-			object->DrawModel(&transform);
-		}
+		object->Draw();
 	}
 }
 

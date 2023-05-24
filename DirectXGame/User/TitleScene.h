@@ -7,6 +7,7 @@
 #include"Collision.h"
 #include"LevelEditor.h"
 #include <map>
+#include"EditorObject.h"
 
 //タイトルシーン
 class TitleScene :public BaseScene
@@ -30,8 +31,8 @@ private:
 	const float length = 50.0f;
 
 	LevelData* levelData = nullptr;
-	std::map<std::string, Model*>models;
-	std::vector<Model*>objects;
+	std::map<std::string, EditorObject*>models;
+	std::vector<EditorObject*>objects;
 	std::vector<Transform>transforms;
 
 	uint32_t playerTex = 0;
