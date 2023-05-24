@@ -33,7 +33,9 @@ private:
 	LevelData* levelData = nullptr;
 	std::map<std::string, EditorObject*>models;
 	std::vector<EditorObject*>objects;
-	std::vector<Transform>transforms;
+
+	myMath::Vector3 pos;
+	float time = 0.0f;
 
 	uint32_t playerTex = 0;
 	uint32_t sphereTex = 0;
@@ -55,5 +57,6 @@ public:
 
 private:
 	
+	void Move();
 	void camUpdate();
 };

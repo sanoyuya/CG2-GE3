@@ -37,9 +37,19 @@ void TitleScene::Initialize()
 			model = it->second;
 		}
 
+		//À•W
+		model->SetPos(objectData.translation);
+		//‰ñ“]Šp
+		model->SetRot(objectData.rotation);
+		//Šgk
+		model->SetScale(objectData.scaling);
+
+		model->SetName(objectData.fileName);
+
 		if (objectData.fileName == "player")
 		{
 			model->SetModel(playerTex);
+			pos = model->GetPos();
 		}
 		else if (objectData.fileName == "sphere")
 		{
@@ -49,13 +59,6 @@ void TitleScene::Initialize()
 		{
 			model->SetModel(tex);
 		}
-
-		//À•W
-		model->SetPos(objectData.translation);
-		//‰ñ“]Šp
-		model->SetRot(objectData.rotation);
-		//Šgk
-		model->SetScale(objectData.scaling);
 
 		objects.push_back(model);
 	}
@@ -76,8 +79,17 @@ void TitleScene::Update()
 
 	skyDomeTrans.TransUpdate(camera.get());//“V‹…
 
+	/*time++;
+	pos.y = PhysicsMath::SimpleHarmonicMotion(time,3.0f);*/
+
+	Move();
+
 	for (auto& object : objects)
 	{
+		if (object->GetName() == "player")
+		{
+			object->SetPos(pos);
+		}
 		object->Update(camera.get());
 	}
 }
@@ -113,4 +125,24 @@ void TitleScene::camUpdate()
 	camera->SetEye(cameraPos);
 	camera->SetTarget({ 0.0f,0.0f ,0.0f });
 	camera->Update(true);
+}
+
+void TitleScene::Move()
+{
+	if (input->KeyboardKeepPush(DIK_W))
+	{
+		pos.z += 0.05f;
+	}
+	if (input->KeyboardKeepPush(DIK_A))
+	{
+		pos.x -= 0.05f;
+	}
+	if (input->KeyboardKeepPush(DIK_S))
+	{
+		pos.z -= 0.05f;
+	}
+	if (input->KeyboardKeepPush(DIK_D))
+	{
+		pos.x += 0.05f;
+	}
 }
