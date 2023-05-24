@@ -12,7 +12,7 @@ void MyGame::Initialize()
 #ifdef _DEBUG
 
 	//シーンマネージャーに最初のシーンをセット
-	SceneManager::GetInstance()->ChangeScene("GAME");
+	SceneManager::GetInstance()->ChangeScene("TITLE");
 
 #endif
 

@@ -79,15 +79,15 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)DirectXTex;$(SolutionDir)lib\x64-windows\include\assimp;$(SolutionDir)lib\x64-windows\include\imgui</IncludePath>
-    <LibraryPath>$(SolutionDir)lib\x64-windows\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)DirectXTex;$(SolutionDir)lib;$(SolutionDir)lib\x64-windows\include\assimp;$(SolutionDir)lib\x64-windows\include\imgui</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\x64-windows\lib;$(LibraryPath);$(SolutionDir)lib</LibraryPath>
     <IntDir>$(SolutionDir)\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)\Generated\Outputs\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)DirectXTex;$(SolutionDir)lib\x64-windows-static\include\assimp;$(SolutionDir)lib\x64-windows-static\include\imgui</IncludePath>
-    <LibraryPath>$(SolutionDir)lib\x64-windows-static\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)DirectXTex;$(SolutionDir)lib;$(SolutionDir)lib\x64-windows-static\include\assimp;$(SolutionDir)lib\x64-windows-static\include\imgui</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\x64-windows-static\lib;$(LibraryPath);$(SolutionDir)lib</LibraryPath>
     <IntDir>$(SolutionDir)\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)\Generated\Outputs\$(Configuration)\</OutDir>
   </PropertyGroup>
@@ -170,10 +170,11 @@
     <ClCompile Include="Engine\Audio\AudioManager.cpp" />
     <ClCompile Include="Engine\Draw\Model\AssimpLoder.cpp" />
     <ClCompile Include="Engine\Draw\Model\AssimpModel.cpp" />
-    <ClCompile Include="Engine\Draw\File.cpp" />
+    <ClCompile Include="Engine\DirectXCore\File.cpp" />
     <ClCompile Include="Engine\DirectXCore\FPS.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp" />
     <ClCompile Include="Engine\Light\LightManager.cpp" />
+    <ClCompile Include="Engine\DirectXCore\LevelEditor.cpp" />
     <ClCompile Include="User\GameScene.cpp" />
     <ClCompile Include="Engine\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp" />
@@ -294,12 +295,13 @@
     <ClInclude Include="Engine\Audio\AudioManager.h" />
     <ClInclude Include="Engine\Draw\Model\AssimpLoder.h" />
     <ClInclude Include="Engine\Draw\Model\AssimpModel.h" />
-    <ClInclude Include="Engine\Draw\File.h" />
+    <ClInclude Include="Engine\DirectXCore\File.h" />
     <ClInclude Include="Engine\DirectXCore\FPS.h" />
     <ClInclude Include="Engine\Input\InputManager.h" />
     <ClInclude Include="Engine\Light\LightManager.h" />
     <ClInclude Include="Engine\Light\PointLight.h" />
     <ClInclude Include="Engine\Light\SpotLight.h" />
+    <ClInclude Include="Engine\DirectXCore\LevelEditor.h" />
     <ClInclude Include="User\GameScene.h" />
     <ClInclude Include="Engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\IndexBuffer.h" />

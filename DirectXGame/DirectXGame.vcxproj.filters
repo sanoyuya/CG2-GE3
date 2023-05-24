@@ -174,7 +174,7 @@
     <ClCompile Include="Engine\DirectXCore\DescriptorHeap.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Draw\File.cpp">
+    <ClCompile Include="Engine\DirectXCore\File.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
     <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp">
@@ -248,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Light\LightManager.cpp">
       <Filter>Engine\ソースファイル\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectXCore\LevelEditor.cpp">
+      <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -337,7 +340,7 @@
     <ClInclude Include="Engine\DirectXCore\DescriptorHeap.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Draw\File.h">
+    <ClInclude Include="Engine\DirectXCore\File.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
     <ClInclude Include="Engine\DirectXCore\Buffer\VertexBuffer.h">
@@ -429,6 +432,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Light\CircleShadow.h">
       <Filter>Engine\ヘッダーファイル\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectXCore\LevelEditor.h">
+      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

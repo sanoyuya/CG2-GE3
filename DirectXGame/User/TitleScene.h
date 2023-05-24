@@ -5,6 +5,8 @@
 #include"Camera.h"
 #include"AudioManager.h"
 #include"Collision.h"
+#include"LevelEditor.h"
+#include <map>
 
 //タイトルシーン
 class TitleScene :public BaseScene
@@ -18,15 +20,23 @@ private:
 	std::unique_ptr<Camera>camera;
 
 	//天球
-	std::unique_ptr<DrawOversight>model;
-	Transform modelTrans;
-	uint32_t modelTex;
+	std::unique_ptr<DrawOversight>skyDome;
+	Transform skyDomeTrans;
+	uint32_t skyDomeTex;
 
 	myMath::Vector3 cameraPos;
 	float angleX = 0.0f;
 	float angleY = 0.0f;
 	const float length = 50.0f;
 
+	LevelData* levelData = nullptr;
+	std::map<std::string, Model*>models;
+	std::vector<Model*>objects;
+	std::vector<Transform>transforms;
+
+	uint32_t playerTex = 0;
+	uint32_t sphereTex = 0;
+	uint32_t tex = 0;
 
 public:
 
