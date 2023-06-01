@@ -2,19 +2,28 @@
 #include"myMath.h"
 #include <vector>
 #include <string>
+#include<json.hpp>
 
 //レベルデータ
 struct LevelData {
 
+	struct Collider
+	{
+		myMath::Vector3 center;
+		myMath::Vector3 size;
+	};
+
 	struct ObjectData {
-		// ファイル名
+		//ファイル名
 		std::string fileName;
-		// 平行移動
+		//平行移動
 		myMath::Vector3 translation;
-		// 回転角
+		//回転角
 		myMath::Vector3 rotation;
-		// スケーリング
+		//スケーリング
 		myMath::Vector3 scaling;
+		//当たり判定
+		Collider collider;
 	};
 
 	// オブジェクト配列
@@ -37,4 +46,8 @@ public:
 	/// <param name="fileName">ファイル名</param>
 	/// <returns></returns>
 	static LevelData* LoadLevelEditorFile(const std::string& fileName);
+
+private:
+
+	static void ObjectDataLoad(LevelData* levelData, nlohmann::json& object);
 };

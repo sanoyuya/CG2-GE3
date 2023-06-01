@@ -2,12 +2,11 @@
 
 EditorObject::~EditorObject()
 {
-	delete model;
 }
 
 void EditorObject::Initialize()
 {
-	model = new Model;
+	model = std::make_unique<Model>();
 	transform.Initialize();
 }
 
@@ -41,6 +40,16 @@ const std::string& EditorObject::GetName()
 	return objectName;
 }
 
+const myMath::Vector3& EditorObject::GetColliderCenter()
+{
+	return colliderCenter;
+}
+
+const myMath::Vector3& EditorObject::GetColliderSize()
+{
+	return colliderSize;
+}
+
 void EditorObject::SetModel(const uint32_t& tex)
 {
 	model->SetModel(tex);
@@ -64,4 +73,14 @@ void EditorObject::SetScale(const myMath::Vector3& scale)
 void EditorObject::SetName(const std::string& name)
 {
 	objectName = name;
+}
+
+void EditorObject::SetColliderCenter(const myMath::Vector3& colliderCenter_)
+{
+	colliderCenter = colliderCenter_;
+}
+
+void EditorObject::SetColliderSize(const myMath::Vector3& colliderSize_)
+{
+	colliderSize = colliderSize_;
 }

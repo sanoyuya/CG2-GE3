@@ -6,8 +6,8 @@
             "name": "Cube",
             "transform": {
                 "translation": [
-                    0.0,
-                    0.0,
+                    2.169999837875366,
+                    -2.93999981880188,
                     0.0
                 ],
                 "rotation": [
@@ -21,7 +21,57 @@
                     1.0
                 ]
             },
-            "file_name": "player"
+            "file_name": "player",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "ICO球",
+                    "transform": {
+                        "translation": [
+                            0.0,
+                            0.0,
+                            3.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scaling": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "file_name": "child",
+                    "collider": {
+                        "type": "BOX",
+                        "center": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "size": [
+                            2.0,
+                            2.0,
+                            2.0
+                        ]
+                    }
+                }
+            ]
         },
         {
             "type": "LIGHT",
@@ -67,10 +117,44 @@
         },
         {
             "type": "MESH",
-            "name": "ICO球",
+            "name": "ICO球.001",
             "transform": {
                 "translation": [
-                    4.009999752044678,
+                    6.159999847412109,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    11.700002670288086,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "ICO球.002",
+            "transform": {
+                "translation": [
+                    -3.0,
                     0.0,
                     0.0
                 ],
@@ -85,26 +169,18 @@
                     1.0
                 ]
             },
-            "file_name": "sphere"
-        },
-        {
-            "type": "MESH",
-            "name": "立方体",
-            "transform": {
-                "translation": [
-                    -6.029999732971191,
+            "file_name": "sphere",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
                     0.0,
                     0.0
                 ],
-                "rotation": [
-                    38.499996185302734,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    3.419999837875366,
-                    1.0
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
                 ]
             }
         }

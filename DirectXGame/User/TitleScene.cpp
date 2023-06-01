@@ -21,7 +21,7 @@ void TitleScene::Initialize()
 
 	playerTex = skyDome->CreateObjModel("Resources/greenDice");
 	sphereTex = skyDome->CreateObjModel("Resources/sphere");
-	tex= skyDome->CreateObjModel("Resources/purpleDice");
+	tex = skyDome->CreateObjModel("Resources/purpleDice");
 
 	levelData = LevelEditor::LoadLevelEditorFile("untitled");
 
@@ -43,8 +43,12 @@ void TitleScene::Initialize()
 		model->SetRot(objectData.rotation);
 		//拡縮
 		model->SetScale(objectData.scaling);
-
+		//名前
 		model->SetName(objectData.fileName);
+		//コライダーの中心座標
+		model->SetColliderCenter(objectData.collider.center);
+		//コライダーサイズ
+		model->SetColliderSize(objectData.collider.size);
 
 		if (objectData.fileName == "player")
 		{
@@ -66,6 +70,9 @@ void TitleScene::Initialize()
 
 void TitleScene::Destroy()
 {
+	delete levelData;
+	models.clear();
+	objects.clear();
 }
 
 void TitleScene::Update()
@@ -89,6 +96,10 @@ void TitleScene::Update()
 		if (object->GetName() == "player")
 		{
 			object->SetPos(pos);
+		}
+		if (object->GetName() == "child")
+		{
+			object->SetPos({ pos.x,object->GetPos().y,pos.z });
 		}
 		object->Update(camera.get());
 	}
