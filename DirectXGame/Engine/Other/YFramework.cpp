@@ -50,6 +50,9 @@ void YFramework::Initialize()
 	//シーンファクトリーを生成し、マネージャにセット
 	AbstractSceneFactory* sceneFactory = new SceneFactory();
 	SceneManager::GetInstance()->SetSceneFactory(sceneFactory);
+
+	postEffect = std::make_unique<PostEffect>();
+	postEffect->Initialize();
 }
 
 void YFramework::Destroy()
@@ -113,6 +116,7 @@ void YFramework::Run()
 
 		//描画処理
 		Draw();
+		postEffect->Draw();
 
 #ifdef _DEBUG
 

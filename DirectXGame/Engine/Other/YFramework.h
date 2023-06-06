@@ -14,6 +14,7 @@
 #include"SpriteCommon.h"
 #include<memory>
 #include"ImGuiManager.h"
+#include"PostEffect.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -37,6 +38,7 @@ protected:
 	AudioManager* audioManager = nullptr;
 	TextureManager* textureManager = nullptr;
 	ImGuiManager* imGuiManager = nullptr;
+	std::unique_ptr<PostEffect>postEffect;
 
 public:
 

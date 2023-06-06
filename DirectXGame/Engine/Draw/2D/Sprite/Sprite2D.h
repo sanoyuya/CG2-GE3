@@ -13,7 +13,7 @@
 
 class Sprite2D
 {
-private:
+protected:
 
 	HRESULT result = S_OK;
 	char PADING[4] = {};
@@ -129,7 +129,7 @@ public:
 	/// <param name="mode">ÉÇÅ[Éh</param>
 	void SetSprite2DBlendMode(const BlendMode& mode);
 
-private:
+protected:
 	void CreateVertexIndexBuffer();
 	void CreateConstBuff();
 	void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
