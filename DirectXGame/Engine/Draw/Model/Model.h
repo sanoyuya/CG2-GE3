@@ -158,6 +158,8 @@ public:
 	/// <returns></returns>
 	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
 
+	//static uint32_t CreateAssimpModel(const std::string& filePath);
+
 	static void StaticInitialize();
 
 	/// <summary>
@@ -170,8 +172,5 @@ private:
 
 	static void LoadShader();
 	void PiplineSet(BlendMode bMode, ShaderMode sMode);
-
-	//コピーコンストラクタ・代入演算子削除
-	/*Model& operator=(const Model&) = delete;
-	Model(const Model&) = delete;*/
+	wchar_t ConvertToWchar_t(std::string& str);
 };

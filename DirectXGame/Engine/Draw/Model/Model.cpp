@@ -1,6 +1,11 @@
 #include "Model.h"
 #include"DirectXBase.h"
 #include"Obj.h"
+#include"AssimpLoder.h"
+
+#include "atlbase.h"
+#include "atlstr.h"
+#include "comutil.h"
 
 Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Model::cmdList;
@@ -271,6 +276,16 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 	}
 }
 
+//wchar_t Model::ConvertToWchar_t(std::string& str)
+//{
+//	const size_t newsizew = orig.size() + 1;
+//	size_t convertedChars = 0;
+//	wchar_t* wcstring = new wchar_t[newsizew];
+//	mbstowcs_s(&convertedChars, wcstring, newsizew, orig.c_str(), _TRUNCATE);
+//	wcout << wcstring << L" (wchar_t *)" << endl;
+//	delete[]wcstring;
+//}
+
 uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
 {
 	std::string path = filePath;
@@ -311,6 +326,54 @@ uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
 		return modelHandle;
 	}
 }
+
+//uint32_t Model::CreateAssimpModel(const std::string& filePath)
+//{
+//	std::string path = filePath;
+//
+//	//ˆê‰ñ“Ç‚Ýž‚ñ‚¾‚±‚Æ‚ª‚ ‚éƒtƒ@ƒCƒ‹‚Í‚»‚Ì‚Ü‚Ü•Ô‚·
+//	auto itr = find_if(modelDatas.begin(), modelDatas.end(), [&](std::pair<const std::string, std::unique_ptr<ModelData, std::default_delete<ModelData>>>& p)
+//		{
+//			return p.second->filePath == path;
+//		});
+//
+//	if (itr == modelDatas.end())
+//	{
+//		uint32_t modelHandle = modelCount;
+//
+//		std::unique_ptr<ModelData> data;
+//		data = std::make_unique<ModelData>();
+//
+//		std::vector<Mesh> meshes;
+//
+//		ImportSettings importSetting =
+//		{
+//			filePath,
+//			meshes,
+//			false,
+//			true
+//		};
+//		AssimpLoder::Load(importSetting);
+//
+//		data->modelHandle = modelCount;
+//
+//		data->filePath = path;
+//
+//		modelDatas[path] = std::move(data);
+//
+//		filePaths[modelCount] = path;
+//
+//		modelCount++;
+//
+//		return modelHandle;
+//	}
+//	else
+//	{
+//		uint32_t modelHandle = modelDatas[path]->modelHandle;
+//
+//		return modelHandle;
+//	}
+//}
 
 void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 {
