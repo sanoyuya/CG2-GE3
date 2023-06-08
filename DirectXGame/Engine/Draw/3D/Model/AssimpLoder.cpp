@@ -1,10 +1,10 @@
-//#include "AssimpLoder.h"
-//#include<assimp/Importer.hpp>
-//#include<assimp/scene.h>
-//#include<assimp/postprocess.h>
-//#include<assimp/cimport.h>
-//#include <filesystem>
-//#include"myMath.h"
+#include "AssimpLoder.h"
+#include<assimp/Importer.hpp>
+#include<assimp/scene.h>
+#include<assimp/postprocess.h>
+#include<assimp/cimport.h>
+#include <filesystem>
+#include"myMath.h"
 //
 //std::wstring GetDirectoryPath(const std::wstring& origin)
 //{

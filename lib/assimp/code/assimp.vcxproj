@@ -76,6 +76,18 @@
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">assimp-vc143-mt</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)\lib\assimp\code;$(SolutionDir)\lib\assimp\contrib;$(SolutionDir)\lib\assimp\include;$(SolutionDir)\lib\assimp\lib;$(SolutionDir)\lib\assimp;$(SolutionDir)\lib\assimp\contlib\pugixml\src;$(SolutionDir)\lib\assimp\cotlib\unzip;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <IncludePath>$(SolutionDir)\lib\assimp\code;$(SolutionDir)\lib\assimp\contrib;$(SolutionDir)\lib\assimp\include;$(SolutionDir)\lib\assimp\lib;$(SolutionDir)\lib\assimp;$(SolutionDir)\lib\assimp\contlib\pugixml\src;$(SolutionDir)\lib\assimp\cotlib\unzip;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <IncludePath>$(SolutionDir)\lib\assimp\code;$(SolutionDir)\lib\assimp\contrib;$(SolutionDir)\lib\assimp\include;$(SolutionDir)\lib\assimp\lib;$(SolutionDir)\lib\assimp;$(SolutionDir)\lib\assimp\contlib\pugixml\src;$(SolutionDir)\lib\assimp\cotlib\unzip;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(solution)\lib\assimp\code;$(solution)\lib\assimp\.;$(solution)\lib\assimp\contrib\zlib;$(solution)\lib\assimp\code\..\contrib\pugixml\src;$(solution)\lib\assimp\code\..\contrib\rapidjson\include;$(solution)\lib\assimp\code\..\contrib;$(solution)\lib\assimp\code\..\contrib\unzip;$(solution)\lib\assimp\code\..\contrib\openddlparser\include;$(solution)\lib\assimp\code\..\include;$(solution)\lib\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -793,7 +805,7 @@
     <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\Compiler\pushpack1.h" />
     <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\Compiler\poppack1.h" />
     <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\Compiler\pstdint.h" />
-</ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionDir)\lib\assimp\contrib\zlib\zlibstatic.vcxproj">
       <Project>{DC03F165-7449-3851-81CC-DA12D35FDB42}</Project>

@@ -741,18 +741,6 @@
     <ClInclude Include="$(SolutionDir)\lib\assimp\code\Common\simd.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\DefaultLogger.hpp">
-      <Filter>include\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\LogStream.hpp">
-      <Filter>include\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\Logger.hpp">
-      <Filter>include\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\NullLogger.hpp">
-      <Filter>include\assimp</Filter>
-    </ClInclude>
     <ClInclude Include="$(SolutionDir)\lib\assimp\code\Common\Win32DebugLogStream.h">
       <Filter>Logging</Filter>
     </ClInclude>
@@ -761,9 +749,6 @@
     </ClInclude>
     <ClInclude Include="$(SolutionDir)\lib\assimp\code\Common\StdOStreamLogStream.h">
       <Filter>Logging</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\BlobIOSystem.h">
-      <Filter>include\assimp</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)\lib\assimp\code\PostProcessing\CalcTangentsProcess.h">
       <Filter>PostProcessing</Filter>
@@ -1734,9 +1719,11 @@
     <ClInclude Include="$(SolutionDir)\lib\assimp\include\assimp\Compiler\pstdint.h">
       <Filter>Compiler</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="$(SolutionDir)\lib\assimp\code\CMakeLists.txt" />
+    <ClInclude Include="$(SolutionDir)\lib\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="$(SolutionDir)\lib\assimp\LogStream.hpp" />
+    <ClInclude Include="$(SolutionDir)\lib\assimp\Logger.hpp" />
+    <ClInclude Include="$(SolutionDir)\lib\assimp\NullLogger.hpp" />
+    <ClInclude Include="$(SolutionDir)\lib\assimp\BlobIOSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(SolutionDir)\lib\assimp\code\res\assimp.rc">
