@@ -9,21 +9,21 @@ struct LevelData {
 
 	struct Collider
 	{
-		myMath::Vector3 center_;
-		myMath::Vector3 size_;
+		myMath::Vector3 center;
+		myMath::Vector3 size;
 	};
 
 	struct ObjectData {
 		//ファイル名
-		std::string fileName_;
+		std::string fileName;
 		//平行移動
-		myMath::Vector3 translation_;
+		myMath::Vector3 translation;
 		//回転角
-		myMath::Vector3 rotation_;
+		myMath::Vector3 rotation;
 		//スケーリング
-		myMath::Vector3 scaling_;
+		myMath::Vector3 scaling;
 		//当たり判定
-		Collider collider_;
+		Collider collider;
 	};
 
 	// オブジェクト配列

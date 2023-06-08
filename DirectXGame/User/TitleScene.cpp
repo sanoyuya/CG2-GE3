@@ -31,31 +31,31 @@ void TitleScene::Initialize()
 		//ファイル名から登録済みモデルを検索
 		EditorObject* model = new EditorObject;
 		model->Initialize();
-		decltype(models)::iterator it = models.find(objectData.fileName_);
+		decltype(models)::iterator it = models.find(objectData.fileName);
 		if (it != models.end())
 		{
 			model = it->second;
 		}
 
 		//座標
-		model->SetPos(objectData.translation_);
+		model->SetPos(objectData.translation);
 		//回転角
-		model->SetRot(objectData.rotation_);
+		model->SetRot(objectData.rotation);
 		//拡縮
-		model->SetScale(objectData.scaling_);
+		model->SetScale(objectData.scaling);
 		//名前
-		model->SetName(objectData.fileName_);
+		model->SetName(objectData.fileName);
 		//コライダーの中心座標
-		model->SetColliderCenter(objectData.collider_.center_);
+		model->SetColliderCenter(objectData.collider.center);
 		//コライダーサイズ
-		model->SetColliderSize(objectData.collider_.size_);
+		model->SetColliderSize(objectData.collider.size);
 
-		if (objectData.fileName_ == "player")
+		if (objectData.fileName == "player")
 		{
 			model->SetModel(playerTex);
 			pos = model->GetPos();
 		}
-		else if (objectData.fileName_ == "sphere")
+		else if (objectData.fileName == "sphere")
 		{
 			model->SetModel(sphereTex);
 		}

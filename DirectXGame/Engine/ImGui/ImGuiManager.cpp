@@ -23,8 +23,8 @@ void ImGuiManager::Initialize(WindowsApp* windowsApp)
 		DirectXBase::GetInstance()->GetDevice().Get(),
 		static_cast<int>(DirectXBase::GetInstance()->GetBackBuffer()),
 		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, DirectXBase::GetInstance()->GetDescriptorHeap()->GetHeap().Get(),
-		handle.cpuHandle_,
-		handle.gpuHandle_
+		handle.cpuHandle,
+		handle.gpuHandle
 	);
 
 	ImGuiIO& io = ImGui::GetIO();
