@@ -117,7 +117,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\lib\assimp\include;$(SolutionDir)\lib\assimp;$(solution)\lib\assimp\code;$(solution)\lib\assimp\.;$(solution)\lib\assimp\contrib\zlib;$(solution)\lib\assimp\code\..\contrib\pugixml\src;$(solution)\lib\assimp\code\..\contrib\rapidjson\include;$(solution)\lib\assimp\code\..\contrib;$(solution)\lib\assimp\code\..\contrib\unzip;$(solution)\lib\assimp\code\..\contrib\openddlparser\include;$(solution)\lib\assimp\code\..\include;$(solution)\lib\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\assimp\include;$(SolutionDir)\lib\assimp;$(SolutionDir)\lib\assimp\code;$(SolutionDir)\lib\assimp\.;$(SolutionDir)\lib\assimp\contrib\zlib;$(SolutionDir)\lib\assimp\code\..\contrib\pugixml\src;$(SolutionDir)\lib\assimp\code\..\contrib\rapidjson\include;$(SolutionDir)\lib\assimp\code\..\contrib;$(SolutionDir)\lib\assimp\code\..\contrib\unzip;$(SolutionDir)\lib\assimp\code\..\contrib\openddlparser\include;$(SolutionDir)\lib\assimp\code\..\include;$(SolutionDir)\lib\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -143,7 +143,7 @@
     </ResourceCompile>
     <Midl>
       <AdditionalIncludeDirectories>$(SolutionDir)\lib\assimp\include;$(SolutionDir)\lib\assimp;$(solution)\lib\assimp\code;$(solution)\lib\assimp\.;$(solution)\lib\assimp\contrib\zlib;$(solution)\lib\assimp\code\..\contrib\pugixml\src;$(solution)\lib\assimp\code\..\contrib\rapidjson\include;$(solution)\lib\assimp\code\..\contrib;$(solution)\lib\assimp\code\..\contrib\unzip;$(solution)\lib\assimp\code\..\contrib\openddlparser\include;$(solution)\lib\assimp\code\..\include;$(solution)\lib\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$($(SolutionDir)\lib\assimp)/$(IntDir)</OutputDirectory>
+      <OutputDirectory>$(SolutionDir)\lib\assimp/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
