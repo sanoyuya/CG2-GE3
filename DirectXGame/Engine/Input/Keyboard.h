@@ -1,23 +1,21 @@
 #pragma once
-
 #include<dinput.h>
 #include<wrl.h>
 #include"WindowsApp.h"
+
 class Keyboard
 {
 private:
 
-	WindowsApp* windowsApp = nullptr;
-
 	//キーボード
-	Microsoft::WRL::ComPtr<IDirectInputDevice8> keyboard = nullptr;
-	BYTE oldkey[256] = {};
-	BYTE key[256] = {};
+	Microsoft::WRL::ComPtr<IDirectInputDevice8> keyboard_ = nullptr;
+	BYTE oldkey_[256] = {};
+	BYTE key_[256] = {};
 
 public:
 
 	//初期化処理(普段使わない)
-	void Initialize(IDirectInput8* directInput);
+	void Initialize(IDirectInput8* directInput, WindowsApp* windowsApp);
 	//更新処理(普段使わない)
 	void Update();
 

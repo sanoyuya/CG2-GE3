@@ -6,81 +6,81 @@ EditorObject::~EditorObject()
 
 void EditorObject::Initialize()
 {
-	model = std::make_unique<Model>();
-	transform.Initialize();
+	model_ = std::make_unique<Model>();
+	transform_.Initialize();
 }
 
 void EditorObject::Update(Camera* camera)
 {
-	transform.TransUpdate(camera);
+	transform_.TransUpdate(camera);
 }
 
 void EditorObject::Draw()
 {
-	model->DrawModel(&transform);
+	model_->DrawModel(&transform_);
 }
 
 const myMath::Vector3& EditorObject::GetPos()
 {
-	return transform.translation;
+	return transform_.translation;
 }
 
 const myMath::Vector3& EditorObject::GetRot()
 {
-	return transform.rotation;
+	return transform_.rotation;
 }
 
 const myMath::Vector3& EditorObject::GetScale()
 {
-	return transform.scale;
+	return transform_.scale;
 }
 
 const std::string& EditorObject::GetName()
 {
-	return objectName;
+	return objectName_;
 }
 
 const myMath::Vector3& EditorObject::GetColliderCenter()
 {
-	return colliderCenter;
+	return colliderCenter_;
 }
 
 const myMath::Vector3& EditorObject::GetColliderSize()
 {
-	return colliderSize;
+	return colliderSize_;
 }
 
 void EditorObject::SetModel(const uint32_t& tex)
 {
-	model->SetModel(tex);
+	model_->SetModel(tex);
 }
 
 void EditorObject::SetPos(const myMath::Vector3& position)
 {
-	transform.translation = position;
+	transform_.translation = position;
 }
 
 void EditorObject::SetRot(const myMath::Vector3& rotation)
 {
-	transform.rotation = rotation;
+	transform_.rotation = rotation;
 }
 
 void EditorObject::SetScale(const myMath::Vector3& scale)
 {
-	transform.scale = scale;
+	transform_.scale = scale;
 }
 
 void EditorObject::SetName(const std::string& name)
 {
-	objectName = name;
+	objectName_ = name;
 }
 
-void EditorObject::SetColliderCenter(const myMath::Vector3& colliderCenter_)
+void EditorObject::SetColliderCenter(const myMath::Vector3& colliderCenter)
 {
-	colliderCenter = colliderCenter_;
+	colliderCenter_ = colliderCenter;
 }
 
-void EditorObject::SetColliderSize(const myMath::Vector3& colliderSize_)
+void EditorObject::SetColliderSize(const myMath::Vector3& colliderSize)
 {
-	colliderSize = colliderSize_;
+	colliderSize_ = colliderSize;
 }

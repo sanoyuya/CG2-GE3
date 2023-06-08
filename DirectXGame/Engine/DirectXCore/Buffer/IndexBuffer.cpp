@@ -3,7 +3,7 @@
 
 void IndexBuffer::Create(size_t length, const uint32_t* data)
 {
-	bufferLength = length;
+	bufferLength_ = length;
 
 	//ヒープ設定
 	D3D12_HEAP_PROPERTIES heapProp{};
@@ -30,40 +30,40 @@ void IndexBuffer::Create(size_t length, const uint32_t* data)
 		&resDesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(buffer.ReleaseAndGetAddressOf()));
+		IID_PPV_ARGS(buffer_.ReleaseAndGetAddressOf()));
 
 	// インデックスバッファビューの設定
-	bufferView = {};
-	bufferView.BufferLocation = buffer->GetGPUVirtualAddress();
-	bufferView.Format = DXGI_FORMAT_R32_UINT;
-	bufferView.SizeInBytes = static_cast<UINT>(length * sizeof(uint32_t));
+	bufferView_ = {};
+	bufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
+	bufferView_.Format = DXGI_FORMAT_R32_UINT;
+	bufferView_.SizeInBytes = static_cast<UINT>(length * sizeof(uint32_t));
 
-	result = buffer->Map(0, nullptr, &bufferMappedPtr);
+	result = buffer_->Map(0, nullptr, &bufferMappedPtr_);
 
 	// マッピングする
 	if (data != nullptr)
 	{
 		// インデックスデータをマッピング先に設定
-		memcpy(bufferMappedPtr, data, length * sizeof(uint32_t));
+		memcpy(bufferMappedPtr_, data, length * sizeof(uint32_t));
 
 		// マッピング解除
-		buffer->Unmap(0, nullptr);
+		buffer_->Unmap(0, nullptr);
 	}
 
-	isValid = true;
+	isValid_ = true;
 }
 
 bool IndexBuffer::IsValid()
 {
-	return isValid;
+	return isValid_;
 }
 
 D3D12_INDEX_BUFFER_VIEW IndexBuffer::GetView() const
 {
-	return bufferView;
+	return bufferView_;
 }
 
 void IndexBuffer::Update(void* data)
 {
-	memcpy(bufferMappedPtr, data, bufferLength * sizeof(uint32_t));
+	memcpy(bufferMappedPtr_, data, bufferLength_ * sizeof(uint32_t));
 }

@@ -18,7 +18,7 @@ namespace myMath
 
 		float length()const;//ƒmƒ‹ƒ€‚ğ‹‚ß‚é
 		float lengthSquared()const;
-		Vector4& normalization()const;//³‹K‰»‚·‚é
+		Vector4 normalization()const;//³‹K‰»‚·‚é
 		Vector4& normal();//³‹K‰»‚·‚é
 		float dot(const Vector4& v)const;//“àÏ‚ğ‹‚ß‚é
 		Vector4 cross(const Vector4& v)const;//ŠOÏ‚ğ‹‚ß‚é

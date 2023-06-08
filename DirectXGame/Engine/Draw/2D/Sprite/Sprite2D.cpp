@@ -2,19 +2,19 @@
 #include <d3dcompiler.h>
 #include"Camera.h"
 
-myMath::Matrix4 Sprite2D::matProjection;
+myMath::Matrix4 Sprite2D::matProjection_;
 
-void Sprite2D::StaticInitialize()
+void Sprite2D::StaticInitialize(WindowsApp* windowsApp)
 {
-	float width = static_cast<float>(WindowsApp::GetInstance()->GetWidth());
-	float height = static_cast<float>(WindowsApp::GetInstance()->GetHeight());
+	float width = windowsApp->GetWidth();
+	float height = windowsApp->GetHeight();
 
-	myMath::MakeOrthogonalL(0.0f, width, height, 0.0f, 0.0f, 1.0f, matProjection);
+	myMath::MakeOrthogonalL(0.0f, width, height, 0.0f, 0.0f, 1.0f, matProjection_);
 }
 
 void Sprite2D::Sprite2DInitialize(uint32_t handle)
 {
-	texture = TextureManager::GetTextureData(handle);
+	texture_ = TextureManager::GetTextureData(handle);
 	CreateVertexIndexBuffer();
 	CreateConstBuff();
 }
@@ -27,10 +27,10 @@ void Sprite2D::DrawSprite2D(myMath::Vector2 position, myMath::Vector4 color, myM
 	if (flipY == false)isFlipY = 1;
 	else isFlipY = -1;
 
-	float left = ((0.0f - anchorpoint.x) * texture->width) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * texture->width) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * texture->height) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * texture->height) * isFlipY;
+	float left = ((0.0f - anchorpoint.x) * texture_->width) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * texture_->width) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * texture_->height) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * texture_->height) * isFlipY;
 
 	//頂点データ
 	PosUvColor vertices[] =
@@ -49,18 +49,18 @@ void Sprite2D::DrawSprite2D(myMath::Vector2 position, myMath::Vector4 color, myM
 	};
 
 	//頂点バッファへのデータ転送
-	vertexBuffer->Update(vertices);
+	vertexBuffer_->Update(vertices);
 
 	//インデックスバッファへのデータ転送
-	indexBuffer->Update(indices);
+	indexBuffer_->Update(indices);
 
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet(blendMode);
+	SpriteCommon::BlendSet(blendMode_);
 
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
 void Sprite2D::DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, myMath::Vector4 color, myMath::Vector2 scale, float rotation, bool flipX, bool flipY)
@@ -79,10 +79,10 @@ void Sprite2D::DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCe
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) / texture->width,(clipCenter.y - clipRadius.y)/ texture->height},{color.x, color.y, color.z, color.w}},//左上インデックス0
-		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / texture->width,(clipCenter.y + clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//左下インデックス1
-		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / texture->width,(clipCenter.y - clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//右上インデックス2
-		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / texture->width,(clipCenter.y + clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//右下インデックス3
+		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) / texture_->width,(clipCenter.y - clipRadius.y)/ texture_->height},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / texture_->width,(clipCenter.y + clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / texture_->width,(clipCenter.y - clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / texture_->width,(clipCenter.y + clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -93,18 +93,18 @@ void Sprite2D::DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCe
 	};
 
 	//頂点バッファへのデータ転送
-	vertexBuffer->Update(vertices);
+	vertexBuffer_->Update(vertices);
 
 	//インデックスバッファへのデータ転送
-	indexBuffer->Update(indices);
+	indexBuffer_->Update(indices);
 
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet(blendMode);
+	SpriteCommon::BlendSet(blendMode_);
 
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
 void Sprite2D::DrawAnimationSpriteX2D(myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
@@ -125,10 +125,10 @@ void Sprite2D::DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheets
 	if (flipY == false)isFlipY = 1;
 	else isFlipY = -1;
 
-	float left = ((0.0f - anchorpoint.x) * texture->width/ sheetsNumX) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * texture->width / sheetsNumX) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * texture->height/ sheetsNumY) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * texture->height / sheetsNumY) * isFlipY;
+	float left = ((0.0f - anchorpoint.x) * texture_->width/ sheetsNumX) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * texture_->width / sheetsNumX) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * texture_->height/ sheetsNumY) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * texture_->height / sheetsNumY) * isFlipY;
 
 	uint16_t animationXYNum = sheetsNumX * sheetsNumY;//分割数(総合計)
 	uint16_t x = nowNum % sheetsNumX;
@@ -156,38 +156,38 @@ void Sprite2D::DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheets
 	};
 
 	//頂点バッファへのデータ転送
-	vertexBuffer->Update(vertices);
+	vertexBuffer_->Update(vertices);
 
 	//インデックスバッファへのデータ転送
-	indexBuffer->Update(indices);
+	indexBuffer_->Update(indices);
 
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet(blendMode);
+	SpriteCommon::BlendSet(blendMode_);
 
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
 void Sprite2D::SetSprite2DBlendMode(const BlendMode& mode)
 {
-	blendMode = mode;
+	blendMode_ = mode;
 }
 
 void Sprite2D::CreateVertexIndexBuffer()
 {
-	vertexBuffer = std::make_unique<VertexBuffer>();
-	vertexBuffer->Create(4, sizeof(PosUvColor));
+	vertexBuffer_ = std::make_unique<VertexBuffer>();
+	vertexBuffer_->Create(4, sizeof(PosUvColor));
 
-	indexBuffer = std::make_unique<IndexBuffer>();
-	indexBuffer->Create(6);
+	indexBuffer_ = std::make_unique<IndexBuffer>();
+	indexBuffer_->Create(6);
 }
 
 void Sprite2D::CreateConstBuff()
 {
-	constBuffMaterial = std::make_unique<ConstantBuffer>();
-	constBuffMaterial->Create(sizeof(myMath::Matrix4));
+	constBuffMaterial_ = std::make_unique<ConstantBuffer>();
+	constBuffMaterial_->Create(sizeof(myMath::Matrix4));
 }
 
 void Sprite2D::Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation)
@@ -202,6 +202,6 @@ void Sprite2D::Update(myMath::Vector2 position, myMath::Vector2 scale, float rot
 	//ワールド行列
 	matWorld = mScale * mRot * mTrans;
 
-	constBuffMap = matWorld * matProjection;
-	constBuffMaterial->Update(&constBuffMap);
+	constBuffMap_ = matWorld * matProjection_;
+	constBuffMaterial_->Update(&constBuffMap_);
 }

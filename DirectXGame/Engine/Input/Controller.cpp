@@ -23,11 +23,11 @@ bool Controller::StickInDeadZone(myMath::Vector2& thumb, const myMath::Vector2& 
 
 void Controller::Update()
 {
-	oldControllerState = controllerState;
-	ZeroMemory(&controllerState, sizeof(XINPUT_STATE));
+	oldControllerState_ = controllerState_;
+	ZeroMemory(&controllerState_, sizeof(XINPUT_STATE));
 
 	//コントローラー取得
-	DWORD dwResult = XInputGetState(0, &controllerState);
+	DWORD dwResult = XInputGetState(0, &controllerState_);
 
 	if (dwResult == ERROR_SUCCESS) {
 		//コントローラーが接続されている
@@ -57,26 +57,26 @@ bool Controller::ButtonTriggerPush(ControllerButton button)
 {
 	//トリガー
 	if (button == LT) {
-		return oldControllerState.Gamepad.bLeftTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD && ButtonKeepPush(button);
+		return oldControllerState_.Gamepad.bLeftTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD && ButtonKeepPush(button);
 	}
 	else if (button == RT) {
-		return oldControllerState.Gamepad.bRightTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD && ButtonKeepPush(button);
+		return oldControllerState_.Gamepad.bRightTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD && ButtonKeepPush(button);
 	}
 	else {
-		return !(oldControllerState.Gamepad.wButtons & button) && ButtonKeepPush(button);
+		return !(oldControllerState_.Gamepad.wButtons & button) && ButtonKeepPush(button);
 	}
 }
 
 bool Controller::ButtonKeepPush(ControllerButton button)
 {
 	if (button == LT) {
-		return XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState.Gamepad.bLeftTrigger;
+		return XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState_.Gamepad.bLeftTrigger;
 	}
 	else if (button == RT) {
-		return XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState.Gamepad.bRightTrigger;
+		return XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState_.Gamepad.bRightTrigger;
 	}
 	else {
-		return controllerState.Gamepad.wButtons & button;
+		return controllerState_.Gamepad.wButtons & button;
 	}
 }
 
@@ -84,26 +84,26 @@ bool Controller::ButtonTriggerRelease(ControllerButton button)
 {
 	//トリガー
 	if (button == LT) {
-		return oldControllerState.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD && !ButtonKeepPush(button);
+		return oldControllerState_.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD && !ButtonKeepPush(button);
 	}
 	else if (button == RT) {
-		return oldControllerState.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD && !ButtonKeepPush(button);
+		return oldControllerState_.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD && !ButtonKeepPush(button);
 	}
 	else {
-		return oldControllerState.Gamepad.wButtons & button && !ButtonKeepPush(button);
+		return oldControllerState_.Gamepad.wButtons & button && !ButtonKeepPush(button);
 	}
 }
 
 bool Controller::ButtonKeepRelease(ControllerButton button)
 {
 	if (button == LT) {
-		return !(XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState.Gamepad.bLeftTrigger);
+		return !(XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState_.Gamepad.bLeftTrigger);
 	}
 	else if (button == RT) {
-		return !(XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState.Gamepad.bRightTrigger);
+		return !(XINPUT_GAMEPAD_TRIGGER_THRESHOLD < controllerState_.Gamepad.bRightTrigger);
 	}
 	else {
-		return !(controllerState.Gamepad.wButtons & button);
+		return !(controllerState_.Gamepad.wButtons & button);
 	}
 }
 
@@ -113,12 +113,12 @@ bool Controller::StickTriggerPush(ControllerStick stick, const float& deadRange,
 	myMath::Vector2 vec;
 	bool isLeftStick = stick <= L_RIGHT;
 	if (isLeftStick) {
-		oldVec = myMath::Vector2(oldControllerState.Gamepad.sThumbLX, oldControllerState.Gamepad.sThumbLY);
-		vec = myMath::Vector2(controllerState.Gamepad.sThumbLX, controllerState.Gamepad.sThumbLY);
+		oldVec = myMath::Vector2(oldControllerState_.Gamepad.sThumbLX, oldControllerState_.Gamepad.sThumbLY);
+		vec = myMath::Vector2(controllerState_.Gamepad.sThumbLX, controllerState_.Gamepad.sThumbLY);
 	}
 	else {
-		oldVec = myMath::Vector2(oldControllerState.Gamepad.sThumbRX, oldControllerState.Gamepad.sThumbRY);
-		vec = myMath::Vector2(controllerState.Gamepad.sThumbRX, controllerState.Gamepad.sThumbRY);
+		oldVec = myMath::Vector2(oldControllerState_.Gamepad.sThumbRX, oldControllerState_.Gamepad.sThumbRY);
+		vec = myMath::Vector2(controllerState_.Gamepad.sThumbRX, controllerState_.Gamepad.sThumbRY);
 	}
 
 	if (!StickInDeadZone(oldVec, deadRate)) {
@@ -132,16 +132,16 @@ bool Controller::StickTriggerPush(ControllerStick stick, const float& deadRange,
 	bool result = false;
 
 	if (stick % 4 == L_UP) {
-		result = !(deadRange < (oldVec.y / STICK_INPUT_MAX)) && deadRange < (vec.y / STICK_INPUT_MAX);
+		result = !(deadRange < (oldVec.y / STICK_INPUT_MAX_)) && deadRange < (vec.y / STICK_INPUT_MAX_);
 	}
 	else if (stick % 4 == L_DOWN) {
-		result = !(oldVec.y / STICK_INPUT_MAX < -deadRange) && vec.y / STICK_INPUT_MAX < -deadRange;
+		result = !(oldVec.y / STICK_INPUT_MAX_ < -deadRange) && vec.y / STICK_INPUT_MAX_ < -deadRange;
 	}
 	else if (stick % 4 == L_RIGHT) {
-		result = !(deadRange < (oldVec.x / STICK_INPUT_MAX)) && deadRange < (vec.x / STICK_INPUT_MAX);
+		result = !(deadRange < (oldVec.x / STICK_INPUT_MAX_)) && deadRange < (vec.x / STICK_INPUT_MAX_);
 	}
 	else if (stick % 4 == L_LEFT) {
-		result = !(oldVec.x / STICK_INPUT_MAX < -deadRange) && vec.x / STICK_INPUT_MAX < -deadRange;
+		result = !(oldVec.x / STICK_INPUT_MAX_ < -deadRange) && vec.x / STICK_INPUT_MAX_ < -deadRange;
 	}
 	else {
 		assert(0);
@@ -156,25 +156,25 @@ bool Controller::StickKeepPush(ControllerStick stick, const float& deadRange, co
 	bool isLeftStick = stick <= L_RIGHT;
 
 	if (isLeftStick) {
-		vec = myMath::Vector2(controllerState.Gamepad.sThumbLX, controllerState.Gamepad.sThumbLY);
+		vec = myMath::Vector2(controllerState_.Gamepad.sThumbLX, controllerState_.Gamepad.sThumbLY);
 	}
 	else {
-		vec = myMath::Vector2(controllerState.Gamepad.sThumbRX, controllerState.Gamepad.sThumbRY);
+		vec = myMath::Vector2(controllerState_.Gamepad.sThumbRX, controllerState_.Gamepad.sThumbRY);
 	}
 
 	if (StickInDeadZone(vec, deadRate))return false;
 
 	if (stick % 4 == L_UP) {
-		return deadRange < (vec.y / STICK_INPUT_MAX);
+		return deadRange < (vec.y / STICK_INPUT_MAX_);
 	}
 	else if (stick % 4 == L_DOWN) {
-		return  vec.y / STICK_INPUT_MAX < -deadRange;
+		return  vec.y / STICK_INPUT_MAX_ < -deadRange;
 	}
 	else if (stick % 4 == L_RIGHT) {
-		return deadRange < (vec.x / STICK_INPUT_MAX);
+		return deadRange < (vec.x / STICK_INPUT_MAX_);
 	}
 	else if (stick % 4 == L_LEFT) {
-		return  vec.x / STICK_INPUT_MAX < -deadRange;
+		return  vec.x / STICK_INPUT_MAX_ < -deadRange;
 	}
 
 	assert(0);
@@ -188,12 +188,12 @@ bool Controller::StickTriggerRelease(ControllerStick stick, const float& deadRan
 	bool isLeftStick = stick <= L_RIGHT;
 
 	if (isLeftStick) {
-		oldVec = myMath::Vector2(oldControllerState.Gamepad.sThumbLX, oldControllerState.Gamepad.sThumbLY);
-		vec = myMath::Vector2(controllerState.Gamepad.sThumbLX, controllerState.Gamepad.sThumbLY);
+		oldVec = myMath::Vector2(oldControllerState_.Gamepad.sThumbLX, oldControllerState_.Gamepad.sThumbLY);
+		vec = myMath::Vector2(controllerState_.Gamepad.sThumbLX, controllerState_.Gamepad.sThumbLY);
 	}
 	else {
-		oldVec = myMath::Vector2(oldControllerState.Gamepad.sThumbRX, oldControllerState.Gamepad.sThumbRY);
-		vec = myMath::Vector2(controllerState.Gamepad.sThumbRX, controllerState.Gamepad.sThumbRY);
+		oldVec = myMath::Vector2(oldControllerState_.Gamepad.sThumbRX, oldControllerState_.Gamepad.sThumbRY);
+		vec = myMath::Vector2(controllerState_.Gamepad.sThumbRX, controllerState_.Gamepad.sThumbRY);
 	}
 
 	if (!StickInDeadZone(oldVec, deadRate)) {
@@ -207,16 +207,16 @@ bool Controller::StickTriggerRelease(ControllerStick stick, const float& deadRan
 	bool result = false;
 
 	if (stick % 4 == L_UP) {
-		result = deadRange < (oldVec.y / STICK_INPUT_MAX) && !(deadRange < (vec.y / STICK_INPUT_MAX));
+		result = deadRange < (oldVec.y / STICK_INPUT_MAX_) && !(deadRange < (vec.y / STICK_INPUT_MAX_));
 	}
 	else if (stick % 4 == L_DOWN) {
-		result = oldVec.y / STICK_INPUT_MAX < -deadRange && !(vec.y / STICK_INPUT_MAX < -deadRange);
+		result = oldVec.y / STICK_INPUT_MAX_ < -deadRange && !(vec.y / STICK_INPUT_MAX_ < -deadRange);
 	}
 	else if (stick % 4 == L_RIGHT) {
-		result = deadRange < (oldVec.x / STICK_INPUT_MAX) && !(deadRange < (vec.x / STICK_INPUT_MAX));
+		result = deadRange < (oldVec.x / STICK_INPUT_MAX_) && !(deadRange < (vec.x / STICK_INPUT_MAX_));
 	}
 	else if (stick % 4 == L_LEFT) {
-		result = oldVec.x / STICK_INPUT_MAX < -deadRange && !(vec.x / STICK_INPUT_MAX < -deadRange);
+		result = oldVec.x / STICK_INPUT_MAX_ < -deadRange && !(vec.x / STICK_INPUT_MAX_ < -deadRange);
 	}
 	else {
 		assert(0);
@@ -242,16 +242,16 @@ void Controller::ShakeController(const float& power, const int& span)
 
 myMath::Vector2 Controller::GetLeftStickVec(const myMath::Vector2& deadRate)
 {
-	myMath::Vector2 result(static_cast<float>(controllerState.Gamepad.sThumbLX), static_cast<float>(-controllerState.Gamepad.sThumbLY));
+	myMath::Vector2 result(static_cast<float>(controllerState_.Gamepad.sThumbLX), static_cast<float>(-controllerState_.Gamepad.sThumbLY));
 	StickInDeadZone(result, deadRate);
-	return result / STICK_INPUT_MAX;
+	return result / STICK_INPUT_MAX_;
 }
 
 myMath::Vector2 Controller::GetRightStickVec(const myMath::Vector2& deadRate)
 {
-	myMath::Vector2 result(static_cast<float>(controllerState.Gamepad.sThumbRX), static_cast<float>(-controllerState.Gamepad.sThumbRY));
+	myMath::Vector2 result(static_cast<float>(controllerState_.Gamepad.sThumbRX), static_cast<float>(-controllerState_.Gamepad.sThumbRY));
 	StickInDeadZone(result, deadRate);
-	return result / STICK_INPUT_MAX;;
+	return result / STICK_INPUT_MAX_;;
 }
 
 Controller* Controller::GetInstance()

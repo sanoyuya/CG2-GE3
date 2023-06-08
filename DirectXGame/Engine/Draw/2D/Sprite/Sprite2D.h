@@ -15,39 +15,39 @@ class Sprite2D
 {
 protected:
 
-	HRESULT result = S_OK;
-	char PADING[4] = {};
+	HRESULT result_ = S_OK;
+	char PADING_[4] = {};
 
 	//頂点バッファ
-	std::unique_ptr<VertexBuffer> vertexBuffer = {};
+	std::unique_ptr<VertexBuffer> vertexBuffer_ = {};
 	//頂点マップ
-	PosUvColor* vertMap = {};
+	PosUvColor* vertMap_ = {};
 
 	//インデックスバッファ
-	std::unique_ptr<IndexBuffer> indexBuffer = {};
+	std::unique_ptr<IndexBuffer> indexBuffer_ = {};
 
 	//インデックスバッファをマッピング
-	uint16_t* indexMap = 0;
+	uint16_t* indexMap_ = 0;
 
 	// 定数バッファ
-	std::unique_ptr<ConstantBuffer> constBuffMaterial = {};
+	std::unique_ptr<ConstantBuffer> constBuffMaterial_ = {};
 
 	//定数バッファのマッピング用ポインタ
-	myMath::Matrix4 constBuffMap = {};
+	myMath::Matrix4 constBuffMap_ = {};
 
 	//プロジェクション行列
-	static myMath::Matrix4 matProjection;
+	static myMath::Matrix4 matProjection_;
 
-	BlendMode blendMode = BlendMode::Alpha;//初期値半透明合成
+	BlendMode blendMode_ = BlendMode::Alpha;//初期値半透明合成
 
-	TextureData* texture = {};
+	TextureData* texture_ = {};
 
 public:
 
 	Sprite2D() {}
 	virtual ~Sprite2D() {}
 
-	static void StaticInitialize();
+	static void StaticInitialize(WindowsApp* windowsApp);
 
 	/// <summary>
 	/// スプライトの初期化処理(2D)

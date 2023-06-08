@@ -12,6 +12,9 @@ private:
 
 public:
 
+	//デストラクタ
+	~WindowsApp();
+
 	/// <summary>
 	/// ウィンドウの作成
 	/// </summary>
@@ -20,7 +23,6 @@ public:
 	/// <param name="height">ウィンドウの縦幅の大きさ</param>
 	void CreatWindow(const wchar_t* title = L"DirectXGame", const float width = 1280.0f, const float height = 720.0f);
 	bool MessageWindow();
-	void Break();
 	void Appearance();
 
 	//ゲッター
@@ -32,16 +34,4 @@ public:
 	//セッター
 	void SetW(WNDCLASSEX W);
 	void SetHwnd(HWND Hwnd);
-
-	//シングルトン
-	static WindowsApp* GetInstance();
-
-private:
-
-	WindowsApp() = default;
-	~WindowsApp() = default;
-
-	//コピーコンストラクタ・代入演算子削除
-	WindowsApp& operator=(const WindowsApp&) = delete;
-	WindowsApp(const WindowsApp&) = delete;
 };

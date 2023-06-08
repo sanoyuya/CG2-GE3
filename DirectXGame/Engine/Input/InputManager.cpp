@@ -2,12 +2,11 @@
 #pragma comment(lib,"dinput8.lib")
 #pragma comment(lib,"dxguid.lib")
 
-void InputManager::Initialize()
+void InputManager::Initialize(WindowsApp* windowsApp)
 {
 	HRESULT result;
 
 	//クラス読み込み
-	windowsApp = WindowsApp::GetInstance();
 	keyboard = Keyboard::GetInstance();
 	mouse = Mouse::GetInstance();
 	controller = Controller::GetInstance();
@@ -16,8 +15,8 @@ void InputManager::Initialize()
 	result = DirectInput8Create(windowsApp->GetW().hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
 	assert(SUCCEEDED(result));
 
-	keyboard->Initialize(directInput.Get());//キーボード初期化処理
-	mouse->Initialize(directInput.Get());//マウス初期化処理
+	keyboard->Initialize(directInput.Get(), windowsApp);//キーボード初期化処理
+	mouse->Initialize(directInput.Get(), windowsApp);//マウス初期化処理
 }
 
 void InputManager::Update()

@@ -3,7 +3,7 @@
 
 void ConstantBuffer::Create(size_t size)
 {
-	bufferSize = size;
+	bufferSize_ = size;
 
 	//定数バッファの設定
 	D3D12_HEAP_PROPERTIES heapProp{};//ヒープ設定
@@ -11,7 +11,7 @@ void ConstantBuffer::Create(size_t size)
 	//リソース設定
 	D3D12_RESOURCE_DESC resDesc{};
 	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = (bufferSize + 0xff) & ~0xff;//頂点データ全体のサイズ
+	resDesc.Width = (bufferSize_ + 0xff) & ~0xff;//頂点データ全体のサイズ
 	resDesc.Height = 1;
 	resDesc.DepthOrArraySize = 1;
 	resDesc.MipLevels = 1;
@@ -25,32 +25,32 @@ void ConstantBuffer::Create(size_t size)
 		&resDesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(buffer.ReleaseAndGetAddressOf()));
+		IID_PPV_ARGS(buffer_.ReleaseAndGetAddressOf()));
 
-	result = buffer->Map(0, nullptr, &bufferMappedPtr);
+	result = buffer_->Map(0, nullptr, &bufferMappedPtr_);
 
-	constantBufferView = {};
-	constantBufferView.BufferLocation = buffer->GetGPUVirtualAddress();
-	constantBufferView.SizeInBytes = static_cast<UINT>(resDesc.Width);
+	constantBufferView_ = {};
+	constantBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
+	constantBufferView_.SizeInBytes = static_cast<UINT>(resDesc.Width);
 
-	DirectXBase::GetInstance()->GetDescriptorHeap()->CreateCBV(constantBufferView);
+	DirectXBase::GetInstance()->GetDescriptorHeap()->CreateCBV(constantBufferView_);
 
-	isValid = true;
+	isValid_ = true;
 }
 
 bool ConstantBuffer::IsValid()
 {
-	return isValid;
+	return isValid_;
 }
 
 D3D12_GPU_VIRTUAL_ADDRESS ConstantBuffer::GetAddress() const
 {
-	return constantBufferView.BufferLocation;
+	return constantBufferView_.BufferLocation;
 }
 
 D3D12_CONSTANT_BUFFER_VIEW_DESC ConstantBuffer::GetViewDesc()
 {
-	return constantBufferView;
+	return constantBufferView_;
 }
 
 void ConstantBuffer::Update(void* data)
@@ -61,15 +61,15 @@ void ConstantBuffer::Update(void* data)
 	}
 
 	// 頂点データをマッピング先に設定
-	memcpy(bufferMappedPtr, data, bufferSize);
+	memcpy(bufferMappedPtr_, data, bufferSize_);
 }
 
 ID3D12Resource* ConstantBuffer::GetResource()
 {
-	return buffer.Get();
+	return buffer_.Get();
 }
 
 void* ConstantBuffer::GetPtr()
 {
-	return bufferMappedPtr;
+	return bufferMappedPtr_;
 }

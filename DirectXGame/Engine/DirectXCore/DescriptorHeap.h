@@ -9,33 +9,33 @@ class DescriptorHeap
 {
 private:
 	//デバイス
-	Microsoft::WRL::ComPtr <ID3D12Device> device;
+	Microsoft::WRL::ComPtr <ID3D12Device> device_;
 	//デスクプリタヒープ
-	Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> descriptorHeap;
+	Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> descriptorHeap_;
 	//デスクプリタレンジ
-	D3D12_DESCRIPTOR_RANGE descriptorRange{};
+	D3D12_DESCRIPTOR_RANGE descriptorRange_{};
 
-	char PADING[4];
+	char PADING_[4];
 
-	D3D12_CPU_DESCRIPTOR_HANDLE	startCpuHandle;
-	D3D12_GPU_DESCRIPTOR_HANDLE	startGpuHandle;
+	D3D12_CPU_DESCRIPTOR_HANDLE	startCpuHandle_;
+	D3D12_GPU_DESCRIPTOR_HANDLE	startGpuHandle_;
 
-	UINT incrementSize;
+	UINT incrementSize_;
 
-	size_t maxSRV = 2048;
-	size_t maxUAV = 2048;
-	size_t maxCBV = 2048;
+	size_t maxSRV_ = 2048;
+	size_t maxUAV_ = 2048;
+	size_t maxCBV_ = 2048;
 
-	size_t countSRV = 0;
-	size_t countUAV = 0;
-	size_t countCBV = 0;
+	size_t countSRV_ = 0;
+	size_t countUAV_ = 0;
+	size_t countCBV_ = 0;
 
 public:
 
 	struct DescriptorHeapViewHandle
 	{
-		D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle;
-		D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle;
+		D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle_;
+		D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle_;
 	};
 
 public:

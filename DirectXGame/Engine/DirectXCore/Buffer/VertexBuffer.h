@@ -8,16 +8,16 @@ class VertexBuffer
 {
 private:
 	// バッファ
-	Microsoft::WRL::ComPtr<ID3D12Resource> vertexBuffer = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertexBuffer_ = nullptr;
 
 	// 頂点バッファビュー
-	D3D12_VERTEX_BUFFER_VIEW vertexBufferView = {};
+	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_ = {};
 
-	void* bufferMappedPtr = nullptr;
+	void* bufferMappedPtr_ = nullptr;
 
 	// バッファの生成に成功したか
-	bool isValid = false;
-	char PADING[7];
+	bool isValid_ = false;
+	char PADING_[7];
 public:
 
 	/// <summary>

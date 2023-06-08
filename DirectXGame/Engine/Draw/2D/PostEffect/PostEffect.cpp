@@ -18,10 +18,10 @@ void PostEffect::Draw()
 	if (flipY == false)isFlipY = 1;
 	else isFlipY = -1;
 
-	float left = ((0.0f - anchorpoint.x) * texture->width) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * texture->width) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * texture->height) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * texture->height) * isFlipY;
+	float left = ((0.0f - anchorpoint.x) * texture_->width) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * texture_->width) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * texture_->height) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * texture_->height) * isFlipY;
 
 	//頂点データ
 	PosUvColor vertices[] =
@@ -40,16 +40,16 @@ void PostEffect::Draw()
 	};
 
 	//頂点バッファへのデータ転送
-	vertexBuffer->Update(vertices);
+	vertexBuffer_->Update(vertices);
 
 	//インデックスバッファへのデータ転送
-	indexBuffer->Update(indices);
+	indexBuffer_->Update(indices);
 
 	Update(position, scale, rotation);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet(blendMode);
+	SpriteCommon::BlendSet(blendMode_);
 
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }

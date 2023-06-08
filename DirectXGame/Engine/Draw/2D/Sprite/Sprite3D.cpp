@@ -2,7 +2,7 @@
 
 void Sprite3D::Sprite3DInitialize(uint32_t handle)
 {
-	texture = TextureManager::GetTextureData(handle);
+	texture_ = TextureManager::GetTextureData(handle);
 	CreateVertexIndexBuffer();
 	CreateConstBuff();
 }
@@ -15,10 +15,10 @@ void Sprite3D::DrawSprite3D(Camera* camera, Transform& transform, BillboardFlag 
 	if (flipY == false)isFlipY = -1;
 	else isFlipY = 1;
 
-	float left = ((0.0f - anchorpoint.x) * texture->width) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * texture->width) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * texture->height) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * texture->height) * isFlipY;
+	float left = ((0.0f - anchorpoint.x) * texture_->width) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * texture_->width) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * texture_->height) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * texture_->height) * isFlipY;
 
 	//頂点データ
 	PosUvColor vertices[] =
@@ -37,18 +37,18 @@ void Sprite3D::DrawSprite3D(Camera* camera, Transform& transform, BillboardFlag 
 	};
 
 	//頂点バッファへのデータ転送
-	vertexBuffer->Update(vertices);
+	vertexBuffer_->Update(vertices);
 
 	//インデックスバッファへのデータ転送
-	indexBuffer->Update(indices);
+	indexBuffer_->Update(indices);
 
 	Update(camera, transform, flag);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet(blendMode);
+	SpriteCommon::BlendSet(blendMode_);
 
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
 void Sprite3D::DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, BillboardFlag billboardFlag, myMath::Vector4 color, bool flipX, bool flipY)
@@ -67,10 +67,10 @@ void Sprite3D::DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Ve
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) / texture->width,(clipCenter.y - clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//左上インデックス0
-		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / texture->width,(clipCenter.y + clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//左下インデックス1
-		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / texture->width,(clipCenter.y - clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//右上インデックス2
-		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / texture->width,(clipCenter.y + clipRadius.y) / texture->height},{color.x, color.y, color.z, color.w}},//右下インデックス3
+		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) / texture_->width,(clipCenter.y - clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / texture_->width,(clipCenter.y + clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / texture_->width,(clipCenter.y - clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / texture_->width,(clipCenter.y + clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -81,18 +81,18 @@ void Sprite3D::DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Ve
 	};
 
 	//頂点バッファへのデータ転送
-	vertexBuffer->Update(vertices);
+	vertexBuffer_->Update(vertices);
 
 	//インデックスバッファへのデータ転送
-	indexBuffer->Update(indices);
+	indexBuffer_->Update(indices);
 
 	Update(camera, transform, billboardFlag);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet(blendMode);
+	SpriteCommon::BlendSet(blendMode_);
 
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
 void Sprite3D::DrawAnimationSpriteX3D(Camera* camera, Transform& transform, uint16_t sheetsNum, uint16_t& nowNum, BillboardFlag billboardFlag, myMath::Vector4 color, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
@@ -113,10 +113,10 @@ void Sprite3D::DrawAnimationSpriteXY3D(Camera* camera, Transform& transform, uin
 	if (flipY == false)isFlipY = -1;
 	else isFlipY = 1;
 
-	float left = ((0.0f - anchorpoint.x) * texture->width / sheetsNumX) * isFlipX;
-	float right = ((1.0f - anchorpoint.x) * texture->width / sheetsNumX) * isFlipX;
-	float top = ((0.0f - anchorpoint.y) * texture->height / sheetsNumY) * isFlipY;
-	float bottom = ((1.0f - anchorpoint.y) * texture->height / sheetsNumY) * isFlipY;
+	float left = ((0.0f - anchorpoint.x) * texture_->width / sheetsNumX) * isFlipX;
+	float right = ((1.0f - anchorpoint.x) * texture_->width / sheetsNumX) * isFlipX;
+	float top = ((0.0f - anchorpoint.y) * texture_->height / sheetsNumY) * isFlipY;
+	float bottom = ((1.0f - anchorpoint.y) * texture_->height / sheetsNumY) * isFlipY;
 
 	uint16_t animationXYNum = sheetsNumX * sheetsNumY;//分割数(総合計)
 	uint16_t x = nowNum % sheetsNumX;
@@ -144,38 +144,38 @@ void Sprite3D::DrawAnimationSpriteXY3D(Camera* camera, Transform& transform, uin
 	};
 
 	//頂点バッファへのデータ転送
-	vertexBuffer->Update(vertices);
+	vertexBuffer_->Update(vertices);
 
 	//インデックスバッファへのデータ転送
-	indexBuffer->Update(indices);
+	indexBuffer_->Update(indices);
 
 	Update(camera, transform, billboardFlag);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet(blendMode);
+	SpriteCommon::BlendSet(blendMode_);
 
 	//描画コマンド
-	SpriteCommon::DrawCommand(texture, vertexBuffer->GetView(), indexBuffer->GetView(), constBuffMaterial.get());
+	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
 void Sprite3D::SetSprite3DBlendMode(const BlendMode& mode)
 {
-	blendMode = mode;
+	blendMode_ = mode;
 }
 
 void Sprite3D::CreateVertexIndexBuffer()
 {
-	vertexBuffer = std::make_unique<VertexBuffer>();
-	vertexBuffer->Create(4, sizeof(PosUvColor));
+	vertexBuffer_ = std::make_unique<VertexBuffer>();
+	vertexBuffer_->Create(4, sizeof(PosUvColor));
 
-	indexBuffer = std::make_unique<IndexBuffer>();
-	indexBuffer->Create(6);
+	indexBuffer_ = std::make_unique<IndexBuffer>();
+	indexBuffer_->Create(6);
 }
 
 void Sprite3D::CreateConstBuff()
 {
-	constBuffMaterial = std::make_unique<ConstantBuffer>();
-	constBuffMaterial->Create(sizeof(myMath::Matrix4));
+	constBuffMaterial_ = std::make_unique<ConstantBuffer>();
+	constBuffMaterial_->Create(sizeof(myMath::Matrix4));
 }
 
 void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
@@ -254,6 +254,6 @@ void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 	}
 
 	transform.Update();
-	constBuffMap = transform.matWorld;
-	constBuffMaterial->Update(&constBuffMap);
+	constBuffMap_ = transform.matWorld;
+	constBuffMaterial_->Update(&constBuffMap_);
 }

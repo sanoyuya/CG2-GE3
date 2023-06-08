@@ -11,18 +11,18 @@ class IndexBuffer
 private:
 
 	//インデックスバッファ生成が成功したか
-	bool isValid = false;
-	char PADING[7];
+	bool isValid_ = false;
+	char PADING_[7];
 
 	// インデックスバッファ
-	Microsoft::WRL::ComPtr<ID3D12Resource> buffer;
+	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
 
 	// インデックスバッファビュー
-	D3D12_INDEX_BUFFER_VIEW bufferView{};
+	D3D12_INDEX_BUFFER_VIEW bufferView_{};
 
-	void* bufferMappedPtr = nullptr;
+	void* bufferMappedPtr_ = nullptr;
 
-	size_t bufferLength = 0;
+	size_t bufferLength_ = 0;
 
 public:
 

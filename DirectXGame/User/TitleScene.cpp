@@ -26,36 +26,36 @@ void TitleScene::Initialize()
 	levelData = LevelEditor::LoadLevelEditorFile("untitled");
 
 	//レベルデータからオブジェクトを生成、配置
-	for (auto& objectData : levelData->objects)
+	for (auto& objectData : levelData->objects_)
 	{
 		//ファイル名から登録済みモデルを検索
 		EditorObject* model = new EditorObject;
 		model->Initialize();
-		decltype(models)::iterator it = models.find(objectData.fileName);
+		decltype(models)::iterator it = models.find(objectData.fileName_);
 		if (it != models.end())
 		{
 			model = it->second;
 		}
 
 		//座標
-		model->SetPos(objectData.translation);
+		model->SetPos(objectData.translation_);
 		//回転角
-		model->SetRot(objectData.rotation);
+		model->SetRot(objectData.rotation_);
 		//拡縮
-		model->SetScale(objectData.scaling);
+		model->SetScale(objectData.scaling_);
 		//名前
-		model->SetName(objectData.fileName);
+		model->SetName(objectData.fileName_);
 		//コライダーの中心座標
-		model->SetColliderCenter(objectData.collider.center);
+		model->SetColliderCenter(objectData.collider_.center_);
 		//コライダーサイズ
-		model->SetColliderSize(objectData.collider.size);
+		model->SetColliderSize(objectData.collider_.size_);
 
-		if (objectData.fileName == "player")
+		if (objectData.fileName_ == "player")
 		{
 			model->SetModel(playerTex);
 			pos = model->GetPos();
 		}
-		else if (objectData.fileName == "sphere")
+		else if (objectData.fileName_ == "sphere")
 		{
 			model->SetModel(sphereTex);
 		}
@@ -70,9 +70,7 @@ void TitleScene::Initialize()
 
 void TitleScene::Destroy()
 {
-	delete levelData;
-	models.clear();
-	objects.clear();
+	
 }
 
 void TitleScene::Update()

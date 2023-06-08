@@ -31,7 +31,7 @@ protected:
 
 	bool endRequest = false;
 
-	WindowsApp* windowsApp = nullptr;
+	std::unique_ptr<WindowsApp> windowsApp;
 	std::unique_ptr<FPS>fps;
 	DirectXBase* directX = nullptr;
 	InputManager* input = nullptr;

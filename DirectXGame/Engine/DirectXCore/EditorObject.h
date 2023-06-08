@@ -6,11 +6,11 @@ class EditorObject
 {
 private:
 
-	std::unique_ptr<Model> model;
-	Transform transform;
-	std::string objectName;
-	myMath::Vector3 colliderCenter = { 0.0f,0.0f ,0.0f };
-	myMath::Vector3 colliderSize = { 0.0f,0.0f ,0.0f };
+	std::unique_ptr<Model> model_;
+	Transform transform_;
+	std::string objectName_;
+	myMath::Vector3 colliderCenter_ = { 0.0f,0.0f ,0.0f };
+	myMath::Vector3 colliderSize_ = { 0.0f,0.0f ,0.0f };
 
 public:
 
@@ -33,6 +33,6 @@ public:
 	void SetRot(const myMath::Vector3& rotation);
 	void SetScale(const myMath::Vector3& scale);
 	void SetName(const std::string& name);
-	void SetColliderCenter(const myMath::Vector3& colliderCenter_);
-	void SetColliderSize(const myMath::Vector3& colliderSize_);
+	void SetColliderCenter(const myMath::Vector3& colliderCenter);
+	void SetColliderSize(const myMath::Vector3& colliderSize);
 };

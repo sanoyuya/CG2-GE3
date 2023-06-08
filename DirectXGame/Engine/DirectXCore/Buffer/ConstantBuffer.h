@@ -10,18 +10,18 @@ class ConstantBuffer
 private:
 
 	// 定数バッファ生成に成功したか
-	bool isValid = false;
-	char PADING[7] = {};
+	bool isValid_ = false;
+	char PADING_[7] = {};
 
 	// 定数バッファ
-	Microsoft::WRL::ComPtr<ID3D12Resource> buffer;
+	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
 
 	// 定数バッファビューの設定
-	D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferView = {};
+	D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferView_ = {};
 
-	void* bufferMappedPtr = nullptr;
+	void* bufferMappedPtr_ = nullptr;
 
-	size_t bufferSize;
+	size_t bufferSize_;
 
 public:
 	/// <summary>
@@ -68,10 +68,8 @@ public:
 	~ConstantBuffer() = default;
 	ConstantBuffer() = default;
 
-
 private:
 
 	ConstantBuffer(const ConstantBuffer&) = delete;
 	void operator = (const ConstantBuffer&) = delete;
-
 };

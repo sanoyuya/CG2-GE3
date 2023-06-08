@@ -13,8 +13,6 @@ std::wstring multiToWideWinapi(std::string const& src)
 	return std::wstring(dest.begin(), dest.end());
 }
 
-AudioManager* AudioManager::instance = nullptr;
-
 AudioManager::AudioManager()
 {
 
@@ -35,18 +33,13 @@ AudioManager::~AudioManager()
 
 AudioManager* AudioManager::GetInstance()
 {
-	if (!instance)
-	{
-		instance = new AudioManager();
-	}
-
-	return instance;
+	static AudioManager instance;
+	return &instance;
 }
 
 void AudioManager::Destroy()
 {
 	MFShutdown();
-	delete instance;
 }
 
 void AudioManager::Initialize()
@@ -74,7 +67,7 @@ void AudioManager::Update()
 {
 	for (AudioData& audio : audios)
 	{
-		audio.playTrigger = false;
+		audio.playTrigger_ = false;
 	}
 
 	if (!playHandleArray.empty())
@@ -117,11 +110,11 @@ bool AudioManager::NowPlay(const uint32_t& Handle)
 		itr++;
 	}
 
-	if (itr->pSourceVoice != nullptr)
+	if (itr->pSourceVoice_ != nullptr)
 	{
 		XAUDIO2_VOICE_STATE state;
 
-		itr->pSourceVoice->GetState(&state);
+		itr->pSourceVoice_->GetState(&state);
 
 		return !(state.pCurrentBufferContext == nullptr);
 	}
@@ -140,11 +133,11 @@ void AudioManager::ChangeVolume(const uint32_t& Handle, float Volume)
 		itr++;
 	}
 
-	itr->volume = Volume;
+	itr->volume_ = Volume;
 
-	if (itr->pSourceVoice != nullptr)
+	if (itr->pSourceVoice_ != nullptr)
 	{
-		itr->pSourceVoice->SetVolume(itr->volume);
+		itr->pSourceVoice_->SetVolume(itr->volume_);
 	}
 }
 
@@ -157,7 +150,7 @@ float AudioManager::GetVolume(const uint32_t& Handle)
 		itr++;
 	}
 
-	return itr->volume;
+	return itr->volume_;
 }
 
 uint32_t AudioManager::LoadAudio(std::string FileName, const float& Volume)
@@ -169,7 +162,7 @@ uint32_t AudioManager::LoadAudio(std::string FileName, const float& Volume)
 		uint32_t i = 0;
 		for (auto itr = audios.begin(); itr != audios.end(); itr++)
 		{
-			if (itr->filePass == FileName)
+			if (itr->filePass_ == FileName)
 			{
 				return i;
 			}
@@ -181,25 +174,25 @@ uint32_t AudioManager::LoadAudio(std::string FileName, const float& Volume)
 
 	std::wstring path = multiToWideWinapi(FileName);
 
-	result = MFCreateSourceReaderFromURL(path.c_str(), NULL, &audios.back().pMFSourceReader);
+	result = MFCreateSourceReaderFromURL(path.c_str(), NULL, &audios.back().pMFSourceReader_);
 
 	IMFMediaType* pMFMediaType{ nullptr };
 	MFCreateMediaType(&pMFMediaType);
 	pMFMediaType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
 	pMFMediaType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM);
-	audios.back().pMFSourceReader->SetCurrentMediaType((DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM, nullptr, pMFMediaType);
+	audios.back().pMFSourceReader_->SetCurrentMediaType((DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM, nullptr, pMFMediaType);
 
 	pMFMediaType->Release();
 	pMFMediaType = nullptr;
-	audios.back().pMFSourceReader->GetCurrentMediaType((DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM, &pMFMediaType);
+	audios.back().pMFSourceReader_->GetCurrentMediaType((DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM, &pMFMediaType);
 
-	MFCreateWaveFormatExFromMFMediaType(pMFMediaType, &audios.back().waveFormat, nullptr);
+	MFCreateWaveFormatExFromMFMediaType(pMFMediaType, &audios.back().waveFormat_, nullptr);
 
 	while (true)
 	{
 		IMFSample* pMFSample{ nullptr };
 		DWORD dwStreamFlags{ 0 };
-		audios.back().pMFSourceReader->ReadSample(((DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, nullptr, &dwStreamFlags, nullptr, &pMFSample);
+		audios.back().pMFSourceReader_->ReadSample(((DWORD)MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, nullptr, &dwStreamFlags, nullptr, &pMFSample);
 
 		if (dwStreamFlags & MF_SOURCE_READERF_ENDOFSTREAM)
 		{
@@ -213,8 +206,8 @@ uint32_t AudioManager::LoadAudio(std::string FileName, const float& Volume)
 		DWORD cbCurrentLength{ 0 };
 		pMFMediaBuffer->Lock(&pBuffer, nullptr, &cbCurrentLength);
 
-		audios.back().mediaData.resize(audios.back().mediaData.size() + cbCurrentLength);
-		memcpy(audios.back().mediaData.data() + audios.back().mediaData.size() - cbCurrentLength, pBuffer, cbCurrentLength);
+		audios.back().mediaData_.resize(audios.back().mediaData_.size() + cbCurrentLength);
+		memcpy(audios.back().mediaData_.data() + audios.back().mediaData_.size() - cbCurrentLength, pBuffer, cbCurrentLength);
 
 		pMFMediaBuffer->Unlock();
 
@@ -240,7 +233,7 @@ int32_t AudioManager::PlayWave(const uint32_t& Handle, bool LoopFlag)
 	}
 
 	//同時に同じ音源を再生しない
-	if (itr->playTrigger)
+	if (itr->playTrigger_)
 	{
 		return -1;
 	}
@@ -248,16 +241,16 @@ int32_t AudioManager::PlayWave(const uint32_t& Handle, bool LoopFlag)
 	//ループ再生で再生しようとしたら既に流れているものを停止
 	if (LoopFlag && NowPlay(Handle))
 	{
-		itr->pSourceVoice->Stop();
+		itr->pSourceVoice_->Stop();
 	}
 
 
-	xAudio2->CreateSourceVoice(&itr->pSourceVoice, itr->waveFormat);
+	xAudio2->CreateSourceVoice(&itr->pSourceVoice_, itr->waveFormat_);
 
 	XAUDIO2_BUFFER buffer{ 0 };
-	buffer.pAudioData = itr->mediaData.data();
+	buffer.pAudioData = itr->mediaData_.data();
 	buffer.Flags = XAUDIO2_END_OF_STREAM;
-	buffer.AudioBytes = sizeof(BYTE) * static_cast<UINT32>(itr->mediaData.size());
+	buffer.AudioBytes = sizeof(BYTE) * static_cast<UINT32>(itr->mediaData_.size());
 
 	if (LoopFlag)
 	{
@@ -265,13 +258,13 @@ int32_t AudioManager::PlayWave(const uint32_t& Handle, bool LoopFlag)
 	}
 
 	//音量の設定
-	itr->pSourceVoice->SetVolume(itr->volume);
+	itr->pSourceVoice_->SetVolume(itr->volume_);
 
 	//波形データの再生
-	result = itr->pSourceVoice->SubmitSourceBuffer(&buffer);
-	result = itr->pSourceVoice->Start();
+	result = itr->pSourceVoice_->SubmitSourceBuffer(&buffer);
+	result = itr->pSourceVoice_->Start();
 
-	itr->playTrigger = true;
+	itr->playTrigger_ = true;
 
 	return 1;
 }
@@ -296,23 +289,20 @@ void AudioManager::StopWave(const uint32_t& Handle)
 		itr++;
 	}
 
-	if (itr->pSourceVoice != nullptr)
+	if (itr->pSourceVoice_ != nullptr)
 	{
-		itr->pSourceVoice->Stop();
-		itr->pSourceVoice->FlushSourceBuffers();
+		itr->pSourceVoice_->Stop();
+		itr->pSourceVoice_->FlushSourceBuffers();
 	}
 }
 
-AudioData::AudioData(std::string FilePass) :filePass(FilePass)
+AudioData::AudioData(std::string FilePass) :filePass_(FilePass)
 {
 }
 
 void AudioData::Unload()
 {
-	if (pBuffer != nullptr)
-	{
-		delete[] pBuffer;
-	}
+	
 }
 
 PlayAudioArray::PlayAudioArray(const std::vector<uint32_t>& Handles) :handles(Handles)

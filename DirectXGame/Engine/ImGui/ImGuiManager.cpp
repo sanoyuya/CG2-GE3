@@ -8,14 +8,14 @@
 
 ImGuiManager* imGuiInstance = nullptr;
 
-void ImGuiManager::Initialize()
+void ImGuiManager::Initialize(WindowsApp* windowsApp)
 {
 	//ImGuiのコンテキストを生成
 	ImGui::CreateContext();
 	//ImGuiのスタイルを設定
 	ImGui::StyleColorsDark();
 
-	ImGui_ImplWin32_Init(WindowsApp::GetInstance()->GetHwnd());
+	ImGui_ImplWin32_Init(windowsApp->GetHwnd());
 
 	DescriptorHeap::DescriptorHeapViewHandle handle = DirectXBase::GetInstance()->GetDescriptorHeap()->AddSRV();
 
@@ -23,8 +23,8 @@ void ImGuiManager::Initialize()
 		DirectXBase::GetInstance()->GetDevice().Get(),
 		static_cast<int>(DirectXBase::GetInstance()->GetBackBuffer()),
 		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, DirectXBase::GetInstance()->GetDescriptorHeap()->GetHeap().Get(),
-		handle.cpuHandle,
-		handle.gpuHandle
+		handle.cpuHandle_,
+		handle.gpuHandle_
 	);
 
 	ImGuiIO& io = ImGui::GetIO();

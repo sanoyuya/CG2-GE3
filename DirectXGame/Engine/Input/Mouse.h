@@ -15,18 +15,19 @@ class Mouse
 {
 private:
 
-	WindowsApp* windowsApp = nullptr;
-
-	Microsoft::WRL::ComPtr<IDirectInputDevice8> mouse = nullptr;
-	DIMOUSESTATE2 mouseState = {};
-	DIMOUSESTATE2 oldMouseState = {};
+	Microsoft::WRL::ComPtr<IDirectInputDevice8> mouse_ = nullptr;
+	DIMOUSESTATE2 mouseState_ = {};
+	DIMOUSESTATE2 oldMouseState_ = {};
 	//マウスの座標
-	myMath::Vector2 mousePos;
+	myMath::Vector2 mousePos_;
+
+	float width_ = 0.0f;
+	float height_ = 0.0f;
 
 public:
 
 	//初期化処理(普段使わない)
-	void Initialize(IDirectInput8* directInput);
+	void Initialize(IDirectInput8* directInput, WindowsApp* windowsApp);
 	//更新処理(普段使わない)
 	void Update();
 

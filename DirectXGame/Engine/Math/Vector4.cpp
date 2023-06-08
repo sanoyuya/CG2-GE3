@@ -23,7 +23,7 @@ namespace myMath
 		return dot(*this);
 	}
 
-	Vector4& Vector4::normalization() const
+	Vector4 Vector4::normalization() const
 	{
 		Vector4 tmp(*this);
 
@@ -31,7 +31,6 @@ namespace myMath
 		if (len != 0)
 		{
 			return tmp /= len;
-
 		}
 
 		return tmp;

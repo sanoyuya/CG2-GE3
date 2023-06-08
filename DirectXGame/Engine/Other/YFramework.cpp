@@ -7,7 +7,7 @@
 
 void YFramework::Initialize()
 {
-	windowsApp = WindowsApp::GetInstance();//WindowsAppクラス読み込み
+	windowsApp = std::make_unique<WindowsApp>();//WindowsAppクラス読み込み
 	windowsApp->CreatWindow(title.c_str(), window_width, window_height);//ウィンドウ作成
 
 	fps = std::make_unique<FPS>();
@@ -16,15 +16,15 @@ void YFramework::Initialize()
 	//DirectX初期化処理 ここから
 
 	directX = DirectXBase::GetInstance();//DirectX_クラス読み込み
-	directX->Initialize();
+	directX->Initialize(windowsApp.get());
 
 	//imGuiの初期化
 	imGuiManager = ImGuiManager::GetInstance();
-	imGuiManager->Initialize();
+	imGuiManager->Initialize(windowsApp.get());
 
 	//キー取得開始
 	input = InputManager::GetInstance();
-	input->Initialize();
+	input->Initialize(windowsApp.get());
 
 	// オーディオの初期化
 	audioManager = AudioManager::GetInstance();
@@ -34,10 +34,12 @@ void YFramework::Initialize()
 
 	//描画初期化処理ここから
 
+	Camera::StaticInitialize(windowsApp.get());
+
 	TextureManager::GetInstance()->StaticInitialize();
 
 	SpriteCommon::Initialize();
-	Sprite2D::StaticInitialize();
+	Sprite2D::StaticInitialize(windowsApp.get());
 
 	Model::StaticInitialize();
 
@@ -57,7 +59,6 @@ void YFramework::Initialize()
 
 void YFramework::Destroy()
 {
-	windowsApp->Break();
 	imGuiManager->Destroy();
 	directX->Destroy();
 	textureManager->Destroy();
@@ -75,7 +76,7 @@ void YFramework::Update()
 	audioManager->Update();
 
 	directX->SetClearColor();//背景色を設定 初期値(水色)
-	directX->UpdateClear();
+	directX->UpdateClear(windowsApp.get());
 }
 
 void YFramework::SetWindowData(const std::string& title_, const float width, const float height)

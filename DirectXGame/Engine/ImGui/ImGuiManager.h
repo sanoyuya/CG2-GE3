@@ -2,6 +2,7 @@
 #include<memory>
 #include<wrl.h>
 #include"DescriptorHeap.h"
+#include"WindowsApp.h"
 
 class ImGuiManager
 {
@@ -15,7 +16,7 @@ public:
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
-	void Initialize();
+	void Initialize(WindowsApp* windowsApp);
 
 	/// <summary>
 	/// ‰ğ•úˆ—

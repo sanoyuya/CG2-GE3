@@ -8,7 +8,6 @@ class InputManager
 {
 private:
 
-	WindowsApp* windowsApp = nullptr;
 	Keyboard* keyboard = nullptr;
 	Mouse* mouse = nullptr;
 	Controller* controller = nullptr;
@@ -17,7 +16,7 @@ private:
 
 public:
 
-	void Initialize();
+	void Initialize(WindowsApp* windowsApp);
 	void Update();
 
 #pragma region	キーボード

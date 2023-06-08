@@ -22,7 +22,6 @@ namespace myMath
 		if (len != 0)
 		{
 			return *this /= len;
-
 		}
 
 		return *this;

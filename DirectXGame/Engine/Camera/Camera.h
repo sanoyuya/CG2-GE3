@@ -1,5 +1,6 @@
 #pragma once
 #include"myMath.h"
+#include"WindowsApp.h"
 
 /// <summary>
 /// カメラ
@@ -8,21 +9,26 @@ class Camera
 {
 private:
 
-	float aspect = 0.0f;
-	float nearClip = 0.0f;
-	float farClip = 0.0f;
-	float angle = 0.0f;				//カメラ角度
-	float distance = 50.0f;			//カメラ距離
-	myMath::Matrix4 matView;		//ビュー行列
-	myMath::Matrix4 matViewInverse;	//逆ビュー行列	
-	myMath::Matrix4 matProjection;	//射影行列
-	myMath::Vector3 eye;			//視点座標
-	myMath::Vector3 target;			//注視点座標
-	myMath::Vector3 up;				//上方向ベクトル
+	static float sWidth_;
+	static float sHeight;
+
+	float aspect_ = 0.0f;
+	float nearClip_ = 0.0f;
+	float farClip_ = 0.0f;
+	float angle_ = 0.0f;				//カメラ角度
+	float distance_ = 50.0f;			//カメラ距離
+	myMath::Matrix4 matView_;		//ビュー行列
+	myMath::Matrix4 matViewInverse_;	//逆ビュー行列	
+	myMath::Matrix4 matProjection_;	//射影行列
+	myMath::Vector3 eye_;			//視点座標
+	myMath::Vector3 target_;			//注視点座標
+	myMath::Vector3 up_;				//上方向ベクトル
 
 	//bool projectionFlag = false;	//平行投影と透視投影を切り替えるフラグ
 
 public:
+
+	static void StaticInitialize(WindowsApp* windowsApp);
 
 	/// <summary>
 	/// 初期化処理
@@ -56,9 +62,9 @@ public:
 	const myMath::Vector3& GetUp();
 
 	//セッター
-	void SetEye(const myMath::Vector3& eye_);
-	void SetTarget(const myMath::Vector3& target_);
-	void SetUp(const myMath::Vector3& up_);
-	void SetNearClip(const float& nearClip_);
-	void SetFarClip(const float& farClip_);
+	void SetEye(const myMath::Vector3& eye);
+	void SetTarget(const myMath::Vector3& target);
+	void SetUp(const myMath::Vector3& up);
+	void SetNearClip(const float& nearClip);
+	void SetFarClip(const float& farClip);
 };

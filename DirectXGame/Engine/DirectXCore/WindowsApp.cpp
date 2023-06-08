@@ -79,11 +79,6 @@ bool WindowsApp::MessageWindow()
 	return true;
 }
 
-void WindowsApp::Break() {
-	//ウインドウクラスを登録解除
-	UnregisterClass(w.lpszClassName, w.hInstance);
-}
-
 void WindowsApp::Appearance()
 {
 	//ウインドウを表示状態にする
@@ -106,6 +101,12 @@ void WindowsApp::SetHwnd(HWND Hwnd) {
 	hwnd = Hwnd;
 }
 
+WindowsApp::~WindowsApp()
+{
+	//ウインドウクラスを登録解除
+	UnregisterClass(w.lpszClassName, w.hInstance);
+}
+
 float WindowsApp::GetWidth()
 {
 	return window_width;
@@ -114,9 +115,4 @@ float WindowsApp::GetWidth()
 float WindowsApp::GetHeight()
 {
 	return window_height;
-}
-
-WindowsApp* WindowsApp::GetInstance(){
-	static WindowsApp instance;
-	return &instance;
 }

@@ -29,16 +29,16 @@
 class AudioData
 {
 public:
-	std::string filePass;
-	IMFSourceReader* pMFSourceReader = nullptr;
-	WAVEFORMATEX* waveFormat = nullptr;
-	std::vector<BYTE> mediaData;
-	char* pBuffer = nullptr;
-	IXAudio2SourceVoice* pSourceVoice = nullptr;
-	float volume = 1.0f;
-	bool loop = false;
-	bool playTrigger = false;
-	char PADDING2[2]{};
+	std::string filePass_;
+	IMFSourceReader* pMFSourceReader_ = nullptr;
+	WAVEFORMATEX* waveFormat_ = nullptr;
+	std::vector<BYTE> mediaData_;
+	std::unique_ptr<char> pBuffer_;
+	IXAudio2SourceVoice* pSourceVoice_ = nullptr;
+	float volume_ = 1.0f;
+	bool loop_ = false;
+	bool playTrigger_ = false;
+	char PADDING2_[2]{};
 	AudioData(std::string FilePass);
 	void Unload();
 };
@@ -105,7 +105,7 @@ struct PlayAudioArray
 class AudioManager
 {
 private:
-	static AudioManager* instance;
+	
 	Microsoft::WRL::ComPtr<IXAudio2>xAudio2;
 	IXAudio2MasteringVoice* masterVoice = nullptr;
 	XAudio2VoiceCallback voiceCallback;

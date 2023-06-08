@@ -2,7 +2,7 @@
 
 void FPS::Initialize()
 {
-	reference = std::chrono::steady_clock::now();//現在の時間を代入
+	reference_ = std::chrono::steady_clock::now();//現在の時間を代入
 }
 
 void FPS::Update(float fixedFps, bool flag)
@@ -15,7 +15,7 @@ void FPS::Update(float fixedFps, bool flag)
 	//現在時間を取得
 	std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
 	//前回記録からの経過時間を取得する
-	std::chrono::microseconds elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - reference);
+	std::chrono::microseconds elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - reference_);
 
 	if (flag == false)
 	{
@@ -23,7 +23,7 @@ void FPS::Update(float fixedFps, bool flag)
 		if (elapsed < minTime)
 		{
 			//1/fixedFps秒経過するまで微小なスリープを繰り返す
-			while (std::chrono::steady_clock::now() - reference < minTime)
+			while (std::chrono::steady_clock::now() - reference_ < minTime)
 			{
 				//1マイクロ秒スリープ
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
@@ -36,7 +36,7 @@ void FPS::Update(float fixedFps, bool flag)
 		if (elapsed < minCheckTime)
 		{
 			//1/fixedFps秒経過するまで微小なスリープを繰り返す
-			while (std::chrono::steady_clock::now() - reference < minCheckTime)
+			while (std::chrono::steady_clock::now() - reference_ < minCheckTime)
 			{
 				//1マイクロ秒スリープ
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
@@ -45,5 +45,5 @@ void FPS::Update(float fixedFps, bool flag)
 	}
 	
 	//現在の時間を記録する
-	reference = std::chrono::steady_clock::now();
+	reference_ = std::chrono::steady_clock::now();
 }

@@ -17,41 +17,39 @@ public:
 	template<class T>using ComPtr = Microsoft::WRL::ComPtr<T>;
 private:
 
-	WindowsApp* windowsApp = nullptr;
-
-	HRESULT result = S_OK;
-	ComPtr<ID3D12Device> device;
-	ComPtr<IDXGIFactory7> dxgiFactory;
-	ComPtr<IDXGISwapChain4> swapChain;
-	ComPtr<ID3D12CommandAllocator> commandAllocator;
-	ComPtr<ID3D12GraphicsCommandList> commandList;
-	ComPtr<ID3D12CommandQueue> commandQueue;
-	ComPtr<ID3D12DescriptorHeap> rtvHeap;
+	HRESULT result_ = S_OK;
+	ComPtr<ID3D12Device> device_;
+	ComPtr<IDXGIFactory7> dxgiFactory_;
+	ComPtr<IDXGISwapChain4> swapChain_;
+	ComPtr<ID3D12CommandAllocator> commandAllocator_;
+	ComPtr<ID3D12GraphicsCommandList> commandList_;
+	ComPtr<ID3D12CommandQueue> commandQueue_;
+	ComPtr<ID3D12DescriptorHeap> rtvHeap_;
 	//スワップチェーンの設定
-	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
+	DXGI_SWAP_CHAIN_DESC1 swapChainDesc_{};
 	
 	//デスクリプタヒープの設定
-	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc{};
+	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc_{};
 	//バックバッファ
-	std::vector<ComPtr<ID3D12Resource>>backBuffers;
+	std::vector<ComPtr<ID3D12Resource>>backBuffers_;
 	//フェンスの生成
-	ComPtr<ID3D12Fence> fence;
-	UINT64 fenceVal = 0;
+	ComPtr<ID3D12Fence> fence_;
+	uint64_t fenceVal_ = 0;
 	//リソースバリアの設定
-	D3D12_RESOURCE_BARRIER barrierDesc{};
-	ComPtr<ID3D12Resource>depthBuff = nullptr;
-	ComPtr<ID3D12DescriptorHeap> dsvHeap;
+	D3D12_RESOURCE_BARRIER barrierDesc_{};
+	ComPtr<ID3D12Resource>depthBuff_;
+	ComPtr<ID3D12DescriptorHeap> dsvHeap_;
 
 	//デスクプリタヒープ
-	std::unique_ptr<DescriptorHeap> descriptorHeap;
+	std::unique_ptr<DescriptorHeap> descriptorHeap_;
 
 	//背景のクリアカラー
-	FLOAT clearColor[4] = { 0.1f,0.25f,0.5f,0.0f };//背景の色(水色)設定
+	FLOAT clearColor_[4] = { 0.1f,0.25f,0.5f,0.0f };//背景の色(水色)設定
 
 public:
 	
-	void Initialize();
-	void UpdateClear();
+	void Initialize(WindowsApp* windowsApp);
+	void UpdateClear(WindowsApp* windowsApp);
 	void UpdateEnd();
 	void Destroy();
 
@@ -81,7 +79,7 @@ private:
 	/// <summary>
 	/// スワップチェーンの初期化
 	/// </summary>
-	void SwapChainInitialize();
+	void SwapChainInitialize(WindowsApp* windowsApp);
 
 	/// <summary>
 	/// レンダーターゲットの初期化
@@ -91,7 +89,7 @@ private:
 	/// <summary>
 	/// 深度テスト
 	/// </summary>
-	void DepthInitialize();
+	void DepthInitialize(WindowsApp* windowsApp);
 
 #pragma endregion
 

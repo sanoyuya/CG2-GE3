@@ -30,9 +30,9 @@ class Controller
 {
 private:
 
-	Microsoft::WRL::ComPtr<IDirectInputDevice8> controller = nullptr;
-	XINPUT_STATE controllerState{};
-	XINPUT_STATE oldControllerState{};
+	Microsoft::WRL::ComPtr<IDirectInputDevice8> controller_ = nullptr;
+	XINPUT_STATE controllerState_{};
+	XINPUT_STATE oldControllerState_{};
 	//コントローラー振動強さ
 	float shakePower = 0.0f;
 	//コントローラー振動長さ(フレーム数)
@@ -42,7 +42,7 @@ private:
 	bool StickInDeadZone(myMath::Vector2& thumb, const myMath::Vector2& deadRate);
 
 	//最高入力強度
-	const float STICK_INPUT_MAX = 32768.0f;
+	const float STICK_INPUT_MAX_ = 32768.0f;
 
 public:
 
@@ -137,12 +137,12 @@ public:
 	//シングルトン
 	static Controller* GetInstance();
 
-	private:
+private:
 
-		Controller() = default;
-		~Controller() = default;
+	Controller() = default;
+	~Controller() = default;
 
-		//コピーコンストラクタ・代入演算子削除
-		Controller& operator=(const Controller&) = delete;
-		Controller(const Controller&) = delete;
+	//コピーコンストラクタ・代入演算子削除
+	Controller& operator=(const Controller&) = delete;
+	Controller(const Controller&) = delete;
 };
