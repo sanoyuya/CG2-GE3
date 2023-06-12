@@ -30,7 +30,7 @@ private:
 	float angleY = 0.0f;
 	const float length = 50.0f;
 
-	LevelData* levelData = nullptr;
+	std::unique_ptr<LevelData> levelData = nullptr;
 	std::map<std::string, EditorObject*>models;
 	std::vector<EditorObject*>objects;
 

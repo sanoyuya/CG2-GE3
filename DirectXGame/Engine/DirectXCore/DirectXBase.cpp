@@ -120,7 +120,7 @@ void DirectXBase::UpdateEnd()
 
 void DirectXBase::Destroy()
 {
-	delete directX;
+	directX = nullptr;
 }
 
 void DirectXBase::DebugLayer()

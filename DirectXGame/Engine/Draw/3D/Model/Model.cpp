@@ -376,7 +376,7 @@ const std::vector<uint32_t> Model::GetIndices()
 
 void Model::SetModel(const uint32_t& modelHandle)
 {
-	modelData_ = sModelDatas_[sFilePaths_[modelHandle]].get();
+	modelData_.reset(sModelDatas_[sFilePaths_[modelHandle]].get());
 }
 
 void Model::SetModelBlendMode(const BlendMode& mode)

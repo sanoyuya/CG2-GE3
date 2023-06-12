@@ -23,7 +23,8 @@ void TitleScene::Initialize()
 	sphereTex = skyDome->CreateObjModel("Resources/sphere");
 	tex = skyDome->CreateObjModel("Resources/purpleDice");
 
-	levelData = LevelEditor::LoadLevelEditorFile("untitled");
+	levelData = std::make_unique<LevelData>();
+	levelData.reset(LevelEditor::LoadLevelEditorFile("untitled"));
 
 	//レベルデータからオブジェクトを生成、配置
 	for (auto& objectData : levelData->objects_)

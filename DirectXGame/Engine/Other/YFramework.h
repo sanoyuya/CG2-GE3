@@ -33,11 +33,6 @@ protected:
 
 	std::unique_ptr<WindowsApp> windowsApp_;
 	std::unique_ptr<FPS>fps_;
-	DirectXBase* directX_ = nullptr;
-	InputManager* input_ = nullptr;
-	AudioManager* audioManager_ = nullptr;
-	TextureManager* textureManager_ = nullptr;
-	ImGuiManager* imGuiManager_ = nullptr;
 	std::unique_ptr<PostEffect>postEffect_;
 
 public:

@@ -85,7 +85,7 @@ protected:
 
 	static const uint32_t sMaxModel_ = 1024;
 
-	ModelData* modelData_;
+	std::unique_ptr<ModelData> modelData_;
 
 private:
 

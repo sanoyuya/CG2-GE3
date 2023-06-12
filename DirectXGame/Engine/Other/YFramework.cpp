@@ -15,20 +15,17 @@ void YFramework::Initialize()
 
 	//DirectX初期化処理 ここから
 
-	directX_ = DirectXBase::GetInstance();//DirectX_クラス読み込み
-	directX_->Initialize(windowsApp_.get());
+	//DirectXBaseクラス読み込み
+	DirectXBase::GetInstance()->Initialize(windowsApp_.get());
 
 	//imGuiの初期化
-	imGuiManager_ = ImGuiManager::GetInstance();
-	imGuiManager_->Initialize(windowsApp_.get());
+	ImGuiManager::GetInstance()->Initialize(windowsApp_.get());
 
 	//キー取得開始
-	input_ = InputManager::GetInstance();
-	input_->Initialize(windowsApp_.get());
+	InputManager::GetInstance()->Initialize(windowsApp_.get());
 
 	// オーディオの初期化
-	audioManager_ = AudioManager::GetInstance();
-	audioManager_->Initialize();
+	AudioManager::GetInstance()->Initialize();
 
 	//DirectX初期化処理 ここまで
 
@@ -59,9 +56,9 @@ void YFramework::Initialize()
 
 void YFramework::Destroy()
 {
-	imGuiManager_->Destroy();
-	directX_->Destroy();
-	audioManager_->Destroy();
+	ImGuiManager::GetInstance()->Destroy();
+	DirectXBase::GetInstance()->Destroy();
+	AudioManager::GetInstance()->Destroy();
 }
 
 void YFramework::Update()
@@ -71,11 +68,11 @@ void YFramework::Update()
 		endRequest_ = true;
 	}
 
-	input_->Update();
-	audioManager_->Update();
+	InputManager::GetInstance()->Update();
+	AudioManager::GetInstance()->Update();
 
-	directX_->SetClearColor();//背景色を設定 初期値(水色)
-	directX_->UpdateClear(windowsApp_.get());
+	DirectXBase::GetInstance()->SetClearColor();//背景色を設定 初期値(水色)
+	DirectXBase::GetInstance()->UpdateClear(windowsApp_.get());
 }
 
 void YFramework::SetWindowData(const std::string& title, const float width, const float height)
@@ -103,11 +100,11 @@ void YFramework::Run()
 	while (true)
 	{
 		//更新処理
-		imGuiManager_->Begin();
+		ImGuiManager::GetInstance()->Begin();
 
 		Update();
 
-		imGuiManager_->End();
+		ImGuiManager::GetInstance()->End();
 
 		if (GetEndRequest())
 		{
@@ -124,9 +121,9 @@ void YFramework::Run()
 
 #endif // DEBUG
 
-		imGuiManager_->Draw();//ALの評価課題出すまではこっち
+		ImGuiManager::GetInstance()->Draw();//ALの評価課題出すまではこっち
 
-		directX_->UpdateEnd();
+		DirectXBase::GetInstance()->UpdateEnd();
 
 		//FPS制御
 		fps_->Update();
