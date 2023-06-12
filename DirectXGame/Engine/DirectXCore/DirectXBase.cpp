@@ -42,7 +42,7 @@ void DirectXBase::Initialize(WindowsApp* windowsApp)
 void DirectXBase::UpdateClear(WindowsApp* windowsApp)
 {	
 	//バックバッファの番号を取得(2つなので0か1番)
-	UINT bbIndex = swapChain_->GetCurrentBackBufferIndex();
+	uint32_t bbIndex = swapChain_->GetCurrentBackBufferIndex();
 
 	//リソースバリアで書き込み可能に変更
 	barrierDesc_.Transition.pResource = backBuffers_[bbIndex].Get();//バックバッファを指定
@@ -147,7 +147,7 @@ void DirectXBase::DeviceInitialize()
 	ComPtr<IDXGIAdapter4> tmpAdapter;
 
 	//パフォーマンスが高いものから順に、全てのアダプターを列挙する
-	for (UINT i = 0; dxgiFactory_->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&tmpAdapter)) != DXGI_ERROR_NOT_FOUND; i++) {
+	for (uint32_t i = 0; dxgiFactory_->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&tmpAdapter)) != DXGI_ERROR_NOT_FOUND; i++) {
 		//動的配列に追加する
 		adapters.push_back(tmpAdapter);
 	}
@@ -273,7 +273,7 @@ void DirectXBase::RenderTargetInitialize()
 	//スワップチェーンの全てのバッファについて処理する
 	for (size_t i = 0; i < backBuffers_.size(); i++) {
 		//スワップチェーンからバッファを取得
-		swapChain_->GetBuffer((UINT)i, IID_PPV_ARGS(&backBuffers_[i]));
+		swapChain_->GetBuffer((uint32_t)i, IID_PPV_ARGS(&backBuffers_[i]));
 		//デスクリプタヒープのハンドル取得
 		D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap_->GetCPUDescriptorHandleForHeapStart();
 		//表か裏かでアドレスがずれる

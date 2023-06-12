@@ -61,16 +61,4 @@ public:
 
 	//マウスの座標取得
 	myMath::Vector2 GetmousePos();
-
-	//シングルトン
-	static Mouse* GetInstance();
-
-private:
-
-	Mouse() = default;
-	~Mouse() = default;
-
-	//コピーコンストラクタ・代入演算子削除
-	Mouse& operator=(const Mouse&) = delete;
-	Mouse(const Mouse&) = delete;
 };

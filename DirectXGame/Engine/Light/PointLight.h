@@ -16,27 +16,28 @@ public://サブクラス
 		myMath::Vector3 lightColor;
 		float pad2;
 		myMath::Vector3 lightAtten;
-		unsigned int active;
+		uint8_t active;
 	};
 
 private://メンバ変数
+
 	//ライト座標(ワールド座標系)
-	myMath::Vector3 lightPos = { 0,0,0 };
+	myMath::Vector3 lightPos_ = { 0,0,0 };
 	//ライトの色
-	myMath::Vector3 lightColor = { 1,1,1 };
+	myMath::Vector3 lightColor_ = { 1,1,1 };
 	//ライト距離減衰係数
-	myMath::Vector3 lightAtten = { 1.0f,1.0f ,1.0f };
+	myMath::Vector3 lightAtten_ = { 1.0f,1.0f ,1.0f };
 	//有効フラグ
-	bool active = false;
+	bool active_ = false;
 
 public://メンバ関数
 
-	inline void SetLightPos(const myMath::Vector3& lightPos_) { lightPos = lightPos_; }
-	inline const myMath::Vector3& GetLightPos() { return lightPos; }
-	inline void SetLightColor(const myMath::Vector3& lightColor_) { lightColor = lightColor_; }
-	inline const myMath::Vector3& GetLightColor() { return lightColor; }
-	inline void SetLightAtten(const myMath::Vector3& lightAtten_) { lightAtten = lightAtten_; }
-	inline const myMath::Vector3& GetLightAtten() { return lightAtten; }
-	inline void SetActive(bool active_) { active = active_; }
-	inline bool IsActive() { return active; }
+	inline void SetLightPos(const myMath::Vector3& lightPos) { lightPos_ = lightPos; }
+	inline const myMath::Vector3& GetLightPos() { return lightPos_; }
+	inline void SetLightColor(const myMath::Vector3& lightColor) { lightColor_ = lightColor; }
+	inline const myMath::Vector3& GetLightColor() { return lightColor_; }
+	inline void SetLightAtten(const myMath::Vector3& lightAtten) { lightAtten_ = lightAtten; }
+	inline const myMath::Vector3& GetLightAtten() { return lightAtten_; }
+	inline void SetActive(bool active) { active_ = active; }
+	inline bool IsActive() { return active_; }
 };

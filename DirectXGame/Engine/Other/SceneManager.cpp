@@ -4,49 +4,49 @@
 void SceneManager::Update()
 {
 	//次シーンの予約があるなら
-	if (nextScene)
+	if (nextScene_)
 	{
 		//旧シーン終了
-		if (scene)
+		if (scene_)
 		{
-			scene->Destroy();
-			delete scene;
+			scene_->Destroy();
+			scene_ = nullptr;
 		}
 
 		//シーン切り替え
-		scene = nextScene;
-		nextScene = nullptr;
+		scene_ = nextScene_;
+		nextScene_ = nullptr;
 
 		//次シーンを初期化する
-		scene->Initialize();
+		scene_->Initialize();
 	}
 
-	scene->Update();
+	scene_->Update();
 }
 
 void SceneManager::Draw()
 {
-	scene->Draw();
+	scene_->Draw();
 }
 
 void SceneManager::Destroy()
 {
-	scene->Destroy();
-	delete scene;
+	scene_->Destroy();
+	scene_ = nullptr;
 }
 
 void SceneManager::ChangeScene(const std::string& sceneName)
 {
-	assert(sceneFactory);
-	assert(nextScene == nullptr);
+	assert(sceneFactory_);
+	assert(nextScene_ == nullptr);
 
 	//次シーンを生成
-	nextScene = sceneFactory->CreateScene(sceneName);
+	nextScene_ = sceneFactory_->CreateScene(sceneName);
 }
 
-void SceneManager::SetSceneFactory(AbstractSceneFactory* sceneFactory_)
+void SceneManager::SetSceneFactory(AbstractSceneFactory* sceneFactory)
 {
-	sceneFactory = sceneFactory_;
+	sceneFactory_ = sceneFactory;
 }
 
 SceneManager* SceneManager::GetInstance()

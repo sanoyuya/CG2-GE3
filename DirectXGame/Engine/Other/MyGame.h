@@ -8,7 +8,7 @@ class MyGame :public YFramework
 private:
 
 	//シーンファクトリー
-	std::unique_ptr<AbstractSceneFactory>sceneFactory;
+	std::unique_ptr<AbstractSceneFactory>sceneFactory_;
 
 public:
 

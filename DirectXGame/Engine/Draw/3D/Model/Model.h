@@ -18,7 +18,9 @@ struct ModelData
 	uint32_t modelHandle;
 
 private:
+
 	char PADING1[4] = {};
+
 public:
 
 	TextureData* textureData;
@@ -35,7 +37,7 @@ private:
 public:
 
 	//インデックスの数
-	UINT maxIndex = 0u;
+	uint32_t maxIndex = 0;
 
 private:
 
@@ -44,7 +46,7 @@ private:
 public:
 
 	//頂点の数
-	UINT maxVert = 0u;
+	uint32_t maxVert = 0;
 	//ワールド行列
 	myMath::Matrix4 matWorld;
 	//頂点データ
@@ -72,35 +74,35 @@ class Model
 {
 protected:
 
-	static Microsoft::WRL::ComPtr<ID3D12Device> device;
-	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cmdList;
+	static Microsoft::WRL::ComPtr<ID3D12Device> sDevice_;
+	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> sCmdList_;
 
-	static std::vector<std::string>filePaths;
+	static std::vector<std::string>sFilePaths_;
 
-	static std::unordered_map<std::string, std::unique_ptr<ModelData>> modelDatas;
+	static std::unordered_map<std::string, std::unique_ptr<ModelData>> sModelDatas_;
 
-	static uint32_t modelCount;
+	static uint32_t sModelCount_;
 
-	static const uint32_t maxModel = 1024;
+	static const uint32_t sMaxModel_ = 1024;
 
-	ModelData* modelData;
+	ModelData* modelData_;
 
 private:
 
-	static std::array<Blob,5> blob;//シェーダオブジェクト
+	static std::array<Blob,5> sBlob_;//シェーダオブジェクト
 
-	static std::array<std::array<PipelineSet, 6>,5> pip;
+	static std::array<std::array<PipelineSet, 6>,5> sPip_;
 
-	BlendMode blendMode = BlendMode::Alpha;//初期値半透明合成
+	BlendMode blendMode_ = BlendMode::Alpha;//初期値半透明合成
 
-	ShaderMode shaderMode = ShaderMode::Basic;//標準
+	ShaderMode shaderMode_ = ShaderMode::Basic;//標準
 
-	std::unique_ptr<ConstantBuffer> col;
+	std::unique_ptr<ConstantBuffer> constantBuff_;
 
-	myMath::Vector4 tmp;
+	myMath::Vector4 tmp_;
 
 	//ライト
-	static LightManager* lightManager;
+	static LightManager* sLightManager_;
 
 public:
 
@@ -172,5 +174,4 @@ private:
 
 	static void LoadShader();
 	void PiplineSet(BlendMode bMode, ShaderMode sMode);
-	wchar_t ConvertToWchar_t(std::string& str);
 };

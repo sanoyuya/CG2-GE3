@@ -31,18 +31,18 @@ void Controller::Update()
 
 	if (dwResult == ERROR_SUCCESS) {
 		//コントローラーが接続されている
-		if (0 < shakeTimer) {
-			shakeTimer--;
+		if (0 < shakeTimer_) {
+			shakeTimer_--;
 			XINPUT_VIBRATION vibration;
 			ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
 
-			if (shakeTimer == 0) {
+			if (shakeTimer_ == 0) {
 				vibration.wLeftMotorSpeed = static_cast<WORD>(0.0f); // use any value between 0-65535 here
 				vibration.wRightMotorSpeed = static_cast<WORD>(0.0f); // use any value between 0-65535 here
 			}
 			else {
-				vibration.wLeftMotorSpeed = static_cast<WORD>(65535.0f * shakePower); // use any value between 0-65535 here
-				vibration.wRightMotorSpeed = static_cast<WORD>(65535.0f * shakePower); // use any value between 0-65535 here
+				vibration.wLeftMotorSpeed = static_cast<WORD>(65535.0f * shakePower_); // use any value between 0-65535 here
+				vibration.wRightMotorSpeed = static_cast<WORD>(65535.0f * shakePower_); // use any value between 0-65535 here
 			}
 
 			XInputSetState(dwResult, &vibration);
@@ -230,14 +230,14 @@ bool Controller::StickKeepRelease(ControllerStick stick, const float& deadRange,
 	return !StickKeepPush(stick, deadRange, deadRate);
 }
 
-void Controller::ShakeController(const float& power, const int& span)
+void Controller::ShakeController(const float& power, const float& span)
 {
 	if (!(0 < power && power <= 1.0f)) {
 		assert(0);
 	}
 
-	shakePower = power;
-	shakeTimer = span;
+	shakePower_ = power;
+	shakeTimer_ = span;
 }
 
 myMath::Vector2 Controller::GetLeftStickVec(const myMath::Vector2& deadRate)
@@ -252,10 +252,4 @@ myMath::Vector2 Controller::GetRightStickVec(const myMath::Vector2& deadRate)
 	myMath::Vector2 result(static_cast<float>(controllerState_.Gamepad.sThumbRX), static_cast<float>(-controllerState_.Gamepad.sThumbRY));
 	StickInDeadZone(result, deadRate);
 	return result / STICK_INPUT_MAX_;;
-}
-
-Controller* Controller::GetInstance()
-{
-	static Controller instance;
-	return &instance;
 }

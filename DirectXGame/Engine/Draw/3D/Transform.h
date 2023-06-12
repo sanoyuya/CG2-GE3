@@ -8,19 +8,21 @@
 class Transform
 {
 private:
+
 	// 定数バッファ
-	std::shared_ptr<ConstantBuffer> constBuff;
+	std::shared_ptr<ConstantBuffer> constBuff_;
 	//定数バッファのマッピング用ポインタ
-	worldViewpojCamera constBuffMap;
+	worldViewpojCamera constBuffMap_;
 
 	//初期化用のビュー行列計算
-	static myMath::Matrix4 defaultViewMat;
+	static myMath::Matrix4 sDefaultViewMat_;
 
 	//初期化用のプロジェクション行列計算
-	static myMath::Matrix4 defaultProjectionMat;
+	static myMath::Matrix4 sDefaultProjectionMat_;
 
 
 public:
+
 	// ローカル座標
 	myMath::Vector3 translation = { 0.0f, 0.0f, 0.0f };
 	// X,Y,Z軸回りのローカル回転角

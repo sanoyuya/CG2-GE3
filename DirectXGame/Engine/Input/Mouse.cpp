@@ -61,9 +61,3 @@ myMath::Vector2 Mouse::GetmousePos()
 {
 	return mousePos_;
 }
-
-Mouse* Mouse::GetInstance()
-{
-	static Mouse instance;
-	return &instance;
-}

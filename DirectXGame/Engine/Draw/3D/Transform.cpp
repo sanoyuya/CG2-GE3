@@ -1,14 +1,14 @@
 #include "Transform.h"
 #include"DirectXBase.h"
 
-myMath::Matrix4 Transform::defaultProjectionMat = { 1.3579f, 0.0f, 0.0f, 0.0f, 0.0f, 2.4142f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0001f, 1.0f, 0.0f, 0.0f, -0.1000f, 0.0f };
-myMath::Matrix4 Transform::defaultViewMat = { 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 50.0f, 0.0f };
+myMath::Matrix4 Transform::sDefaultProjectionMat_ = { 1.3579f, 0.0f, 0.0f, 0.0f, 0.0f, 2.4142f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0001f, 1.0f, 0.0f, 0.0f, -0.1000f, 0.0f };
+myMath::Matrix4 Transform::sDefaultViewMat_ = { 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 50.0f, 0.0f };
 
 void Transform::Initialize()
 {
 	//定数バッファ生成(3D座標変換行列)
-	constBuff = std::make_shared<ConstantBuffer>();
-	constBuff->Create(sizeof(worldViewpojCamera));
+	constBuff_ = std::make_shared<ConstantBuffer>();
+	constBuff_->Create(sizeof(worldViewpojCamera));
 
 	myMath::Matrix4 matScale, matRot, matTrans;
 
@@ -33,11 +33,11 @@ void Transform::Initialize()
 	}
 
 	//定数バッファに書き込み
-	constBuffMap.matWorld = matWorld * defaultViewMat * defaultProjectionMat;
-	constBuffMap.world = matWorld;
-	constBuffMap.cameraPos = { 0.0f,0.0f,-50.0f };
+	constBuffMap_.matWorld = matWorld * sDefaultViewMat_ * sDefaultProjectionMat_;
+	constBuffMap_.world = matWorld;
+	constBuffMap_.cameraPos = { 0.0f,0.0f,-50.0f };
 
-	constBuff->Update(&constBuffMap);
+	constBuff_->Update(&constBuffMap_);
 }
 
 void Transform::TransUpdate(Camera* camera)
@@ -65,15 +65,15 @@ void Transform::TransUpdate(Camera* camera)
 	}
 
 	//定数バッファに書き込み
-	constBuffMap.matWorld = matWorld * camera->GetMatViewInverse() * camera->GetMatProjection();
-	constBuffMap.world = matWorld;
-	constBuffMap.cameraPos = camera->GetEye();
-	constBuff->Update(&constBuffMap);
+	constBuffMap_.matWorld = matWorld * camera->GetMatViewInverse() * camera->GetMatProjection();
+	constBuffMap_.world = matWorld;
+	constBuffMap_.cameraPos = camera->GetEye();
+	constBuff_->Update(&constBuffMap_);
 }
 
 void Transform::Update()
 {
-	constBuff->Update(&constBuffMap);
+	constBuff_->Update(&constBuffMap_);
 }
 
 void Transform::MakeWorldMatrix()
@@ -103,12 +103,12 @@ void Transform::MakeWorldMatrix()
 
 ID3D12Resource* Transform::GetconstBuff()
 {
-	return constBuff->GetResource();
+	return constBuff_->GetResource();
 }
 
 worldViewpojCamera* Transform::GetWorldViewpojCamera()
 {
-	return &constBuffMap;
+	return &constBuffMap_;
 }
 
 namespace myMath

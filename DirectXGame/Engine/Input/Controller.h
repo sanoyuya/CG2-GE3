@@ -34,9 +34,9 @@ private:
 	XINPUT_STATE controllerState_{};
 	XINPUT_STATE oldControllerState_{};
 	//コントローラー振動強さ
-	float shakePower = 0.0f;
+	float shakePower_ = 0.0f;
 	//コントローラー振動長さ(フレーム数)
-	int shakeTimer = 0;
+	float shakeTimer_ = 0.0f;
 
 	//デッドゾーンに入っているか(DeadRate : デッドゾーン判定の度合い、1.0fだとデフォルト)
 	bool StickInDeadZone(myMath::Vector2& thumb, const myMath::Vector2& deadRate);
@@ -118,7 +118,7 @@ public:
 	/// </summary>
 	/// <param name="power">振動の強さ0.0f～1.0f</param>
 	/// <param name="span">振動の時間フレーム</param>
-	void ShakeController(const float& power, const int& span);
+	void ShakeController(const float& power, const float& span);
 
 	/// <summary>
 	/// Lスティックの傾きの取得
@@ -133,16 +133,4 @@ public:
 	/// <param name="deadRate">デッドゾーン判定の度合い初期値1.0f</param>
 	/// <returns></returns>
 	myMath::Vector2 GetRightStickVec(const myMath::Vector2& deadRate = { 1.0f,1.0f });
-
-	//シングルトン
-	static Controller* GetInstance();
-
-private:
-
-	Controller() = default;
-	~Controller() = default;
-
-	//コピーコンストラクタ・代入演算子削除
-	Controller& operator=(const Controller&) = delete;
-	Controller(const Controller&) = delete;
 };

@@ -47,9 +47,3 @@ bool Keyboard::KeepRelease(int keyName)
 {
 	return !key_[keyName] && !oldkey_[keyName];
 }
-
-Keyboard* Keyboard::GetInstance()
-{
-	static Keyboard instance;
-	return &instance;
-}

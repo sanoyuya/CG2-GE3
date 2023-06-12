@@ -7,17 +7,17 @@ class EngineOP :public BaseScene
 {
 private:
 
-	std::unique_ptr<Sprite>engineLogo;
-	uint32_t engineLogoTex = 0;
-	myMath::Vector2 center = { 640,360 };
-	myMath::Vector4 logoColor = { 0.0f,0.0f,0.0f,0.0f };
+	std::unique_ptr<Sprite>engineLogo_;
+	uint32_t engineLogoTex_ = 0;
+	myMath::Vector2 center_ = { 640,360 };
+	myMath::Vector4 logoColor_ = { 0.0f,0.0f,0.0f,0.0f };
 
-	std::unique_ptr<Sprite>back;
-	uint32_t backTex = 0;
+	std::unique_ptr<Sprite>back_;
+	uint32_t backTex_ = 0;
 
 	//アニメーション関連
-	uint16_t animationTimer = 0;
-	uint16_t animationEndTime = 180;
+	uint16_t animationTimer_ = 0;
+	uint16_t animationEndTime_ = 180;
 
 public:
 

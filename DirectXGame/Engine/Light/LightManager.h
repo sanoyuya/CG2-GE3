@@ -12,12 +12,14 @@
 class LightManager
 {
 public://定数
-	static const int DirLightNum = 3;
-	static const int PointLightNum = 3;
-	static const int SpotLightNum = 3;
-	static const int CircleShadowNum = 1;
+
+	static const uint8_t DirLightNum = 3;
+	static const uint8_t PointLightNum = 3;
+	static const uint8_t SpotLightNum = 3;
+	static const uint8_t CircleShadowNum = 1;
 
 public://サブクラス
+
 	//定数バッファ用構造体
 	struct ConstBufferData
 	{
@@ -35,10 +37,12 @@ public://サブクラス
 	};
 
 private://静的メンバ変数
+
 	//デバイス
-	static ID3D12Device* device;
+	static Microsoft::WRL::ComPtr<ID3D12Device> sDevice_;
 
 public://静的メンバ関数
+
 	static void StaticInitialize(ID3D12Device* device_);
 
 	/// <summary>
@@ -48,20 +52,21 @@ public://静的メンバ関数
 	static LightManager* Create();
 
 private://メンバ変数
+
 	//定数バッファ
-	std::unique_ptr<ConstantBuffer> constBuff;
+	std::unique_ptr<ConstantBuffer> constBuff_;
 	//環境光の色
-	myMath::Vector3 ambientColor = { 1,1,1 };
+	myMath::Vector3 ambientColor_ = { 1,1,1 };
 	//平行光源の配列
-	DirectionalLight dirLights[DirLightNum];
+	DirectionalLight dirLights_[DirLightNum];
 	//点光源の配列
-	PointLight pointLights[PointLightNum];
+	PointLight pointLights_[PointLightNum];
 	//スポットライトの配列
-	SpotLight spotLights[SpotLightNum];
+	SpotLight spotLights_[SpotLightNum];
 	//丸影の配列
-	CircleShadow circleShadows[CircleShadowNum];
+	CircleShadow circleShadows_[CircleShadowNum];
 	//ダーティフラグ
-	bool dirty = false;
+	bool dirty_ = false;
 
 public:
 	/// <summary>
@@ -77,7 +82,7 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(ID3D12GraphicsCommandList* cmdList, UINT rootParameterIndex);
+	void Draw(ID3D12GraphicsCommandList* cmdList, uint32_t rootParameterIndex);
 
 	/// <summary>
 	/// 定数バッファ転送
@@ -97,21 +102,21 @@ public:
 	/// </summary>
 	/// <param name="index">ライト番号</param>
 	/// <param name="active">有効フラグ</param>
-	void SetDirLightActive(int index, bool active);
+	void SetDirLightActive(int8_t index, bool active);
 
 	/// <summary>
 	/// 平行光源のライト方向をセット
 	/// </summary>
 	/// <param name="index">ライト番号</param>
 	/// <param name="lightDer">ライト方向</param>
-	void SetDirLightDir(int index, const myMath::Vector4& lightDir);
+	void SetDirLightDir(int8_t index, const myMath::Vector4& lightDir);
 
 	/// <summary>
 	/// 平行光源のライトの色をセット
 	/// </summary>
 	/// <param name="index">ライト番号</param>
 	/// <param name="lightColor">ライトの色</param>
-	void SetDirLightColor(int index, const myMath::Vector3& lightColor);
+	void SetDirLightColor(int8_t index, const myMath::Vector3& lightColor);
 
 #pragma endregion
 
@@ -122,50 +127,50 @@ public:
 	/// </summary>
 	/// <param name="index">ライト番号</param>
 	/// <param name="active">有効フラグ</param>
-	void SetPointLightActive(int index, bool active);
+	void SetPointLightActive(int8_t index, bool active);
 
 	/// <summary>
 	/// 点光源の座標をセット
 	/// </summary>
 	/// <param name="index">ライト番号</param>
 	/// <param name="lightPos">座標</param>
-	void SetPointLightPos(int index, const myMath::Vector3& lightPos);
+	void SetPointLightPos(int8_t index, const myMath::Vector3& lightPos);
 
 	/// <summary>
 	/// 点光源のライトの色をセット
 	/// </summary>
 	/// <param name="index">ライト番号</param>
 	/// <param name="lightColor">ライトの色</param>
-	void SetPointLightColor(int index, const myMath::Vector3& lightColor);
+	void SetPointLightColor(int8_t index, const myMath::Vector3& lightColor);
 
 	/// <summary>
 	/// 点光源の距離減衰係数をセット
 	/// </summary>
 	/// <param name="index">ライト番号</param>
 	/// <param name="lightAtten">距離減衰係数</param>
-	void SetPointLightAtten(int index, const myMath::Vector3& lightAtten);
+	void SetPointLightAtten(int8_t index, const myMath::Vector3& lightAtten);
 
 #pragma endregion
 
 #pragma region スポットライト
 
-	void SetSpotLightActive(int index, bool active);
-	void SetSpotLightDir(int index, const myMath::Vector4& lightDir);
-	void SetSpotLightPos(int index, const myMath::Vector3& lightPos);
-	void SetSpotLightColor(int index, const myMath::Vector3& lightColor);
-	void SetSpotLightAtten(int index, const myMath::Vector3& lightAtten);
-	void SetSpotLightFactorAngle(int index, const myMath::Vector2& lightFactorAngle);
+	void SetSpotLightActive(int8_t index, bool active);
+	void SetSpotLightDir(int8_t index, const myMath::Vector4& lightDir);
+	void SetSpotLightPos(int8_t index, const myMath::Vector3& lightPos);
+	void SetSpotLightColor(int8_t index, const myMath::Vector3& lightColor);
+	void SetSpotLightAtten(int8_t index, const myMath::Vector3& lightAtten);
+	void SetSpotLightFactorAngle(int8_t index, const myMath::Vector2& lightFactorAngle);
 
 #pragma endregion
 
 #pragma region 丸影
 
-	void SetCircleShadowActive(int index, bool active);
-	void SetCircleShadowCasterPos(int index, const myMath::Vector3& casterPos);
-	void SetCircleShadowDir(int index, const myMath::Vector4& lightdir);
-	void SetCircleShadowDistanceCasterLight(int index, float distanceCasterLight);
-	void SetCircleShadowAtten(int index, const myMath::Vector3& lightAtten);
-	void SetCircleShadowFactorAngle(int index, const myMath::Vector2& lightFactorAngle);
+	void SetCircleShadowActive(int8_t index, bool active);
+	void SetCircleShadowCasterPos(int8_t index, const myMath::Vector3& casterPos);
+	void SetCircleShadowDir(int8_t index, const myMath::Vector4& lightdir);
+	void SetCircleShadowDistanceCasterLight(int8_t index, float distanceCasterLight);
+	void SetCircleShadowAtten(int8_t index, const myMath::Vector3& lightAtten);
+	void SetCircleShadowFactorAngle(int8_t index, const myMath::Vector2& lightFactorAngle);
 
 #pragma endregion
 };

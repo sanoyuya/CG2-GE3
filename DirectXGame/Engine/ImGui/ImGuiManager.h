@@ -9,7 +9,7 @@ class ImGuiManager
 private:
 
 	//SRV用デスクリプタヒープ
-	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>srvHeap;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>srvHeap_;
 
 public:
 

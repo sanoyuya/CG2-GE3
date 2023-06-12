@@ -1,14 +1,15 @@
 #pragma once
 #include<Windows.h>
+
 class WindowsApp
 {
 private:
 
-	WNDCLASSEX w{};
-	HWND hwnd;
-	MSG msg{};//メッセージ
-	float window_width = 1280.0f;//横幅
-	float window_height = 720.0f;//縦幅
+	WNDCLASSEX w_{};
+	HWND hwnd_;
+	MSG msg_{};//メッセージ
+	float windowWidth_ = 1280.0f;//横幅
+	float windowHeight = 720.0f;//縦幅
 
 public:
 

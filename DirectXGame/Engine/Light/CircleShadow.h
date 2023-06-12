@@ -22,34 +22,36 @@ public://サブクラス
 	};
 
 private://メンバ変数
+
 	//方向(単位ベクトル)
-	myMath::Vector4 dir = { 1,0,0,0 };
+	myMath::Vector4 dir_ = { 1,0,0,0 };
 	//キャスターとライトの距離
-	float distanceCasterLight = 100.0f;
+	float distanceCasterLight_ = 100.0f;
 	//キャスター座標(ワールド座標系)
-	myMath::Vector3 casterPos = { 0,0,0 };
+	myMath::Vector3 casterPos_ = { 0,0,0 };
 	//距離減衰係数
-	myMath::Vector3 atten = { 0.5f,0.6f,0.0f };
+	myMath::Vector3 atten_ = { 0.5f,0.6f,0.0f };
 	//減衰角度
-	myMath::Vector2 factorAngleCos = { 0.2f,0.5f };
+	myMath::Vector2 factorAngleCos_ = { 0.2f,0.5f };
 	//有効フラグ
-	bool active = false;
+	bool active_ = false;
 
 public://メンバ関数
-	inline void SetDir(const myMath::Vector4& dir_) { dir = dir_.normalization(); }
-	inline const myMath::Vector4& GetDir() { return dir; }
-	inline void SetCasterPos(const myMath::Vector3& casterPos_) { casterPos = casterPos_; }
-	inline const myMath::Vector3& GetCasterPos() { return casterPos; }
-	inline void SetDistanceCasterLight(float distanceCasterlight_) { distanceCasterLight = distanceCasterlight_; }
-	inline float GetDistanceCasterLight() { return distanceCasterLight; }
-	inline void SetAtten(const myMath::Vector3& atten_) { atten = atten_; }
-	inline const myMath::Vector3& GetAtten() { return atten; }
-	inline void SetFactorAngle(const myMath::Vector2& factorAngleCos_)
+
+	inline void SetDir(const myMath::Vector4& dir) { dir_ = dir.normalization(); }
+	inline const myMath::Vector4& GetDir() { return dir_; }
+	inline void SetCasterPos(const myMath::Vector3& casterPos) { casterPos_ = casterPos; }
+	inline const myMath::Vector3& GetCasterPos() { return casterPos_; }
+	inline void SetDistanceCasterLight(float distanceCasterlight) { distanceCasterLight_ = distanceCasterlight; }
+	inline float GetDistanceCasterLight() { return distanceCasterLight_; }
+	inline void SetAtten(const myMath::Vector3& atten) { atten_ = atten; }
+	inline const myMath::Vector3& GetAtten() { return atten_; }
+	inline void SetFactorAngle(const myMath::Vector2& factorAngleCos)
 	{
-		factorAngleCos.x = cosf(DirectX::XMConvertToRadians(factorAngleCos_.x));
-		factorAngleCos.y = cosf(DirectX::XMConvertToRadians(factorAngleCos_.y));
+		factorAngleCos_.x = cosf(DirectX::XMConvertToRadians(factorAngleCos.x));
+		factorAngleCos_.y = cosf(DirectX::XMConvertToRadians(factorAngleCos.y));
 	}
-	inline const myMath::Vector2& GetFactorAngleCos() { return factorAngleCos; }
-	inline void SetActive(bool active_) { active = active_; }
-	inline bool IsActive() { return active; }
+	inline const myMath::Vector2& GetFactorAngleCos() { return factorAngleCos_; }
+	inline void SetActive(bool active) { active_ = active; }
+	inline bool IsActive() { return active_; }
 };

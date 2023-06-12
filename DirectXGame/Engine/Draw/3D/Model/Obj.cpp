@@ -138,8 +138,8 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data)
 		CalculateSmoothedVertexNormals(data);
 	}
 
-	data->maxVert = static_cast<UINT>(data->vertices.size());
-	data->maxIndex = static_cast<UINT>(data->indices.size());
+	data->maxVert = static_cast<uint32_t>(data->vertices.size());
+	data->maxIndex = static_cast<uint32_t>(data->indices.size());
 
 	//頂点バッファ・インデックス生成
 	data->vertexBuffer = std::make_unique<VertexBuffer>();

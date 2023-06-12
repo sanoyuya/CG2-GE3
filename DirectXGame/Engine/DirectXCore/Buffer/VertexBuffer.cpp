@@ -9,7 +9,7 @@ void VertexBuffer::Create(size_t length, size_t singleSize, const void* data)
 	D3D12_RESOURCE_DESC resDesc{};
 
 	//頂点データ全体のサイズ = 頂点データサイズ一つ分のサイズ * 頂点データの要素数
-	UINT sizeVB = static_cast<UINT>(singleSize * length);
+	uint32_t sizeVB = static_cast<uint32_t>(singleSize * length);
 	
 	//頂点バッファの設定
 	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
@@ -33,8 +33,8 @@ void VertexBuffer::Create(size_t length, size_t singleSize, const void* data)
 
 	// 頂点バッファビューの設定
 	vertexBufferView_.BufferLocation = vertexBuffer_->GetGPUVirtualAddress();
-	vertexBufferView_.SizeInBytes = static_cast<UINT>(length * singleSize);
-	vertexBufferView_.StrideInBytes = static_cast<UINT>(singleSize);
+	vertexBufferView_.SizeInBytes = static_cast<uint32_t>(length * singleSize);
+	vertexBufferView_.StrideInBytes = static_cast<uint32_t>(singleSize);
 
 	result = vertexBuffer_->Map(0, nullptr, &bufferMappedPtr_);
 

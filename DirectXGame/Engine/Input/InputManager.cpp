@@ -7,9 +7,9 @@ void InputManager::Initialize(WindowsApp* windowsApp)
 	HRESULT result;
 
 	//ÉNÉâÉXì«Ç›çûÇ›
-	keyboard = Keyboard::GetInstance();
-	mouse = Mouse::GetInstance();
-	controller = Controller::GetInstance();
+	keyboard = std::make_unique<Keyboard>();
+	mouse = std::make_unique<Mouse>();
+	controller = std::make_unique<Controller>();
 
 	//DirectInputÇÃèâä˙âª
 	result = DirectInput8Create(windowsApp->GetW().hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
@@ -111,7 +111,7 @@ bool InputManager::ControllerStickKeepRelease(ControllerStick stick, const float
 	return controller->StickKeepRelease(stick, deadRange, deadRate);
 }
 
-void InputManager::ShakeController(const float& power, const int& span)
+void InputManager::ShakeController(const float& power, const float& span)
 {
 	controller->ShakeController(power, span);
 }

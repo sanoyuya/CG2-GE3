@@ -1,6 +1,7 @@
 #pragma once
 #include<wrl.h>
 #include <d3d12.h>
+#include<stdint.h>
 
 /// <summary>
 /// デスクプリタヒープ
@@ -8,6 +9,7 @@
 class DescriptorHeap
 {
 private:
+
 	//デバイス
 	Microsoft::WRL::ComPtr <ID3D12Device> device_;
 	//デスクプリタヒープ
@@ -20,7 +22,7 @@ private:
 	D3D12_CPU_DESCRIPTOR_HANDLE	startCpuHandle_;
 	D3D12_GPU_DESCRIPTOR_HANDLE	startGpuHandle_;
 
-	UINT incrementSize_;
+	uint32_t incrementSize_ = 0;
 
 	size_t maxSRV_ = 2048;
 	size_t maxUAV_ = 2048;

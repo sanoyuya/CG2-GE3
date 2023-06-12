@@ -23,22 +23,22 @@ class YFramework
 {
 protected:
 
-	std::wstring title = L"";
-	float window_width = 0.0f;//横幅
-	float window_height = 0.0f;//縦幅
+	std::wstring title_ = L"";
+	float windowWidth_ = 0.0f;//横幅
+	float windowHeight_ = 0.0f;//縦幅
 
-	myMath::Vector4 windowColor = { 0.0f ,0.0f ,0.0f ,0.0f };
+	myMath::Vector4 windowColor_ = { 0.0f ,0.0f ,0.0f ,0.0f };
 
-	bool endRequest = false;
+	bool endRequest_ = false;
 
-	std::unique_ptr<WindowsApp> windowsApp;
-	std::unique_ptr<FPS>fps;
-	DirectXBase* directX = nullptr;
-	InputManager* input = nullptr;
-	AudioManager* audioManager = nullptr;
-	TextureManager* textureManager = nullptr;
-	ImGuiManager* imGuiManager = nullptr;
-	std::unique_ptr<PostEffect>postEffect;
+	std::unique_ptr<WindowsApp> windowsApp_;
+	std::unique_ptr<FPS>fps_;
+	DirectXBase* directX_ = nullptr;
+	InputManager* input_ = nullptr;
+	AudioManager* audioManager_ = nullptr;
+	TextureManager* textureManager_ = nullptr;
+	ImGuiManager* imGuiManager_ = nullptr;
+	std::unique_ptr<PostEffect>postEffect_;
 
 public:
 
@@ -66,7 +66,7 @@ public:
 	/// <param name="title">タイトルバーの名前</param>
 	/// <param name="width">ウィンドウの横幅</param>
 	/// <param name="height">ウィンドウの縦幅</param>
-	void SetWindowData(const std::string& title_ = "DirectXGame", const float width = 1280.0f, const float height = 720.0f);
+	void SetWindowData(const std::string& title = "DirectXGame", const float width = 1280.0f, const float height = 720.0f);
 
 	void SetWindowColor(const myMath::Vector4& color = { 0.1f,0.25f,0.5f,0.0f });
 

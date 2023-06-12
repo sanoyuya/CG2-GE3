@@ -46,16 +46,4 @@ public:
 	/// <param name="keyName">DIK_〇〇</param>
 	/// <returns></returns>
 	bool KeepRelease(int keyName);
-
-	//シングルトン
-	static Keyboard* GetInstance();
-
-private:
-
-	Keyboard() = default;
-	~Keyboard() = default;
-
-	//コピーコンストラクタ・代入演算子削除
-	Keyboard& operator=(const Keyboard&) = delete;
-	Keyboard(const Keyboard&) = delete;
 };

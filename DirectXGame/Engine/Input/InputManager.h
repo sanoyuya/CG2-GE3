@@ -3,14 +3,15 @@
 #include"Keyboard.h"
 #include"Mouse.h"
 #include"Controller.h"
+#include<memory>
 
 class InputManager
 {
 private:
 
-	Keyboard* keyboard = nullptr;
-	Mouse* mouse = nullptr;
-	Controller* controller = nullptr;
+	std::unique_ptr<Keyboard> keyboard;
+	std::unique_ptr<Mouse> mouse;
+	std::unique_ptr<Controller> controller;
 
 	Microsoft::WRL::ComPtr<IDirectInput8> directInput = nullptr;
 
@@ -157,7 +158,7 @@ public:
 	/// </summary>
 	/// <param name="power">振動の強さ0.0f～1.0f</param>
 	/// <param name="span">振動の時間フレーム</param>
-	void ShakeController(const float& power, const int& span);
+	void ShakeController(const float& power, const float& span);
 
 	/// <summary>
 	/// Lスティックの傾きの取得

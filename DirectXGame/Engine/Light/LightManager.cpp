@@ -3,17 +3,17 @@
 /// <summary>
 /// 静的メンバ変数の実態
 /// </summary>
-ID3D12Device* LightManager::device = nullptr;
+Microsoft::WRL::ComPtr<ID3D12Device> LightManager::sDevice_ = nullptr;
 
 void LightManager::StaticInitialize(ID3D12Device* device_)
 {
 	//再初期化チェック
-	assert(!LightManager::device);
+	assert(!LightManager::sDevice_);
 
 	//nullptrチェック
 	assert(device_);
 
-	LightManager::device = device_;
+	LightManager::sDevice_ = device_;
 }
 
 LightManager* LightManager::Create()
@@ -30,10 +30,10 @@ LightManager* LightManager::Create()
 void LightManager::Initialize()
 {
 	// nullptrチェック
-	assert(device);
+	assert(sDevice_);
 
-	constBuff = std::make_unique<ConstantBuffer>();
-	constBuff->Create(sizeof(ConstBufferData));
+	constBuff_ = std::make_unique<ConstantBuffer>();
+	constBuff_->Create(sizeof(ConstBufferData));
 
 	TransferConstBuffer();
 }
@@ -41,17 +41,17 @@ void LightManager::Initialize()
 void LightManager::Update()
 {
 	//値の更新があった時だけ定数バッファに転送する
-	if (dirty)
+	if (dirty_)
 	{
 		TransferConstBuffer();
-		dirty = false;
+		dirty_ = false;
 	}
 }
 
-void LightManager::Draw(ID3D12GraphicsCommandList* cmdList, UINT rootParameterIndex)
+void LightManager::Draw(ID3D12GraphicsCommandList* cmdList, uint32_t rootParameterIndex)
 {
 	//定数バッファビューをセット
-	cmdList->SetGraphicsRootConstantBufferView(rootParameterIndex, constBuff->GetAddress());
+	cmdList->SetGraphicsRootConstantBufferView(rootParameterIndex, constBuff_->GetAddress());
 }
 
 void LightManager::TransferConstBuffer()
@@ -63,17 +63,17 @@ void LightManager::TransferConstBuffer()
 	
 	if (SUCCEEDED(result)) {
 
-		constMap.ambientColor = ambientColor;
+		constMap.ambientColor = ambientColor_;
 
 		//平行光源
-		for (int i = 0; i < DirLightNum; i++)
+		for (int8_t i = 0; i < DirLightNum; i++)
 		{
 			//ライトが有効の時のみ設定を転送
-			if (dirLights[i].IsActive())
+			if (dirLights_[i].IsActive())
 			{
 				constMap.dirLights[i].active = true;
-				constMap.dirLights[i].lightv = -dirLights[i].GetLightDir();
-				constMap.dirLights[i].lightcolor = dirLights[i].GetLightColor();
+				constMap.dirLights[i].lightv = -dirLights_[i].GetLightDir();
+				constMap.dirLights[i].lightcolor = dirLights_[i].GetLightColor();
 			}
 			//ライトが無効なら転送しない
 			else
@@ -83,15 +83,15 @@ void LightManager::TransferConstBuffer()
 		}
 
 		//点光源
-		for (int i = 0; i < PointLightNum; i++)
+		for (int8_t i = 0; i < PointLightNum; i++)
 		{
 			//ライトが有効なら設定を転送
-			if (pointLights[i].IsActive())
+			if (pointLights_[i].IsActive())
 			{
 				constMap.pointLights[i].active = 1;
-				constMap.pointLights[i].lightPos = pointLights[i].GetLightPos();
-				constMap.pointLights[i].lightColor = pointLights[i].GetLightColor();
-				constMap.pointLights[i].lightAtten = pointLights[i].GetLightAtten();
+				constMap.pointLights[i].lightPos = pointLights_[i].GetLightPos();
+				constMap.pointLights[i].lightColor = pointLights_[i].GetLightColor();
+				constMap.pointLights[i].lightAtten = pointLights_[i].GetLightAtten();
 			}
 			else
 			{
@@ -100,17 +100,17 @@ void LightManager::TransferConstBuffer()
 		}
 
 		//スポットライト
-		for (int i = 0; i < SpotLightNum; i++)
+		for (int8_t i = 0; i < SpotLightNum; i++)
 		{
 			//ライトが有効なら設定を転送
-			if (spotLights[i].IsActive())
+			if (spotLights_[i].IsActive())
 			{
 				constMap.spotLights[i].active = true;
-				constMap.spotLights[i].lightv = -spotLights[i].GetLightDir();
-				constMap.spotLights[i].lightPos = spotLights[i].GetLightPos();
-				constMap.spotLights[i].lightColor = spotLights[i].GetLightColor();
-				constMap.spotLights[i].lightAtten = spotLights[i].GetLightAtten();
-				constMap.spotLights[i].lightActorAngleCos = spotLights[i].GetLightFactorAngleCos();
+				constMap.spotLights[i].lightv = -spotLights_[i].GetLightDir();
+				constMap.spotLights[i].lightPos = spotLights_[i].GetLightPos();
+				constMap.spotLights[i].lightColor = spotLights_[i].GetLightColor();
+				constMap.spotLights[i].lightAtten = spotLights_[i].GetLightAtten();
+				constMap.spotLights[i].lightActorAngleCos = spotLights_[i].GetLightFactorAngleCos();
 			}
 			//ライトが無効ならライトの色を0に
 			else
@@ -120,17 +120,17 @@ void LightManager::TransferConstBuffer()
 		}
 
 		//丸影
-		for (int i = 0; i < CircleShadowNum; i++)
+		for (int8_t i = 0; i < CircleShadowNum; i++)
 		{
 			//ライトが有効なら設定を転送
-			if (circleShadows[i].IsActive())
+			if (circleShadows_[i].IsActive())
 			{
-				constMap.circleShadows[i].dir = -circleShadows[i].GetDir();
+				constMap.circleShadows[i].dir = -circleShadows_[i].GetDir();
 				constMap.circleShadows[i].active = true;
-				constMap.circleShadows[i].casterPos = circleShadows[i].GetCasterPos();
-				constMap.circleShadows[i].distanceCasterLight = circleShadows[i].GetDistanceCasterLight();
-				constMap.circleShadows[i].atten = circleShadows[i].GetAtten();
-				constMap.circleShadows[i].factorAngleCos = circleShadows[i].GetFactorAngleCos();
+				constMap.circleShadows[i].casterPos = circleShadows_[i].GetCasterPos();
+				constMap.circleShadows[i].distanceCasterLight = circleShadows_[i].GetDistanceCasterLight();
+				constMap.circleShadows[i].atten = circleShadows_[i].GetAtten();
+				constMap.circleShadows[i].factorAngleCos = circleShadows_[i].GetFactorAngleCos();
 			}
 			//ライトが無効ならライトの色を0に
 			else
@@ -139,157 +139,157 @@ void LightManager::TransferConstBuffer()
 			}
 		}
 
-		constBuff->Update(&constMap);
+		constBuff_->Update(&constMap);
 	}
 }
 
 void LightManager::SetAmbientColor(const myMath::Vector3& color)
 {
-	ambientColor = color;
-	dirty = true;
+	ambientColor_ = color;
+	dirty_ = true;
 }
 
-void LightManager::SetDirLightActive(int index, bool active)
+void LightManager::SetDirLightActive(int8_t index, bool active)
 {
 	assert(0 <= index && index < DirLightNum);
-	dirLights[index].SetActive(active);
+	dirLights_[index].SetActive(active);
 }
 
-void LightManager::SetDirLightDir(int index, const myMath::Vector4& lightDir)
+void LightManager::SetDirLightDir(int8_t index, const myMath::Vector4& lightDir)
 {
 	assert(0 <= index && index < DirLightNum);
-	dirLights[index].SetLightDir(lightDir);
-	dirty = true;
+	dirLights_[index].SetLightDir(lightDir);
+	dirty_ = true;
 }
 
-void LightManager::SetDirLightColor(int index, const myMath::Vector3& lightColor)
+void LightManager::SetDirLightColor(int8_t index, const myMath::Vector3& lightColor)
 {
 	assert(0 <= index && index < DirLightNum);
-	dirLights[index].SetLightColor(lightColor);
-	dirty = true;
+	dirLights_[index].SetLightColor(lightColor);
+	dirty_ = true;
 }
 
-void LightManager::SetPointLightActive(int index, bool active)
+void LightManager::SetPointLightActive(int8_t index, bool active)
 {
 	assert(0 <= index && index < PointLightNum);
 
-	pointLights[index].SetActive(active);
+	pointLights_[index].SetActive(active);
 }
 
-void LightManager::SetPointLightPos(int index, const myMath::Vector3& lightPos)
+void LightManager::SetPointLightPos(int8_t index, const myMath::Vector3& lightPos)
 {
 	assert(0 <= index && index < PointLightNum);
 
-	pointLights[index].SetLightPos(lightPos);
-	dirty = true;
+	pointLights_[index].SetLightPos(lightPos);
+	dirty_ = true;
 }
 
-void LightManager::SetPointLightColor(int index, const myMath::Vector3& lightColor)
+void LightManager::SetPointLightColor(int8_t index, const myMath::Vector3& lightColor)
 {
 	assert(0 <= index && index < PointLightNum);
 
-	pointLights[index].SetLightColor(lightColor);
-	dirty = true;
+	pointLights_[index].SetLightColor(lightColor);
+	dirty_ = true;
 }
 
-void LightManager::SetPointLightAtten(int index, const myMath::Vector3& lightAtten)
+void LightManager::SetPointLightAtten(int8_t index, const myMath::Vector3& lightAtten)
 {
 	assert(0 <= index && index < PointLightNum);
 
-	pointLights[index].SetLightAtten(lightAtten);
-	dirty = true;
+	pointLights_[index].SetLightAtten(lightAtten);
+	dirty_ = true;
 }
 
-void LightManager::SetSpotLightActive(int index, bool active)
+void LightManager::SetSpotLightActive(int8_t index, bool active)
 {
 	assert(0 <= index && index < SpotLightNum);
 
-	spotLights[index].SetActive(active);
+	spotLights_[index].SetActive(active);
 }
 
-void LightManager::SetSpotLightDir(int index, const myMath::Vector4& lightDir)
+void LightManager::SetSpotLightDir(int8_t index, const myMath::Vector4& lightDir)
 {
 	assert(0 <= index && index < SpotLightNum);
 
-	spotLights[index].SetLightDir(lightDir);
-	dirty = true;
+	spotLights_[index].SetLightDir(lightDir);
+	dirty_ = true;
 }
 
-void LightManager::SetSpotLightPos(int index, const myMath::Vector3& lightPos)
+void LightManager::SetSpotLightPos(int8_t index, const myMath::Vector3& lightPos)
 {
 	assert(0 <= index && index < SpotLightNum);
 
-	spotLights[index].SetLightPos(lightPos);
-	dirty = true;
+	spotLights_[index].SetLightPos(lightPos);
+	dirty_ = true;
 }
 
-void LightManager::SetSpotLightColor(int index, const myMath::Vector3& lightColor)
+void LightManager::SetSpotLightColor(int8_t index, const myMath::Vector3& lightColor)
 {
 	assert(0 <= index && index < SpotLightNum);
 
-	spotLights[index].SetLightColor(lightColor);
-	dirty = true;
+	spotLights_[index].SetLightColor(lightColor);
+	dirty_ = true;
 }
 
-void LightManager::SetSpotLightAtten(int index, const myMath::Vector3& lightAtten)
+void LightManager::SetSpotLightAtten(int8_t index, const myMath::Vector3& lightAtten)
 {
 	assert(0 <= index && index < SpotLightNum);
 
-	spotLights[index].SetLightAtten(lightAtten);
-	dirty = true;
+	spotLights_[index].SetLightAtten(lightAtten);
+	dirty_ = true;
 }
 
-void LightManager::SetSpotLightFactorAngle(int index, const myMath::Vector2& lightFactorAngle)
+void LightManager::SetSpotLightFactorAngle(int8_t index, const myMath::Vector2& lightFactorAngle)
 {
 	assert(0 <= index && index < SpotLightNum);
 
-	spotLights[index].SetLightFactorAngle(lightFactorAngle);
-	dirty = true;
+	spotLights_[index].SetLightFactorAngle(lightFactorAngle);
+	dirty_ = true;
 }
 
-void LightManager::SetCircleShadowActive(int index, bool active)
+void LightManager::SetCircleShadowActive(int8_t index, bool active)
 {
 	assert(0 <= index && index < CircleShadowNum);
 
-	circleShadows[index].SetActive(active);
+	circleShadows_[index].SetActive(active);
 }
 
-void LightManager::SetCircleShadowCasterPos(int index, const myMath::Vector3& casterPos)
+void LightManager::SetCircleShadowCasterPos(int8_t index, const myMath::Vector3& casterPos)
 {
 	assert(0 <= index && index < CircleShadowNum);
 
-	circleShadows[index].SetCasterPos(casterPos);
-	dirty = true;
+	circleShadows_[index].SetCasterPos(casterPos);
+	dirty_ = true;
 }
 
-void LightManager::SetCircleShadowDir(int index, const myMath::Vector4& lightdir)
+void LightManager::SetCircleShadowDir(int8_t index, const myMath::Vector4& lightdir)
 {
 	assert(0 <= index && index < CircleShadowNum);
 
-	circleShadows[index].SetDir(lightdir);
-	dirty = true;
+	circleShadows_[index].SetDir(lightdir);
+	dirty_ = true;
 }
 
-void LightManager::SetCircleShadowDistanceCasterLight(int index, float distanceCasterLight)
+void LightManager::SetCircleShadowDistanceCasterLight(int8_t index, float distanceCasterLight)
 {
 	assert(0 <= index && index < CircleShadowNum);
 
-	circleShadows[index].SetDistanceCasterLight(distanceCasterLight);
-	dirty = true;
+	circleShadows_[index].SetDistanceCasterLight(distanceCasterLight);
+	dirty_ = true;
 }
 
-void LightManager::SetCircleShadowAtten(int index, const myMath::Vector3& lightAtten)
+void LightManager::SetCircleShadowAtten(int8_t index, const myMath::Vector3& lightAtten)
 {
 	assert(0 <= index && index < CircleShadowNum);
 
-	circleShadows[index].SetAtten(lightAtten);
-	dirty = true;
+	circleShadows_[index].SetAtten(lightAtten);
+	dirty_ = true;
 }
 
-void LightManager::SetCircleShadowFactorAngle(int index, const myMath::Vector2& lightFactorAngle)
+void LightManager::SetCircleShadowFactorAngle(int8_t index, const myMath::Vector2& lightFactorAngle)
 {
 	assert(0 <= index && index < CircleShadowNum);
 
-	circleShadows[index].SetFactorAngle(lightFactorAngle);
-	dirty = true;
+	circleShadows_[index].SetFactorAngle(lightFactorAngle);
+	dirty_ = true;
 }

@@ -26,34 +26,34 @@ public://サブクラス
 private://メンバ変数
 
 	//ライト方向(単位ベクトル)
-	myMath::Vector4 lightDir = { 1,0,0,0 };
+	myMath::Vector4 lightDir_ = { 1,0,0,0 };
 	//ライト座標(ワールド座標系)
-	myMath::Vector3 lightPos = { 0,0,0 };
+	myMath::Vector3 lightPos_ = { 0,0,0 };
 	//ライトの色
-	myMath::Vector3 lightColor = { 1,1,1 };
+	myMath::Vector3 lightColor_ = { 1,1,1 };
 	//ライト距離減衰係数
-	myMath::Vector3 lightAtten = { 1.0f,1.0f ,1.0f };
+	myMath::Vector3 lightAtten_ = { 1.0f,1.0f ,1.0f };
 	//ライト減衰角度(開始角度、終了角度)
-	myMath::Vector2 lightFactorAngleCos = { 0.5f,0.2f };
+	myMath::Vector2 lightFactorAngleCos_ = { 0.5f,0.2f };
 	//有効フラグ
-	bool active = false;
+	bool active_ = false;
 
 public://メンバ関数
 
-	inline void SetLightDir(const myMath::Vector4& lightDir_) { lightDir = lightDir_.normalization(); }
-	inline const myMath::Vector4& GetLightDir() { return lightDir; }
-	inline void SetLightPos(const myMath::Vector3& lightPos_) { lightPos = lightPos_; }
-	inline const myMath::Vector3& GetLightPos() { return lightPos; }
-	inline void SetLightColor(const myMath::Vector3& lightColor_) { lightColor = lightColor_; }
-	inline const myMath::Vector3& GetLightColor() { return lightColor; }
-	inline void SetLightAtten(const myMath::Vector3& lightAtten_) { lightAtten = lightAtten_; }
-	inline const myMath::Vector3& GetLightAtten() { return lightAtten; }
-	inline void SetLightFactorAngle(const myMath::Vector2& lightFactorAngle_)
+	inline void SetLightDir(const myMath::Vector4& lightDir) { lightDir_ = lightDir.normalization(); }
+	inline const myMath::Vector4& GetLightDir() { return lightDir_; }
+	inline void SetLightPos(const myMath::Vector3& lightPos) { lightPos_ = lightPos; }
+	inline const myMath::Vector3& GetLightPos() { return lightPos_; }
+	inline void SetLightColor(const myMath::Vector3& lightColor) { lightColor_ = lightColor; }
+	inline const myMath::Vector3& GetLightColor() { return lightColor_; }
+	inline void SetLightAtten(const myMath::Vector3& lightAtten) { lightAtten_ = lightAtten; }
+	inline const myMath::Vector3& GetLightAtten() { return lightAtten_; }
+	inline void SetLightFactorAngle(const myMath::Vector2& lightFactorAngle)
 	{
-		lightFactorAngleCos.x = cosf(DirectX::XMConvertToRadians(lightFactorAngle_.x));
-		lightFactorAngleCos.y = cosf(DirectX::XMConvertToRadians(lightFactorAngle_.y));
+		lightFactorAngleCos_.x = cosf(DirectX::XMConvertToRadians(lightFactorAngle.x));
+		lightFactorAngleCos_.y = cosf(DirectX::XMConvertToRadians(lightFactorAngle.y));
 	}
-	inline const myMath::Vector2& GetLightFactorAngleCos() { return lightFactorAngleCos; }
-	inline void SetActive(bool active_) { active = active_; }
-	inline bool IsActive() { return active; }
+	inline const myMath::Vector2& GetLightFactorAngleCos() { return lightFactorAngleCos_; }
+	inline void SetActive(bool active) { active_ = active; }
+	inline bool IsActive() { return active_; }
 };

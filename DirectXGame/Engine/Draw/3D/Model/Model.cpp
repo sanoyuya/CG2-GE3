@@ -7,36 +7,36 @@
 #include "atlstr.h"
 #include "comutil.h"
 
-Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
-Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Model::cmdList;
-std::vector<std::string>Model::filePaths;
-std::unordered_map<std::string, std::unique_ptr<ModelData>> Model::modelDatas;
-LightManager* Model::lightManager = nullptr;
-uint32_t Model::modelCount;
-std::array <Blob, 5> Model::blob;//シェーダオブジェクト
-std::array <std::array<PipelineSet, 6>, 5> Model::pip;
+Microsoft::WRL::ComPtr<ID3D12Device> Model::sDevice_;
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Model::sCmdList_;
+std::vector<std::string>Model::sFilePaths_;
+std::unordered_map<std::string, std::unique_ptr<ModelData>> Model::sModelDatas_;
+LightManager* Model::sLightManager_ = nullptr;
+uint32_t Model::sModelCount_;
+std::array <Blob, 5> Model::sBlob_;//シェーダオブジェクト
+std::array <std::array<PipelineSet, 6>, 5> Model::sPip_;
 
 void Model::StaticInitialize()
 {
-	device = DirectXBase::GetInstance()->GetDevice();
-	cmdList = DirectXBase::GetInstance()->GetCommandList();
+	sDevice_ = DirectXBase::GetInstance()->GetDevice();
+	sCmdList_ = DirectXBase::GetInstance()->GetCommandList();
 
 	LoadShader();
 
-	for (int i = 0; i < pip.size(); i++)
+	for (int i = 0; i < sPip_.size(); i++)
 	{
-		Pipeline::CreateBasicModelPipline(blob[0], (BlendMode)i, device.Get(), pip[0]);//Basicシェーダー用
-		Pipeline::CreatePhongModelPipline(blob[1], (BlendMode)i, device.Get(), pip[1]);//Phongシェーダー用
-		Pipeline::CreatePhongModelPipline(blob[2], (BlendMode)i, device.Get(), pip[2]);//Toonシェーダー用
-		Pipeline::CreatePhongModelPipline(blob[3], (BlendMode)i, device.Get(), pip[3]);//リムライト用
+		Pipeline::CreateBasicModelPipline(sBlob_[0], (BlendMode)i, sDevice_.Get(), sPip_[0]);//Basicシェーダー用
+		Pipeline::CreatePhongModelPipline(sBlob_[1], (BlendMode)i, sDevice_.Get(), sPip_[1]);//Phongシェーダー用
+		Pipeline::CreatePhongModelPipline(sBlob_[2], (BlendMode)i, sDevice_.Get(), sPip_[2]);//Toonシェーダー用
+		Pipeline::CreatePhongModelPipline(sBlob_[3], (BlendMode)i, sDevice_.Get(), sPip_[3]);//リムライト用
 	}
 
-	filePaths.resize(maxModel);
+	sFilePaths_.resize(sMaxModel_);
 }
 
 void Model::SetLight(LightManager* lightManager_)
 {
-	Model::lightManager = lightManager_;
+	Model::sLightManager_ = lightManager_;
 }
 
 void Model::LoadShader()
@@ -44,36 +44,36 @@ void Model::LoadShader()
 #pragma region Basicシェーダー用
 
 	//頂点シェーダの読み込みとコンパイル
-	blob[0].vs = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicVS.hlsl", "main", "vs_5_0", blob[0].vs.Get());
+	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	blob[0].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicPS.hlsl", "main", "ps_5_0", blob[0].ps.Get());
+	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
 
 #pragma endregion Basicシェーダー用
 
 #pragma region Phongシェーダー用
 
 	//頂点シェーダの読み込みとコンパイル
-	blob[1].vs = DrawCommon::ShaderCompile(L"Resources/shaders/PhongVS.hlsl", "main", "vs_5_0", blob[1].vs.Get());
+	sBlob_[1].vs = DrawCommon::ShaderCompile(L"Resources/shaders/PhongVS.hlsl", "main", "vs_5_0", sBlob_[1].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	blob[1].ps = DrawCommon::ShaderCompile(L"Resources/shaders/PhongPS.hlsl", "main", "ps_5_0", blob[1].ps.Get());
+	sBlob_[1].ps = DrawCommon::ShaderCompile(L"Resources/shaders/PhongPS.hlsl", "main", "ps_5_0", sBlob_[1].ps.Get());
 
 #pragma endregion Phongシェーダー用
 
 #pragma region Toonシェーダー用
 
 	//頂点シェーダの読み込みとコンパイル
-	blob[2].vs = DrawCommon::ShaderCompile(L"Resources/shaders/ToonVS.hlsl", "main", "vs_5_0", blob[2].vs.Get());
+	sBlob_[2].vs = DrawCommon::ShaderCompile(L"Resources/shaders/ToonVS.hlsl", "main", "vs_5_0", sBlob_[2].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	blob[2].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ToonPS.hlsl", "main", "ps_5_0", blob[2].ps.Get());
+	sBlob_[2].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ToonPS.hlsl", "main", "ps_5_0", sBlob_[2].ps.Get());
 
 #pragma endregion Toonシェーダー用
 
 #pragma region リムライト用
 
 	//頂点シェーダの読み込みとコンパイル
-	blob[3].vs = DrawCommon::ShaderCompile(L"Resources/shaders/RimLightVS.hlsl", "main", "vs_5_0", blob[3].vs.Get());
+	sBlob_[3].vs = DrawCommon::ShaderCompile(L"Resources/shaders/RimLightVS.hlsl", "main", "vs_5_0", sBlob_[3].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	blob[3].ps = DrawCommon::ShaderCompile(L"Resources/shaders/RimLightPS.hlsl", "main", "ps_5_0", blob[3].ps.Get());
+	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/shaders/RimLightPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
 
 #pragma endregion リムライト用
 }
@@ -88,26 +88,26 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		{
 		case ShaderMode::Basic:
 
-			cmdList->SetPipelineState(pip[0][0].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[0][0].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[0][0].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[0][0].rootSignature.Get());
 
 			break;
 		case ShaderMode::Phong:
 
-			cmdList->SetPipelineState(pip[1][0].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[1][0].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[1][0].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[1][0].rootSignature.Get());
 
 			break;
 		case ShaderMode::Toon:
 
-			cmdList->SetPipelineState(pip[2][0].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[2][0].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[2][0].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[2][0].rootSignature.Get());
 
 			break;
 		case ShaderMode::RimLight:
 
-			cmdList->SetPipelineState(pip[3][0].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[3][0].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[3][0].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[3][0].rootSignature.Get());
 
 			break;
 		}
@@ -120,26 +120,26 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		{
 		case ShaderMode::Basic:
 
-			cmdList->SetPipelineState(pip[0][1].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[0][1].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[0][1].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[0][1].rootSignature.Get());
 
 			break;
 		case ShaderMode::Phong:
 
-			cmdList->SetPipelineState(pip[1][1].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[1][1].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[1][1].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[1][1].rootSignature.Get());
 
 			break;
 		case ShaderMode::Toon:
 
-			cmdList->SetPipelineState(pip[2][1].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[2][1].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[2][1].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[2][1].rootSignature.Get());
 
 			break;
 		case ShaderMode::RimLight:
 
-			cmdList->SetPipelineState(pip[3][1].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[3][1].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[3][1].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[3][1].rootSignature.Get());
 
 			break;
 		}
@@ -152,26 +152,26 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		{
 		case ShaderMode::Basic:
 
-			cmdList->SetPipelineState(pip[0][2].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[0][2].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[0][2].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[0][2].rootSignature.Get());
 
 			break;
 		case ShaderMode::Phong:
 
-			cmdList->SetPipelineState(pip[1][2].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[1][2].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[1][2].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[1][2].rootSignature.Get());
 
 			break;
 		case ShaderMode::Toon:
 
-			cmdList->SetPipelineState(pip[2][2].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[2][2].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[2][2].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[2][2].rootSignature.Get());
 
 			break;
 		case ShaderMode::RimLight:
 
-			cmdList->SetPipelineState(pip[3][2].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[3][2].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[3][2].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[3][2].rootSignature.Get());
 
 			break;
 		}
@@ -184,26 +184,26 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		{
 		case ShaderMode::Basic:
 
-			cmdList->SetPipelineState(pip[0][3].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[0][3].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[0][3].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[0][3].rootSignature.Get());
 
 			break;
 		case ShaderMode::Phong:
 
-			cmdList->SetPipelineState(pip[1][3].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[1][3].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[1][3].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[1][3].rootSignature.Get());
 
 			break;
 		case ShaderMode::Toon:
 
-			cmdList->SetPipelineState(pip[2][3].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[2][3].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[2][3].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[2][3].rootSignature.Get());
 
 			break;
 		case ShaderMode::RimLight:
 
-			cmdList->SetPipelineState(pip[3][3].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[3][3].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[3][3].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[3][3].rootSignature.Get());
 
 			break;
 		}
@@ -216,26 +216,26 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		{
 		case ShaderMode::Basic:
 
-			cmdList->SetPipelineState(pip[0][4].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[0][4].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[0][4].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[0][4].rootSignature.Get());
 
 			break;
 		case ShaderMode::Phong:
 
-			cmdList->SetPipelineState(pip[1][4].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[1][4].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[1][4].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[1][4].rootSignature.Get());
 
 			break;
 		case ShaderMode::Toon:
 
-			cmdList->SetPipelineState(pip[2][4].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[2][4].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[2][4].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[2][4].rootSignature.Get());
 
 			break;
 		case ShaderMode::RimLight:
 
-			cmdList->SetPipelineState(pip[3][4].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[3][4].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[3][4].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[3][4].rootSignature.Get());
 
 			break;
 		}
@@ -248,26 +248,26 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		{
 		case ShaderMode::Basic:
 
-			cmdList->SetPipelineState(pip[0][5].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[0][5].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[0][5].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[0][5].rootSignature.Get());
 
 			break;
 		case ShaderMode::Phong:
 
-			cmdList->SetPipelineState(pip[1][5].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[1][5].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[1][5].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[1][5].rootSignature.Get());
 
 			break;
 		case ShaderMode::Toon:
 
-			cmdList->SetPipelineState(pip[2][5].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[2][5].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[2][5].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[2][5].rootSignature.Get());
 
 			break;
 		case ShaderMode::RimLight:
 
-			cmdList->SetPipelineState(pip[3][5].pipelineState.Get());
-			cmdList->SetGraphicsRootSignature(pip[3][5].rootSignature.Get());
+			sCmdList_->SetPipelineState(sPip_[3][5].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[3][5].rootSignature.Get());
 
 			break;
 		}
@@ -276,16 +276,6 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 	}
 }
 
-//wchar_t Model::ConvertToWchar_t(std::string& str)
-//{
-//	const size_t newsizew = orig.size() + 1;
-//	size_t convertedChars = 0;
-//	wchar_t* wcstring = new wchar_t[newsizew];
-//	mbstowcs_s(&convertedChars, wcstring, newsizew, orig.c_str(), _TRUNCATE);
-//	wcout << wcstring << L" (wchar_t *)" << endl;
-//	delete[]wcstring;
-//}
-
 uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
 {
 	std::string path = filePath;
@@ -293,162 +283,114 @@ uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
 	path += smoothing ? " : true" : " : false";
 
 	//一回読み込んだことがあるファイルはそのまま返す
-	auto itr = find_if(modelDatas.begin(), modelDatas.end(), [&](std::pair<const std::string, std::unique_ptr<ModelData, std::default_delete<ModelData>>>& p)
+	auto itr = find_if(sModelDatas_.begin(), sModelDatas_.end(), [&](std::pair<const std::string, std::unique_ptr<ModelData, std::default_delete<ModelData>>>& p)
 		{
 			return p.second->filePath == path;
 		});
 
-	if (itr == modelDatas.end())
+	if (itr == sModelDatas_.end())
 	{
-		uint32_t modelHandle = modelCount;
+		uint32_t modelHandle = sModelCount_;
 
 		std::unique_ptr<ModelData> data;
 		data = std::make_unique<ModelData>();
 
 		Obj::Create(filePath.c_str(), smoothing, data.get());
 
-		data->modelHandle = modelCount;
+		data->modelHandle = sModelCount_;
 
 		data->filePath = path;
 
-		modelDatas[path] = std::move(data);
+		sModelDatas_[path] = std::move(data);
 
-		filePaths[modelCount] = path;
+		sFilePaths_[sModelCount_] = path;
 
-		modelCount++;
+		sModelCount_++;
 
 		return modelHandle;
 	}
 	else
 	{
-		uint32_t modelHandle = modelDatas[path]->modelHandle;
+		uint32_t modelHandle = sModelDatas_[path]->modelHandle;
 
 		return modelHandle;
 	}
 }
 
-//uint32_t Model::CreateAssimpModel(const std::string& filePath)
-//{
-//	std::string path = filePath;
-//
-//	//一回読み込んだことがあるファイルはそのまま返す
-//	auto itr = find_if(modelDatas.begin(), modelDatas.end(), [&](std::pair<const std::string, std::unique_ptr<ModelData, std::default_delete<ModelData>>>& p)
-//		{
-//			return p.second->filePath == path;
-//		});
-//
-//	if (itr == modelDatas.end())
-//	{
-//		uint32_t modelHandle = modelCount;
-//
-//		std::unique_ptr<ModelData> data;
-//		data = std::make_unique<ModelData>();
-//
-//		std::vector<Mesh> meshes;
-//
-//		ImportSettings importSetting =
-//		{
-//			filePath,
-//			meshes,
-//			false,
-//			true
-//		};
-//		AssimpLoder::Load(importSetting);
-//
-//		data->modelHandle = modelCount;
-//
-//		data->filePath = path;
-//
-//		modelDatas[path] = std::move(data);
-//
-//		filePaths[modelCount] = path;
-//
-//		modelCount++;
-//
-//		return modelHandle;
-//	}
-//	else
-//	{
-//		uint32_t modelHandle = modelDatas[path]->modelHandle;
-//
-//		return modelHandle;
-//	}
-//}
-
 void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 {
-	D3D12_VERTEX_BUFFER_VIEW vbView = modelData->vertexBuffer->GetView();
-	D3D12_INDEX_BUFFER_VIEW ibView = modelData->indexBuffer->GetView();
+	D3D12_VERTEX_BUFFER_VIEW vbView = modelData_->vertexBuffer->GetView();
+	D3D12_INDEX_BUFFER_VIEW ibView = modelData_->indexBuffer->GetView();
 
-	tmp = color;
-	col->Update(&tmp);
+	tmp_ = color;
+	constantBuff_->Update(&tmp_);
 
-	PiplineSet(static_cast<BlendMode>(blendMode),static_cast<ShaderMode>(shaderMode));
+	PiplineSet(static_cast<BlendMode>(blendMode_),static_cast<ShaderMode>(shaderMode_));
 
 	// プリミティブ形状の設定コマンド
-	cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
+	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 
 	// 頂点バッファビューの設定コマンド
-	cmdList->IASetVertexBuffers(0, 1, &vbView);
+	sCmdList_->IASetVertexBuffers(0, 1, &vbView);
 
 	//インデックスバッファビューの設定コマンド
-	cmdList->IASetIndexBuffer(&ibView);
+	sCmdList_->IASetIndexBuffer(&ibView);
 
 	// 定数バッファビュー(CBV)の設定コマンド
-	cmdList->SetGraphicsRootConstantBufferView(0, transform->GetconstBuff()->GetGPUVirtualAddress());
-	cmdList->SetGraphicsRootConstantBufferView(1, modelData->constBuffMaterial->GetAddress());
+	sCmdList_->SetGraphicsRootConstantBufferView(0, transform->GetconstBuff()->GetGPUVirtualAddress());
+	sCmdList_->SetGraphicsRootConstantBufferView(1, modelData_->constBuffMaterial->GetAddress());
 	//ルートパラメータ2番に色情報を設定
-	cmdList->SetGraphicsRootConstantBufferView(2, col->GetAddress());
+	sCmdList_->SetGraphicsRootConstantBufferView(2, constantBuff_->GetAddress());
 
 	//ライトの描画
-	if (shaderMode != ShaderMode::Basic)
+	if (shaderMode_ != ShaderMode::Basic)
 	{
 		//ルートパラメータ2番にライト情報を設定
-		lightManager->Draw(cmdList.Get(), 4);
+		sLightManager_->Draw(sCmdList_.Get(), 4);
 	}
 
 	// SRVヒープの設定コマンド
-	cmdList->SetDescriptorHeaps(1, modelData->textureData->srvHeap.GetAddressOf());
+	sCmdList_->SetDescriptorHeaps(1, modelData_->textureData->srvHeap.GetAddressOf());
 
 	// SRVヒープの先頭にあるSRVをルートパラメータ3番に設定
-	cmdList->SetGraphicsRootDescriptorTable(3, modelData->textureData->gpuHandle);
+	sCmdList_->SetGraphicsRootDescriptorTable(3, modelData_->textureData->gpuHandle);
 
 	// 描画コマンド
-	cmdList->DrawIndexedInstanced(modelData->maxIndex, 1, 0, 0, 0);
+	sCmdList_->DrawIndexedInstanced(modelData_->maxIndex, 1, 0, 0, 0);
 }
 
 const myMath::Matrix4& Model::GetMatWorld()
 {
-	return modelData->matWorld;
+	return modelData_->matWorld;
 }
 
 const std::vector<PosNormalUv> Model::GetVertices()
 {
-	return modelData->vertices;
+	return modelData_->vertices;
 }
 
 const std::vector<uint32_t> Model::GetIndices()
 {
-	return modelData->indices;
+	return modelData_->indices;
 }
 
 void Model::SetModel(const uint32_t& modelHandle)
 {
-	modelData = modelDatas[filePaths[modelHandle]].get();
+	modelData_ = sModelDatas_[sFilePaths_[modelHandle]].get();
 }
 
 void Model::SetModelBlendMode(const BlendMode& mode)
 {
-	blendMode = mode;
+	blendMode_ = mode;
 }
 
 void Model::SetShaderMode(const ShaderMode& mode)
 {
-	shaderMode = mode;
+	shaderMode_ = mode;
 }
 
 Model::Model()
 {
-	col = std::make_unique<ConstantBuffer>();
-	col->Create(sizeof(myMath::Vector4));
+	constantBuff_ = std::make_unique<ConstantBuffer>();
+	constantBuff_->Create(sizeof(myMath::Vector4));
 }

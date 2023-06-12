@@ -36,17 +36,17 @@ private:
 
 	DirectXBase* directX_;
 
-	static TextureManager* textureManager;
+	static TextureManager* sTextureManager_;
 
 	//テクスチャ数
-	uint32_t nextTexture;
+	uint32_t nextTexture_;
 
 	// ヒープ設定
-	D3D12_HEAP_PROPERTIES textureHeapProp{};
+	D3D12_HEAP_PROPERTIES textureHeapProp_{};
 
-	static std::vector<std::string>filePaths;
+	static std::vector<std::string>sFilePaths_;
 
-	static std::unordered_map<std::string, std::unique_ptr<TextureData>> textureDatas;
+	static std::unordered_map<std::string, std::unique_ptr<TextureData>> sTextureDatas_;
 
 public:
 
@@ -67,11 +67,6 @@ public:
 	/// </summary>
 	/// <returns>インスタンス</returns>
 	static TextureManager* GetInstance();
-
-	/// <summary>
-	/// インスタンスを解放
-	/// </summary>
-	void Destroy();
 
 	/// <summary>
 	/// テクスチャをロードします

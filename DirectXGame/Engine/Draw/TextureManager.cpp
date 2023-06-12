@@ -1,8 +1,8 @@
 #include "TextureManager.h"
 
-TextureManager* TextureManager::textureManager = nullptr;
-std::vector<std::string>TextureManager::filePaths;
-std::unordered_map<std::string, std::unique_ptr<TextureData>> TextureManager::textureDatas;
+TextureManager* TextureManager::sTextureManager_ = nullptr;
+std::vector<std::string>TextureManager::sFilePaths_;
+std::unordered_map<std::string, std::unique_ptr<TextureData>> TextureManager::sTextureDatas_;
 
 void TextureManager::LoadFile(const std::string& path, DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg)
 {
@@ -56,37 +56,37 @@ TextureData* TextureManager::FromTextureData(const std::string& path)
 
 uint32_t TextureManager::LoadTexture(const std::string& path)
 {
-	if (nextTexture > 2024)
+	if (nextTexture_ > 2024)
 	{
 		assert(0);
 	}
 
 	//一回読み込んだことがあるファイルはそのまま返す
-	auto itr = find_if(textureDatas.begin(), textureDatas.end(), [&](std::pair<const std::string, std::unique_ptr<TextureData, std::default_delete<TextureData>>>& p)
+	auto itr = find_if(sTextureDatas_.begin(), sTextureDatas_.end(), [&](std::pair<const std::string, std::unique_ptr<TextureData, std::default_delete<TextureData>>>& p)
 		{
 			return p.second->path == path;
 		});
 
-	if (itr == textureDatas.end())
+	if (itr == sTextureDatas_.end())
 	{
 		std::unique_ptr<TextureData> data;
 
 		data.reset(FromTextureData(path));
-		data->textureHandle = nextTexture;
+		data->textureHandle = nextTexture_;
 		data->path = path;
 
-		textureDatas[path] = std::move(data);
-		filePaths[nextTexture] = path;
-		uint32_t handl = nextTexture;
+		sTextureDatas_[path] = std::move(data);
+		sFilePaths_[nextTexture_] = path;
+		uint32_t handl = nextTexture_;
 
-		nextTexture++;
+		nextTexture_++;
 
 		return handl;
 	}
 	else
 	{
 
-		uint32_t modelHandle = textureDatas[path]->textureHandle;
+		uint32_t modelHandle = sTextureDatas_[path]->textureHandle;
 
 		return modelHandle;
 	}
@@ -97,26 +97,17 @@ void TextureManager::StaticInitialize()
 	directX_ = DirectXBase::GetInstance();
 
 	// ヒープ設定
-	textureHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
-	textureHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-	textureHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+	textureHeapProp_.Type = D3D12_HEAP_TYPE_CUSTOM;
+	textureHeapProp_.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	textureHeapProp_.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
-	filePaths.resize(2024);
+	sFilePaths_.resize(2024);
 }
 
 TextureManager* TextureManager::GetInstance()
 {
-	if (!textureManager)
-	{
-		textureManager = new TextureManager();
-	}
-
-	return textureManager;
-}
-
-void TextureManager::Destroy()
-{
-	delete textureManager;
+	static TextureManager instance;
+	return &instance;
 }
 
 uint32_t TextureManager::Load(const std::string& path)
@@ -126,7 +117,7 @@ uint32_t TextureManager::Load(const std::string& path)
 
 TextureData* TextureManager::GetTextureData(uint32_t handle)
 {
-	return textureDatas[filePaths[handle]].get();
+	return sTextureDatas_[sFilePaths_[handle]].get();
 }
 
 Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg)
@@ -137,14 +128,14 @@ Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::Te
 	textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
 	textureResourceDesc.Format = metadata.format;
 	textureResourceDesc.Width = metadata.width;//幅
-	textureResourceDesc.Height = (UINT)metadata.height;//高さ
+	textureResourceDesc.Height = (uint32_t)metadata.height;//高さ
 	textureResourceDesc.DepthOrArraySize = (UINT16)metadata.arraySize;
 	textureResourceDesc.MipLevels = (UINT16)metadata.mipLevels;
 	textureResourceDesc.SampleDesc.Count = 1;
 
 	// テクスチャバッファの生成
 	HRESULT hr = directX_->GetDevice()->CreateCommittedResource(
-		&textureHeapProp,
+		&textureHeapProp_,
 		D3D12_HEAP_FLAG_NONE,
 		&textureResourceDesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
@@ -158,11 +149,11 @@ Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::Te
 		const DirectX::Image* img = scratchImg.GetImage(i, 0, 0);
 		// テクスチャバッファにデータ転送
 		hr = result->WriteToSubresource(
-			(UINT)i,
+			static_cast<uint32_t>(i),
 			nullptr,              // 全領域へコピー
 			img->pixels,          // 元データアドレス
-			(UINT)img->rowPitch,  // 1ラインサイズ
-			(UINT)img->slicePitch // 1枚サイズ
+			static_cast<uint32_t>(img->rowPitch),  // 1ラインサイズ
+			static_cast<uint32_t>(img->slicePitch) // 1枚サイズ
 		);
 		assert(SUCCEEDED(hr));
 	}
@@ -177,7 +168,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::CreateShaderResourceView(ID3D12Resou
 	srvDesc.Format = metadata.format;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = static_cast<UINT>(metadata.mipLevels);
+	srvDesc.Texture2D.MipLevels = static_cast<uint32_t>(metadata.mipLevels);
 
 	D3D12_GPU_DESCRIPTOR_HANDLE result{};
 

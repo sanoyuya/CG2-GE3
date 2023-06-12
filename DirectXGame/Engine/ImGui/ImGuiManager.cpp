@@ -6,8 +6,6 @@
 #include"DirectXBase.h"
 #include"DescriptorHeap.h"
 
-ImGuiManager* imGuiInstance = nullptr;
-
 void ImGuiManager::Initialize(WindowsApp* windowsApp)
 {
 	//ImGuiのコンテキストを生成
@@ -37,8 +35,6 @@ void ImGuiManager::Destroy()
 	ImGui_ImplDX12_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
-
-	delete imGuiInstance;
 }
 
 void ImGuiManager::Begin()

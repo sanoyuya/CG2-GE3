@@ -7,39 +7,39 @@
 
 void YFramework::Initialize()
 {
-	windowsApp = std::make_unique<WindowsApp>();//WindowsAppクラス読み込み
-	windowsApp->CreatWindow(title.c_str(), window_width, window_height);//ウィンドウ作成
+	windowsApp_ = std::make_unique<WindowsApp>();//WindowsAppクラス読み込み
+	windowsApp_->CreatWindow(title_.c_str(), windowWidth_, windowHeight_);//ウィンドウ作成
 
-	fps = std::make_unique<FPS>();
-	fps->Initialize();
+	fps_ = std::make_unique<FPS>();
+	fps_->Initialize();
 
 	//DirectX初期化処理 ここから
 
-	directX = DirectXBase::GetInstance();//DirectX_クラス読み込み
-	directX->Initialize(windowsApp.get());
+	directX_ = DirectXBase::GetInstance();//DirectX_クラス読み込み
+	directX_->Initialize(windowsApp_.get());
 
 	//imGuiの初期化
-	imGuiManager = ImGuiManager::GetInstance();
-	imGuiManager->Initialize(windowsApp.get());
+	imGuiManager_ = ImGuiManager::GetInstance();
+	imGuiManager_->Initialize(windowsApp_.get());
 
 	//キー取得開始
-	input = InputManager::GetInstance();
-	input->Initialize(windowsApp.get());
+	input_ = InputManager::GetInstance();
+	input_->Initialize(windowsApp_.get());
 
 	// オーディオの初期化
-	audioManager = AudioManager::GetInstance();
-	audioManager->Initialize();
+	audioManager_ = AudioManager::GetInstance();
+	audioManager_->Initialize();
 
 	//DirectX初期化処理 ここまで
 
 	//描画初期化処理ここから
 
-	Camera::StaticInitialize(windowsApp.get());
+	Camera::StaticInitialize(windowsApp_.get());
 
 	TextureManager::GetInstance()->StaticInitialize();
 
 	SpriteCommon::Initialize();
-	Sprite2D::StaticInitialize(windowsApp.get());
+	Sprite2D::StaticInitialize(windowsApp_.get());
 
 	Model::StaticInitialize();
 
@@ -47,47 +47,46 @@ void YFramework::Initialize()
 
 	//描画初期化処理ここまで
 
-	windowsApp->Appearance();
+	windowsApp_->Appearance();
 
 	//シーンファクトリーを生成し、マネージャにセット
 	AbstractSceneFactory* sceneFactory = new SceneFactory();
 	SceneManager::GetInstance()->SetSceneFactory(sceneFactory);
 
-	postEffect = std::make_unique<PostEffect>();
-	postEffect->Initialize();
+	postEffect_ = std::make_unique<PostEffect>();
+	postEffect_->Initialize();
 }
 
 void YFramework::Destroy()
 {
-	imGuiManager->Destroy();
-	directX->Destroy();
-	textureManager->Destroy();
-	audioManager->Destroy();
+	imGuiManager_->Destroy();
+	directX_->Destroy();
+	audioManager_->Destroy();
 }
 
 void YFramework::Update()
 {
-	if (!windowsApp->MessageWindow())
+	if (!windowsApp_->MessageWindow())
 	{
-		endRequest = true;
+		endRequest_ = true;
 	}
 
-	input->Update();
-	audioManager->Update();
+	input_->Update();
+	audioManager_->Update();
 
-	directX->SetClearColor();//背景色を設定 初期値(水色)
-	directX->UpdateClear(windowsApp.get());
+	directX_->SetClearColor();//背景色を設定 初期値(水色)
+	directX_->UpdateClear(windowsApp_.get());
 }
 
-void YFramework::SetWindowData(const std::string& title_, const float width, const float height)
+void YFramework::SetWindowData(const std::string& title, const float width, const float height)
 {
 	wchar_t wtitle[256];
 
-	MultiByteToWideChar(CP_ACP, 0, title_.c_str(), -1, wtitle, _countof(wtitle));
+	MultiByteToWideChar(CP_ACP, 0, title.c_str(), -1, wtitle, _countof(wtitle));
 
-	title = wtitle;
-	window_width = width;//横幅
-	window_height = height;//縦幅
+	title_ = wtitle;
+	windowWidth_ = width;//横幅
+	windowHeight_ = height;//縦幅
 }
 
 void YFramework::SetWindowColor(const myMath::Vector4& color)
@@ -104,11 +103,11 @@ void YFramework::Run()
 	while (true)
 	{
 		//更新処理
-		imGuiManager->Begin();
+		imGuiManager_->Begin();
 
 		Update();
 
-		imGuiManager->End();
+		imGuiManager_->End();
 
 		if (GetEndRequest())
 		{
@@ -117,7 +116,7 @@ void YFramework::Run()
 
 		//描画処理
 		Draw();
-		postEffect->Draw();
+		postEffect_->Draw();
 
 #ifdef _DEBUG
 
@@ -125,12 +124,12 @@ void YFramework::Run()
 
 #endif // DEBUG
 
-		imGuiManager->Draw();//ALの評価課題出すまではこっち
+		imGuiManager_->Draw();//ALの評価課題出すまではこっち
 
-		directX->UpdateEnd();
+		directX_->UpdateEnd();
 
 		//FPS制御
-		fps->Update();
+		fps_->Update();
 	}
 	Destroy();
 }
@@ -141,5 +140,5 @@ void YFramework::Draw()
 
 bool& YFramework::GetEndRequest()
 {
-	return endRequest;
+	return endRequest_;
 }

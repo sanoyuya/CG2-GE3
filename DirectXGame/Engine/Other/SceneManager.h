@@ -8,11 +8,11 @@ class SceneManager
 private:
 
 	//現在のシーン
-	BaseScene* scene = nullptr;
-	BaseScene* nextScene = nullptr;
+	BaseScene* scene_ = nullptr;
+	BaseScene* nextScene_ = nullptr;
 
 	//シーンファクトリー
-	AbstractSceneFactory* sceneFactory = nullptr;
+	AbstractSceneFactory* sceneFactory_ = nullptr;
 
 public:
 
@@ -28,7 +28,7 @@ public:
 	//次シーン予約
 	void ChangeScene(const std::string& sceneName);
 
-	void SetSceneFactory(AbstractSceneFactory* sceneFactory_);
+	void SetSceneFactory(AbstractSceneFactory* sceneFactory);
 
 	//シングルトン
 	static SceneManager* GetInstance();

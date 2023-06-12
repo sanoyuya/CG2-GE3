@@ -74,12 +74,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4049 %(AdditionalOptions)</AdditionalOptions>
-      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>

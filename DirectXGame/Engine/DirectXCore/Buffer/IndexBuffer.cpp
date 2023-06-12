@@ -11,7 +11,7 @@ void IndexBuffer::Create(size_t length, const uint32_t* data)
 	D3D12_RESOURCE_DESC resDesc{};
 
 	//インデックスデータのサイズ
-	UINT sizeIB = static_cast<UINT>(sizeof(uint32_t) * length);
+	uint32_t sizeIB = static_cast<uint32_t>(sizeof(uint32_t) * length);
 	//頂点バッファの設定
 	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUへの転送用
 	//リソース設定　
@@ -36,7 +36,7 @@ void IndexBuffer::Create(size_t length, const uint32_t* data)
 	bufferView_ = {};
 	bufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
 	bufferView_.Format = DXGI_FORMAT_R32_UINT;
-	bufferView_.SizeInBytes = static_cast<UINT>(length * sizeof(uint32_t));
+	bufferView_.SizeInBytes = static_cast<uint32_t>(length * sizeof(uint32_t));
 
 	result = buffer_->Map(0, nullptr, &bufferMappedPtr_);
 
