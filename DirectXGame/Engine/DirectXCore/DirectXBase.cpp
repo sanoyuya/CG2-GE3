@@ -367,7 +367,6 @@ void DirectXBase::SetClearColor(myMath::Vector4 color)
 
 DirectXBase* DirectXBase::GetInstance()
 {
-	static DirectXBase* instance;
-	directX = instance;
-	return directX;
+	static DirectXBase instance;
+	return &instance;
 }

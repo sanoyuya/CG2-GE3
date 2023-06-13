@@ -23,50 +23,50 @@ void TitleScene::Initialize()
 	sphereTex = skyDome->CreateObjModel("Resources/sphere");
 	tex = skyDome->CreateObjModel("Resources/purpleDice");
 
-	//levelData = std::make_unique<LevelData>();
-	//levelData.reset(LevelEditor::LoadLevelEditorFile("untitled"));
+	levelData = std::make_unique<LevelData>();
+	levelData.reset(LevelEditor::LoadLevelEditorFile("untitled"));
 
-	////レベルデータからオブジェクトを生成、配置
-	//for (auto& objectData : levelData->objects_)
-	//{
-	//	//ファイル名から登録済みモデルを検索
-	//	EditorObject* model = new EditorObject;
-	//	model->Initialize();
-	//	decltype(models)::iterator it = models.find(objectData.fileName);
-	//	if (it != models.end())
-	//	{
-	//		model = it->second;
-	//	}
+	//レベルデータからオブジェクトを生成、配置
+	for (auto& objectData : levelData->objects_)
+	{
+		//ファイル名から登録済みモデルを検索
+		EditorObject* model = new EditorObject;
+		model->Initialize();
+		decltype(models)::iterator it = models.find(objectData.fileName);
+		if (it != models.end())
+		{
+			model = it->second;
+		}
 
-	//	//座標
-	//	model->SetPos(objectData.translation);
-	//	//回転角
-	//	model->SetRot(objectData.rotation);
-	//	//拡縮
-	//	model->SetScale(objectData.scaling);
-	//	//名前
-	//	model->SetName(objectData.fileName);
-	//	//コライダーの中心座標
-	//	model->SetColliderCenter(objectData.collider.center);
-	//	//コライダーサイズ
-	//	model->SetColliderSize(objectData.collider.size);
+		//座標
+		model->SetPos(objectData.translation);
+		//回転角
+		model->SetRot(objectData.rotation);
+		//拡縮
+		model->SetScale(objectData.scaling);
+		//名前
+		model->SetName(objectData.fileName);
+		//コライダーの中心座標
+		model->SetColliderCenter(objectData.collider.center);
+		//コライダーサイズ
+		model->SetColliderSize(objectData.collider.size);
 
-	//	if (objectData.fileName == "player")
-	//	{
-	//		model->SetModel(playerTex);
-	//		pos = model->GetPos();
-	//	}
-	//	else if (objectData.fileName == "sphere")
-	//	{
-	//		model->SetModel(sphereTex);
-	//	}
-	//	else
-	//	{
-	//		model->SetModel(tex);
-	//	}
+		if (objectData.fileName == "player")
+		{
+			model->SetModel(playerTex);
+			pos = model->GetPos();
+		}
+		else if (objectData.fileName == "sphere")
+		{
+			model->SetModel(sphereTex);
+		}
+		else
+		{
+			model->SetModel(tex);
+		}
 
-	//	objects.push_back(model);
-	//}
+		objects.push_back(model);
+	}
 }
 
 void TitleScene::Destroy()
