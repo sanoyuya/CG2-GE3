@@ -85,7 +85,7 @@ protected:
 
 	static const uint32_t sMaxModel_ = 1024;
 
-	std::unique_ptr<ModelData> modelData_;
+	ModelData* modelData_ = nullptr;
 
 private:
 
@@ -143,7 +143,7 @@ public:
 	void SetShaderMode(const ShaderMode& mode);
 
 	Model();
-	~Model() = default;
+	virtual ~Model();
 
 	/// <summary>
 	/// ƒ‚ƒfƒ‹‚Ì•`‰æ
@@ -169,6 +169,8 @@ public:
 	/// </summary>
 	/// <param name="light">ƒ‰ƒCƒg</param>
 	static void SetLight(LightManager* lightManager_);
+
+	static void StaticDestory();
 
 private:
 

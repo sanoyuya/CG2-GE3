@@ -3,7 +3,7 @@
 #include"GameScene.h"
 #include "EngineOP.h"
 
-BaseScene* SceneFactory::CreateScene(const std::string& sceneName)
+std::unique_ptr<BaseScene> SceneFactory::CreateScene(const std::string& sceneName)
 {
     //Ÿ‚ÌƒV[ƒ“‚ğ¶¬
     BaseScene* newScene = nullptr;
@@ -21,5 +21,5 @@ BaseScene* SceneFactory::CreateScene(const std::string& sceneName)
         newScene = new EngineOP();
     }
 
-    return newScene;
+    return std::unique_ptr<BaseScene>(newScene);
 }

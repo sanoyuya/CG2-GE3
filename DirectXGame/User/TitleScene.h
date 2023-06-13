@@ -21,7 +21,7 @@ private:
 	std::unique_ptr<Camera>camera;
 
 	//“V‹…
-	std::unique_ptr<DrawOversight>skyDome;
+	std::unique_ptr<Model>skyDome;
 	Transform skyDomeTrans;
 	uint32_t skyDomeTex;
 

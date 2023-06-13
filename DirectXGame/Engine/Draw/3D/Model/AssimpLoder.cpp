@@ -5,7 +5,7 @@
 #include<assimp/cimport.h>
 #include <filesystem>
 #include"myMath.h"
-//
+
 //std::wstring GetDirectoryPath(const std::wstring& origin)
 //{
 //	std::filesystem::path p = origin.c_str();

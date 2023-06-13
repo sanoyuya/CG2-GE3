@@ -57,6 +57,7 @@ void YFramework::Initialize()
 void YFramework::Destroy()
 {
 	ImGuiManager::GetInstance()->Destroy();
+	Model::StaticDestory();
 	DirectXBase::GetInstance()->Destroy();
 	AudioManager::GetInstance()->Destroy();
 }

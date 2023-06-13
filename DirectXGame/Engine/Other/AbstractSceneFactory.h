@@ -1,5 +1,5 @@
 #pragma once
-
+#include<memory>
 #include"BaseScene.h"
 
 #include<string>
@@ -14,5 +14,5 @@ public:
 	virtual ~AbstractSceneFactory() = default;
 
 	//ÉVÅ[Éìê∂ê¨
-	virtual BaseScene* CreateScene(const std::string& sceneName) = 0;
+	virtual std::unique_ptr<BaseScene> CreateScene(const std::string& sceneName) = 0;
 };

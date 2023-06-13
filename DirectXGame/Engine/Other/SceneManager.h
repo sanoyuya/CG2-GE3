@@ -8,8 +8,8 @@ class SceneManager
 private:
 
 	//現在のシーン
-	BaseScene* scene_ = nullptr;
-	BaseScene* nextScene_ = nullptr;
+	std::unique_ptr<BaseScene> scene_;
+	std::unique_ptr<BaseScene> nextScene_;
 
 	//シーンファクトリー
 	AbstractSceneFactory* sceneFactory_ = nullptr;

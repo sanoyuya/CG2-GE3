@@ -10,12 +10,11 @@ void SceneManager::Update()
 		if (scene_)
 		{
 			scene_->Destroy();
-			scene_ = nullptr;
+			scene_.reset();
 		}
 
 		//シーン切り替え
-		scene_ = nextScene_;
-		nextScene_ = nullptr;
+		scene_ = std::move(nextScene_);
 
 		//次シーンを初期化する
 		scene_->Initialize();
@@ -32,7 +31,7 @@ void SceneManager::Draw()
 void SceneManager::Destroy()
 {
 	scene_->Destroy();
-	scene_ = nullptr;
+	scene_.reset();
 }
 
 void SceneManager::ChangeScene(const std::string& sceneName)

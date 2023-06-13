@@ -39,6 +39,13 @@ void Model::SetLight(LightManager* lightManager_)
 	Model::sLightManager_ = lightManager_;
 }
 
+void Model::StaticDestory()
+{
+	Model::sDevice_ = nullptr;
+	Model::sCmdList_ = nullptr;
+	Model::sModelDatas_.clear();
+}
+
 void Model::LoadShader()
 {
 #pragma region Basicシェーダー用
@@ -376,7 +383,7 @@ const std::vector<uint32_t> Model::GetIndices()
 
 void Model::SetModel(const uint32_t& modelHandle)
 {
-	modelData_.reset(sModelDatas_[sFilePaths_[modelHandle]].get());
+	modelData_ = sModelDatas_[sFilePaths_[modelHandle]].get();
 }
 
 void Model::SetModelBlendMode(const BlendMode& mode)
@@ -393,4 +400,9 @@ Model::Model()
 {
 	constantBuff_ = std::make_unique<ConstantBuffer>();
 	constantBuff_->Create(sizeof(myMath::Vector4));
+}
+
+Model::~Model()
+{
+
 }
