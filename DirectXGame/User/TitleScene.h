@@ -32,7 +32,7 @@ private:
 
 	std::unique_ptr<LevelData> levelData = nullptr;
 	std::map<std::string, EditorObject*>models;
-	std::vector<EditorObject*>objects;
+	std::vector<std::unique_ptr<EditorObject>>objects;
 
 	myMath::Vector3 pos;
 	float time = 0.0f;

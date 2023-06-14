@@ -35,7 +35,7 @@ void TitleScene::Initialize()
 		decltype(models)::iterator it = models.find(objectData.fileName);
 		if (it != models.end())
 		{
-			model = it->second;
+			model= it->second;
 		}
 
 		//À•W
@@ -65,7 +65,7 @@ void TitleScene::Initialize()
 			model->SetModel(tex);
 		}
 
-		objects.push_back(model);
+		objects.push_back(std::unique_ptr<EditorObject>(model));
 	}
 }
 
