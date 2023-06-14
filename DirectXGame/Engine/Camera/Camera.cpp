@@ -1,12 +1,12 @@
 #include "Camera.h"
 
 float Camera::sWidth_;
-float Camera::sHeight;
+float Camera::sHeight_;
 
 void Camera::StaticInitialize(WindowsApp* windowsApp)
 {
 	sWidth_ = windowsApp->GetWidth();
-	sHeight = windowsApp->GetHeight();
+	sHeight_ = windowsApp->GetHeight();
 }
 
 void Camera::Initialize(bool projectionFlag)
@@ -14,7 +14,7 @@ void Camera::Initialize(bool projectionFlag)
 	eye_ = { 0,0,-distance_ };//視点座標
 	target_ = { 0,0,0 };//注視点座標
 	up_ = { 0,1,0 };//上方向ベクトル
-	aspect_ = sWidth_ / sHeight;
+	aspect_ = sWidth_ / sHeight_;
 	nearClip_ = 0.1f;
 	farClip_ = 1000.0f;
 
@@ -39,7 +39,7 @@ void Camera::UpdateMatProjection(bool projectionFlag)
 	if (projectionFlag == false)
 	{
 		//平行投影
-		myMath::MakeOrthogonalL(0.0f, sWidth_, sHeight,0.0f , nearClip_, farClip_, matProjection_);
+		myMath::MakeOrthogonalL(0.0f, sWidth_, sHeight_,0.0f , nearClip_, farClip_, matProjection_);
 	}
 	else
 	{
@@ -93,12 +93,12 @@ void Camera::SetUp(const myMath::Vector3& up)
 	up_ = up;
 }
 
-void Camera::SetNearClip(const float& nearClip)
+void Camera::SetNearClip(const float nearClip)
 {
 	nearClip_ = nearClip;
 }
 
-void Camera::SetFarClip(const float& farClip)
+void Camera::SetFarClip(const float farClip)
 {
 	farClip_ = farClip;
 }

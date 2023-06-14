@@ -101,7 +101,7 @@ void AudioManager::Update()
 	}
 }
 
-bool AudioManager::NowPlay(const uint32_t& Handle)
+bool AudioManager::NowPlay(const uint32_t Handle)
 {
 	std::list<AudioData>::iterator itr = audios.begin();
 
@@ -124,7 +124,7 @@ bool AudioManager::NowPlay(const uint32_t& Handle)
 	}
 }
 
-void AudioManager::ChangeVolume(const uint32_t& Handle, float Volume)
+void AudioManager::ChangeVolume(const uint32_t Handle, float Volume)
 {
 	std::list<AudioData>::iterator itr = audios.begin();
 
@@ -141,7 +141,7 @@ void AudioManager::ChangeVolume(const uint32_t& Handle, float Volume)
 	}
 }
 
-float AudioManager::GetVolume(const uint32_t& Handle)
+float AudioManager::GetVolume(const uint32_t Handle)
 {
 	std::list<AudioData>::iterator itr = audios.begin();
 
@@ -153,7 +153,7 @@ float AudioManager::GetVolume(const uint32_t& Handle)
 	return itr->volume_;
 }
 
-uint32_t AudioManager::LoadAudio(std::string FileName, const float& Volume)
+uint32_t AudioManager::LoadAudio(std::string FileName, const float Volume)
 {
 	HRESULT result = 0;
 
@@ -222,7 +222,7 @@ uint32_t AudioManager::LoadAudio(std::string FileName, const float& Volume)
 	return handle;
 }
 
-int32_t AudioManager::PlayWave(const uint32_t& Handle, bool LoopFlag)
+int32_t AudioManager::PlayWave(const uint32_t Handle, bool LoopFlag)
 {
 	HRESULT result;
 
@@ -280,7 +280,7 @@ int32_t AudioManager::PlayWaveArray(const std::vector<uint32_t>& handles)
 	return PlayWave(handles[0]);
 };
 
-void AudioManager::StopWave(const uint32_t& Handle)
+void AudioManager::StopWave(const uint32_t Handle)
 {
 	std::list<AudioData>::iterator itr = audios.begin();
 

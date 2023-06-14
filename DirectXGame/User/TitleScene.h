@@ -41,6 +41,8 @@ private:
 	uint32_t sphereTex = 0;
 	uint32_t tex = 0;
 
+	uint32_t bgm = 0;
+
 public:
 
 	//‰Šú‰»ˆ—

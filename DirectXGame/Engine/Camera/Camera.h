@@ -10,7 +10,7 @@ class Camera
 private:
 
 	static float sWidth_;
-	static float sHeight;
+	static float sHeight_;
 
 	float aspect_ = 0.0f;
 	float nearClip_ = 0.0f;
@@ -65,6 +65,6 @@ public:
 	void SetEye(const myMath::Vector3& eye);
 	void SetTarget(const myMath::Vector3& target);
 	void SetUp(const myMath::Vector3& up);
-	void SetNearClip(const float& nearClip);
-	void SetFarClip(const float& farClip);
+	void SetNearClip(const float nearClip);
+	void SetFarClip(const float farClip);
 };

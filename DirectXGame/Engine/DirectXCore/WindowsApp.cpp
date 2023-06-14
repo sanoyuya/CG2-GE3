@@ -30,7 +30,7 @@ LRESULT WindowProc(HWND hwnd, uint32_t msg, WPARAM wparam, LPARAM lparam)
 void WindowsApp::CreatWindow(const wchar_t* title, const float width, const float height)
 {
 	windowWidth_ = width;
-	windowHeight = height;
+	windowHeight_ = height;
 
 	//システムタイマーの分解能を上げる
 	timeBeginPeriod(1);
@@ -46,7 +46,7 @@ void WindowsApp::CreatWindow(const wchar_t* title, const float width, const floa
 	RegisterClassEx(&w_);
 
 	//ウインドウサイズ{X座標　Y座標 横幅　縦幅}
-	RECT wrc = { 0,0,static_cast<LONG>(windowWidth_),static_cast<LONG>(windowHeight) };
+	RECT wrc = { 0,0,static_cast<LONG>(windowWidth_),static_cast<LONG>(windowHeight_) };
 	//自動でサイズを補正する
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
@@ -114,5 +114,5 @@ float WindowsApp::GetWidth()
 
 float WindowsApp::GetHeight()
 {
-	return windowHeight;
+	return windowHeight_;
 }

@@ -128,7 +128,7 @@ public:
 	/// モデルデータのセット
 	/// </summary>
 	/// <param name="modelHandle">モデルのハンドル</param>
-	void SetModel(const uint32_t& modelHandle);
+	void SetModel(const uint32_t modelHandle);
 
 	/// <summary>
 	/// ブレンドモードのセット

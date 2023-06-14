@@ -9,7 +9,7 @@ private:
 	HWND hwnd_;
 	MSG msg_{};//メッセージ
 	float windowWidth_ = 1280.0f;//横幅
-	float windowHeight = 720.0f;//縦幅
+	float windowHeight_ = 720.0f;//縦幅
 
 public:
 

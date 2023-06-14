@@ -23,6 +23,9 @@ void TitleScene::Initialize()
 	sphereTex = skyDome->CreateObjModel("Resources/sphere");
 	tex = skyDome->CreateObjModel("Resources/purpleDice");
 
+	bgm = audioManager->LoadAudio("Resources/Sound/title.mp3",0.1f);
+	audioManager->PlayWave(bgm);
+
 	levelData = std::make_unique<LevelData>();
 	levelData.reset(LevelEditor::LoadLevelEditorFile("untitled"));
 

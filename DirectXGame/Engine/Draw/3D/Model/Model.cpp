@@ -381,7 +381,7 @@ const std::vector<uint32_t> Model::GetIndices()
 	return modelData_->indices;
 }
 
-void Model::SetModel(const uint32_t& modelHandle)
+void Model::SetModel(const uint32_t modelHandle)
 {
 	modelData_ = sModelDatas_[sFilePaths_[modelHandle]].get();
 }
@@ -404,5 +404,4 @@ Model::Model()
 
 Model::~Model()
 {
-
 }
