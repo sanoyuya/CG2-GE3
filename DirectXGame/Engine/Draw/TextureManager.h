@@ -51,14 +51,14 @@ private:
 public:
 
 	/// <summary>
-	/// テクスチャをロードします
+	/// テクスチャのロード
 	/// </summary>
 	/// <param name="filepath">テクスチャのファイルパス</param>
 	/// <returns>テクスチャハンドル</returns>
 	uint32_t LoadTexture(const std::string& path);
 
 	/// <summary>
-	/// 初期化
+	/// 静的初期化処理
 	/// </summary>
 	void StaticInitialize();
 
@@ -69,7 +69,7 @@ public:
 	static TextureManager* GetInstance();
 
 	/// <summary>
-	/// テクスチャをロードします
+	/// テクスチャのロード
 	/// </summary>
 	/// <param name="filepath">テクスチャのファイルパス</param>
 	/// <returns>テクスチャハンドル</returns>

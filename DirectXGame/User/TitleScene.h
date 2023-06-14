@@ -15,33 +15,33 @@ class TitleScene :public BaseScene
 private:
 
 	//ÉNÉâÉXì«Ç›çûÇ›
-	InputManager* input = nullptr;
-	AudioManager* audioManager = nullptr;
+	InputManager* input_ = nullptr;
+	AudioManager* audioManager_ = nullptr;
 
-	std::unique_ptr<Camera>camera;
+	std::unique_ptr<Camera>camera_;
 
 	//ìVãÖ
-	std::unique_ptr<Model>skyDome;
-	Transform skyDomeTrans;
-	uint32_t skyDomeTex;
+	std::unique_ptr<Model>skyDome_;
+	Transform skyDomeTrans_;
+	uint32_t skyDomeTex_;
 
-	myMath::Vector3 cameraPos;
-	float angleX = 0.0f;
-	float angleY = 0.0f;
-	const float length = 50.0f;
+	myMath::Vector3 cameraPos_;
+	float angleX_ = 0.0f;
+	float angleY_ = 0.0f;
+	const float length_ = 50.0f;
 
-	std::unique_ptr<LevelData> levelData = nullptr;
-	std::map<std::string, EditorObject*>models;
-	std::vector<std::unique_ptr<EditorObject>>objects;
+	std::unique_ptr<LevelData> levelData_ = nullptr;
+	std::map<std::string, EditorObject*>models_;
+	std::vector<std::unique_ptr<EditorObject>>objects_;
 
-	myMath::Vector3 pos;
-	float time = 0.0f;
+	myMath::Vector3 pos_;
+	float time_ = 0.0f;
 
-	uint32_t playerTex = 0;
-	uint32_t sphereTex = 0;
-	uint32_t tex = 0;
+	uint32_t playerTex_ = 0;
+	uint32_t sphereTex_ = 0;
+	uint32_t tex_ = 0;
 
-	uint32_t bgm = 0;
+	uint32_t bgm_ = 0;
 
 public:
 

@@ -47,6 +47,10 @@ public:
 	Sprite2D() {}
 	virtual ~Sprite2D() {}
 
+	/// <summary>
+	/// 静的初期化処理
+	/// </summary>
+	/// <param name="windowsApp">windowsAppのポインタ</param>
 	static void StaticInitialize(WindowsApp* windowsApp);
 
 	/// <summary>
@@ -130,7 +134,17 @@ public:
 	void SetSprite2DBlendMode(const BlendMode& mode);
 
 protected:
-	void CreateVertexIndexBuffer();
-	void CreateConstBuff();
+
+	/// <summary>
+	/// バッファの生成処理
+	/// </summary>
+	void CreateBuff();
+
+	/// <summary>
+	/// 行列計算
+	/// </summary>
+	/// <param name="position">座標</param>
+	/// <param name="scale">大きさ</param>
+	/// <param name="rotation">角度</param>
 	void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
 };

@@ -69,5 +69,14 @@ struct worldViewpojCamera
 class DrawCommon
 {
 public:
+
+	/// <summary>
+	/// シェーダーのコンパイル
+	/// </summary>
+	/// <param name="shaderFileName">シェーダーの名前</param>
+	/// <param name="entrypointName">エントリーポイント名</param>
+	/// <param name="shaderModelName">シェーダーモデルの指定</param>
+	/// <param name="blob">シェーダーオブジェクト</param>
+	/// <returns></returns>
 	static ID3DBlob* ShaderCompile(const wchar_t* shaderFileName, LPCSTR entrypointName, LPCSTR shaderModelName, ID3DBlob* blob);
 };

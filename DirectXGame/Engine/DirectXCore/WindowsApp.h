@@ -23,7 +23,16 @@ public:
 	/// <param name="width">ウィンドウの横幅の大きさ</param>
 	/// <param name="height">ウィンドウの縦幅の大きさ</param>
 	void CreatWindow(const wchar_t* title = L"DirectXGame", const float width = 1280.0f, const float height = 720.0f);
+
+	/// <summary>
+	/// メッセージウィンドウ
+	/// </summary>
+	/// <returns></returns>
 	bool MessageWindow();
+
+	/// <summary>
+	/// ウィンドウを表示
+	/// </summary>
 	void Appearance();
 
 	//ゲッター

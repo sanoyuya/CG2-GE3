@@ -44,11 +44,33 @@ class Pipeline
 {
 public://スプライト
 
+	/// <summary>
+	/// スプライト用パイプラインの生成
+	/// </summary>
+	/// <param name="blob">シェーダーオブジェクト</param>
+	/// <param name="blend">ブレンドモード</param>
+	/// <param name="device">デバイス</param>
+	/// <param name="pip">パイプライン</param>
 	static void CreateSpritePipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 
 public://モデル
 
+	/// <summary>
+	/// Basicモデル用パイプライン生成
+	/// </summary>
+	/// <param name="blob">シェーダーオブジェクト</param>
+	/// <param name="blend">ブレンドモード</param>
+	/// <param name="device">デバイス</param>
+	/// <param name="pip">パイプライン</param>
 	static void CreateBasicModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
+
+	/// <summary>
+	/// Phongモデル用パイプライン生成
+	/// </summary>
+	/// <param name="blob">シェーダーオブジェクト</param>
+	/// <param name="blend">ブレンドモード</param>
+	/// <param name="device">デバイス</param>
+	/// <param name="pip">パイプライン</param>
 	static void CreatePhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 	
 };

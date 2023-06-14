@@ -162,18 +162,30 @@ public:
 
 	//static uint32_t CreateAssimpModel(const std::string& filePath);
 
-	static void StaticInitialize();
-
 	/// <summary>
 	/// ライトのセット
 	/// </summary>
 	/// <param name="light">ライト</param>
 	static void SetLight(LightManager* lightManager_);
 
+	/// <summary>
+	/// 静的初期化処理
+	/// </summary>
+	static void StaticInitialize();
+
+	/// <summary>
+	/// 静的解放処理
+	/// </summary>
 	static void StaticDestory();
 
 private:
 
 	static void LoadShader();
+
+	/// <summary>
+	/// パイプライン設定を適用
+	/// </summary>
+	/// <param name="bMode">ブレンドモード</param>
+	/// <param name="sMode">シェーダーモード</param>
 	void PiplineSet(BlendMode bMode, ShaderMode sMode);
 };

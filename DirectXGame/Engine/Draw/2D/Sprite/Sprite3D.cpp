@@ -3,8 +3,7 @@
 void Sprite3D::Sprite3DInitialize(uint32_t handle)
 {
 	texture_ = TextureManager::GetTextureData(handle);
-	CreateVertexIndexBuffer();
-	CreateConstBuff();
+	CreateBuff();
 }
 
 void Sprite3D::DrawSprite3D(Camera* camera, Transform& transform, BillboardFlag flag, myMath::Vector4 color, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
@@ -163,17 +162,14 @@ void Sprite3D::SetSprite3DBlendMode(const BlendMode& mode)
 	blendMode_ = mode;
 }
 
-void Sprite3D::CreateVertexIndexBuffer()
+void Sprite3D::CreateBuff()
 {
 	vertexBuffer_ = std::make_unique<VertexBuffer>();
 	vertexBuffer_->Create(4, sizeof(PosUvColor));
 
 	indexBuffer_ = std::make_unique<IndexBuffer>();
 	indexBuffer_->Create(6);
-}
 
-void Sprite3D::CreateConstBuff()
-{
 	constBuffMaterial_ = std::make_unique<ConstantBuffer>();
 	constBuffMaterial_->Create(sizeof(myMath::Matrix4));
 }

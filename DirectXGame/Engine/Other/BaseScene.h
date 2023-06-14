@@ -18,5 +18,4 @@ public:
 
 	//•`‰æˆ—
 	virtual void Draw() = 0;
-
 };

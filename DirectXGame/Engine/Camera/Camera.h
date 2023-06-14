@@ -33,13 +33,13 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	/// <param name="projectionFlag">平行投影と透視投影を切り替えるフラグ</param>
+	/// <param name="projectionFlag">平行投影と透視投影を切り替えるフラグ false:2D,true:3D</param>
 	void Initialize(bool projectionFlag);
 
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	/// <param name="projectionFlag">平行投影と透視投影を切り替えるフラグ</param>
+	/// <param name="projectionFlag">平行投影と透視投影を切り替えるフラグ false:2D,true:3D</param>
 	void Update(bool projectionFlag);
 
 	/// <summary>

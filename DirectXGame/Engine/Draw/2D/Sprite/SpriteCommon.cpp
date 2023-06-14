@@ -5,7 +5,7 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>SpriteCommon::cmdList;
 Blob SpriteCommon::blob;//シェーダオブジェクト
 std::array<PipelineSet, 6> SpriteCommon::pip;
 
-void SpriteCommon::Initialize()
+void SpriteCommon::StaticInitialize()
 {
 	device = DirectXBase::GetInstance()->GetDevice();
 	cmdList = DirectXBase::GetInstance()->GetCommandList();

@@ -35,7 +35,7 @@ void YFramework::Initialize()
 
 	TextureManager::GetInstance()->StaticInitialize();
 
-	SpriteCommon::Initialize();
+	SpriteCommon::StaticInitialize();
 	Sprite2D::StaticInitialize(windowsApp_.get());
 
 	Model::StaticInitialize();

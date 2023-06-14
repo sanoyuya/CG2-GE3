@@ -131,8 +131,18 @@ public:
 	void SetSprite3DBlendMode(const BlendMode& mode);
 
 private:
-	void CreateVertexIndexBuffer();
-	void CreateConstBuff();
+
+	/// <summary>
+	/// バッファの生成処理
+	/// </summary>
+	void CreateBuff();
+
+	/// <summary>
+	/// 行列計算
+	/// </summary>
+	/// <param name="camera">カメラのポインタ</param>
+	/// <param name="transform">トランスフォーム</param>
+	/// <param name="flag">ビルボードの種類</param>
 	void Update(Camera* camera, Transform transform,BillboardFlag flag);
 	//void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
 };

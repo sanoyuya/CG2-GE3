@@ -15,8 +15,7 @@ void Sprite2D::StaticInitialize(WindowsApp* windowsApp)
 void Sprite2D::Sprite2DInitialize(uint32_t handle)
 {
 	texture_ = TextureManager::GetTextureData(handle);
-	CreateVertexIndexBuffer();
-	CreateConstBuff();
+	CreateBuff();
 }
 
 void Sprite2D::DrawSprite2D(myMath::Vector2 position, myMath::Vector4 color, myMath::Vector2 scale, float rotation, myMath::Vector2 anchorpoint, bool flipX, bool flipY)
@@ -175,17 +174,14 @@ void Sprite2D::SetSprite2DBlendMode(const BlendMode& mode)
 	blendMode_ = mode;
 }
 
-void Sprite2D::CreateVertexIndexBuffer()
+void Sprite2D::CreateBuff()
 {
 	vertexBuffer_ = std::make_unique<VertexBuffer>();
 	vertexBuffer_->Create(4, sizeof(PosUvColor));
 
 	indexBuffer_ = std::make_unique<IndexBuffer>();
 	indexBuffer_->Create(6);
-}
 
-void Sprite2D::CreateConstBuff()
-{
 	constBuffMaterial_ = std::make_unique<ConstantBuffer>();
 	constBuffMaterial_->Create(sizeof(myMath::Matrix4));
 }
