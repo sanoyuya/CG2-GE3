@@ -33,13 +33,8 @@ void TitleScene::Initialize()
 	for (auto& objectData : levelData_->objects_)
 	{
 		//ファイル名から登録済みモデルを検索
-		EditorObject* model = new EditorObject;
+		std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
 		model->Initialize();
-		decltype(models_)::iterator it = models_.find(objectData.fileName);
-		if (it != models_.end())
-		{
-			model= it->second;
-		}
 
 		//座標
 		model->SetPos(objectData.translation);
@@ -68,7 +63,7 @@ void TitleScene::Initialize()
 			model->SetModel(tex_);
 		}
 
-		objects_.push_back(std::unique_ptr<EditorObject>(model));
+		objects_.push_back(std::move(model));
 	}
 }
 

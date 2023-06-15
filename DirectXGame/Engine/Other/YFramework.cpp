@@ -51,7 +51,7 @@ void YFramework::Initialize()
 	SceneManager::GetInstance()->SetSceneFactory(sceneFactory);
 
 	postEffect_ = std::make_unique<PostEffect>();
-	postEffect_->Initialize();
+	postEffect_->Initialize(windowsApp_.get());
 }
 
 void YFramework::Destroy()
