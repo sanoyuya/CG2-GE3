@@ -73,7 +73,6 @@ void YFramework::Update()
 	AudioManager::GetInstance()->Update();
 
 	DirectXBase::GetInstance()->SetClearColor();//”wŒiF‚ğİ’è ‰Šú’l(…F)
-	DirectXBase::GetInstance()->UpdateClear(windowsApp_.get());
 }
 
 void YFramework::SetWindowData(const std::string& title, const float width, const float height)
@@ -105,6 +104,12 @@ void YFramework::Run()
 
 		Update();
 
+		postEffect_->PreDrawScene(windowsApp_.get());
+		Draw();
+		postEffect_->PostDrawScene();
+
+		DirectXBase::GetInstance()->UpdateClear(windowsApp_.get());
+
 		ImGuiManager::GetInstance()->End();
 
 		if (GetEndRequest())
@@ -113,16 +118,17 @@ void YFramework::Run()
 		}
 
 		//•`‰æˆ—
-		Draw();
+		//Draw();
+
 		postEffect_->Draw();
 
 #ifdef _DEBUG
 
-		
+		//ImGuiManager::GetInstance()->Draw();
 
 #endif // DEBUG
 
-		ImGuiManager::GetInstance()->Draw();//AL‚Ì•]‰¿‰Û‘èo‚·‚Ü‚Å‚Í‚±‚Á‚¿
+		ImGuiManager::GetInstance()->Draw();
 
 		DirectXBase::GetInstance()->UpdateEnd();
 
