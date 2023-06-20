@@ -26,45 +26,7 @@ void TitleScene::Initialize()
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/title.mp3",0.1f);
 	audioManager_->PlayWave(bgm_);
 
-	levelData_ = std::make_unique<LevelData>();
-	levelData_.reset(LevelEditor::LoadLevelEditorFile("untitled"));
-
-	//レベルデータからオブジェクトを生成、配置
-	for (auto& objectData : levelData_->objects_)
-	{
-		//ファイル名から登録済みモデルを検索
-		std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
-		model->Initialize();
-
-		//座標
-		model->SetPos(objectData.translation);
-		//回転角
-		model->SetRot(objectData.rotation);
-		//拡縮
-		model->SetScale(objectData.scaling);
-		//名前
-		model->SetName(objectData.fileName);
-		//コライダーの中心座標
-		model->SetColliderCenter(objectData.collider.center);
-		//コライダーサイズ
-		model->SetColliderSize(objectData.collider.size);
-
-		if (objectData.fileName == "player")
-		{
-			model->SetModel(playerTex_);
-			pos_ = model->GetPos();
-		}
-		else if (objectData.fileName == "sphere")
-		{
-			model->SetModel(sphereTex_);
-		}
-		else
-		{
-			model->SetModel(tex_);
-		}
-
-		objects_.push_back(std::move(model));
-	}
+	LevelDataInitialize();
 }
 
 void TitleScene::Destroy()
@@ -133,6 +95,49 @@ void TitleScene::camUpdate()
 	camera_->SetEye(cameraPos_);
 	camera_->SetTarget({ 0.0f,0.0f ,0.0f });
 	camera_->Update(true);
+}
+
+void TitleScene::LevelDataInitialize()
+{
+	std::unique_ptr<LevelData> levelData_ = std::make_unique<LevelData>();
+	levelData_.reset(LevelEditor::LoadLevelEditorFile("untitled"));
+
+	//レベルデータからオブジェクトを生成、配置
+	for (auto& objectData : levelData_->objects_)
+	{
+		//ファイル名から登録済みモデルを検索
+		std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
+		model->Initialize();
+
+		//座標
+		model->SetPos(objectData.translation);
+		//回転角
+		model->SetRot(objectData.rotation);
+		//拡縮
+		model->SetScale(objectData.scaling);
+		//名前
+		model->SetName(objectData.fileName);
+		//コライダーの中心座標
+		model->SetColliderCenter(objectData.collider.center);
+		//コライダーサイズ
+		model->SetColliderSize(objectData.collider.size);
+
+		if (objectData.fileName == "player")
+		{
+			model->SetModel(playerTex_);
+			pos_ = model->GetPos();
+		}
+		else if (objectData.fileName == "sphere")
+		{
+			model->SetModel(sphereTex_);
+		}
+		else
+		{
+			model->SetModel(tex_);
+		}
+
+		objects_.push_back(std::move(model));
+	}
 }
 
 void TitleScene::Move()

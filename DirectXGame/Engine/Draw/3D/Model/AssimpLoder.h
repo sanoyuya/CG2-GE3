@@ -6,25 +6,26 @@
 #include"IndexBuffer.h"
 #include"ConstantBuffer.h"
 #include"myMath.h"
-
-struct Vertex
-{
-	myMath::Vector3 position; // 位置座標
-	myMath::Vector3 normal; // 法線
-	myMath::Vector2 uv; // uv座標
-	myMath::Vector3 tangent; // 接空間
-	myMath::Vector4 color; // 頂点色
-};
-
-struct Mesh
-{
-	std::vector<Vertex> vertices;	//頂点データ配列
-	std::vector<uint16_t> indices;	//インデックス配列
-	std::wstring diffuseMap;		//テクスチャのファイル
-};
+#include"Model.h"
 
 struct aiMesh;
 struct aiMaterial;
+
+//struct Vertex
+//{
+//	myMath::Vector3 position; // 位置座標
+//	myMath::Vector3 normal; // 法線
+//	myMath::Vector2 uv; // uv座標
+//	myMath::Vector3 tangent; // 接空間
+//	myMath::Vector4 color; // 頂点色
+//};
+
+struct Mesh
+{
+	std::vector<PosNormalUv> vertices;	//頂点データ配列
+	std::vector<uint16_t> indices;	//インデックス配列
+	std::wstring diffuseMap;		//テクスチャのファイル
+};
 
 struct ImportSettings
 {
@@ -38,10 +39,10 @@ class AssimpLoder
 {
 public:
 
-	static bool Load(ImportSettings setting); // モデルをロードする
+	static bool Load(ImportSettings setting, ModelData* data); // モデルをロードする
 
 private:
 
-	static void LoadMesh(Mesh& dst, const aiMesh* src, bool inverseU, bool inverseV);
+	static void LoadMesh(Mesh& dst, const aiMesh* src, bool inverseU, bool inverseV, ModelData* data);
 	static void LoadTexture(const wchar_t* filename, Mesh& dst, const aiMaterial* src);
 };

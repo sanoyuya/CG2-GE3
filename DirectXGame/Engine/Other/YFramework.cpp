@@ -104,9 +104,9 @@ void YFramework::Run()
 
 		Update();
 
-		postEffect_->PreDrawScene(windowsApp_.get());
+		/*postEffect_->PreDrawScene(windowsApp_.get());
 		Draw();
-		postEffect_->PostDrawScene();
+		postEffect_->PostDrawScene();*/
 
 		DirectXBase::GetInstance()->UpdateClear(windowsApp_.get());
 
@@ -118,9 +118,9 @@ void YFramework::Run()
 		}
 
 		//•`‰æˆ—
-		//Draw();
+		Draw();
 
-		postEffect_->Draw();
+		//postEffect_->Draw();
 
 #ifdef _DEBUG
 

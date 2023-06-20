@@ -324,6 +324,56 @@ uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
 	}
 }
 
+uint32_t Model::CreateAssimpModel(const std::string& filePath)
+{
+	std::string path = filePath;
+
+	//一回読み込んだことがあるファイルはそのまま返す
+	auto itr = find_if(sModelDatas_.begin(), sModelDatas_.end(), [&](std::pair<const std::string, std::unique_ptr<ModelData, std::default_delete<ModelData>>>& p)
+		{
+			return p.second->filePath == path;
+		});
+
+	if (itr == sModelDatas_.end())
+	{
+		uint32_t modelHandle = sModelCount_;
+
+		std::unique_ptr<ModelData> data;
+		data = std::make_unique<ModelData>();
+
+		std::vector<Mesh> sMeshes_;//メッシュの配列
+		ImportSettings sSet_ = { nullptr,sMeshes_,false,false };
+
+		wchar_t wfilepath[256];
+
+		MultiByteToWideChar(CP_ACP, 0, filePath.c_str(), -1, wfilepath, _countof(wfilepath));
+		sSet_.filename = wfilepath;
+		sSet_.inverseU = false;
+		sSet_.inverseV = true;
+		sSet_.meshes = sMeshes_;
+
+		AssimpLoder::Load(sSet_, data.get());
+
+		data->modelHandle = sModelCount_;
+
+		data->filePath = path;
+
+		sModelDatas_[path] = std::move(data);
+
+		sFilePaths_[sModelCount_] = path;
+
+		sModelCount_++;
+
+		return modelHandle;
+	}
+	else
+	{
+		uint32_t modelHandle = sModelDatas_[path]->modelHandle;
+
+		return modelHandle;
+	}
+}
+
 void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 {
 	D3D12_VERTEX_BUFFER_VIEW vbView = modelData_->vertexBuffer->GetView();
@@ -365,6 +415,48 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	// 描画コマンド
 	sCmdList_->DrawIndexedInstanced(modelData_->maxIndex, 1, 0, 0, 0);
 }
+
+//void Model::DrawAssimpModel(Transform* transform, myMath::Vector4 color)
+//{
+//	D3D12_VERTEX_BUFFER_VIEW vbView = modelData_->vertexBuffer->GetView();
+//	D3D12_INDEX_BUFFER_VIEW ibView = modelData_->indexBuffer->GetView();
+//
+//	tmp_ = color;
+//	constantBuff_->Update(&tmp_);
+//
+//	PiplineSet(static_cast<BlendMode>(blendMode_), static_cast<ShaderMode>(shaderMode_));
+//
+//	// プリミティブ形状の設定コマンド
+//	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
+//
+//	// 頂点バッファビューの設定コマンド
+//	sCmdList_->IASetVertexBuffers(0, 1, &vbView);
+//
+//	//インデックスバッファビューの設定コマンド
+//	sCmdList_->IASetIndexBuffer(&ibView);
+//
+//	// 定数バッファビュー(CBV)の設定コマンド
+//	sCmdList_->SetGraphicsRootConstantBufferView(0, transform->GetconstBuff()->GetGPUVirtualAddress());
+//	sCmdList_->SetGraphicsRootConstantBufferView(1, modelData_->constBuffMaterial->GetAddress());
+//	//ルートパラメータ2番に色情報を設定
+//	sCmdList_->SetGraphicsRootConstantBufferView(2, constantBuff_->GetAddress());
+//
+//	//ライトの描画
+//	if (shaderMode_ != ShaderMode::Basic)
+//	{
+//		//ルートパラメータ2番にライト情報を設定
+//		sLightManager_->Draw(sCmdList_.Get(), 4);
+//	}
+//
+//	// SRVヒープの設定コマンド
+//	sCmdList_->SetDescriptorHeaps(1, modelData_->textureData->srvHeap.GetAddressOf());
+//
+//	// SRVヒープの先頭にあるSRVをルートパラメータ3番に設定
+//	sCmdList_->SetGraphicsRootDescriptorTable(3, modelData_->textureData->gpuHandle);
+//
+//	// 描画コマンド
+//	sCmdList_->DrawIndexedInstanced(modelData_->maxIndex, 1, 0, 0, 0);
+//}
 
 const myMath::Matrix4& Model::GetMatWorld()
 {
