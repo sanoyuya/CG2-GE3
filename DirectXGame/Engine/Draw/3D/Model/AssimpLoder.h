@@ -44,5 +44,5 @@ public:
 private:
 
 	static void LoadMesh(Mesh& dst, const aiMesh* src, bool inverseU, bool inverseV, ModelData* data);
-	static void LoadTexture(const wchar_t* filename, Mesh& dst, const aiMaterial* src);
+	static void LoadTexture(const wchar_t* filename, Mesh& dst, const aiMaterial* src, ModelData* data);
 };

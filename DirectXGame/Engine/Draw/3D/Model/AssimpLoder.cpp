@@ -6,6 +6,16 @@
 #include <filesystem>
 #include"myMath.h"
 
+std::string ToNarrow(const wchar_t* s, char dfault = '?', const std::locale& loc = std::locale())
+{
+	std::ostringstream stm;
+
+	while (*s != L'\0') {
+		stm << std::use_facet< std::ctype<wchar_t> >(loc).narrow(*s++, dfault);
+	}
+	return stm.str();
+}
+
 std::wstring GetDirectoryPath(const std::wstring& origin)
 {
 	std::filesystem::path p = origin.c_str();
@@ -85,7 +95,7 @@ bool AssimpLoder::Load(ImportSettings settings, ModelData* data)
 		const auto pMesh = scene->mMeshes[i];
 		LoadMesh(meshs[i], pMesh, settings.inverseU, settings.inverseV, data);
 		const auto pMaterial = scene->mMaterials[i];
-		LoadTexture(settings.filename, meshs[i], pMaterial);
+		LoadTexture(settings.filename, meshs[i], pMaterial, data);
 	}
 
 	scene = nullptr;
@@ -126,6 +136,7 @@ void AssimpLoder::LoadMesh(Mesh& dst, const aiMesh* src, bool inverseU, bool inv
 		vertex.color = myMath::Vector4(color->r, color->g, color->b, color->a);*/
 
 		dst.vertices[i] = vertex;
+		data->vertices.push_back(vertex);
 	}
 
 	dst.indices.resize(src->mNumFaces * 3);
@@ -137,6 +148,7 @@ void AssimpLoder::LoadMesh(Mesh& dst, const aiMesh* src, bool inverseU, bool inv
 		dst.indices[i * 3 + 0] = static_cast<uint16_t>(face.mIndices[0]);
 		dst.indices[i * 3 + 1] = static_cast<uint16_t>(face.mIndices[1]);
 		dst.indices[i * 3 + 2] = static_cast<uint16_t>(face.mIndices[2]);
+		data->indices.emplace_back(static_cast<uint32_t>(data->indices.size()));
 	}
 
 	data->maxVert = static_cast<uint32_t>(data->vertices.size());
@@ -161,7 +173,7 @@ void AssimpLoder::LoadMesh(Mesh& dst, const aiMesh* src, bool inverseU, bool inv
 	data->constBuffMaterial->Update(&tmpMaterial);
 }
 
-void AssimpLoder::LoadTexture(const wchar_t* filename, Mesh& dst, const aiMaterial* src)
+void AssimpLoder::LoadTexture(const wchar_t* filename, Mesh& dst, const aiMaterial* src, ModelData* data)
 {
 	aiString path;
 	if (src->Get(AI_MATKEY_TEXTURE_DIFFUSE(0), path) == AI_SUCCESS)
@@ -170,6 +182,9 @@ void AssimpLoder::LoadTexture(const wchar_t* filename, Mesh& dst, const aiMateri
 		auto dir = GetDirectoryPath(filename);
 		auto file = std::string(path.C_Str());
 		dst.diffuseMap = dir + ToWideString(file);
+
+		uint32_t handl = TextureManager::Load(ToNarrow(filename));
+		data->textureData = TextureManager::GetTextureData(handl);
 	}
 	else
 	{
