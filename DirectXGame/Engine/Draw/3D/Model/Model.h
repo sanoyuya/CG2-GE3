@@ -152,6 +152,8 @@ public:
 	/// <param name="color">色(初期値:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
 	void DrawModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f });
 
+	//void DrawAssimpModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f });
+
 	/// <summary>
 	/// モデルの生成
 	/// </summary>
@@ -159,6 +161,8 @@ public:
 	/// <param name="smoothing">スムージングするかどうか(初期値:false)</param>
 	/// <returns></returns>
 	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
+
+	static uint32_t CreateAssimpModel(const std::string& filePath);
 
 	//static uint32_t CreateAssimpModel(const std::string& filePath);
 

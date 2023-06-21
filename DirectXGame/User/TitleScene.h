@@ -30,7 +30,6 @@ private:
 	float angleY_ = 0.0f;
 	const float length_ = 50.0f;
 
-	std::unique_ptr<LevelData> levelData_ = nullptr;
 	std::map<std::string, EditorObject*>models_;
 	std::vector<std::unique_ptr<EditorObject>>objects_;
 
@@ -61,4 +60,5 @@ private:
 	
 	void Move();
 	void camUpdate();
+	void LevelDataInitialize();
 };

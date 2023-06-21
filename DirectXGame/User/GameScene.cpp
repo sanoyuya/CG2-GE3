@@ -54,6 +54,11 @@ void GameScene::Initialize()
 	lightSphereTrans_.scale.x = 0.25f;
 	lightSphereTrans_.scale.y = 0.25f;
 	lightSphereTrans_.scale.z = 0.25f;
+
+	assimpModelTex_ = Model::CreateAssimpModel("gltfBox");
+	assimpModel_= std::make_unique<Model>();
+	assimpModel_->SetModel(assimpModelTex_);
+	assimpModelTrans_.Initialize();
 }
 
 void GameScene::Destroy()
@@ -62,10 +67,10 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
-	/*if (input->KeyboardTriggerPush(DIK_SPACE))
+	if (input_->KeyboardTriggerPush(DIK_SPACE))
 	{
 		SceneManager::GetInstance()->ChangeScene("TITLE");
-	}*/
+	}
 	sphere2_->SetShaderMode(ShaderMode::Toon);
 
 	CamMove();
@@ -87,6 +92,7 @@ void GameScene::Update()
 	sphere3Trans_.TransUpdate(camera_.get());
 	lightSphereTrans_.translation = lightPos_;
 	lightSphereTrans_.TransUpdate(camera_.get());
+	assimpModelTrans_.TransUpdate(camera_.get());
 }
 
 void GameScene::Draw()
@@ -99,6 +105,7 @@ void GameScene::Draw()
 	{
 		lightSphere_->DrawModel(&lightSphereTrans_, { lightColor_.x,lightColor_.y,lightColor_.z,0.5f });
 	}
+	assimpModel_->DrawModel(&assimpModelTrans_);
 }
 
 void GameScene::Rotation()

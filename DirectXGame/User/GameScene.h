@@ -55,6 +55,10 @@ private:
 	float angleY_ = 0.0f;
 	const float length_ = 50.0f;
 
+	std::unique_ptr<Model>assimpModel_;
+	Transform assimpModelTrans_;
+	uint32_t assimpModelTex_;
+
 public:
 
 	//‰Šú‰»ˆ—
