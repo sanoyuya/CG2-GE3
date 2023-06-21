@@ -8,5 +8,5 @@ float4 main(VSOutput input) : SV_TARGET
     float4 texcolor = tex.Sample(smp, input.uv);
     
     //return float4(texcolor.rgb,1);
-    return float4(texcolor.rgb, 1) * float4(0.25, 0.5, 0.25, 1);
+    return float4(texcolor.rgb, 1);
 }
