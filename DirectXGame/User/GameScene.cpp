@@ -55,7 +55,7 @@ void GameScene::Initialize()
 	lightSphereTrans_.scale.y = 0.25f;
 	lightSphereTrans_.scale.z = 0.25f;
 
-	assimpModelTex_ = Model::CreateAssimpModel("Resources/Alicia/FBX/Alicia_solid_Unity.FBX");
+	assimpModelTex_ = Model::CreateAssimpModel("gltfBox");
 	assimpModel_= std::make_unique<Model>();
 	assimpModel_->SetModel(assimpModelTex_);
 	assimpModelTrans_.Initialize();
@@ -67,10 +67,10 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
-	/*if (input->KeyboardTriggerPush(DIK_SPACE))
+	if (input_->KeyboardTriggerPush(DIK_SPACE))
 	{
 		SceneManager::GetInstance()->ChangeScene("TITLE");
-	}*/
+	}
 	sphere2_->SetShaderMode(ShaderMode::Toon);
 
 	CamMove();

@@ -23,7 +23,7 @@ struct aiMaterial;
 struct Mesh
 {
 	std::vector<PosNormalUv> vertices;	//頂点データ配列
-	std::vector<uint16_t> indices;	//インデックス配列
+	std::vector<uint32_t> indices;	//インデックス配列
 	std::wstring diffuseMap;		//テクスチャのファイル
 };
 
