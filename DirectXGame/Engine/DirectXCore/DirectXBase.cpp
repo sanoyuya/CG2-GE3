@@ -39,7 +39,7 @@ void DirectXBase::Initialize(WindowsApp* windowsApp)
 }
 
 //DirectX毎フレーム処理
-void DirectXBase::UpdateClear(WindowsApp* windowsApp)
+void DirectXBase::PreDraw(WindowsApp* windowsApp)
 {	
 	//バックバッファの番号を取得(2つなので0か1番)
 	uint32_t bbIndex = swapChain_->GetCurrentBackBufferIndex();
@@ -83,7 +83,7 @@ void DirectXBase::UpdateClear(WindowsApp* windowsApp)
 	commandList_->RSSetScissorRects(1, &scissorRect);
 }
 
-void DirectXBase::UpdateEnd()
+void DirectXBase::PostDraw()
 {
 	//5.リソースバリアを戻す
 	barrierDesc_.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態から

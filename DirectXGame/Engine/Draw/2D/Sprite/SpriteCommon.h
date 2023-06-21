@@ -11,12 +11,12 @@ class SpriteCommon
 {
 public:
 
-	static Microsoft::WRL::ComPtr<ID3D12Device>device;
-	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>cmdList;
+	static Microsoft::WRL::ComPtr<ID3D12Device>sDevice_;
+	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>sCmdList_;
 
-	static Blob blob;//シェーダオブジェクト
+	static Blob sBlob_;//シェーダオブジェクト
 
-	static std::array<PipelineSet, 6> pip;//パイプライン
+	static std::array<PipelineSet, 6> sPip_;//パイプライン
 
 public:
 

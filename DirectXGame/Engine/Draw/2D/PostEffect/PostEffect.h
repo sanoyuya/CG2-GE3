@@ -1,10 +1,21 @@
 #pragma once
 #include"WindowsApp.h"
 #include"DirectXBase.h"
-#include "Sprite2D.h"
+#include "DrawCommon.h"
+#include"Pipeline.h"
+#include"IndexBuffer.h"
+#include"VertexBuffer.h"
+#include"ConstantBuffer.h"
+#include"TextureManager.h"
 #include"myMath.h"
 
-class PostEffect : public Sprite2D
+struct VertexPosUV
+{
+	myMath::Vector3 pos;//座標
+	myMath::Vector2 uv;//uv座標
+};
+
+class PostEffect
 {
 private:
 
@@ -19,6 +30,24 @@ private:
 	//DSV用デスクリプタヒープ
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>descHeapDSV_;
 
+	//頂点バッファ
+	std::unique_ptr<VertexBuffer> vertexBuffer_ = {};
+	//頂点マップ
+	PosUvColor* vertMap_ = {};
+	//インデックスバッファ
+	std::unique_ptr<IndexBuffer> indexBuffer_ = {};
+	// 定数バッファ
+	std::unique_ptr<ConstantBuffer> constBuffMaterial_ = {};
+	//定数バッファのマッピング用ポインタ
+	myMath::Matrix4 constBuffMap_ = {};
+	//プロジェクション行列
+	static myMath::Matrix4 matProjection_;
+
+	//シェーダオブジェクト
+	static std::array<Blob, 5> sBlob_;
+	//パイプライン
+	static std::array<PipelineSet, 5> sPip_;
+
 	//画面クリアカラー
 	static const float sClearColor_[4];
 
@@ -31,6 +60,7 @@ private:
 	bool flipY_ = false;
 
 	uint32_t tex_ = 0;
+	TextureData* texture_ = {};
 
 public:
 
@@ -56,6 +86,8 @@ public:
 
 private:
 
+	void VertSetting();
+	void CreateBuff();
 	//texBuff_の生成
 	void CreateTexBuff(WindowsApp* windowsApp);
 	//SRVの作成
@@ -66,4 +98,10 @@ private:
 	void CreateDepth(WindowsApp* windowsApp);
 	//DSVの作成
 	void CreateDSV();
+
+	void CreatePipline();
+
+	void LoadShader();
+
+	void DrawCommand();
 };

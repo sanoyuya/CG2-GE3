@@ -2,14 +2,19 @@
 #include <d3dx12.h>
 
 const float PostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
+myMath::Matrix4 PostEffect::matProjection_;
+std::array <Blob, 5> PostEffect::sBlob_;//シェーダオブジェクト
+std::array <PipelineSet, 5> PostEffect::sPip_;
 
 void PostEffect::Initialize(WindowsApp* windowsApp)
 {
 	//テクスチャ読み込み
-	tex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
-	//基底クラスとしての初期化
-	Sprite2D::Sprite2DInitialize(tex_);
-
+	tex_ = TextureManager::GetInstance()->LoadTexture("Resources/reimu.png");
+	texture_ = TextureManager::GetTextureData(tex_);
+	//バッファの作成
+	CreateBuff();
+	
+	VertSetting();
 	//texBuff_の生成
 	CreateTexBuff(windowsApp);
 	//SRVの作成
@@ -20,31 +25,33 @@ void PostEffect::Initialize(WindowsApp* windowsApp)
 	CreateDepth(windowsApp);
 	//DSVの作成
 	CreateDSV();
-
-	scale_ = { 500.0f,500.0f };
-	color_ = { 1.0f,1.0f ,1.0f ,1.0f };
+	//パイプラインの生成
+	CreatePipline();
 }
 
 void PostEffect::Draw()
 {
-	int isFlipX, isFlipY;
-	if (flipX_ == false)isFlipX = 1;
-	else isFlipX = -1;
-	if (flipY_ == false)isFlipY = 1;
-	else isFlipY = -1;
+	matProjection_ = myMath::MakeIdentity();
+	constBuffMap_ = matProjection_;
+	constBuffMaterial_->Update(&constBuffMap_);
 
-	float left = ((0.0f - anchorpoint_.x) * texture_->width) * isFlipX;
-	float right = ((1.0f - anchorpoint_.x) * texture_->width) * isFlipX;
-	float top = ((0.0f - anchorpoint_.y) * texture_->height) * isFlipY;
-	float bottom = ((1.0f - anchorpoint_.y) * texture_->height) * isFlipY;
+	// パイプラインステートとルートシグネチャの設定コマンド
+	DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[0].pipelineState.Get());
+	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[0].rootSignature.Get());
 
+	//描画コマンド
+	DrawCommand();
+}
+
+void PostEffect::VertSetting()
+{
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{0.0f,0.0f},{color_.x, color_.y, color_.z, color_.w}},//左上インデックス0
-		{{left,bottom,0.0f},{0.0f,1.0f},{color_.x, color_.y, color_.z, color_.w}},//左下インデックス1
-		{{right,top,0.0f},{1.0f,0.0f},{color_.x, color_.y, color_.z, color_.w}},//右上インデックス2
-		{{right,bottom,0.0f},{1.0f,1.0f},{color_.x, color_.y, color_.z, color_.w}},//右下インデックス3
+		{{-0.5f,-0.5f,0.0f},{0.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}},//左上インデックス0
+		{{-0.5f,0.5f,0.0f},{0.0f,0.0f},{1.0f,1.0f,1.0f,1.0f}},//左下インデックス1
+		{{0.5f,-0.5f,0.0f},{1.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}},//右上インデックス2
+		{{0.5f,0.5f,0.0f},{1.0f,0.0f},{1.0f,1.0f,1.0f,1.0f}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -59,19 +66,23 @@ void PostEffect::Draw()
 
 	//インデックスバッファへのデータ転送
 	indexBuffer_->Update(indices);
+}
 
-	Update(position_, scale_, rotation_);
+void PostEffect::CreateBuff()
+{
+	vertexBuffer_ = std::make_unique<VertexBuffer>();
+	vertexBuffer_->Create(4, sizeof(PosUvColor));
 
-	// パイプラインステートとルートシグネチャの設定コマンド
-	SpriteCommon::BlendSet(blendMode_);
+	indexBuffer_ = std::make_unique<IndexBuffer>();
+	indexBuffer_->Create(6);
 
-	//描画コマンド
-	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
+	constBuffMaterial_ = std::make_unique<ConstantBuffer>();
+	constBuffMaterial_->Create(sizeof(myMath::Matrix4));
 }
 
 void PostEffect::CreateTexBuff(WindowsApp* windowsApp)
 {
-	//リソース設定
+	//テクスチャリソース設定
 	CD3DX12_RESOURCE_DESC texresDesc = CD3DX12_RESOURCE_DESC::Tex2D(
 		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
 		static_cast<UINT64>(windowsApp->GetWidth()),
@@ -81,7 +92,7 @@ void PostEffect::CreateTexBuff(WindowsApp* windowsApp)
 
 	auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0);
 	auto clearValue = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, sClearColor_);
-	// リソースを生成
+	//テクスチャバッファの生成
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
@@ -91,23 +102,23 @@ void PostEffect::CreateTexBuff(WindowsApp* windowsApp)
 		IID_PPV_ARGS(&texBuff_));
 	assert(SUCCEEDED(result));
 
-	//画素数(1280*720=921600ピクセル)
-	const uint32_t pixelCount = static_cast<uint32_t>(windowsApp->GetWidth() * windowsApp->GetHeight());
-	//画素1行分のデータサイズ
-	const uint32_t rowPitch = sizeof(uint32_t) * static_cast<uint32_t>(windowsApp->GetWidth());
-	//画像全体のデータサイズ
-	const uint32_t depthPitch = rowPitch * static_cast<uint32_t>(windowsApp->GetHeight());
-	//画像イメージ
-	UINT* img = new UINT[pixelCount];
-	for (uint32_t i = 0; i < pixelCount; i++)
-	{
-		img[i] = 0xff0000ff;
-	}
+	////画素数(1280*720=921600ピクセル)
+	//const uint32_t pixelCount = static_cast<uint32_t>(windowsApp->GetWidth() * windowsApp->GetHeight());
+	////画素1行分のデータサイズ
+	//const uint32_t rowPitch = sizeof(uint32_t) * static_cast<uint32_t>(windowsApp->GetWidth());
+	////画像全体のデータサイズ
+	//const uint32_t depthPitch = rowPitch * static_cast<uint32_t>(windowsApp->GetHeight());
+	////画像イメージ
+	//UINT* img = new UINT[pixelCount];
+	//for (uint32_t i = 0; i < pixelCount; i++)
+	//{
+	//	img[i] = 0xff0000ff;
+	//}
 
-	//テクスチャバッファにデータ転送
-	result = texBuff_->WriteToSubresource(0, nullptr, img, rowPitch, depthPitch);
-	assert(SUCCEEDED(result));
-	delete[]img;
+	////テクスチャバッファにデータ転送
+	//result = texBuff_->WriteToSubresource(0, nullptr, img, rowPitch, depthPitch);
+	//assert(SUCCEEDED(result));
+	//delete[]img;
 }
 
 void PostEffect::CreateDescHeap()
@@ -218,4 +229,45 @@ void PostEffect::CreateDSV()
 	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 	DirectXBase::GetInstance()->GetDevice()->CreateDepthStencilView(depthBuff_.Get(), &dsvDesc, descHeapDSV_->GetCPUDescriptorHandleForHeapStart());
+}
+
+void PostEffect::CreatePipline()
+{
+	LoadShader();
+
+	for (int8_t i = 0; i < sPip_.size(); i++)
+	{
+		Pipeline::CreatePostEffectPipline(sBlob_[0], sPip_[0]);
+	}
+}
+
+void PostEffect::LoadShader()
+{
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/shaders/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/shaders/PostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
+}
+
+void PostEffect::DrawCommand()
+{
+	// プリミティブ形状の設定コマンド
+	DirectXBase::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
+	auto vbView = vertexBuffer_->GetView();
+	// 頂点バッファビューの設定コマンド
+	DirectXBase::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &vbView);
+	//定数バッファビュー(CBV)の設定コマンド
+	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, constBuffMaterial_.get()->GetAddress());
+	//SRVヒープの設定コマンド
+	DirectXBase::GetInstance()->GetCommandList()->SetDescriptorHeaps(1, texture_->srvHeap.GetAddressOf());
+	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture_->gpuHandle;
+	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
+	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
+	auto ibView = indexBuffer_->GetView();
+	//インデックスバッファビューの設定コマンド
+	DirectXBase::GetInstance()->GetCommandList()->IASetIndexBuffer(&ibView);
+
+	// 描画コマンド
+	DirectXBase::GetInstance()->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }

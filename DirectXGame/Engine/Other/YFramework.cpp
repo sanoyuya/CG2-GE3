@@ -108,7 +108,7 @@ void YFramework::Run()
 		Draw();
 		postEffect_->PostDrawScene();
 
-		DirectXBase::GetInstance()->UpdateClear(windowsApp_.get());
+		DirectXBase::GetInstance()->PreDraw(windowsApp_.get());
 
 		ImGuiManager::GetInstance()->End();
 
@@ -130,7 +130,7 @@ void YFramework::Run()
 
 		ImGuiManager::GetInstance()->Draw();
 
-		DirectXBase::GetInstance()->UpdateEnd();
+		DirectXBase::GetInstance()->PostDraw();
 
 		//FPS§Œä
 		fps_->Update();

@@ -13,7 +13,7 @@
 
 class Sprite2D
 {
-protected:
+private:
 
 	HRESULT result_ = S_OK;
 	char PADING_[4] = {};
@@ -133,7 +133,7 @@ public:
 	/// <param name="mode">モード</param>
 	void SetSprite2DBlendMode(const BlendMode& mode);
 
-protected:
+private:
 
 	/// <summary>
 	/// バッファの生成処理

@@ -115,6 +115,9 @@
     <Filter Include="Engine\リソース ファイル\Model\RimLight">
       <UniqueIdentifier>{488cf6c5-ef61-4bbf-affc-685378b4a19c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\リソース ファイル\PosEffect">
+      <UniqueIdentifier>{e3270379-6654-4c7d-a075-1df031365cbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -290,6 +293,12 @@
     <FxCompile Include="Resources\shaders\RimLightVS.hlsl">
       <Filter>Engine\リソース ファイル\Model\RimLight</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectVS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User\GameScene.h">
@@ -464,6 +473,9 @@
     </None>
     <None Include="Resources\shaders\Toon.hlsli">
       <Filter>Engine\リソース ファイル\Model\Toon</Filter>
+    </None>
+    <None Include="Resources\shaders\PostEffect.hlsli">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </None>
   </ItemGroup>
 </Project>

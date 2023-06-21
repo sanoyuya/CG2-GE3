@@ -49,8 +49,8 @@ private:
 public:
 	
 	void Initialize(WindowsApp* windowsApp);
-	void UpdateClear(WindowsApp* windowsApp);
-	void UpdateEnd();
+	void PreDraw(WindowsApp* windowsApp);
+	void PostDraw();
 	void Destroy();
 
 private:

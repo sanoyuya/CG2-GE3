@@ -73,4 +73,7 @@ public://モデル
 	/// <param name="pip">パイプライン</param>
 	static void CreatePhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 	
+public://ポストエフェクト
+
+	static void CreatePostEffectPipline(Blob& blob, PipelineSet& pip);
 };
