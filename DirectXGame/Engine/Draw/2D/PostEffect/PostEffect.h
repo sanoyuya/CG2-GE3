@@ -59,9 +59,6 @@ private:
 	bool flipX_ = false;
 	bool flipY_ = false;
 
-	uint32_t tex_ = 0;
-	TextureData* texture_ = {};
-
 public:
 
 	/// <summary>
@@ -90,8 +87,6 @@ private:
 	void CreateBuff();
 	//texBuff_の生成
 	void CreateTexBuff(WindowsApp* windowsApp);
-	//SRVの作成
-	void CreateDescHeap();
 	//RTVの作成
 	void CreateRTV();
 	//深度バッファの生成
@@ -104,4 +99,6 @@ private:
 	void LoadShader();
 
 	void DrawCommand();
+	//SRVの作成
+	void CreateSRV();
 };

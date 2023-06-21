@@ -8,9 +8,6 @@ std::array <PipelineSet, 5> PostEffect::sPip_;
 
 void PostEffect::Initialize(WindowsApp* windowsApp)
 {
-	//テクスチャ読み込み
-	tex_ = TextureManager::GetInstance()->LoadTexture("Resources/reimu.png");
-	texture_ = TextureManager::GetTextureData(tex_);
 	//バッファの作成
 	CreateBuff();
 	
@@ -18,7 +15,7 @@ void PostEffect::Initialize(WindowsApp* windowsApp)
 	//texBuff_の生成
 	CreateTexBuff(windowsApp);
 	//SRVの作成
-	CreateDescHeap();
+	CreateSRV();
 	//RTVの作成
 	CreateRTV();
 	//深度バッファの生成
@@ -119,20 +116,6 @@ void PostEffect::CreateTexBuff(WindowsApp* windowsApp)
 	//result = texBuff_->WriteToSubresource(0, nullptr, img, rowPitch, depthPitch);
 	//assert(SUCCEEDED(result));
 	//delete[]img;
-}
-
-void PostEffect::CreateDescHeap()
-{
-	//SRV設定
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};//設定構造体
-	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = 1;
-
-	//デスクリプタヒープを加算
-	handle_ = DirectXBase::GetInstance()->GetDescriptorHeap()->AddSRV();
-	DirectXBase::GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_.Get(), &srvDesc, handle_.cpuHandle);
 }
 
 void PostEffect::PreDrawScene(WindowsApp* windowsApp)
@@ -258,10 +241,8 @@ void PostEffect::DrawCommand()
 	DirectXBase::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &vbView);
 	//定数バッファビュー(CBV)の設定コマンド
 	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, constBuffMaterial_.get()->GetAddress());
-	//SRVヒープの設定コマンド
-	DirectXBase::GetInstance()->GetCommandList()->SetDescriptorHeaps(1, texture_->srvHeap.GetAddressOf());
 	//SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture_->gpuHandle;
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = handle_.gpuHandle;
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	auto ibView = indexBuffer_->GetView();
@@ -270,4 +251,18 @@ void PostEffect::DrawCommand()
 
 	// 描画コマンド
 	DirectXBase::GetInstance()->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
+}
+
+void PostEffect::CreateSRV()
+{
+	//SRV設定
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};//設定構造体
+	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+
+	//デスクリプタヒープを加算
+	handle_ = DirectXBase::GetInstance()->GetDescriptorHeap()->AddSRV();
+	DirectXBase::GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_.Get(), &srvDesc, handle_.cpuHandle);
 }
