@@ -21,9 +21,9 @@ void SpriteCommon::StaticInitialize()
 void SpriteCommon::LoadShader()
 {
 	//頂点シェーダの読み込みとコンパイル
-	sBlob_.vs = DrawCommon::ShaderCompile(L"Resources/shaders/SpriteVS.hlsl", "main", "vs_5_0", sBlob_.vs.Get());
+	sBlob_.vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Sprite/SpriteVS.hlsl", "main", "vs_5_0", sBlob_.vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	sBlob_.ps = DrawCommon::ShaderCompile(L"Resources/shaders/SpritePS.hlsl", "main", "ps_5_0", sBlob_.ps.Get());
+	sBlob_.ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Sprite/SpritePS.hlsl", "main", "ps_5_0", sBlob_.ps.Get());
 }
 
 void SpriteCommon::BlendSet(BlendMode mode)

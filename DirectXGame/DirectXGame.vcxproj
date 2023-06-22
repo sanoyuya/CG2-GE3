@@ -66,7 +66,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -87,7 +87,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -101,8 +101,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Engine\DirectXCore\EditorObject.cpp" />
-    <ClCompile Include="Engine\Other\EngineOP.cpp" />
+    <ClCompile Include="Engine\LevelEditor\EditorObject.cpp" />
+    <ClCompile Include="User\EngineOP.cpp" />
     <ClCompile Include="Engine\Collision\Collision.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\ConstantBuffer.cpp" />
@@ -118,8 +118,9 @@
     <ClCompile Include="Engine\DirectXCore\FPS.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp" />
     <ClCompile Include="Engine\Light\LightManager.cpp" />
-    <ClCompile Include="Engine\DirectXCore\LevelEditor.cpp" />
+    <ClCompile Include="Engine\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="Engine\Draw\2D\PostEffect\PostEffect.cpp" />
+    <ClCompile Include="Engine\Draw\2D\PostEffect\MultiLenderPostEffect.cpp" />
     <ClCompile Include="User\GameScene.cpp" />
     <ClCompile Include="Engine\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp" />
@@ -150,73 +151,73 @@
     <ClCompile Include="Engine\Other\YFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\shaders\PostEffectPS.hlsl">
+    <FxCompile Include="Resources\Shaders\PostEffect\PostEffectPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffectVS.hlsl">
+    <FxCompile Include="Resources\Shaders\PostEffect\PostEffectVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongPS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Phong\PhongPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Phong\PhongVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ModelBasicVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicVS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
+    <FxCompile Include="Resources\Shaders\Sprite\SpritePS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Sprite\SpriteVS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ToonPS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Toon\ToonPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ToonVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Toon\ToonVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\RimLightPS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\RimLight\RimLightPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\RimLightVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\RimLight\RimLightVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
@@ -224,10 +225,10 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\DirectXCore\EditorObject.h" />
+    <ClInclude Include="Engine\LevelEditor\EditorObject.h" />
     <ClInclude Include="Engine\Light\CircleShadow.h" />
     <ClInclude Include="Engine\Light\DirectionalLight.h" />
-    <ClInclude Include="Engine\Other\EngineOP.h" />
+    <ClInclude Include="User\EngineOP.h" />
     <ClInclude Include="Engine\Collision\Collision.h" />
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />
     <ClInclude Include="Engine\Other\BaseScene.h" />
@@ -247,8 +248,9 @@
     <ClInclude Include="Engine\Light\LightManager.h" />
     <ClInclude Include="Engine\Light\PointLight.h" />
     <ClInclude Include="Engine\Light\SpotLight.h" />
-    <ClInclude Include="Engine\DirectXCore\LevelEditor.h" />
+    <ClInclude Include="Engine\LevelEditor\LevelEditor.h" />
     <ClInclude Include="Engine\Draw\2D\PostEffect\PostEffect.h" />
+    <ClInclude Include="Engine\Draw\2D\PostEffect\MultiLenderPostEffect.h" />
     <ClInclude Include="User\GameScene.h" />
     <ClInclude Include="Engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\IndexBuffer.h" />
@@ -278,12 +280,12 @@
     <ClInclude Include="Engine\Other\YFramework.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shaders\PostEffect.hlsli" />
-    <None Include="Resources\shaders\PhongShader.hlsli" />
-    <None Include="Resources\shaders\ModelBasic.hlsli" />
-    <None Include="Resources\shaders\Sprite.hlsli" />
-    <None Include="Resources\shaders\Toon.hlsli" />
-    <None Include="Resources\shaders\RimLight.hlsli" />
+    <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli" />
+    <None Include="Resources\Shaders\Model\Phong\PhongShader.hlsli" />
+    <None Include="Resources\Shaders\Model\Basic\ModelBasic.hlsli" />
+    <None Include="Resources\Shaders\Sprite\Sprite.hlsli" />
+    <None Include="Resources\Shaders\Model\Toon\Toon.hlsli" />
+    <None Include="Resources\Shaders\Model\RimLight\RimLight.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">

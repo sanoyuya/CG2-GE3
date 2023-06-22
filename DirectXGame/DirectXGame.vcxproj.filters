@@ -118,6 +118,18 @@
     <Filter Include="Engine\リソース ファイル\PosEffect">
       <UniqueIdentifier>{e3270379-6654-4c7d-a075-1df031365cbd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\LevelEditor">
+      <UniqueIdentifier>{a116016e-6735-476e-8ee4-7a3e93daf0c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Draw\PostEffect">
+      <UniqueIdentifier>{9e791aab-88ed-4e84-9e9a-a9f03932d9bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Draw\PostEffect">
+      <UniqueIdentifier>{faa4e011-7b1e-4cb7-bdb2-dd9d79a7bc23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\LevelEditor">
+      <UniqueIdentifier>{d8effa6f-0125-45d0-8c28-7cda3d3702e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -246,57 +258,60 @@
     <ClCompile Include="Engine\Collision\Collision.cpp">
       <Filter>Engine\ソースファイル\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Other\EngineOP.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Light\LightManager.cpp">
       <Filter>Engine\ソースファイル\Light</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DirectXCore\LevelEditor.cpp">
-      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    <ClCompile Include="Engine\LevelEditor\LevelEditor.cpp">
+      <Filter>Engine\ソースファイル\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DirectXCore\EditorObject.cpp">
-      <Filter>Engine\ソースファイル\DirectXCore</Filter>
+    <ClCompile Include="Engine\LevelEditor\EditorObject.cpp">
+      <Filter>Engine\ソースファイル\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Draw\2D\PostEffect\MultiLenderPostEffect.cpp">
+      <Filter>Engine\ソースファイル\Draw\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Draw\2D\PostEffect\PostEffect.cpp">
-      <Filter>Engine\ソースファイル\Draw</Filter>
+      <Filter>Engine\ソースファイル\Draw\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="User\EngineOP.cpp">
+      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\shaders\ModelBasicPS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
       <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ModelBasicVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicVS.hlsl">
       <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongPS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Phong\PhongPS.hlsl">
       <Filter>Engine\リソース ファイル\Model\Phong</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Phong\PhongVS.hlsl">
       <Filter>Engine\リソース ファイル\Model\Phong</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ToonPS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Toon\ToonPS.hlsl">
       <Filter>Engine\リソース ファイル\Model\Toon</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ToonVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\Toon\ToonVS.hlsl">
       <Filter>Engine\リソース ファイル\Model\Toon</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
+    <FxCompile Include="Resources\Shaders\Sprite\SpritePS.hlsl">
       <Filter>Engine\リソース ファイル\Sprite</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Sprite\SpriteVS.hlsl">
       <Filter>Engine\リソース ファイル\Sprite</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\RimLightPS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\RimLight\RimLightPS.hlsl">
       <Filter>Engine\リソース ファイル\Model\RimLight</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\RimLightVS.hlsl">
+    <FxCompile Include="Resources\Shaders\Model\RimLight\RimLightVS.hlsl">
       <Filter>Engine\リソース ファイル\Model\RimLight</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffectPS.hlsl">
+    <FxCompile Include="Resources\Shaders\PostEffect\PostEffectPS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffectVS.hlsl">
+    <FxCompile Include="Resources\Shaders\PostEffect\PostEffectVS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </FxCompile>
   </ItemGroup>
@@ -430,9 +445,6 @@
     <ClInclude Include="Engine\Collision\Collision.h">
       <Filter>Engine\ヘッダーファイル\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Other\EngineOP.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Light\LightManager.h">
       <Filter>Engine\ヘッダーファイル\Light</Filter>
     </ClInclude>
@@ -448,33 +460,39 @@
     <ClInclude Include="Engine\Light\CircleShadow.h">
       <Filter>Engine\ヘッダーファイル\Light</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DirectXCore\LevelEditor.h">
-      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\DirectXCore\EditorObject.h">
-      <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
+    <ClInclude Include="Engine\Draw\2D\PostEffect\MultiLenderPostEffect.h">
+      <Filter>Engine\ヘッダーファイル\Draw\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Draw\2D\PostEffect\PostEffect.h">
-      <Filter>Engine\ヘッダーファイル\Draw</Filter>
+      <Filter>Engine\ヘッダーファイル\Draw\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\LevelEditor\LevelEditor.h">
+      <Filter>Engine\ヘッダーファイル\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\LevelEditor\EditorObject.h">
+      <Filter>Engine\ヘッダーファイル\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="User\EngineOP.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shaders\ModelBasic.hlsli">
+    <None Include="Resources\Shaders\Model\Basic\ModelBasic.hlsli">
       <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </None>
-    <None Include="Resources\shaders\PhongShader.hlsli">
+    <None Include="Resources\Shaders\Model\Phong\PhongShader.hlsli">
       <Filter>Engine\リソース ファイル\Model\Phong</Filter>
     </None>
-    <None Include="Resources\shaders\Sprite.hlsli">
+    <None Include="Resources\Shaders\Sprite\Sprite.hlsli">
       <Filter>Engine\リソース ファイル\Sprite</Filter>
     </None>
-    <None Include="Resources\shaders\RimLight.hlsli">
+    <None Include="Resources\Shaders\Model\RimLight\RimLight.hlsli">
       <Filter>Engine\リソース ファイル\Model\RimLight</Filter>
     </None>
-    <None Include="Resources\shaders\Toon.hlsli">
+    <None Include="Resources\Shaders\Model\Toon\Toon.hlsli">
       <Filter>Engine\リソース ファイル\Model\Toon</Filter>
     </None>
-    <None Include="Resources\shaders\PostEffect.hlsli">
+    <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </None>
   </ItemGroup>

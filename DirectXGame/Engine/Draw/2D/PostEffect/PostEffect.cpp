@@ -227,9 +227,9 @@ void PostEffect::CreatePipline()
 void PostEffect::LoadShader()
 {
 	//頂点シェーダの読み込みとコンパイル
-	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/shaders/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
+	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/shaders/PostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
+	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
 }
 
 void PostEffect::DrawCommand()

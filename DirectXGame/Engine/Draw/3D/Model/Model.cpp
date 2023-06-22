@@ -51,36 +51,36 @@ void Model::LoadShader()
 #pragma region Basicシェーダー用
 
 	//頂点シェーダの読み込みとコンパイル
-	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
+	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Basic/ModelBasicVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ModelBasicPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
+	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Basic/ModelBasicPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
 
 #pragma endregion Basicシェーダー用
 
 #pragma region Phongシェーダー用
 
 	//頂点シェーダの読み込みとコンパイル
-	sBlob_[1].vs = DrawCommon::ShaderCompile(L"Resources/shaders/PhongVS.hlsl", "main", "vs_5_0", sBlob_[1].vs.Get());
+	sBlob_[1].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/PhongVS.hlsl", "main", "vs_5_0", sBlob_[1].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	sBlob_[1].ps = DrawCommon::ShaderCompile(L"Resources/shaders/PhongPS.hlsl", "main", "ps_5_0", sBlob_[1].ps.Get());
+	sBlob_[1].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/PhongPS.hlsl", "main", "ps_5_0", sBlob_[1].ps.Get());
 
 #pragma endregion Phongシェーダー用
 
 #pragma region Toonシェーダー用
 
 	//頂点シェーダの読み込みとコンパイル
-	sBlob_[2].vs = DrawCommon::ShaderCompile(L"Resources/shaders/ToonVS.hlsl", "main", "vs_5_0", sBlob_[2].vs.Get());
+	sBlob_[2].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Toon/ToonVS.hlsl", "main", "vs_5_0", sBlob_[2].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	sBlob_[2].ps = DrawCommon::ShaderCompile(L"Resources/shaders/ToonPS.hlsl", "main", "ps_5_0", sBlob_[2].ps.Get());
+	sBlob_[2].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Toon/ToonPS.hlsl", "main", "ps_5_0", sBlob_[2].ps.Get());
 
 #pragma endregion Toonシェーダー用
 
 #pragma region リムライト用
 
 	//頂点シェーダの読み込みとコンパイル
-	sBlob_[3].vs = DrawCommon::ShaderCompile(L"Resources/shaders/RimLightVS.hlsl", "main", "vs_5_0", sBlob_[3].vs.Get());
+	sBlob_[3].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/RimLight/RimLightVS.hlsl", "main", "vs_5_0", sBlob_[3].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/shaders/RimLightPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
+	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/RimLight/RimLightPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
 
 #pragma endregion リムライト用
 }
