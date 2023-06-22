@@ -12,12 +12,17 @@ void TitleScene::Initialize()
 	camera_->Initialize(true);
 	cameraPos_ = { 0.0f,3.0f,-10.0f };
 
+	lightManager_.reset(lightManager_->Create());
+	Model::SetLight(lightManager_.get());
+
 	//天球
 	skyDome_ = std::make_unique<Model>();
 	//model->SetModelBlendMode(BlendMode::Sub);
 	skyDomeTex_ = Model::CreateObjModel("Resources/skydome2");
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
+
+	Model::SetStaticShaderMode(ShaderMode::MultiPhong);
 
 	playerTex_ = skyDome_->CreateObjModel("Resources/greenDice");
 	sphereTex_ = skyDome_->CreateObjModel("Resources/sphere");
@@ -62,6 +67,14 @@ void TitleScene::Update()
 		}
 		object->Update(camera_.get());
 	}
+
+	lightManager_->Update();
+
+	//ポイントライト
+	lightManager_->SetPointLightActive(0, true);
+	lightManager_->SetPointLightPos(0, { 0.0f,0.0f ,0.0f });
+	lightManager_->SetPointLightColor(0, { 1.0f,1.0f,1.0f });
+	lightManager_->SetPointLightAtten(0, { 0.3f,0.1f,0.1f });
 }
 
 void TitleScene::Draw()

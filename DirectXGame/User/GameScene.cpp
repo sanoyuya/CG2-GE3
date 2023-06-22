@@ -37,7 +37,7 @@ void GameScene::Initialize()
 
 	//^‚ñ’†‚Ì‹…
 	sphere2_ = std::make_unique<Model>();
-	
+	sphere2_->SetShaderMode(ShaderMode::Toon);
 	sphere2_->SetModel(sphereTex_);
 	sphere2Trans_.Initialize();
 
@@ -71,7 +71,6 @@ void GameScene::Update()
 	{
 		SceneManager::GetInstance()->ChangeScene("TITLE");
 	}
-	sphere2_->SetShaderMode(ShaderMode::Toon);
 
 	CamMove();
 	Rotation();
@@ -98,9 +97,9 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	model_->DrawModel(&modelTrans_);
-	sphere_->DrawModel(&sphereTrans_, color_);
+	/*sphere_->DrawModel(&sphereTrans_, color_);
 	sphere2_->DrawModel(&sphere2Trans_, color_);
-	sphere3_->DrawModel(&sphere3Trans_, color_);
+	sphere3_->DrawModel(&sphere3Trans_, color_);*/
 	if (lightDisplayFlag_)
 	{
 		lightSphere_->DrawModel(&lightSphereTrans_, { lightColor_.x,lightColor_.y,lightColor_.z,0.5f });

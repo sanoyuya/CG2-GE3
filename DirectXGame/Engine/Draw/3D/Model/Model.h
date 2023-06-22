@@ -95,7 +95,9 @@ private:
 
 	BlendMode blendMode_ = BlendMode::Alpha;//初期値半透明合成
 
-	ShaderMode shaderMode_ = ShaderMode::Basic;//標準
+	static ShaderMode sShaderMode_;
+
+	ShaderMode shaderMode_ = sShaderMode_;//標準
 
 	std::unique_ptr<ConstantBuffer> constantBuff_;
 
@@ -137,10 +139,12 @@ public:
 	void SetModelBlendMode(const BlendMode& mode);
 
 	/// <summary>
-	/// シェーダーモードのセット
+	/// モデル単体のシェーダーモードのセット
 	/// </summary>
 	/// <param name="mode">シェーダーモード</param>
 	void SetShaderMode(const ShaderMode& mode);
+
+	static void SetStaticShaderMode(const ShaderMode& mode);
 
 	Model();
 	virtual ~Model();
@@ -152,8 +156,6 @@ public:
 	/// <param name="color">色(初期値:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
 	void DrawModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f });
 
-	//void DrawAssimpModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f });
-
 	/// <summary>
 	/// モデルの生成
 	/// </summary>
@@ -163,8 +165,6 @@ public:
 	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
 
 	static uint32_t CreateAssimpModel(const std::string& filePath);
-
-	//static uint32_t CreateAssimpModel(const std::string& filePath);
 
 	/// <summary>
 	/// ライトのセット

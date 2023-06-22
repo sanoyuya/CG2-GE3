@@ -15,6 +15,7 @@
 #include<memory>
 #include"ImGuiManager.h"
 #include"PostEffect.h"
+#include"MultiLenderPostEffect.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -34,6 +35,7 @@ protected:
 	std::unique_ptr<WindowsApp> windowsApp_;
 	std::unique_ptr<FPS>fps_;
 	std::unique_ptr<PostEffect>postEffect_;
+	std::unique_ptr<MultiLenderPostEffect>multiLenderPostEffect_;
 
 public:
 

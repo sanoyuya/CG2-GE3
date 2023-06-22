@@ -50,8 +50,11 @@ void YFramework::Initialize()
 	AbstractSceneFactory* sceneFactory = new SceneFactory();
 	SceneManager::GetInstance()->SetSceneFactory(sceneFactory);
 
-	postEffect_ = std::make_unique<PostEffect>();
-	postEffect_->Initialize(windowsApp_.get());
+	/*postEffect_ = std::make_unique<PostEffect>();
+	postEffect_->Initialize(windowsApp_.get());*/
+
+	multiLenderPostEffect_= std::make_unique<MultiLenderPostEffect>();
+	multiLenderPostEffect_->Initialize(windowsApp_.get());
 }
 
 void YFramework::Destroy()
@@ -104,9 +107,13 @@ void YFramework::Run()
 
 		Update();
 
-		postEffect_->PreDrawScene(windowsApp_.get());
+		/*postEffect_->PreDrawScene(windowsApp_.get());
 		Draw();
-		postEffect_->PostDrawScene();
+		postEffect_->PostDrawScene();*/
+
+		multiLenderPostEffect_->PreDrawScene(windowsApp_.get());
+		Draw();
+		multiLenderPostEffect_->PostDrawScene();
 
 		DirectXBase::GetInstance()->PreDraw(windowsApp_.get());
 
@@ -118,7 +125,7 @@ void YFramework::Run()
 		}
 
 		//•`‰æˆ—
-		postEffect_->Draw();
+		multiLenderPostEffect_->Draw();
 
 #ifdef _DEBUG
 

@@ -1,10 +1,17 @@
-#include"Toon.hlsli"
+#include "PhongShader.hlsli"
 
 Texture2D<float4> tex : register(t0); // 0番スロットに設定されたテクスチャ
 SamplerState smp : register(s0); // 0番スロットに設定されたサンプラー
 
-float4 main(VSOutput input) : SV_TARGET
+struct PSOutput
 {
+    float4 target0 : SV_TARGET0;
+    float4 target1 : SV_TARGET1;
+};
+
+PSOutput main(VSOutput input) : SV_TARGET
+{
+    PSOutput output;
     //テクスチャマッピング
     float4 texcolor = tex.Sample(smp, input.uv);
 
@@ -23,16 +30,16 @@ float4 main(VSOutput input) : SV_TARGET
         if (dirLights[i].active)
         {
             //ライトに向かうベクトルと法線の内積
-            float3 dotLightNormal = dot(dirLights[i].lightv, input.normal);
+            float3 dotlightnormal = dot(dirLights[i].lightv, input.normal);
             //反射光ベクトル
-            float3 reflect = normalize(-dirLights[i].lightv + 2 * dotLightNormal * input.normal);
+            float3 reflect = normalize(-dirLights[i].lightv + 2 * dotlightnormal * input.normal);
              //拡散反射光
-            float3 diffuse = smoothstep(0.45, 0.5, dotLightNormal * m_diffuse);
+            float3 diffuse = saturate(dotlightnormal) * m_diffuse * texcolor.rgb * color.rgb;
             //鏡面反射光
             float3 specular = pow(saturate(dot(reflect, eyedir)), shininess) * m_specular;
     
             //全て加算する
-            shaderColor.rgb = (diffuse + specular) * dirLights[i].lightcolor;
+            shaderColor.rgb += saturate((diffuse + specular) * dirLights[i].lightcolor);
         }
     }
     
@@ -52,11 +59,11 @@ float4 main(VSOutput input) : SV_TARGET
             //ライトに向かうベクトルと法線の内積
             float3 dotLightNormal = dot(lightv, input.normal);
             //反射光ベクトル
-            float3 reflect = -lightv + 2 * dotLightNormal * input.normal;
+            float3 reflect = normalize(-lightv + 2 * dotLightNormal * input.normal);
             //拡散反射光
-            float3 diffuse = smoothstep(0.45, 0.5, saturate(dot(normalize(input.normal), lightv))) * texcolor.rgb * color.rgb * pointLights[i].lightColor;
+            float3 diffuse = saturate(dotLightNormal) * m_diffuse * texcolor.rgb * color.rgb;
             //鏡面反射光
-            float3 specular = smoothstep(0.45, 0.5, pow(saturate(dot(reflect, eyedir)), shininess * m_diffuse)) * m_specular * pointLights[i].lightColor;
+            float3 specular = pow(saturate(dot(reflect, eyedir)), shininess);
             //全て加算する
             shaderColor.rgb += atten * saturate(diffuse + specular) * pointLights[i].lightColor;
         }
@@ -83,13 +90,13 @@ float4 main(VSOutput input) : SV_TARGET
             //ライトに向かうベクトルと法線の内積
             float3 dotLightNormal = dot(lightv, input.normal);
             //反射光ベクトル
-            float3 reflect = -lightv + 2 * dotLightNormal * input.normal;
+            float3 reflect = normalize(-lightv + 2 * dotLightNormal * input.normal);
             //拡散反射光
-            float3 diffuse = smoothstep(0.45, 0.5, saturate(dot(normalize(input.normal), lightv))) * texcolor.rgb * color.rgb * spotLights[i].lightColor;
+            float3 diffuse = saturate(dotLightNormal) * m_diffuse * texcolor.rgb * color.rgb;
             //鏡面反射光
-            float3 specular = smoothstep(0.45, 0.5, pow(saturate(dot(reflect, eyedir)), shininess * m_diffuse)) * m_specular * spotLights[i].lightColor;
+            float3 specular = pow(saturate(dot(reflect, eyedir)), shininess) * m_specular;
             //全て加算する
-            shaderColor.rgb += atten * (diffuse + specular) * spotLights[i].lightColor;
+            shaderColor.rgb += atten * saturate(diffuse + specular) * spotLights[i].lightColor;
         }
     }
     
@@ -124,5 +131,8 @@ float4 main(VSOutput input) : SV_TARGET
     }
 
     //シェーディングによる色で描画
-    return shaderColor;
+    output.target0 = shaderColor;
+    //output.target1 = float4(1 - (shaderColor).rgb, color.a);
+    output.target1 = float4(0,0,0, color.a);
+    return output;
 }

@@ -20,6 +20,7 @@ enum class ShaderMode
 	Phong,//フォンシェーディング
 	Toon,//トゥーンシェーディング
 	RimLight,//リムライト
+	MultiPhong//マルチレンダーターゲット用
 };
 
 struct PipelineSet
@@ -72,8 +73,16 @@ public://モデル
 	/// <param name="device">デバイス</param>
 	/// <param name="pip">パイプライン</param>
 	static void CreatePhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
+
+
+	static void CreateMultiPhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 	
 public://ポストエフェクト
 
+	/// <summary>
+	/// ポストエフェクト用パイプライン生成
+	/// </summary>
+	/// <param name="blob">シェーダーオブジェクト</param>
+	/// <param name="pip">パイプライン</param>
 	static void CreatePostEffectPipline(Blob& blob, PipelineSet& pip);
 };

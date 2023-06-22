@@ -8,6 +8,7 @@
 #include"LevelEditor.h"
 #include <map>
 #include"EditorObject.h"
+#include"LightManager.h"
 
 //タイトルシーン
 class TitleScene :public BaseScene
@@ -17,6 +18,7 @@ private:
 	//クラス読み込み
 	InputManager* input_ = nullptr;
 	AudioManager* audioManager_ = nullptr;
+	std::unique_ptr<LightManager>lightManager_;
 
 	std::unique_ptr<Camera>camera_;
 

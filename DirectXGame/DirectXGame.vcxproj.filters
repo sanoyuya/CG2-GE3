@@ -314,6 +314,9 @@
     <FxCompile Include="Resources\Shaders\PostEffect\PostEffectVS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\Model\Phong\MultiPhongPS.hlsl">
+      <Filter>Engine\リソース ファイル\Model\Phong</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User\GameScene.h">

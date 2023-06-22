@@ -15,6 +15,7 @@ LightManager* Model::sLightManager_ = nullptr;
 uint32_t Model::sModelCount_;
 std::array <Blob, 5> Model::sBlob_;//シェーダオブジェクト
 std::array <std::array<PipelineSet, 6>, 5> Model::sPip_;
+ShaderMode Model::sShaderMode_ = ShaderMode::Basic;//標準
 
 void Model::StaticInitialize()
 {
@@ -29,6 +30,7 @@ void Model::StaticInitialize()
 		Pipeline::CreatePhongModelPipline(sBlob_[1], (BlendMode)i, sDevice_.Get(), sPip_[1]);//Phongシェーダー用
 		Pipeline::CreatePhongModelPipline(sBlob_[2], (BlendMode)i, sDevice_.Get(), sPip_[2]);//Toonシェーダー用
 		Pipeline::CreatePhongModelPipline(sBlob_[3], (BlendMode)i, sDevice_.Get(), sPip_[3]);//リムライト用
+		Pipeline::CreateMultiPhongModelPipline(sBlob_[4], (BlendMode)i, sDevice_.Get(), sPip_[4]);//マルチレンダーターゲット用
 	}
 
 	sFilePaths_.resize(sMaxModel_);
@@ -83,6 +85,15 @@ void Model::LoadShader()
 	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/RimLight/RimLightPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
 
 #pragma endregion リムライト用
+
+#pragma region マルチレンダーターゲット用
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[4].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/PhongVS.hlsl", "main", "vs_5_0", sBlob_[4].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[4].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/MultiPhongPS.hlsl", "main", "ps_5_0", sBlob_[4].ps.Get());
+
+#pragma endregion マルチレンダーターゲット用
 }
 
 void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
@@ -117,6 +128,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][0].rootSignature.Get());
 
 			break;
+		case ShaderMode::MultiPhong:
+
+			sCmdList_->SetPipelineState(sPip_[4][0].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[4][0].rootSignature.Get());
+
+			break;
 		}
 
 		break;
@@ -147,6 +164,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 
 			sCmdList_->SetPipelineState(sPip_[3][1].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][1].rootSignature.Get());
+
+			break;
+		case ShaderMode::MultiPhong:
+
+			sCmdList_->SetPipelineState(sPip_[4][1].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[4][1].rootSignature.Get());
 
 			break;
 		}
@@ -181,6 +204,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][2].rootSignature.Get());
 
 			break;
+		case ShaderMode::MultiPhong:
+
+			sCmdList_->SetPipelineState(sPip_[4][2].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[4][2].rootSignature.Get());
+
+			break;
 		}
 
 		break;
@@ -211,6 +240,13 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 
 			sCmdList_->SetPipelineState(sPip_[3][3].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][3].rootSignature.Get());
+
+			break;
+
+		case ShaderMode::MultiPhong:
+
+			sCmdList_->SetPipelineState(sPip_[4][3].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[4][3].rootSignature.Get());
 
 			break;
 		}
@@ -245,6 +281,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][4].rootSignature.Get());
 
 			break;
+		case ShaderMode::MultiPhong:
+
+			sCmdList_->SetPipelineState(sPip_[4][4].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[4][4].rootSignature.Get());
+
+			break;
 		}
 
 		break;
@@ -275,6 +317,12 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 
 			sCmdList_->SetPipelineState(sPip_[3][5].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][5].rootSignature.Get());
+
+			break;
+		case ShaderMode::MultiPhong:
+
+			sCmdList_->SetPipelineState(sPip_[4][5].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[4][5].rootSignature.Get());
 
 			break;
 		}
@@ -416,48 +464,6 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	sCmdList_->DrawIndexedInstanced(modelData_->maxIndex, 1, 0, 0, 0);
 }
 
-//void Model::DrawAssimpModel(Transform* transform, myMath::Vector4 color)
-//{
-//	D3D12_VERTEX_BUFFER_VIEW vbView = modelData_->vertexBuffer->GetView();
-//	D3D12_INDEX_BUFFER_VIEW ibView = modelData_->indexBuffer->GetView();
-//
-//	tmp_ = color;
-//	constantBuff_->Update(&tmp_);
-//
-//	PiplineSet(static_cast<BlendMode>(blendMode_), static_cast<ShaderMode>(shaderMode_));
-//
-//	// プリミティブ形状の設定コマンド
-//	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
-//
-//	// 頂点バッファビューの設定コマンド
-//	sCmdList_->IASetVertexBuffers(0, 1, &vbView);
-//
-//	//インデックスバッファビューの設定コマンド
-//	sCmdList_->IASetIndexBuffer(&ibView);
-//
-//	// 定数バッファビュー(CBV)の設定コマンド
-//	sCmdList_->SetGraphicsRootConstantBufferView(0, transform->GetconstBuff()->GetGPUVirtualAddress());
-//	sCmdList_->SetGraphicsRootConstantBufferView(1, modelData_->constBuffMaterial->GetAddress());
-//	//ルートパラメータ2番に色情報を設定
-//	sCmdList_->SetGraphicsRootConstantBufferView(2, constantBuff_->GetAddress());
-//
-//	//ライトの描画
-//	if (shaderMode_ != ShaderMode::Basic)
-//	{
-//		//ルートパラメータ2番にライト情報を設定
-//		sLightManager_->Draw(sCmdList_.Get(), 4);
-//	}
-//
-//	// SRVヒープの設定コマンド
-//	sCmdList_->SetDescriptorHeaps(1, modelData_->textureData->srvHeap.GetAddressOf());
-//
-//	// SRVヒープの先頭にあるSRVをルートパラメータ3番に設定
-//	sCmdList_->SetGraphicsRootDescriptorTable(3, modelData_->textureData->gpuHandle);
-//
-//	// 描画コマンド
-//	sCmdList_->DrawIndexedInstanced(modelData_->maxIndex, 1, 0, 0, 0);
-//}
-
 const myMath::Matrix4& Model::GetMatWorld()
 {
 	return modelData_->matWorld;
@@ -486,6 +492,11 @@ void Model::SetModelBlendMode(const BlendMode& mode)
 void Model::SetShaderMode(const ShaderMode& mode)
 {
 	shaderMode_ = mode;
+}
+
+void Model::SetStaticShaderMode(const ShaderMode& mode)
+{
+	sShaderMode_ = mode;
 }
 
 Model::Model()
