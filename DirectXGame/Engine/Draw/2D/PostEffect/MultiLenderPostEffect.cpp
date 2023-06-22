@@ -42,7 +42,7 @@ void MultiLenderPostEffect::Draw()
 		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 		srvDesc.Texture2D.MipLevels = 1;
 		DirectXBase::GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_[tex].Get(),
-			&srvDesc, DirectXBase::GetInstance()->GetDescriptorHeap()->GetHeap()->GetCPUDescriptorHandleForHeapStart());
+			&srvDesc, handle_.cpuHandle);
 	}
 	matProjection_ = myMath::MakeIdentity();
 	constBuffMap_ = matProjection_;
@@ -196,7 +196,7 @@ void MultiLenderPostEffect::CreateRTV()
 		//デスクリプタヒープにRTV作成
 		//DirectXBase::GetInstance()->GetDevice()->CreateRenderTargetView(texBuff_[i].Get(), &renderTargetViewDesc, descHeapRTV_->GetCPUDescriptorHandleForHeapStart());
 		DirectXBase::GetInstance()->GetDevice()->CreateRenderTargetView(texBuff_[i].Get(),
-			&renderTargetViewDesc, CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeapRTV_->GetCPUDescriptorHandleForHeapStart(),
+			nullptr, CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeapRTV_->GetCPUDescriptorHandleForHeapStart(),
 				i, DirectXBase::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)));
 	}
 }

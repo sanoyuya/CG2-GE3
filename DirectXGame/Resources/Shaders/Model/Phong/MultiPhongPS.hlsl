@@ -61,7 +61,7 @@ PSOutput main(VSOutput input) : SV_TARGET
             //”½ŽËŒõƒxƒNƒgƒ‹
             float3 reflect = normalize(-lightv + 2 * dotLightNormal * input.normal);
             //ŠgŽU”½ŽËŒõ
-            float3 diffuse = saturate(dotLightNormal) * m_diffuse * texcolor.rgb * color.rgb;
+            float3 diffuse = saturate(dotLightNormal) * texcolor.rgb * color.rgb;
             //‹¾–Ê”½ŽËŒõ
             float3 specular = pow(saturate(dot(reflect, eyedir)), shininess);
             //‘S‚Ä‰ÁŽZ‚·‚é

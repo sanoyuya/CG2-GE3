@@ -115,9 +115,9 @@ void YFramework::Run()
 		Draw();
 		multiLenderPostEffect_->PostDrawScene();
 
-		DirectXBase::GetInstance()->PreDraw(windowsApp_.get());
-
 		ImGuiManager::GetInstance()->End();
+
+		DirectXBase::GetInstance()->PreDraw(windowsApp_.get());
 
 		if (GetEndRequest())
 		{
