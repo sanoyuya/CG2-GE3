@@ -74,7 +74,13 @@ public://モデル
 	/// <param name="pip">パイプライン</param>
 	static void CreatePhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 
-
+	/// <summary>
+	/// マルチレンダーターゲットPhongモデル用パイプライン生成
+	/// </summary>
+	/// <param name="blob">シェーダーオブジェクト</param>
+	/// <param name="blend">ブレンドモード</param>
+	/// <param name="device">デバイス</param>
+	/// <param name="pip">パイプライン</param>
 	static void CreateMultiPhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 	
 public://ポストエフェクト
@@ -85,4 +91,6 @@ public://ポストエフェクト
 	/// <param name="blob">シェーダーオブジェクト</param>
 	/// <param name="pip">パイプライン</param>
 	static void CreatePostEffectPipline(Blob& blob, PipelineSet& pip);
+
+	static void CreateMultiTexturePipline(Blob& blob, PipelineSet& pip);
 };

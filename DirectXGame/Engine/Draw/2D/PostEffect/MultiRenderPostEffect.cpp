@@ -1,13 +1,13 @@
-#include "MultiLenderPostEffect.h"
+#include "MultiRenderPostEffect.h"
 #include <d3dx12.h>
 #include"InputManager.h"
 
-const float MultiLenderPostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
-myMath::Matrix4 MultiLenderPostEffect::matProjection_;
-std::array <Blob, 5> MultiLenderPostEffect::sBlob_;//シェーダオブジェクト
-std::array <PipelineSet, 5> MultiLenderPostEffect::sPip_;
+const float MultiRenderPostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
+myMath::Matrix4 MultiRenderPostEffect::matProjection_;
+std::array <Blob, 5> MultiRenderPostEffect::sBlob_;//シェーダオブジェクト
+std::array <PipelineSet, 5> MultiRenderPostEffect::sPip_;
 
-void MultiLenderPostEffect::Initialize(WindowsApp* windowsApp)
+void MultiRenderPostEffect::Initialize(WindowsApp* windowsApp)
 {
 	//バッファの作成
 	CreateBuff();
@@ -27,7 +27,7 @@ void MultiLenderPostEffect::Initialize(WindowsApp* windowsApp)
 	CreatePipline();
 }
 
-void MultiLenderPostEffect::Draw()
+void MultiRenderPostEffect::Draw()
 {
 	if (InputManager::GetInstance()->KeyboardTriggerPush(DIK_0))
 	{
@@ -56,7 +56,7 @@ void MultiLenderPostEffect::Draw()
 	DrawCommand();
 }
 
-void MultiLenderPostEffect::VertSetting()
+void MultiRenderPostEffect::VertSetting()
 {
 	//頂点データ
 	PosUvColor vertices[] =
@@ -81,7 +81,7 @@ void MultiLenderPostEffect::VertSetting()
 	indexBuffer_->Update(indices);
 }
 
-void MultiLenderPostEffect::CreateBuff()
+void MultiRenderPostEffect::CreateBuff()
 {
 	vertexBuffer_ = std::make_unique<VertexBuffer>();
 	vertexBuffer_->Create(4, sizeof(PosUvColor));
@@ -93,7 +93,7 @@ void MultiLenderPostEffect::CreateBuff()
 	constBuffMaterial_->Create(sizeof(myMath::Matrix4));
 }
 
-void MultiLenderPostEffect::CreateTexBuff(WindowsApp* windowsApp)
+void MultiRenderPostEffect::CreateTexBuff(WindowsApp* windowsApp)
 {
 	//テクスチャリソース設定
 	CD3DX12_RESOURCE_DESC texresDesc = CD3DX12_RESOURCE_DESC::Tex2D(
@@ -119,7 +119,7 @@ void MultiLenderPostEffect::CreateTexBuff(WindowsApp* windowsApp)
 	}
 }
 
-void MultiLenderPostEffect::PreDrawScene(WindowsApp* windowsApp)
+void MultiRenderPostEffect::PreDrawScene(WindowsApp* windowsApp)
 {
 	for (int8_t i = 0; i < 2; i++)
 	{
@@ -165,7 +165,7 @@ void MultiLenderPostEffect::PreDrawScene(WindowsApp* windowsApp)
 	DirectXBase::GetInstance()->GetCommandList()->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
 
-void MultiLenderPostEffect::PostDrawScene()
+void MultiRenderPostEffect::PostDrawScene()
 {
 	for (int8_t i = 0; i < 2; i++)
 	{
@@ -175,7 +175,7 @@ void MultiLenderPostEffect::PostDrawScene()
 	}
 }
 
-void MultiLenderPostEffect::CreateRTV()
+void MultiRenderPostEffect::CreateRTV()
 {
 	//RTV用デスクリプタヒープ設定
 	D3D12_DESCRIPTOR_HEAP_DESC rtvDescHeapDesc{};
@@ -201,7 +201,7 @@ void MultiLenderPostEffect::CreateRTV()
 	}
 }
 
-void MultiLenderPostEffect::CreateDepth(WindowsApp* windowsApp)
+void MultiRenderPostEffect::CreateDepth(WindowsApp* windowsApp)
 {
 	//深度バッファリソース設定
 	CD3DX12_RESOURCE_DESC depthResDesc = CD3DX12_RESOURCE_DESC::Tex2D(
@@ -224,7 +224,7 @@ void MultiLenderPostEffect::CreateDepth(WindowsApp* windowsApp)
 	assert(SUCCEEDED(result));
 }
 
-void MultiLenderPostEffect::CreateDSV()
+void MultiRenderPostEffect::CreateDSV()
 {
 	//DSV用デスクリプタヒープ設定
 	D3D12_DESCRIPTOR_HEAP_DESC dsvDescHeapDesc{};
@@ -241,7 +241,7 @@ void MultiLenderPostEffect::CreateDSV()
 	DirectXBase::GetInstance()->GetDevice()->CreateDepthStencilView(depthBuff_.Get(), &dsvDesc, descHeapDSV_->GetCPUDescriptorHandleForHeapStart());
 }
 
-void MultiLenderPostEffect::CreatePipline()
+void MultiRenderPostEffect::CreatePipline()
 {
 	LoadShader();
 
@@ -251,7 +251,7 @@ void MultiLenderPostEffect::CreatePipline()
 	}
 }
 
-void MultiLenderPostEffect::LoadShader()
+void MultiRenderPostEffect::LoadShader()
 {
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
@@ -259,7 +259,7 @@ void MultiLenderPostEffect::LoadShader()
 	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
 }
 
-void MultiLenderPostEffect::DrawCommand()
+void MultiRenderPostEffect::DrawCommand()
 {
 	// プリミティブ形状の設定コマンド
 	DirectXBase::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
@@ -280,7 +280,7 @@ void MultiLenderPostEffect::DrawCommand()
 	DirectXBase::GetInstance()->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
 
-void MultiLenderPostEffect::CreateSRV()
+void MultiRenderPostEffect::CreateSRV()
 {
 	//SRV設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};//設定構造体

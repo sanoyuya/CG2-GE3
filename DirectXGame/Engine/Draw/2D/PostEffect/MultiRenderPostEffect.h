@@ -1,7 +1,7 @@
 #pragma once
 #include"PostEffect.h"
 
-class MultiLenderPostEffect
+class MultiRenderPostEffect
 {
 private:
 

@@ -102,6 +102,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\LevelEditor\EditorObject.cpp" />
+    <ClCompile Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.cpp" />
     <ClCompile Include="User\EngineOP.cpp" />
     <ClCompile Include="Engine\Collision\Collision.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
@@ -120,7 +121,7 @@
     <ClCompile Include="Engine\Light\LightManager.cpp" />
     <ClCompile Include="Engine\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="Engine\Draw\2D\PostEffect\PostEffect.cpp" />
-    <ClCompile Include="Engine\Draw\2D\PostEffect\MultiLenderPostEffect.cpp" />
+    <ClCompile Include="Engine\Draw\2D\PostEffect\MultiRenderPostEffect.cpp" />
     <ClCompile Include="User\GameScene.cpp" />
     <ClCompile Include="Engine\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp" />
@@ -151,6 +152,12 @@
     <ClCompile Include="Engine\Other\YFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Resources\Shaders\PostEffect\MultiTexturePostEffectPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\Model\Phong\MultiPhongPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
@@ -234,6 +241,7 @@
     <ClInclude Include="Engine\LevelEditor\EditorObject.h" />
     <ClInclude Include="Engine\Light\CircleShadow.h" />
     <ClInclude Include="Engine\Light\DirectionalLight.h" />
+    <ClInclude Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.h" />
     <ClInclude Include="User\EngineOP.h" />
     <ClInclude Include="Engine\Collision\Collision.h" />
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />
@@ -256,7 +264,7 @@
     <ClInclude Include="Engine\Light\SpotLight.h" />
     <ClInclude Include="Engine\LevelEditor\LevelEditor.h" />
     <ClInclude Include="Engine\Draw\2D\PostEffect\PostEffect.h" />
-    <ClInclude Include="Engine\Draw\2D\PostEffect\MultiLenderPostEffect.h" />
+    <ClInclude Include="Engine\Draw\2D\PostEffect\MultiRenderPostEffect.h" />
     <ClInclude Include="User\GameScene.h" />
     <ClInclude Include="Engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\IndexBuffer.h" />

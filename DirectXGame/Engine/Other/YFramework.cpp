@@ -53,8 +53,11 @@ void YFramework::Initialize()
 	/*postEffect_ = std::make_unique<PostEffect>();
 	postEffect_->Initialize(windowsApp_.get());*/
 
-	multiLenderPostEffect_= std::make_unique<MultiLenderPostEffect>();
-	multiLenderPostEffect_->Initialize(windowsApp_.get());
+	/*multiRenderPostEffect_= std::make_unique<MultiRenderPostEffect>();
+	multiRenderPostEffect_->Initialize(windowsApp_.get());*/
+
+	multiTexturePostEffect_ = std::make_unique<MultiTexturePostEffect>();
+	multiTexturePostEffect_->Initialize(windowsApp_.get());
 }
 
 void YFramework::Destroy()
@@ -111,9 +114,13 @@ void YFramework::Run()
 		Draw();
 		postEffect_->PostDrawScene();*/
 
-		multiLenderPostEffect_->PreDrawScene(windowsApp_.get());
+		/*multiRenderPostEffect_->PreDrawScene(windowsApp_.get());
 		Draw();
-		multiLenderPostEffect_->PostDrawScene();
+		multiRenderPostEffect_->PostDrawScene();*/
+
+		multiTexturePostEffect_->PreDrawScene(windowsApp_.get());
+		Draw();
+		multiTexturePostEffect_->PostDrawScene();
 
 		ImGuiManager::GetInstance()->End();
 
@@ -125,7 +132,7 @@ void YFramework::Run()
 		}
 
 		//•`‰æˆ—
-		multiLenderPostEffect_->Draw();
+		multiTexturePostEffect_->Draw();
 
 #ifdef _DEBUG
 

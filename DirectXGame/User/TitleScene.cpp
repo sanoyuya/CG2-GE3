@@ -22,7 +22,7 @@ void TitleScene::Initialize()
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
 
-	Model::SetStaticShaderMode(ShaderMode::MultiPhong);
+	Model::SetStaticShaderMode(ShaderMode::Phong);
 
 	playerTex_ = skyDome_->CreateObjModel("Resources/greenDice");
 	sphereTex_ = skyDome_->CreateObjModel("Resources/sphere");
@@ -36,7 +36,7 @@ void TitleScene::Initialize()
 
 void TitleScene::Destroy()
 {
-	
+	audioManager_->StopWave(bgm_);
 }
 
 void TitleScene::Update()
