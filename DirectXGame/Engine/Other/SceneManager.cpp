@@ -18,6 +18,9 @@ void SceneManager::Update()
 
 		//次シーンを初期化する
 		scene_->Initialize();
+
+		//シーンの名前を変更
+		sceneName_ = nextSceneName_;
 	}
 
 	scene_->Update();
@@ -41,11 +44,17 @@ void SceneManager::ChangeScene(const std::string& sceneName)
 
 	//次シーンを生成
 	nextScene_ = sceneFactory_->CreateScene(sceneName);
+	nextSceneName_ = sceneName;
 }
 
 void SceneManager::SetSceneFactory(AbstractSceneFactory* sceneFactory)
 {
 	sceneFactory_ = sceneFactory;
+}
+
+std::string SceneManager::GetSceneName()
+{
+	return sceneName_;
 }
 
 SceneManager* SceneManager::GetInstance()

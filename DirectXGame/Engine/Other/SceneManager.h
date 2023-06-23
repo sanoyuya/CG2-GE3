@@ -14,6 +14,10 @@ private:
 	//シーンファクトリー
 	AbstractSceneFactory* sceneFactory_ = nullptr;
 
+	//シーンの名前
+	std::string sceneName_;
+	std::string nextSceneName_;
+
 public:
 
 	//更新処理
@@ -29,6 +33,8 @@ public:
 	void ChangeScene(const std::string& sceneName);
 
 	void SetSceneFactory(AbstractSceneFactory* sceneFactory);
+
+	std::string GetSceneName();
 
 	//シングルトン
 	static SceneManager* GetInstance();
