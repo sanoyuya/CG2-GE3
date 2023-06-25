@@ -14,9 +14,6 @@
 #include"SpriteCommon.h"
 #include<memory>
 #include"ImGuiManager.h"
-#include"PostEffect.h"
-#include"MultiRenderPostEffect.h"
-#include"MultiTexturePostEffect.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -35,9 +32,6 @@ protected:
 
 	std::unique_ptr<WindowsApp> windowsApp_;
 	std::unique_ptr<FPS>fps_;
-	std::unique_ptr<PostEffect>postEffect_;
-	std::unique_ptr<MultiRenderPostEffect>multiRenderPostEffect_;
-	std::unique_ptr<MultiTexturePostEffect>multiTexturePostEffect_;
 
 public:
 
@@ -53,7 +47,8 @@ public:
 	virtual void Update();
 
 	//•`‰æˆ—
-	virtual void Draw() = 0;
+	virtual void SceneDraw() = 0;
+	virtual void PostEffectDraw() = 0;
 
 	//I—¹ƒtƒ‰ƒO‚Ìæ“¾
 	virtual bool& GetEndRequest();

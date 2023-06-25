@@ -49,15 +49,6 @@ void YFramework::Initialize()
 	//シーンファクトリーを生成し、マネージャにセット
 	AbstractSceneFactory* sceneFactory = new SceneFactory();
 	SceneManager::GetInstance()->SetSceneFactory(sceneFactory);
-
-	postEffect_ = std::make_unique<PostEffect>();
-	postEffect_->Initialize(windowsApp_.get());
-
-	/*multiRenderPostEffect_= std::make_unique<MultiRenderPostEffect>();
-	multiRenderPostEffect_->Initialize(windowsApp_.get());*/
-
-	multiTexturePostEffect_ = std::make_unique<MultiTexturePostEffect>();
-	multiTexturePostEffect_->Initialize(windowsApp_.get());
 }
 
 void YFramework::Destroy()
@@ -110,22 +101,7 @@ void YFramework::Run()
 
 		Update();
 
-		if (SceneManager::GetInstance()->GetSceneName() == "TITLE")
-		{
-			multiTexturePostEffect_->PreDrawScene(windowsApp_.get());
-			Draw();
-			multiTexturePostEffect_->PostDrawScene();
-		}
-		else if (SceneManager::GetInstance()->GetSceneName() == "GAME")
-		{
-			postEffect_->PreDrawScene(windowsApp_.get());
-			Draw();
-			postEffect_->PostDrawScene();
-		}
-
-		/*multiRenderPostEffect_->PreDrawScene(windowsApp_.get());
-		Draw();
-		multiRenderPostEffect_->PostDrawScene();*/
+		SceneDraw();
 
 		ImGuiManager::GetInstance()->End();
 
@@ -137,20 +113,13 @@ void YFramework::Run()
 		}
 
 		//描画処理
-		if (SceneManager::GetInstance()->GetSceneName() == "TITLE")
-		{
-			multiTexturePostEffect_->Draw();
-		}
-		else if (SceneManager::GetInstance()->GetSceneName() == "GAME")
-		{
-			postEffect_->Draw();
-		}
+		PostEffectDraw();
 
 #ifdef _DEBUG
 
 		//ImGuiManager::GetInstance()->Draw();
 
-#endif // DEBUG
+#endif _DEBUG
 
 		ImGuiManager::GetInstance()->Draw();
 
@@ -162,7 +131,11 @@ void YFramework::Run()
 	Destroy();
 }
 
-void YFramework::Draw()
+void YFramework::SceneDraw()
+{
+}
+
+void YFramework::PostEffectDraw()
 {
 }
 

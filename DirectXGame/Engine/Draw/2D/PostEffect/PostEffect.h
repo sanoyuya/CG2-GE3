@@ -51,14 +51,6 @@ private:
 	//画面クリアカラー
 	static const float sClearColor_[4];
 
-	myMath::Vector2 position_ = { 0.0f,0.0f };
-	myMath::Vector2 scale_ = { 0.0f,0.0f };
-	float rotation_ = 0.0f;
-	myMath::Vector4 color_ = { 0.0f,0.0f,0.0f,0.0f };
-	myMath::Vector2 anchorpoint_ = { 0.0f,0.0f };
-	bool flipX_ = false;
-	bool flipY_ = false;
-
 public:
 
 	/// <summary>

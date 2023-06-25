@@ -9,6 +9,15 @@ void MyGame::Initialize()
 	//基底クラスの初期化処理
 	YFramework::Initialize();
 
+	postEffect_ = std::make_unique<PostEffect>();
+	postEffect_->Initialize(windowsApp_.get());
+
+	/*multiRenderPostEffect_= std::make_unique<MultiRenderPostEffect>();
+	multiRenderPostEffect_->Initialize(windowsApp_.get());*/
+
+	multiTexturePostEffect_ = std::make_unique<MultiTexturePostEffect>();
+	multiTexturePostEffect_->Initialize(windowsApp_.get());
+
 #ifdef _DEBUG
 
 	//シーンマネージャーに最初のシーンをセット
@@ -21,7 +30,7 @@ void MyGame::Initialize()
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("EngineOP");
 
-#endif 
+#endif
 }
 
 void MyGame::Destroy()
@@ -41,7 +50,34 @@ void MyGame::Update()
 	SceneManager::GetInstance()->Update();
 }
 
-void MyGame::Draw()
+void MyGame::SceneDraw()
 {
-	SceneManager::GetInstance()->Draw();
+	if (SceneManager::GetInstance()->GetSceneName() == "TITLE")
+	{
+		multiTexturePostEffect_->PreDrawScene(windowsApp_.get());
+		SceneManager::GetInstance()->Draw();
+		multiTexturePostEffect_->PostDrawScene();
+	}
+	else if (SceneManager::GetInstance()->GetSceneName() == "GAME")
+	{
+		postEffect_->PreDrawScene(windowsApp_.get());
+		SceneManager::GetInstance()->Draw();
+		postEffect_->PostDrawScene();
+	}
+
+	/*multiRenderPostEffect_->PreDrawScene(windowsApp_.get());
+	Draw();
+	multiRenderPostEffect_->PostDrawScene();*/
+}
+
+void MyGame::PostEffectDraw()
+{
+	if (SceneManager::GetInstance()->GetSceneName() == "TITLE")
+	{
+		multiTexturePostEffect_->Draw();
+	}
+	else if (SceneManager::GetInstance()->GetSceneName() == "GAME")
+	{
+		postEffect_->Draw();
+	}
 }
