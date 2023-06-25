@@ -2,6 +2,7 @@
 #include"SceneManager.h"
 #include"PhysicsMath.h"
 #include<imgui.h>
+#include"PostEffect.h"
 
 void GameScene::Initialize()
 {
@@ -70,6 +71,23 @@ void GameScene::Update()
 	if (input_->KeyboardTriggerPush(DIK_SPACE))
 	{
 		SceneManager::GetInstance()->ChangeScene("TITLE");
+	}
+
+	if (input_->KeyboardTriggerPush(DIK_0))
+	{
+		PostEffect::SetEffectMode(EffectMode::None);
+	}
+	else if (input_->KeyboardTriggerPush(DIK_1))
+	{
+		PostEffect::SetEffectMode(EffectMode::BrightnessUP);
+	}
+	else if (input_->KeyboardTriggerPush(DIK_2))
+	{
+		PostEffect::SetEffectMode(EffectMode::Inverse);
+	}
+	else if (input_->KeyboardTriggerPush(DIK_3))
+	{
+		PostEffect::SetEffectMode(EffectMode::Blur);
 	}
 
 	CamMove();

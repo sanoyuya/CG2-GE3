@@ -323,6 +323,15 @@
     <FxCompile Include="Resources\Shaders\PostEffect\MultiTexturePostEffectPS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\BrightnessPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\InversePS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\BlurPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User\GameScene.h">

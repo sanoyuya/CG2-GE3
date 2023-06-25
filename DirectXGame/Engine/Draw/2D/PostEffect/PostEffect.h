@@ -15,6 +15,14 @@ struct VertexPosUV
 	myMath::Vector2 uv;//uv座標
 };
 
+enum EffectMode
+{
+	None,//何もしない
+	BrightnessUP,//明度を2倍で出力
+	Inverse,//色反転
+	Blur//ぼかし
+};
+
 class PostEffect
 {
 private:
@@ -44,12 +52,14 @@ private:
 	static myMath::Matrix4 matProjection_;
 
 	//シェーダオブジェクト
-	static std::array<Blob, 5> sBlob_;
+	static std::array<Blob, 4> sBlob_;
 	//パイプライン
-	static std::array<PipelineSet, 5> sPip_;
+	static std::array<PipelineSet, 4> sPip_;
 
 	//画面クリアカラー
 	static const float sClearColor_[4];
+
+	static EffectMode sEffectMode_;
 
 public:
 
@@ -73,6 +83,10 @@ public:
 	/// </summary>
 	void PostDrawScene();
 
+public:
+
+	static void SetEffectMode(const EffectMode& mode);
+
 private:
 
 	void VertSetting();
@@ -85,12 +99,14 @@ private:
 	void CreateDepth(WindowsApp* windowsApp);
 	//DSVの作成
 	void CreateDSV();
-
+	//パイプライン生成
 	void CreatePipline();
-
+	//シェーダー読み込み
 	void LoadShader();
-
+	//描画コマンド
 	void DrawCommand();
 	//SRVの作成
 	void CreateSRV();
+	//パイプラインステートとルートシグネチャの設定コマンド
+	void SetPipline();
 };

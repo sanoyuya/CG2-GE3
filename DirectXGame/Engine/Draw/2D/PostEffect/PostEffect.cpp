@@ -3,8 +3,9 @@
 
 const float PostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
 myMath::Matrix4 PostEffect::matProjection_;
-std::array <Blob, 5> PostEffect::sBlob_;//シェーダオブジェクト
-std::array <PipelineSet, 5> PostEffect::sPip_;
+std::array <Blob, 4> PostEffect::sBlob_;//シェーダオブジェクト
+std::array <PipelineSet, 4> PostEffect::sPip_;
+EffectMode PostEffect::sEffectMode_ = EffectMode::None;//何も掛けない状態で初期化
 
 void PostEffect::Initialize(WindowsApp* windowsApp)
 {
@@ -32,9 +33,8 @@ void PostEffect::Draw()
 	constBuffMap_ = matProjection_;
 	constBuffMaterial_->Update(&constBuffMap_);
 
-	// パイプラインステートとルートシグネチャの設定コマンド
-	DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[0].pipelineState.Get());
-	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[0].rootSignature.Get());
+	//パイプラインステートとルートシグネチャの設定コマンド
+	SetPipline();
 
 	//描画コマンド
 	DrawCommand();
@@ -43,12 +43,12 @@ void PostEffect::Draw()
 void PostEffect::VertSetting()
 {
 	//頂点データ
-	PosUvColor vertices[] =
+	VertexPosUV vertices[] =
 	{
-		{{-1.0f,-1.0f,0.0f},{0.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}},//左上インデックス0
-		{{-1.0f,1.0f,0.0f},{0.0f,0.0f},{1.0f,1.0f,1.0f,1.0f}},//左下インデックス1
-		{{1.0f,-1.0f,0.0f},{1.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}},//右上インデックス2
-		{{1.0f,1.0f,0.0f},{1.0f,0.0f},{1.0f,1.0f,1.0f,1.0f}},//右下インデックス3
+		{{-1.0f,-1.0f,0.0f},{0.0f,1.0f}},//左上インデックス0
+		{{-1.0f,1.0f,0.0f},{0.0f,0.0f}},//左下インデックス1
+		{{1.0f,-1.0f,0.0f},{1.0f,1.0f}},//右上インデックス2
+		{{1.0f,1.0f,0.0f},{1.0f,0.0f}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -68,7 +68,7 @@ void PostEffect::VertSetting()
 void PostEffect::CreateBuff()
 {
 	vertexBuffer_ = std::make_unique<VertexBuffer>();
-	vertexBuffer_->Create(4, sizeof(PosUvColor));
+	vertexBuffer_->Create(4, sizeof(VertexPosUV));
 
 	indexBuffer_ = std::make_unique<IndexBuffer>();
 	indexBuffer_->Create(6);
@@ -98,24 +98,6 @@ void PostEffect::CreateTexBuff(WindowsApp* windowsApp)
 		&clearValue,
 		IID_PPV_ARGS(&texBuff_));
 	assert(SUCCEEDED(result));
-
-	////画素数(1280*720=921600ピクセル)
-	//const uint32_t pixelCount = static_cast<uint32_t>(windowsApp->GetWidth() * windowsApp->GetHeight());
-	////画素1行分のデータサイズ
-	//const uint32_t rowPitch = sizeof(uint32_t) * static_cast<uint32_t>(windowsApp->GetWidth());
-	////画像全体のデータサイズ
-	//const uint32_t depthPitch = rowPitch * static_cast<uint32_t>(windowsApp->GetHeight());
-	////画像イメージ
-	//UINT* img = new UINT[pixelCount];
-	//for (uint32_t i = 0; i < pixelCount; i++)
-	//{
-	//	img[i] = 0xff0000ff;
-	//}
-
-	////テクスチャバッファにデータ転送
-	//result = texBuff_->WriteToSubresource(0, nullptr, img, rowPitch, depthPitch);
-	//assert(SUCCEEDED(result));
-	//delete[]img;
 }
 
 void PostEffect::PreDrawScene(WindowsApp* windowsApp)
@@ -152,6 +134,11 @@ void PostEffect::PostDrawScene()
 	auto barrier = CD3DX12_RESOURCE_BARRIER::Transition(texBuff_.Get(),
 		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 	DirectXBase::GetInstance()->GetCommandList()->ResourceBarrier(1, &barrier);
+}
+
+void PostEffect::SetEffectMode(const EffectMode& mode)
+{
+	sEffectMode_ = mode;
 }
 
 void PostEffect::CreateRTV()
@@ -220,16 +207,47 @@ void PostEffect::CreatePipline()
 
 	for (int8_t i = 0; i < sPip_.size(); i++)
 	{
-		Pipeline::CreatePostEffectPipline(sBlob_[0], sPip_[0]);
+		Pipeline::CreatePostEffectPipline(sBlob_[i], sPip_[i]);
 	}
 }
 
 void PostEffect::LoadShader()
 {
+#pragma region None
+
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
+
+#pragma endregion None
+
+#pragma region BrightnessUP
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[1].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[1].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[1].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BrightnessPS.hlsl", "main", "ps_5_0", sBlob_[1].ps.Get());
+
+#pragma endregion BrightnessUP
+
+#pragma region Inverse
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[2].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[2].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[2].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/InversePS.hlsl", "main", "ps_5_0", sBlob_[2].ps.Get());
+
+#pragma endregion Inverse
+
+#pragma region Blur
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[3].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[3].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BlurPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
+
+#pragma endregion Blur
 }
 
 void PostEffect::DrawCommand()
@@ -265,4 +283,27 @@ void PostEffect::CreateSRV()
 	//デスクリプタヒープを加算
 	handle_ = DirectXBase::GetInstance()->GetDescriptorHeap()->AddSRV();
 	DirectXBase::GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_.Get(), &srvDesc, handle_.cpuHandle);
+}
+
+void PostEffect::SetPipline()
+{
+	switch (sEffectMode_)
+	{
+	case None:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[0].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[0].rootSignature.Get());
+		break;
+	case BrightnessUP:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[1].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[1].rootSignature.Get());
+		break;
+	case Inverse:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[2].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[2].rootSignature.Get());
+		break;
+	case Blur:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[3].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[3].rootSignature.Get());
+		break;
+	}
 }

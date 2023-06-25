@@ -59,12 +59,12 @@ void MultiRenderPostEffect::Draw()
 void MultiRenderPostEffect::VertSetting()
 {
 	//頂点データ
-	PosUvColor vertices[] =
+	VertexPosUV vertices[] =
 	{
-		{{-1.0f,-1.0f,0.0f},{0.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}},//左上インデックス0
-		{{-1.0f,1.0f,0.0f},{0.0f,0.0f},{1.0f,1.0f,1.0f,1.0f}},//左下インデックス1
-		{{1.0f,-1.0f,0.0f},{1.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}},//右上インデックス2
-		{{1.0f,1.0f,0.0f},{1.0f,0.0f},{1.0f,1.0f,1.0f,1.0f}},//右下インデックス3
+		{{-1.0f,-1.0f,0.0f},{0.0f,1.0f}},//左上インデックス0
+		{{-1.0f,1.0f,0.0f},{0.0f,0.0f}},//左下インデックス1
+		{{1.0f,-1.0f,0.0f},{1.0f,1.0f}},//右上インデックス2
+		{{1.0f,1.0f,0.0f},{1.0f,0.0f}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -84,7 +84,7 @@ void MultiRenderPostEffect::VertSetting()
 void MultiRenderPostEffect::CreateBuff()
 {
 	vertexBuffer_ = std::make_unique<VertexBuffer>();
-	vertexBuffer_->Create(4, sizeof(PosUvColor));
+	vertexBuffer_->Create(4, sizeof(VertexPosUV));
 
 	indexBuffer_ = std::make_unique<IndexBuffer>();
 	indexBuffer_->Create(6);
