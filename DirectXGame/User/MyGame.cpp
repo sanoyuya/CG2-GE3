@@ -12,8 +12,8 @@ void MyGame::Initialize()
 	postEffect_ = std::make_unique<PostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
 
-	/*multiRenderPostEffect_= std::make_unique<MultiRenderPostEffect>();
-	multiRenderPostEffect_->Initialize(windowsApp_.get());*/
+	multiRenderPostEffect_= std::make_unique<MultiRenderPostEffect>();
+	multiRenderPostEffect_->Initialize(windowsApp_.get());
 
 	multiTexturePostEffect_ = std::make_unique<MultiTexturePostEffect>();
 	multiTexturePostEffect_->Initialize(windowsApp_.get());
@@ -66,7 +66,7 @@ void MyGame::SceneDraw()
 	}
 
 	/*multiRenderPostEffect_->PreDrawScene(windowsApp_.get());
-	Draw();
+	SceneManager::GetInstance()->Draw();
 	multiRenderPostEffect_->PostDrawScene();*/
 }
 
@@ -80,4 +80,6 @@ void MyGame::PostEffectDraw()
 	{
 		postEffect_->Draw();
 	}
+
+	//multiRenderPostEffect_->Draw();
 }

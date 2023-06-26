@@ -341,6 +341,15 @@
     <FxCompile Include="Resources\Shaders\PostEffect\UVShiftBlurPS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect\Blur</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\GrayScalePS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Model\Basic\SimpleColorPS.hlsl">
+      <Filter>Engine\リソース ファイル\Model\Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\SepiaColorPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User\GameScene.h">

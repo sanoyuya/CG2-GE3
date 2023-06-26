@@ -13,8 +13,8 @@ std::vector<std::string>Model::sFilePaths_;
 std::unordered_map<std::string, std::unique_ptr<ModelData>> Model::sModelDatas_;
 LightManager* Model::sLightManager_ = nullptr;
 uint32_t Model::sModelCount_;
-std::array <Blob, 5> Model::sBlob_;//シェーダオブジェクト
-std::array <std::array<PipelineSet, 6>, 5> Model::sPip_;
+std::array <Blob, 6> Model::sBlob_;//シェーダオブジェクト
+std::array <std::array<PipelineSet, 6>, 6> Model::sPip_;
 ShaderMode Model::sShaderMode_ = ShaderMode::Basic;//標準
 
 void Model::StaticInitialize()
@@ -31,6 +31,7 @@ void Model::StaticInitialize()
 		Pipeline::CreatePhongModelPipline(sBlob_[2], (BlendMode)i, sDevice_.Get(), sPip_[2]);//Toonシェーダー用
 		Pipeline::CreatePhongModelPipline(sBlob_[3], (BlendMode)i, sDevice_.Get(), sPip_[3]);//リムライト用
 		Pipeline::CreateMultiPhongModelPipline(sBlob_[4], (BlendMode)i, sDevice_.Get(), sPip_[4]);//マルチレンダーターゲット用
+		Pipeline::CreateBasicModelPipline(sBlob_[5], (BlendMode)i, sDevice_.Get(), sPip_[5]);//単色シェーダー用
 	}
 
 	sFilePaths_.resize(sMaxModel_);
@@ -94,9 +95,18 @@ void Model::LoadShader()
 	sBlob_[4].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/MultiPhongPS.hlsl", "main", "ps_5_0", sBlob_[4].ps.Get());
 
 #pragma endregion マルチレンダーターゲット用
+
+#pragma region Basicシェーダー用
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[5].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Basic/ModelBasicVS.hlsl", "main", "vs_5_0", sBlob_[5].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[5].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Basic/SimpleColorPS.hlsl", "main", "ps_5_0", sBlob_[5].ps.Get());
+
+#pragma endregion Basicシェーダー用
 }
 
-void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
+void Model::PiplineSet(BlendMode bMode, ShaderMode sMode)
 {
 	switch (bMode)
 	{
@@ -105,34 +115,28 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		switch (sMode)
 		{
 		case ShaderMode::Basic:
-
 			sCmdList_->SetPipelineState(sPip_[0][0].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[0][0].rootSignature.Get());
-
 			break;
 		case ShaderMode::Phong:
-
 			sCmdList_->SetPipelineState(sPip_[1][0].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[1][0].rootSignature.Get());
-
 			break;
 		case ShaderMode::Toon:
-
 			sCmdList_->SetPipelineState(sPip_[2][0].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[2][0].rootSignature.Get());
-
 			break;
 		case ShaderMode::RimLight:
-
 			sCmdList_->SetPipelineState(sPip_[3][0].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][0].rootSignature.Get());
-
 			break;
 		case ShaderMode::MultiPhong:
-
 			sCmdList_->SetPipelineState(sPip_[4][0].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[4][0].rootSignature.Get());
-
+			break;
+		case ShaderMode::SimpleColor:
+			sCmdList_->SetPipelineState(sPip_[5][0].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[5][0].rootSignature.Get());
 			break;
 		}
 
@@ -143,34 +147,28 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		switch (sMode)
 		{
 		case ShaderMode::Basic:
-
 			sCmdList_->SetPipelineState(sPip_[0][1].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[0][1].rootSignature.Get());
-
 			break;
 		case ShaderMode::Phong:
-
 			sCmdList_->SetPipelineState(sPip_[1][1].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[1][1].rootSignature.Get());
-
 			break;
 		case ShaderMode::Toon:
-
 			sCmdList_->SetPipelineState(sPip_[2][1].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[2][1].rootSignature.Get());
-
 			break;
 		case ShaderMode::RimLight:
-
 			sCmdList_->SetPipelineState(sPip_[3][1].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][1].rootSignature.Get());
-
 			break;
 		case ShaderMode::MultiPhong:
-
 			sCmdList_->SetPipelineState(sPip_[4][1].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[4][1].rootSignature.Get());
-
+			break;
+		case ShaderMode::SimpleColor:
+			sCmdList_->SetPipelineState(sPip_[5][1].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[5][1].rootSignature.Get());
 			break;
 		}
 
@@ -181,34 +179,28 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		switch (sMode)
 		{
 		case ShaderMode::Basic:
-
 			sCmdList_->SetPipelineState(sPip_[0][2].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[0][2].rootSignature.Get());
-
 			break;
 		case ShaderMode::Phong:
-
 			sCmdList_->SetPipelineState(sPip_[1][2].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[1][2].rootSignature.Get());
-
 			break;
 		case ShaderMode::Toon:
-
 			sCmdList_->SetPipelineState(sPip_[2][2].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[2][2].rootSignature.Get());
-
 			break;
 		case ShaderMode::RimLight:
-
 			sCmdList_->SetPipelineState(sPip_[3][2].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][2].rootSignature.Get());
-
 			break;
 		case ShaderMode::MultiPhong:
-
 			sCmdList_->SetPipelineState(sPip_[4][2].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[4][2].rootSignature.Get());
-
+			break;
+		case ShaderMode::SimpleColor:
+			sCmdList_->SetPipelineState(sPip_[5][2].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[5][2].rootSignature.Get());
 			break;
 		}
 
@@ -219,35 +211,28 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		switch (sMode)
 		{
 		case ShaderMode::Basic:
-
 			sCmdList_->SetPipelineState(sPip_[0][3].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[0][3].rootSignature.Get());
-
 			break;
 		case ShaderMode::Phong:
-
 			sCmdList_->SetPipelineState(sPip_[1][3].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[1][3].rootSignature.Get());
-
 			break;
 		case ShaderMode::Toon:
-
 			sCmdList_->SetPipelineState(sPip_[2][3].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[2][3].rootSignature.Get());
-
 			break;
 		case ShaderMode::RimLight:
-
 			sCmdList_->SetPipelineState(sPip_[3][3].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][3].rootSignature.Get());
-
 			break;
-
 		case ShaderMode::MultiPhong:
-
 			sCmdList_->SetPipelineState(sPip_[4][3].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[4][3].rootSignature.Get());
-
+			break;
+		case ShaderMode::SimpleColor:
+			sCmdList_->SetPipelineState(sPip_[5][3].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[5][3].rootSignature.Get());
 			break;
 		}
 
@@ -258,34 +243,28 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		switch (sMode)
 		{
 		case ShaderMode::Basic:
-
 			sCmdList_->SetPipelineState(sPip_[0][4].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[0][4].rootSignature.Get());
-
 			break;
 		case ShaderMode::Phong:
-
 			sCmdList_->SetPipelineState(sPip_[1][4].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[1][4].rootSignature.Get());
-
 			break;
 		case ShaderMode::Toon:
-
 			sCmdList_->SetPipelineState(sPip_[2][4].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[2][4].rootSignature.Get());
-
 			break;
 		case ShaderMode::RimLight:
-
 			sCmdList_->SetPipelineState(sPip_[3][4].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][4].rootSignature.Get());
-
 			break;
 		case ShaderMode::MultiPhong:
-
 			sCmdList_->SetPipelineState(sPip_[4][4].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[4][4].rootSignature.Get());
-
+			break;
+		case ShaderMode::SimpleColor:
+			sCmdList_->SetPipelineState(sPip_[5][4].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[5][4].rootSignature.Get());
 			break;
 		}
 
@@ -296,34 +275,28 @@ void Model::PiplineSet(BlendMode bMode,ShaderMode sMode)
 		switch (sMode)
 		{
 		case ShaderMode::Basic:
-
 			sCmdList_->SetPipelineState(sPip_[0][5].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[0][5].rootSignature.Get());
-
 			break;
 		case ShaderMode::Phong:
-
 			sCmdList_->SetPipelineState(sPip_[1][5].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[1][5].rootSignature.Get());
-
 			break;
 		case ShaderMode::Toon:
-
 			sCmdList_->SetPipelineState(sPip_[2][5].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[2][5].rootSignature.Get());
-
 			break;
 		case ShaderMode::RimLight:
-
 			sCmdList_->SetPipelineState(sPip_[3][5].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[3][5].rootSignature.Get());
-
 			break;
 		case ShaderMode::MultiPhong:
-
 			sCmdList_->SetPipelineState(sPip_[4][5].pipelineState.Get());
 			sCmdList_->SetGraphicsRootSignature(sPip_[4][5].rootSignature.Get());
-
+			break;
+		case ShaderMode::SimpleColor:
+			sCmdList_->SetPipelineState(sPip_[5][5].pipelineState.Get());
+			sCmdList_->SetGraphicsRootSignature(sPip_[5][5].rootSignature.Get());
 			break;
 		}
 
@@ -430,7 +403,7 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	tmp_ = color;
 	constantBuff_->Update(&tmp_);
 
-	PiplineSet(static_cast<BlendMode>(blendMode_),static_cast<ShaderMode>(shaderMode_));
+	PiplineSet(static_cast<BlendMode>(blendMode_), static_cast<ShaderMode>(shaderMode_));
 
 	// プリミティブ形状の設定コマンド
 	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
@@ -448,7 +421,7 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 	sCmdList_->SetGraphicsRootConstantBufferView(2, constantBuff_->GetAddress());
 
 	//ライトの描画
-	if (shaderMode_ != ShaderMode::Basic)
+	if (shaderMode_ != ShaderMode::Basic && shaderMode_ != ShaderMode::SimpleColor)
 	{
 		//ルートパラメータ2番にライト情報を設定
 		sLightManager_->Draw(sCmdList_.Get(), 4);

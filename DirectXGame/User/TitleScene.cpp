@@ -2,6 +2,7 @@
 #include"SceneManager.h"
 #include<imgui.h>
 #include"PhysicsMath.h"
+#include"PostEffect.h"
 
 void TitleScene::Initialize()
 {
@@ -22,8 +23,6 @@ void TitleScene::Initialize()
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
 
-	Model::SetStaticShaderMode(ShaderMode::Phong);
-
 	playerTex_ = skyDome_->CreateObjModel("Resources/greenDice");
 	sphereTex_ = skyDome_->CreateObjModel("Resources/sphere");
 	tex_ = skyDome_->CreateObjModel("Resources/purpleDice");
@@ -32,6 +31,8 @@ void TitleScene::Initialize()
 	audioManager_->PlayWave(bgm_);
 
 	LevelDataInitialize();
+
+	PostEffect::SetPower(power_);
 }
 
 void TitleScene::Destroy()
@@ -148,6 +149,7 @@ void TitleScene::LevelDataInitialize()
 		{
 			model->SetModel(tex_);
 		}
+		model->SetShader(ShaderMode::MultiPhong);
 
 		objects_.push_back(std::move(model));
 	}

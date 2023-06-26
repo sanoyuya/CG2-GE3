@@ -89,9 +89,9 @@ protected:
 
 private:
 
-	static std::array<Blob,5> sBlob_;//シェーダオブジェクト
+	static std::array<Blob,6> sBlob_;//シェーダオブジェクト
 
-	static std::array<std::array<PipelineSet, 6>,5> sPip_;
+	static std::array<std::array<PipelineSet, 6>,6> sPip_;
 
 	BlendMode blendMode_ = BlendMode::Alpha;//初期値半透明合成
 

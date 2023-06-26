@@ -44,6 +44,8 @@ private:
 
 	uint32_t bgm_ = 0;
 
+	float power_ = 3.0f;
+
 public:
 
 	//‰Šú‰»ˆ—

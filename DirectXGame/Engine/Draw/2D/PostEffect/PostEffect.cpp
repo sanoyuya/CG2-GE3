@@ -2,8 +2,8 @@
 #include <d3dx12.h>
 
 const float PostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
-std::array <Blob, 4> PostEffect::sBlob_;//シェーダオブジェクト
-std::array <PipelineSet, 4> PostEffect::sPip_;
+std::array <Blob, 7> PostEffect::sBlob_;//シェーダオブジェクト
+std::array <PipelineSet, 7> PostEffect::sPip_;
 EffectMode PostEffect::sEffectMode_ = EffectMode::None;//何も掛けない状態で初期化
 float PostEffect::power_ = 0.0f;
 
@@ -258,6 +258,33 @@ void PostEffect::LoadShader()
 	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BlurPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
 
 #pragma endregion Blur
+
+#pragma region GaussianBlur
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[4].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[4].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[4].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/GaussianBlurPS.hlsl", "main", "ps_5_0", sBlob_[4].ps.Get());
+
+#pragma endregion GaussianBlur
+
+#pragma region GrayScale
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[5].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[5].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[5].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/GrayScalePS.hlsl", "main", "ps_5_0", sBlob_[5].ps.Get());
+
+#pragma endregion GrayScale
+
+#pragma region SepiaColor
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[6].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[6].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[6].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/SepiaColorPS.hlsl", "main", "ps_5_0", sBlob_[6].ps.Get());
+
+#pragma endregion SepiaColor
 }
 
 void PostEffect::DrawCommand()
@@ -314,6 +341,18 @@ void PostEffect::SetPipline()
 	case Blur:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[3].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[3].rootSignature.Get());
+		break;
+	case GaussianBlur:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[4].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[4].rootSignature.Get());
+		break;
+	case GrayScale:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[5].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[5].rootSignature.Get());
+		break;
+	case SepiaColor:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[6].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[6].rootSignature.Get());
 		break;
 	}
 }

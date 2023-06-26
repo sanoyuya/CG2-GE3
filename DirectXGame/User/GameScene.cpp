@@ -34,20 +34,21 @@ void GameScene::Initialize()
 	sphere_->SetShaderMode(ShaderMode::Phong);
 	sphere_->SetModel(sphereTex_);
 	sphereTrans_.Initialize();
-	sphereTrans_.translation.x = -3.0f;
+	sphereTrans_.translation = { -3.0f ,-3.0f,0.0f };
 
 	//^‚ñ’†‚Ì‹…
 	sphere2_ = std::make_unique<Model>();
 	sphere2_->SetShaderMode(ShaderMode::Toon);
 	sphere2_->SetModel(sphereTex_);
 	sphere2Trans_.Initialize();
+	sphere2Trans_.translation = { 0.0f ,-3.0f,0.0f };
 
 	//‰E‚Ì‹…
 	sphere3_ = std::make_unique<Model>();
 	sphere3_->SetShaderMode(ShaderMode::RimLight);
 	sphere3_->SetModel(sphereTex_);
 	sphere3Trans_.Initialize();
-	sphere3Trans_.translation.x = 3.0f;
+	sphere3Trans_.translation = { 3.0f ,-3.0f,0.0f };
 
 	lightSphere_ = std::make_unique<Model>();
 	lightSphere_->SetModel(sphereTex_);
@@ -89,6 +90,10 @@ void GameScene::Update()
 	{
 		PostEffect::SetEffectMode(EffectMode::Blur);
 	}
+	else if (input_->KeyboardTriggerPush(DIK_4))
+	{
+		PostEffect::SetEffectMode(EffectMode::GrayScale);
+	}
 
 	blurPower-=1.0f/12.0f;
 	if (input_->KeyboardTriggerPush(DIK_O))
@@ -123,9 +128,9 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	model_->DrawModel(&modelTrans_);
-	/*sphere_->DrawModel(&sphereTrans_, color_);
+	sphere_->DrawModel(&sphereTrans_, color_);
 	sphere2_->DrawModel(&sphere2Trans_, color_);
-	sphere3_->DrawModel(&sphere3Trans_, color_);*/
+	sphere3_->DrawModel(&sphere3Trans_, color_);
 	if (lightDisplayFlag_)
 	{
 		lightSphere_->DrawModel(&lightSphereTrans_, { lightColor_.x,lightColor_.y,lightColor_.z,0.5f });

@@ -84,3 +84,8 @@ void EditorObject::SetColliderSize(const myMath::Vector3& colliderSize)
 {
 	colliderSize_ = colliderSize;
 }
+
+void EditorObject::SetShader(const ShaderMode& mode)
+{
+	model_->SetShaderMode(mode);
+}

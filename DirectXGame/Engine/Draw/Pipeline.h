@@ -20,7 +20,8 @@ enum class ShaderMode
 	Phong,//フォンシェーディング
 	Toon,//トゥーンシェーディング
 	RimLight,//リムライト
-	MultiPhong//マルチレンダーターゲット用
+	MultiPhong,//マルチレンダーターゲット用
+	SimpleColor//単色シェーダー用
 };
 
 struct PipelineSet

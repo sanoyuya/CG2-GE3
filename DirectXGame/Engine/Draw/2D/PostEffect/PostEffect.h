@@ -20,7 +20,10 @@ enum EffectMode
 	None,//何もしない
 	BrightnessUP,//明度を2倍で出力
 	Inverse,//色反転
-	Blur//ぼかし
+	Blur,//ぼかし
+	GaussianBlur,//ガウシアンブラー	
+	GrayScale,//モノクロ
+	SepiaColor//セピアカラー
 };
 
 class PostEffect
@@ -52,9 +55,9 @@ private:
 	static myMath::Matrix4 matProjection_;
 
 	//シェーダオブジェクト
-	static std::array<Blob, 4> sBlob_;
+	static std::array<Blob, 7> sBlob_;
 	//パイプライン
-	static std::array<PipelineSet, 4> sPip_;
+	static std::array<PipelineSet, 7> sPip_;
 
 	//画面クリアカラー
 	static const float sClearColor_[4];

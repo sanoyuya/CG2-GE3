@@ -7,5 +7,6 @@ float4 main(VSOutput input) : SV_TARGET
 {
     float4 texcolor = tex.Sample(smp, input.uv);
    
-    return float4(1.0f - texcolor.rgb, 1);
+    float3 grayScale = (texcolor.r * 0.299 + texcolor.g * 0.597 + texcolor.b * 0.114);
+    return float4(grayScale, 1.0f);
 }

@@ -35,4 +35,5 @@ public:
 	void SetName(const std::string& name);
 	void SetColliderCenter(const myMath::Vector3& colliderCenter);
 	void SetColliderSize(const myMath::Vector3& colliderSize);
+	void SetShader(const ShaderMode& mode);
 };
