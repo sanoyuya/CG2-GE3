@@ -59,6 +59,8 @@ private:
 	Transform assimpModelTrans_;
 	uint32_t assimpModelTex_;
 
+	float blurPower = 0.0f;
+
 public:
 
 	//‰Šú‰»ˆ—

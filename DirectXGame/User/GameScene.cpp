@@ -90,6 +90,14 @@ void GameScene::Update()
 		PostEffect::SetEffectMode(EffectMode::Blur);
 	}
 
+	blurPower-=1.0f/12.0f;
+	if (input_->KeyboardTriggerPush(DIK_O))
+	{
+		blurPower = 5.0f;
+	}
+	blurPower = std::clamp(blurPower, 0.0f,5.0f);
+	PostEffect::SetPower(blurPower);
+
 	CamMove();
 	Rotation();
 

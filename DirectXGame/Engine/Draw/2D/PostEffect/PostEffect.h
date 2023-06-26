@@ -47,7 +47,7 @@ private:
 	// 定数バッファ
 	std::unique_ptr<ConstantBuffer> constBuffMaterial_ = {};
 	//定数バッファのマッピング用ポインタ
-	myMath::Matrix4 constBuffMap_ = {};
+	float constBuffMap_ = {};
 	//プロジェクション行列
 	static myMath::Matrix4 matProjection_;
 
@@ -60,6 +60,8 @@ private:
 	static const float sClearColor_[4];
 
 	static EffectMode sEffectMode_;
+
+	static float power_;
 
 public:
 
@@ -86,6 +88,8 @@ public:
 public:
 
 	static void SetEffectMode(const EffectMode& mode);
+
+	static void SetPower(const float power);
 
 private:
 

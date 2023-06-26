@@ -2,10 +2,10 @@
 #include <d3dx12.h>
 
 const float PostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
-myMath::Matrix4 PostEffect::matProjection_;
 std::array <Blob, 4> PostEffect::sBlob_;//シェーダオブジェクト
 std::array <PipelineSet, 4> PostEffect::sPip_;
 EffectMode PostEffect::sEffectMode_ = EffectMode::None;//何も掛けない状態で初期化
+float PostEffect::power_ = 0.0f;
 
 void PostEffect::Initialize(WindowsApp* windowsApp)
 {
@@ -29,8 +29,7 @@ void PostEffect::Initialize(WindowsApp* windowsApp)
 
 void PostEffect::Draw()
 {
-	matProjection_ = myMath::MakeIdentity();
-	constBuffMap_ = matProjection_;
+	constBuffMap_ = power_;
 	constBuffMaterial_->Update(&constBuffMap_);
 
 	//パイプラインステートとルートシグネチャの設定コマンド
@@ -138,7 +137,18 @@ void PostEffect::PostDrawScene()
 
 void PostEffect::SetEffectMode(const EffectMode& mode)
 {
-	sEffectMode_ = mode;
+	if (sEffectMode_ != mode)
+	{
+		sEffectMode_ = mode;
+	}
+}
+
+void PostEffect::SetPower(const float power)
+{
+	if (power_ != power)
+	{
+		power_ = power;
+	}
 }
 
 void PostEffect::CreateRTV()

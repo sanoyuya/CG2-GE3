@@ -130,6 +130,9 @@
     <Filter Include="Engine\ヘッダーファイル\LevelEditor">
       <UniqueIdentifier>{d8effa6f-0125-45d0-8c28-7cda3d3702e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\リソース ファイル\PosEffect\Blur">
+      <UniqueIdentifier>{c19b8a51-5014-461a-8ec4-34950dc0b9d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -330,7 +333,13 @@
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\PostEffect\BlurPS.hlsl">
-      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+      <Filter>Engine\リソース ファイル\PosEffect\Blur</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\GaussianBlurPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect\Blur</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\UVShiftBlurPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect\Blur</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
