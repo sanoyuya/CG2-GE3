@@ -18,19 +18,8 @@ void MyGame::Initialize()
 	multiTexturePostEffect_ = std::make_unique<MultiTexturePostEffect>();
 	multiTexturePostEffect_->Initialize(windowsApp_.get());
 
-#ifdef _DEBUG
-
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("TITLE");
-
-#endif
-
-#ifndef _DEBUG
-
-	//シーンマネージャーに最初のシーンをセット
-	SceneManager::GetInstance()->ChangeScene("EngineOP");
-
-#endif
 }
 
 void MyGame::Destroy()

@@ -8,27 +8,29 @@ float4 main(VSOutput input) : SV_TARGET
 {
     float4 col = { 0.0f, 0.0f, 0.0f, 0.0f };
     float4 color = tex0.Sample(smp, input.uv);
-    float4 colorTex0 = float4(float3(1 - color.rgb), color.a);
-    float4 colorTex1 = tex1.Sample(smp, input.uv);
+    float4 colorTex0 = { 0.0f, 0.0f, 0.0f, 0.0f };
+    float4 colorTex1 = color;
     
     float shiftU = 1.0f / 1280.0f;
     float shiftV = 1.0f / 720.0f;
     int num = 0;
     
-    for (float i = -power; i <= power; i++)
+    for (float i = -2.0f; i <= 2.0f; i++)
     {
-        for (float j = -power; j <= power; j++)
+        for (float j = -2.0f; j <= 2.0f; j++)
         {
-            colorTex1 += tex1.Sample(smp, input.uv + float2(shiftU * i, shiftV * j));
+            float2 pickUV = input.uv + float2(shiftU * i, shiftV * j);
+            pickUV = clamp(pickUV, 0.0f, 0.9999f);
+            colorTex0 += tex1.Sample(smp, pickUV);
             num++;
         }
     }
-    colorTex1 = float4(colorTex1.rgb / num, 1);
+    colorTex0 = float4(colorTex0.rgb / num, 1);
     
-    col = colorTex0;
+    col = colorTex1;
     if (fmod(input.uv.y,0.1f)<0.05f)
     {
-        col = colorTex1;
+        col = colorTex0;
     }
     
     return float4(col.rgb, 1);

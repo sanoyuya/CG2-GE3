@@ -30,7 +30,9 @@ float4 main(VSOutput input) : SV_TARGET
     {
         for (float j = -power; j <= power; j++)
         {
-            col += tex.Sample(smp, input.uv + float2(shiftU * i, shiftV * j));
+            float2 pickUV = input.uv + float2(shiftU * i, shiftV * j);
+            pickUV = clamp(pickUV, 0.0f, 0.9999f);
+            col += tex.Sample(smp, pickUV);
             num++;
         }
     }

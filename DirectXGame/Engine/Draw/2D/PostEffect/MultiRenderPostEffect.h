@@ -8,6 +8,7 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12Resource>texBuff_[2];
 
 	DescriptorHeap::DescriptorHeapViewHandle handle_;
+	DescriptorHeap::DescriptorHeapViewHandle handle2_;
 
 	//深度バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource>depthBuff_;

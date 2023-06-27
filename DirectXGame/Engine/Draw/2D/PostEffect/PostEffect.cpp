@@ -2,8 +2,8 @@
 #include <d3dx12.h>
 
 const float PostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
-std::array <Blob, 7> PostEffect::sBlob_;//シェーダオブジェクト
-std::array <PipelineSet, 7> PostEffect::sPip_;
+std::array <Blob, 8> PostEffect::sBlob_;//シェーダオブジェクト
+std::array <PipelineSet, 8> PostEffect::sPip_;
 EffectMode PostEffect::sEffectMode_ = EffectMode::None;//何も掛けない状態で初期化
 float PostEffect::power_ = 0.0f;
 
@@ -89,6 +89,8 @@ void PostEffect::CreateTexBuff(WindowsApp* windowsApp)
 	auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0);
 	auto clearValue = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, sClearColor_);
 	//テクスチャバッファの生成
+
+#ifdef _DEBUG
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
@@ -97,6 +99,15 @@ void PostEffect::CreateTexBuff(WindowsApp* windowsApp)
 		&clearValue,
 		IID_PPV_ARGS(&texBuff_));
 	assert(SUCCEEDED(result));
+#else
+	DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
+		&heapProperties,
+		D3D12_HEAP_FLAG_NONE,
+		&texresDesc,
+		D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
+		&clearValue,
+		IID_PPV_ARGS(&texBuff_));
+#endif // _DEBUG
 }
 
 void PostEffect::PreDrawScene(WindowsApp* windowsApp)
@@ -158,8 +169,12 @@ void PostEffect::CreateRTV()
 	rtvDescHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
 	rtvDescHeapDesc.NumDescriptors = 1;
 	//RTV用デスクリプタヒープを作成
+#ifdef _DEBUG
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateDescriptorHeap(&rtvDescHeapDesc, IID_PPV_ARGS(&descHeapRTV_));
 	assert(SUCCEEDED(result));
+#else
+	DirectXBase::GetInstance()->GetDevice()->CreateDescriptorHeap(&rtvDescHeapDesc, IID_PPV_ARGS(&descHeapRTV_));
+#endif // _DEBUG
 
 	//レンダーターゲットビューの設定
 	D3D12_RENDER_TARGET_VIEW_DESC renderTargetViewDesc{};
@@ -184,6 +199,8 @@ void PostEffect::CreateDepth(WindowsApp* windowsApp)
 	//深度バッファ生成
 	auto clearValue = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_D32_FLOAT, 1.0f, 0);
 	auto properties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+
+#ifdef _DEBUG
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&properties,
 		D3D12_HEAP_FLAG_NONE,
@@ -192,6 +209,15 @@ void PostEffect::CreateDepth(WindowsApp* windowsApp)
 		&clearValue,
 		IID_PPV_ARGS(&depthBuff_));
 	assert(SUCCEEDED(result));
+#else
+	DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
+		&properties,
+		D3D12_HEAP_FLAG_NONE,
+		&depthResDesc,
+		D3D12_RESOURCE_STATE_DEPTH_WRITE,
+		&clearValue,
+		IID_PPV_ARGS(&depthBuff_));
+#endif // DEBUG
 }
 
 void PostEffect::CreateDSV()
@@ -201,8 +227,12 @@ void PostEffect::CreateDSV()
 	dsvDescHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
 	dsvDescHeapDesc.NumDescriptors = 1;
 	//DSV用デスクリプタヒープを作成
+#ifdef _DEBUG
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateDescriptorHeap(&dsvDescHeapDesc, IID_PPV_ARGS(&descHeapDSV_));
 	assert(SUCCEEDED(result));
+#else
+	DirectXBase::GetInstance()->GetDevice()->CreateDescriptorHeap(&dsvDescHeapDesc, IID_PPV_ARGS(&descHeapDSV_));
+#endif // _DEBUG
 
 	//デスクリプタヒープにDSV作成
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
@@ -285,6 +315,15 @@ void PostEffect::LoadShader()
 	sBlob_[6].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/SepiaColorPS.hlsl", "main", "ps_5_0", sBlob_[6].ps.Get());
 
 #pragma endregion SepiaColor
+
+#pragma region UVShift
+
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[7].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[7].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[7].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/UVShiftPS.hlsl", "main", "ps_5_0", sBlob_[7].ps.Get());
+
+#pragma endregion UVShift
 }
 
 void PostEffect::DrawCommand()
@@ -353,6 +392,10 @@ void PostEffect::SetPipline()
 	case SepiaColor:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[6].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[6].rootSignature.Get());
+		break;
+	case UVShift:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[7].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[7].rootSignature.Get());
 		break;
 	}
 }

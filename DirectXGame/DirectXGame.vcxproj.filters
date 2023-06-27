@@ -338,9 +338,6 @@
     <FxCompile Include="Resources\Shaders\PostEffect\GaussianBlurPS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect\Blur</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\PostEffect\UVShiftBlurPS.hlsl">
-      <Filter>Engine\リソース ファイル\PosEffect\Blur</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shaders\PostEffect\GrayScalePS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </FxCompile>
@@ -348,6 +345,9 @@
       <Filter>Engine\リソース ファイル\Model\Basic</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\PostEffect\SepiaColorPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\UVShiftPS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </FxCompile>
   </ItemGroup>

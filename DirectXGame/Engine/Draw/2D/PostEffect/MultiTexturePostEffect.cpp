@@ -93,6 +93,8 @@ void MultiTexturePostEffect::CreateTexBuff(WindowsApp* windowsApp)
 		auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0);
 		auto clearValue = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, sClearColor_);
 		//テクスチャバッファの生成
+
+#ifdef _DEBUG
 		HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 			&heapProperties,
 			D3D12_HEAP_FLAG_NONE,
@@ -101,6 +103,15 @@ void MultiTexturePostEffect::CreateTexBuff(WindowsApp* windowsApp)
 			&clearValue,
 			IID_PPV_ARGS(&texBuff_[i]));
 		assert(SUCCEEDED(result));
+#else
+		DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
+			&heapProperties,
+			D3D12_HEAP_FLAG_NONE,
+			&texresDesc,
+			D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
+			&clearValue,
+			IID_PPV_ARGS(&texBuff_[i]));
+#endif // _DEBUG
 	}
 }
 
@@ -167,8 +178,12 @@ void MultiTexturePostEffect::CreateRTV()
 	rtvDescHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
 	rtvDescHeapDesc.NumDescriptors = 2;
 	//RTV用デスクリプタヒープを作成
+#ifdef _DEBUG
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateDescriptorHeap(&rtvDescHeapDesc, IID_PPV_ARGS(&descHeapRTV_));
 	assert(SUCCEEDED(result));
+#else
+	DirectXBase::GetInstance()->GetDevice()->CreateDescriptorHeap(&rtvDescHeapDesc, IID_PPV_ARGS(&descHeapRTV_));
+#endif // _DEBUG
 
 	//レンダーターゲットビューの設定
 	D3D12_RENDER_TARGET_VIEW_DESC renderTargetViewDesc{};
@@ -199,6 +214,8 @@ void MultiTexturePostEffect::CreateDepth(WindowsApp* windowsApp)
 	//深度バッファ生成
 	auto clearValue = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_D32_FLOAT, 1.0f, 0);
 	auto properties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+
+#ifdef _DEBUG
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&properties,
 		D3D12_HEAP_FLAG_NONE,
@@ -207,6 +224,15 @@ void MultiTexturePostEffect::CreateDepth(WindowsApp* windowsApp)
 		&clearValue,
 		IID_PPV_ARGS(&depthBuff_));
 	assert(SUCCEEDED(result));
+#else
+	DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
+		&properties,
+		D3D12_HEAP_FLAG_NONE,
+		&depthResDesc,
+		D3D12_RESOURCE_STATE_DEPTH_WRITE,
+		&clearValue,
+		IID_PPV_ARGS(&depthBuff_));
+#endif // _DEBUG
 }
 
 void MultiTexturePostEffect::CreateDSV()
@@ -216,8 +242,12 @@ void MultiTexturePostEffect::CreateDSV()
 	dsvDescHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
 	dsvDescHeapDesc.NumDescriptors = 1;
 	//DSV用デスクリプタヒープを作成
+#ifdef _DEBUG
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateDescriptorHeap(&dsvDescHeapDesc, IID_PPV_ARGS(&descHeapDSV_));
 	assert(SUCCEEDED(result));
+#else
+	DirectXBase::GetInstance()->GetDevice()->CreateDescriptorHeap(&dsvDescHeapDesc, IID_PPV_ARGS(&descHeapDSV_));
+#endif // _DEBUG
 
 	//デスクリプタヒープにDSV作成
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
@@ -257,11 +287,11 @@ void MultiTexturePostEffect::DrawCommand()
 
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(1,
-		CD3DX12_GPU_DESCRIPTOR_HANDLE(handle_.gpuHandle, 0,
+		CD3DX12_GPU_DESCRIPTOR_HANDLE(handle_[0].gpuHandle, 0,
 			DirectXBase::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)));
 	//SRVヒープ先頭にあるSRVをルートパラメーター2番に設定
 	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(2,
-		CD3DX12_GPU_DESCRIPTOR_HANDLE(handle_.gpuHandle, 1,
+		CD3DX12_GPU_DESCRIPTOR_HANDLE(handle_[1].gpuHandle, 0,
 			DirectXBase::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)));
 
 	auto ibView = indexBuffer_->GetView();
@@ -281,11 +311,12 @@ void MultiTexturePostEffect::CreateSRV()
 	srvDesc.Texture2D.MipLevels = 2;
 
 	//デスクリプタヒープを加算
-	handle_ = DirectXBase::GetInstance()->GetDescriptorHeap()->AddSRV();
+	handle_[0] = DirectXBase::GetInstance()->GetDescriptorHeap()->AddSRV();
+	handle_[1] = DirectXBase::GetInstance()->GetDescriptorHeap()->AddSRV();
 	for (int8_t i = 0; i < 2; i++)
 	{
 		DirectXBase::GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_[i].Get(), &srvDesc,
-			CD3DX12_CPU_DESCRIPTOR_HANDLE(handle_.cpuHandle, i,
+			CD3DX12_CPU_DESCRIPTOR_HANDLE(handle_[i].cpuHandle, 0,
 				DirectXBase::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)));
 	}
 }

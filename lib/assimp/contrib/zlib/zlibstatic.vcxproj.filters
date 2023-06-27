@@ -31,9 +31,6 @@
     <ClInclude Include="$(SolutionDir)\lib\assimp\contrib\zlib\zutil.h" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="$(SolutionDir)\lib\assimp\contrib\zlib\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Header Files">
       <UniqueIdentifier>{60D4632D-6B94-3E62-BAAB-55DA25B3A13A}</UniqueIdentifier>
     </Filter>

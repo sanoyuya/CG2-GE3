@@ -16,6 +16,8 @@ void TitleScene::Initialize()
 	lightManager_.reset(lightManager_->Create());
 	Model::SetLight(lightManager_.get());
 
+	Model::SetStaticShaderMode(ShaderMode::MultiPhong);
+
 	//“V‹…
 	skyDome_ = std::make_unique<Model>();
 	//model->SetModelBlendMode(BlendMode::Sub);

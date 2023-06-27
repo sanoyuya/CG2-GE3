@@ -7,6 +7,7 @@
 #include"BaseScene.h"
 #include"Collision.h"
 #include"LightManager.h"
+#include"PostEffect.h"
 
 class GameScene :public BaseScene
 {
@@ -59,7 +60,8 @@ private:
 	Transform assimpModelTrans_;
 	uint32_t assimpModelTex_;
 
-	float blurPower = 0.0f;
+	float blurPower = 3.0f;
+	EffectMode mode_ = EffectMode::None;
 
 public:
 

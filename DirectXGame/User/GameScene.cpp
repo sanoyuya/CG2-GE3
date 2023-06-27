@@ -2,7 +2,6 @@
 #include"SceneManager.h"
 #include"PhysicsMath.h"
 #include<imgui.h>
-#include"PostEffect.h"
 
 void GameScene::Initialize()
 {
@@ -26,12 +25,14 @@ void GameScene::Initialize()
 	model_->SetModel(modelTex_);
 	modelTrans_.Initialize();
 
+	Model::SetStaticShaderMode(ShaderMode::SimpleColor);
+
 	sphereTex_ = Model::CreateObjModel("Resources/sphere", true);
 	sphere2Tex_ = Model::CreateObjModel("Resources/sphere2",true);
 	
 	//ç∂ÇÃãÖ
 	sphere_ = std::make_unique<Model>();
-	sphere_->SetShaderMode(ShaderMode::Phong);
+	sphere_->SetShaderMode(ShaderMode::SimpleColor);
 	sphere_->SetModel(sphereTex_);
 	sphereTrans_.Initialize();
 	sphereTrans_.translation = { -3.0f ,-3.0f,0.0f };
@@ -74,33 +75,10 @@ void GameScene::Update()
 		SceneManager::GetInstance()->ChangeScene("TITLE");
 	}
 
-	if (input_->KeyboardTriggerPush(DIK_0))
-	{
-		PostEffect::SetEffectMode(EffectMode::None);
-	}
-	else if (input_->KeyboardTriggerPush(DIK_1))
-	{
-		PostEffect::SetEffectMode(EffectMode::BrightnessUP);
-	}
-	else if (input_->KeyboardTriggerPush(DIK_2))
-	{
-		PostEffect::SetEffectMode(EffectMode::Inverse);
-	}
-	else if (input_->KeyboardTriggerPush(DIK_3))
-	{
-		PostEffect::SetEffectMode(EffectMode::Blur);
-	}
-	else if (input_->KeyboardTriggerPush(DIK_4))
-	{
-		PostEffect::SetEffectMode(EffectMode::GrayScale);
-	}
+	ImGuiUpdate();
 
-	blurPower-=1.0f/12.0f;
-	if (input_->KeyboardTriggerPush(DIK_O))
-	{
-		blurPower = 5.0f;
-	}
-	blurPower = std::clamp(blurPower, 0.0f,5.0f);
+	PostEffect::SetEffectMode(mode_);
+
 	PostEffect::SetPower(blurPower);
 
 	CamMove();
@@ -113,8 +91,6 @@ void GameScene::Update()
 	lightManager_->SetPointLightPos(0, lightPos_);
 	lightManager_->SetPointLightColor(0, lightColor_);
 	lightManager_->SetPointLightAtten(0, lightAtten_);
-
-	ImGuiUpdate();
 
 	modelTrans_.TransUpdate(camera_.get());//ìVãÖ
 	sphereTrans_.TransUpdate(camera_.get());//ãÖ
@@ -171,6 +147,7 @@ void GameScene::CamMove()
 
 void GameScene::ImGuiUpdate()
 {
+	//ãÖ
 	ImGui::Begin("sphere");
 	ImGui::ColorEdit4("color", &color_.x);
 	if(ImGui::Button("texFlag"))
@@ -191,6 +168,8 @@ void GameScene::ImGuiUpdate()
 		}
 	}
 	ImGui::End();
+
+	//ÉâÉCÉg
 	ImGui::Begin("light");
 	ImGui::SliderFloat3("position", &lightPos_.x, -10.0f, 10.0f);
 	ImGui::ColorEdit3("color", &lightColor_.x);
@@ -207,4 +186,11 @@ void GameScene::ImGuiUpdate()
 		}
 	}
 	ImGui::End();
+
+	int mode = static_cast<int>(mode_);
+	ImGui::Begin("postEffect");
+	ImGui::SliderInt("effectMode", &mode, 0, 7);
+	ImGui::SliderFloat("blurPower", &blurPower, 0.0f, 10.0f);
+	ImGui::End();
+	mode_= static_cast<EffectMode>(mode);
 }
