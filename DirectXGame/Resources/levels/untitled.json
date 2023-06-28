@@ -6,9 +6,9 @@
             "name": "Cube",
             "transform": {
                 "translation": [
-                    2.169999837875366,
-                    -2.93999981880188,
-                    0.0
+                    0.0,
+                    0.0,
+                    5.0
                 ],
                 "rotation": [
                     0.0,
@@ -18,60 +18,9 @@
                 "scaling": [
                     1.0,
                     1.0,
-                    1.0
+                    5.0
                 ]
-            },
-            "file_name": "player",
-            "collider": {
-                "type": "BOX",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            },
-            "children": [
-                {
-                    "type": "MESH",
-                    "name": "ICO球",
-                    "transform": {
-                        "translation": [
-                            0.0,
-                            0.0,
-                            3.0
-                        ],
-                        "rotation": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scaling": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "file_name": "child",
-                    "collider": {
-                        "type": "BOX",
-                        "center": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "size": [
-                            2.0,
-                            2.0,
-                            2.0
-                        ]
-                    }
-                }
-            ]
+            }
         },
         {
             "type": "LIGHT",
@@ -117,46 +66,33 @@
         },
         {
             "type": "MESH",
-            "name": "ICO球.001",
+            "name": "Cube.001",
             "transform": {
                 "translation": [
-                    6.159999847412109,
-                    0.0,
-                    0.0
+                    4.170289039611816,
+                    -4.198794364929199,
+                    5.0
                 ],
                 "rotation": [
-                    11.700002670288086,
+                    0.0,
                     -0.0,
                     0.0
                 ],
                 "scaling": [
                     1.0,
                     1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "BOX",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
+                    5.0
                 ]
             }
         },
         {
             "type": "MESH",
-            "name": "ICO球.002",
+            "name": "Cube.002",
             "transform": {
                 "translation": [
-                    -3.0,
                     0.0,
-                    0.0
+                    8.155607223510742,
+                    5.0
                 ],
                 "rotation": [
                     0.0,
@@ -166,21 +102,112 @@
                 "scaling": [
                     1.0,
                     1.0,
-                    1.0
+                    5.0
                 ]
-            },
-            "file_name": "sphere",
-            "collider": {
-                "type": "BOX",
-                "center": [
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.003",
+            "transform": {
+                "translation": [
+                    11.276250839233398,
+                    3.079784870147705,
+                    5.0
+                ],
+                "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
+                "scaling": [
+                    1.0,
+                    1.0,
+                    5.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.004",
+            "transform": {
+                "translation": [
+                    11.276250839233398,
+                    -9.567306518554688,
+                    5.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    5.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.005",
+            "transform": {
+                "translation": [
+                    -5.745876312255859,
+                    -9.567306518554688,
+                    5.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    5.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.006",
+            "transform": {
+                "translation": [
+                    -9.246296882629395,
+                    -1.0214653015136719,
+                    5.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    5.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.007",
+            "transform": {
+                "translation": [
+                    -12.249996185302734,
+                    5.9942426681518555,
+                    5.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    5.0
                 ]
             }
         }

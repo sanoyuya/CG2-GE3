@@ -10,7 +10,7 @@ void GameScene::Initialize()
 
 	camera_ = std::make_unique<Camera>();
 	camera_->Initialize(true);
-	camera_->SetEye({ 0.0f,0.0f,0.0f });
+	camera_->SetEye({ 0.0f,30.0f,-30.0f });
 
 	lightManager_.reset(lightManager_->Create());
 	Model::SetLight(lightManager_.get());
@@ -39,6 +39,10 @@ void GameScene::Update()
 	{
 		SceneManager::GetInstance()->ChangeScene("TITLE");
 	}
+	else if (input_->KeyboardTriggerPush(DIK_R))
+	{
+		gameLevelData_->ReLoad();
+	}
 
 	lightManager_->Update();
 
@@ -47,6 +51,8 @@ void GameScene::Update()
 	lightManager_->SetPointLightPos(0, lightPos_);
 	lightManager_->SetPointLightColor(0, lightColor_);
 	lightManager_->SetPointLightAtten(0, lightAtten_);
+
+	camera_->Update(true);
 
 	gameLevelData_->Update(camera_.get());
 
