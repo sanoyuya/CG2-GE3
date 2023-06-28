@@ -24,7 +24,8 @@ enum EffectMode
 	GaussianBlur,//ガウシアンブラー	
 	GrayScale,//モノクロ
 	SepiaColor,//セピアカラー
-	UVShift//UVずらし
+	UVShift,//UVずらし
+	Bloom//ブルーム
 };
 
 class PostEffect
@@ -56,9 +57,9 @@ private:
 	static myMath::Matrix4 matProjection_;
 
 	//シェーダオブジェクト
-	static std::array<Blob, 8> sBlob_;
+	static std::array<Blob, 9> sBlob_;
 	//パイプライン
-	static std::array<PipelineSet, 8> sPip_;
+	static std::array<PipelineSet, 9> sPip_;
 
 	//画面クリアカラー
 	static const float sClearColor_[4];

@@ -132,7 +132,6 @@ PSOutput main(VSOutput input) : SV_TARGET
 
     //シェーディングによる色で描画
     output.target0 = shaderColor;
-    output.target1 = float4(1 - (shaderColor).rgb, color.a);
-    //output.target1 = float4(0,0,0, color.a);
+    output.target1 = shaderColor;
     return output;
 }

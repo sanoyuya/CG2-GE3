@@ -350,6 +350,9 @@
     <FxCompile Include="Resources\Shaders\PostEffect\UVShiftPS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\BloomPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User\GameScene.h">

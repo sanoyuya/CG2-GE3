@@ -62,6 +62,7 @@ private:
 
 	float blurPower = 3.0f;
 	EffectMode mode_ = EffectMode::None;
+	ShaderMode shaderMode_ = ShaderMode::Basic;
 
 public:
 

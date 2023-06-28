@@ -459,17 +459,26 @@ void Model::SetModel(const uint32_t modelHandle)
 
 void Model::SetModelBlendMode(const BlendMode& mode)
 {
-	blendMode_ = mode;
+	if (blendMode_ != mode)
+	{
+		blendMode_ = mode;
+	}
 }
 
 void Model::SetShaderMode(const ShaderMode& mode)
 {
-	shaderMode_ = mode;
+	if (shaderMode_ != mode)
+	{
+		shaderMode_ = mode;
+	}
 }
 
 void Model::SetStaticShaderMode(const ShaderMode& mode)
 {
-	sShaderMode_ = mode;
+	if (sShaderMode_ != mode)
+	{
+		sShaderMode_ = mode;
+	}
 }
 
 Model::Model()

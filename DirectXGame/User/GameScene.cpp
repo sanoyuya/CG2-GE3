@@ -25,14 +25,12 @@ void GameScene::Initialize()
 	model_->SetModel(modelTex_);
 	modelTrans_.Initialize();
 
-	Model::SetStaticShaderMode(ShaderMode::SimpleColor);
-
 	sphereTex_ = Model::CreateObjModel("Resources/sphere", true);
 	sphere2Tex_ = Model::CreateObjModel("Resources/sphere2",true);
 	
 	//ç∂ÇÃãÖ
 	sphere_ = std::make_unique<Model>();
-	sphere_->SetShaderMode(ShaderMode::SimpleColor);
+	sphere_->SetShaderMode(ShaderMode::Phong);
 	sphere_->SetModel(sphereTex_);
 	sphereTrans_.Initialize();
 	sphereTrans_.translation = { -3.0f ,-3.0f,0.0f };
@@ -46,7 +44,7 @@ void GameScene::Initialize()
 
 	//âEÇÃãÖ
 	sphere3_ = std::make_unique<Model>();
-	sphere3_->SetShaderMode(ShaderMode::RimLight);
+	sphere3_->SetShaderMode(ShaderMode::SimpleColor);
 	sphere3_->SetModel(sphereTex_);
 	sphere3Trans_.Initialize();
 	sphere3Trans_.translation = { 3.0f ,-3.0f,0.0f };
@@ -76,6 +74,8 @@ void GameScene::Update()
 	}
 
 	ImGuiUpdate();
+
+	assimpModel_->SetShaderMode(shaderMode_);
 
 	PostEffect::SetEffectMode(mode_);
 
@@ -111,7 +111,7 @@ void GameScene::Draw()
 	{
 		lightSphere_->DrawModel(&lightSphereTrans_, { lightColor_.x,lightColor_.y,lightColor_.z,0.5f });
 	}
-	assimpModel_->DrawModel(&assimpModelTrans_);
+	assimpModel_->DrawModel(&assimpModelTrans_,color_);
 }
 
 void GameScene::Rotation()
@@ -148,8 +148,11 @@ void GameScene::CamMove()
 void GameScene::ImGuiUpdate()
 {
 	//ãÖ
-	ImGui::Begin("sphere");
+	ImGui::Begin("model");
 	ImGui::ColorEdit4("color", &color_.x);
+	int shaderMode = static_cast<int>(shaderMode_);
+	ImGui::SliderInt("shaderMode", &shaderMode, 0, 5);
+	shaderMode_ = static_cast<ShaderMode>(shaderMode);
 	if(ImGui::Button("texFlag"))
 	{
 		if (texFlag_ == false)
@@ -189,7 +192,7 @@ void GameScene::ImGuiUpdate()
 
 	int mode = static_cast<int>(mode_);
 	ImGui::Begin("postEffect");
-	ImGui::SliderInt("effectMode", &mode, 0, 7);
+	ImGui::SliderInt("effectMode", &mode, 0, 8);
 	ImGui::SliderFloat("blurPower", &blurPower, 0.0f, 10.0f);
 	ImGui::End();
 	mode_= static_cast<EffectMode>(mode);

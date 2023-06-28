@@ -2,8 +2,8 @@
 #include <d3dx12.h>
 
 const float PostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
-std::array <Blob, 8> PostEffect::sBlob_;//シェーダオブジェクト
-std::array <PipelineSet, 8> PostEffect::sPip_;
+std::array <Blob, 9> PostEffect::sBlob_;//シェーダオブジェクト
+std::array <PipelineSet, 9> PostEffect::sPip_;
 EffectMode PostEffect::sEffectMode_ = EffectMode::None;//何も掛けない状態で初期化
 float PostEffect::power_ = 0.0f;
 
@@ -254,76 +254,67 @@ void PostEffect::CreatePipline()
 void PostEffect::LoadShader()
 {
 #pragma region None
-
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
-
 #pragma endregion None
 
 #pragma region BrightnessUP
-
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[1].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[1].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[1].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BrightnessPS.hlsl", "main", "ps_5_0", sBlob_[1].ps.Get());
-
 #pragma endregion BrightnessUP
 
 #pragma region Inverse
-
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[2].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[2].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[2].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/InversePS.hlsl", "main", "ps_5_0", sBlob_[2].ps.Get());
-
 #pragma endregion Inverse
 
 #pragma region Blur
-
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[3].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[3].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BlurPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
-
 #pragma endregion Blur
 
 #pragma region GaussianBlur
-
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[4].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[4].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[4].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/GaussianBlurPS.hlsl", "main", "ps_5_0", sBlob_[4].ps.Get());
-
 #pragma endregion GaussianBlur
 
 #pragma region GrayScale
-
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[5].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[5].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[5].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/GrayScalePS.hlsl", "main", "ps_5_0", sBlob_[5].ps.Get());
-
 #pragma endregion GrayScale
 
 #pragma region SepiaColor
-
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[6].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[6].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[6].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/SepiaColorPS.hlsl", "main", "ps_5_0", sBlob_[6].ps.Get());
-
 #pragma endregion SepiaColor
 
 #pragma region UVShift
-
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[7].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[7].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[7].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/UVShiftPS.hlsl", "main", "ps_5_0", sBlob_[7].ps.Get());
-
 #pragma endregion UVShift
+
+#pragma region Bloom
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[8].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[8].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[8].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BloomPS.hlsl", "main", "ps_5_0", sBlob_[8].ps.Get());
+#pragma endregion Bloom
 }
 
 void PostEffect::DrawCommand()
@@ -396,6 +387,10 @@ void PostEffect::SetPipline()
 	case UVShift:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[7].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[7].rootSignature.Get());
+		break;
+	case Bloom:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[8].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[8].rootSignature.Get());
 		break;
 	}
 }

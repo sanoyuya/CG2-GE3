@@ -9,21 +9,6 @@ float4 main(VSOutput input) : SV_TARGET
     float shiftV = 1.0f / 720.0f;
     float4 col = float4(0.0f, 0.0f, 0.0f, 0.0f);
     
-    //col += tex.Sample(smp, input.uv + float2(-shiftU, -shiftV));
-    //col += tex.Sample(smp, input.uv + float2(0.0f, -shiftV));
-    //col += tex.Sample(smp, input.uv + float2(shiftU, -shiftV));
-    
-    //col += tex.Sample(smp, input.uv + float2(-shiftU, 0.0f));
-    //col += tex.Sample(smp, input.uv + float2(0.0f, 0.0f));
-    //col += tex.Sample(smp, input.uv + float2(shiftU, 0.0f));
-    
-    //col += tex.Sample(smp, input.uv + float2(-shiftU, shiftV));
-    //col += tex.Sample(smp, input.uv + float2(0.0f, shiftV));
-    //col += tex.Sample(smp, input.uv + float2(shiftU, shiftV));
-    
-    //col /= 9.0f;
-    //return float4(col.rgb, 1);
-    
     int num = 0;
     
     for (float i = -power; i <= power; i++)
