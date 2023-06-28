@@ -5,9 +5,6 @@
 #include"Camera.h"
 #include"AudioManager.h"
 #include"Collision.h"
-#include"LevelEditor.h"
-#include <map>
-#include"EditorObject.h"
 #include"LightManager.h"
 
 //タイトルシーン
@@ -32,19 +29,7 @@ private:
 	float angleY_ = 0.0f;
 	const float length_ = 50.0f;
 
-	std::map<std::string, EditorObject*>models_;
-	std::vector<std::unique_ptr<EditorObject>>objects_;
-
-	myMath::Vector3 pos_;
-	float time_ = 0.0f;
-
-	uint32_t playerTex_ = 0;
-	uint32_t sphereTex_ = 0;
-	uint32_t tex_ = 0;
-
 	uint32_t bgm_ = 0;
-
-	float power_ = 3.0f;
 
 public:
 
@@ -62,7 +47,5 @@ public:
 
 private:
 	
-	void Move();
 	void camUpdate();
-	void LevelDataInitialize();
 };

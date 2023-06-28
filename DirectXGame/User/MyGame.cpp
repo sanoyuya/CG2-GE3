@@ -9,12 +9,9 @@ void MyGame::Initialize()
 	//基底クラスの初期化処理
 	YFramework::Initialize();
 
+	//ポストエフェクトの初期化
 	postEffect_ = std::make_unique<PostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
-
-	multiRenderPostEffect_= std::make_unique<MultiRenderPostEffect>();
-	multiRenderPostEffect_->Initialize(windowsApp_.get());
-
 	multiTexturePostEffect_ = std::make_unique<MultiTexturePostEffect>();
 	multiTexturePostEffect_->Initialize(windowsApp_.get());
 
@@ -41,34 +38,12 @@ void MyGame::Update()
 
 void MyGame::SceneDraw()
 {
-	if (SceneManager::GetInstance()->GetSceneName() == "TITLE")
-	{
-		multiTexturePostEffect_->PreDrawScene(windowsApp_.get());
-		SceneManager::GetInstance()->Draw();
-		multiTexturePostEffect_->PostDrawScene();
-	}
-	else if (SceneManager::GetInstance()->GetSceneName() == "GAME")
-	{
-		postEffect_->PreDrawScene(windowsApp_.get());
-		SceneManager::GetInstance()->Draw();
-		postEffect_->PostDrawScene();
-	}
-
-	/*multiRenderPostEffect_->PreDrawScene(windowsApp_.get());
+	postEffect_->PreDrawScene(windowsApp_.get());
 	SceneManager::GetInstance()->Draw();
-	multiRenderPostEffect_->PostDrawScene();*/
+	postEffect_->PostDrawScene();
 }
 
 void MyGame::PostEffectDraw()
 {
-	if (SceneManager::GetInstance()->GetSceneName() == "TITLE")
-	{
-		multiTexturePostEffect_->Draw();
-	}
-	else if (SceneManager::GetInstance()->GetSceneName() == "GAME")
-	{
-		postEffect_->Draw();
-	}
-
-	//multiRenderPostEffect_->Draw();
+	postEffect_->Draw();
 }

@@ -103,6 +103,7 @@
   <ItemGroup>
     <ClCompile Include="Engine\LevelEditor\EditorObject.cpp" />
     <ClCompile Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.cpp" />
+    <ClCompile Include="User\GameLevelData.cpp" />
     <ClCompile Include="User\EngineOP.cpp" />
     <ClCompile Include="Engine\Collision\Collision.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
@@ -294,6 +295,7 @@
     <ClInclude Include="Engine\Light\CircleShadow.h" />
     <ClInclude Include="Engine\Light\DirectionalLight.h" />
     <ClInclude Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.h" />
+    <ClInclude Include="User\GameLevelData.h" />
     <ClInclude Include="User\EngineOP.h" />
     <ClInclude Include="Engine\Collision\Collision.h" />
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />

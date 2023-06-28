@@ -133,12 +133,15 @@
     <Filter Include="Engine\リソース ファイル\PosEffect\Blur">
       <UniqueIdentifier>{c19b8a51-5014-461a-8ec4-34950dc0b9d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\Scene">
+      <UniqueIdentifier>{67871c74-52d6-48ea-8e39-a0e1a1330800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{a447e952-8c76-4bc2-b244-d211e1be8a23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameScene.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Input\Keyboard.cpp">
@@ -234,14 +237,8 @@
     <ClCompile Include="User\MyGame.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="User\TitleScene.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Other\SceneManager.cpp">
       <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="User\SceneFactory.cpp">
-      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Engine\ImGui\ImGuiManager.cpp">
       <Filter>Engine\ソースファイル</Filter>
@@ -276,11 +273,23 @@
     <ClCompile Include="Engine\Draw\2D\PostEffect\PostEffect.cpp">
       <Filter>Engine\ソースファイル\Draw\PostEffect</Filter>
     </ClCompile>
-    <ClCompile Include="User\EngineOP.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.cpp">
       <Filter>Engine\ソースファイル\Draw\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameLevelData.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\EngineOP.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="User\SceneFactory.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="User\TitleScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,9 +364,6 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="User\GameScene.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Input\Keyboard.h">
       <Filter>Engine\ヘッダーファイル\Input</Filter>
     </ClInclude>
@@ -451,9 +457,6 @@
     <ClInclude Include="Engine\Other\MyGame.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="User\TitleScene.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h">
       <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
@@ -462,9 +465,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Other\SceneManager.h">
       <Filter>Engine\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Other\SceneFactory.h">
-      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Other\YFramework.h">
       <Filter>Engine\ヘッダーファイル</Filter>
@@ -511,11 +511,23 @@
     <ClInclude Include="Engine\LevelEditor\EditorObject.h">
       <Filter>Engine\ヘッダーファイル\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="User\EngineOP.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.h">
       <Filter>Engine\ヘッダーファイル\Draw\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameLevelData.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\EngineOP.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Other\SceneFactory.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="User\TitleScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

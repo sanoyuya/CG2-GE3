@@ -1,0 +1,52 @@
+#pragma once
+#include"LevelEditor.h"
+#include <map>
+#include"EditorObject.h"
+#include"Camera.h"
+
+class GameLevelData
+{
+private:
+
+	std::string fileName_ = {};
+
+	std::map<std::string, EditorObject*>models_;
+	std::vector<std::unique_ptr<EditorObject>>objects_;
+
+	myMath::Vector3 pos_;
+
+	uint32_t playerTex_ = 0;
+	uint32_t sphereTex_ = 0;
+	uint32_t tex_ = 0;
+
+public:
+
+	GameLevelData();
+	~GameLevelData();
+
+	/// <summary>
+	/// ‰Šú‰»ˆ—
+	/// </summary>
+	void Initialize(const std::string& fileName);
+
+	/// <summary>
+	/// XVˆ—
+	/// </summary>
+	/// <param name="camera"></param>
+	void Update(Camera* camera);
+
+	/// <summary>
+	/// •`‰æˆ—
+	/// </summary>
+	void Draw();
+
+	/// <summary>
+	/// Ä“Ç‚İ‚İ
+	/// </summary>
+	void ReLoad();
+
+private:
+
+	void CreateModel();
+	void Load();
+};
