@@ -56,6 +56,10 @@ void GameLevelData::Load()
 		{
 			cameraData_.position = objectData.translation;
 		}
+		else if (objectData.fileName == "cameraPoint")
+		{
+			cameraData_.controlPoints.push_back(objectData.translation);
+		}
 		else
 		{
 			//ファイル名から登録済みモデルを検索

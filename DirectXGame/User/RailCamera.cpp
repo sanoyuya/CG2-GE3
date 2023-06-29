@@ -1,4 +1,5 @@
 #include "RailCamera.h"
+#include <algorithm>
 
 void RailCamera::Initialize(const CameraData& cameraData)
 {
@@ -10,6 +11,15 @@ void RailCamera::Initialize(const CameraData& cameraData)
 
 void RailCamera::Update()
 {
+	time += 0.001f;
+	if (time >= 1.0f)
+	{
+		time = 0.0f;
+	}
+
+	//キャットムルスプライン曲線
+	position_ = myMath::CatmullRomSpline(controlPoints_, time);
+
 	camera_->Update(true);
 	camera_->SetEye(position_);
 }
@@ -28,6 +38,10 @@ Camera* RailCamera::GetCameraPtr()
 void RailCamera::Load(const CameraData& cameraData)
 {
 	position_ = cameraData.position;
+
+	controlPoints_ = cameraData.controlPoints;
+	myMath::Vector3 startPoint = controlPoints_.front();
+	controlPoints_.push_back(startPoint);
 }
 
 void RailCamera::Reset()

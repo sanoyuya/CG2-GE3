@@ -5,6 +5,9 @@
 struct CameraData
 {
 	myMath::Vector3 position;
+
+	//êßå‰ì_
+	std::vector<myMath::Vector3> controlPoints;
 };
 
 class RailCamera
@@ -16,6 +19,10 @@ private:
 	myMath::Vector3 position_;
 	myMath::Vector3 target_;
 	myMath::Vector3 up_;
+
+	//êßå‰ì_
+	std::vector<myMath::Vector3> controlPoints_;
+	float time = 0.0f;
 
 public:
 
