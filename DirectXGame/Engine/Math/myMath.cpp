@@ -168,4 +168,70 @@ namespace myMath
 		// —”‚ğ¶¬
 		return get_rand_uni_real(engine);
 	}
+
+	// “ñ‚Â‚Ì’l‚ª‚Ù‚Ú“™‚µ‚¢‚©
+	bool Approximately(float a, float b)
+	{
+		float tmp = 1e-06f * std::max(abs(a), abs(b));
+
+		float tmp2 = EPSILON * 8.0f;
+
+		if (abs(b - a) < std::max(tmp, tmp2))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	Vector3 HermiteGetPoint(Vector3 p0, Vector3 p1, Vector3 v0, Vector3 v1, float t)
+	{
+		Vector3 c0 = 2.0f * p0 + -2.0f * p1 + v0 + v1;
+		Vector3 c1 = -3.0f * p0 + 3.0f * p1 + -2.0f * v0 - v1;
+		Vector3 c2 = v0;
+		Vector3 c3 = p0;
+
+		float t2 = t * t;
+		float t3 = t2 * t;
+		return c0 * t3 + c1 * t2 + c2 * t + c3;
+	}
+
+	Vector3 CatmullRomSpline(std::vector<Vector3>& points, float t)
+	{
+		float length = static_cast<float>(points.size());
+		float progress = (length - 1) * t;
+		float index = std::floor(progress);
+		float weight = progress - index;
+
+		if (Approximately(weight, 0.0f) && index >= length - 1)
+		{
+			index = length - 2;
+			weight = 1;
+		}
+
+		Vector3 p0 = points[static_cast<size_t>(index)];
+		Vector3 p1 = points[static_cast<size_t>(index + 1.0f)];
+		Vector3 p2;
+		Vector3 p3;
+
+		if (index > 0.0f)
+		{
+			p2 = 0.5f * (points[static_cast<size_t>(index + 1.0f)] - points[static_cast<size_t>(index - 1.0f)]);
+		}
+		else
+		{
+			p2 = points[static_cast<size_t>(index + 1.0f)] - points[static_cast<size_t>(index)];
+		}
+
+		if (index < length - 2.0f)
+		{
+			p3 = 0.5f * (points[static_cast<size_t>(index + 2.0f)] - points[static_cast<size_t>(index)]);
+		}
+		else
+		{
+			p3 = points[static_cast<size_t>(index + 1.0f)] - points[static_cast<size_t>(index)];
+		}
+
+		return HermiteGetPoint(p0, p1, p2, p3, weight);
+	}
 }
