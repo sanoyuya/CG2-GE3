@@ -3,6 +3,8 @@
 #include <map>
 #include"EditorObject.h"
 #include"Camera.h"
+#include"Player.h"
+#include"RailCamera.h"
 
 class GameLevelData
 {
@@ -18,6 +20,9 @@ private:
 	uint32_t playerTex_ = 0;
 	uint32_t sphereTex_ = 0;
 	uint32_t tex_ = 0;
+
+	PlayerData playerData_;
+	CameraData cameraData_;
 
 public:
 
@@ -49,4 +54,9 @@ private:
 
 	void CreateModel();
 	void Load();
+
+public:
+
+	const PlayerData& GetPlayerData();
+	const CameraData& GetCameraData();
 };

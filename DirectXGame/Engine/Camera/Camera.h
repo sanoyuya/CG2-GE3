@@ -42,6 +42,8 @@ public:
 	/// <param name="projectionFlag">平行投影と透視投影を切り替えるフラグ false:2D,true:3D</param>
 	void Update(bool projectionFlag);
 
+private:
+
 	/// <summary>
 	/// ビュー行列の計算
 	/// </summary>
@@ -52,6 +54,8 @@ public:
 	/// </summary>
 	/// <param name="projectionFlag">平行投影と透視投影を切り替えるフラグ</param>
 	void UpdateMatProjection(bool projectionFlag);
+
+public:
 
 	//ゲッター
 	const myMath::Matrix4& GetMatView();

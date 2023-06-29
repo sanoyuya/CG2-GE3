@@ -66,7 +66,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -87,7 +87,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -101,10 +101,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\RailCamera.cpp" />
+    <ClCompile Include="User\Character\Player.cpp" />
+    <ClCompile Include="User\Character\Enemy.cpp" />
     <ClCompile Include="Engine\LevelEditor\EditorObject.cpp" />
     <ClCompile Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.cpp" />
     <ClCompile Include="User\GameLevelData.cpp" />
-    <ClCompile Include="User\EngineOP.cpp" />
+    <ClCompile Include="User\Scene\EngineOP.cpp" />
     <ClCompile Include="Engine\Collision\Collision.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\ConstantBuffer.cpp" />
@@ -123,7 +126,7 @@
     <ClCompile Include="Engine\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="Engine\Draw\2D\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Engine\Draw\2D\PostEffect\MultiRenderPostEffect.cpp" />
-    <ClCompile Include="User\GameScene.cpp" />
+    <ClCompile Include="User\Scene\GameScene.cpp" />
     <ClCompile Include="Engine\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Engine\Input\Keyboard.cpp" />
@@ -136,14 +139,14 @@
     <ClCompile Include="Engine\Draw\3D\Model\Obj.cpp" />
     <ClCompile Include="Engine\Math\PhysicsMath.cpp" />
     <ClCompile Include="Engine\Draw\Pipeline.cpp" />
-    <ClCompile Include="User\SceneFactory.cpp" />
+    <ClCompile Include="User\Scene\SceneFactory.cpp" />
     <ClCompile Include="Engine\Other\SceneManager.cpp" />
     <ClCompile Include="Engine\Draw\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Engine\Draw\2D\Sprite\Sprite2D.cpp" />
     <ClCompile Include="Engine\Draw\2D\Sprite\Sprite3D.cpp" />
     <ClCompile Include="Engine\Draw\2D\Sprite\SpriteCommon.cpp" />
     <ClCompile Include="Engine\Draw\TextureManager.cpp" />
-    <ClCompile Include="User\TitleScene.cpp" />
+    <ClCompile Include="User\Scene\TitleScene.cpp" />
     <ClCompile Include="Engine\Draw\3D\Transform.cpp" />
     <ClCompile Include="Engine\Math\Vector2.cpp" />
     <ClCompile Include="Engine\Math\Vector3.cpp" />
@@ -291,12 +294,15 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\RailCamera.h" />
+    <ClInclude Include="User\Character\Player.h" />
+    <ClInclude Include="User\Character\Enemy.h" />
     <ClInclude Include="Engine\LevelEditor\EditorObject.h" />
     <ClInclude Include="Engine\Light\CircleShadow.h" />
     <ClInclude Include="Engine\Light\DirectionalLight.h" />
     <ClInclude Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.h" />
     <ClInclude Include="User\GameLevelData.h" />
-    <ClInclude Include="User\EngineOP.h" />
+    <ClInclude Include="User\Scene\EngineOP.h" />
     <ClInclude Include="Engine\Collision\Collision.h" />
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />
     <ClInclude Include="Engine\Other\BaseScene.h" />
@@ -319,7 +325,7 @@
     <ClInclude Include="Engine\LevelEditor\LevelEditor.h" />
     <ClInclude Include="Engine\Draw\2D\PostEffect\PostEffect.h" />
     <ClInclude Include="Engine\Draw\2D\PostEffect\MultiRenderPostEffect.h" />
-    <ClInclude Include="User\GameScene.h" />
+    <ClInclude Include="User\Scene\GameScene.h" />
     <ClInclude Include="Engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\IndexBuffer.h" />
     <ClInclude Include="Engine\Input\Keyboard.h" />
@@ -338,7 +344,7 @@
     <ClInclude Include="Engine\Draw\2D\Sprite\Sprite3D.h" />
     <ClInclude Include="Engine\Draw\2D\Sprite\SpriteCommon.h" />
     <ClInclude Include="Engine\Draw\TextureManager.h" />
-    <ClInclude Include="User\TitleScene.h" />
+    <ClInclude Include="User\Scene\TitleScene.h" />
     <ClInclude Include="Engine\Draw\3D\Transform.h" />
     <ClInclude Include="Engine\Math\Vector2.h" />
     <ClInclude Include="Engine\Math\Vector3.h" />
