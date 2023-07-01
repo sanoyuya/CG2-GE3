@@ -69,5 +69,5 @@ void GameScene::Draw()
 {
 	skyDome_->DrawModel(&skyDomeTrans_);
 	gameLevelData_->Draw();
-	player_->Draw();
+	player_->Draw(camera_->GetCameraPtr());
 }

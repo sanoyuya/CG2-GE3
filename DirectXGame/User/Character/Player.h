@@ -21,6 +21,11 @@ private:
 
 	Transform cameraTrans_;
 
+	std::unique_ptr<Sprite>reticle_;
+	Transform reticleTrans_;
+	uint32_t reticleTex_ = 0;
+
+
 public:
 
 	Player();
@@ -30,7 +35,7 @@ public:
 
 	void Update(Camera* camera);
 
-	void Draw();
+	void Draw(Camera* camera);
 
 private:
 
