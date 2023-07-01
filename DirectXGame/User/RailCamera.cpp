@@ -13,7 +13,7 @@ void RailCamera::Update()
 {
 	position_ = myMath::CatmullRomSpline(controlPoints_, time);
 
-	time += 0.001f;
+	time += 0.0001f;
 	if (time >= 1.0f)
 	{
 		time = 0.0f;
@@ -21,9 +21,9 @@ void RailCamera::Update()
 
 	target_ = myMath::CatmullRomSpline(controlPoints_, time);
 
-	camera_->Update(true);
 	camera_->SetEye(position_);
 	camera_->SetTarget(target_);
+	camera_->Update(true);
 }
 
 void RailCamera::ReLoad(const CameraData& cameraData)
@@ -48,4 +48,6 @@ void RailCamera::Load(const CameraData& cameraData)
 
 void RailCamera::Reset()
 {
+	controlPoints_.clear();
+	time = 0.0f;
 }

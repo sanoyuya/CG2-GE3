@@ -107,5 +107,6 @@ void GameLevelData::ReLoad()
 	//íœ‚µ‚ÄÄ“Ç‚İ‚İ
 	models_.clear();
 	objects_.clear();
+	cameraData_.controlPoints.clear();
 	Load();
 }
