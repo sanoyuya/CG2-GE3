@@ -25,7 +25,6 @@ private:
 	Transform reticleTrans_;
 	uint32_t reticleTex_ = 0;
 
-
 public:
 
 	Player();

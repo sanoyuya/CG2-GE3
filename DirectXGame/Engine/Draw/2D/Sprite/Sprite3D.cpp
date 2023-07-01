@@ -189,7 +189,12 @@ void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 	switch (flag)
 	{
 	case BillboardFlag::NonBillboard:
-		transform.matWorld = mScale * mRot * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		transform.matWorld = mScale * mRot * mTrans;
+		if (transform.parent)
+		{
+			transform.matWorld *= transform.parent->matWorld;
+		}
+		transform.matWorld *= camera->GetMatViewInverse() * camera->GetMatProjection();
 		break;
 	case BillboardFlag::AllBillboard:
 
@@ -198,8 +203,12 @@ void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 		mat.m[3][2] = 0;
 		mat.m[3][3] = 1;
 
-		transform.matWorld = mScale * mRot * mat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
-
+		transform.matWorld = mScale * mRot * mat * mTrans;
+		if (transform.parent)
+		{
+			transform.matWorld *= transform.parent->matWorld;
+		}
+		transform.matWorld *= camera->GetMatViewInverse() * camera->GetMatProjection();
 		break;
 
 	case BillboardFlag::XBillboard:
@@ -214,7 +223,12 @@ void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 		mat.m[3][2] = 0;
 		mat.m[3][3] = 1;
 
-		transform.matWorld = mScale * mRot * mat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		transform.matWorld = mScale * mRot * mat * mTrans;
+		if (transform.parent)
+		{
+			transform.matWorld *= transform.parent->matWorld;
+		}
+		transform.matWorld *= camera->GetMatViewInverse() * camera->GetMatProjection();
 		break;
 
 	case BillboardFlag::YBillboard:
@@ -229,8 +243,12 @@ void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 		mat.m[3][2] = 0;
 		mat.m[3][3] = 1;
 
-
-		transform.matWorld = mScale * mRot * mat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		transform.matWorld = mScale * mRot * mat * mTrans;
+		if (transform.parent)
+		{
+			transform.matWorld *= transform.parent->matWorld;
+		}
+		transform.matWorld *= camera->GetMatViewInverse() * camera->GetMatProjection();
 		break;
 
 	case BillboardFlag::XYBillboard:
@@ -245,7 +263,12 @@ void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 		mat.m[3][2] = 0;
 		mat.m[3][3] = 1;
 
-		transform.matWorld = mScale * mRot * mat * mTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		transform.matWorld = mScale * mRot * mat * mTrans;
+		if (transform.parent)
+		{
+			transform.matWorld *= transform.parent->matWorld;
+		}
+		transform.matWorld *= camera->GetMatViewInverse() * camera->GetMatProjection();
 		break;
 	}
 

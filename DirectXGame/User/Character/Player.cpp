@@ -14,7 +14,7 @@ void Player::Initialize()
 	playerTex_ = player_->CreateObjModel("Resources/F-35E");
 	player_->SetModel(playerTex_);
 	playerTrans_.Initialize();
-	playerTrans_.translation = { 0.0f,-3.0f,10.0f };
+	playerTrans_.translation = { 0.0f,0.0f,10.0f };
 	playerTrans_.scale = { 0.5f,0.5f,0.5f };
 	cameraTrans_.Initialize();
 
@@ -22,7 +22,8 @@ void Player::Initialize()
 	reticleTex_ = reticle_->LoadTexture("Resources/reticle.png");
 	reticle_->Sprite3DInitialize(reticleTex_);
 	reticleTrans_.Initialize();
-	reticleTrans_.translation = { 0.0f,-3.0f,10.0f };
+	reticleTrans_.translation = { 0.0f,0.0f,30.0f };
+	reticleTrans_.scale = { 0.125f,0.125f,1.0f};
 }
 
 void Player::Update(Camera* camera)
@@ -32,13 +33,12 @@ void Player::Update(Camera* camera)
 	reticleTrans_.parent = &cameraTrans_;
 
 	playerTrans_.TransUpdate(camera);
-	reticleTrans_.TransUpdate(camera);
 }
 
 void Player::Draw(Camera* camera)
 {
+	reticle_->DrawSprite3D(camera, reticleTrans_);
 	player_->DrawModel(&playerTrans_);
-	reticle_->DrawSprite3D(camera, playerTrans_);
 }
 
 void Player::Reset()
