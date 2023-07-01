@@ -8,36 +8,28 @@ Player::~Player()
 {
 }
 
-void Player::Initialize(const PlayerData& playerData)
+void Player::Initialize()
 {
-	Load(playerData);
 	player_ = std::make_unique<Model>();
 	playerTex_ = player_->CreateObjModel("Resources/F-35E");
 	player_->SetModel(playerTex_);
 	playerTrans_.Initialize();
+	playerTrans_.translation = { 0.0f,-3.0f,10.0f };
+	playerTrans_.scale = { 0.5f,0.5f,0.5f };
+	cameraTrans_.Initialize();
 }
 
 void Player::Update(Camera* camera)
 {
+	cameraTrans_.matWorld = camera->GetMatView();
+	playerTrans_.parent = &cameraTrans_;
+
 	playerTrans_.TransUpdate(camera);
 }
 
 void Player::Draw()
 {
 	player_->DrawModel(&playerTrans_);
-}
-
-void Player::ReLoad(const PlayerData& playerData)
-{
-	Reset();
-	Load(playerData);
-}
-
-void Player::Load(const PlayerData& playerData)
-{
-	playerTrans_.translation = playerData.pos;
-	playerTrans_.rotation = playerData.rotation;
-	playerTrans_.scale = playerData.scale;
 }
 
 void Player::Reset()

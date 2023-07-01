@@ -11,17 +11,19 @@ void RailCamera::Initialize(const CameraData& cameraData)
 
 void RailCamera::Update()
 {
+	position_ = myMath::CatmullRomSpline(controlPoints_, time);
+
 	time += 0.001f;
 	if (time >= 1.0f)
 	{
 		time = 0.0f;
 	}
 
-	//キャットムルスプライン曲線
-	position_ = myMath::CatmullRomSpline(controlPoints_, time);
+	target_ = myMath::CatmullRomSpline(controlPoints_, time);
 
 	camera_->Update(true);
 	camera_->SetEye(position_);
+	camera_->SetTarget(target_);
 }
 
 void RailCamera::ReLoad(const CameraData& cameraData)

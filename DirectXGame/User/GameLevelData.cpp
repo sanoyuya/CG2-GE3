@@ -48,9 +48,7 @@ void GameLevelData::Load()
 	{
 		if (objectData.fileName == "player")
 		{
-			playerData_.pos = objectData.translation;
-			playerData_.rotation = objectData.rotation;
-			playerData_.scale = objectData.scaling;
+			continue;
 		}
 		else if (objectData.fileName == "camera")
 		{

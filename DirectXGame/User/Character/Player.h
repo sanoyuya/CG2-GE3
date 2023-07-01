@@ -19,21 +19,20 @@ private:
 	Transform playerTrans_;
 	uint32_t playerTex_ = 0;
 
+	Transform cameraTrans_;
+
 public:
 
 	Player();
 	~Player();
 
-	void Initialize(const PlayerData& playerData);
+	void Initialize();
 
 	void Update(Camera* camera);
 
 	void Draw();
 
-	void ReLoad(const PlayerData& playerData);
-
 private:
 
-	void Load(const PlayerData& playerData);
 	void Reset();
 };

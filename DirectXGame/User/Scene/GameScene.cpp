@@ -27,9 +27,10 @@ void GameScene::Initialize()
 
 	camera_ = std::make_unique<RailCamera>();
 	camera_->Initialize(gameLevelData_->GetCameraData());
+	camera_->Update();
 
 	player_ = std::make_unique<Player>();
-	player_->Initialize(gameLevelData_->GetPlayerData());
+	player_->Initialize();
 }
 
 void GameScene::Destroy()
@@ -46,7 +47,6 @@ void GameScene::Update()
 	{
 		gameLevelData_->ReLoad();
 		camera_->ReLoad(gameLevelData_->GetCameraData());
-		player_->ReLoad(gameLevelData_->GetPlayerData());
 	}
 
 	lightManager_->Update();
