@@ -3,6 +3,7 @@
 #include"Camera.h"
 #include"InputManager.h"
 #include"myMath.h"
+#include"Bullet.h"
 
 struct PlayerData
 {
@@ -15,6 +16,8 @@ class Player
 {
 private:
 
+	InputManager* input_ = nullptr;
+
 	std::unique_ptr<Model>player_;
 	Transform playerTrans_;
 	uint32_t playerTex_ = 0;
@@ -24,6 +27,13 @@ private:
 	std::unique_ptr<Sprite>reticle_;
 	Transform reticleTrans_;
 	uint32_t reticleTex_ = 0;
+
+	myMath::Vector3 directionVector_;//•ûŒüƒxƒNƒgƒ‹
+
+	std::list<std::unique_ptr<Bullet>>bullets_;
+
+	const float moveSpeed_ = 0.125f;
+	const float reticleSpeed_ = 0.5f;
 
 public:
 
@@ -39,4 +49,16 @@ public:
 private:
 
 	void Reset();
+
+	void Move();
+
+	void ReticleMove();
+
+	void MoveLimit();
+
+	void ReticleLimit();
+
+	void BulletUpdate(Camera* camera);
+
+	void BulletDraw();
 };

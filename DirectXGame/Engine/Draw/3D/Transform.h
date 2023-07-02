@@ -20,7 +20,6 @@ private:
 	//初期化用のプロジェクション行列計算
 	static myMath::Matrix4 sDefaultProjectionMat_;
 
-
 public:
 
 	// ローカル座標
@@ -34,6 +33,8 @@ public:
 
 	// 親となるワールド変換へのポインタ
 	const Transform* parent = nullptr;
+
+	myMath::Vector3 parentToTranslation = { 0.0f, 0.0f, 0.0f };
 
 public:
 

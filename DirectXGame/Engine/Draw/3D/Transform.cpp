@@ -63,6 +63,9 @@ void Transform::TransUpdate(Camera* camera)
 	{
 		matWorld *= parent->matWorld;
 	}
+	parentToTranslation.x = matWorld.m[3][0];
+	parentToTranslation.y = matWorld.m[3][1];
+	parentToTranslation.z = matWorld.m[3][2];
 
 	//定数バッファに書き込み
 	constBuffMap_.matWorld = matWorld * camera->GetMatViewInverse() * camera->GetMatProjection();

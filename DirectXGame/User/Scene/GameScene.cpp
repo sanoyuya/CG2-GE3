@@ -39,11 +39,7 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
-	if (input_->KeyboardTriggerPush(DIK_SPACE))
-	{
-		SceneManager::GetInstance()->ChangeScene("TITLE");
-	}
-	else if (input_->KeyboardTriggerPush(DIK_R))
+	if (input_->KeyboardTriggerPush(DIK_R))
 	{
 		gameLevelData_->ReLoad();
 		camera_->ReLoad(gameLevelData_->GetCameraData());
