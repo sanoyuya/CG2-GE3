@@ -198,7 +198,6 @@ namespace myMath
 
 		m[2][0] = std::sin(angle);
 		m[2][2] = std::cos(angle);
-
 	}
 
 	void Matrix4::MakeRotationZ(float angle)

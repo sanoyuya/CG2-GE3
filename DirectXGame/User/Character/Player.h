@@ -28,12 +28,14 @@ private:
 	Transform reticleTrans_;
 	uint32_t reticleTex_ = 0;
 
-	myMath::Vector3 directionVector_;//方向ベクトル
+	myMath::Vector3 directionVector_;//方向ベクトル(ローカル)
+	myMath::Vector3 parentToDirectionVector_;//親子を反映させた方向ベクトル
 
 	std::list<std::unique_ptr<Bullet>>bullets_;
 
 	const float moveSpeed_ = 0.125f;
 	const float reticleSpeed_ = 0.5f;
+	const float moveLimit = 6.0f;
 
 public:
 
@@ -51,6 +53,8 @@ private:
 	void Reset();
 
 	void Move();
+
+	void Rotation();
 
 	void ReticleMove();
 

@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <algorithm>
+#include"PhysicsMath.h"
 
 Player::Player()
 {
@@ -35,16 +36,21 @@ void Player::Update(Camera* camera)
 	playerTrans_.parent = &cameraTrans_;
 	reticleTrans_.parent = &cameraTrans_;
 
-	Move();
 	MoveLimit();
 	ReticleMove();
+	Move();
 	ReticleLimit();
 
 	playerTrans_.TransUpdate(camera);
 	reticleTrans_.TransUpdate(camera);
 
-	directionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;//ê≥ñ ÉxÉNÉgÉã
+	directionVector_ = reticleTrans_.translation - playerTrans_.translation;//ê≥ñ ÉxÉNÉgÉã
 	directionVector_ = directionVector_.normalization();//ê≥ãKâª
+
+	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;//ê≥ñ ÉxÉNÉgÉã
+	parentToDirectionVector_ = parentToDirectionVector_.normalization();//ê≥ãKâª
+
+	Rotation();
 
 	BulletUpdate(camera);
 }
@@ -62,22 +68,16 @@ void Player::Reset()
 
 void Player::Move()
 {
-	if (input_->KeyboardKeepPush(DIK_W))
-	{
-		playerTrans_.translation += {0.0f, moveSpeed_, 0.0f};
-	}
-	if (input_->KeyboardKeepPush(DIK_A))
-	{
-		playerTrans_.translation += {-moveSpeed_, 0.0f, 0.0f};
-	}
-	if (input_->KeyboardKeepPush(DIK_S))
-	{
-		playerTrans_.translation += {0.0f, -moveSpeed_, 0.0f};
-	}
-	if (input_->KeyboardKeepPush(DIK_D))
-	{
-		playerTrans_.translation += {moveSpeed_, 0.0f, 0.0f};
-	}
+	float reticleX = reticleTrans_.translation.x / 4;
+	float reticleY = reticleTrans_.translation.y / 4;
+	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 10.0f);
+	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 10.0f);
+}
+
+void Player::Rotation()
+{
+	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
+	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 }
 
 void Player::ReticleMove()
@@ -102,14 +102,14 @@ void Player::ReticleMove()
 
 void Player::MoveLimit()
 {
-	playerTrans_.translation.x = std::clamp(playerTrans_.translation.x, -6.0f, 6.0f);
-	playerTrans_.translation.y = std::clamp(playerTrans_.translation.y, -3.0f, 3.0f);
+	playerTrans_.translation.x = std::clamp(playerTrans_.translation.x, -moveLimit, moveLimit);
+	playerTrans_.translation.y = std::clamp(playerTrans_.translation.y, -moveLimit / 16 * 9, moveLimit / 16 * 9);
 }
 
 void Player::ReticleLimit()
 {
-	reticleTrans_.translation.x = std::clamp(reticleTrans_.translation.x, -25.0f, 25.0f);
-	reticleTrans_.translation.y = std::clamp(reticleTrans_.translation.y, -15.0f, 15.0f);
+	reticleTrans_.translation.x = std::clamp(reticleTrans_.translation.x, -moveLimit * 4, moveLimit * 4);
+	reticleTrans_.translation.y = std::clamp(reticleTrans_.translation.y, -moveLimit * 4 / 16 * 9, moveLimit * 4 / 16 * 9);
 }
 
 void Player::BulletUpdate(Camera* camera)
@@ -120,7 +120,7 @@ void Player::BulletUpdate(Camera* camera)
 	{
 		//íeÇê∂ê¨ÇµÅAèâä˙âª
 		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
-		newBullet->Initialize(playerTrans_.parentToTranslation, directionVector_);
+		newBullet->Initialize(playerTrans_.parentToTranslation, parentToDirectionVector_);
 		//íeÇìoò^Ç∑ÇÈ
 		bullets_.push_back(std::move(newBullet));
 	}
