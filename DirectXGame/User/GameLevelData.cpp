@@ -56,7 +56,13 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "cameraPoint")
 		{
-			cameraData_.controlPoints.push_back(objectData.translation);
+			cameraData_.controlPoints.push_back(objectData.translation);//§Œä“_‚ğ“o˜^
+		}
+		else if (objectData.fileName == "normalEnemy")
+		{
+			std::unique_ptr<Enemy>enemy_ = std::make_unique<Enemy>();
+			enemy_->SetPosition(objectData.translation);
+			enemyData_.normalEnemys.push_back(std::move(enemy_));//Enemy‚ğ“o˜^
 		}
 		else
 		{
@@ -102,11 +108,17 @@ const CameraData& GameLevelData::GetCameraData()
 	return cameraData_;
 }
 
+EnemyData& GameLevelData::GetEnemyData()
+{
+	return enemyData_;
+}
+
 void GameLevelData::ReLoad()
 {
 	//íœ‚µ‚ÄÄ“Ç‚İ‚İ
 	models_.clear();
 	objects_.clear();
 	cameraData_.controlPoints.clear();
+	enemyData_.normalEnemys.clear();
 	Load();
 }

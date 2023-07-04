@@ -309,6 +309,9 @@
     <ClCompile Include="User\Bullet.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="User\Character\EnemyManager.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -557,6 +560,9 @@
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="User\Bullet.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\EnemyManager.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

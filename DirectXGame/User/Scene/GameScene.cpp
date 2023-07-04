@@ -31,6 +31,9 @@ void GameScene::Initialize()
 
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
+
+	enemyManager_ = std::make_unique<EnemyManager>();
+	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
 }
 
 void GameScene::Destroy()
@@ -43,6 +46,7 @@ void GameScene::Update()
 	{
 		gameLevelData_->ReLoad();
 		camera_->ReLoad(gameLevelData_->GetCameraData());
+		enemyManager_->ReLoad(gameLevelData_->GetEnemyData());
 	}
 
 	lightManager_->Update();
@@ -59,11 +63,13 @@ void GameScene::Update()
 
 	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
 	player_->Update(camera_->GetCameraPtr());
+	enemyManager_->Update(camera_->GetCameraPtr());
 }
 
 void GameScene::Draw()
 {
 	skyDome_->DrawModel(&skyDomeTrans_);
 	gameLevelData_->Draw();
+	enemyManager_->Draw();
 	player_->Draw(camera_->GetCameraPtr());
 }

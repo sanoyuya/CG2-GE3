@@ -5,6 +5,7 @@
 #include"Camera.h"
 #include"Player.h"
 #include"RailCamera.h"
+#include"EnemyManager.h"
 
 class GameLevelData
 {
@@ -23,6 +24,7 @@ private:
 
 	PlayerData playerData_;
 	CameraData cameraData_;
+	EnemyData enemyData_;
 
 public:
 
@@ -59,4 +61,5 @@ public:
 
 	const PlayerData& GetPlayerData();
 	const CameraData& GetCameraData();
+	EnemyData& GetEnemyData();
 };

@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Character\EnemyManager.cpp" />
     <ClCompile Include="User\Bullet.cpp" />
     <ClCompile Include="User\RailCamera.cpp" />
     <ClCompile Include="User\Character\Player.cpp" />
@@ -295,6 +296,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Character\EnemyManager.h" />
     <ClInclude Include="User\Bullet.h" />
     <ClInclude Include="User\RailCamera.h" />
     <ClInclude Include="User\Character\Player.h" />
