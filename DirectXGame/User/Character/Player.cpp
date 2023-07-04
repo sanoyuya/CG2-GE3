@@ -18,7 +18,7 @@ void Player::Initialize()
 	playerTex_ = player_->CreateObjModel("Resources/F-35E");
 	player_->SetModel(playerTex_);
 	playerTrans_.Initialize();
-	playerTrans_.translation = { 0.0f,-3.0f,10.0f };
+	playerTrans_.translation = { 0.0f,0.0f,10.0f };
 	playerTrans_.scale = { 0.5f,0.5f,0.5f };
 	cameraTrans_.Initialize();
 
@@ -78,6 +78,9 @@ void Player::Rotation()
 {
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
+
+	float angleZ = -(reticleTrans_.translation.x / 4 -playerTrans_.translation.x)/2;
+	playerTrans_.rotation.z = PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 10.0f);
 }
 
 void Player::ReticleMove()
