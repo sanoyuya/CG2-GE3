@@ -27,7 +27,7 @@ void Player::Initialize()
 	reticle_->Sprite3DInitialize(reticleTex_);
 	reticleTrans_.Initialize();
 	reticleTrans_.translation = { 0.0f,0.0f,30.0f };
-	reticleTrans_.scale = { 0.125f,0.125f,1.0f};
+	reticleTrans_.scale = { 0.125f,0.125f,1.0f };
 }
 
 void Player::Update(Camera* camera)
@@ -79,7 +79,7 @@ void Player::Rotation()
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-	float angleZ = -(reticleTrans_.translation.x / 4 -playerTrans_.translation.x)/2;
+	float angleZ = -(reticleTrans_.translation.x / 4 - playerTrans_.translation.x) / 2;
 	playerTrans_.rotation.z = PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 10.0f);
 }
 
