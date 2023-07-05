@@ -64,6 +64,8 @@ void Player::Draw(Camera* camera)
 
 void Player::Reset()
 {
+	playerTrans_.translation = { 0.0f,0.0f,10.0f };
+	reticleTrans_.translation = { 0.0f,0.0f,30.0f };
 }
 
 void Player::Move()

@@ -37,14 +37,13 @@ void EnemyManager::Draw()
 
 void EnemyManager::Load(EnemyData& enemyData)
 {
-	//normalEnemys_ = enemyData.normalEnemys;
 	std::swap(normalEnemys_, enemyData.normalEnemys);
 }
 
 void EnemyManager::ReLoad(EnemyData& enemyData)
 {
 	Reset();
-	Load(enemyData);
+	Initialize(enemyData);
 }
 
 void EnemyManager::Reset()
