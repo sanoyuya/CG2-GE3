@@ -48,9 +48,9 @@ public:
 
 	void Draw(Camera* camera);
 
-private:
-
 	void Reset();
+
+private:
 
 	void Move();
 

@@ -70,10 +70,10 @@ void Player::Reset()
 
 void Player::Move()
 {
-	float reticleX = reticleTrans_.translation.x / 4;
-	float reticleY = reticleTrans_.translation.y / 4;
-	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 10.0f);
-	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 10.0f);
+	float reticleX = reticleTrans_.translation.x / 3;
+	float reticleY = reticleTrans_.translation.y / 3;
+	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 20.0f);
+	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 20.0f);
 }
 
 void Player::Rotation()
@@ -81,7 +81,7 @@ void Player::Rotation()
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-	float angleZ = -(reticleTrans_.translation.x / 4 - playerTrans_.translation.x) / 2;
+	float angleZ = -(reticleTrans_.translation.x / 3 - playerTrans_.translation.x) / 2;
 	playerTrans_.rotation.z = PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 10.0f);
 }
 
@@ -113,8 +113,8 @@ void Player::MoveLimit()
 
 void Player::ReticleLimit()
 {
-	reticleTrans_.translation.x = std::clamp(reticleTrans_.translation.x, -moveLimit * 4, moveLimit * 4);
-	reticleTrans_.translation.y = std::clamp(reticleTrans_.translation.y, -moveLimit * 4 / 16 * 9, moveLimit * 4 / 16 * 9);
+	reticleTrans_.translation.x = std::clamp(reticleTrans_.translation.x, -moveLimit * 3, moveLimit * 3);
+	reticleTrans_.translation.y = std::clamp(reticleTrans_.translation.y, -moveLimit * 3 / 16 * 9, moveLimit * 3 / 16 * 9);
 }
 
 void Player::BulletUpdate(Camera* camera)

@@ -46,6 +46,7 @@ void GameScene::Update()
 	{
 		gameLevelData_->ReLoad();
 		camera_->ReLoad(gameLevelData_->GetCameraData());
+		player_->Reset();
 		enemyManager_->ReLoad(gameLevelData_->GetEnemyData());
 	}
 
