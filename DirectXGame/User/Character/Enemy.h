@@ -1,5 +1,7 @@
 #pragma once
 #include"DrawOversight.h"
+#include"Bullet.h"
+#include<list>
 
 class Enemy
 {
@@ -9,6 +11,8 @@ private:
 	uint32_t enemyTex_ = 0;
 	Transform enemyTrans_;
 	bool isDead_;
+
+	std::list<std::unique_ptr<Bullet>>bullets_;
 
 public:
 
