@@ -50,6 +50,8 @@ public:
 
 	void Reset();
 
+	const Transform& GetTransform();
+
 private:
 
 	void Move();

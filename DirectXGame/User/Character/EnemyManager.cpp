@@ -18,12 +18,12 @@ void EnemyManager::Initialize(EnemyData& enemyData)
 	}
 }
 
-void EnemyManager::Update(Camera* camera)
+void EnemyManager::Update(Camera* camera, Player* player)
 {
 	normalEnemys_.remove_if([](std::unique_ptr<Enemy>& enemy) { return enemy->GetIsDead(); });
 	for (const std::unique_ptr<Enemy>& enemy : normalEnemys_)
 	{
-		enemy->Update(camera);
+		enemy->Update(camera, player);
 	}
 }
 

@@ -2,6 +2,7 @@
 #include"Enemy.h"
 #include <list>
 #include<memory>
+#include"Player.h"
 
 struct EnemyData
 {
@@ -21,7 +22,7 @@ public:
 
 	void Initialize(EnemyData& enemyData);
 
-	void Update(Camera* camera);
+	void Update(Camera* camera,Player* player);
 
 	void Draw();
 

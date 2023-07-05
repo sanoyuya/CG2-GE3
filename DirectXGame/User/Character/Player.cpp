@@ -68,6 +68,11 @@ void Player::Reset()
 	reticleTrans_.translation = { 0.0f,0.0f,30.0f };
 }
 
+const Transform& Player::GetTransform()
+{
+	return playerTrans_;
+}
+
 void Player::Move()
 {
 	float reticleX = reticleTrans_.translation.x / 3;
