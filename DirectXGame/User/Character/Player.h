@@ -37,6 +37,8 @@ private:
 	const float reticleSpeed_ = 0.5f;
 	const float moveLimit = 6.0f;
 
+	uint8_t hp_ = 3;
+
 public:
 
 	Player();
@@ -50,7 +52,11 @@ public:
 
 	void Reset();
 
+	void HpSub();
+
 	const Transform& GetTransform();
+
+	const uint8_t& GetHp();
 
 private:
 

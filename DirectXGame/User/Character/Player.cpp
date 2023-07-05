@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <algorithm>
 #include"PhysicsMath.h"
+#include"ColliderManager.h"
 
 Player::Player()
 {
@@ -68,9 +69,19 @@ void Player::Reset()
 	reticleTrans_.translation = { 0.0f,0.0f,30.0f };
 }
 
+void Player::HpSub()
+{
+	hp_--;
+}
+
 const Transform& Player::GetTransform()
 {
 	return playerTrans_;
+}
+
+const uint8_t& Player::GetHp()
+{
+	return hp_;
 }
 
 void Player::Move()
@@ -140,6 +151,8 @@ void Player::BulletUpdate(Camera* camera)
 	{
 		bullet->Update(camera);
 	}
+
+	ColliderManager::GetInstance()->SetPlayerBulletList(bullets_);//’eƒŠƒXƒg‚ğColliderManager‚É‘—‚é
 }
 
 void Player::BulletDraw()

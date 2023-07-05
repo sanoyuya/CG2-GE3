@@ -2,6 +2,7 @@
 #include"SceneManager.h"
 #include"PhysicsMath.h"
 #include<imgui.h>
+#include"ColliderManager.h"
 
 void GameScene::Initialize()
 {
@@ -65,6 +66,8 @@ void GameScene::Update()
 	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
 	player_->Update(camera_->GetCameraPtr());
 	enemyManager_->Update(camera_->GetCameraPtr(), player_.get());
+
+	ColliderManager::GetInstance()->Update(player_.get());
 }
 
 void GameScene::Draw()

@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include"ColliderManager.h"
 
 Enemy::Enemy()
 {
@@ -64,6 +65,8 @@ void Enemy::BulletUpdate(Camera* camera, Player* player)
 	{
 		bullet->Update(camera);
 	}
+
+	ColliderManager::GetInstance()->SetEnemyBulletList(bullets_);//’eƒŠƒXƒg‚ğColliderManager‚É‘—‚é
 }
 
 void Enemy::BulletDraw()

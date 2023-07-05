@@ -34,6 +34,11 @@ void Bullet::Draw()
 	bullet_->DrawModel(&bulletTrans_);
 }
 
+void Bullet::SetOwner(const BulletOwner& owner)
+{
+	owner_ = owner;
+}
+
 bool Bullet::GetIsDead()
 {
 	return isDead_;
