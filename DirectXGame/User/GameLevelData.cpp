@@ -1,4 +1,5 @@
 #include "GameLevelData.h"
+#include"ColliderManager.h"
 
 GameLevelData::GameLevelData()
 {
@@ -60,9 +61,9 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "normalEnemy")
 		{
-			std::unique_ptr<Enemy>enemy_ = std::make_unique<Enemy>();
-			enemy_->SetPosition(objectData.translation);
-			enemyData_.normalEnemys.push_back(std::move(enemy_));//Enemy‚ð“o˜^
+			std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>();
+			enemy->SetPosition(objectData.translation);
+			enemyData_.normalEnemys.push_back(std::move(enemy));//Enemy‚ð“o˜^
 		}
 		else
 		{

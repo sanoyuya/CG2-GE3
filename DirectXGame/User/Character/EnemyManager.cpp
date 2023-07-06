@@ -1,4 +1,5 @@
 #include "EnemyManager.h"
+#include"ColliderManager.h"
 
 EnemyManager::EnemyManager()
 {
@@ -12,9 +13,10 @@ void EnemyManager::Initialize(EnemyData& enemyData)
 {
 	Load(enemyData);
 
-	for (const std::unique_ptr<Enemy>& enemy : normalEnemys_)
+	for (std::unique_ptr<Enemy>& enemy : normalEnemys_)
 	{
 		enemy->Initialize();
+		ColliderManager::GetInstance()->AddEnemyCollider(enemy.get());
 	}
 }
 

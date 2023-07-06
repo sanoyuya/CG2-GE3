@@ -3,7 +3,14 @@
 
 bool Collision::SphereToSphere(const myMath::Vector3& sphere1, float radius1, const myMath::Vector3& sphere2, float radius2)
 {
-	return false;
+	/*return false;
+
+	if (std::pow((sphere2.x - sphere1.x), 2)
+		+ std::pow((sphere2.y - sphere1.y), 2)
+		+ std::pow((sphere2.z - sphere1.z), 2) <= std::pow((radius1 + radius2), 2))
+	{
+		return true;
+	}*/
 
 	if (std::pow((sphere2.x - sphere1.x), 2)
 		+ std::pow((sphere2.y - sphere1.y), 2)
@@ -11,17 +18,46 @@ bool Collision::SphereToSphere(const myMath::Vector3& sphere1, float radius1, co
 	{
 		return true;
 	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Collision::SphereToSphere(const Sphere* sphere1, const Sphere* sphere2)
+{
+	if (std::pow((sphere2->center.x - sphere1->center.x), 2)
+		+ std::pow((sphere2->center.y - sphere1->center.y), 2)
+		+ std::pow((sphere2->center.z - sphere1->center.z), 2) <= std::pow((sphere1->radius + sphere2->radius), 2))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool Collision::SphereToSphere(const Sphere& sphere1, const Sphere& sphere2)
 {
-	return false;
+	/*return false;
 
 	if (std::pow((sphere2.center.x - sphere1.center.x), 2)
 		+ std::pow((sphere2.center.y - sphere1.center.y), 2)
 		+ std::pow((sphere2.center.z - sphere1.center.z), 2) <= std::pow((sphere1.radius + sphere2.radius), 2))
 	{
 		return true;
+	}*/
+
+	if (std::pow((sphere2.center.x - sphere1.center.x), 2)
+		+ std::pow((sphere2.center.y - sphere1.center.y), 2)
+		+ std::pow((sphere2.center.z - sphere1.center.z), 2) <= std::pow((sphere1.radius + sphere2.radius), 2))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 

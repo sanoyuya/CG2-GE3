@@ -11,7 +11,7 @@ private:
 	std::unique_ptr<Model>enemy_;
 	uint32_t enemyTex_ = 0;
 	Transform enemyTrans_;
-	bool isDead_;
+	bool isDead_ = false;
 
 	std::list<std::unique_ptr<Bullet>>bullets_;
 	float bulletTimer = 0.0f;
@@ -30,7 +30,11 @@ public:
 
 	void SetPosition(const myMath::Vector3& position);
 
+	const myMath::Vector3& GetPosition();
+
 	bool GetIsDead();
+
+	void OnCollision();
 
 private:
 

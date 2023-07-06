@@ -3,31 +3,33 @@
 #include"Collision.h"
 #include"Player.h"
 #include"EnemyManager.h"
+#include <forward_list>
 
 class ColliderManager
 {
 private:
 
-	std::list<std::unique_ptr<Bullet>>playerBullets_;
-	std::list<std::unique_ptr<Enemy>>enemys_;
-	std::list<std::unique_ptr<Bullet>>enemyBullets_;
+	std::list<Bullet*>playersBulletsCollider_;
+	std::list<Enemy*>enemysCollider_;
+	std::list<Bullet*>enemysBulletsCollider_;
 
 public:
 
 	void Update(Player* player);
 
+	void AddPlayerBulletCollider(Bullet* collider);
+
+	void AddEnemyCollider(Enemy* collider);
+
+	void AddEnemyBulletCollider(Bullet* collider);
+
 private:
 
 	void PlayerBulletToEnemy();
 	void EnemyBulletToPlayer(Player* player);
+	void EnemyToPlayer(Player* player);
 
 public:
-
-	void SetPlayerBulletList(std::list<std::unique_ptr<Bullet>>& playerBullets);
-
-	void SetEnemyList(std::list<std::unique_ptr<Enemy>>& enemys);
-
-	void SetEnemyBulletList(std::list<std::unique_ptr<Bullet>>& enemyBullets);
 
 	//ƒVƒ“ƒOƒ‹ƒgƒ“
 	static ColliderManager* GetInstance();

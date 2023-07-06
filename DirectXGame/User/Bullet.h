@@ -30,4 +30,8 @@ public:
 public:
 
 	bool GetIsDead();
+
+	void OnCollision();
+
+	const myMath::Vector3& GetPosition();
 };

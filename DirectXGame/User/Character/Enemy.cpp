@@ -36,9 +36,19 @@ void Enemy::SetPosition(const myMath::Vector3& position)
 	enemyTrans_.translation = position;
 }
 
+const myMath::Vector3& Enemy::GetPosition()
+{
+	return enemyTrans_.translation;
+}
+
 bool Enemy::GetIsDead()
 {
 	return isDead_;
+}
+
+void Enemy::OnCollision()
+{
+	isDead_ = true;
 }
 
 void Enemy::BulletUpdate(Camera* camera, Player* player)
@@ -55,6 +65,7 @@ void Enemy::BulletUpdate(Camera* camera, Player* player)
 		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
 		newBullet->Initialize(enemyTrans_.translation, frontVec);
 		//’e‚ð“o˜^‚·‚é
+		ColliderManager::GetInstance()->AddEnemyBulletCollider(newBullet.get());
 		bullets_.push_back(std::move(newBullet));
 
 		bulletTimer = 0.0f;
@@ -65,8 +76,6 @@ void Enemy::BulletUpdate(Camera* camera, Player* player)
 	{
 		bullet->Update(camera);
 	}
-
-	ColliderManager::GetInstance()->SetEnemyBulletList(bullets_);//’eƒŠƒXƒg‚ðColliderManager‚É‘—‚é
 }
 
 void Enemy::BulletDraw()

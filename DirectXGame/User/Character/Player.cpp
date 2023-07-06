@@ -143,6 +143,7 @@ void Player::BulletUpdate(Camera* camera)
 		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
 		newBullet->Initialize(playerTrans_.parentToTranslation, parentToDirectionVector_);
 		//’e‚ð“o˜^‚·‚é
+		ColliderManager::GetInstance()->AddPlayerBulletCollider(newBullet.get());
 		bullets_.push_back(std::move(newBullet));
 	}
 
@@ -151,8 +152,6 @@ void Player::BulletUpdate(Camera* camera)
 	{
 		bullet->Update(camera);
 	}
-
-	ColliderManager::GetInstance()->SetPlayerBulletList(bullets_);//’eƒŠƒXƒg‚ðColliderManager‚É‘—‚é
 }
 
 void Player::BulletDraw()

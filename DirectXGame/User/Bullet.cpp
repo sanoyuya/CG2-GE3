@@ -34,12 +34,17 @@ void Bullet::Draw()
 	bullet_->DrawModel(&bulletTrans_);
 }
 
-void Bullet::SetOwner(const BulletOwner& owner)
-{
-	owner_ = owner;
-}
-
 bool Bullet::GetIsDead()
 {
 	return isDead_;
+}
+
+void Bullet::OnCollision()
+{
+	isDead_ = true;
+}
+
+const myMath::Vector3& Bullet::GetPosition()
+{
+	return bulletTrans_.translation;
 }

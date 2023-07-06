@@ -2,29 +2,62 @@
 
 void ColliderManager::Update(Player* player)
 {
+	EnemyBulletToPlayer(player);
+	PlayerBulletToEnemy();
+}
+
+void ColliderManager::AddPlayerBulletCollider(Bullet* collider)
+{
+	playersBulletsCollider_.push_back(collider);
+}
+
+void ColliderManager::AddEnemyCollider(Enemy* collider)
+{
+	enemysCollider_.push_back(collider);
+}
+
+void ColliderManager::AddEnemyBulletCollider(Bullet* collider)
+{
+	enemysBulletsCollider_.push_back(collider);
 }
 
 void ColliderManager::PlayerBulletToEnemy()
 {
+	for (auto& bullet : playersBulletsCollider_)
+	{
+		for (auto& enemys : enemysCollider_)
+		{
+			if (Collision::SphereToSphere(bullet->GetPosition(),1.0f, enemys->GetPosition(),2.0f))
+			{
+				bullet->OnCollision();
+				enemys->OnCollision();
+			}
+		}
+	}
 }
 
 void ColliderManager::EnemyBulletToPlayer(Player* player)
 {
+	for (auto& bullet : enemysBulletsCollider_)
+	{
+		if (Collision::SphereToSphere(player->GetTransform().translation, 2.0f, bullet->GetPosition(), 1.0f))
+		{
+			player->HpSub();
+			bullet->OnCollision();
+		}
+	}
 }
 
-void ColliderManager::SetPlayerBulletList(std::list<std::unique_ptr<Bullet>>& playerBullets)
+void ColliderManager::EnemyToPlayer(Player* player)
 {
-	playerBullets_ = playerBullets;
-}
-
-void ColliderManager::SetEnemyList(std::list<std::unique_ptr<Enemy>>& enemys)
-{
-	enemys_ = enemys;
-}
-
-void ColliderManager::SetEnemyBulletList(std::list<std::unique_ptr<Bullet>>& enemyBullets)
-{
-	enemyBullets_ = enemyBullets;
+	for (auto& enemys : enemysCollider_)
+	{
+		if (Collision::SphereToSphere(player->GetTransform().translation, 2.0f, enemys->GetPosition(), 2.0f))
+		{
+			player->HpSub();
+			enemys->OnCollision();
+		}
+	}
 }
 
 ColliderManager* ColliderManager::GetInstance()
