@@ -21,6 +21,13 @@ void ColliderManager::AddEnemyBulletCollider(Bullet* collider)
 	enemysBulletsCollider_.push_back(collider);
 }
 
+void ColliderManager::Reset()
+{
+	playersBulletsCollider_.clear();
+	enemysCollider_.clear();
+	enemysBulletsCollider_.clear();
+}
+
 void ColliderManager::PlayerBulletToEnemy()
 {
 	for (auto& bullet : playersBulletsCollider_)

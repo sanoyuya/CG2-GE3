@@ -315,6 +315,9 @@
     <ClCompile Include="User\ColliderManager.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Draw\2D\ParticleManager.cpp">
+      <Filter>Engine\ソースファイル\Draw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -570,6 +573,9 @@
     </ClInclude>
     <ClInclude Include="User\ColliderManager.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Draw\2D\ParticleManager.h">
+      <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

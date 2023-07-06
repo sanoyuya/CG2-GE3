@@ -45,6 +45,7 @@ void GameScene::Update()
 {
 	if (input_->KeyboardTriggerPush(DIK_R))
 	{
+		ColliderManager::GetInstance()->Reset();
 		gameLevelData_->ReLoad();
 		camera_->ReLoad(gameLevelData_->GetCameraData());
 		player_->Reset();

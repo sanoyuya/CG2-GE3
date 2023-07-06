@@ -23,6 +23,8 @@ public:
 
 	void AddEnemyBulletCollider(Bullet* collider);
 
+	void Reset();
+
 private:
 
 	void PlayerBulletToEnemy();

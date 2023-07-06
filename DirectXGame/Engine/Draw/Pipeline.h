@@ -55,6 +55,15 @@ public://スプライト
 	/// <param name="pip">パイプライン</param>
 	static void CreateSpritePipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 
+	/// <summary>
+	/// パーティクル用パイプラインの生成
+	/// </summary>
+	/// <param name="blob">シェーダーオブジェクト</param>
+	/// <param name="blend">ブレンドモード</param>
+	/// <param name="device">デバイス</param>
+	/// <param name="pip">パイプライン</param>
+	static void CreateParticlePipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
+
 public://モデル
 
 	/// <summary>
