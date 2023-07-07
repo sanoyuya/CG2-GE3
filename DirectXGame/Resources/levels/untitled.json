@@ -910,28 +910,6 @@
                 ]
             },
             "file_name": "normalEnemy"
-        },
-        {
-            "type": "MESH",
-            "name": "ICO球.006",
-            "transform": {
-                "translation": [
-                    20.0,
-                    120.0,
-                    50.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "normalEnemy"
         }
     ]
 }

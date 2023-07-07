@@ -9,6 +9,7 @@
 #include"PostEffect.h"
 #include"GameLevelData.h"
 #include"EnemyManager.h"
+#include"PlayerDamageEffect.h"
 
 class GameScene :public BaseScene
 {
@@ -32,6 +33,7 @@ private:
 	std::unique_ptr<GameLevelData> gameLevelData_;
 
 	std::unique_ptr<Player>player_;
+	std::unique_ptr<PlayerDamageEffect>playerDamageEffect_;
 
 	std::unique_ptr<EnemyManager>enemyManager_;
 

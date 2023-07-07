@@ -72,6 +72,12 @@ void Player::Reset()
 void Player::HpSub()
 {
 	hp_--;
+	damageFlag_ = true;
+}
+
+const bool& Player::GetDamageFlag()
+{
+	return damageFlag_;
 }
 
 const Transform& Player::GetTransform()
@@ -84,12 +90,17 @@ const uint8_t& Player::GetHp()
 	return hp_;
 }
 
+void Player::SetDamageFlag(const bool& damageFlag)
+{
+	damageFlag_ = damageFlag;
+}
+
 void Player::Move()
 {
 	float reticleX = reticleTrans_.translation.x / 3;
 	float reticleY = reticleTrans_.translation.y / 3;
-	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 20.0f);
-	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 20.0f);
+	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 15.0f);
+	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 15.0f);
 }
 
 void Player::Rotation()
@@ -141,7 +152,7 @@ void Player::BulletUpdate(Camera* camera)
 	{
 		//íeÇê∂ê¨ÇµÅAèâä˙âª
 		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
-		newBullet->Initialize(playerTrans_.parentToTranslation, parentToDirectionVector_);
+		newBullet->Initialize(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
 		//íeÇìoò^Ç∑ÇÈ
 		ColliderManager::GetInstance()->AddPlayerBulletCollider(newBullet.get());
 		bullets_.push_back(std::move(newBullet));

@@ -18,10 +18,12 @@ public:
 	void Update(Player* player);
 
 	void AddPlayerBulletCollider(Bullet* collider);
+	void SubPlayerBullet(Bullet* bullet);
 
 	void AddEnemyCollider(Enemy* collider);
 
 	void AddEnemyBulletCollider(Bullet* collider);
+	void SubEnemyBullet(Bullet* bullet);
 
 	void Reset();
 

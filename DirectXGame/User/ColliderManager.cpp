@@ -2,6 +2,7 @@
 
 void ColliderManager::Update(Player* player)
 {
+	
 	EnemyBulletToPlayer(player);
 	PlayerBulletToEnemy();
 }
@@ -9,6 +10,11 @@ void ColliderManager::Update(Player* player)
 void ColliderManager::AddPlayerBulletCollider(Bullet* collider)
 {
 	playersBulletsCollider_.push_back(collider);
+}
+
+void ColliderManager::SubPlayerBullet(Bullet* bullet)
+{
+	playersBulletsCollider_.remove(bullet);
 }
 
 void ColliderManager::AddEnemyCollider(Enemy* collider)
@@ -19,6 +25,11 @@ void ColliderManager::AddEnemyCollider(Enemy* collider)
 void ColliderManager::AddEnemyBulletCollider(Bullet* collider)
 {
 	enemysBulletsCollider_.push_back(collider);
+}
+
+void ColliderManager::SubEnemyBullet(Bullet* bullet)
+{
+	enemysBulletsCollider_.remove(bullet);
 }
 
 void ColliderManager::Reset()
@@ -47,7 +58,7 @@ void ColliderManager::EnemyBulletToPlayer(Player* player)
 {
 	for (auto& bullet : enemysBulletsCollider_)
 	{
-		if (Collision::SphereToSphere(player->GetTransform().translation, 2.0f, bullet->GetPosition(), 1.0f))
+		if (Collision::SphereToSphere(player->GetTransform().translation, 20.0f, bullet->GetPosition(), 1.0f))
 		{
 			player->HpSub();
 			bullet->OnCollision();

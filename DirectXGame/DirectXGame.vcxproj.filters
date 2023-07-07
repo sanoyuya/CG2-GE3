@@ -318,6 +318,9 @@
     <ClCompile Include="Engine\Draw\2D\ParticleManager.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
+    <ClCompile Include="User\PlayerDamageEffect.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -576,6 +579,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Draw\2D\ParticleManager.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="User\PlayerDamageEffect.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

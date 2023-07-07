@@ -32,6 +32,7 @@ void GameScene::Initialize()
 
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
+	playerDamageEffect_ = std::make_unique<PlayerDamageEffect>();
 
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
@@ -66,6 +67,7 @@ void GameScene::Update()
 
 	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
 	player_->Update(camera_->GetCameraPtr());
+	playerDamageEffect_->Update(player_.get());
 	enemyManager_->Update(camera_->GetCameraPtr(), player_.get());
 	ColliderManager::GetInstance()->Update(player_.get());
 }

@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include"ColliderManager.h"
 
 Bullet::Bullet()
 {
@@ -8,7 +9,7 @@ Bullet::~Bullet()
 {
 }
 
-void Bullet::Initialize(const myMath::Vector3& position, const myMath::Vector3& directionVector)
+void Bullet::Initialize(const myMath::Vector3& position, const myMath::Vector3& directionVector, BulletOwner owner)
 {
 	bullet_ = std::make_unique<Model>();
 	bulletTex_ = bullet_->CreateObjModel("Resources/sphere");
@@ -16,6 +17,8 @@ void Bullet::Initialize(const myMath::Vector3& position, const myMath::Vector3& 
 	bulletTrans_.Initialize();
 	bulletTrans_.translation = position;
 	directionVector_ = directionVector;
+
+	owner_ = owner;
 }
 
 void Bullet::Update(Camera* camera)
@@ -24,6 +27,14 @@ void Bullet::Update(Camera* camera)
 	if (deathTimer_ > maxDeathTime_)
 	{
 		isDead_ = true;
+		if (owner_ == BulletOwner::Player)
+		{
+			ColliderManager::GetInstance()->SubPlayerBullet(this);
+		}
+		else if (owner_ == BulletOwner::Enemy)
+		{
+			ColliderManager::GetInstance()->SubEnemyBullet(this);
+		}
 	}
 	bulletTrans_.translation += directionVector_ * speed_;
 	bulletTrans_.TransUpdate(camera);

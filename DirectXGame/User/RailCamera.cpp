@@ -13,7 +13,7 @@ void RailCamera::Update()
 {
 	position_ = myMath::CatmullRomSpline(controlPoints_, time);
 
-	time += 0.0005f;
+	time += 0.000125f;
 	if (time >= 1.0f)
 	{
 		time = 0.0f;

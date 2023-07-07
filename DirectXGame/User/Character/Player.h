@@ -38,6 +38,7 @@ private:
 	const float moveLimit = 6.0f;
 
 	uint8_t hp_ = 3;
+	bool damageFlag_ = false;
 
 public:
 
@@ -54,9 +55,13 @@ public:
 
 	void HpSub();
 
+	const bool& GetDamageFlag();
+
 	const Transform& GetTransform();
 
 	const uint8_t& GetHp();
+
+	void SetDamageFlag(const bool& damageFlag);
 
 private:
 

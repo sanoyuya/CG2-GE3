@@ -102,6 +102,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Draw\2D\ParticleManager.cpp" />
+    <ClCompile Include="User\PlayerDamageEffect.cpp" />
     <ClCompile Include="User\ColliderManager.cpp" />
     <ClCompile Include="User\Character\EnemyManager.cpp" />
     <ClCompile Include="User\Bullet.cpp" />
@@ -299,6 +300,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Draw\2D\ParticleManager.h" />
+    <ClInclude Include="User\PlayerDamageEffect.h" />
     <ClInclude Include="User\ColliderManager.h" />
     <ClInclude Include="User\Character\EnemyManager.h" />
     <ClInclude Include="User\Bullet.h" />
