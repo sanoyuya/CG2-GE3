@@ -3,6 +3,7 @@
 #include<imgui.h>
 #include"PhysicsMath.h"
 #include"PostEffect.h"
+#include"EasingFunction.h"
 
 void TitleScene::Initialize()
 {
@@ -15,6 +16,10 @@ void TitleScene::Initialize()
 
 	lightManager_.reset(lightManager_->Create());
 	Model::SetLight(lightManager_.get());
+
+	title_ = std::make_unique<Sprite>();
+	titleTex_ = title_->LoadTexture("Resources/defaultTitle.png");
+	title_->Sprite2DInitialize(titleTex_);
 
 	//“V‹…
 	skyDome_ = std::make_unique<Model>();
@@ -40,6 +45,18 @@ void TitleScene::Update()
 
 	camUpdate();
 
+	if (time_ >= 180.0f)
+	{
+		time_ = 180.0f;
+	}
+	time_++;
+
+	if (input_->KeyboardTriggerPush(DIK_R))
+	{
+		time_ = 0.0f;
+	}
+	titlePos_.x = static_cast<float>(Easing::EaseInCubic(time_, 0.0f, 1280.0f, 180.0f));
+
 	skyDomeTrans_.TransUpdate(camera_.get());//“V‹…
 
 	lightManager_->Update();
@@ -54,6 +71,7 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	skyDome_->DrawModel(&skyDomeTrans_);
+	title_->DrawSprite2D(titlePos_);
 }
 
 void TitleScene::camUpdate()

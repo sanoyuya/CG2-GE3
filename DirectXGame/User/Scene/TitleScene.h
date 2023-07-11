@@ -31,6 +31,11 @@ private:
 
 	uint32_t bgm_ = 0;
 
+	uint32_t titleTex_ = 0;
+	std::unique_ptr<Sprite>title_;
+	myMath::Vector2 titlePos_ = { 0.0f,360.0f };
+	float time_ = 0.0f;
+
 public:
 
 	//‰Šú‰»ˆ—

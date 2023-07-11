@@ -9,7 +9,8 @@ private:
 
 	std::unique_ptr<Sprite>engineLogo_;
 	uint32_t engineLogoTex_ = 0;
-	myMath::Vector2 center_ = { 640,360 };
+	myMath::Vector2 engineLogoPos_ = { 640.0f,0.0f };
+	myMath::Vector2 center_ = { 640.0f,360.0f };
 	myMath::Vector4 logoColor_ = { 0.0f,0.0f,0.0f,0.0f };
 
 	std::unique_ptr<Sprite>back_;

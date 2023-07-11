@@ -1,5 +1,6 @@
 #include "EngineOP.h"
 #include"SceneManager.h"
+#include"EasingFunction.h"
 
 void EngineOP::Initialize()
 {
@@ -22,6 +23,7 @@ void EngineOP::Update()
 	animationTimer_++;
 	if (animationTimer_ <= 90)
 	{
+		engineLogoPos_.y = static_cast<float>(Easing::EaseOutBounce(animationTimer_, -100.0f, 360.0f, 90.0f));
 		logoColor_.w += 1.0f / 90;
 	}
 	else if (animationTimer_ > 90 && animationTimer_ <= animationEndTime_)
@@ -38,5 +40,5 @@ void EngineOP::Update()
 void EngineOP::Draw()
 {
 	back_->DrawSprite2D(center_, { 0.0f,0.0f,0.0f,1.0f }, { 1280,720 });
-	engineLogo_->DrawSprite2D(center_, logoColor_);
+	engineLogo_->DrawSprite2D(engineLogoPos_, logoColor_);
 }

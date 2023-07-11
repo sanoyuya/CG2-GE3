@@ -321,6 +321,9 @@
     <ClCompile Include="User\PlayerDamageEffect.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Math\EasingFunction.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -582,6 +585,9 @@
     </ClInclude>
     <ClInclude Include="User\PlayerDamageEffect.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\EasingFunction.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
