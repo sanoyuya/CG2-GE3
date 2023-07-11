@@ -159,16 +159,16 @@
     <ClCompile Include="Engine\Input\Controller.cpp">
       <Filter>Engine\ソースファイル\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DirectXCore\DirectXBase.cpp">
+    <ClCompile Include="Engine\DirectXCore\Core\DirectXBase.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DirectXCore\WindowsApp.cpp">
+    <ClCompile Include="Engine\DirectXCore\Core\WindowsApp.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DirectXCore\FPS.cpp">
+    <ClCompile Include="Engine\DirectXCore\Core\FPS.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Draw\DrawCommon.cpp">
+    <ClCompile Include="Engine\Draw\Common\DrawCommon.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Math\myMath.cpp">
@@ -186,22 +186,22 @@
     <ClCompile Include="Engine\Math\Matrix4.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Draw\TextureManager.cpp">
+    <ClCompile Include="Engine\Draw\Common\TextureManager.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Math\PhysicsMath.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Draw\DrawOversight.cpp">
+    <ClCompile Include="Engine\Draw\Common\DrawOversight.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Draw\Pipeline.cpp">
+    <ClCompile Include="Engine\Draw\Common\Pipeline.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DirectXCore\DescriptorHeap.cpp">
+    <ClCompile Include="Engine\DirectXCore\Core\DescriptorHeap.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DirectXCore\File.cpp">
+    <ClCompile Include="Engine\DirectXCore\Core\File.cpp">
       <Filter>Engine\ソースファイル\DirectXCore</Filter>
     </ClCompile>
     <ClCompile Include="Engine\DirectXCore\Buffer\IndexBuffer.cpp">
@@ -406,16 +406,16 @@
     <ClInclude Include="Engine\Input\Controller.h">
       <Filter>Engine\ヘッダーファイル\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DirectXCore\DirectXBase.h">
+    <ClInclude Include="Engine\DirectXCore\Core\DirectXBase.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DirectXCore\WindowsApp.h">
+    <ClInclude Include="Engine\DirectXCore\Core\WindowsApp.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DirectXCore\FPS.h">
+    <ClInclude Include="Engine\DirectXCore\Core\FPS.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Draw\DrawCommon.h">
+    <ClInclude Include="Engine\Draw\Common\DrawCommon.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Math\myMath.h">
@@ -433,22 +433,22 @@
     <ClInclude Include="Engine\Math\Matrix4.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Draw\TextureManager.h">
+    <ClInclude Include="Engine\Draw\Common\TextureManager.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Math\PhysicsMath.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Draw\DrawOversight.h">
+    <ClInclude Include="Engine\Draw\Common\DrawOversight.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Draw\Pipeline.h">
+    <ClInclude Include="Engine\Draw\Common\Pipeline.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DirectXCore\DescriptorHeap.h">
+    <ClInclude Include="Engine\DirectXCore\Core\DescriptorHeap.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DirectXCore\File.h">
+    <ClInclude Include="Engine\DirectXCore\Core\File.h">
       <Filter>Engine\ヘッダーファイル\DirectXcore</Filter>
     </ClInclude>
     <ClInclude Include="Engine\DirectXCore\Buffer\VertexBuffer.h">

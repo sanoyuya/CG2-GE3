@@ -66,7 +66,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -87,7 +87,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -118,15 +118,15 @@
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Engine\Input\Controller.cpp" />
-    <ClCompile Include="Engine\DirectXCore\DescriptorHeap.cpp" />
-    <ClCompile Include="Engine\DirectXCore\DirectXBase.cpp" />
-    <ClCompile Include="Engine\Draw\DrawCommon.cpp" />
-    <ClCompile Include="Engine\Draw\DrawOversight.cpp" />
+    <ClCompile Include="Engine\DirectXCore\Core\DescriptorHeap.cpp" />
+    <ClCompile Include="Engine\DirectXCore\Core\DirectXBase.cpp" />
+    <ClCompile Include="Engine\Draw\Common\DrawCommon.cpp" />
+    <ClCompile Include="Engine\Draw\Common\DrawOversight.cpp" />
     <ClCompile Include="Engine\Audio\AudioManager.cpp" />
     <ClCompile Include="Engine\Draw\3D\Model\AssimpLoder.cpp" />
     <ClCompile Include="Engine\Draw\3D\Model\AssimpModel.cpp" />
-    <ClCompile Include="Engine\DirectXCore\File.cpp" />
-    <ClCompile Include="Engine\DirectXCore\FPS.cpp" />
+    <ClCompile Include="Engine\DirectXCore\Core\File.cpp" />
+    <ClCompile Include="Engine\DirectXCore\Core\FPS.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp" />
     <ClCompile Include="Engine\Light\LightManager.cpp" />
     <ClCompile Include="Engine\LevelEditor\LevelEditor.cpp" />
@@ -144,21 +144,21 @@
     <ClCompile Include="Engine\Math\myMath.cpp" />
     <ClCompile Include="Engine\Draw\3D\Model\Obj.cpp" />
     <ClCompile Include="Engine\Math\PhysicsMath.cpp" />
-    <ClCompile Include="Engine\Draw\Pipeline.cpp" />
+    <ClCompile Include="Engine\Draw\Common\Pipeline.cpp" />
     <ClCompile Include="User\Scene\SceneFactory.cpp" />
     <ClCompile Include="Engine\Other\SceneManager.cpp" />
     <ClCompile Include="Engine\Draw\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Engine\Draw\2D\Sprite\Sprite2D.cpp" />
     <ClCompile Include="Engine\Draw\2D\Sprite\Sprite3D.cpp" />
     <ClCompile Include="Engine\Draw\2D\Sprite\SpriteCommon.cpp" />
-    <ClCompile Include="Engine\Draw\TextureManager.cpp" />
+    <ClCompile Include="Engine\Draw\Common\TextureManager.cpp" />
     <ClCompile Include="User\Scene\TitleScene.cpp" />
     <ClCompile Include="Engine\Draw\3D\Transform.cpp" />
     <ClCompile Include="Engine\Math\Vector2.cpp" />
     <ClCompile Include="Engine\Math\Vector3.cpp" />
     <ClCompile Include="Engine\Math\Vector4.cpp" />
     <ClCompile Include="Engine\DirectXCore\Buffer\VertexBuffer.cpp" />
-    <ClCompile Include="Engine\DirectXCore\WindowsApp.cpp" />
+    <ClCompile Include="Engine\DirectXCore\Core\WindowsApp.cpp" />
     <ClCompile Include="Engine\Other\YFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -321,15 +321,15 @@
     <ClInclude Include="Engine\Camera\Camera.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Engine\Input\Controller.h" />
-    <ClInclude Include="Engine\DirectXCore\DescriptorHeap.h" />
-    <ClInclude Include="Engine\DirectXCore\DirectXBase.h" />
-    <ClInclude Include="Engine\Draw\DrawCommon.h" />
-    <ClInclude Include="Engine\Draw\DrawOversight.h" />
+    <ClInclude Include="Engine\DirectXCore\Core\DescriptorHeap.h" />
+    <ClInclude Include="Engine\DirectXCore\Core\DirectXBase.h" />
+    <ClInclude Include="Engine\Draw\Common\DrawCommon.h" />
+    <ClInclude Include="Engine\Draw\Common\DrawOversight.h" />
     <ClInclude Include="Engine\Audio\AudioManager.h" />
     <ClInclude Include="Engine\Draw\3D\Model\AssimpLoder.h" />
     <ClInclude Include="Engine\Draw\3D\Model\AssimpModel.h" />
-    <ClInclude Include="Engine\DirectXCore\File.h" />
-    <ClInclude Include="Engine\DirectXCore\FPS.h" />
+    <ClInclude Include="Engine\DirectXCore\Core\File.h" />
+    <ClInclude Include="Engine\DirectXCore\Core\FPS.h" />
     <ClInclude Include="Engine\Input\InputManager.h" />
     <ClInclude Include="Engine\Light\LightManager.h" />
     <ClInclude Include="Engine\Light\PointLight.h" />
@@ -348,21 +348,21 @@
     <ClInclude Include="Engine\Math\myMath.h" />
     <ClInclude Include="Engine\Draw\3D\Model\Obj.h" />
     <ClInclude Include="Engine\Math\PhysicsMath.h" />
-    <ClInclude Include="Engine\Draw\Pipeline.h" />
+    <ClInclude Include="Engine\Draw\Common\Pipeline.h" />
     <ClInclude Include="Engine\Other\SceneFactory.h" />
     <ClInclude Include="Engine\Other\SceneManager.h" />
     <ClInclude Include="Engine\Draw\2D\Sprite\Sprite.h" />
     <ClInclude Include="Engine\Draw\2D\Sprite\Sprite2D.h" />
     <ClInclude Include="Engine\Draw\2D\Sprite\Sprite3D.h" />
     <ClInclude Include="Engine\Draw\2D\Sprite\SpriteCommon.h" />
-    <ClInclude Include="Engine\Draw\TextureManager.h" />
+    <ClInclude Include="Engine\Draw\Common\TextureManager.h" />
     <ClInclude Include="User\Scene\TitleScene.h" />
     <ClInclude Include="Engine\Draw\3D\Transform.h" />
     <ClInclude Include="Engine\Math\Vector2.h" />
     <ClInclude Include="Engine\Math\Vector3.h" />
     <ClInclude Include="Engine\Math\Vector4.h" />
     <ClInclude Include="Engine\DirectXCore\Buffer\VertexBuffer.h" />
-    <ClInclude Include="Engine\DirectXCore\WindowsApp.h" />
+    <ClInclude Include="Engine\DirectXCore\Core\WindowsApp.h" />
     <ClInclude Include="Engine\Other\YFramework.h" />
   </ItemGroup>
   <ItemGroup>
