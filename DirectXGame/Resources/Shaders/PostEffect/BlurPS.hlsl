@@ -11,8 +11,10 @@ float4 main(VSOutput input) : SV_TARGET
     
     int num = 0;
     
+    [loop]
     for (float i = -power; i <= power; i++)
     {
+        [loop]
         for (float j = -power; j <= power; j++)
         {
             float2 pickUV = input.uv + float2(shiftU * i, shiftV * j);

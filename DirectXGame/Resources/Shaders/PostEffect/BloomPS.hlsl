@@ -13,8 +13,10 @@ float4 main(VSOutput input) : SV_TARGET
     float totalWeight = 0.0f, _Sigma = power / 1000.0f + 0.0001f, StepWidth = 0.001f;
     float4 col = (0.0f, 0.0f, 0.0f, 0.0f);
 
+    [loop]
     for (float py = -_Sigma * 2; py <= _Sigma * 2; py += StepWidth)
     {
+        [loop]
         for (float px = -_Sigma * 2; px <= _Sigma * 2; px += StepWidth)
         {
             float2 pickUV = input.uv + float2(px, py);

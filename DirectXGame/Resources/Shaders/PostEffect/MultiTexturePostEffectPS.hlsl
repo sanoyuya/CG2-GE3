@@ -15,8 +15,10 @@ float4 main(VSOutput input) : SV_TARGET
     float shiftV = 1.0f / 720.0f;
     int num = 0;
     
+    [loop]
     for (float i = -3.0f; i <= 3.0f; i++)
     {
+        [loop]
         for (float j = -3.0f; j <= 3.0f; j++)
         {
             float2 pickUV = input.uv + float2(shiftU * i, shiftV * j);

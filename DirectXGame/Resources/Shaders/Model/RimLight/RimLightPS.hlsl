@@ -18,6 +18,7 @@ float4 main(VSOutput input) : SV_TARGET
     float4 shaderColor = float4(ambientColor * ambient * texcolor.rgb * color.rgb, color.a);
     
     //平行光源
+    [loop]
     for (int i = 0; i < DIRLIGHT_NUM; i++)
     {
         if (dirLights[i].active)
@@ -37,6 +38,7 @@ float4 main(VSOutput input) : SV_TARGET
     }
     
     //点光源
+    [loop]
     for (i = 0; i < POINTLIGHT_NUM; i++)
     {
         if (pointLights[i].active)
@@ -66,6 +68,7 @@ float4 main(VSOutput input) : SV_TARGET
     }
     
     //スポットライト
+    [loop]
     for (i = 0; i < SPOTLIGHT_NUM; i++)
     {
         if (spotLights[i].active)
@@ -100,6 +103,7 @@ float4 main(VSOutput input) : SV_TARGET
     }
     
     //丸影
+    [loop]
     for (i = 0; i < CIRCLESHADOW_NUM; i++)
     {
         if (circleShadows[i].active)

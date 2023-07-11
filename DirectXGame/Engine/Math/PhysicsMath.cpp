@@ -27,4 +27,20 @@ namespace PhysicsMath
 
 		return position;
 	}
+
+	float angle = 0.0f;
+	myMath::Vector2 FigureOfEight(float radiusX, float radiusY, float flame, const float maxFlame)
+	{
+		myMath::Vector2 pos = { 0.0f,0.0f };
+		
+		if (flame >= maxFlame)
+		{
+			angle = 0.0f;
+		}
+		pos.x = radiusX * (cosf(angle) * 2.0f);
+		pos.y = radiusY * (sinf(2 * angle) * 2.0f);
+
+		angle += myMath::AX_2PIF / maxFlame;
+		return pos;
+	}
 }

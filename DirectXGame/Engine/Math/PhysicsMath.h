@@ -29,4 +29,6 @@ namespace PhysicsMath
 	/// <param name="angle">Šp“x</param>
 	/// <returns></returns>
 	myMath::Vector2 CircularMotion(myMath::Vector2 CenterPoint, float radius, float angle);
+
+	myMath::Vector2 FigureOfEight(float radiusX, float radiusY, float flame, const float maxFlame);
 }

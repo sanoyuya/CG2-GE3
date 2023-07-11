@@ -47,7 +47,7 @@ void TitleScene::Update()
 
 	if (time_ >= 180.0f)
 	{
-		time_ = 180.0f;
+		time_ = 0.0f;
 	}
 	time_++;
 
@@ -55,7 +55,9 @@ void TitleScene::Update()
 	{
 		time_ = 0.0f;
 	}
-	titlePos_.x = static_cast<float>(Easing::EaseInCubic(time_, 0.0f, 1280.0f, 180.0f));
+
+	const myMath::Vector2 center = { 640.0f,360.0f };
+	titlePos_ = center + PhysicsMath::FigureOfEight(100.0f, 50.0f, time_, 180.0f);
 
 	skyDomeTrans_.TransUpdate(camera_.get());//“V‹…
 
