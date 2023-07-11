@@ -1,6 +1,7 @@
 #include "DrawCommon.h"
 #include <wrl.h>
 #include <string>
+#pragma comment(lib,"d3dcompiler.lib")
 
 ConstBuffDataMaterial ModelMaterial::GetConstBuffMaterial()
 {

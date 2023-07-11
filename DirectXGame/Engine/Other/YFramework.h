@@ -15,8 +15,6 @@
 #include<memory>
 #include"ImGuiManager.h"
 
-#pragma comment(lib, "d3dcompiler.lib")
-
 //ƒQ[ƒ€‘S‘Ì
 class YFramework
 {

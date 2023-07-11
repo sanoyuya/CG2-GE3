@@ -1,4 +1,9 @@
 #include "AudioManager.h"
+#pragma comment(lib,"xaudio2.lib")
+#pragma comment(lib, "Mf.lib")
+#pragma comment(lib, "mfplat.lib")
+#pragma comment(lib, "Mfreadwrite.lib")
+#pragma comment(lib, "mfuuid.lib")
 
 std::wstring multiToWideWinapi(std::string const& src)
 {

@@ -20,12 +20,6 @@
 #include<Windows.h>
 #include<wrl.h>
 
-#pragma comment(lib,"xaudio2.lib")
-#pragma comment(lib, "Mf.lib")
-#pragma comment(lib, "mfplat.lib")
-#pragma comment(lib, "Mfreadwrite.lib")
-#pragma comment(lib, "mfuuid.lib")
-
 class AudioData
 {
 public:
