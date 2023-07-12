@@ -238,7 +238,7 @@ void Sprite::DrawAnimationSpriteXY(myMath::Vector2 position, uint16_t sheetsNumX
 	cmdList->DrawIndexedInstanced(_countof(indices), 1, 0, 0, 0);
 }
 
-void Sprite::SetSpriteBlendMode(BlendMode mode)
+void Sprite::SetBlendMode(BlendMode mode)
 {
 	blendMode = int(mode);
 }
