@@ -1,0 +1,47 @@
+#include "MyGame.h"
+#include"SceneManager.h"
+
+void MyGame::Initialize()
+{
+	YFramework::SetWindowData();
+	YFramework::SetWindowColor();
+
+	//基底クラスの初期化処理
+	YFramework::Initialize();
+
+	//ポストエフェクトの初期化
+	postEffect_ = std::make_unique<PostEffect>();
+	postEffect_->Initialize(windowsApp_.get());
+
+	//シーンマネージャーに最初のシーンをセット
+	SceneManager::GetInstance()->ChangeScene("EngineOP");
+}
+
+void MyGame::Destroy()
+{
+	SceneManager::GetInstance()->Destroy();
+
+	//基底クラスの終了処理
+	YFramework::Destroy();
+}
+
+void MyGame::Update()
+{
+	//基底クラスの更新処理
+	YFramework::Update();
+
+	//シーンマネージャーの更新処理
+	SceneManager::GetInstance()->Update();
+}
+
+void MyGame::SceneDraw()
+{
+	postEffect_->PreDrawScene(windowsApp_.get());
+	SceneManager::GetInstance()->Draw();
+	postEffect_->PostDrawScene();
+}
+
+void MyGame::PostEffectDraw()
+{
+	postEffect_->Draw();
+}
