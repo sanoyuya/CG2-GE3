@@ -15,7 +15,7 @@ void PlayerDamageEffect::Update(Player* player)
 	{
 		damageFlag_ = true;
 		PostEffect::SetEffectMode(EffectMode::GaussianBlur);
-		power_ = 5.0f;
+		power_ = 10.0f;
 		player->SetDamageFlag(false);
 	}
 

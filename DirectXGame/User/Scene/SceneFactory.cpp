@@ -2,6 +2,7 @@
 #include"TitleScene.h"
 #include"GameScene.h"
 #include "EngineOP.h"
+#include"ResultScene.h"
 
 std::unique_ptr<BaseScene> SceneFactory::CreateScene(const std::string& sceneName)
 {
@@ -19,6 +20,10 @@ std::unique_ptr<BaseScene> SceneFactory::CreateScene(const std::string& sceneNam
     else if (sceneName == "EngineOP")
     {
         newScene = new EngineOP();
+    }
+    else if (sceneName == "RESULT")
+    {
+        newScene = new ResultScene();
     }
 
     return std::unique_ptr<BaseScene>(newScene);

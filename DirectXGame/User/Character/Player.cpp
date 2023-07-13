@@ -29,6 +29,10 @@ void Player::Initialize()
 	reticleTrans_.Initialize();
 	reticleTrans_.translation = { 0.0f,0.0f,30.0f };
 	reticleTrans_.scale = { 0.125f,0.125f,1.0f };
+
+	hpBar_ = std::make_unique<Sprite>();
+	hpBarTex_ = reticle_->LoadTexture("Resources/white1x1.png");
+	hpBar_->Sprite2DInitialize(hpBarTex_);
 }
 
 void Player::Update(Camera* camera)
@@ -61,6 +65,7 @@ void Player::Draw(Camera* camera)
 	reticle_->DrawSprite3D(camera, reticleTrans_);
 	BulletDraw();
 	player_->DrawModel(&playerTrans_);
+	hpBar_->DrawSprite2D({ 100,100 }, { 0.0f,1.0f,0.0f,1.0f }, { 20.0f * hp_,20.0f }, 0.0f, { 0.0f,0.0f });
 }
 
 void Player::Reset()
@@ -72,6 +77,7 @@ void Player::Reset()
 void Player::HpSub()
 {
 	hp_--;
+	min(hp_, 0);
 	damageFlag_ = true;
 }
 
@@ -85,7 +91,7 @@ const Transform& Player::GetTransform()
 	return playerTrans_;
 }
 
-const uint8_t& Player::GetHp()
+const uint8_t Player::GetHp()
 {
 	return hp_;
 }
@@ -114,6 +120,7 @@ void Player::Rotation()
 
 void Player::ReticleMove()
 {
+#pragma region キーボード
 	if (input_->KeyboardKeepPush(DIK_UP))
 	{
 		reticleTrans_.translation += {0.0f, reticleSpeed_, 0.0f};
@@ -130,6 +137,13 @@ void Player::ReticleMove()
 	{
 		reticleTrans_.translation += {reticleSpeed_, 0.0f, 0.0f};
 	}
+#pragma endregion キーボード
+
+#pragma region コントローラー
+
+	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_* input_->GetLeftStickVec().y, 0.0f};
+
+#pragma endregion コントローラー
 }
 
 void Player::MoveLimit()
@@ -148,7 +162,7 @@ void Player::BulletUpdate(Camera* camera)
 {
 	bullets_.remove_if([](std::unique_ptr<Bullet>& bullet) { return bullet->GetIsDead(); });
 
-	if (input_->KeyboardTriggerPush(DIK_SPACE))
+	if (input_->KeyboardTriggerPush(DIK_SPACE)||input_->ControllerButtonTriggerPush(A))
 	{
 		//弾を生成し、初期化
 		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();

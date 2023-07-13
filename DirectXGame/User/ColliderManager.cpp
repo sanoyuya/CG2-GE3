@@ -2,9 +2,13 @@
 
 void ColliderManager::Update(Player* player)
 {
-	
+	enemysBulletsCollider_.remove_if([](Bullet* bullet) { return bullet->GetIsDead(); });
+	playersBulletsCollider_.remove_if([](Bullet* bullet) { return bullet->GetIsDead(); });
+	enemysCollider_.remove_if([](Enemy* enemy) { return enemy->GetIsDead(); });
+
 	EnemyBulletToPlayer(player);
 	PlayerBulletToEnemy();
+	EnemyToPlayer(player);
 }
 
 void ColliderManager::AddPlayerBulletCollider(Bullet* collider)
@@ -58,7 +62,7 @@ void ColliderManager::EnemyBulletToPlayer(Player* player)
 {
 	for (auto& bullet : enemysBulletsCollider_)
 	{
-		if (Collision::SphereToSphere(player->GetTransform().translation, 20.0f, bullet->GetPosition(), 1.0f))
+		if (Collision::SphereToSphere(player->GetTransform().parentToTranslation, 1.0f, bullet->GetPosition(), 1.0f))
 		{
 			player->HpSub();
 			bullet->OnCollision();
@@ -70,7 +74,7 @@ void ColliderManager::EnemyToPlayer(Player* player)
 {
 	for (auto& enemys : enemysCollider_)
 	{
-		if (Collision::SphereToSphere(player->GetTransform().translation, 2.0f, enemys->GetPosition(), 2.0f))
+		if (Collision::SphereToSphere(player->GetTransform().parentToTranslation, 1.0f, enemys->GetPosition(), 2.0f))
 		{
 			player->HpSub();
 			enemys->OnCollision();

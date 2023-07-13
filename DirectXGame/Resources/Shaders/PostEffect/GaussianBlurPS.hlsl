@@ -5,7 +5,7 @@ SamplerState smp : register(s0);
 
 float4 main(VSOutput input) : SV_TARGET
 {
-    float totalWeight = 0.0f, _Sigma = (power + 0.1f) / 1000.0f, StepWidth = 0.001f;
+    float totalWeight = 0.0f, _Sigma = (power + 0.1f) / 1000.0f, StepWidth = 0.0025f;
     float4 col = float4(0.0f, 0.0f, 0.0f, 0.0f);
 
     [loop]

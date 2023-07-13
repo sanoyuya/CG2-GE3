@@ -103,6 +103,8 @@
   <ItemGroup>
     <ClCompile Include="Engine\Math\EasingFunction.cpp" />
     <ClCompile Include="Engine\Draw\2D\ParticleManager.cpp" />
+    <ClCompile Include="User\Scene\ResultScene.cpp" />
+    <ClCompile Include="User\Scene\SceneChangeAnimation.cpp" />
     <ClCompile Include="User\PlayerDamageEffect.cpp" />
     <ClCompile Include="User\ColliderManager.cpp" />
     <ClCompile Include="User\Character\EnemyManager.cpp" />
@@ -302,6 +304,8 @@
   <ItemGroup>
     <ClInclude Include="Engine\Math\EasingFunction.h" />
     <ClInclude Include="Engine\Draw\2D\ParticleManager.h" />
+    <ClInclude Include="User\Scene\ResultScene.h" />
+    <ClInclude Include="User\Scene\SceneChangeAnimation.h" />
     <ClInclude Include="User\PlayerDamageEffect.h" />
     <ClInclude Include="User\ColliderManager.h" />
     <ClInclude Include="User\Character\EnemyManager.h" />
