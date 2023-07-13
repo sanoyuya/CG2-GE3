@@ -1,5 +1,6 @@
 #include "MyGame.h"
 #include"SceneManager.h"
+#include"SceneChangeAnimation.h"
 
 void MyGame::Initialize()
 {
@@ -12,6 +13,8 @@ void MyGame::Initialize()
 	//ポストエフェクトの初期化
 	postEffect_ = std::make_unique<PostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
+
+	SceneChangeAnimation::GetInstance()->StaticInitialize();
 
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("EngineOP");

@@ -324,6 +324,12 @@
     <ClCompile Include="Engine\Math\EasingFunction.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
+    <ClCompile Include="User\Scene\SceneChangeAnimation.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Scene\ResultScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -588,6 +594,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Math\EasingFunction.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Scene\SceneChangeAnimation.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Scene\ResultScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

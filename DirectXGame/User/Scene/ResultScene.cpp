@@ -1,12 +1,8 @@
-#include "TitleScene.h"
-#include"SceneManager.h"
-#include<imgui.h>
-#include"PhysicsMath.h"
-#include"PostEffect.h"
-#include"EasingFunction.h"
+#include "ResultScene.h"
 #include"SceneChangeAnimation.h"
+#include"PhysicsMath.h"
 
-void TitleScene::Initialize()
+void ResultScene::Initialize()
 {
 	input_ = InputManager::GetInstance();
 	audioManager_ = AudioManager::GetInstance();
@@ -18,9 +14,9 @@ void TitleScene::Initialize()
 	lightManager_.reset(lightManager_->Create());
 	Model::SetLight(lightManager_.get());
 
-	title_ = std::make_unique<Sprite>();
-	titleTex_ = title_->LoadTexture("Resources/defaultTitle.png");
-	title_->Sprite2DInitialize(titleTex_);
+	result_ = std::make_unique<Sprite>();
+	resultTex_ = result_->LoadTexture("Resources/defaultResult.png");
+	result_->Sprite2DInitialize(resultTex_);
 
 	//“V‹…
 	skyDome_ = std::make_unique<Model>();
@@ -28,22 +24,22 @@ void TitleScene::Initialize()
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
 
-	bgm_ = audioManager_->LoadAudio("Resources/Sound/title.mp3",0.1f);
+	bgm_ = audioManager_->LoadAudio("Resources/Sound/title.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
 }
 
-void TitleScene::Destroy()
+void ResultScene::Destroy()
 {
 	audioManager_->StopWave(bgm_);
 }
 
-void TitleScene::Update()
+void ResultScene::Update()
 {
 	if (input_->KeyboardTriggerPush(DIK_SPACE))
 	{
 		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
 	}
-	SceneChangeAnimation::GetInstance()->Change("GAME");
+	SceneChangeAnimation::GetInstance()->Change("TITLE");
 
 	camUpdate();
 
@@ -59,7 +55,7 @@ void TitleScene::Update()
 	}
 
 	const myMath::Vector2 center = { 640.0f,360.0f };
-	titlePos_ = center + PhysicsMath::FigureOfEight(100.0f, 50.0f, time_, 180.0f);
+	resultPos_ = center + PhysicsMath::FigureOfEight(100.0f, 50.0f, time_, 180.0f);
 
 	skyDomeTrans_.TransUpdate(camera_.get());//“V‹…
 
@@ -72,14 +68,14 @@ void TitleScene::Update()
 	lightManager_->SetPointLightAtten(0, { 0.3f,0.1f,0.1f });
 }
 
-void TitleScene::Draw()
+void ResultScene::Draw()
 {
 	skyDome_->DrawModel(&skyDomeTrans_);
-	title_->DrawSprite2D(titlePos_);
+	result_->DrawSprite2D(resultPos_);
 	SceneChangeAnimation::GetInstance()->Draw();
 }
 
-void TitleScene::camUpdate()
+void ResultScene::camUpdate()
 {
 	if (input_->KeyboardKeepPush(DIK_UP))
 	{

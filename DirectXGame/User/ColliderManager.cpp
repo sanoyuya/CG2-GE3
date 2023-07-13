@@ -58,7 +58,7 @@ void ColliderManager::EnemyBulletToPlayer(Player* player)
 {
 	for (auto& bullet : enemysBulletsCollider_)
 	{
-		if (Collision::SphereToSphere(player->GetTransform().parentToTranslation, 2.0f, bullet->GetPosition(), 1.0f))
+		if (Collision::SphereToSphere(player->GetTransform().parentToTranslation, 1.0f, bullet->GetPosition(), 1.0f))
 		{
 			player->HpSub();
 			bullet->OnCollision();
@@ -70,7 +70,7 @@ void ColliderManager::EnemyToPlayer(Player* player)
 {
 	for (auto& enemys : enemysCollider_)
 	{
-		if (Collision::SphereToSphere(player->GetTransform().parentToTranslation, 2.0f, enemys->GetPosition(), 2.0f))
+		if (Collision::SphereToSphere(player->GetTransform().parentToTranslation, 1.0f, enemys->GetPosition(), 2.0f))
 		{
 			player->HpSub();
 			enemys->OnCollision();

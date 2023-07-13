@@ -3,6 +3,7 @@
 #include"PhysicsMath.h"
 #include<imgui.h>
 #include"ColliderManager.h"
+#include"SceneChangeAnimation.h"
 
 void GameScene::Initialize()
 {
@@ -44,6 +45,8 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
+	SceneChangeAnimation::GetInstance()->Change("RESULT");
+
 	if (input_->KeyboardTriggerPush(DIK_R))
 	{
 		ColliderManager::GetInstance()->Reset();
@@ -78,4 +81,5 @@ void GameScene::Draw()
 	gameLevelData_->Draw();
 	enemyManager_->Draw();
 	player_->Draw(camera_->GetCameraPtr());
+	SceneChangeAnimation::GetInstance()->Draw();
 }
