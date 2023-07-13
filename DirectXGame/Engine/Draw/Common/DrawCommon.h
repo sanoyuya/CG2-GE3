@@ -17,6 +17,13 @@ struct PosNormalUv
 	myMath::Vector2 uv;//uv座標
 };
 
+struct PosScaleColor
+{
+	myMath::Vector3 pos; // xyz座標
+	float scale;//スケール
+	myMath::Vector4 color;//カラー
+};
+
 //マテリアルよう定数バッファ構造体
 struct ConstBuffDataMaterial
 {

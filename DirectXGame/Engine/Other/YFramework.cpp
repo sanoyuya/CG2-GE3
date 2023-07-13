@@ -4,6 +4,7 @@
 #include"SceneManager.h"
 #include"imgui.h"
 #include"LightManager.h"
+#include"ParticleManager.h"
 
 void YFramework::Initialize()
 {
@@ -39,6 +40,8 @@ void YFramework::Initialize()
 	Sprite2D::StaticInitialize(windowsApp_.get());
 
 	Model::StaticInitialize();
+
+	ParticleManager::StaticInitialize();
 
 	LightManager::StaticInitialize(DirectXBase::GetInstance()->GetDevice().Get());
 

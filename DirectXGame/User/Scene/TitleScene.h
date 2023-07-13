@@ -6,6 +6,7 @@
 #include"AudioManager.h"
 #include"Collision.h"
 #include"LightManager.h"
+#include"ParticleEmitter.h"
 
 //タイトルシーン
 class TitleScene :public BaseScene
@@ -35,6 +36,9 @@ private:
 	std::unique_ptr<Sprite>title_;
 	myMath::Vector2 titlePos_ = { 0.0f,360.0f };
 	float time_ = 0.0f;
+
+	std::unique_ptr<ParticleEmitter>emitter_;
+	Transform emitterTrans_;
 
 public:
 
