@@ -114,6 +114,7 @@ void Player::Rotation()
 
 void Player::ReticleMove()
 {
+#pragma region キーボード
 	if (input_->KeyboardKeepPush(DIK_UP))
 	{
 		reticleTrans_.translation += {0.0f, reticleSpeed_, 0.0f};
@@ -130,6 +131,13 @@ void Player::ReticleMove()
 	{
 		reticleTrans_.translation += {reticleSpeed_, 0.0f, 0.0f};
 	}
+#pragma endregion キーボード
+
+#pragma region コントローラー
+
+	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_* input_->GetLeftStickVec().y, 0.0f};
+
+#pragma endregion コントローラー
 }
 
 void Player::MoveLimit()
@@ -148,7 +156,7 @@ void Player::BulletUpdate(Camera* camera)
 {
 	bullets_.remove_if([](std::unique_ptr<Bullet>& bullet) { return bullet->GetIsDead(); });
 
-	if (input_->KeyboardTriggerPush(DIK_SPACE))
+	if (input_->KeyboardTriggerPush(DIK_SPACE)||input_->ControllerButtonTriggerPush(A))
 	{
 		//弾を生成し、初期化
 		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
