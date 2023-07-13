@@ -35,7 +35,7 @@ void ResultScene::Destroy()
 
 void ResultScene::Update()
 {
-	if (input_->KeyboardTriggerPush(DIK_SPACE))
+	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 	{
 		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
 	}

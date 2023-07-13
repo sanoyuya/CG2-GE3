@@ -29,6 +29,10 @@ void Player::Initialize()
 	reticleTrans_.Initialize();
 	reticleTrans_.translation = { 0.0f,0.0f,30.0f };
 	reticleTrans_.scale = { 0.125f,0.125f,1.0f };
+
+	hpBar_ = std::make_unique<Sprite>();
+	hpBarTex_ = reticle_->LoadTexture("Resources/white1x1.png");
+	hpBar_->Sprite2DInitialize(hpBarTex_);
 }
 
 void Player::Update(Camera* camera)
@@ -61,6 +65,7 @@ void Player::Draw(Camera* camera)
 	reticle_->DrawSprite3D(camera, reticleTrans_);
 	BulletDraw();
 	player_->DrawModel(&playerTrans_);
+	hpBar_->DrawSprite2D({ 100,100 }, { 0.0f,1.0f,0.0f,1.0f }, { 20.0f * hp_,20.0f }, 0.0f, { 0.0f,0.0f });
 }
 
 void Player::Reset()
@@ -72,6 +77,7 @@ void Player::Reset()
 void Player::HpSub()
 {
 	hp_--;
+	min(hp_, 0);
 	damageFlag_ = true;
 }
 
@@ -85,7 +91,7 @@ const Transform& Player::GetTransform()
 	return playerTrans_;
 }
 
-const uint8_t& Player::GetHp()
+const uint8_t Player::GetHp()
 {
 	return hp_;
 }

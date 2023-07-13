@@ -65,7 +65,7 @@ void Enemy::BulletUpdate(Camera* camera, Player* player)
 		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
 		newBullet->Initialize(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 		//’e‚ð“o˜^‚·‚é
-		ColliderManager::GetInstance()->AddEnemyBulletCollider(newBullet.get());
+ 		ColliderManager::GetInstance()->AddEnemyBulletCollider(newBullet.get());
 		bullets_.push_back(std::move(newBullet));
 
 		bulletTimer = 0.0f;

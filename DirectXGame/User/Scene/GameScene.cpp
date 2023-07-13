@@ -45,6 +45,10 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
+	if (player_->GetHp() <= 0)
+	{
+		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
+	}
 	SceneChangeAnimation::GetInstance()->Change("RESULT");
 
 	if (input_->KeyboardTriggerPush(DIK_R))
