@@ -20,7 +20,6 @@ static const float2 uv_array[vnum] =
     float2(1, 0) //右上
 };
 
-
 //点の入力から、四角形を出力する
 [maxvertexcount(vnum)]
 void main(
@@ -41,7 +40,7 @@ void main(
         //ワールド座標ベースでずらす
         element.svpos = input[0].pos + offset;
         //ビュー、射影変換
-        element.svpos = mul(matBillboard, element.svpos);
+        element.svpos = mul(mat, element.svpos);
         element.uv = uv_array[i];
         element.color = input[0].color;
         output.Append(element);

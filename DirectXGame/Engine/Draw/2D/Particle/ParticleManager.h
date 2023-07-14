@@ -58,7 +58,7 @@ private:
 	std::unique_ptr<ConstantBuffer> constBuffer_ = {};
 
 	//定数バッファのマッピング用ポインタ
-	myMath::Matrix4 constBuffMap_ = {};
+	matMatBillboard constBuffMap_ = {};
 
 	TextureData* texture_ = {};
 
@@ -75,7 +75,7 @@ public:
 
 	void Initialize(uint32_t handle);
 
-	void Update(Camera* camera, Transform& transform);
+	void Update(Camera* camera);
 
 	void Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color);
 	
@@ -95,5 +95,5 @@ private:
 
 	void DrawCommand();
 
-	void BillboardUpdate(Camera* camera, Transform& transform);
+	void BillboardUpdate(Camera* camera);
 };

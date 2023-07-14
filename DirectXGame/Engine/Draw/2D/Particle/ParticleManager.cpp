@@ -29,7 +29,7 @@ void ParticleManager::Initialize(uint32_t handle)
 	CreateBuff();
 }
 
-void ParticleManager::Update(Camera* camera,Transform& transform)
+void ParticleManager::Update(Camera* camera)
 {
 	//寿命が尽きたパーティクルを全削除
 	particles_.remove_if([](OneParticle& x)
@@ -64,7 +64,8 @@ void ParticleManager::Update(Camera* camera,Transform& transform)
 
 	//定数バッファへデータ転送
 	PosScaleColor* vertMap = nullptr;
-	vertMap = new PosScaleColor;
+	result_ = vertexBuffer_->GetResource()->Map(0, nullptr, (void**)&vertMap);
+	assert(SUCCEEDED(result_));
 
 	//パーティクルの情報を1つずつ反映
 	for (std::forward_list<OneParticle>::iterator it = particles_.begin();it != particles_.end();it++)
@@ -78,9 +79,9 @@ void ParticleManager::Update(Camera* camera,Transform& transform)
 		//次の頂点へ
 		vertMap++;
 	}
-	vertexBuffer_->Update(vertMap);
+	vertexBuffer_->GetResource()->Unmap(0, nullptr);
 
-	BillboardUpdate(camera, transform);
+	BillboardUpdate(camera);
 }
 
 void ParticleManager::Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color)
@@ -128,7 +129,7 @@ void ParticleManager::CreateBuff()
 	vertexBuffer_->Update(vertices_);
 
 	constBuffer_ = std::make_unique<ConstantBuffer>();
-	constBuffer_->Create(sizeof(myMath::Matrix4));
+	constBuffer_->Create(sizeof(matMatBillboard));
 }
 
 void ParticleManager::LoadShader()
@@ -199,27 +200,17 @@ void ParticleManager::DrawCommand()
 	sCmdList_->DrawInstanced(static_cast<UINT>(std::distance(particles_.begin(),particles_.end())), 1, 0, 0);
 }
 
-void ParticleManager::BillboardUpdate(Camera* camera, Transform& transform)
+void ParticleManager::BillboardUpdate(Camera* camera)
 {
 	myMath::Matrix4 mTrans, mRot, mScale;
 	myMath::Matrix4 mat = camera->GetMatView();
-
-	//平行移動行列
-	mTrans.MakeTranslation(transform.translation);
-	//回転行列
-	mRot.MakeRotation(transform.rotation);
-	//スケール行列
-	mScale.MakeScaling(transform.scale);
 
 	mat.m[3][0] = 0;
 	mat.m[3][1] = 0;
 	mat.m[3][2] = 0;
 	mat.m[3][3] = 1;
 
-	transform.matWorld = mScale * mRot * mat * mTrans;
-	transform.matWorld *= camera->GetMatViewInverse() * camera->GetMatProjection();
-
-	transform.Update();
-	constBuffMap_ = transform.matWorld;
+	constBuffMap_.matBillboard = mat;
+	constBuffMap_.mat = camera->GetMatViewInverse() * camera->GetMatProjection();
 	constBuffer_->Update(&constBuffMap_);
 }

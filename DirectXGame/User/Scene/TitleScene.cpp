@@ -34,7 +34,6 @@ void TitleScene::Initialize()
 	// パーティクル生成
 	emitter_ = std::make_unique<ParticleEmitter>();
 	emitter_->Initialize();
-	emitterTrans_.Initialize();
 }
 
 void TitleScene::Destroy()
@@ -67,7 +66,7 @@ void TitleScene::Update()
 	titlePos_ = center + PhysicsMath::FigureOfEight(100.0f, 50.0f, time_, 180.0f);
 
 	emitter_->Create({ 0,0,0 });
-	emitter_->Update(camera_.get(), emitterTrans_);
+	emitter_->Update(camera_.get());
 
 	skyDomeTrans_.TransUpdate(camera_.get());//天球
 
@@ -83,7 +82,7 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	skyDome_->DrawModel(&skyDomeTrans_);
-	title_->DrawSprite2D(titlePos_);
+	//title_->DrawSprite2D(titlePos_);
 	emitter_->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
 }

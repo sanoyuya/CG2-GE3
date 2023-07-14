@@ -12,6 +12,6 @@ public:
 
 	void Initialize();
 	void Create(const myMath::Vector3 center);
-	void Update(Camera* camera, Transform& transform);
+	void Update(Camera* camera);
 	void Draw();
 };

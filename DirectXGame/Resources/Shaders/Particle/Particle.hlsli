@@ -1,5 +1,6 @@
 cbuffer cbuff0 : register(b0)
 {
+    matrix mat;
     matrix matBillboard; //ビルボード行列
 };
 

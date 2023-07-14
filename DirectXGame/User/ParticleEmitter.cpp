@@ -4,7 +4,7 @@ void ParticleEmitter::Initialize()
 {
 	// パーティクル生成
 	particleMan_ = std::make_unique<ParticleManager>();
-	tex_ = particleMan_->LoadTexture("Resources/white1x1.png");
+	tex_ = particleMan_->LoadTexture("Resources/defaultTitle.png");
 	particleMan_->Initialize(tex_);
 }
 
@@ -40,9 +40,9 @@ void ParticleEmitter::Create(const myMath::Vector3 center)
 	}
 }
 
-void ParticleEmitter::Update(Camera* camera, Transform& transform)
+void ParticleEmitter::Update(Camera* camera)
 {
-	particleMan_->Update(camera, transform);
+	particleMan_->Update(camera);
 }
 
 void ParticleEmitter::Draw()
