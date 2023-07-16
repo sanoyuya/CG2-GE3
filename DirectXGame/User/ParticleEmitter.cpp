@@ -4,7 +4,7 @@ void ParticleEmitter::Initialize()
 {
 	// パーティクル生成
 	particleMan_ = std::make_unique<ParticleManager>();
-	tex_ = particleMan_->LoadTexture("Resources/defaultTitle.png");
+	tex_ = particleMan_->LoadTexture("Resources/reticle.png");
 	particleMan_->Initialize(tex_);
 }
 
@@ -36,7 +36,7 @@ void ParticleEmitter::Create(const myMath::Vector3 center)
 		col.z = (float)rand() / RAND_MAX * rnd_col;
 
 		//追加
-		particleMan_->Add(60, pos, vel, acc, 0.0f, 0.0f, col);
+		particleMan_->Add(60.0f, pos, vel, acc, 10.0f, 0.0f, col);
 	}
 }
 

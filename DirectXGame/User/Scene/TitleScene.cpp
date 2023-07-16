@@ -81,7 +81,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	skyDome_->DrawModel(&skyDomeTrans_);
+	//skyDome_->DrawModel(&skyDomeTrans_);
 	//title_->DrawSprite2D(titlePos_);
 	emitter_->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();

@@ -55,11 +55,6 @@ void ParticleManager::Update(Camera* camera)
 		//スケールの線形補間
 		it->scale = (it->e_scale - it->s_scale) * f;
 		it->scale += it->s_scale;
-
-		it->color.x -= 5.0f;
-		it->color.y -= 5.0f;
-		it->color.z -= 5.0f;
-		it->color.w -= 5.0f;
 	}
 
 	//定数バッファへデータ転送
@@ -197,7 +192,7 @@ void ParticleManager::DrawCommand()
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	sCmdList_->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	// 描画コマンド
-	sCmdList_->DrawInstanced(static_cast<UINT>(std::distance(particles_.begin(),particles_.end())), 1, 0, 0);
+	sCmdList_->DrawInstanced(static_cast<UINT>(vertexCount_), 1, 0, 0);
 }
 
 void ParticleManager::BillboardUpdate(Camera* camera)
