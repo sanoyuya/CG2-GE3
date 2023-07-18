@@ -1,10 +1,9 @@
 #pragma once
 #include"DrawOversight.h"
-#include"Bullet.h"
 #include<list>
 #include"Player.h"
 
-class Enemy
+class Enemy :public Character
 {
 private:
 
@@ -13,7 +12,6 @@ private:
 	Transform enemyTrans_;
 	bool isDead_ = false;
 
-	std::list<std::unique_ptr<Bullet>>bullets_;
 	float bulletTimer = 0.0f;
 	const float maxBulletTime = 60.0f;
 

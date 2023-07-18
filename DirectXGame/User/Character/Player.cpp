@@ -160,23 +160,13 @@ void Player::ReticleLimit()
 
 void Player::BulletUpdate(Camera* camera)
 {
-	bullets_.remove_if([](std::unique_ptr<Bullet>& bullet) { return bullet->GetIsDead(); });
-
 	if (input_->KeyboardTriggerPush(DIK_SPACE)||input_->ControllerButtonTriggerPush(A))
 	{
-		//’e‚ğ¶¬‚µA‰Šú‰»
-		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
-		newBullet->Initialize(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
-		//’e‚ğ“o˜^‚·‚é
-		ColliderManager::GetInstance()->AddPlayerBulletCollider(newBullet.get());
-		bullets_.push_back(std::move(newBullet));
+		CreateBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
 	}
 
 	//’e‚ÌXVˆ—
-	for (const std::unique_ptr<Bullet>& bullet : bullets_)
-	{
-		bullet->Update(camera);
-	}
+	Character::BulletUpdate(camera);
 }
 
 void Player::BulletDraw()

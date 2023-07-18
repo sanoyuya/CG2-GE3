@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Character\Character.cpp" />
     <ClCompile Include="Engine\Math\EasingFunction.cpp" />
     <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp" />
     <ClCompile Include="User\ParticleEmitter.cpp" />
@@ -321,6 +322,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Character\Character.h" />
     <ClInclude Include="Engine\Math\EasingFunction.h" />
     <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h" />
     <ClInclude Include="User\ParticleEmitter.h" />

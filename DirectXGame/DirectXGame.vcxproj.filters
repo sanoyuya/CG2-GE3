@@ -336,6 +336,9 @@
     <ClCompile Include="User\ParticleEmitter.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="User\Character\Character.cpp">
+      <Filter>User\ソース ファイル\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -618,6 +621,9 @@
     </ClInclude>
     <ClInclude Include="User\ParticleEmitter.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\Character.h">
+      <Filter>User\ヘッダー ファイル\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
