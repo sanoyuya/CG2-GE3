@@ -52,3 +52,8 @@ void EnemyManager::Reset()
 {
 	normalEnemys_.clear();
 }
+
+const std::list<std::unique_ptr<Enemy>>& EnemyManager::GetEnemyList()
+{
+	return normalEnemys_;
+}

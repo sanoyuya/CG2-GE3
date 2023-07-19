@@ -145,6 +145,9 @@
     <Filter Include="User\ヘッダー ファイル\Character">
       <UniqueIdentifier>{5f01a0b7-d10d-4424-b92a-6c039f8bceea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\リソース ファイル\Particle">
+      <UniqueIdentifier>{f9b797fa-c9fc-4e10-999d-9978cd0749d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -315,7 +318,7 @@
     <ClCompile Include="User\ColliderManager.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Draw\2D\ParticleManager.cpp">
+    <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
     <ClCompile Include="User\PlayerDamageEffect.cpp">
@@ -329,6 +332,18 @@
     </ClCompile>
     <ClCompile Include="User\Scene\ResultScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="User\ParticleEmitter.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\Character.cpp">
+      <Filter>User\ソース ファイル\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\Radar.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject.cpp">
+      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +415,15 @@
     </FxCompile>
     <FxCompile Include="Resources\Shaders\PostEffect\BloomPS.hlsl">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Particle\ParticlePS.hlsl">
+      <Filter>Engine\リソース ファイル\Particle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Particle\ParticleVS.hlsl">
+      <Filter>Engine\リソース ファイル\Particle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Particle\ParticleGS.hlsl">
+      <Filter>Engine\リソース ファイル\Particle</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -586,7 +610,7 @@
     <ClInclude Include="User\ColliderManager.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Draw\2D\ParticleManager.h">
+    <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
     <ClInclude Include="User\PlayerDamageEffect.h">
@@ -600,6 +624,18 @@
     </ClInclude>
     <ClInclude Include="User\Scene\ResultScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="User\ParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\Character.h">
+      <Filter>User\ヘッダー ファイル\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\Radar.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameObject.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -620,6 +656,9 @@
     </None>
     <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli">
       <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </None>
+    <None Include="Resources\Shaders\Particle\Particle.hlsli">
+      <Filter>Engine\リソース ファイル\Particle</Filter>
     </None>
   </ItemGroup>
 </Project>

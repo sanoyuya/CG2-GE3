@@ -10,6 +10,7 @@
 #include"GameLevelData.h"
 #include"EnemyManager.h"
 #include"PlayerDamageEffect.h"
+#include"Radar.h"
 
 class GameScene :public BaseScene
 {
@@ -36,6 +37,8 @@ private:
 	std::unique_ptr<PlayerDamageEffect>playerDamageEffect_;
 
 	std::unique_ptr<EnemyManager>enemyManager_;
+
+	std::unique_ptr<Radar>radar_;
 
 public:
 

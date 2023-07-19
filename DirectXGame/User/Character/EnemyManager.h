@@ -14,6 +14,7 @@ class EnemyManager
 private:
 
 	std::list<std::unique_ptr<Enemy>>normalEnemys_;
+	std::list<Enemy*>list;
 
 public:
 
@@ -31,4 +32,6 @@ public:
 	void ReLoad(EnemyData& enemyData);
 
 	void Reset();
+
+	const std::list<std::unique_ptr<Enemy>>& GetEnemyList();
 };

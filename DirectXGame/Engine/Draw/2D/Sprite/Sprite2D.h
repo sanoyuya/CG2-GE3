@@ -15,7 +15,7 @@ class Sprite2D
 {
 private:
 
-	HRESULT result_ = S_OK;
+	HRESULT result_ = S_FALSE;
 	char PADING_[4] = {};
 
 	//頂点バッファ

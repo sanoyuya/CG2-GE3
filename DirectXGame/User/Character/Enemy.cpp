@@ -56,26 +56,16 @@ void Enemy::BulletUpdate(Camera* camera, Player* player)
 	myMath::Vector3 frontVec = player->GetTransform().parentToTranslation - enemyTrans_.translation;
 	frontVec = frontVec.normalization();
 
-	bullets_.remove_if([](std::unique_ptr<Bullet>& bullet) { return bullet->GetIsDead(); });
-
 	bulletTimer++;
 	if (bulletTimer >maxBulletTime)
 	{
-		//’e‚ğ¶¬‚µA‰Šú‰»
-		std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
-		newBullet->Initialize(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
-		//’e‚ğ“o˜^‚·‚é
- 		ColliderManager::GetInstance()->AddEnemyBulletCollider(newBullet.get());
-		bullets_.push_back(std::move(newBullet));
+		CreateBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 
 		bulletTimer = 0.0f;
 	}
 
 	//’e‚ÌXVˆ—
-	for (const std::unique_ptr<Bullet>& bullet : bullets_)
-	{
-		bullet->Update(camera);
-	}
+	Character::BulletUpdate(camera);
 }
 
 void Enemy::BulletDraw()

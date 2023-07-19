@@ -66,7 +66,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -87,7 +87,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -101,8 +101,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\GameObject.cpp" />
+    <ClCompile Include="User\Character\Radar.cpp" />
+    <ClCompile Include="User\Character\Character.cpp" />
     <ClCompile Include="Engine\Math\EasingFunction.cpp" />
-    <ClCompile Include="Engine\Draw\2D\ParticleManager.cpp" />
+    <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp" />
+    <ClCompile Include="User\ParticleEmitter.cpp" />
     <ClCompile Include="User\Scene\ResultScene.cpp" />
     <ClCompile Include="User\Scene\SceneChangeAnimation.cpp" />
     <ClCompile Include="User\PlayerDamageEffect.cpp" />
@@ -164,6 +168,24 @@
     <ClCompile Include="Engine\Other\YFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Resources\Shaders\Particle\ParticleGS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Particle\ParticlePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Particle\ParticleVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\PostEffect\BloomPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
@@ -302,8 +324,12 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\GameObject.h" />
+    <ClInclude Include="User\Character\Radar.h" />
+    <ClInclude Include="User\Character\Character.h" />
     <ClInclude Include="Engine\Math\EasingFunction.h" />
-    <ClInclude Include="Engine\Draw\2D\ParticleManager.h" />
+    <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h" />
+    <ClInclude Include="User\ParticleEmitter.h" />
     <ClInclude Include="User\Scene\ResultScene.h" />
     <ClInclude Include="User\Scene\SceneChangeAnimation.h" />
     <ClInclude Include="User\PlayerDamageEffect.h" />
@@ -370,6 +396,7 @@
     <ClInclude Include="Engine\Other\YFramework.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shaders\Particle\Particle.hlsli" />
     <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli" />
     <None Include="Resources\Shaders\Model\Phong\PhongShader.hlsli" />
     <None Include="Resources\Shaders\Model\Basic\ModelBasic.hlsli" />

@@ -30,6 +30,10 @@ void TitleScene::Initialize()
 
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/title.mp3",0.1f);
 	audioManager_->PlayWave(bgm_);
+
+	// パーティクル生成
+	emitter_ = std::make_unique<ParticleEmitter>();
+	emitter_->Initialize();
 }
 
 void TitleScene::Destroy()
@@ -61,6 +65,9 @@ void TitleScene::Update()
 	const myMath::Vector2 center = { 640.0f,360.0f };
 	titlePos_ = center + PhysicsMath::FigureOfEight(100.0f, 50.0f, time_, 180.0f);
 
+	emitter_->Create({ 0,0,0 });
+	emitter_->Update(camera_.get());
+
 	skyDomeTrans_.TransUpdate(camera_.get());//天球
 
 	lightManager_->Update();
@@ -74,8 +81,9 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	skyDome_->DrawModel(&skyDomeTrans_);
-	title_->DrawSprite2D(titlePos_);
+	//skyDome_->DrawModel(&skyDomeTrans_);
+	//title_->DrawSprite2D(titlePos_);
+	emitter_->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
 }
 

@@ -37,6 +37,9 @@ void GameScene::Initialize()
 
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
+
+	radar_= std::make_unique<Radar>();
+	radar_->Initialize(enemyManager_.get());
 }
 
 void GameScene::Destroy()
@@ -85,5 +88,6 @@ void GameScene::Draw()
 	gameLevelData_->Draw();
 	enemyManager_->Draw();
 	player_->Draw(camera_->GetCameraPtr());
+	radar_->Draw(enemyManager_.get(),player_.get());
 	SceneChangeAnimation::GetInstance()->Draw();
 }

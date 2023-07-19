@@ -182,7 +182,7 @@ void Pipeline::CreateParticlePipline(Blob& blob, BlendMode blend, ID3D12Device* 
 		},
 		{
 			//セマンティック名,同じセマンティック名が複数ある時に使うインデックス(0で良い),要素数とビット数を表す,入力スロットインデックス(0で良い),データのオフセット値,入力データ種別,一度に描画するインスタンス数(0で良い)
-			"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0,D3D12_APPEND_ALIGNED_ELEMENT,D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+			"SCALE", 0, DXGI_FORMAT_R32G32_FLOAT, 0,D3D12_APPEND_ALIGNED_ELEMENT,D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
 		{
 			//color
@@ -276,7 +276,7 @@ void Pipeline::CreateParticlePipline(Blob& blob, BlendMode blend, ID3D12Device* 
 	pipelineDesc.InputLayout.pInputElementDescs = inputLayout;
 	pipelineDesc.InputLayout.NumElements = _countof(inputLayout);
 	// 図形の形状設定
-	pipelineDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+	pipelineDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_POINT;
 	// その他の設定
 	pipelineDesc.NumRenderTargets = 1; // 描画対象は1つ
 	pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 0~255指定のRGBA
