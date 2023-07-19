@@ -910,6 +910,50 @@
                 ]
             },
             "file_name": "normalEnemy"
+        },
+        {
+            "type": "MESH",
+            "name": "ICO球.006",
+            "transform": {
+                "translation": [
+                    0.0,
+                    137.1095428466797,
+                    50.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy"
+        },
+        {
+            "type": "MESH",
+            "name": "ICO球.007",
+            "transform": {
+                "translation": [
+                    0.0,
+                    101.1638412475586,
+                    50.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy"
         }
     ]
 }

@@ -46,6 +46,6 @@ void Radar::Draw(EnemyManager* enemys, Player * player)
 		}
 		count++;
 	}
-	player_->DrawSprite2D(center);
+	player_->DrawSprite2D(center,{1.0f,1.0f,1.0f,1.0f },{ 1.0f ,1.0f },player->GetTransform().rotation.y);
 	radar_->DrawSprite2D(center);
 }
