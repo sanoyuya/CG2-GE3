@@ -36,6 +36,16 @@ void ColliderManager::SubEnemyBullet(Bullet* bullet)
 	enemysBulletsCollider_.remove(bullet);
 }
 
+void ColliderManager::AddCollision(GameObject* object)
+{
+	objects.push_back(object);
+}
+
+void ColliderManager::SubCollision(GameObject* object)
+{
+	objects.remove(object);
+}
+
 void ColliderManager::Reset()
 {
 	playersBulletsCollider_.clear();

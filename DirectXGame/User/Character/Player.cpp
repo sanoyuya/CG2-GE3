@@ -77,7 +77,7 @@ void Player::Reset()
 void Player::HpSub()
 {
 	hp_--;
-	min(hp_, 0);
+	hp_=max(hp_, 0);
 	damageFlag_ = true;
 }
 

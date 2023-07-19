@@ -35,7 +35,7 @@ private:
 	const float reticleSpeed_ = 0.5f;
 	const float moveLimit = 6.0f;
 
-	uint8_t hp_ = 10;
+	int8_t hp_ = 10;
 	std::unique_ptr<Sprite>hpBar_;
 	uint32_t hpBarTex_ = 0;
 
