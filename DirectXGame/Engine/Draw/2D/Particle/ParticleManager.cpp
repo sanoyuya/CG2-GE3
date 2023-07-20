@@ -238,6 +238,6 @@ void ParticleManager::BillboardUpdate(Camera* camera)
 	matCameraRot.m[3][3] = 1;
 
 	constBuffMap_.matBillboard = matCameraRot;
-	constBuffMap_.mat = camera->GetMatView() * camera->GetMatProjection();
+	constBuffMap_.mat = camera->GetMatViewInverse() * camera->GetMatProjection();
 	constBuffer_->Update(&constBuffMap_);
 }
