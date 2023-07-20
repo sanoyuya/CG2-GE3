@@ -13,7 +13,7 @@ void TitleScene::Initialize()
 
 	camera_ = std::make_unique<Camera>();
 	camera_->Initialize(true);
-	cameraPos_ = { 0.0f,0.0f,0.0f };
+	camera_->SetEye({ 0,0,-50 });
 
 	lightManager_.reset(lightManager_->Create());
 	Model::SetLight(lightManager_.get());
@@ -49,7 +49,7 @@ void TitleScene::Update()
 	}
 	SceneChangeAnimation::GetInstance()->Change("GAME");
 
-	camUpdate();
+	//camUpdate();
 
 	if (time_ >= 180.0f)
 	{
@@ -81,7 +81,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	//skyDome_->DrawModel(&skyDomeTrans_);
+	skyDome_->DrawModel(&skyDomeTrans_);
 	//title_->DrawSprite2D(titlePos_);
 	emitter_->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();

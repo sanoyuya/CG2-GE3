@@ -192,20 +192,52 @@ void ParticleManager::DrawCommand()
 	//SRVヒープ先頭にあるSRVをルートパラメーター1番に設定
 	sCmdList_->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 	// 描画コマンド
-	sCmdList_->DrawInstanced(static_cast<UINT>(vertexCount_), 1, 0, 0);
+	sCmdList_->DrawInstanced(static_cast<UINT>(std::distance(particles_.begin(), particles_.end())), 1, 0, 0);
 }
 
 void ParticleManager::BillboardUpdate(Camera* camera)
 {
-	myMath::Matrix4 mTrans, mRot, mScale;
-	myMath::Matrix4 mat = camera->GetMatView();
+	//カメラZ軸(視点方向)
+	myMath::Vector3 cameraZ = camera->GetTarget() - camera->GetEye();
 
-	mat.m[3][0] = 0;
-	mat.m[3][1] = 0;
-	mat.m[3][2] = 0;
-	mat.m[3][3] = 1;
+	//ベクトルを正規化
+	cameraZ = cameraZ.normalization();
 
-	constBuffMap_.matBillboard = mat;
-	constBuffMap_.mat = camera->GetMatViewInverse() * camera->GetMatProjection();
+	//カメラのX軸(右方向)
+	myMath::Vector3 cameraX;
+	//X軸は上方向->Z軸の外積で決まる
+	cameraX = camera->GetUp().cross(cameraZ);
+	//ベクトルを正規化
+	cameraX = cameraX.normalization();
+
+	//カメラのY軸(上方向)
+	myMath::Vector3 cameraY;
+	//Y軸はZ軸->X軸の外積で決まる
+	cameraY = cameraZ.cross(cameraX);
+	//ベクトルを正規化
+	cameraY = cameraY.normalization();
+
+	//カメラ回転行列
+	myMath::Matrix4 matCameraRot;
+	//カメラ座標系->ワールド座標系の変換行列
+	matCameraRot.m[0][0] = cameraX.x;
+	matCameraRot.m[0][1] = cameraX.y;
+	matCameraRot.m[0][2] = cameraX.z;
+
+	matCameraRot.m[1][0] = cameraY.x;
+	matCameraRot.m[1][1] = cameraY.y;
+	matCameraRot.m[1][2] = cameraY.z;
+
+	matCameraRot.m[2][0] = cameraZ.x;
+	matCameraRot.m[2][1] = cameraZ.y;
+	matCameraRot.m[2][2] = cameraZ.z;
+
+	matCameraRot.m[3][0] = 0;
+	matCameraRot.m[3][1] = 0;
+	matCameraRot.m[3][2] = 0;
+	matCameraRot.m[3][3] = 1;
+
+	constBuffMap_.matBillboard = matCameraRot;
+	constBuffMap_.mat = camera->GetMatView() * camera->GetMatProjection();
 	constBuffer_->Update(&constBuffMap_);
 }
