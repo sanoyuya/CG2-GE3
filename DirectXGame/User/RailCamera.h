@@ -1,6 +1,7 @@
 #pragma once
 #include"Camera.h"
 #include<memory>
+#include"Player.h"
 
 struct CameraData
 {
@@ -28,7 +29,7 @@ public:
 
 	void Initialize(const CameraData& cameraData);
 
-	void Update();
+	void Update(Player* player);
 
 	void ReLoad(const CameraData& cameraData);
 

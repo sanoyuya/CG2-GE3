@@ -41,6 +41,8 @@ private:
 
 	bool damageFlag_ = false;
 
+	myMath::Vector3 targetPos = {};
+
 public:
 
 	Player();
@@ -64,11 +66,13 @@ public:
 
 	void SetDamageFlag(const bool& damageFlag);
 
+	const myMath::Vector3& GetAddTargetPos();
+
 private:
 
 	void Move();
 
-	void Rotation();
+	void Rotation(Camera* camera);
 
 	void ReticleMove();
 

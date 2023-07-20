@@ -55,7 +55,7 @@ void Player::Update(Camera* camera)
 	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;//正面ベクトル
 	parentToDirectionVector_ = parentToDirectionVector_.normalization();//正規化
 
-	Rotation();
+	Rotation(camera);
 
 	BulletUpdate(camera);
 }
@@ -102,6 +102,11 @@ void Player::SetDamageFlag(const bool& damageFlag)
 	damageFlag_ = damageFlag;
 }
 
+const myMath::Vector3& Player::GetAddTargetPos()
+{
+	return targetPos;
+}
+
 void Player::Move()
 {
 	float reticleX = reticleTrans_.translation.x / 2;
@@ -110,13 +115,24 @@ void Player::Move()
 	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
 }
 
-void Player::Rotation()
+void Player::Rotation(Camera* camera)
 {
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-	float angleZ = -(reticleTrans_.translation.x / 3 - playerTrans_.translation.x) / 2.5f;
+	float angleZ = -(reticleTrans_.translation.x / 2 - playerTrans_.translation.x) / 5.0f;
 	playerTrans_.rotation.z = PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
+
+	myMath::Vector3 cameraUp =
+	{
+		sinf(playerTrans_.rotation.z / 7),
+		cosf(playerTrans_.rotation.z / 7),
+		0.0f
+	};
+	camera->SetUp(cameraUp);
+
+	targetPos = { sinf(playerTrans_.rotation.z / 7),0.0f,-cosf(playerTrans_.rotation.z / 7) };
+	myMath::Vector3 cameraFrontVec = { camera->GetTarget() - camera->GetEye() };
 }
 
 void Player::ReticleMove()
@@ -142,7 +158,7 @@ void Player::ReticleMove()
 
 #pragma region コントローラー
 
-	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_* input_->GetLeftStickVec().y, 0.0f};
+	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_ * input_->GetLeftStickVec().y, 0.0f};
 
 #pragma endregion コントローラー
 }
@@ -161,7 +177,7 @@ void Player::ReticleLimit()
 
 void Player::BulletUpdate(Camera* camera)
 {
-	if (input_->KeyboardTriggerPush(DIK_SPACE)||input_->ControllerButtonTriggerPush(A))
+	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 	{
 		CreateBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
 	}
