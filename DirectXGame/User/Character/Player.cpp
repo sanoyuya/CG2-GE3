@@ -2,6 +2,7 @@
 #include <algorithm>
 #include"PhysicsMath.h"
 #include"ColliderManager.h"
+#include<imgui.h>
 
 Player::Player()
 {
@@ -121,6 +122,7 @@ void Player::Rotation(Camera* camera)
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
 	float angleZ = -(reticleTrans_.translation.x / 2 - playerTrans_.translation.x) / 5.0f;
+	//ƒ‚ƒfƒ‹‚ÌZŽ²‰ñ“]
 	playerTrans_.rotation.z = PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 
 	myMath::Vector3 cameraUp =
@@ -131,8 +133,16 @@ void Player::Rotation(Camera* camera)
 	};
 	camera->SetUp(cameraUp);
 
-	targetPos = { sinf(playerTrans_.rotation.z / 7),0.0f,-cosf(playerTrans_.rotation.z / 7) };
-	myMath::Vector3 cameraFrontVec = { camera->GetTarget() - camera->GetEye() };
+	targetPos = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
+
+	ImGui::Begin("rot");
+	ImGui::InputFloat3("playerRot", &playerTrans_.rotation.x);
+	ImGui::InputFloat3("target", &targetPos.x);
+	myMath::Vector3 cameraTarget = camera->GetTarget();
+	ImGui::InputFloat3("cameraTarget", &cameraTarget.x);
+	myMath::Vector3 cameraPos = camera->GetEye();
+	ImGui::InputFloat3("cameraPos", &cameraPos.x);
+	ImGui::End();
 }
 
 void Player::ReticleMove()

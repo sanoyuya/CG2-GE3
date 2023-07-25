@@ -326,4 +326,15 @@ namespace myMath
 		temp *= mat;
 		return temp;
 	}
+
+	Vector3 Matrix4::Transform(const Matrix4& mat, const Vector3 vec)
+	{
+		float w = vec.x * mat.m[0][3] + vec.y * mat.m[1][3] + vec.z * mat.m[2][3] + mat.m[3][3];
+
+		Vector3 tmp = { (vec.x * mat.m[0][0] + vec.y * mat.m[1][0] + vec.z * mat.m[2][0] + mat.m[3][0]) / w,
+			(vec.x * mat.m[0][1] + vec.y * mat.m[1][1] + vec.z * mat.m[2][1] + mat.m[3][1]) / w,
+			(vec.x * mat.m[0][2] + vec.y * mat.m[1][2] + vec.z * mat.m[2][2] + mat.m[3][2]) / w };
+
+		return tmp;
+	}
 }

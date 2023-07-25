@@ -20,9 +20,9 @@ void RailCamera::Update(Player* player)
 	}
 
 	target_ = myMath::CatmullRomSpline(controlPoints_, time);
-
+	player = player;
 	camera_->SetEye(position_);
-	camera_->SetTarget(target_ + player->GetAddTargetPos());
+	camera_->SetTarget(target_+ player->GetAddTargetPos());
 	camera_->Update(true);
 }
 

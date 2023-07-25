@@ -118,6 +118,14 @@ namespace myMath
 		/// æZ
 		/// </summary>
 		Matrix4 operator*(const Matrix4& mat) const;
+
+		/// <summary>
+		/// ƒxƒNƒgƒ‹‚Æs—ñ‚ÌŠ|‚¯Z
+		/// </summary>
+		/// <param name="mat"></param>
+		/// <param name="vec"></param>
+		/// <returns></returns>
+		Vector3 Transform(const Matrix4& mat, const Vector3 vec);
 	};
 
 	/// <summary>
