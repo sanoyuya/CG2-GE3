@@ -4,7 +4,7 @@ void ColliderManager::Update(Player* player)
 {
 	enemysBulletsCollider_.remove_if([](Bullet* bullet) { return bullet->GetIsDead(); });
 	playersBulletsCollider_.remove_if([](Bullet* bullet) { return bullet->GetIsDead(); });
-	enemysCollider_.remove_if([](Enemy* enemy) { return enemy->GetIsDead(); });
+	enemysCollider_.remove_if([](Enemy* enemy) { return enemy->GetDeathAnimationFlag(); });
 
 	EnemyBulletToPlayer(player);
 	PlayerBulletToEnemy();

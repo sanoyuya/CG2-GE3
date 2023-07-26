@@ -40,6 +40,8 @@ public:
 
 	bool GetIsDead();
 
+	bool GetDeathAnimationFlag();
+
 	void OnCollision();
 
 private:
