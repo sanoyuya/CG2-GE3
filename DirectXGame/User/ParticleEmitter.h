@@ -1,7 +1,7 @@
 #pragma once
-#include"ParticleManager.h"
+#include"ParticleBase.h"
 
-class ParticleEmitter
+class ParticleEmitter:public ParticleBase
 {
 private:
 

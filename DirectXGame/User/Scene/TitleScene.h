@@ -7,6 +7,7 @@
 #include"Collision.h"
 #include"LightManager.h"
 #include"ParticleEmitter.h"
+#include"EnemyParticleEmitter.h"
 
 //タイトルシーン
 class TitleScene :public BaseScene
@@ -37,7 +38,7 @@ private:
 	myMath::Vector2 titlePos_ = { 0.0f,360.0f };
 	float time_ = 0.0f;
 
-	std::unique_ptr<ParticleEmitter>emitter_;
+	std::unique_ptr<EnemyParticleEmitter>emitter_;
 	Transform emitterTrans_;
 
 public:

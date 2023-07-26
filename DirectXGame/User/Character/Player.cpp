@@ -118,6 +118,7 @@ void Player::Move()
 
 void Player::Rotation(Camera* camera)
 {
+	//レティクルの方向に向くように回転
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
@@ -133,6 +134,7 @@ void Player::Rotation(Camera* camera)
 	};
 	camera->SetUp(cameraUp);
 
+	//プレイヤーの横向きの回転をワールド座標に変換し、後でカメラに足せるように変数に格納
 	targetPos = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
 
 	ImGui::Begin("rot");

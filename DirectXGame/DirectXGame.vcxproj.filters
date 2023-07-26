@@ -148,6 +148,12 @@
     <Filter Include="Engine\リソース ファイル\Particle">
       <UniqueIdentifier>{f9b797fa-c9fc-4e10-999d-9978cd0749d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\Particle">
+      <UniqueIdentifier>{9caaa770-535b-492f-93ee-9f513a63da22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Particle">
+      <UniqueIdentifier>{a8ccdc58-cbd6-45cf-b9b4-bf9de8406dd4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -333,9 +339,6 @@
     <ClCompile Include="User\Scene\ResultScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\ParticleEmitter.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\Character\Character.cpp">
       <Filter>User\ソース ファイル\Character</Filter>
     </ClCompile>
@@ -344,6 +347,12 @@
     </ClCompile>
     <ClCompile Include="User\GameObject.cpp">
       <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Particle\EnemyParticleEmitter.cpp">
+      <Filter>User\ソース ファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="User\ParticleEmitter.cpp">
+      <Filter>User\ソース ファイル\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -625,9 +634,6 @@
     <ClInclude Include="User\Scene\ResultScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\ParticleEmitter.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="User\Character\Character.h">
       <Filter>User\ヘッダー ファイル\Character</Filter>
     </ClInclude>
@@ -636,6 +642,15 @@
     </ClInclude>
     <ClInclude Include="User\GameObject.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Particle\EnemyParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Particle\ParticleBase.h">
+      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="User\ParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

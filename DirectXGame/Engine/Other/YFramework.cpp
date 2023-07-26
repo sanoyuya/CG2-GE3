@@ -120,11 +120,9 @@ void YFramework::Run()
 
 #ifdef _DEBUG
 
-		//ImGuiManager::GetInstance()->Draw();
+		ImGuiManager::GetInstance()->Draw();
 
 #endif _DEBUG
-
-		ImGuiManager::GetInstance()->Draw();
 
 		DirectXBase::GetInstance()->PostDraw();
 
