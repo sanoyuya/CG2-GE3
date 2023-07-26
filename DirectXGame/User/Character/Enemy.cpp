@@ -73,6 +73,11 @@ bool Enemy::GetIsDead()
 	return isDead_;
 }
 
+bool Enemy::GetDeathAnimationFlag()
+{
+	return deathAnimationFlag_;
+}
+
 void Enemy::OnCollision()
 {
 	deathAnimationFlag_ = true;
