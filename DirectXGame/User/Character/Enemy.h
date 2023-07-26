@@ -2,6 +2,7 @@
 #include"DrawOversight.h"
 #include<list>
 #include"Player.h"
+#include"EnemyParticleEmitter.h"
 
 class Enemy :public Character
 {
@@ -14,6 +15,13 @@ private:
 
 	float bulletTimer = 0.0f;
 	const float maxBulletTime = 60.0f;
+
+	bool deathAnimationFlag_ = false;
+	uint8_t deathAnimationTimer_ = 0;
+	const uint8_t maxDeathAnimationTime_ = 60;
+
+	std::unique_ptr<EnemyParticleEmitter>emitter_;
+	Transform emitterTrans_;
 
 public:
 

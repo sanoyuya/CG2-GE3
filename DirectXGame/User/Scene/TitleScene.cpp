@@ -13,7 +13,7 @@ void TitleScene::Initialize()
 
 	camera_ = std::make_unique<Camera>();
 	camera_->Initialize(true);
-	cameraPos_ = { 0.0f,0.0f,0.0f };
+	camera_->SetEye({ 0,0,-50 });
 
 	lightManager_.reset(lightManager_->Create());
 	Model::SetLight(lightManager_.get());
@@ -32,7 +32,7 @@ void TitleScene::Initialize()
 	audioManager_->PlayWave(bgm_);
 
 	// パーティクル生成
-	emitter_ = std::make_unique<ParticleEmitter>();
+	emitter_ = std::make_unique<EnemyParticleEmitter>();
 	emitter_->Initialize();
 }
 
@@ -49,7 +49,7 @@ void TitleScene::Update()
 	}
 	SceneChangeAnimation::GetInstance()->Change("GAME");
 
-	camUpdate();
+	//camUpdate();
 
 	if (time_ >= 180.0f)
 	{
@@ -65,7 +65,11 @@ void TitleScene::Update()
 	const myMath::Vector2 center = { 640.0f,360.0f };
 	titlePos_ = center + PhysicsMath::FigureOfEight(100.0f, 50.0f, time_, 180.0f);
 
-	emitter_->Create({ 0,0,0 });
+	if (input_->KeyboardTriggerPush(DIK_0))
+	{
+		emitter_->Create({ 0,0,0 });
+	}
+	//emitter_->Create({ 0,0,0 });
 	emitter_->Update(camera_.get());
 
 	skyDomeTrans_.TransUpdate(camera_.get());//天球
@@ -81,7 +85,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	//skyDome_->DrawModel(&skyDomeTrans_);
+	skyDome_->DrawModel(&skyDomeTrans_);
 	//title_->DrawSprite2D(titlePos_);
 	emitter_->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();

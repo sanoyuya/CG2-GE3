@@ -10,8 +10,6 @@ void Transform::Initialize()
 	constBuff_ = std::make_shared<ConstantBuffer>();
 	constBuff_->Create(sizeof(worldViewpojCamera));
 
-	myMath::Matrix4 matScale, matRot, matTrans;
-
 	//スケール、回転、平行移動行列の計算
 	matScale.MakeScaling(scale);
 	matRot.MakeRotation(rotation);
@@ -30,6 +28,9 @@ void Transform::Initialize()
 	if (parent)
 	{
 		matWorld *= parent->matWorld;
+		matScale *= parent->matScale;
+		matRot *= parent->matRot;
+		matTrans *= parent->matTrans;
 	}
 
 	//定数バッファに書き込み
@@ -42,8 +43,6 @@ void Transform::Initialize()
 
 void Transform::TransUpdate(Camera* camera)
 {
-	myMath::Matrix4 matScale, matRot, matTrans;
-
 	//スケール、回転、平行移動行列の計算
 	matScale.MakeScaling(scale);
 	matRot.MakeRotation(rotation);
@@ -62,6 +61,9 @@ void Transform::TransUpdate(Camera* camera)
 	if (parent)
 	{
 		matWorld *= parent->matWorld;
+		matScale *= parent->matScale;
+		matRot *= parent->matRot;
+		matTrans *= parent->matTrans;
 	}
 	parentToTranslation.x = matWorld.m[3][0];
 	parentToTranslation.y = matWorld.m[3][1];
@@ -81,8 +83,6 @@ void Transform::Update()
 
 void Transform::MakeWorldMatrix()
 {
-	myMath::Matrix4 matScale, matRot, matTrans;
-
 	//スケール、回転、平行移動行列の計算
 	matScale.MakeScaling(scale);
 	matRot.MakeRotation(rotation);
@@ -101,6 +101,9 @@ void Transform::MakeWorldMatrix()
 	if (parent)
 	{
 		matWorld *= parent->matWorld;
+		matScale *= parent->matScale;
+		matRot *= parent->matRot;
+		matTrans *= parent->matTrans;
 	}
 }
 

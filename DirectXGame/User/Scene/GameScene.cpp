@@ -27,13 +27,13 @@ void GameScene::Initialize()
 	gameLevelData_ = std::make_unique<GameLevelData>();
 	gameLevelData_->Initialize("untitled");
 
-	camera_ = std::make_unique<RailCamera>();
-	camera_->Initialize(gameLevelData_->GetCameraData());
-	camera_->Update();
-
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
 	playerDamageEffect_ = std::make_unique<PlayerDamageEffect>();
+
+	camera_ = std::make_unique<RailCamera>();
+	camera_->Initialize(gameLevelData_->GetCameraData());
+	camera_->Update(player_.get());
 
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
@@ -70,13 +70,11 @@ void GameScene::Update()
 	lightManager_->SetPointLightPos(0, lightPos_);
 	lightManager_->SetPointLightColor(0, lightColor_);
 	lightManager_->SetPointLightAtten(0, lightAtten_);
-
-	camera_->Update();
-
-	gameLevelData_->Update(camera_->GetCameraPtr());
-
-	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
+	
 	player_->Update(camera_->GetCameraPtr());
+	camera_->Update(player_.get());
+	gameLevelData_->Update(camera_->GetCameraPtr());
+	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
 	playerDamageEffect_->Update(player_.get());
 	enemyManager_->Update(camera_->GetCameraPtr(), player_.get());
 	ColliderManager::GetInstance()->Update(player_.get());

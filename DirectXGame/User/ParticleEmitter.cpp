@@ -34,6 +34,7 @@ void ParticleEmitter::Create(const myMath::Vector3 center)
 		col.x = (float)rand() / RAND_MAX * rnd_col;
 		col.y = (float)rand() / RAND_MAX * rnd_col;
 		col.z = (float)rand() / RAND_MAX * rnd_col;
+		col.w = 255.0f;
 
 		//’Ç‰Á
 		particleMan_->Add(60.0f, pos, vel, acc, 10.0f, 0.0f, col);

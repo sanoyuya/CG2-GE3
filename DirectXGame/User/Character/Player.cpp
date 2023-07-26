@@ -2,6 +2,7 @@
 #include <algorithm>
 #include"PhysicsMath.h"
 #include"ColliderManager.h"
+#include<imgui.h>
 
 Player::Player()
 {
@@ -55,7 +56,7 @@ void Player::Update(Camera* camera)
 	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;//正面ベクトル
 	parentToDirectionVector_ = parentToDirectionVector_.normalization();//正規化
 
-	Rotation();
+	Rotation(camera);
 
 	BulletUpdate(camera);
 }
@@ -70,8 +71,9 @@ void Player::Draw(Camera* camera)
 
 void Player::Reset()
 {
-	playerTrans_.translation = { 0.0f,0.0f,10.0f };
-	reticleTrans_.translation = { 0.0f,0.0f,30.0f };
+	playerTrans_.translation = { 0.0f,-reticleLimit_ / 3,10.0f };
+	reticleTrans_.translation = { 0.0f,-reticleLimit_,30.0f };
+	hp_ = 10;
 }
 
 void Player::HpSub()
@@ -101,6 +103,11 @@ void Player::SetDamageFlag(const bool& damageFlag)
 	damageFlag_ = damageFlag;
 }
 
+const myMath::Vector3& Player::GetAddTargetPos()
+{
+	return targetPos;
+}
+
 void Player::Move()
 {
 	float reticleX = reticleTrans_.translation.x / 2;
@@ -109,13 +116,35 @@ void Player::Move()
 	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
 }
 
-void Player::Rotation()
+void Player::Rotation(Camera* camera)
 {
+	//レティクルの方向に向くように回転
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-	float angleZ = -(reticleTrans_.translation.x / 3 - playerTrans_.translation.x) / 2.5f;
+	float angleZ = -(reticleTrans_.translation.x / 2 - playerTrans_.translation.x) / 5.0f;
+	//モデルのZ軸回転
 	playerTrans_.rotation.z = PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
+
+	myMath::Vector3 cameraUp =
+	{
+		sinf(playerTrans_.rotation.z / 7),
+		cosf(playerTrans_.rotation.z / 7),
+		0.0f
+	};
+	camera->SetUp(cameraUp);
+
+	//プレイヤーの横向きの回転をワールド座標に変換し、後でカメラに足せるように変数に格納
+	targetPos = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
+
+	ImGui::Begin("rot");
+	ImGui::InputFloat3("playerRot", &playerTrans_.rotation.x);
+	ImGui::InputFloat3("target", &targetPos.x);
+	myMath::Vector3 cameraTarget = camera->GetTarget();
+	ImGui::InputFloat3("cameraTarget", &cameraTarget.x);
+	myMath::Vector3 cameraPos = camera->GetEye();
+	ImGui::InputFloat3("cameraPos", &cameraPos.x);
+	ImGui::End();
 }
 
 void Player::ReticleMove()
@@ -141,7 +170,7 @@ void Player::ReticleMove()
 
 #pragma region コントローラー
 
-	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_* input_->GetLeftStickVec().y, 0.0f};
+	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_ * input_->GetLeftStickVec().y, 0.0f};
 
 #pragma endregion コントローラー
 }
@@ -160,7 +189,7 @@ void Player::ReticleLimit()
 
 void Player::BulletUpdate(Camera* camera)
 {
-	if (input_->KeyboardTriggerPush(DIK_SPACE)||input_->ControllerButtonTriggerPush(A))
+	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 	{
 		CreateBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
 	}

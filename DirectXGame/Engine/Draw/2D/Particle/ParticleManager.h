@@ -42,7 +42,7 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>sCmdList_;
 
 	std::forward_list<OneParticle>particles_; //頂点数
-	static const uint32_t vertexCount_ = 1024; //頂点数
+	static const uint32_t vertexCount_ = 4096; //頂点数
 	//頂点データ配列
 	static PosScaleColor vertices_[vertexCount_];
 

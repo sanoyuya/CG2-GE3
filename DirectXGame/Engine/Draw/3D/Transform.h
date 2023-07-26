@@ -30,6 +30,9 @@ public:
 	myMath::Vector3 scale = { 1.0f, 1.0f, 1.0f };
 
 	myMath::Matrix4 matWorld;
+	myMath::Matrix4 matRot;
+	myMath::Matrix4 matScale;
+	myMath::Matrix4 matTrans;
 
 	// 親となるワールド変換へのポインタ
 	const Transform* parent = nullptr;

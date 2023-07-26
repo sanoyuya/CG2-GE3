@@ -15,19 +15,46 @@ void Enemy::Initialize()
 	enemyTex_ = enemy_->CreateObjModel("Resources/F-35E");
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
+
+	// パーティクル生成
+	emitter_ = std::make_unique<EnemyParticleEmitter>();
+	emitter_->Initialize();
 }
 
 void Enemy::Update(Camera* camera, Player* player)
 {
+	//敵のモデルの更新処理
 	enemyTrans_.TransUpdate(camera);
-
+	//弾の生成処理と更新処理
 	BulletUpdate(camera, player);
+
+	//死亡演出の更新処理
+	if (deathAnimationFlag_ == true)
+	{
+		emitter_->Update(camera);
+		deathAnimationTimer_++;
+	}
+
+	if (deathAnimationTimer_ > maxDeathAnimationTime_)
+	{
+		isDead_ = true;
+	}
 }
 
 void Enemy::Draw()
 {
-	enemy_->DrawModel(&enemyTrans_);
+	//死んでいないときのみ描画
+	if (deathAnimationFlag_ == false)
+	{
+		enemy_->DrawModel(&enemyTrans_);
+	}
+	else
+	{
+		//死亡演出の描画処理
+		emitter_->Draw();
+	}
 
+	//弾の描画処理
 	BulletDraw();
 }
 
@@ -48,7 +75,8 @@ bool Enemy::GetIsDead()
 
 void Enemy::OnCollision()
 {
-	isDead_ = true;
+	deathAnimationFlag_ = true;
+	emitter_->Create(enemyTrans_.parentToTranslation);
 }
 
 void Enemy::BulletUpdate(Camera* camera, Player* player)
@@ -56,12 +84,15 @@ void Enemy::BulletUpdate(Camera* camera, Player* player)
 	myMath::Vector3 frontVec = player->GetTransform().parentToTranslation - enemyTrans_.translation;
 	frontVec = frontVec.normalization();
 
-	bulletTimer++;
-	if (bulletTimer >maxBulletTime)
+	if (deathAnimationFlag_ == false)
 	{
-		CreateBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+		bulletTimer++;
+		if (bulletTimer > maxBulletTime)
+		{
+			CreateBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 
-		bulletTimer = 0.0f;
+			bulletTimer = 0.0f;
+		}
 	}
 
 	//弾の更新処理
