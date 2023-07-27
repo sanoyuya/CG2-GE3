@@ -77,7 +77,7 @@ void Player::Draw(Camera* camera)
 	myMath::Vector4 hpColor = {};
 	if (hp_ > maxHp_ / 2)
 	{
-		hpColor = { 108.0f/ 255.0f,187.0f/ 255.0f,90.0f/ 255.0f,1.0f };
+		hpColor = { 130.0f/ 255.0f,174.0f/ 255.0f,70.0f/ 255.0f,1.0f };
 	}
 	else if (hp_ > maxHp_ / 4 && hp_ <= maxHp_ / 2)
 	{

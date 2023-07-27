@@ -78,12 +78,12 @@ float4 main(VSOutput input) : SV_TARGET
             float d = length(lightv);
             lightv = normalize(lightv);
             //距離減衰係数
-            float atten = saturate(1.0f / (spotLights[i].lightAtten + spotLights[i].lightAtten.y * d + spotLights[i].lightAtten.z * d * d));
+            float3 atten = saturate(1.0f / (spotLights[i].lightAtten + spotLights[i].lightAtten.y * d + spotLights[i].lightAtten.z * d * d));
             //角度減衰
             float cos = dot(lightv, spotLights[i].lightv);
             //減衰開始角度から、減衰終了角度にかけて減衰
             //減衰開始角度の内側1倍 減衰終了角度の外側は0倍の輝度
-            float angleAtten = smoothstep(spotLights[i].lightFactorAngleCos.y, spotLights[i].lightFactorAngleCos.x, cos);
+            float3 angleAtten = smoothstep(spotLights[i].lightFactorAngleCos.y, spotLights[i].lightFactorAngleCos.x, cos);
             //角度減衰を乗算
             atten *= angleAtten;
             //ライトに向かうベクトルと法線の内積
