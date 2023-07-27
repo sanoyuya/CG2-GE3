@@ -351,7 +351,10 @@
     <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="User\ParticleEmitter.cpp">
+    <ClCompile Include="User\Particle\ParticleEmitter.cpp">
+      <Filter>User\ソース ファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Particle\PlayerEngineSmokeParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Particle</Filter>
     </ClCompile>
   </ItemGroup>
@@ -649,7 +652,10 @@
     <ClInclude Include="User\Particle\ParticleBase.h">
       <Filter>User\ヘッダー ファイル\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="User\ParticleEmitter.h">
+    <ClInclude Include="User\Particle\ParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Particle\PlayerEngineSmokeParticleEmitter.h">
       <Filter>User\ヘッダー ファイル\Particle</Filter>
     </ClInclude>
   </ItemGroup>

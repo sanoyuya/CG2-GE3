@@ -34,6 +34,11 @@ void Player::Initialize()
 	hpBar_ = std::make_unique<Sprite>();
 	hpBarTex_ = reticle_->LoadTexture("Resources/white1x1.png");
 	hpBar_->Sprite2DInitialize(hpBarTex_);
+
+	// パーティクル生成
+	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
+	smokeEmitter_->Initialize();
+	smokeTrans_.Initialize();
 }
 
 void Player::Update(Camera* camera)
@@ -51,14 +56,20 @@ void Player::Update(Camera* camera)
 	reticleTrans_.TransUpdate(camera);
 
 	directionVector_ = reticleTrans_.translation - playerTrans_.translation;//正面ベクトル
-	directionVector_ = directionVector_.normalization();//正規化
+	directionVector_.normalization();//正規化
 
 	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;//正面ベクトル
-	parentToDirectionVector_ = parentToDirectionVector_.normalization();//正規化
+	parentToDirectionVector_.normalization();//正規化
 
 	Rotation(camera);
 
 	BulletUpdate(camera);
+
+	smokeTrans_.parent = &playerTrans_;
+	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
+	smokeTrans_.TransUpdate(camera);
+	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
+	smokeEmitter_->Update(camera);
 }
 
 void Player::Draw(Camera* camera)
@@ -66,6 +77,7 @@ void Player::Draw(Camera* camera)
 	reticle_->DrawSprite3D(camera, reticleTrans_);
 	BulletDraw();
 	player_->DrawModel(&playerTrans_);
+	smokeEmitter_->Draw();
 	hpBar_->DrawSprite2D({ 100,100 }, { 0.0f,1.0f,0.0f,1.0f }, { 20.0f * hp_,20.0f }, 0.0f, { 0.0f,0.0f });
 }
 

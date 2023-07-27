@@ -21,7 +21,6 @@ private:
 	const uint8_t maxDeathAnimationTime_ = 60;
 
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
-	Transform emitterTrans_;
 
 public:
 

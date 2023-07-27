@@ -4,6 +4,7 @@
 #include"InputManager.h"
 #include"myMath.h"
 #include"Character.h"
+#include"PlayerEngineSmokeParticleEmitter.h"
 
 struct PlayerData
 {
@@ -42,6 +43,9 @@ private:
 	bool damageFlag_ = false;
 
 	myMath::Vector3 targetPos = {};
+
+	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
+	Transform smokeTrans_;
 
 public:
 

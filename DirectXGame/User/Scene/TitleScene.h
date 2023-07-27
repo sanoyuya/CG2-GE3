@@ -39,7 +39,6 @@ private:
 	float time_ = 0.0f;
 
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
-	Transform emitterTrans_;
 
 public:
 

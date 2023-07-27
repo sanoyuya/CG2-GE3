@@ -101,13 +101,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Particle\PlayerEngineSmokeParticleEmitter.cpp" />
     <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp" />
     <ClCompile Include="User\GameObject.cpp" />
     <ClCompile Include="User\Character\Radar.cpp" />
     <ClCompile Include="User\Character\Character.cpp" />
     <ClCompile Include="Engine\Math\EasingFunction.cpp" />
     <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp" />
-    <ClCompile Include="User\ParticleEmitter.cpp" />
+    <ClCompile Include="User\Particle\ParticleEmitter.cpp" />
     <ClCompile Include="User\Scene\ResultScene.cpp" />
     <ClCompile Include="User\Scene\SceneChangeAnimation.cpp" />
     <ClCompile Include="User\PlayerDamageEffect.cpp" />
@@ -325,6 +326,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Particle\PlayerEngineSmokeParticleEmitter.h" />
     <ClInclude Include="User\Particle\ParticleBase.h" />
     <ClInclude Include="User\Particle\EnemyDeathParticleEmitter.h" />
     <ClInclude Include="User\GameObject.h" />
@@ -332,7 +334,7 @@
     <ClInclude Include="User\Character\Character.h" />
     <ClInclude Include="Engine\Math\EasingFunction.h" />
     <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h" />
-    <ClInclude Include="User\ParticleEmitter.h" />
+    <ClInclude Include="User\Particle\ParticleEmitter.h" />
     <ClInclude Include="User\Scene\ResultScene.h" />
     <ClInclude Include="User\Scene\SceneChangeAnimation.h" />
     <ClInclude Include="User\PlayerDamageEffect.h" />
