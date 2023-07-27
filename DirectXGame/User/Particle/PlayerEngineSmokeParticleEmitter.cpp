@@ -13,11 +13,12 @@ void PlayerEngineSmokeParticleEmitter::Create(const myMath::Vector3 center)
 	for (int i = 0; i < 5; i++)
 	{
 		const float lifeTime = 15.0f;
+		const float radius = 0.125f;
 		//初期座標(生成する場所の中心座標)
 		myMath::Vector3 pos{};
 		//中心点から半径1mの円の中にランダムに設定
-		pos.x = center.x + static_cast<float>(myMath::GetRand(-0.125f, 0.125f));
-		pos.y = center.y + static_cast<float>(myMath::GetRand(-0.125f, 0.125f));
+		pos.x = center.x + static_cast<float>(myMath::GetRand(-radius, radius));
+		pos.y = center.y + static_cast<float>(myMath::GetRand(-radius, radius));
 		pos.z = center.z;
 
 		//生成した座標から中心座標に向かう処理
@@ -25,11 +26,10 @@ void PlayerEngineSmokeParticleEmitter::Create(const myMath::Vector3 center)
 		//正面ベクトルを正規化
 		particleFrontVec.normalization();
 		
-		const float speed = 0.25f / lifeTime;
+		const float speed = radius * 2 / lifeTime;
 		//正面ベクトルの方向にspeed分進む
 		myMath::Vector3 vel = particleFrontVec * speed;
 
-		//段々ゆっくりになるような処理
 		myMath::Vector3 acc{};
 
 		myMath::Vector4 col = { 1.0f,1.0f,1.0f,1.0f };

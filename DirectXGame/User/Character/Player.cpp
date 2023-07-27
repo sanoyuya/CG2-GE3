@@ -65,11 +65,7 @@ void Player::Update(Camera* camera)
 
 	BulletUpdate(camera);
 
-	smokeTrans_.parent = &playerTrans_;
-	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
-	smokeTrans_.TransUpdate(camera);
-	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
-	smokeEmitter_->Update(camera);
+	SmokeUpdate(camera);
 }
 
 void Player::Draw(Camera* camera)
@@ -78,7 +74,20 @@ void Player::Draw(Camera* camera)
 	BulletDraw();
 	player_->DrawModel(&playerTrans_);
 	smokeEmitter_->Draw();
-	hpBar_->DrawSprite2D({ 100,100 }, { 0.0f,1.0f,0.0f,1.0f }, { 20.0f * hp_,20.0f }, 0.0f, { 0.0f,0.0f });
+	myMath::Vector4 hpColor = {};
+	if (hp_ > maxHp_ / 2)
+	{
+		hpColor = { 108.0f/ 255.0f,187.0f/ 255.0f,90.0f/ 255.0f,1.0f };
+	}
+	else if (hp_ > maxHp_ / 4 && hp_ <= maxHp_ / 2)
+	{
+		hpColor = { 255.0f / 255.0f,217.0f / 255.0f,0.0f / 255.0f,1.0f };
+	}
+	else
+	{
+		hpColor= { 255.0f / 255.0f,0.0f / 255.0f,0.0f / 255.0f,1.0f };
+	}
+	hpBar_->DrawSprite2D({ 100,100 }, hpColor, { 20.0f * hp_,20.0f }, 0.0f, { 0.0f,0.0f });
 }
 
 void Player::Reset()
@@ -136,7 +145,7 @@ void Player::Rotation(Camera* camera)
 
 	float angleZ = -(reticleTrans_.translation.x / 2 - playerTrans_.translation.x) / 5.0f;
 	//ƒ‚ƒfƒ‹‚ÌZŽ²‰ñ“]
-	playerTrans_.rotation.z = PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
+	PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 
 	myMath::Vector3 cameraUp =
 	{
@@ -216,4 +225,13 @@ void Player::BulletDraw()
 	{
 		bullet->Draw();//’e‚Ì•`‰æ
 	}
+}
+
+void Player::SmokeUpdate(Camera* camera)
+{
+	smokeTrans_.parent = &playerTrans_;
+	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
+	smokeTrans_.TransUpdate(camera);
+	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
+	smokeEmitter_->Update(camera);
 }
