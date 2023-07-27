@@ -32,7 +32,7 @@ void TitleScene::Initialize()
 	audioManager_->PlayWave(bgm_);
 
 	// パーティクル生成
-	emitter_ = std::make_unique<EnemyParticleEmitter>();
+	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
 	emitter_->Initialize();
 }
 
@@ -69,7 +69,7 @@ void TitleScene::Update()
 	{
 		emitter_->Create({ 0,0,0 });
 	}
-	//emitter_->Create({ 0,0,0 });
+	emitter_->Create({ 0,0,0 });
 	emitter_->Update(camera_.get());
 
 	skyDomeTrans_.TransUpdate(camera_.get());//天球

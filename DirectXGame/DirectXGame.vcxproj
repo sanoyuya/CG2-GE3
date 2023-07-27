@@ -101,7 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="User\Particle\EnemyParticleEmitter.cpp" />
+    <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp" />
     <ClCompile Include="User\GameObject.cpp" />
     <ClCompile Include="User\Character\Radar.cpp" />
     <ClCompile Include="User\Character\Character.cpp" />
@@ -326,7 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User\Particle\ParticleBase.h" />
-    <ClInclude Include="User\Particle\EnemyParticleEmitter.h" />
+    <ClInclude Include="User\Particle\EnemyDeathParticleEmitter.h" />
     <ClInclude Include="User\GameObject.h" />
     <ClInclude Include="User\Character\Radar.h" />
     <ClInclude Include="User\Character\Character.h" />

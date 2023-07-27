@@ -17,7 +17,7 @@ void Enemy::Initialize()
 	enemyTrans_.Initialize();
 
 	// パーティクル生成
-	emitter_ = std::make_unique<EnemyParticleEmitter>();
+	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
 	emitter_->Initialize();
 }
 

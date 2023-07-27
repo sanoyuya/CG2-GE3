@@ -1,6 +1,6 @@
-#include "EnemyParticleEmitter.h"
+#include "EnemyDeathParticleEmitter.h"
 
-void EnemyParticleEmitter::Initialize()
+void EnemyDeathParticleEmitter::Initialize()
 {
 	// パーティクル生成
 	particleMan_ = std::make_unique<ParticleManager>();
@@ -8,7 +8,7 @@ void EnemyParticleEmitter::Initialize()
 	particleMan_->Initialize(tex_);
 }
 
-void EnemyParticleEmitter::Create(const myMath::Vector3 center)
+void EnemyDeathParticleEmitter::Create(const myMath::Vector3 center)
 {
 	for (int i = 0; i < 60; i++)
 	{
@@ -21,10 +21,10 @@ void EnemyParticleEmitter::Create(const myMath::Vector3 center)
 		//速度
 		myMath::Vector3 vel = { static_cast<float>(myMath::GetRand(-1.0f,1.0f)),static_cast<float>(myMath::GetRand(-1.0f,1.0f)) ,static_cast<float>(myMath::GetRand(-1.0f,1.0f)) };
 
-		//重力に見立ててYのみ[-0.001f,0]でランダムに分布
+		//重力のような処理
 		myMath::Vector3 acc{};
-		float yadd = 0.0245f;
-		acc.y -= yadd;
+		const float gravity = 0.0245f;
+		acc.y -= gravity;
 
 		myMath::Vector4 col = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -33,12 +33,12 @@ void EnemyParticleEmitter::Create(const myMath::Vector3 center)
 	}
 }
 
-void EnemyParticleEmitter::Update(Camera* camera)
+void EnemyDeathParticleEmitter::Update(Camera* camera)
 {
 	particleMan_->Update(camera);
 }
 
-void EnemyParticleEmitter::Draw()
+void EnemyDeathParticleEmitter::Draw()
 {
 	particleMan_->Draw();
 }

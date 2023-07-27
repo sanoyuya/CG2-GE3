@@ -2,7 +2,7 @@
 #include"DrawOversight.h"
 #include<list>
 #include"Player.h"
-#include"EnemyParticleEmitter.h"
+#include"EnemyDeathParticleEmitter.h"
 
 class Enemy :public Character
 {
@@ -20,7 +20,7 @@ private:
 	uint8_t deathAnimationTimer_ = 0;
 	const uint8_t maxDeathAnimationTime_ = 60;
 
-	std::unique_ptr<EnemyParticleEmitter>emitter_;
+	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
 	Transform emitterTrans_;
 
 public:

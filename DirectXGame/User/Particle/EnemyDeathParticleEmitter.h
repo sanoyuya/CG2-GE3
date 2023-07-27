@@ -1,7 +1,7 @@
 #pragma once
 #include"ParticleBase.h"
 
-class EnemyParticleEmitter:public ParticleBase
+class EnemyDeathParticleEmitter:public ParticleBase
 {
 private:
 
@@ -13,7 +13,7 @@ public:
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~EnemyParticleEmitter() = default;
+	~EnemyDeathParticleEmitter() = default;
 
 	/// <summary>
 	/// 初期化処理
