@@ -38,9 +38,10 @@ void Radar::Draw(EnemyManager* enemys, Player * player)
 	for (auto& enemy:enemys->GetEnemyList())
 	{
 		myMath::Vector2 difference = { -enemy->GetPosition().x + player->GetTransform().parentToTranslation.x,enemy->GetPosition().z - player->GetTransform().parentToTranslation.z };
-		myMath::Vector2 length = { sqrt(difference.x * difference.x),sqrt(difference.y * difference.y) };
+		float length = sqrt(difference.x * difference.x)+ sqrt(difference.y * difference.y);
 
-		if (radarSize >= length.x && radarSize >= length.y)
+		//ƒŒ[ƒ_[‚Ì“à‘¤‚Ì”ÍˆÍ“à‚É‚¢‚é‚È‚ç
+		if (radarSize >= length)
 		{
 			radarEnemys_[count]->DrawSprite2D({ center.x + difference.x,center.y + difference.y });
 		}

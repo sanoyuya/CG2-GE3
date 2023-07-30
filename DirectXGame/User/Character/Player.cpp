@@ -55,10 +55,10 @@ void Player::Update(Camera* camera)
 	playerTrans_.TransUpdate(camera);
 	reticleTrans_.TransUpdate(camera);
 
-	directionVector_ = reticleTrans_.translation - playerTrans_.translation;//正面ベクトル
+	directionVector_ = reticleTrans_.translation - playerTrans_.translation;//ローカルの正面ベクトル
 	directionVector_.normalization();//正規化
 
-	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;//正面ベクトル
+	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;//ワールドの正面ベクトル
 	parentToDirectionVector_.normalization();//正規化
 
 	Rotation(camera);
@@ -131,8 +131,10 @@ const myMath::Vector3& Player::GetAddTargetPos()
 
 void Player::Move()
 {
+	//先に補間先の座標を定義する
 	float reticleX = reticleTrans_.translation.x / 2;
 	float reticleY = reticleTrans_.translation.y / 2;
+	//そのまま移動させると動きが硬いので補完する
 	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
 	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
 }
@@ -147,10 +149,11 @@ void Player::Rotation(Camera* camera)
 	//モデルのZ軸回転
 	PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 
+	myMath::Vector3 cameraFrontVec = camera->GetTarget() - camera->GetEye();
 	myMath::Vector3 cameraUp =
 	{
-		sinf(playerTrans_.rotation.z / 7),
-		cosf(playerTrans_.rotation.z / 7),
+		sinf(cameraFrontVec.y)* sinf(playerTrans_.rotation.z),
+		cosf(cameraFrontVec.y) * cosf(playerTrans_.rotation.z),
 		0.0f
 	};
 	camera->SetUp(cameraUp);
@@ -160,7 +163,7 @@ void Player::Rotation(Camera* camera)
 
 	ImGui::Begin("rot");
 	ImGui::InputFloat3("playerRot", &playerTrans_.rotation.x);
-	ImGui::InputFloat3("target", &targetPos.x);
+	ImGui::InputFloat3("cameraFrontVec", &cameraFrontVec.x);
 	myMath::Vector3 cameraTarget = camera->GetTarget();
 	ImGui::InputFloat3("cameraTarget", &cameraTarget.x);
 	myMath::Vector3 cameraPos = camera->GetEye();
@@ -191,6 +194,7 @@ void Player::ReticleMove()
 
 #pragma region コントローラー
 
+	//Lスティックを傾けることで移動できるようにする
 	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_ * input_->GetLeftStickVec().y, 0.0f};
 
 #pragma endregion コントローラー
@@ -205,6 +209,7 @@ void Player::MoveLimit()
 void Player::ReticleLimit()
 {
 	reticleTrans_.translation.x = std::clamp(reticleTrans_.translation.x, -reticleLimit_, reticleLimit_);
+	//画面比率に合わせた制限処理(x:y,16:9)
 	reticleTrans_.translation.y = std::clamp(reticleTrans_.translation.y, -reticleLimit_ / 16 * 9, reticleLimit_ / 16 * 9);
 }
 
@@ -212,6 +217,7 @@ void Player::BulletUpdate(Camera* camera)
 {
 	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 	{
+		//弾の作成
 		CreateBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
 	}
 
@@ -229,9 +235,14 @@ void Player::BulletDraw()
 
 void Player::SmokeUpdate(Camera* camera)
 {
+	//モーター(?)の座標に合わせるため、モデルの中心座標から位置をずらせるように子を作成
 	smokeTrans_.parent = &playerTrans_;
+	//モデルの中心座標から位置をずらす
 	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
+	//子の更新処理
 	smokeTrans_.TransUpdate(camera);
+	//パーティクルを毎フレーム作成
 	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
+	//パーティクルの更新
 	smokeEmitter_->Update(camera);
 }
