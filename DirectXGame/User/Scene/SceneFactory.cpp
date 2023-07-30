@@ -2,7 +2,6 @@
 #include"TitleScene.h"
 #include"GameScene.h"
 #include "EngineOP.h"
-#include"ResultScene.h"
 #include"GameClearScene.h"
 #include"GameOverScene.h"
 
@@ -22,10 +21,6 @@ std::unique_ptr<BaseScene> SceneFactory::CreateScene(const std::string& sceneNam
     else if (sceneName == "EngineOP")
     {
         newScene = new EngineOP();
-    }
-    else if (sceneName == "RESULT")
-    {
-        newScene = new ResultScene();
     }
     else if (sceneName == "GAMECLEAR")
     {
