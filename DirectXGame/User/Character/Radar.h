@@ -8,7 +8,7 @@ class Radar
 private:
 
 	const myMath::Vector2 center = { 1130.0f,570.0f };
-	const float radarSize = 97.0f;
+	const float radarSize = 96.0f;
 	const float radarEnemySize = 5.0f;
 
 	std::unique_ptr<Sprite>radar_;
