@@ -36,8 +36,8 @@ private:
 	const float reticleSpeed_ = 0.5f;
 	const float reticleLimit_ = 15.0f;
 
-	int8_t hp_ = 10;
-	int8_t maxHp_ = 10;
+	int8_t hp_ = 100;
+	int8_t maxHp_ = 100;
 	std::unique_ptr<Sprite>hpBar_;
 	uint32_t hpBarTex_ = 0;
 
