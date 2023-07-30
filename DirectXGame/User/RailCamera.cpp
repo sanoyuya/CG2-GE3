@@ -11,15 +11,15 @@ void RailCamera::Initialize(const CameraData& cameraData)
 
 void RailCamera::Update(Player* player)
 {
-	position_ = myMath::CatmullRomSpline(controlPoints_, time);
+	position_ = myMath::CatmullRomSpline(controlPoints_, time_);
 
-	time += 0.000125f;
-	if (time >= 1.0f)
+	time_ += 0.00025f;
+	if (time_ >= 1.0f)
 	{
-		time = 0.0f;
+		time_ = 0.0f;
 	}
 
-	target_ = myMath::CatmullRomSpline(controlPoints_, time);
+	target_ = myMath::CatmullRomSpline(controlPoints_, time_);
 	player = player;
 	camera_->SetEye(position_);
 	camera_->SetTarget(target_+ player->GetAddTargetPos());
@@ -37,6 +37,11 @@ Camera* RailCamera::GetCameraPtr()
 	return camera_.get();
 }
 
+const float RailCamera::GetTime()
+{
+	return time_;
+}
+
 void RailCamera::Load(const CameraData& cameraData)
 {
 	position_ = cameraData.position;
@@ -49,5 +54,5 @@ void RailCamera::Load(const CameraData& cameraData)
 void RailCamera::Reset()
 {
 	controlPoints_.clear();
-	time = 0.0f;
+	time_ = 0.0f;
 }

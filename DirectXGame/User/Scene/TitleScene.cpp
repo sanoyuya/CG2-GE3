@@ -47,6 +47,8 @@ void TitleScene::Update()
 	{
 		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
 	}
+	SceneChangeAnimation::GetInstance()->Update();
+	SceneChangeAnimation::GetInstance()->ChangeAfter();
 	SceneChangeAnimation::GetInstance()->Change("GAME");
 
 	//camUpdate();

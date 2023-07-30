@@ -9,7 +9,7 @@ void SceneChangeAnimation::StaticInitialize()
 	back_->Sprite2DInitialize(backTex_);
 }
 
-void SceneChangeAnimation::Change(const std::string& sceneName)
+void SceneChangeAnimation::Update()
 {
 	if (animationFlag_ == true)
 	{
@@ -20,18 +20,25 @@ void SceneChangeAnimation::Change(const std::string& sceneName)
 	{
 		alpha_ = static_cast<float>(Easing::EaseInCirc(static_cast<double>(animationTimer_), 0.0f, 1.0f, 90.0f));
 	}
-	else
-	{
-		alpha_ = static_cast<float>(Easing::EaseInCirc(static_cast<double>(animationTimer_ - 90.0f), 1.0f, 0.0f, 90.0f));
-	}
+}
 
+void SceneChangeAnimation::Change(const std::string& sceneName)
+{
 	if (animationTimer_ == maxAnimationTime / 2)
 	{
 		SceneManager::GetInstance()->ChangeScene(sceneName);
 	}
-	else if (animationTimer_ >= maxAnimationTime)
+}
+
+void SceneChangeAnimation::ChangeAfter()
+{
+	if (animationTimer_ >= maxAnimationTime)
 	{
 		Reset();
+	}
+	else if (animationTimer_ > 90.0f)
+	{
+		alpha_ = static_cast<float>(Easing::EaseInCirc(static_cast<double>(animationTimer_ - 90.0f), 1.0f, 0.0f, 90.0f));
 	}
 }
 

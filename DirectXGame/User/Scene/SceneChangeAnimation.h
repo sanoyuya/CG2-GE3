@@ -18,7 +18,11 @@ public:
 
 	void StaticInitialize();
 
+	void Update();
+
 	void Change(const std::string& sceneName);
+
+	void ChangeAfter();
 
 	void Draw();
 
