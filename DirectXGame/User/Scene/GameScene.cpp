@@ -4,6 +4,7 @@
 #include<imgui.h>
 #include"ColliderManager.h"
 #include"SceneChangeAnimation.h"
+#include"PostEffect.h"
 
 void GameScene::Initialize()
 {
@@ -44,6 +45,7 @@ void GameScene::Initialize()
 
 void GameScene::Destroy()
 {
+	PostEffect::SetEffectMode(EffectMode::None);
 }
 
 void GameScene::Update()
@@ -52,7 +54,7 @@ void GameScene::Update()
 	SceneChangeAnimation::GetInstance()->ChangeAfter();
 
 	//プレイヤーのHPが0になったらゲームオーバー
-	if (player_->GetHp() <= 0)
+	if (player_->GetDeathFlag()==true)
 	{
 		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
 		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");

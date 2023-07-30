@@ -6,9 +6,12 @@ void ColliderManager::Update(Player* player)
 	playersBulletsCollider_.remove_if([](Bullet* bullet) { return bullet->GetIsDead(); });
 	enemysCollider_.remove_if([](Enemy* enemy) { return enemy->GetDeathAnimationFlag(); });
 
-	EnemyBulletToPlayer(player);
+	if (player->GetHp() > 0)
+	{
+		EnemyBulletToPlayer(player);
+		EnemyToPlayer(player);
+	}
 	PlayerBulletToEnemy();
-	EnemyToPlayer(player);
 }
 
 void ColliderManager::AddPlayerBulletCollider(Bullet* collider)
