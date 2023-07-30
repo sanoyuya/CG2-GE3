@@ -23,7 +23,7 @@ private:
 
 	//êßå‰ì_
 	std::vector<myMath::Vector3> controlPoints_;
-	float time = 0.0f;
+	float time_ = 0.0f;
 
 public:
 
@@ -34,6 +34,8 @@ public:
 	void ReLoad(const CameraData& cameraData);
 
 	Camera* GetCameraPtr();
+
+	const float GetTime();
 
 private:
 

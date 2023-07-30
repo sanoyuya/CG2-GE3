@@ -104,7 +104,7 @@ void Player::HpSub()
 	damageFlag_ = true;
 }
 
-const bool& Player::GetDamageFlag()
+const bool Player::GetDamageFlag()
 {
 	return damageFlag_;
 }
@@ -119,7 +119,7 @@ const uint8_t Player::GetHp()
 	return hp_;
 }
 
-void Player::SetDamageFlag(const bool& damageFlag)
+void Player::SetDamageFlag(const bool damageFlag)
 {
 	damageFlag_ = damageFlag;
 }

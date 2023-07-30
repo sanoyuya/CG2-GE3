@@ -101,6 +101,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Scene\GameClearScene.cpp" />
+    <ClCompile Include="User\Scene\GameOverScene.cpp" />
     <ClCompile Include="User\Particle\PlayerEngineSmokeParticleEmitter.cpp" />
     <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp" />
     <ClCompile Include="User\GameObject.cpp" />
@@ -326,6 +328,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Scene\GameClearScene.h" />
+    <ClInclude Include="User\Scene\GameOverScene.h" />
     <ClInclude Include="User\Particle\PlayerEngineSmokeParticleEmitter.h" />
     <ClInclude Include="User\Particle\ParticleBase.h" />
     <ClInclude Include="User\Particle\EnemyDeathParticleEmitter.h" />

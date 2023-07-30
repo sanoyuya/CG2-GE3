@@ -63,13 +63,13 @@ public:
 
 	void HpSub();
 
-	const bool& GetDamageFlag();
+	const bool GetDamageFlag();
 
 	const Transform& GetTransform();
 
 	const uint8_t GetHp();
 
-	void SetDamageFlag(const bool& damageFlag);
+	void SetDamageFlag(const bool damageFlag);
 
 	const myMath::Vector3& GetAddTargetPos();
 

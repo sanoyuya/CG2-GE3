@@ -48,11 +48,22 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
+	SceneChangeAnimation::GetInstance()->Update();
+	SceneChangeAnimation::GetInstance()->ChangeAfter();
+
+	//プレイヤーのHPが0になったらゲームオーバー
 	if (player_->GetHp() <= 0)
 	{
 		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
+		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");
 	}
-	SceneChangeAnimation::GetInstance()->Change("RESULT");
+
+	//カメラが最後まで到達したらゲームクリア
+	if (camera_->GetTime() >= 0.95f)
+	{
+		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
+		SceneChangeAnimation::GetInstance()->Change("GAMECLEAR");
+	}
 
 	if (input_->KeyboardTriggerPush(DIK_R))
 	{

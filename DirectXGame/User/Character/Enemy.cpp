@@ -91,10 +91,15 @@ void Enemy::BulletUpdate(Camera* camera, Player* player)
 
 	if (deathAnimationFlag_ == false)
 	{
+		float length = sqrt((player->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x) * (player->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x)) +
+			sqrt((player->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z) * (player->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z));
 		bulletTimer++;
 		if (bulletTimer > maxBulletTime)
 		{
-			CreateBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+			if (75.0f >= length)
+			{
+				CreateBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+			}
 
 			bulletTimer = 0.0f;
 		}

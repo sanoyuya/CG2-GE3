@@ -357,6 +357,12 @@
     <ClCompile Include="User\Particle\PlayerEngineSmokeParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="User\Scene\GameClearScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Scene\GameOverScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -657,6 +663,12 @@
     </ClInclude>
     <ClInclude Include="User\Particle\PlayerEngineSmokeParticleEmitter.h">
       <Filter>User\ヘッダー ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Scene\GameClearScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Scene\GameOverScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

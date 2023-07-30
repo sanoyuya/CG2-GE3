@@ -16,7 +16,7 @@ private:
 	const uint8_t maxDeathTime_ = 60;
 
 	myMath::Vector3 directionVector_;//•ûŒüƒxƒNƒgƒ‹
-	const float speed_ = 2.0f;
+	const float speed_ = 1.5f;
 
 	std::unique_ptr<Model>bullet_;
 	uint32_t bulletTex_ = 0;
