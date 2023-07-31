@@ -41,11 +41,16 @@ void GameScene::Initialize()
 
 	radar_= std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
+
+	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
+	audioManager_->PlayWave(bgm_);
 }
 
 void GameScene::Destroy()
 {
+	ColliderManager::GetInstance()->Reset();
 	PostEffect::SetEffectMode(EffectMode::None);
+	audioManager_->StopWave(bgm_);
 }
 
 void GameScene::Update()
@@ -91,6 +96,7 @@ void GameScene::Update()
 	playerDamageEffect_->Update(player_.get());
 	enemyManager_->Update(camera_->GetCameraPtr(), player_.get());
 	ColliderManager::GetInstance()->Update(player_.get());
+	radar_->Update(camera_->GetCameraPtr());
 }
 
 void GameScene::Draw()

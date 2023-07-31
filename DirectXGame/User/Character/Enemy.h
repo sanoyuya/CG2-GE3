@@ -45,7 +45,7 @@ public://セッター
 
 public://ゲッター
 
-	const myMath::Vector3& GetPosition();
+	const Transform& GetTrans();
 
 	const float& GetColliderSize();
 

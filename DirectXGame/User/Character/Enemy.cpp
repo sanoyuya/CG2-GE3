@@ -73,9 +73,9 @@ void Enemy::SetColliderSize(const float size)
 	colliderSize_ = size;
 }
 
-const myMath::Vector3& Enemy::GetPosition()
+const Transform& Enemy::GetTrans()
 {
-	return enemyTrans_.translation;
+	return enemyTrans_;
 }
 
 const float& Enemy::GetColliderSize()
