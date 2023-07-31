@@ -11,6 +11,7 @@ private:
 	std::unique_ptr<Model>enemy_;
 	uint32_t enemyTex_ = 0;
 	Transform enemyTrans_;
+	float colliderSize_ = 0.0f;
 	bool isDead_ = false;
 
 	float bulletTimer = 0.0f;
@@ -33,9 +34,20 @@ public:
 
 	void Draw();
 
+public://セッター
+
+	//blenderで出力したデータを読み込むときに初期座標をセットする関数
 	void SetPosition(const myMath::Vector3& position);
+	//blenderで出力したデータを読み込むときに初期角度をセットする関数
+	void SetRotation(const myMath::Vector3& rotation);
+	//blenderで出力したデータを読み込むときに当たり判定の大きさをセットする関数
+	void SetColliderSize(const float size);
+
+public://ゲッター
 
 	const myMath::Vector3& GetPosition();
+
+	const float& GetColliderSize();
 
 	bool GetIsDead();
 

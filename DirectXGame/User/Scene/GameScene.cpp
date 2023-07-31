@@ -26,7 +26,7 @@ void GameScene::Initialize()
 
 	//レベルエディタの初期化&読み込み
 	gameLevelData_ = std::make_unique<GameLevelData>();
-	gameLevelData_->Initialize("untitled");
+	gameLevelData_->Initialize("stage1");
 
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
