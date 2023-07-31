@@ -19,7 +19,7 @@ void TitleScene::Initialize()
 	Model::SetLight(lightManager_.get());
 
 	title_ = std::make_unique<Sprite>();
-	titleTex_ = title_->LoadTexture("Resources/defaultTitle.png");
+	titleTex_ = title_->LoadTexture("Resources/gameLogo.png");
 	title_->Sprite2DInitialize(titleTex_);
 
 	//天球
@@ -29,12 +29,12 @@ void TitleScene::Initialize()
 	skyDomeTrans_.Initialize();
 
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/title.mp3",0.1f);
-	//audioManager_->PlayWave(bgm_);
+	audioManager_->PlayWave(bgm_);
 }
 
 void TitleScene::Destroy()
 {
-	//audioManager_->StopWave(bgm_);
+	audioManager_->StopWave(bgm_);
 }
 
 void TitleScene::Update()
@@ -49,6 +49,9 @@ void TitleScene::Update()
 
 	skyDomeTrans_.TransUpdate(camera_.get());//天球
 
+	time_++;
+	position_.y = 360.0f+PhysicsMath::SimpleHarmonicMotion(time_);
+
 	lightManager_->Update();
 
 	//ポイントライト
@@ -60,8 +63,8 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	skyDome_->DrawModel(&skyDomeTrans_);
-	title_->DrawSprite2D({ 640.0f,360.0f });
+	//skyDome_->DrawModel(&skyDomeTrans_);
+	title_->DrawSprite2D({ position_ });
 	SceneChangeAnimation::GetInstance()->Draw();
 }
 

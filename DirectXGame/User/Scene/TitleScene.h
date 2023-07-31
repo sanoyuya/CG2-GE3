@@ -33,6 +33,9 @@ private:
 	uint32_t titleTex_ = 0;
 	std::unique_ptr<Sprite>title_;
 
+	float time_ = 0.0f;
+	myMath::Vector2 position_ = { 640.0f,0.0f };
+
 public:
 
 	//‰Šú‰»ˆ—

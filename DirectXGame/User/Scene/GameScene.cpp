@@ -43,14 +43,14 @@ void GameScene::Initialize()
 	radar_->Initialize(enemyManager_.get());
 
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
-	//audioManager_->PlayWave(bgm_);
+	audioManager_->PlayWave(bgm_);
 }
 
 void GameScene::Destroy()
 {
 	ColliderManager::GetInstance()->Reset();
 	PostEffect::SetEffectMode(EffectMode::None);
-	//audioManager_->StopWave(bgm_);
+	audioManager_->StopWave(bgm_);
 }
 
 void GameScene::Update()

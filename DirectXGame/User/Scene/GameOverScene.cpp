@@ -24,7 +24,7 @@ void GameOverScene::Initialize()
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
 
-	bgm_ = audioManager_->LoadAudio("Resources/Sound/title.mp3", 0.1f);
+	bgm_ = audioManager_->LoadAudio("Resources/Sound/Blinded.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
 }
 
