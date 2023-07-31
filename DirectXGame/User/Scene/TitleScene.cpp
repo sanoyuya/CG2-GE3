@@ -29,12 +29,12 @@ void TitleScene::Initialize()
 	skyDomeTrans_.Initialize();
 
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/title.mp3",0.1f);
-	audioManager_->PlayWave(bgm_);
+	//audioManager_->PlayWave(bgm_);
 }
 
 void TitleScene::Destroy()
 {
-	audioManager_->StopWave(bgm_);
+	//audioManager_->StopWave(bgm_);
 }
 
 void TitleScene::Update()
