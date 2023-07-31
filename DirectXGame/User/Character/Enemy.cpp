@@ -63,9 +63,24 @@ void Enemy::SetPosition(const myMath::Vector3& position)
 	enemyTrans_.translation = position;
 }
 
-const myMath::Vector3& Enemy::GetPosition()
+void Enemy::SetRotation(const myMath::Vector3& rotation)
 {
-	return enemyTrans_.translation;
+	enemyTrans_.rotation = rotation;
+}
+
+void Enemy::SetColliderSize(const float size)
+{
+	colliderSize_ = size;
+}
+
+const Transform& Enemy::GetTrans()
+{
+	return enemyTrans_;
+}
+
+const float& Enemy::GetColliderSize()
+{
+	return colliderSize_;
 }
 
 bool Enemy::GetIsDead()

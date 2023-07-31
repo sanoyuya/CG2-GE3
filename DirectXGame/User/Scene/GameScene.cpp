@@ -4,6 +4,7 @@
 #include<imgui.h>
 #include"ColliderManager.h"
 #include"SceneChangeAnimation.h"
+#include"PostEffect.h"
 
 void GameScene::Initialize()
 {
@@ -25,7 +26,7 @@ void GameScene::Initialize()
 
 	//レベルエディタの初期化&読み込み
 	gameLevelData_ = std::make_unique<GameLevelData>();
-	gameLevelData_->Initialize("untitled");
+	gameLevelData_->Initialize("stage1");
 
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
@@ -40,10 +41,16 @@ void GameScene::Initialize()
 
 	radar_= std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
+
+	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
+	//audioManager_->PlayWave(bgm_);
 }
 
 void GameScene::Destroy()
 {
+	ColliderManager::GetInstance()->Reset();
+	PostEffect::SetEffectMode(EffectMode::None);
+	//audioManager_->StopWave(bgm_);
 }
 
 void GameScene::Update()
@@ -52,7 +59,7 @@ void GameScene::Update()
 	SceneChangeAnimation::GetInstance()->ChangeAfter();
 
 	//プレイヤーのHPが0になったらゲームオーバー
-	if (player_->GetHp() <= 0)
+	if (player_->GetDeathFlag()==true)
 	{
 		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
 		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");
@@ -89,6 +96,7 @@ void GameScene::Update()
 	playerDamageEffect_->Update(player_.get());
 	enemyManager_->Update(camera_->GetCameraPtr(), player_.get());
 	ColliderManager::GetInstance()->Update(player_.get());
+	radar_->Update(camera_->GetCameraPtr());
 }
 
 void GameScene::Draw()

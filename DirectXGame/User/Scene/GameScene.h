@@ -40,6 +40,8 @@ private:
 
 	std::unique_ptr<Radar>radar_;
 
+	uint32_t bgm_ = 0;
+
 public:
 
 	//‰Šú‰»ˆ—

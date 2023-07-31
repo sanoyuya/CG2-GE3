@@ -5,6 +5,7 @@
 #include"myMath.h"
 #include"Character.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
+#include"EnemyDeathParticleEmitter.h"
 
 struct PlayerData
 {
@@ -36,10 +37,14 @@ private:
 	const float reticleSpeed_ = 0.5f;
 	const float reticleLimit_ = 15.0f;
 
-	int8_t hp_ = 20;
-	int8_t maxHp_ = 20;
+	int8_t maxHp_ = 10;
+	int8_t hp_ = maxHp_;
+
 	std::unique_ptr<Sprite>hpBar_;
 	uint32_t hpBarTex_ = 0;
+	bool deathFlag_ = false;
+	bool animationFlag_ = false;
+	float deathAnimationTimer = 0.0f;
 
 	bool damageFlag_ = false;
 
@@ -47,6 +52,9 @@ private:
 
 	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
+
+	std::unique_ptr<EnemyDeathParticleEmitter>deathParticleEmitter_;
+	Transform deathParticleEmitterTrans_;
 
 public:
 
@@ -72,6 +80,8 @@ public:
 	void SetDamageFlag(const bool damageFlag);
 
 	const myMath::Vector3& GetAddTargetPos();
+
+	const bool& GetDeathFlag();
 
 private:
 

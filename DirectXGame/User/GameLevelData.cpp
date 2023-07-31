@@ -57,13 +57,19 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "cameraPoint")
 		{
-			cameraData_.controlPoints.push_back(objectData.translation);//§Œä“_‚ğ“o˜^
+			//§Œä“_‚ğ“o˜^
+			cameraData_.controlPoints.push_back(objectData.translation);
 		}
 		else if (objectData.fileName == "normalEnemy")
 		{
 			std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>();
 			enemy->SetPosition(objectData.translation);
-			enemyData_.normalEnemys.push_back(std::move(enemy));//Enemy‚ğ“o˜^
+			//blenderã‚ÆÀ•WŒn‚ªáŠ±‚¸‚ê‚Ä‚¢‚é‚Ì‚ÅáŠ±C³‚µ‚Ä‘—‚é
+			enemy->SetRotation({ myMath::ChangeRadians(objectData.rotation.x), myMath::ChangeRadians(objectData.rotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(objectData.rotation.z) - myMath::AX_PIF / 2 });
+			//”¼Œa‚³‚¦•ª‚©‚ê‚Î—Ç‚¢‚Ì‚Åx‚Ì’l‚Ì‚İ‘—‚é
+			enemy->SetColliderSize(objectData.collider.size.x);
+			//Enemy‚ğ“o˜^
+			enemyData_.normalEnemys.push_back(std::move(enemy));
 		}
 		else
 		{

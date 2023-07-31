@@ -39,6 +39,10 @@ void Player::Initialize()
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
+
+	deathParticleEmitter_ = std::make_unique<EnemyDeathParticleEmitter>();
+	deathParticleEmitter_->Initialize();
+	deathParticleEmitterTrans_.Initialize();
 }
 
 void Player::Update(Camera* camera)
@@ -47,33 +51,76 @@ void Player::Update(Camera* camera)
 	playerTrans_.parent = &cameraTrans_;
 	reticleTrans_.parent = &cameraTrans_;
 
-	MoveLimit();
-	ReticleMove();
-	Move();
-	ReticleLimit();
+	if (hp_ <= 0)
+	{
+		if (animationFlag_ == false)
+		{
+			deathParticleEmitter_->Create(playerTrans_.parentToTranslation);
+			animationFlag_ = true;
+		}
+		else
+		{
+			deathAnimationTimer++;
+			if (deathAnimationTimer >= 60.0f)
+			{
+				deathFlag_ = true;
+			}
+		}
+	}
+	else
+	{
+		MoveLimit();
+		ReticleMove();
+		Move();
+		ReticleLimit();
+	}
 
 	playerTrans_.TransUpdate(camera);
 	reticleTrans_.TransUpdate(camera);
 
-	directionVector_ = reticleTrans_.translation - playerTrans_.translation;//ローカルの正面ベクトル
-	directionVector_.normalization();//正規化
+	//ローカルの正面ベクトル
+	directionVector_ = reticleTrans_.translation - playerTrans_.translation;
+	//正規化
+	directionVector_.normalization();
 
-	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;//ワールドの正面ベクトル
-	parentToDirectionVector_.normalization();//正規化
+	//ワールドの正面ベクトル
+	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;
+	//正規化
+	parentToDirectionVector_.normalization();
 
 	Rotation(camera);
 
 	BulletUpdate(camera);
 
 	SmokeUpdate(camera);
+
+	if (animationFlag_ == true)
+	{
+		deathParticleEmitter_->Update(camera);
+	}
 }
 
 void Player::Draw(Camera* camera)
 {
-	reticle_->DrawSprite3D(camera, reticleTrans_);
+	//弾の描画
 	BulletDraw();
-	player_->DrawModel(&playerTrans_);
-	smokeEmitter_->Draw();
+
+	if (hp_ > 0)
+	{
+		//レティクルの描画
+		reticle_->DrawSprite3D(camera, reticleTrans_);
+		//プレイヤーのモデル描画
+		player_->DrawModel(&playerTrans_);
+		//機体のエンジンから火が出るパーティクルの描画
+		smokeEmitter_->Draw();
+	}
+
+	if (animationFlag_ == true)
+	{
+		//死亡演出の描画
+		deathParticleEmitter_->Draw();
+	}
+
 	myMath::Vector4 hpColor = {};
 	if (hp_ > maxHp_ / 2)
 	{
@@ -127,6 +174,11 @@ void Player::SetDamageFlag(const bool damageFlag)
 const myMath::Vector3& Player::GetAddTargetPos()
 {
 	return targetPos;
+}
+
+const bool& Player::GetDeathFlag()
+{
+	return deathFlag_;
 }
 
 void Player::Move()
@@ -215,10 +267,13 @@ void Player::ReticleLimit()
 
 void Player::BulletUpdate(Camera* camera)
 {
-	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
+	if (hp_ > 0)
 	{
-		//弾の作成
-		CreateBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
+		if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
+		{
+			//弾の作成
+			CreateBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
+		}
 	}
 
 	//弾の更新処理
@@ -229,13 +284,14 @@ void Player::BulletDraw()
 {
 	for (const std::unique_ptr<Bullet>& bullet : bullets_)
 	{
-		bullet->Draw();//弾の描画
+		//弾の描画
+		bullet->Draw();
 	}
 }
 
 void Player::SmokeUpdate(Camera* camera)
 {
-	//モーター(?)の座標に合わせるため、モデルの中心座標から位置をずらせるように子を作成
+	//エンジンの座標に合わせるため、モデルの中心座標から位置をずらせるように子を作成
 	smokeTrans_.parent = &playerTrans_;
 	//モデルの中心座標から位置をずらす
 	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
