@@ -4,7 +4,7 @@
 
 void MyGame::Initialize()
 {
-	YFramework::SetWindowData();
+	YFramework::SetWindowData("AirBattle");
 	YFramework::SetWindowColor();
 
 	//Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
