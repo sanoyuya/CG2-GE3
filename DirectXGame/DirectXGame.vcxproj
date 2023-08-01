@@ -101,6 +101,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\GameLevelData.cpp" />
+    <ClCompile Include="User\GameObject.cpp" />
     <ClCompile Include="User\PlayerDeathAnimation.cpp" />
     <ClCompile Include="User\UI\Reticle.cpp" />
     <ClCompile Include="User\UI\HPBar.cpp" />
