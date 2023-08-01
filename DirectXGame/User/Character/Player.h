@@ -6,6 +6,7 @@
 #include"Character.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
 #include"EnemyDeathParticleEmitter.h"
+#include"HPBar.h"
 
 struct PlayerData
 {
@@ -39,9 +40,8 @@ private:
 
 	int8_t maxHp_ = 10;
 	int8_t hp_ = maxHp_;
+	std::unique_ptr<HPBar>hpBar_;
 
-	std::unique_ptr<Sprite>hpBar_;
-	uint32_t hpBarTex_ = 0;
 	bool deathFlag_ = false;
 	bool animationFlag_ = false;
 	float deathAnimationTimer = 0.0f;

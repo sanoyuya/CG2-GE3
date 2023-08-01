@@ -31,9 +31,9 @@ void Player::Initialize()
 	reticleTrans_.translation = { 0.0f,-reticleLimit_,30.0f };
 	reticleTrans_.scale = { 0.125f,0.125f,1.0f };
 
-	hpBar_ = std::make_unique<Sprite>();
-	hpBarTex_ = reticle_->LoadTexture("Resources/white1x1.png");
-	hpBar_->Sprite2DInitialize(hpBarTex_);
+	//HPバーの初期化
+	hpBar_ = std::make_unique<HPBar>();
+	hpBar_->Initialize(maxHp_, { 100.0f,100.0f });
 
 	// パーティクル生成
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
@@ -50,6 +50,9 @@ void Player::Update(Camera* camera)
 	cameraTrans_.matWorld = camera->GetMatView();
 	playerTrans_.parent = &cameraTrans_;
 	reticleTrans_.parent = &cameraTrans_;
+
+	//HPバーの更新
+	hpBar_->Update(hp_);
 
 	if (hp_ <= 0)
 	{
@@ -113,6 +116,8 @@ void Player::Draw(Camera* camera)
 		player_->DrawModel(&playerTrans_);
 		//機体のエンジンから火が出るパーティクルの描画
 		smokeEmitter_->Draw();
+		//HPバーの描画
+		hpBar_->Draw();
 	}
 
 	if (animationFlag_ == true)
@@ -120,21 +125,6 @@ void Player::Draw(Camera* camera)
 		//死亡演出の描画
 		deathParticleEmitter_->Draw();
 	}
-
-	myMath::Vector4 hpColor = {};
-	if (hp_ > maxHp_ / 2)
-	{
-		hpColor = { 130.0f/ 255.0f,174.0f/ 255.0f,70.0f/ 255.0f,1.0f };
-	}
-	else if (hp_ > maxHp_ / 4 && hp_ <= maxHp_ / 2)
-	{
-		hpColor = { 255.0f / 255.0f,217.0f / 255.0f,0.0f / 255.0f,1.0f };
-	}
-	else
-	{
-		hpColor= { 255.0f / 255.0f,0.0f / 255.0f,0.0f / 255.0f,1.0f };
-	}
-	hpBar_->DrawSprite2D({ 100,100 }, hpColor, { 20.0f * hp_,20.0f }, 0.0f, { 0.0f,0.0f });
 }
 
 void Player::Reset()

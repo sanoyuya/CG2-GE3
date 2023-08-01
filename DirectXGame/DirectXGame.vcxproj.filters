@@ -360,6 +360,9 @@
     <ClCompile Include="User\Scene\GameOverScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="User\HPBar.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -663,6 +666,9 @@
     </ClInclude>
     <ClInclude Include="User\Scene\GameOverScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="User\HPBar.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
