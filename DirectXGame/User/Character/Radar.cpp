@@ -1,13 +1,5 @@
 #include "Radar.h"
 
-Radar::Radar()
-{
-}
-
-Radar::~Radar()
-{
-}
-
 void Radar::Initialize(EnemyManager* enemys)
 {
 	radar_ = std::make_unique<Sprite>();

@@ -20,6 +20,9 @@ private:
 
 public:
 
+	Reticle() = default;
+	~Reticle() = default;
+
 	void Initialize();
 
 	void Update(Camera* camera);

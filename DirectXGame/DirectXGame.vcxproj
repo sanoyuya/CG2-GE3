@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\PlayerDeathAnimation.cpp" />
     <ClCompile Include="User\Reticle.cpp" />
     <ClCompile Include="User\HPBar.cpp" />
     <ClCompile Include="User\Scene\GameClearScene.cpp" />
@@ -329,6 +330,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\PlayerDeathAnimation.h" />
     <ClInclude Include="User\Reticle.h" />
     <ClInclude Include="User\HPBar.h" />
     <ClInclude Include="User\Scene\GameClearScene.h" />

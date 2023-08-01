@@ -16,6 +16,9 @@ private:
 
 public:
 
+	HPBar() = default;
+	~HPBar() = default;
+
 	void Initialize(const int8_t maxHp, const myMath::Vector2 leftUpPoint);
 
 	void Update(const int8_t hp);

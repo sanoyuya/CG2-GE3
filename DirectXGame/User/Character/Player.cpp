@@ -37,9 +37,8 @@ void Player::Initialize()
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
 
-	deathParticleEmitter_ = std::make_unique<EnemyDeathParticleEmitter>();
-	deathParticleEmitter_->Initialize();
-	deathParticleEmitterTrans_.Initialize();
+	deathAnimation_ = std::make_unique<PlayerDeathAnimation>();
+	deathAnimation_->Initialize();
 }
 
 void Player::Update(Camera* camera)
@@ -52,19 +51,7 @@ void Player::Update(Camera* camera)
 
 	if (hp_ <= 0)
 	{
-		if (animationFlag_ == false)
-		{
-			deathParticleEmitter_->Create(playerTrans_.parentToTranslation);
-			animationFlag_ = true;
-		}
-		else
-		{
-			deathAnimationTimer++;
-			if (deathAnimationTimer >= 60.0f)
-			{
-				deathFlag_ = true;
-			}
-		}
+		deathAnimation_->Update(playerTrans_.parentToTranslation);
 	}
 	else
 	{
@@ -90,10 +77,9 @@ void Player::Update(Camera* camera)
 
 	SmokeUpdate(camera);
 
-	if (animationFlag_ == true)
-	{
-		deathParticleEmitter_->Update(camera);
-	}
+	deathAnimation_->ParticleUpdate(camera);
+
+	deathFlag_ = deathAnimation_->GetDeathFlag();
 }
 
 void Player::Draw(Camera* camera)
@@ -113,11 +99,8 @@ void Player::Draw(Camera* camera)
 		hpBar_->Draw();
 	}
 
-	if (animationFlag_ == true)
-	{
-		//Ž€–S‰‰o‚Ì•`‰æ
-		deathParticleEmitter_->Draw();
-	}
+	//Ž€–S‰‰o‚Ì•`‰æ
+	deathAnimation_->Draw();
 }
 
 void Player::Reset()

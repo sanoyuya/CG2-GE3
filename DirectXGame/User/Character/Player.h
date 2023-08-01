@@ -8,6 +8,7 @@
 #include"EnemyDeathParticleEmitter.h"
 #include"HPBar.h"
 #include"Reticle.h"
+#include"PlayerDeathAnimation.h"
 
 struct PlayerData
 {
@@ -40,8 +41,6 @@ private:
 	std::unique_ptr<HPBar>hpBar_;
 
 	bool deathFlag_ = false;
-	bool animationFlag_ = false;
-	float deathAnimationTimer = 0.0f;
 
 	bool damageFlag_ = false;
 
@@ -50,8 +49,7 @@ private:
 	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
 
-	std::unique_ptr<EnemyDeathParticleEmitter>deathParticleEmitter_;
-	Transform deathParticleEmitterTrans_;
+	std::unique_ptr<PlayerDeathAnimation>deathAnimation_;
 
 public:
 

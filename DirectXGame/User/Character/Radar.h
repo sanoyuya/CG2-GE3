@@ -25,8 +25,8 @@ private:
 
 public:
 
-	Radar();
-	~Radar();
+	Radar() = default;
+	~Radar() = default;
 
 	void Initialize(EnemyManager* enemys);
 	void Update(Camera* camera);
