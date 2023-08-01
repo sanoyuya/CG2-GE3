@@ -154,6 +154,12 @@
     <Filter Include="User\ヘッダー ファイル\Particle">
       <UniqueIdentifier>{a8ccdc58-cbd6-45cf-b9b4-bf9de8406dd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\UI">
+      <UniqueIdentifier>{f5d1c6b7-49dd-44c7-9da9-98d045efd00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\UI">
+      <UniqueIdentifier>{2c3fac6c-85d4-4344-90de-0433972ef691}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -339,9 +345,6 @@
     <ClCompile Include="User\Character\Character.cpp">
       <Filter>User\ソース ファイル\Character</Filter>
     </ClCompile>
-    <ClCompile Include="User\Character\Radar.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\GameObject.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
@@ -360,14 +363,17 @@
     <ClCompile Include="User\Scene\GameOverScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\HPBar.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Reticle.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\PlayerDeathAnimation.cpp">
       <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\Radar.cpp">
+      <Filter>User\ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Reticle.cpp">
+      <Filter>User\ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="User\HPBar.cpp">
+      <Filter>User\ソース ファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -649,9 +655,6 @@
     <ClInclude Include="User\Character\Character.h">
       <Filter>User\ヘッダー ファイル\Character</Filter>
     </ClInclude>
-    <ClInclude Include="User\Character\Radar.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="User\GameObject.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
@@ -673,14 +676,17 @@
     <ClInclude Include="User\Scene\GameOverScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\HPBar.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Reticle.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="User\PlayerDeathAnimation.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\HPBar.h">
+      <Filter>User\ヘッダー ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\Radar.h">
+      <Filter>User\ヘッダー ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Reticle.h">
+      <Filter>User\ヘッダー ファイル\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,18 +32,21 @@ void Player::Initialize()
 	hpBar_ = std::make_unique<HPBar>();
 	hpBar_->Initialize(maxHp_, { 100.0f,100.0f });
 
-	// パーティクル生成
+	//パーティクルの初期化
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
 
+	//死亡演出の初期化
 	deathAnimation_ = std::make_unique<PlayerDeathAnimation>();
 	deathAnimation_->Initialize();
 }
 
 void Player::Update(Camera* camera)
 {
+	//カメラを親にする為に行列をTransformのmatWorldに登録
 	cameraTrans_.matWorld = camera->GetMatView();
+	//レティクルの親にカメラを設定
 	playerTrans_.parent = &cameraTrans_;
 
 	//HPバーの更新
@@ -51,14 +54,18 @@ void Player::Update(Camera* camera)
 
 	if (hp_ <= 0)
 	{
+		//死亡演出の更新処理
 		deathAnimation_->Update(playerTrans_.parentToTranslation);
 	}
 	else
 	{
+		//レティクルの更新処理
 		reticle_->Update(camera);
+		//自機の移動処理
 		Move();
 	}
 
+	//Transformの更新処理
 	playerTrans_.TransUpdate(camera);
 
 	//ローカルの正面ベクトル
@@ -71,14 +78,16 @@ void Player::Update(Camera* camera)
 	//正規化
 	parentToDirectionVector_.normalization();
 
+	//自機の回転処理
 	Rotation(camera);
 
+	//弾の更新処理
 	BulletUpdate(camera);
-
+	//エンジンの煙の更新処理
 	SmokeUpdate(camera);
-
+	//死亡演出のパーティクルの更新処理
 	deathAnimation_->ParticleUpdate(camera);
-
+	//死亡演出で死亡させたときのフラグの値を貰う
 	deathFlag_ = deathAnimation_->GetDeathFlag();
 }
 
@@ -107,6 +116,7 @@ void Player::Reset()
 {
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };
 	hp_ = 10;
+	//レティクルのリセット
 	reticle_->Reset();
 }
 
