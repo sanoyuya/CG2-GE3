@@ -66,7 +66,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Particle</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Particle;$(ProjectDir)User\UI</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -87,7 +87,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Particle</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Particle;$(ProjectDir)User\UI</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -102,14 +102,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="User\PlayerDeathAnimation.cpp" />
-    <ClCompile Include="User\Reticle.cpp" />
-    <ClCompile Include="User\HPBar.cpp" />
+    <ClCompile Include="User\UI\Reticle.cpp" />
+    <ClCompile Include="User\UI\HPBar.cpp" />
     <ClCompile Include="User\Scene\GameClearScene.cpp" />
     <ClCompile Include="User\Scene\GameOverScene.cpp" />
     <ClCompile Include="User\Particle\PlayerEngineSmokeParticleEmitter.cpp" />
     <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp" />
-    <ClCompile Include="User\GameObject.cpp" />
-    <ClCompile Include="User\Character\Radar.cpp" />
+    <ClCompile Include="User\UI\Radar.cpp" />
     <ClCompile Include="User\Character\Character.cpp" />
     <ClCompile Include="Engine\Math\EasingFunction.cpp" />
     <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp" />
@@ -124,7 +123,6 @@
     <ClCompile Include="User\Character\Enemy.cpp" />
     <ClCompile Include="Engine\LevelEditor\EditorObject.cpp" />
     <ClCompile Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.cpp" />
-    <ClCompile Include="User\GameLevelData.cpp" />
     <ClCompile Include="User\Scene\EngineOP.cpp" />
     <ClCompile Include="Engine\Collision\Collision.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
@@ -331,15 +329,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User\PlayerDeathAnimation.h" />
-    <ClInclude Include="User\Reticle.h" />
-    <ClInclude Include="User\HPBar.h" />
+    <ClInclude Include="User\UI\Reticle.h" />
+    <ClInclude Include="User\UI\HPBar.h" />
     <ClInclude Include="User\Scene\GameClearScene.h" />
     <ClInclude Include="User\Scene\GameOverScene.h" />
     <ClInclude Include="User\Particle\PlayerEngineSmokeParticleEmitter.h" />
     <ClInclude Include="User\Particle\ParticleBase.h" />
     <ClInclude Include="User\Particle\EnemyDeathParticleEmitter.h" />
     <ClInclude Include="User\GameObject.h" />
-    <ClInclude Include="User\Character\Radar.h" />
+    <ClInclude Include="User\UI\Radar.h" />
     <ClInclude Include="User\Character\Character.h" />
     <ClInclude Include="Engine\Math\EasingFunction.h" />
     <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h" />

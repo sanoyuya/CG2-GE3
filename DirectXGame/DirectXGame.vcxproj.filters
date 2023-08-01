@@ -297,9 +297,6 @@
     <ClCompile Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.cpp">
       <Filter>Engine\ソースファイル\Draw\PostEffect</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameLevelData.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\Scene\EngineOP.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
@@ -345,9 +342,6 @@
     <ClCompile Include="User\Character\Character.cpp">
       <Filter>User\ソース ファイル\Character</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameObject.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Particle</Filter>
     </ClCompile>
@@ -366,13 +360,13 @@
     <ClCompile Include="User\PlayerDeathAnimation.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="User\Character\Radar.cpp">
+    <ClCompile Include="User\UI\Radar.cpp">
       <Filter>User\ソース ファイル\UI</Filter>
     </ClCompile>
-    <ClCompile Include="User\Reticle.cpp">
+    <ClCompile Include="User\UI\Reticle.cpp">
       <Filter>User\ソース ファイル\UI</Filter>
     </ClCompile>
-    <ClCompile Include="User\HPBar.cpp">
+    <ClCompile Include="User\UI\HPBar.cpp">
       <Filter>User\ソース ファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -679,13 +673,13 @@
     <ClInclude Include="User\PlayerDeathAnimation.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="User\HPBar.h">
+    <ClInclude Include="User\UI\HPBar.h">
       <Filter>User\ヘッダー ファイル\UI</Filter>
     </ClInclude>
-    <ClInclude Include="User\Character\Radar.h">
+    <ClInclude Include="User\UI\Radar.h">
       <Filter>User\ヘッダー ファイル\UI</Filter>
     </ClInclude>
-    <ClInclude Include="User\Reticle.h">
+    <ClInclude Include="User\UI\Reticle.h">
       <Filter>User\ヘッダー ファイル\UI</Filter>
     </ClInclude>
   </ItemGroup>
