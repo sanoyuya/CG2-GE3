@@ -7,6 +7,7 @@
 #include"PlayerEngineSmokeParticleEmitter.h"
 #include"EnemyDeathParticleEmitter.h"
 #include"HPBar.h"
+#include"Reticle.h"
 
 struct PlayerData
 {
@@ -27,16 +28,12 @@ private:
 
 	Transform cameraTrans_;
 
-	std::unique_ptr<Sprite>reticle_;
-	Transform reticleTrans_;
-	uint32_t reticleTex_ = 0;
-
 	myMath::Vector3 directionVector_;//方向ベクトル(ローカル)
 	myMath::Vector3 parentToDirectionVector_;//親子を反映させた方向ベクトル
 
+	std::unique_ptr<Reticle>reticle_;
+
 	const float moveSpeed_ = 0.125f;
-	const float reticleSpeed_ = 0.5f;
-	const float reticleLimit_ = 15.0f;
 
 	int8_t maxHp_ = 10;
 	int8_t hp_ = maxHp_;
@@ -88,12 +85,6 @@ private:
 	void Move();
 
 	void Rotation(Camera* camera);
-
-	void ReticleMove();
-
-	void MoveLimit();
-
-	void ReticleLimit();
 
 	void BulletUpdate(Camera* camera);
 

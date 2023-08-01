@@ -363,6 +363,9 @@
     <ClCompile Include="User\HPBar.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="User\Reticle.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -668,6 +671,9 @@
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="User\HPBar.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Reticle.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

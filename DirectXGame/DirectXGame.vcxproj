@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Reticle.cpp" />
     <ClCompile Include="User\HPBar.cpp" />
     <ClCompile Include="User\Scene\GameClearScene.cpp" />
     <ClCompile Include="User\Scene\GameOverScene.cpp" />
@@ -328,6 +329,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Reticle.h" />
     <ClInclude Include="User\HPBar.h" />
     <ClInclude Include="User\Scene\GameClearScene.h" />
     <ClInclude Include="User\Scene\GameOverScene.h" />

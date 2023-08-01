@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <algorithm>
 #include"PhysicsMath.h"
 #include"ColliderManager.h"
 #include<imgui.h>
@@ -16,20 +15,18 @@ void Player::Initialize()
 {
 	input_ = InputManager::GetInstance();
 
+	//レティクルの初期化
+	reticle_ = std::make_unique<Reticle>();
+	reticle_->Initialize();
+
+	//プレイヤーの初期化
 	player_ = std::make_unique<Model>();
 	playerTex_ = player_->CreateObjModel("Resources/F-35E");
 	player_->SetModel(playerTex_);
 	playerTrans_.Initialize();
-	playerTrans_.translation = { 0.0f,-reticleLimit_ / 3,10.0f };
+	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };
 	playerTrans_.scale = { 0.5f,0.5f,0.5f };
 	cameraTrans_.Initialize();
-
-	reticle_ = std::make_unique<Sprite>();
-	reticleTex_ = reticle_->LoadTexture("Resources/reticle.png");
-	reticle_->Sprite3DInitialize(reticleTex_);
-	reticleTrans_.Initialize();
-	reticleTrans_.translation = { 0.0f,-reticleLimit_,30.0f };
-	reticleTrans_.scale = { 0.125f,0.125f,1.0f };
 
 	//HPバーの初期化
 	hpBar_ = std::make_unique<HPBar>();
@@ -49,7 +46,6 @@ void Player::Update(Camera* camera)
 {
 	cameraTrans_.matWorld = camera->GetMatView();
 	playerTrans_.parent = &cameraTrans_;
-	reticleTrans_.parent = &cameraTrans_;
 
 	//HPバーの更新
 	hpBar_->Update(hp_);
@@ -72,22 +68,19 @@ void Player::Update(Camera* camera)
 	}
 	else
 	{
-		MoveLimit();
-		ReticleMove();
+		reticle_->Update(camera);
 		Move();
-		ReticleLimit();
 	}
 
 	playerTrans_.TransUpdate(camera);
-	reticleTrans_.TransUpdate(camera);
 
 	//ローカルの正面ベクトル
-	directionVector_ = reticleTrans_.translation - playerTrans_.translation;
+	directionVector_ = reticle_->GetTransform().translation - playerTrans_.translation;
 	//正規化
 	directionVector_.normalization();
 
 	//ワールドの正面ベクトル
-	parentToDirectionVector_ = reticleTrans_.parentToTranslation - playerTrans_.parentToTranslation;
+	parentToDirectionVector_ = reticle_->GetTransform().parentToTranslation - playerTrans_.parentToTranslation;
 	//正規化
 	parentToDirectionVector_.normalization();
 
@@ -111,7 +104,7 @@ void Player::Draw(Camera* camera)
 	if (hp_ > 0)
 	{
 		//レティクルの描画
-		reticle_->DrawSprite3D(camera, reticleTrans_);
+		reticle_->Draw(camera);
 		//プレイヤーのモデル描画
 		player_->DrawModel(&playerTrans_);
 		//機体のエンジンから火が出るパーティクルの描画
@@ -129,9 +122,9 @@ void Player::Draw(Camera* camera)
 
 void Player::Reset()
 {
-	playerTrans_.translation = { 0.0f,-reticleLimit_ / 3,10.0f };
-	reticleTrans_.translation = { 0.0f,-reticleLimit_,30.0f };
+	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };
 	hp_ = 10;
+	reticle_->Reset();
 }
 
 void Player::HpSub()
@@ -174,8 +167,8 @@ const bool& Player::GetDeathFlag()
 void Player::Move()
 {
 	//先に補間先の座標を定義する
-	float reticleX = reticleTrans_.translation.x / 2;
-	float reticleY = reticleTrans_.translation.y / 2;
+	float reticleX = reticle_->GetTransform().translation.x / 2;
+	float reticleY = reticle_->GetTransform().translation.y / 2;
 	//そのまま移動させると動きが硬いので補完する
 	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
 	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
@@ -187,7 +180,7 @@ void Player::Rotation(Camera* camera)
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-	float angleZ = -(reticleTrans_.translation.x / 2 - playerTrans_.translation.x) / 5.0f;
+	float angleZ = -(reticle_->GetTransform().translation.x / 2 - playerTrans_.translation.x) / 5.0f;
 	//モデルのZ軸回転
 	PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 
@@ -211,48 +204,6 @@ void Player::Rotation(Camera* camera)
 	myMath::Vector3 cameraPos = camera->GetEye();
 	ImGui::InputFloat3("cameraPos", &cameraPos.x);
 	ImGui::End();
-}
-
-void Player::ReticleMove()
-{
-#pragma region キーボード
-	if (input_->KeyboardKeepPush(DIK_UP))
-	{
-		reticleTrans_.translation += {0.0f, reticleSpeed_, 0.0f};
-	}
-	if (input_->KeyboardKeepPush(DIK_LEFT))
-	{
-		reticleTrans_.translation += {-reticleSpeed_, 0.0f, 0.0f};
-	}
-	if (input_->KeyboardKeepPush(DIK_DOWN))
-	{
-		reticleTrans_.translation += {0.0f, -reticleSpeed_, 0.0f};
-	}
-	if (input_->KeyboardKeepPush(DIK_RIGHT))
-	{
-		reticleTrans_.translation += {reticleSpeed_, 0.0f, 0.0f};
-	}
-#pragma endregion キーボード
-
-#pragma region コントローラー
-
-	//Lスティックを傾けることで移動できるようにする
-	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_ * input_->GetLeftStickVec().y, 0.0f};
-
-#pragma endregion コントローラー
-}
-
-void Player::MoveLimit()
-{
-	/*playerTrans_.translation.x = std::clamp(playerTrans_.translation.x, -moveLimit, moveLimit);
-	playerTrans_.translation.y = std::clamp(playerTrans_.translation.y, -moveLimit / 16 * 9, moveLimit / 16 * 9);*/
-}
-
-void Player::ReticleLimit()
-{
-	reticleTrans_.translation.x = std::clamp(reticleTrans_.translation.x, -reticleLimit_, reticleLimit_);
-	//画面比率に合わせた制限処理(x:y,16:9)
-	reticleTrans_.translation.y = std::clamp(reticleTrans_.translation.y, -reticleLimit_ / 16 * 9, reticleLimit_ / 16 * 9);
 }
 
 void Player::BulletUpdate(Camera* camera)
