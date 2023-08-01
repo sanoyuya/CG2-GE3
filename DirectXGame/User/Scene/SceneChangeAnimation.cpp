@@ -18,7 +18,7 @@ void SceneChangeAnimation::Update()
 
 	if (animationTimer_ <= 90.0f)
 	{
-		alpha_ = static_cast<float>(Easing::EaseInCirc(static_cast<double>(animationTimer_), 0.0f, 1.0f, 90.0f));
+		alpha_ = static_cast<float>(Easing::EaseInQuint(static_cast<double>(animationTimer_), 0.0f, 1.0f, 90.0f));
 	}
 }
 
@@ -38,7 +38,7 @@ void SceneChangeAnimation::ChangeAfter()
 	}
 	else if (animationTimer_ > 90.0f)
 	{
-		alpha_ = static_cast<float>(Easing::EaseInCirc(static_cast<double>(animationTimer_ - 90.0f), 1.0f, 0.0f, 90.0f));
+		alpha_ = static_cast<float>(Easing::EaseInOutQuint(static_cast<double>(animationTimer_ - 90.0f), 1.0f, 0.0f, 90.0f));
 	}
 }
 
