@@ -1,5 +1,6 @@
 #pragma once
 #include"DrawOversight.h"
+#include"PlayerEngineSmokeParticleEmitter.h"
 
 enum class BulletOwner
 {
@@ -24,6 +25,9 @@ private:
 
 	BulletOwner owner_ = BulletOwner::Player;
 
+	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
+	Transform smokeTrans_;
+
 public:
 
 	Bullet();
@@ -36,6 +40,8 @@ public:
 	void Draw();
 
 public:
+
+	void SmokeUpdate(Camera* camera);
 
 	bool GetIsDead();
 
