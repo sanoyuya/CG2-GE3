@@ -15,10 +15,16 @@ private:
 	float colliderSize_ = 0.0f;
 	float spawnTime_ = 0.0f;
 	float deathTime_ = 0.0f;
+
+	bool spawnFlag_ = false;
 	bool isDead_ = false;
 
 	float bulletTimer = 0.0f;
 	const float maxBulletTime = 60.0f;
+
+	bool spawnAnimationFlag_ = false;
+	uint8_t spawnAnimationTimer_ = 0;
+	const uint8_t maxSpawnAnimationTime_ = 60;
 
 	bool deathAnimationFlag_ = false;
 	uint8_t deathAnimationTimer_ = 0;
@@ -67,6 +73,8 @@ private:
 	void BulletUpdate(Camera* camera, Player* player);
 
 	void BulletDraw();
+
+	void SpawnUpdate(Camera* camera, GameTimer* gameTimer);
 
 	void DeathUpdate(Camera* camera, GameTimer* gameTimer);
 };

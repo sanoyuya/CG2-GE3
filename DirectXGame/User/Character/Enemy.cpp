@@ -23,18 +23,26 @@ void Enemy::Initialize()
 
 void Enemy::Update(Camera* camera, Player* player, GameTimer* gameTimer)
 {
-	//敵のモデルの更新処理
-	enemyTrans_.TransUpdate(camera);
-	//弾の生成処理と更新処理
-	BulletUpdate(camera, player);
-	//死亡処理
-	DeathUpdate(camera, gameTimer);
+	//出現していたら
+	if (spawnFlag_ == true)
+	{
+		//敵のモデルの更新処理
+		enemyTrans_.TransUpdate(camera);
+		//弾の生成処理と更新処理
+		BulletUpdate(camera, player);
+		//死亡処理
+		DeathUpdate(camera, gameTimer);
+	}
+	else
+	{
+		SpawnUpdate(camera, gameTimer);
+	}
 }
 
 void Enemy::Draw()
 {
 	//死んでいないときのみ描画
-	if (deathAnimationFlag_ == false)
+	if (spawnFlag_ == true && deathAnimationFlag_ == false)
 	{
 		enemy_->DrawModel(&enemyTrans_);
 	}
@@ -66,13 +74,15 @@ void Enemy::SetColliderSize(const float size)
 void Enemy::SetSpawnTimer(const float timer)
 {
 	spawnTime_ = timer;
+	//デバッグ用
+	spawnTime_ = 5.0f;
 }
 
 void Enemy::SetDeathTimer(const float timer)
 {
 	deathTime_ = timer;
 	//デバッグ用
-	deathTime_ = 10.0f;
+	deathTime_ = 20.0f;
 }
 
 const Transform& Enemy::GetTrans()
@@ -134,8 +144,33 @@ void Enemy::BulletDraw()
 	}
 }
 
+void Enemy::SpawnUpdate(Camera* camera, GameTimer* gameTimer)
+{
+	if (spawnTime_ <= gameTimer->GetIntTime())
+	{
+		if (spawnAnimationFlag_ == false)
+		{
+			enemyTrans_.TransUpdate(camera);
+			emitter_->Create(enemyTrans_.parentToTranslation);
+		}
+		spawnAnimationFlag_ = true;
+	}
+
+	if (spawnAnimationFlag_ == true)
+	{
+		emitter_->Update(camera);
+		spawnAnimationTimer_++;
+	}
+
+	if (spawnAnimationTimer_ > maxSpawnAnimationTime_)
+	{
+		spawnFlag_ = true;
+	}
+}
+
 void Enemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
 {
+	//死亡時間になったら死ぬ
 	if (deathTime_ <= gameTimer->GetIntTime())
 	{
 		deathAnimationFlag_ = true;
