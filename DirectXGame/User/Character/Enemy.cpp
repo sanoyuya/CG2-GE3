@@ -82,7 +82,7 @@ void Enemy::SetDeathTimer(const float timer)
 {
 	deathTime_ = timer;
 	//デバッグ用
-	deathTime_ = 20.0f;
+	deathTime_ = 10.0f;
 }
 
 const Transform& Enemy::GetTrans()
@@ -98,6 +98,11 @@ const float& Enemy::GetColliderSize()
 bool Enemy::GetIsDead()
 {
 	return isDead_;
+}
+
+bool Enemy::GetSpawnFlag()
+{
+	return spawnFlag_;
 }
 
 bool Enemy::GetDeathAnimationFlag()
@@ -148,9 +153,9 @@ void Enemy::SpawnUpdate(Camera* camera, GameTimer* gameTimer)
 {
 	if (spawnTime_ <= gameTimer->GetIntTime())
 	{
+		enemyTrans_.TransUpdate(camera);
 		if (spawnAnimationFlag_ == false)
 		{
-			enemyTrans_.TransUpdate(camera);
 			emitter_->Create(enemyTrans_.parentToTranslation);
 		}
 		spawnAnimationFlag_ = true;
@@ -173,6 +178,10 @@ void Enemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
 	//死亡時間になったら死ぬ
 	if (deathTime_ <= gameTimer->GetIntTime())
 	{
+		if (deathAnimationFlag_ == false)
+		{
+			emitter_->Create(enemyTrans_.parentToTranslation);
+		}
 		deathAnimationFlag_ = true;
 	}
 

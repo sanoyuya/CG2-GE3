@@ -64,6 +64,8 @@ public://ÉQÉbÉ^Å[
 
 	bool GetIsDead();
 
+	bool GetSpawnFlag();
+
 	bool GetDeathAnimationFlag();
 
 	void OnCollision();

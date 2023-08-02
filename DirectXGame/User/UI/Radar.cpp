@@ -41,8 +41,8 @@ void Radar::Draw(EnemyManager* enemys, Player* player)
 		//自機と敵との距離の算出
 		float length = sqrt(difference.x * difference.x) + sqrt(difference.y * difference.y);
 
-		//レーダーの内側の範囲内にいるなら
-		if (radarSize >= length)
+		//敵が出現しているかつレーダーの内側の範囲内にいるなら
+		if (enemy->GetSpawnFlag() == true && radarSize >= length)
 		{
 			radarEnemys_[count]->DrawSprite2D({ center_.x + difference.x,center_.y + difference.y }, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f,1.0f }, enemy->GetTrans().rotation.y - myMath::AX_PIF);
 		}
