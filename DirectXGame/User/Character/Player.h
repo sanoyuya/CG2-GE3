@@ -36,7 +36,7 @@ private:
 
 	const float moveSpeed_ = 0.125f;
 
-	int8_t maxHp_ = 10;
+	int8_t maxHp_ = 100;
 	int8_t hp_ = maxHp_;
 	std::unique_ptr<HPBar>hpBar_;
 
