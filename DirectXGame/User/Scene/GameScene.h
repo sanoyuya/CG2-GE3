@@ -11,6 +11,7 @@
 #include"EnemyManager.h"
 #include"PlayerDamageEffect.h"
 #include"Radar.h"
+#include"GameTimer.h"
 
 class GameScene :public BaseScene
 {
@@ -39,6 +40,8 @@ private:
 	std::unique_ptr<EnemyManager>enemyManager_;
 
 	std::unique_ptr<Radar>radar_;
+
+	std::unique_ptr<GameTimer>gameTimer_;
 
 	uint32_t bgm_ = 0;
 

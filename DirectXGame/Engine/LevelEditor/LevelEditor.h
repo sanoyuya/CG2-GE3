@@ -13,6 +13,12 @@ struct LevelData {
 		myMath::Vector3 size;
 	};
 
+	struct Timer
+	{
+		float spawnTimer;
+		float deathTimer;
+	};
+
 	struct ObjectData {
 		//ファイル名
 		std::string fileName;
@@ -24,6 +30,8 @@ struct LevelData {
 		myMath::Vector3 scaling;
 		//当たり判定
 		Collider collider;
+		//タイマー
+		Timer timer;
 	};
 
 	// オブジェクト配列

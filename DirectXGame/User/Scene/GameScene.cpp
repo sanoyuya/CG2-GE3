@@ -28,6 +28,8 @@ void GameScene::Initialize()
 	gameLevelData_ = std::make_unique<GameLevelData>();
 	gameLevelData_->Initialize("stage1");
 
+	gameTimer_ = std::make_unique<GameTimer>();
+
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
 	playerDamageEffect_ = std::make_unique<PlayerDamageEffect>();
@@ -76,6 +78,7 @@ void GameScene::Update()
 	{
 		ColliderManager::GetInstance()->Reset();
 		gameLevelData_->ReLoad();
+		gameTimer_->Reset();
 		camera_->ReLoad(gameLevelData_->GetCameraData());
 		player_->Reset();
 		enemyManager_->ReLoad(gameLevelData_->GetEnemyData());
@@ -89,12 +92,13 @@ void GameScene::Update()
 	lightManager_->SetPointLightColor(0, lightColor_);
 	lightManager_->SetPointLightAtten(0, lightAtten_);
 	
+	gameTimer_->Update();
 	player_->Update(camera_->GetCameraPtr());
 	camera_->Update(player_.get());
 	gameLevelData_->Update(camera_->GetCameraPtr());
 	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
 	playerDamageEffect_->Update(player_.get());
-	enemyManager_->Update(camera_->GetCameraPtr(), player_.get());
+	enemyManager_->Update(camera_->GetCameraPtr(), player_.get(),gameTimer_.get());
 	ColliderManager::GetInstance()->Update(player_.get());
 	radar_->Update(camera_->GetCameraPtr());
 }

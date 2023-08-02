@@ -3,6 +3,7 @@
 #include<list>
 #include"Player.h"
 #include"EnemyDeathParticleEmitter.h"
+#include"GameTimer.h"
 
 class Enemy :public Character
 {
@@ -12,6 +13,8 @@ private:
 	uint32_t enemyTex_ = 0;
 	Transform enemyTrans_;
 	float colliderSize_ = 0.0f;
+	float spawnTime_ = 0.0f;
+	float deathTime_ = 0.0f;
 	bool isDead_ = false;
 
 	float bulletTimer = 0.0f;
@@ -30,7 +33,7 @@ public:
 
 	void Initialize();
 
-	void Update(Camera* camera, Player*player);
+	void Update(Camera* camera, Player*player, GameTimer* gameTimer);
 
 	void Draw();
 
@@ -42,6 +45,10 @@ public://セッター
 	void SetRotation(const myMath::Vector3& rotation);
 	//blenderで出力したデータを読み込むときに当たり判定の大きさをセットする関数
 	void SetColliderSize(const float size);
+	//blenderで出力したデータを読み込むときにスポーンタイマーをセットする関数
+	void SetSpawnTimer(const float timer);
+	//blenderで出力したデータを読み込むときに死亡タイマーをセットする関数
+	void SetDeathTimer(const float timer);
 
 public://ゲッター
 
@@ -60,4 +67,6 @@ private:
 	void BulletUpdate(Camera* camera, Player* player);
 
 	void BulletDraw();
+
+	void DeathUpdate(Camera* camera, GameTimer* gameTimer);
 };

@@ -375,6 +375,9 @@
     <ClCompile Include="User\GameObject.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="User\GameTimer.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -687,6 +690,9 @@
     </ClInclude>
     <ClInclude Include="User\UI\Reticle.h">
       <Filter>User\ヘッダー ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameTimer.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

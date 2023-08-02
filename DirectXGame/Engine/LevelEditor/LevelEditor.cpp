@@ -96,6 +96,15 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.collider.size.y = static_cast<float>(collider["size"][2]);
 			objectData.collider.size.z = static_cast<float>(collider["size"][0]);
 		}
+
+		nlohmann::json& timer = object["timer"];
+		if (timer != nullptr)
+		{
+			//èoåªéûä‘
+			objectData.timer.spawnTimer = timer["spawn"];
+			//éÄñSéûä‘
+			objectData.timer.deathTimer = timer["death"];
+		}
 	}
 	else if (type.compare("CAMERA") == 0)
 	{

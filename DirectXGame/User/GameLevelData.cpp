@@ -68,6 +68,9 @@ void GameLevelData::Load()
 			enemy->SetRotation({ myMath::ChangeRadians(objectData.rotation.x), myMath::ChangeRadians(objectData.rotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(objectData.rotation.z) - myMath::AX_PIF / 2 });
 			//”¼Œa‚³‚¦•ª‚©‚ê‚Î—Ç‚¢‚Ì‚Åx‚Ì’l‚Ì‚Ý‘—‚é
 			enemy->SetColliderSize(objectData.collider.size.x);
+			//blender‘¤‚ÅÝ’è‚µ‚½ŽžŠÔ‚ð‘—‚é
+			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
+			enemy->SetDeathTimer(objectData.timer.deathTimer);
 			//Enemy‚ð“o˜^
 			enemyData_.normalEnemys.push_back(std::move(enemy));
 		}
