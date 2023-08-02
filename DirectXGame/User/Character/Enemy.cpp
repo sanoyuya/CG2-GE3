@@ -74,15 +74,11 @@ void Enemy::SetColliderSize(const float size)
 void Enemy::SetSpawnTimer(const float timer)
 {
 	spawnTime_ = timer;
-	//デバッグ用
-	spawnTime_ = 5.0f;
 }
 
 void Enemy::SetDeathTimer(const float timer)
 {
 	deathTime_ = timer;
-	//デバッグ用
-	deathTime_ = 10.0f;
 }
 
 const Transform& Enemy::GetTrans()

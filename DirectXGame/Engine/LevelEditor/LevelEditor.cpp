@@ -101,9 +101,9 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 		if (timer != nullptr)
 		{
 			//oŒ»ŠÔ
-			objectData.timer.spawnTimer = timer["spawn"];
+			objectData.timer.spawnTimer = static_cast<float>(timer["spawn"]);
 			//€–SŠÔ
-			objectData.timer.deathTimer = timer["death"];
+			objectData.timer.deathTimer = static_cast<float>(timer["death"]);
 		}
 	}
 	else if (type.compare("CAMERA") == 0)

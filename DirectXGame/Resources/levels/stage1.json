@@ -507,7 +507,7 @@
         },
         {
             "type": "MESH",
-            "name": "ICO球.001",
+            "name": "cameraPoint.001",
             "transform": {
                 "translation": [
                     -120.0,
@@ -520,16 +520,16 @@
                     0.0
                 ],
                 "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
+                    5.0,
+                    5.0,
+                    5.0
                 ]
             },
             "file_name": "cameraPoint"
         },
         {
             "type": "MESH",
-            "name": "ICO球.002",
+            "name": "cameraPoint.002",
             "transform": {
                 "translation": [
                     70.0,
@@ -542,16 +542,16 @@
                     0.0
                 ],
                 "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
+                    5.0,
+                    5.0,
+                    5.0
                 ]
             },
             "file_name": "cameraPoint"
         },
         {
             "type": "MESH",
-            "name": "ICO球.003",
+            "name": "cameraPoint.003",
             "transform": {
                 "translation": [
                     70.0,
@@ -564,16 +564,16 @@
                     0.0
                 ],
                 "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
+                    5.0,
+                    5.0,
+                    5.0
                 ]
             },
             "file_name": "cameraPoint"
         },
         {
             "type": "MESH",
-            "name": "ICO球.004",
+            "name": "cameraPoint.004",
             "transform": {
                 "translation": [
                     -90.0,
@@ -586,16 +586,16 @@
                     0.0
                 ],
                 "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
+                    5.0,
+                    5.0,
+                    5.0
                 ]
             },
             "file_name": "cameraPoint"
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体",
+            "name": "enemy",
             "transform": {
                 "translation": [
                     0.0,
@@ -626,11 +626,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 0.0,
+                "death": 20.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.001",
+            "name": "enemy.001",
             "transform": {
                 "translation": [
                     0.0,
@@ -661,11 +665,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 0.0,
+                "death": 20.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.002",
+            "name": "enemy.002",
             "transform": {
                 "translation": [
                     120.0,
@@ -696,11 +704,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 15.0,
+                "death": 40.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.003",
+            "name": "enemy.003",
             "transform": {
                 "translation": [
                     107.73753356933594,
@@ -731,11 +743,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 15.0,
+                "death": 40.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.004",
+            "name": "enemy.004",
             "transform": {
                 "translation": [
                     93.66987609863281,
@@ -766,11 +782,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 15.0,
+                "death": 40.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.005",
+            "name": "enemy.005",
             "transform": {
                 "translation": [
                     100.87252807617188,
@@ -801,11 +821,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 15.0,
+                "death": 40.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.006",
+            "name": "enemy.006",
             "transform": {
                 "translation": [
                     -20.0,
@@ -836,11 +860,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 30.0,
+                "death": 50.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.007",
+            "name": "enemy.007",
             "transform": {
                 "translation": [
                     -20.0,
@@ -871,11 +899,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 30.0,
+                "death": 50.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.008",
+            "name": "enemy.008",
             "transform": {
                 "translation": [
                     -20.0,
@@ -906,11 +938,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 30.0,
+                "death": 50.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.009",
+            "name": "enemy.009",
             "transform": {
                 "translation": [
                     -109.54011535644531,
@@ -941,11 +977,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 50.0,
+                "death": 100.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.010",
+            "name": "enemy.010",
             "transform": {
                 "translation": [
                     -104.45358276367188,
@@ -976,11 +1016,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 50.0,
+                "death": 100.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.011",
+            "name": "enemy.011",
             "transform": {
                 "translation": [
                     -119.61474609375,
@@ -1011,11 +1055,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 50.0,
+                "death": 100.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.012",
+            "name": "enemy.012",
             "transform": {
                 "translation": [
                     -118.0851821899414,
@@ -1046,11 +1094,15 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 50.0,
+                "death": 100.0
             }
         },
         {
             "type": "MESH",
-            "name": "胴体_立方体.013",
+            "name": "enemy.013",
             "transform": {
                 "translation": [
                     -100.50452423095703,
@@ -1081,6 +1133,10 @@
                     2.0,
                     2.0
                 ]
+            },
+            "timer": {
+                "spawn": 50.0,
+                "death": 100.0
             }
         }
     ]

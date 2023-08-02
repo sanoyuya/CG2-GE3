@@ -44,10 +44,11 @@ void Radar::Draw(EnemyManager* enemys, Player* player)
 		//敵が出現しているかつレーダーの内側の範囲内にいるなら
 		if (enemy->GetSpawnFlag() == true && radarSize >= length)
 		{
-			radarEnemys_[count]->DrawSprite2D({ center_.x + difference.x,center_.y + difference.y }, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f,1.0f }, enemy->GetTrans().rotation.y - myMath::AX_PIF);
+			radarEnemys_[count]->DrawSprite2D({ center_.x + difference.x * cosf(angle) + difference.y * sinf(angle),
+				center_.y + difference.y * cosf(angle) - difference.x * sinf(angle) }, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f,1.0f }, enemy->GetTrans().rotation.y - myMath::AX_PIF - angle);
 		}
 		count++;
 	}
-	player_->DrawSprite2D(center_, { 1.0f,1.0f,1.0f,1.0f }, { 1.0f ,1.0f }, angle);
+	player_->DrawSprite2D(center_, { 1.0f,1.0f,1.0f,1.0f }, { 1.0f ,1.0f }, 0.0f);
 	radar_->DrawSprite2D(center_);
 }
