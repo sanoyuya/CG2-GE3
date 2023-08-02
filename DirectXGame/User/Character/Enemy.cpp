@@ -139,7 +139,6 @@ void Enemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
 	if (deathTime_ <= gameTimer->GetIntTime())
 	{
 		deathAnimationFlag_ = true;
-		emitter_->Create(enemyTrans_.parentToTranslation);
 	}
 
 	//€–S‰‰o‚ÌXVˆ—
