@@ -12,9 +12,11 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	enemy_ = std::make_unique<Model>();
-	enemyTex_ = enemy_->CreateObjModel("Resources/F-35E");
+	enemyTex_ = enemy_->CreateObjModel("Resources/enemy");
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
+	enemyTrans_.rotation.y = myMath::AX_PIF / 2;
+	enemyTrans_.scale = { 15.0f,15.0f,15.0f };
 
 	// パーティクル生成
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();

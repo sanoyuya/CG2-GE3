@@ -180,7 +180,7 @@ void Player::Rotation(Camera* camera)
 	myMath::Vector3 cameraFrontVec = camera->GetTarget() - camera->GetEye();
 	myMath::Vector3 cameraUp =
 	{
-		sinf(cameraFrontVec.y)* sinf(playerTrans_.rotation.z),
+		sinf(cameraFrontVec.y) * sinf(playerTrans_.rotation.z),
 		cosf(cameraFrontVec.y) * cosf(playerTrans_.rotation.z),
 		0.0f
 	};
