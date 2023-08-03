@@ -82,7 +82,7 @@ double Easing::EaseInBack(double time, const double startPoint, const double end
 double Easing::EaseInBounce(double time, const double startPoint, const double endPoint, const double maxTime)
 {
 	double x = 1.0f - time / maxTime;
-	double v = 1.0f - EaseOutBounce(x, startPoint, endPoint, maxTime);
+	double v = 1.0f - EaseOutBounce(x, 0, 1, 1);
 	double ret = (endPoint - startPoint) * v + startPoint;
 	return ret;
 }
@@ -282,8 +282,8 @@ double Easing::EaseInOutBounce(double time, const double startPoint, const doubl
 {
 	double x = time / maxTime;
 	double v = x < 0.5f
-		? (1.0f - EaseOutBounce(1.0f - 2.0f * x, startPoint, endPoint, maxTime)) / 2.0f
-		: (1.0f + EaseOutBounce(2.0f * x - 1.0f, startPoint, endPoint, maxTime)) / 2.0f;
+		? (1.0f - EaseOutBounce(1.0f - 2.0f * x, 0.0f, 1.0f, 1.0f)) / 2.0f
+		: (1.0f + EaseOutBounce(2.0f * x - 1.0f, 0.0f, 1.0f, 1.0f)) / 2.0f;
 	double ret = (endPoint - startPoint) * v + startPoint;
 	return ret;
 }
