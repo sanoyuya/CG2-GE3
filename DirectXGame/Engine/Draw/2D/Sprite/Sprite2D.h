@@ -127,6 +127,8 @@ public:
 	/// <param name="flipY">Y反転(初期値:false)</param>
 	void DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheetsNumX, uint16_t sheetsNumY, uint16_t& nowNum, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
+	void DrawCircleGaugeSprite2D(myMath::Vector2 position, float angle = 0.0f, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, bool flipX = false, bool flipY = false);
+
 	/// <summary>
 	/// ブレンドモードのセット(2D)
 	/// </summary>

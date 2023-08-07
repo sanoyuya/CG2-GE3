@@ -1,6 +1,7 @@
 #include "Sprite2D.h"
 #include <d3dcompiler.h>
 #include"Camera.h"
+#include <algorithm>
 
 myMath::Matrix4 Sprite2D::matProjection_;
 
@@ -145,6 +146,58 @@ void Sprite2D::DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheets
 		{{left,bottom,0.0f},{static_cast<float>(x / sheetsNumX),static_cast<float>((y + 1) / sheetsNumY)},{color.x, color.y, color.z, color.w}},//左下インデックス1
 		{{right,top,0.0f},{static_cast<float>((x + 1) / sheetsNumX),static_cast<float>(y / sheetsNumY)},{color.x, color.y, color.z, color.w}},//右上インデックス2
 		{{right,bottom,0.0f},{static_cast<float>((x + 1) / sheetsNumX),static_cast<float>((y + 1) / sheetsNumY)},{color.x, color.y, color.z, color.w}},//右下インデックス3
+	};
+
+	//インデックスデータ
+	uint32_t indices[] =
+	{
+		1,0,3,//三角形1つ目
+		2,3,0,//三角形2つ目
+	};
+
+	//頂点バッファへのデータ転送
+	vertexBuffer_->Update(vertices);
+
+	//インデックスバッファへのデータ転送
+	indexBuffer_->Update(indices);
+
+	Update(position, scale, rotation);
+
+	// パイプラインステートとルートシグネチャの設定コマンド
+	SpriteCommon::BlendSet(blendMode_);
+
+	//描画コマンド
+	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
+}
+
+void Sprite2D::DrawCircleGaugeSprite2D(myMath::Vector2 position, float angle, myMath::Vector4 color, myMath::Vector2 scale, float rotation, bool flipX, bool flipY)
+{
+	int isFlipX, isFlipY;
+	if (flipX == false)isFlipX = 1;
+	else isFlipX = -1;
+	if (flipY == false)isFlipY = 1;
+	else isFlipY = -1;
+
+	float left = -0.5f * texture_->width * isFlipX;
+	float right = 0.5f * texture_->width * isFlipX;
+	float top = -0.5f * texture_->height * isFlipY;
+	float bottom = 0.5f * texture_->height * isFlipY;
+
+	float x = sqrt(2.0f) * cosf(angle);
+	float y = sqrt(2.0f) * sinf(angle);
+
+	x = std::clamp(x, -1.0f, 1.0f);
+	y = std::clamp(y, -1.0f, 1.0f);
+
+	
+
+	//頂点データ
+	PosUvColor vertices[] =
+	{
+		{{left,top,0.0f},{0.0f,0.0f},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{0.0f,1.0f},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{1.0f,0.0f},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{1.0f,1.0f},{color.x, color.y, color.z, color.w}},//右下インデックス3
 	};
 
 	//インデックスデータ

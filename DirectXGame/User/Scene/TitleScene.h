@@ -9,6 +9,13 @@
 #include"ParticleEmitter.h"
 #include"EnemyDeathParticleEmitter.h"
 
+enum class SceneNum
+{
+	NONE,
+	GAME,
+	DEMO
+};
+
 //タイトルシーン
 class TitleScene :public BaseScene
 {
@@ -35,6 +42,8 @@ private:
 
 	float time_ = 0.0f;
 	myMath::Vector2 position_ = { 640.0f,0.0f };
+
+	SceneNum sceneNum_ = SceneNum::NONE;
 
 public:
 

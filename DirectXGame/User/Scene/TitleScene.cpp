@@ -39,13 +39,32 @@ void TitleScene::Destroy()
 
 void TitleScene::Update()
 {
-	if (input_->KeyboardTriggerPush(DIK_SPACE)||input_->ControllerButtonTriggerPush(A))
-	{
-		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
-	}
 	SceneChangeAnimation::GetInstance()->Update();
 	SceneChangeAnimation::GetInstance()->ChangeAfter();
-	SceneChangeAnimation::GetInstance()->Change("GAME");
+
+	if (sceneNum_ == SceneNum::NONE)
+	{
+		if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
+		{
+			SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
+			sceneNum_ = SceneNum::GAME;
+		}
+#ifdef _DEBUG
+		else if (input_->KeyboardTriggerPush(DIK_D) || input_->ControllerButtonTriggerPush(Y))
+		{
+			SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
+			sceneNum_ = SceneNum::DEMO;
+		}
+#endif // DEBUG
+	}
+	else if (sceneNum_ == SceneNum::GAME)
+	{
+		SceneChangeAnimation::GetInstance()->Change("GAME");
+	}
+	else if (sceneNum_ == SceneNum::DEMO)
+	{
+		SceneChangeAnimation::GetInstance()->Change("DEMO");
+	}
 
 	skyDomeTrans_.TransUpdate(camera_.get());//“V‹…
 
