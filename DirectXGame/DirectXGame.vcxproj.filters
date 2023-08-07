@@ -139,12 +139,6 @@
     <Filter Include="User\ヘッダー ファイル\Scene">
       <UniqueIdentifier>{a447e952-8c76-4bc2-b244-d211e1be8a23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="User\ソース ファイル\Character">
-      <UniqueIdentifier>{fdae6c65-b735-494e-9fb2-f81f5d129344}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\Character">
-      <UniqueIdentifier>{5f01a0b7-d10d-4424-b92a-6c039f8bceea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\リソース ファイル\Particle">
       <UniqueIdentifier>{f9b797fa-c9fc-4e10-999d-9978cd0749d0}</UniqueIdentifier>
     </Filter>
@@ -159,6 +153,12 @@
     </Filter>
     <Filter Include="User\ヘッダー ファイル\UI">
       <UniqueIdentifier>{2c3fac6c-85d4-4344-90de-0433972ef691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Object">
+      <UniqueIdentifier>{eff3171f-06eb-46ac-9178-33086d5b9a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ソース ファイル\Object">
+      <UniqueIdentifier>{06c67e16-a22f-44bb-b1a5-8837b7bc669e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -309,19 +309,10 @@
     <ClCompile Include="User\Scene\TitleScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\Character\Player.cpp">
-      <Filter>User\ソース ファイル\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Character\Enemy.cpp">
-      <Filter>User\ソース ファイル\Character</Filter>
-    </ClCompile>
     <ClCompile Include="User\RailCamera.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="User\Bullet.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Character\EnemyManager.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="User\ColliderManager.cpp">
@@ -338,9 +329,6 @@
     </ClCompile>
     <ClCompile Include="User\Scene\SceneChangeAnimation.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Character\Character.cpp">
-      <Filter>User\ソース ファイル\Character</Filter>
     </ClCompile>
     <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Particle</Filter>
@@ -372,14 +360,26 @@
     <ClCompile Include="User\GameLevelData.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameObject.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\GameTimer.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="User\Scene\DemoScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\Enemy.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\Player.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\NormalEnemy.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\EnemyManager.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -625,12 +625,6 @@
     <ClInclude Include="Engine\Other\SceneFactory.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\Character\Enemy.h">
-      <Filter>User\ヘッダー ファイル\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Character\Player.h">
-      <Filter>User\ヘッダー ファイル\Character</Filter>
-    </ClInclude>
     <ClInclude Include="User\RailCamera.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
@@ -638,9 +632,6 @@
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="User\Bullet.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Character\EnemyManager.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="User\ColliderManager.h">
@@ -657,9 +648,6 @@
     </ClInclude>
     <ClInclude Include="User\Scene\SceneChangeAnimation.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Character\Character.h">
-      <Filter>User\ヘッダー ファイル\Character</Filter>
     </ClInclude>
     <ClInclude Include="User\GameObject.h">
       <Filter>User\ヘッダー ファイル</Filter>
@@ -699,6 +687,18 @@
     </ClInclude>
     <ClInclude Include="User\Scene\DemoScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\Player.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\Enemy.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\NormalEnemy.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\EnemyManager.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

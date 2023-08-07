@@ -13,7 +13,7 @@ void EnemyManager::Initialize(EnemyData& enemyData)
 {
 	Load(enemyData);
 
-	for (std::unique_ptr<Enemy>& enemy : normalEnemys_)
+	for (std::unique_ptr<Enemy>& enemy : enemys_)
 	{
 		enemy->Initialize();
 		ColliderManager::GetInstance()->AddEnemyCollider(enemy.get());
@@ -22,16 +22,19 @@ void EnemyManager::Initialize(EnemyData& enemyData)
 
 void EnemyManager::Update(Camera* camera, Player* player, GameTimer* gameTimer)
 {
-	normalEnemys_.remove_if([](std::unique_ptr<Enemy>& enemy) { return enemy->GetIsDead(); });
-	for (const std::unique_ptr<Enemy>& enemy : normalEnemys_)
+	enemys_.remove_if([](std::unique_ptr<Enemy>& enemy) { return enemy->GetIsDead(); });
+	for (const std::unique_ptr<Enemy>& enemy : enemys_)
 	{
-		enemy->Update(camera, player, gameTimer);
+		enemy->SetCamera(camera);
+		enemy->SetPlayer(player);
+		enemy->SetGameTimer(gameTimer);
+		enemy->Update();
 	}
 }
 
 void EnemyManager::Draw()
 {
-	for (const std::unique_ptr<Enemy>& enemy : normalEnemys_)
+	for (const std::unique_ptr<Enemy>& enemy : enemys_)
 	{
 		enemy->Draw();
 	}
@@ -39,7 +42,7 @@ void EnemyManager::Draw()
 
 void EnemyManager::Load(EnemyData& enemyData)
 {
-	std::swap(normalEnemys_, enemyData.normalEnemys);
+	std::swap(enemys_, enemyData.enemys);
 }
 
 void EnemyManager::ReLoad(EnemyData& enemyData)
@@ -50,10 +53,10 @@ void EnemyManager::ReLoad(EnemyData& enemyData)
 
 void EnemyManager::Reset()
 {
-	normalEnemys_.clear();
+	enemys_.clear();
 }
 
 const std::list<std::unique_ptr<Enemy>>& EnemyManager::GetEnemyList()
 {
-	return normalEnemys_;
+	return enemys_;
 }

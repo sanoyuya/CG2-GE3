@@ -5,78 +5,58 @@
 #include"EnemyDeathParticleEmitter.h"
 #include"GameTimer.h"
 
-class Enemy :public Character
+class Enemy :public GameObject
 {
-private:
+protected:
 
-	std::unique_ptr<Model>enemy_;
-	uint32_t enemyTex_ = 0;
-	Transform enemyTrans_;
-	float colliderSize_ = 0.0f;
-	float spawnTime_ = 0.0f;
-	float deathTime_ = 0.0f;
-
-	bool spawnFlag_ = false;
-	bool isDead_ = false;
-
-	float bulletTimer = 0.0f;
-	const float maxBulletTime = 60.0f;
-
-	bool spawnAnimationFlag_ = false;
-	uint8_t spawnAnimationTimer_ = 0;
-	const uint8_t maxSpawnAnimationTime_ = 60;
-
-	bool deathAnimationFlag_ = false;
-	uint8_t deathAnimationTimer_ = 0;
-	const uint8_t maxDeathAnimationTime_ = 60;
-
-	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
+	Camera* camera_ = nullptr;
+	Player* player_ = nullptr;
+	GameTimer* gameTimer_ = nullptr;
 
 public:
 
-	Enemy();
-	~Enemy();
+	virtual ~Enemy() = default;
 
-	void Initialize();
+	//初期化処理
+	virtual void Initialize() = 0;
 
-	void Update(Camera* camera, Player*player, GameTimer* gameTimer);
+	//更新処理
+	virtual void Update() = 0;
 
-	void Draw();
+	//描画処理
+	virtual void Draw() = 0;
 
-public://セッター
+	//オブジェクトの名前取得処理
+	virtual std::string GetName() = 0;
+
+	virtual bool GetIsDead() = 0;
+
+public:
 
 	//blenderで出力したデータを読み込むときに初期座標をセットする関数
-	void SetPosition(const myMath::Vector3& position);
+	virtual void SetPosition(const myMath::Vector3& position) = 0;
 	//blenderで出力したデータを読み込むときに初期角度をセットする関数
-	void SetRotation(const myMath::Vector3& rotation);
+	virtual void SetRotation(const myMath::Vector3& rotation) = 0;
 	//blenderで出力したデータを読み込むときに当たり判定の大きさをセットする関数
-	void SetColliderSize(const float size);
+	virtual void SetColliderSize(const float size) = 0;
 	//blenderで出力したデータを読み込むときにスポーンタイマーをセットする関数
-	void SetSpawnTimer(const float timer);
+	virtual void SetSpawnTimer(const float timer) = 0;
 	//blenderで出力したデータを読み込むときに死亡タイマーをセットする関数
-	void SetDeathTimer(const float timer);
+	virtual void SetDeathTimer(const float timer) = 0;
 
-public://ゲッター
+	void SetCamera(Camera* camera);
 
-	const Transform& GetTrans();
+	void SetPlayer(Player* player);
 
-	const float& GetColliderSize();
+	void SetGameTimer(GameTimer* gameTimer);
 
-	bool GetIsDead();
+	virtual const Transform& GetTrans() = 0;
 
-	bool GetSpawnFlag();
+	virtual const float& GetColliderSize() = 0;
 
-	bool GetDeathAnimationFlag();
+	virtual bool GetSpawnFlag() = 0;
 
-	void OnCollision();
+	virtual bool GetDeathAnimationFlag() = 0;
 
-private:
-
-	void BulletUpdate(Camera* camera, Player* player);
-
-	void BulletDraw();
-
-	void SpawnUpdate(Camera* camera, GameTimer* gameTimer);
-
-	void DeathUpdate(Camera* camera, GameTimer* gameTimer);
+	virtual void OnCollision() = 0;
 };

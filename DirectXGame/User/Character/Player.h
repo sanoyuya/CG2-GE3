@@ -3,12 +3,12 @@
 #include"Camera.h"
 #include"InputManager.h"
 #include"myMath.h"
-#include"Character.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
 #include"EnemyDeathParticleEmitter.h"
 #include"HPBar.h"
 #include"Reticle.h"
 #include"PlayerDeathAnimation.h"
+#include"GameObject.h"
 
 struct PlayerData
 {
@@ -17,11 +17,14 @@ struct PlayerData
 	myMath::Vector3 scale;
 };
 
-class Player:public Character
+class Player:public GameObject
 {
 private:
 
 	InputManager* input_ = nullptr;
+	Camera* camera_ = nullptr;
+
+	std::string name_ = "player";
 
 	std::unique_ptr<Model>player_;
 	Transform playerTrans_;
@@ -58,9 +61,11 @@ public:
 
 	void Initialize();
 
-	void Update(Camera* camera);
+	void Update();
 
-	void Draw(Camera* camera);
+	void Draw();
+
+	std::string GetName();
 
 	void Reset();
 
@@ -77,6 +82,8 @@ public:
 	const myMath::Vector3& GetAddTargetPos();
 
 	const bool& GetDeathFlag();
+
+	void SetCamera(Camera* camera);
 
 private:
 

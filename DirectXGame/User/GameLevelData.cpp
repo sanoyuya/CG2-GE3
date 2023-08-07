@@ -62,7 +62,7 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "normalEnemy")
 		{
-			std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>();
+			std::unique_ptr<Enemy>enemy = std::make_unique<NormalEnemy>();
 			enemy->SetPosition(objectData.translation);
 			//blenderã‚ÆÀ•WŒn‚ªŽáŠ±‚¸‚ê‚Ä‚¢‚é‚Ì‚ÅŽáŠ±C³‚µ‚Ä‘—‚é
 			enemy->SetRotation({ myMath::ChangeRadians(objectData.rotation.x), myMath::ChangeRadians(objectData.rotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(objectData.rotation.z) - myMath::AX_PIF / 2 });
@@ -72,7 +72,7 @@ void GameLevelData::Load()
 			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
 			enemy->SetDeathTimer(objectData.timer.deathTimer);
 			//Enemy‚ð“o˜^
-			enemyData_.normalEnemys.push_back(std::move(enemy));
+			enemyData_.enemys.push_back(std::move(enemy));
 		}
 		else
 		{
@@ -129,6 +129,6 @@ void GameLevelData::ReLoad()
 	models_.clear();
 	objects_.clear();
 	cameraData_.controlPoints.clear();
-	enemyData_.normalEnemys.clear();
+	enemyData_.enemys.clear();
 	Load();
 }

@@ -1,11 +1,29 @@
 #include "GameObject.h"
 #include"ColliderManager.h"
 
-GameObject::GameObject(std::string objectName, myMath::Vector3 center, float radius)
+void GameObject::CreateBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner)
 {
-	objectName_ = objectName;
-	collision_.center = { center.x,center.y,center.z,1.0f };
-	collision_.radius = radius;
+	//íeÇê∂ê¨ÇµÅAèâä˙âª
+	std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
+	newBullet->Initialize(position, frontVec, owner);
+	//íeÇìoò^Ç∑ÇÈ
+	if (owner == BulletOwner::Player)
+	{
+		ColliderManager::GetInstance()->AddPlayerBulletCollider(newBullet.get());
+	}
+	else if (owner == BulletOwner::Enemy)
+	{
+		ColliderManager::GetInstance()->AddEnemyBulletCollider(newBullet.get());
+	}
+	bullets_.push_back(std::move(newBullet));
+}
 
-	ColliderManager::GetInstance()->AddCollision(this);
+void GameObject::BulletUpdate(Camera* camera)
+{
+	bullets_.remove_if([](std::unique_ptr<Bullet>& bullet) { return bullet->GetIsDead(); });
+
+	for (const std::unique_ptr<Bullet>& bullet : bullets_)
+	{
+		bullet->Update(camera);
+	}
 }

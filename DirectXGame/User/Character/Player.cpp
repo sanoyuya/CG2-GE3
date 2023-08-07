@@ -42,10 +42,10 @@ void Player::Initialize()
 	deathAnimation_->Initialize();
 }
 
-void Player::Update(Camera* camera)
+void Player::Update()
 {
 	//カメラを親にする為に行列をTransformのmatWorldに登録
-	cameraTrans_.matWorld = camera->GetMatView();
+	cameraTrans_.matWorld = camera_->GetMatView();
 	//レティクルの親にカメラを設定
 	playerTrans_.parent = &cameraTrans_;
 
@@ -60,13 +60,13 @@ void Player::Update(Camera* camera)
 	else
 	{
 		//レティクルの更新処理
-		reticle_->Update(camera);
+		reticle_->Update(camera_);
 		//自機の移動処理
 		Move();
 	}
 
 	//Transformの更新処理
-	playerTrans_.TransUpdate(camera);
+	playerTrans_.TransUpdate(camera_);
 
 	//ローカルの正面ベクトル
 	directionVector_ = reticle_->GetTransform().translation - playerTrans_.translation;
@@ -79,19 +79,19 @@ void Player::Update(Camera* camera)
 	parentToDirectionVector_.normalization();
 
 	//自機の回転処理
-	Rotation(camera);
+	Rotation(camera_);
 
 	//弾の更新処理
-	BulletUpdate(camera);
+	BulletUpdate(camera_);
 	//エンジンの煙の更新処理
-	SmokeUpdate(camera);
+	SmokeUpdate(camera_);
 	//死亡演出のパーティクルの更新処理
-	deathAnimation_->ParticleUpdate(camera);
+	deathAnimation_->ParticleUpdate(camera_);
 	//死亡演出で死亡させたときのフラグの値を貰う
 	deathFlag_ = deathAnimation_->GetDeathFlag();
 }
 
-void Player::Draw(Camera* camera)
+void Player::Draw()
 {
 	//弾の描画
 	BulletDraw();
@@ -99,7 +99,7 @@ void Player::Draw(Camera* camera)
 	if (hp_ > 0)
 	{
 		//レティクルの描画
-		reticle_->Draw(camera);
+		reticle_->Draw(camera_);
 		//プレイヤーのモデル描画
 		player_->DrawModel(&playerTrans_);
 		//機体のエンジンから火が出るパーティクルの描画
@@ -110,6 +110,11 @@ void Player::Draw(Camera* camera)
 
 	//死亡演出の描画
 	deathAnimation_->Draw();
+}
+
+std::string Player::GetName()
+{
+	return name_;
 }
 
 void Player::Reset()
@@ -155,6 +160,11 @@ const myMath::Vector3& Player::GetAddTargetPos()
 const bool& Player::GetDeathFlag()
 {
 	return deathFlag_;
+}
+
+void Player::SetCamera(Camera* camera)
+{
+	camera_ = camera;
 }
 
 void Player::Move()
@@ -211,7 +221,7 @@ void Player::BulletUpdate(Camera* camera)
 	}
 
 	//弾の更新処理
-	Character::BulletUpdate(camera);
+	GameObject::BulletUpdate(camera);
 }
 
 void Player::BulletDraw()

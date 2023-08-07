@@ -4,18 +4,18 @@
 #include<memory>
 #include"Player.h"
 #include"GameTimer.h"
+#include"NormalEnemy.h"
 
 struct EnemyData
 {
-	std::list<std::unique_ptr<Enemy>>normalEnemys;
+	std::list<std::unique_ptr<Enemy>>enemys;
 };
 
 class EnemyManager
 {
 private:
 
-	std::list<std::unique_ptr<Enemy>>normalEnemys_;
-	std::list<Enemy*>list;
+	std::list<std::unique_ptr<Enemy>>enemys_;
 
 public:
 

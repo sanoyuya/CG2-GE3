@@ -101,10 +101,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Character\NormalEnemy.cpp" />
+    <ClCompile Include="User\GameObject.cpp" />
     <ClCompile Include="User\Scene\DemoScene.cpp" />
     <ClCompile Include="User\GameTimer.cpp" />
     <ClCompile Include="User\GameLevelData.cpp" />
-    <ClCompile Include="User\GameObject.cpp" />
     <ClCompile Include="User\PlayerDeathAnimation.cpp" />
     <ClCompile Include="User\UI\Reticle.cpp" />
     <ClCompile Include="User\UI\HPBar.cpp" />
@@ -113,7 +114,6 @@
     <ClCompile Include="User\Particle\PlayerEngineSmokeParticleEmitter.cpp" />
     <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp" />
     <ClCompile Include="User\UI\Radar.cpp" />
-    <ClCompile Include="User\Character\Character.cpp" />
     <ClCompile Include="Engine\Math\EasingFunction.cpp" />
     <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp" />
     <ClCompile Include="User\Particle\ParticleEmitter.cpp" />
@@ -332,6 +332,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Character\NormalEnemy.h" />
     <ClInclude Include="User\Scene\DemoScene.h" />
     <ClInclude Include="User\GameTimer.h" />
     <ClInclude Include="User\PlayerDeathAnimation.h" />
@@ -344,7 +345,6 @@
     <ClInclude Include="User\Particle\EnemyDeathParticleEmitter.h" />
     <ClInclude Include="User\GameObject.h" />
     <ClInclude Include="User\UI\Radar.h" />
-    <ClInclude Include="User\Character\Character.h" />
     <ClInclude Include="Engine\Math\EasingFunction.h" />
     <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h" />
     <ClInclude Include="User\Particle\ParticleEmitter.h" />

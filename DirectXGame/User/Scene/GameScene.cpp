@@ -93,7 +93,8 @@ void GameScene::Update()
 	lightManager_->SetPointLightAtten(0, lightAtten_);
 	
 	gameTimer_->Update();
-	player_->Update(camera_->GetCameraPtr());
+	player_->SetCamera(camera_->GetCameraPtr());
+	player_->Update();
 	camera_->Update(player_.get());
 	gameLevelData_->Update(camera_->GetCameraPtr());
 	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
@@ -108,7 +109,7 @@ void GameScene::Draw()
 	skyDome_->DrawModel(&skyDomeTrans_);
 	gameLevelData_->Draw();
 	enemyManager_->Draw();
-	player_->Draw(camera_->GetCameraPtr());
+	player_->Draw();
 	radar_->Draw(enemyManager_.get(),player_.get());
 	SceneChangeAnimation::GetInstance()->Draw();
 }
