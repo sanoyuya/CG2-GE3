@@ -1,11 +1,14 @@
-#include "GameObject.h"
+#include "BulletManager.h"
 #include"ColliderManager.h"
 
-void GameObject::CreateBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner)
+void BulletManager::CreateBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner)
 {
 	//íeÇê∂ê¨ÇµÅAèâä˙âª
 	std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>();
-	newBullet->Initialize(position, frontVec, owner);
+	newBullet->SetPos(position);
+	newBullet->SetDirectionVector(frontVec);
+	newBullet->SetOwner(owner);
+	newBullet->Initialize();
 	//íeÇìoò^Ç∑ÇÈ
 	if (owner == BulletOwner::Player)
 	{
@@ -18,12 +21,13 @@ void GameObject::CreateBullet(myMath::Vector3 position, myMath::Vector3 frontVec
 	bullets_.push_back(std::move(newBullet));
 }
 
-void GameObject::BulletUpdate(Camera* camera)
+void BulletManager::BulletUpdate(Camera* camera)
 {
 	bullets_.remove_if([](std::unique_ptr<Bullet>& bullet) { return bullet->GetIsDead(); });
 
 	for (const std::unique_ptr<Bullet>& bullet : bullets_)
 	{
-		bullet->Update(camera);
+		bullet->SetCamera(camera);
+		bullet->Update();
 	}
 }

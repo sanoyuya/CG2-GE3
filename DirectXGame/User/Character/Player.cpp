@@ -221,7 +221,7 @@ void Player::BulletUpdate(Camera* camera)
 	}
 
 	//’e‚ÌXVˆ—
-	GameObject::BulletUpdate(camera);
+	BulletManager::BulletUpdate(camera);
 }
 
 void Player::BulletDraw()

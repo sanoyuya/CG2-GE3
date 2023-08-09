@@ -312,9 +312,6 @@
     <ClCompile Include="User\RailCamera.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="User\Bullet.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\ColliderManager.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
@@ -366,9 +363,6 @@
     <ClCompile Include="User\Scene\DemoScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameObject.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\Character\Enemy.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
@@ -379,6 +373,12 @@
       <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
     <ClCompile Include="User\Character\EnemyManager.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Bullet.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="User\BulletManager.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -631,9 +631,6 @@
     <ClInclude Include="User\Scene\TitleScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\Bullet.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="User\ColliderManager.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
@@ -648,9 +645,6 @@
     </ClInclude>
     <ClInclude Include="User\Scene\SceneChangeAnimation.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject.h">
-      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="User\Particle\EnemyDeathParticleEmitter.h">
       <Filter>User\ヘッダー ファイル\Particle</Filter>
@@ -698,6 +692,15 @@
       <Filter>User\ヘッダー ファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="User\Character\EnemyManager.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Bullet.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameObject.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="User\BulletManager.h">
       <Filter>User\ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>

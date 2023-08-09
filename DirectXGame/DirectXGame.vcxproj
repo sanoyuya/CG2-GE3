@@ -101,8 +101,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\BulletManager.cpp" />
     <ClCompile Include="User\Character\NormalEnemy.cpp" />
-    <ClCompile Include="User\GameObject.cpp" />
     <ClCompile Include="User\Scene\DemoScene.cpp" />
     <ClCompile Include="User\GameTimer.cpp" />
     <ClCompile Include="User\GameLevelData.cpp" />
@@ -332,6 +332,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\BulletManager.h" />
     <ClInclude Include="User\Character\NormalEnemy.h" />
     <ClInclude Include="User\Scene\DemoScene.h" />
     <ClInclude Include="User\GameTimer.h" />

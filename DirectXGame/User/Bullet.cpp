@@ -9,16 +9,12 @@ Bullet::~Bullet()
 {
 }
 
-void Bullet::Initialize(const myMath::Vector3& position, const myMath::Vector3& directionVector, BulletOwner owner)
+void Bullet::Initialize()
 {
 	bullet_ = std::make_unique<Model>();
 	bulletTex_ = bullet_->CreateObjModel("Resources/sphere");
 	bullet_->SetModel(bulletTex_);
 	bulletTrans_.Initialize();
-	bulletTrans_.translation = position;
-	directionVector_ = directionVector;
-
-	owner_ = owner;
 
 	//パーティクルの初期化
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
@@ -26,7 +22,7 @@ void Bullet::Initialize(const myMath::Vector3& position, const myMath::Vector3& 
 	smokeTrans_.Initialize();
 }
 
-void Bullet::Update(Camera* camera)
+void Bullet::Update()
 {
 	deathTimer_++;
 	if (deathTimer_ > maxDeathTime_)
@@ -42,9 +38,9 @@ void Bullet::Update(Camera* camera)
 		}
 	}
 	bulletTrans_.translation += directionVector_ * speed_;
-	bulletTrans_.TransUpdate(camera);
+	bulletTrans_.TransUpdate(camera_);
 
-	SmokeUpdate(camera);
+	SmokeUpdate();
 }
 
 void Bullet::Draw()
@@ -53,18 +49,43 @@ void Bullet::Draw()
 	smokeEmitter_->Draw();
 }
 
-void Bullet::SmokeUpdate(Camera* camera)
+std::string Bullet::GetName()
+{
+	return name_;
+}
+
+void Bullet::SetCamera(Camera* camera)
+{
+	camera_ = camera;
+}
+
+void Bullet::SetPos(const myMath::Vector3& position)
+{
+	bulletTrans_.translation = position;
+}
+
+void Bullet::SetDirectionVector(const myMath::Vector3& directionVector)
+{
+	directionVector_ = directionVector;
+}
+
+void Bullet::SetOwner(BulletOwner owner)
+{
+	owner = owner_;
+}
+
+void Bullet::SmokeUpdate()
 {
 	//エンジンの座標に合わせるため、モデルの中心座標から位置をずらせるように子を作成
 	smokeTrans_.parent = &bulletTrans_;
 	//モデルの中心座標から位置をずらす
 	smokeTrans_.translation = { 0.0f,0.0f,-1.0f };
 	//子の更新処理
-	smokeTrans_.TransUpdate(camera);
+	smokeTrans_.TransUpdate(camera_);
 	//パーティクルを毎フレーム作成
 	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
 	//パーティクルの更新
-	smokeEmitter_->Update(camera);
+	smokeEmitter_->Update(camera_);
 }
 
 bool Bullet::GetIsDead()

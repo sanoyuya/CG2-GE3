@@ -1,7 +1,7 @@
 #pragma once
 #include"Enemy.h"
 
-class NormalEnemy:public Enemy
+class NormalEnemy:public Enemy, public BulletManager
 {
 private:
 

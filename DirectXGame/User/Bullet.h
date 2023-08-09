@@ -1,6 +1,7 @@
 #pragma once
 #include"DrawOversight.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
+#include"GameObject.h"
 
 enum class BulletOwner
 {
@@ -8,9 +9,13 @@ enum class BulletOwner
 	Enemy
 };
 
-class Bullet
+class Bullet:public GameObject
 {
 private:
+
+	Camera* camera_ = nullptr;
+
+	std::string name_ = "bullet";
 
 	bool isDead_ = false;
 	uint8_t deathTimer_ = 0;
@@ -33,15 +38,22 @@ public:
 	Bullet();
 	~Bullet();
 
-	void Initialize(const myMath::Vector3& position,const myMath::Vector3& directionVector, BulletOwner owner);
+	void Initialize();
 
-	void Update(Camera* camera);
+	void Update();
 
 	void Draw();
 
+	std::string GetName();
+
+	void SetCamera(Camera* camera);
+	void SetPos(const myMath::Vector3& position);
+	void SetDirectionVector(const myMath::Vector3& directionVector);
+	void SetOwner(BulletOwner owner);
+
 public:
 
-	void SmokeUpdate(Camera* camera);
+	void SmokeUpdate();
 
 	bool GetIsDead();
 

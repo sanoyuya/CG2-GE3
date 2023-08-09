@@ -9,6 +9,7 @@
 #include"Reticle.h"
 #include"PlayerDeathAnimation.h"
 #include"GameObject.h"
+#include"BulletManager.h"
 
 struct PlayerData
 {
@@ -17,7 +18,7 @@ struct PlayerData
 	myMath::Vector3 scale;
 };
 
-class Player:public GameObject
+class Player:public GameObject, public BulletManager
 {
 private:
 

@@ -133,7 +133,7 @@ void NormalEnemy::BulletUpdate(Camera* camera, Player* player)
 	}
 
 	//’e‚ÌXVˆ—
-	GameObject::BulletUpdate(camera);
+	BulletManager::BulletUpdate(camera);
 }
 
 void NormalEnemy::BulletDraw()
