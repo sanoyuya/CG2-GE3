@@ -132,4 +132,9 @@ namespace myMath
 	/// <param name="points">§Œä“_</param>
 	/// <param name="t">ŠÔ(0.0`1.0)</param>
 	Vector3 CatmullRomSpline(std::vector<Vector3>& points, float t);
+
+	//üŒ`•âŠ®(1ŸŠÖ”•âŠ®)
+	const Vector3 lerp(const Vector3& start, const Vector3& end, const float t);
+
+	Vector3 Beziers(Vector3 startPos, Vector3 endPos,Vector3 controlPoint, float t);
 }

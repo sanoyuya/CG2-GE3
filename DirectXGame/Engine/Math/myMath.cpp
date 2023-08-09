@@ -234,4 +234,20 @@ namespace myMath
 
 		return HermiteGetPoint(p0, p1, p2, p3, weight);
 	}
+
+	const Vector3 lerp(const Vector3& start, const Vector3& end, const float t)
+	{
+		return start * (1.0f - t) + end * t;
+	}
+
+	Vector3 Beziers(Vector3 startPos, Vector3 endPos, Vector3 controlPoint, float t)
+	{
+		float timeRate = std::min(t / 1.0f, 1.0f);
+
+		Vector3 a = lerp(startPos, controlPoint, timeRate);
+		Vector3 b = lerp(controlPoint, endPos, timeRate);
+		Vector3 position = lerp(a, b, timeRate);
+
+		return position;
+	}
 }

@@ -381,6 +381,9 @@
     <ClCompile Include="User\BulletManager.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp">
+      <Filter>Engine\ソースファイル\Draw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -702,6 +705,9 @@
     </ClInclude>
     <ClInclude Include="User\BulletManager.h">
       <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h">
+      <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
