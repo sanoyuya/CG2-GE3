@@ -1,7 +1,7 @@
-#include "NormalEnemy.h"
-#include"ColliderManager.h"
+#include "MoveEnemy.h"
+#include"PhysicsMath.h"
 
-void NormalEnemy::Initialize()
+void MoveEnemy::Initialize()
 {
 	enemy_ = std::make_unique<Model>();
 	enemyTex_ = enemy_->CreateObjModel("Resources/enemy");
@@ -14,8 +14,12 @@ void NormalEnemy::Initialize()
 	emitter_->Initialize();
 }
 
-void NormalEnemy::Update()
+void MoveEnemy::Update()
 {
+	time_++;
+	addY = PhysicsMath::SimpleHarmonicMotion(time_,0.5f,120.0f);
+	enemyTrans_.translation.y = enemyTrans_.translation.y+addY;
+
 	//oŒ»‚µ‚Ä‚¢‚½‚ç
 	if (spawnFlag_ == true)
 	{
@@ -32,7 +36,7 @@ void NormalEnemy::Update()
 	}
 }
 
-void NormalEnemy::Draw()
+void MoveEnemy::Draw()
 {
 	//Ž€‚ñ‚Å‚¢‚È‚¢‚Æ‚«‚Ì‚Ý•`‰æ
 	if (spawnFlag_ == true && deathAnimationFlag_ == false)
@@ -49,73 +53,73 @@ void NormalEnemy::Draw()
 	BulletDraw();
 }
 
-std::string NormalEnemy::GetName()
+std::string MoveEnemy::GetName()
 {
 	return name_;
 }
 
-void NormalEnemy::SetPosition(const myMath::Vector3& position)
+void MoveEnemy::SetPosition(const myMath::Vector3& position)
 {
 	enemyTrans_.translation = position;
 }
 
-void NormalEnemy::SetRotation(const myMath::Vector3& rotation)
+void MoveEnemy::SetRotation(const myMath::Vector3& rotation)
 {
 	enemyTrans_.rotation = rotation;
 }
 
-void NormalEnemy::SetColliderSize(const float size)
+void MoveEnemy::SetColliderSize(const float size)
 {
 	colliderSize_ = size;
 }
 
-void NormalEnemy::SetSpawnTimer(const float timer)
+void MoveEnemy::SetSpawnTimer(const float timer)
 {
 	spawnTime_ = timer;
 }
 
-void NormalEnemy::SetDeathTimer(const float timer)
+void MoveEnemy::SetDeathTimer(const float timer)
 {
 	deathTime_ = timer;
 }
 
-const Transform& NormalEnemy::GetTrans()
+const Transform& MoveEnemy::GetTrans()
 {
 	return enemyTrans_;
 }
 
-const float& NormalEnemy::GetColliderSize()
+const float& MoveEnemy::GetColliderSize()
 {
 	return colliderSize_;
 }
 
-bool NormalEnemy::GetIsDead()
+bool MoveEnemy::GetIsDead()
 {
 	return isDead_;
 }
 
-bool NormalEnemy::GetSpawnFlag()
+bool MoveEnemy::GetSpawnFlag()
 {
 	return spawnFlag_;
 }
 
-bool NormalEnemy::GetDeathAnimationFlag()
+bool MoveEnemy::GetDeathAnimationFlag()
 {
 	return deathAnimationFlag_;
 }
 
-void NormalEnemy::OnCollision()
+void MoveEnemy::OnCollision()
 {
 	deathAnimationFlag_ = true;
 	emitter_->Create(enemyTrans_.parentToTranslation);
 }
 
-bool NormalEnemy::GetLockOnFlag()
+bool MoveEnemy::GetLockOnFlag()
 {
 	return lockOnFlag;
 }
 
-void NormalEnemy::BulletUpdate(Camera* camera, Player* player)
+void MoveEnemy::BulletUpdate(Camera* camera, Player* player)
 {
 	myMath::Vector3 frontVec = player->GetTransform().parentToTranslation - enemyTrans_.translation;
 	frontVec = frontVec.normalization();
@@ -140,7 +144,7 @@ void NormalEnemy::BulletUpdate(Camera* camera, Player* player)
 	BulletManager::BulletUpdate(camera);
 }
 
-void NormalEnemy::BulletDraw()
+void MoveEnemy::BulletDraw()
 {
 	for (const std::unique_ptr<Bullet>& bullet : bullets_)
 	{
@@ -148,7 +152,7 @@ void NormalEnemy::BulletDraw()
 	}
 }
 
-void NormalEnemy::SpawnUpdate(Camera* camera, GameTimer* gameTimer)
+void MoveEnemy::SpawnUpdate(Camera* camera, GameTimer* gameTimer)
 {
 	if (spawnTime_ <= gameTimer->GetIntTime())
 	{
@@ -172,7 +176,7 @@ void NormalEnemy::SpawnUpdate(Camera* camera, GameTimer* gameTimer)
 	}
 }
 
-void NormalEnemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
+void MoveEnemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
 {
 	//Ž€–SŽžŠÔ‚É‚È‚Á‚½‚çŽ€‚Ê
 	if (deathTime_ <= gameTimer->GetIntTime())

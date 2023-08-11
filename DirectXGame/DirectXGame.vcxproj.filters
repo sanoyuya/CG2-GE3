@@ -384,6 +384,12 @@
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
+    <ClCompile Include="User\Particle\EnemySpawnParticleEmitter.cpp">
+      <Filter>User\ソース ファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\MoveEnemy.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -708,6 +714,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Particle\EnemySpawnParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\MoveEnemy.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

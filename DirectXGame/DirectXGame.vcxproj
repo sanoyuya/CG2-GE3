@@ -101,6 +101,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Character\MoveEnemy.cpp" />
+    <ClCompile Include="User\Particle\EnemySpawnParticleEmitter.cpp" />
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp" />
     <ClCompile Include="User\BulletManager.cpp" />
     <ClCompile Include="User\Character\NormalEnemy.cpp" />
@@ -333,6 +335,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Character\MoveEnemy.h" />
+    <ClInclude Include="User\Particle\EnemySpawnParticleEmitter.h" />
     <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h" />
     <ClInclude Include="User\BulletManager.h" />
     <ClInclude Include="User\Character\NormalEnemy.h" />

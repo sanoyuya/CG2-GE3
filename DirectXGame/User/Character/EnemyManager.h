@@ -5,6 +5,7 @@
 #include"Player.h"
 #include"GameTimer.h"
 #include"NormalEnemy.h"
+#include"MoveEnemy.h"
 
 struct EnemyData
 {

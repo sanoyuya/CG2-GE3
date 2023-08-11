@@ -1138,6 +1138,45 @@
                 "spawn": 15.0,
                 "death": 40.0
             }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy.005",
+            "transform": {
+                "translation": [
+                    0.0,
+                    90.0,
+                    50.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    10.0,
+                    10.0,
+                    10.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 0.0,
+                "death": 20.0
+            }
         }
     ]
 }
