@@ -30,6 +30,8 @@ private:
 
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
 
+	bool lockOnFlag = false;
+
 public:
 
 	NormalEnemy()=default;
@@ -69,6 +71,8 @@ public://ÉQÉbÉ^Å[
 	bool GetDeathAnimationFlag();
 
 	void OnCollision();
+
+	bool GetLockOnFlag();
 
 private:
 

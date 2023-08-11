@@ -7,7 +7,6 @@ void NormalEnemy::Initialize()
 	enemyTex_ = enemy_->CreateObjModel("Resources/enemy");
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
-	enemyTrans_.rotation.y = myMath::AX_PIF / 2;
 	enemyTrans_.scale = { 15.0f,15.0f,15.0f };
 
 	// パーティクル生成
@@ -109,6 +108,11 @@ void NormalEnemy::OnCollision()
 {
 	deathAnimationFlag_ = true;
 	emitter_->Create(enemyTrans_.parentToTranslation);
+}
+
+bool NormalEnemy::GetLockOnFlag()
+{
+	return lockOnFlag;
 }
 
 void NormalEnemy::BulletUpdate(Camera* camera, Player* player)
