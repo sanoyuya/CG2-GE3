@@ -10,7 +10,6 @@ private:
 	std::unique_ptr<Model>enemy_;
 	uint32_t enemyTex_ = 0;
 	Transform enemyTrans_;
-	float colliderSize_ = 0.0f;
 	float spawnTime_ = 0.0f;
 	float deathTime_ = 0.0f;
 
@@ -32,6 +31,8 @@ private:
 
 	bool lockOnFlag = false;
 
+	CollisionData collisionData_;
+
 public:
 
 	NormalEnemy()=default;
@@ -44,6 +45,12 @@ public:
 	void Draw();
 
 	std::string GetName();
+
+	//オブジェクトの当たり判定取得処理
+	const CollisionData& GetCollisionData();
+
+	//オブジェクトの衝突判定処理
+	void OnCollision();
 
 public://セッター
 
@@ -60,23 +67,19 @@ public://セッター
 
 public://ゲッター
 
-	const Transform& GetTrans();
-
-	const float& GetColliderSize();
-
 	bool GetIsDead();
 
 	bool GetSpawnFlag();
 
 	bool GetDeathAnimationFlag();
 
-	void OnCollision();
-
 	bool GetLockOnFlag();
+
+	const Transform& GetTrans();
 
 private:
 
-	void BulletUpdate(Camera* camera, Player* player);
+	void BulletUpdate(Camera* camera);
 
 	void BulletDraw();
 

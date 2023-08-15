@@ -55,6 +55,8 @@ private:
 
 	std::unique_ptr<PlayerDeathAnimation>deathAnimation_;
 
+	CollisionData collisionData_;
+
 public:
 
 	Player();
@@ -68,9 +70,12 @@ public:
 
 	std::string GetName();
 
-	void Reset();
+	//オブジェクトの当たり判定取得処理
+	const CollisionData& GetCollisionData();
 
-	void HpSub();
+	void OnCollision();
+
+	void Reset();
 
 	const bool GetDamageFlag();
 

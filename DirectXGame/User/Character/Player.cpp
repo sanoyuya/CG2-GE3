@@ -9,6 +9,7 @@ Player::Player()
 
 Player::~Player()
 {
+	ColliderManager::GetInstance()->SubCollision(this);
 }
 
 void Player::Initialize()
@@ -40,6 +41,10 @@ void Player::Initialize()
 	//死亡演出の初期化
 	deathAnimation_ = std::make_unique<PlayerDeathAnimation>();
 	deathAnimation_->Initialize();
+
+	collisionData_.radius = 1.0f;
+
+	ColliderManager::GetInstance()->AddCollision(this);
 }
 
 void Player::Update()
@@ -67,6 +72,8 @@ void Player::Update()
 
 	//Transformの更新処理
 	playerTrans_.TransUpdate(camera_);
+
+	collisionData_.center = playerTrans_.translation;
 
 	//ローカルの正面ベクトル
 	directionVector_ = reticle_->GetTransform().translation - playerTrans_.translation;
@@ -117,19 +124,24 @@ std::string Player::GetName()
 	return name_;
 }
 
+const CollisionData& Player::GetCollisionData()
+{
+	return collisionData_;
+}
+
+void Player::OnCollision()
+{
+	hp_--;
+	hp_ = max(hp_, 0);
+	damageFlag_ = true;
+}
+
 void Player::Reset()
 {
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };
 	hp_ = 10;
 	//レティクルのリセット
 	reticle_->Reset();
-}
-
-void Player::HpSub()
-{
-	hp_--;
-	hp_ = max(hp_, 0);
-	damageFlag_ = true;
 }
 
 const bool Player::GetDamageFlag()

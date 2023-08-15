@@ -1,11 +1,17 @@
 #pragma once
-#include"Camera.h"
+
+struct CollisionData
+{
+	myMath::Vector3 center = {};
+	float radius = 0.0f;
+};
 
 //オブジェクト基底クラス
 class GameObject
 {
 public:
 
+	//デストラクタ
 	virtual ~GameObject() = default;
 
 	//初期化処理
@@ -19,4 +25,10 @@ public:
 
 	//オブジェクトの名前取得処理
 	virtual std::string GetName() = 0;
+
+	//オブジェクトの当たり判定取得処理
+	virtual const CollisionData& GetCollisionData() = 0;
+
+	//オブジェクトの衝突判定処理
+	virtual void OnCollision() = 0;
 };

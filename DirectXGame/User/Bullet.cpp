@@ -20,6 +20,8 @@ void Bullet::Initialize()
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
+
+	collisionData_.radius = 1.0f;
 }
 
 void Bullet::Update()
@@ -28,17 +30,12 @@ void Bullet::Update()
 	if (deathTimer_ > maxDeathTime_)
 	{
 		isDead_ = true;
-		if (owner_ == BulletOwner::Player)
-		{
-			ColliderManager::GetInstance()->SubPlayerBullet(this);
-		}
-		else if (owner_ == BulletOwner::Enemy)
-		{
-			ColliderManager::GetInstance()->SubEnemyBullet(this);
-		}
+		ColliderManager::GetInstance()->SubCollision(this);
 	}
 	bulletTrans_.translation += directionVector_ * speed_;
 	bulletTrans_.TransUpdate(camera_);
+
+	collisionData_.center = bulletTrans_.translation;
 
 	SmokeUpdate();
 }
@@ -52,6 +49,11 @@ void Bullet::Draw()
 std::string Bullet::GetName()
 {
 	return name_;
+}
+
+const CollisionData& Bullet::GetCollisionData()
+{
+	return collisionData_;
 }
 
 void Bullet::SetCamera(Camera* camera)
@@ -71,7 +73,12 @@ void Bullet::SetDirectionVector(const myMath::Vector3& directionVector)
 
 void Bullet::SetOwner(BulletOwner owner)
 {
-	owner = owner_;
+	owner_ = owner;
+}
+
+void Bullet::SetName(const std::string& name)
+{
+	name_ = name;
 }
 
 void Bullet::SmokeUpdate()
@@ -96,6 +103,7 @@ bool Bullet::GetIsDead()
 void Bullet::OnCollision()
 {
 	isDead_ = true;
+	ColliderManager::GetInstance()->SubCollision(this);
 }
 
 const myMath::Vector3& Bullet::GetPosition()

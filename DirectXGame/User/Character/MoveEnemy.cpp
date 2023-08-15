@@ -1,5 +1,6 @@
 #include "MoveEnemy.h"
 #include"PhysicsMath.h"
+#include"ColliderManager.h"
 
 void MoveEnemy::Initialize()
 {
@@ -18,7 +19,9 @@ void MoveEnemy::Update()
 {
 	time_++;
 	addY = PhysicsMath::SimpleHarmonicMotion(time_,0.5f,120.0f);
-	enemyTrans_.translation.y = enemyTrans_.translation.y+addY;
+	enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
+
+	collisionData_.center = enemyTrans_.translation;
 
 	//oŒ»‚µ‚Ä‚¢‚½‚ç
 	if (spawnFlag_ == true)
@@ -26,7 +29,7 @@ void MoveEnemy::Update()
 		//“G‚Ìƒ‚ƒfƒ‹‚ÌXVˆ—
 		enemyTrans_.TransUpdate(camera_);
 		//’e‚Ì¶¬ˆ—‚ÆXVˆ—
-		BulletUpdate(camera_, player_);
+		BulletUpdate(camera_);
 		//Ž€–Sˆ—
 		DeathUpdate(camera_, gameTimer_);
 	}
@@ -58,6 +61,11 @@ std::string MoveEnemy::GetName()
 	return name_;
 }
 
+const CollisionData& MoveEnemy::GetCollisionData()
+{
+	return collisionData_;
+}
+
 void MoveEnemy::SetPosition(const myMath::Vector3& position)
 {
 	enemyTrans_.translation = position;
@@ -70,7 +78,7 @@ void MoveEnemy::SetRotation(const myMath::Vector3& rotation)
 
 void MoveEnemy::SetColliderSize(const float size)
 {
-	colliderSize_ = size;
+	collisionData_.radius = size;
 }
 
 void MoveEnemy::SetSpawnTimer(const float timer)
@@ -81,16 +89,6 @@ void MoveEnemy::SetSpawnTimer(const float timer)
 void MoveEnemy::SetDeathTimer(const float timer)
 {
 	deathTime_ = timer;
-}
-
-const Transform& MoveEnemy::GetTrans()
-{
-	return enemyTrans_;
-}
-
-const float& MoveEnemy::GetColliderSize()
-{
-	return colliderSize_;
 }
 
 bool MoveEnemy::GetIsDead()
@@ -111,6 +109,7 @@ bool MoveEnemy::GetDeathAnimationFlag()
 void MoveEnemy::OnCollision()
 {
 	deathAnimationFlag_ = true;
+	ColliderManager::GetInstance()->SubCollision(this);
 	emitter_->Create(enemyTrans_.parentToTranslation);
 }
 
@@ -119,15 +118,20 @@ bool MoveEnemy::GetLockOnFlag()
 	return lockOnFlag;
 }
 
-void MoveEnemy::BulletUpdate(Camera* camera, Player* player)
+const Transform& MoveEnemy::GetTrans()
 {
-	myMath::Vector3 frontVec = player->GetTransform().parentToTranslation - enemyTrans_.translation;
+	return enemyTrans_;
+}
+
+void MoveEnemy::BulletUpdate(Camera* camera)
+{
+	myMath::Vector3 frontVec = player_->GetTransform().parentToTranslation - enemyTrans_.translation;
 	frontVec = frontVec.normalization();
 
 	if (deathAnimationFlag_ == false)
 	{
-		float length = sqrt((player->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x) * (player->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x)) +
-			sqrt((player->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z) * (player->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z));
+		float length = sqrt((player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x) * (player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x)) +
+			sqrt((player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z) * (player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z));
 		bulletTimer++;
 		if (bulletTimer > maxBulletTime)
 		{

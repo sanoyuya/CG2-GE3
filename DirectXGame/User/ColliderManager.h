@@ -10,34 +10,16 @@ class ColliderManager
 {
 private:
 
-	std::list<Bullet*>playersBulletsCollider_;
-	std::list<Enemy*>enemysCollider_;
-	std::list<Bullet*>enemysBulletsCollider_;
-
 	std::list<GameObject*>objects;
 
 public:
 
 	void Update(Player* player);
 
-	void AddPlayerBulletCollider(Bullet* collider);
-	void SubPlayerBullet(Bullet* bullet);
-
-	void AddEnemyCollider(Enemy* collider);
-
-	void AddEnemyBulletCollider(Bullet* collider);
-	void SubEnemyBullet(Bullet* bullet);
-
 	void AddCollision(GameObject* object);
 	void SubCollision(GameObject* object);
 
 	void Reset();
-
-private:
-
-	void PlayerBulletToEnemy();
-	void EnemyBulletToPlayer(Player* player);
-	void EnemyToPlayer(Player* player);
 
 public:
 
@@ -53,4 +35,3 @@ private:
 	ColliderManager& operator=(const ColliderManager&) = delete;
 	ColliderManager(const ColliderManager&) = delete;
 };
-

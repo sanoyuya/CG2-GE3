@@ -8,16 +8,18 @@ void BulletManager::CreateBullet(myMath::Vector3 position, myMath::Vector3 front
 	newBullet->SetPos(position);
 	newBullet->SetDirectionVector(frontVec);
 	newBullet->SetOwner(owner);
-	newBullet->Initialize();
-	//’e‚ð“o˜^‚·‚é
 	if (owner == BulletOwner::Player)
 	{
-		ColliderManager::GetInstance()->AddPlayerBulletCollider(newBullet.get());
+		newBullet->SetName("playerBullet");
 	}
 	else if (owner == BulletOwner::Enemy)
 	{
-		ColliderManager::GetInstance()->AddEnemyBulletCollider(newBullet.get());
+		newBullet->SetName("enemyBullet");
 	}
+	newBullet->Initialize();
+
+	//’e‚ð“o˜^‚·‚é
+	ColliderManager::GetInstance()->AddCollision(newBullet.get());
 	bullets_.push_back(std::move(newBullet));
 }
 

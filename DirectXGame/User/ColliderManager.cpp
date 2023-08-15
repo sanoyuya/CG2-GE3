@@ -2,41 +2,47 @@
 
 void ColliderManager::Update(Player* player)
 {
-	enemysBulletsCollider_.remove_if([](Bullet* bullet) { return bullet->GetIsDead(); });
-	playersBulletsCollider_.remove_if([](Bullet* bullet) { return bullet->GetIsDead(); });
-	enemysCollider_.remove_if([](Enemy* enemy) { return enemy->GetDeathAnimationFlag(); });
-
-	if (player->GetHp() > 0)
+	for (auto& object1 : objects)
 	{
-		EnemyBulletToPlayer(player);
-		EnemyToPlayer(player);
+		for (auto& object2 : objects)
+		{
+			if (player->GetHp() > 0)
+			{
+				//player‚Æ“G‚Ì’e‚Ì“–‚½‚è”»’è
+				if (object1->GetName() == "player" && object2->GetName() == "enemyBullet")
+				{
+					if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+						object2->GetCollisionData().center, object2->GetCollisionData().radius))
+					{
+						object1->OnCollision();//player‚ÌHPŒ¸­
+						object2->OnCollision();//“G‚Ì’e‚ðÁ–Å‚³‚¹‚é
+					}
+				}
+
+				//player‚Æ“G‚Ì“–‚½‚è”»’è
+				if (object1->GetName() == "player" && object2->GetName() == "enemy")
+				{
+					if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+						object2->GetCollisionData().center, object2->GetCollisionData().radius))
+					{
+						object1->OnCollision();//player‚ÌHPŒ¸­
+						object2->OnCollision();//“G‚ðÁ–Å‚³‚¹‚é
+					}
+				}
+			}
+
+			//player‚Ì’e‚Æ“G‚Ì“–‚½‚è”»’è
+			if (object1->GetName() == "playerBullet" && object2->GetName() == "enemy")
+			{
+				if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+					object2->GetCollisionData().center, object2->GetCollisionData().radius))
+				{
+					object1->OnCollision();//player‚Ì’e‚ðÁ–Å‚³‚¹‚é
+					object2->OnCollision();//“G‚ðÁ–Å‚³‚¹‚é
+				}
+			}
+		}
 	}
-	PlayerBulletToEnemy();
-}
-
-void ColliderManager::AddPlayerBulletCollider(Bullet* collider)
-{
-	playersBulletsCollider_.push_back(collider);
-}
-
-void ColliderManager::SubPlayerBullet(Bullet* bullet)
-{
-	playersBulletsCollider_.remove(bullet);
-}
-
-void ColliderManager::AddEnemyCollider(Enemy* collider)
-{
-	enemysCollider_.push_back(collider);
-}
-
-void ColliderManager::AddEnemyBulletCollider(Bullet* collider)
-{
-	enemysBulletsCollider_.push_back(collider);
-}
-
-void ColliderManager::SubEnemyBullet(Bullet* bullet)
-{
-	enemysBulletsCollider_.remove(bullet);
 }
 
 void ColliderManager::AddCollision(GameObject* object)
@@ -51,48 +57,7 @@ void ColliderManager::SubCollision(GameObject* object)
 
 void ColliderManager::Reset()
 {
-	playersBulletsCollider_.clear();
-	enemysCollider_.clear();
-	enemysBulletsCollider_.clear();
-}
-
-void ColliderManager::PlayerBulletToEnemy()
-{
-	for (auto& bullet : playersBulletsCollider_)
-	{
-		for (auto& enemys : enemysCollider_)
-		{
-			if (Collision::SphereToSphere(bullet->GetPosition(),1.0f, enemys->GetTrans().translation,enemys->GetColliderSize()))
-			{
-				bullet->OnCollision();
-				enemys->OnCollision();
-			}
-		}
-	}
-}
-
-void ColliderManager::EnemyBulletToPlayer(Player* player)
-{
-	for (auto& bullet : enemysBulletsCollider_)
-	{
-		if (Collision::SphereToSphere(player->GetTransform().parentToTranslation, 1.0f, bullet->GetPosition(), 1.0f))
-		{
-			player->HpSub();
-			bullet->OnCollision();
-		}
-	}
-}
-
-void ColliderManager::EnemyToPlayer(Player* player)
-{
-	for (auto& enemys : enemysCollider_)
-	{
-		if (Collision::SphereToSphere(player->GetTransform().parentToTranslation, 1.0f, enemys->GetTrans().translation, enemys->GetColliderSize()))
-		{
-			player->HpSub();
-			enemys->OnCollision();
-		}
-	}
+	objects.clear();
 }
 
 ColliderManager* ColliderManager::GetInstance()

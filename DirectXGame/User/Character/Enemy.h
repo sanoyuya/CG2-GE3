@@ -4,6 +4,7 @@
 #include"Player.h"
 #include"EnemyDeathParticleEmitter.h"
 #include"GameTimer.h"
+#include"Transform.h"
 
 class Enemy :public GameObject
 {
@@ -29,6 +30,12 @@ public:
 	//オブジェクトの名前取得処理
 	virtual std::string GetName() = 0;
 
+	//オブジェクトの当たり判定取得処理
+	virtual const CollisionData& GetCollisionData() = 0;
+
+	//オブジェクトの衝突判定処理
+	virtual void OnCollision() = 0;
+
 	virtual bool GetIsDead() = 0;
 
 	virtual bool GetLockOnFlag() = 0;
@@ -50,13 +57,9 @@ public:
 
 	void SetGameTimer(GameTimer* gameTimer);
 
-	virtual const Transform& GetTrans() = 0;
-
-	virtual const float& GetColliderSize() = 0;
-
 	virtual bool GetSpawnFlag() = 0;
 
 	virtual bool GetDeathAnimationFlag() = 0;
 
-	virtual void OnCollision() = 0;
+	virtual const Transform& GetTrans() = 0;
 };
