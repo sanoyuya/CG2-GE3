@@ -7,6 +7,7 @@ Bullet::Bullet()
 
 Bullet::~Bullet()
 {
+	ColliderManager::GetInstance()->SubCollision(this);
 }
 
 void Bullet::Initialize()
@@ -30,7 +31,6 @@ void Bullet::Update()
 	if (deathTimer_ > maxDeathTime_)
 	{
 		isDead_ = true;
-		ColliderManager::GetInstance()->SubCollision(this);
 	}
 	bulletTrans_.translation += directionVector_ * speed_;
 	bulletTrans_.TransUpdate(camera_);
@@ -95,15 +95,15 @@ void Bullet::SmokeUpdate()
 	smokeEmitter_->Update(camera_);
 }
 
-bool Bullet::GetIsDead()
+const bool Bullet::GetIsDead()
 {
 	return isDead_;
 }
 
 void Bullet::OnCollision()
 {
+	//ColliderManager::GetInstance()->SubCollision(this);
 	isDead_ = true;
-	ColliderManager::GetInstance()->SubCollision(this);
 }
 
 const myMath::Vector3& Bullet::GetPosition()

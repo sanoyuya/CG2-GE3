@@ -3,10 +3,6 @@
 #include"ColliderManager.h"
 #include<imgui.h>
 
-Player::Player()
-{
-}
-
 Player::~Player()
 {
 	ColliderManager::GetInstance()->SubCollision(this);
@@ -73,7 +69,7 @@ void Player::Update()
 	//Transformの更新処理
 	playerTrans_.TransUpdate(camera_);
 
-	collisionData_.center = playerTrans_.translation;
+	collisionData_.center = playerTrans_.parentToTranslation;
 
 	//ローカルの正面ベクトル
 	directionVector_ = reticle_->GetTransform().translation - playerTrans_.translation;
@@ -136,6 +132,11 @@ void Player::OnCollision()
 	damageFlag_ = true;
 }
 
+const bool Player::GetIsDead()
+{
+	return deathFlag_;
+}
+
 void Player::Reset()
 {
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };
@@ -167,11 +168,6 @@ void Player::SetDamageFlag(const bool damageFlag)
 const myMath::Vector3& Player::GetAddTargetPos()
 {
 	return targetPos;
-}
-
-const bool& Player::GetDeathFlag()
-{
-	return deathFlag_;
 }
 
 void Player::SetCamera(Camera* camera)

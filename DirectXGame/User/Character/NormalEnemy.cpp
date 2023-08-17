@@ -1,6 +1,14 @@
 #include "NormalEnemy.h"
 #include"ColliderManager.h"
 
+NormalEnemy::~NormalEnemy()
+{
+	if (deathAnimationFlag_ == false)
+	{
+		ColliderManager::GetInstance()->SubCollision(this);
+	}
+}
+
 void NormalEnemy::Initialize()
 {
 	enemy_ = std::make_unique<Model>();
@@ -86,7 +94,7 @@ void NormalEnemy::SetDeathTimer(const float timer)
 	deathTime_ = timer;
 }
 
-bool NormalEnemy::GetIsDead()
+const bool NormalEnemy::GetIsDead()
 {
 	return isDead_;
 }
@@ -103,9 +111,11 @@ bool NormalEnemy::GetDeathAnimationFlag()
 
 void NormalEnemy::OnCollision()
 {
+	if (deathAnimationFlag_ == false)
+	{
+		emitter_->Create(enemyTrans_.parentToTranslation);
+	}
 	deathAnimationFlag_ = true;
-	ColliderManager::GetInstance()->SubCollision(this);
-	emitter_->Create(enemyTrans_.parentToTranslation);
 }
 
 bool NormalEnemy::GetLockOnFlag()
@@ -180,11 +190,7 @@ void NormalEnemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
 	//€–SŠÔ‚É‚È‚Á‚½‚ç€‚Ê
 	if (deathTime_ <= gameTimer->GetIntTime())
 	{
-		if (deathAnimationFlag_ == false)
-		{
-			emitter_->Create(enemyTrans_.parentToTranslation);
-		}
-		deathAnimationFlag_ = true;
+		isDead_ = true;
 	}
 
 	//€–S‰‰o‚ÌXVˆ—

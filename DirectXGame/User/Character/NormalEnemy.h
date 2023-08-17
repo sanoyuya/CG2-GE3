@@ -5,7 +5,7 @@ class NormalEnemy:public Enemy, public BulletManager
 {
 private:
 
-	std::string name_ = "normalEnemy";
+	std::string name_ = "enemy";
 
 	std::unique_ptr<Model>enemy_;
 	uint32_t enemyTex_ = 0;
@@ -36,7 +36,7 @@ private:
 public:
 
 	NormalEnemy()=default;
-	~NormalEnemy() = default;
+	~NormalEnemy();
 
 	void Initialize();
 
@@ -67,7 +67,7 @@ public://セッター
 
 public://ゲッター
 
-	bool GetIsDead();
+	const bool GetIsDead();
 
 	bool GetSpawnFlag();
 

@@ -61,7 +61,7 @@ void GameScene::Update()
 	SceneChangeAnimation::GetInstance()->ChangeAfter();
 
 	//プレイヤーのHPが0になったらゲームオーバー
-	if (player_->GetDeathFlag()==true)
+	if (player_->GetIsDead()==true)
 	{
 		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
 		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");

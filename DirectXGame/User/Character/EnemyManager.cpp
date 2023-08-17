@@ -16,7 +16,6 @@ void EnemyManager::Initialize(EnemyData& enemyData)
 	for (std::unique_ptr<Enemy>& enemy : enemys_)
 	{
 		enemy->Initialize();
-		//ColliderManager::GetInstance()->AddEnemyCollider(enemy.get());
 		ColliderManager::GetInstance()->AddCollision(enemy.get());
 	}
 }

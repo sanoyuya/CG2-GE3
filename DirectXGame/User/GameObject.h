@@ -31,4 +31,7 @@ public:
 
 	//オブジェクトの衝突判定処理
 	virtual void OnCollision() = 0;
+
+	//死亡フラグの取得
+	virtual const bool GetIsDead() = 0;
 };

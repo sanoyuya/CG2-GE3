@@ -64,7 +64,7 @@ public:
 
 	void SmokeUpdate();
 
-	bool GetIsDead();
+	const bool GetIsDead();
 
 	const myMath::Vector3& GetPosition();
 };

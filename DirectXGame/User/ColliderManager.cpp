@@ -2,6 +2,8 @@
 
 void ColliderManager::Update(Player* player)
 {
+	objects.remove_if([](GameObject* object) { return object->GetIsDead(); });
+
 	for (auto& object1 : objects)
 	{
 		for (auto& object2 : objects)
@@ -38,7 +40,7 @@ void ColliderManager::Update(Player* player)
 					object2->GetCollisionData().center, object2->GetCollisionData().radius))
 				{
 					object1->OnCollision();//player‚Ì’e‚ðÁ–Å‚³‚¹‚é
-					object2->OnCollision();//“G‚ðÁ–Å‚³‚¹‚é
+ 					object2->OnCollision();//“G‚ðÁ–Å‚³‚¹‚é
 				}
 			}
 		}

@@ -59,7 +59,7 @@ private:
 
 public:
 
-	Player();
+	Player() = default;
 	~Player();
 
 	void Initialize();
@@ -75,6 +75,9 @@ public:
 
 	void OnCollision();
 
+	//Ž€–Sƒtƒ‰ƒO‚ÌŽæ“¾
+	const bool GetIsDead();
+
 	void Reset();
 
 	const bool GetDamageFlag();
@@ -86,8 +89,6 @@ public:
 	void SetDamageFlag(const bool damageFlag);
 
 	const myMath::Vector3& GetAddTargetPos();
-
-	const bool& GetDeathFlag();
 
 	void SetCamera(Camera* camera);
 

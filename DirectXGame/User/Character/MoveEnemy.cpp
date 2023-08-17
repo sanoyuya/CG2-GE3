@@ -2,6 +2,14 @@
 #include"PhysicsMath.h"
 #include"ColliderManager.h"
 
+MoveEnemy::~MoveEnemy()
+{
+	if (deathAnimationFlag_ == false)
+	{
+		ColliderManager::GetInstance()->SubCollision(this);
+	}
+}
+
 void MoveEnemy::Initialize()
 {
 	enemy_ = std::make_unique<Model>();
@@ -91,7 +99,7 @@ void MoveEnemy::SetDeathTimer(const float timer)
 	deathTime_ = timer;
 }
 
-bool MoveEnemy::GetIsDead()
+const bool MoveEnemy::GetIsDead()
 {
 	return isDead_;
 }
@@ -108,9 +116,11 @@ bool MoveEnemy::GetDeathAnimationFlag()
 
 void MoveEnemy::OnCollision()
 {
+	if (deathAnimationFlag_ == false)
+	{
+		emitter_->Create(enemyTrans_.parentToTranslation);
+	}
 	deathAnimationFlag_ = true;
-	ColliderManager::GetInstance()->SubCollision(this);
-	emitter_->Create(enemyTrans_.parentToTranslation);
 }
 
 bool MoveEnemy::GetLockOnFlag()
@@ -185,11 +195,7 @@ void MoveEnemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
 	//€–SŠÔ‚É‚È‚Á‚½‚ç€‚Ê
 	if (deathTime_ <= gameTimer->GetIntTime())
 	{
-		if (deathAnimationFlag_ == false)
-		{
-			emitter_->Create(enemyTrans_.parentToTranslation);
-		}
-		deathAnimationFlag_ = true;
+		isDead_ = true;
 	}
 
 	//€–S‰‰o‚ÌXVˆ—
