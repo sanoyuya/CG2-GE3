@@ -54,6 +54,9 @@ public:
 	//オブジェクトの衝突判定処理
 	void OnCollision();
 
+	//死亡アニメーションフラグの取得
+	const bool GetDeathAnimationFlag();
+
 	void SetCamera(Camera* camera);
 	void SetPos(const myMath::Vector3& position);
 	void SetDirectionVector(const myMath::Vector3& directionVector);

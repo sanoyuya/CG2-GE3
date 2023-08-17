@@ -137,6 +137,11 @@ const bool Player::GetIsDead()
 	return deathFlag_;
 }
 
+const bool Player::GetDeathAnimationFlag()
+{
+	return deathAnimation_.get();
+}
+
 void Player::Reset()
 {
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };

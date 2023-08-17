@@ -104,17 +104,14 @@ bool NormalEnemy::GetSpawnFlag()
 	return spawnFlag_;
 }
 
-bool NormalEnemy::GetDeathAnimationFlag()
+const bool NormalEnemy::GetDeathAnimationFlag()
 {
 	return deathAnimationFlag_;
 }
 
 void NormalEnemy::OnCollision()
 {
-	if (deathAnimationFlag_ == false)
-	{
-		emitter_->Create(enemyTrans_.parentToTranslation);
-	}
+	emitter_->Create(enemyTrans_.parentToTranslation);
 	deathAnimationFlag_ = true;
 }
 

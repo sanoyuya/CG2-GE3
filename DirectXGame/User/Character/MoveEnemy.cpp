@@ -109,17 +109,14 @@ bool MoveEnemy::GetSpawnFlag()
 	return spawnFlag_;
 }
 
-bool MoveEnemy::GetDeathAnimationFlag()
+const bool MoveEnemy::GetDeathAnimationFlag()
 {
 	return deathAnimationFlag_;
 }
 
 void MoveEnemy::OnCollision()
 {
-	if (deathAnimationFlag_ == false)
-	{
-		emitter_->Create(enemyTrans_.parentToTranslation);
-	}
+	emitter_->Create(enemyTrans_.parentToTranslation);
 	deathAnimationFlag_ = true;
 }
 

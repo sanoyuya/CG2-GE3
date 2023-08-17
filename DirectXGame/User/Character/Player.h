@@ -78,6 +78,8 @@ public:
 	//Ž€–Sƒtƒ‰ƒO‚ÌŽæ“¾
 	const bool GetIsDead();
 
+	const bool GetDeathAnimationFlag();
+
 	void Reset();
 
 	const bool GetDamageFlag();

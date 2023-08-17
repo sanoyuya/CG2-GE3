@@ -39,6 +39,9 @@ public:
 	//死亡フラグの取得
 	virtual const bool GetIsDead() = 0;
 
+	//死亡アニメーションフラグの取得
+	virtual const bool GetDeathAnimationFlag() = 0;
+
 	virtual bool GetLockOnFlag() = 0;
 
 	//blenderで出力したデータを読み込むときに初期座標をセットする関数
@@ -59,8 +62,6 @@ public:
 	void SetGameTimer(GameTimer* gameTimer);
 
 	virtual bool GetSpawnFlag() = 0;
-
-	virtual bool GetDeathAnimationFlag() = 0;
 
 	virtual const Transform& GetTrans() = 0;
 };

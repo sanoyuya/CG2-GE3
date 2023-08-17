@@ -34,4 +34,7 @@ public:
 
 	//死亡フラグの取得
 	virtual const bool GetIsDead() = 0;
+
+	//死亡アニメーションフラグの取得
+	virtual const bool GetDeathAnimationFlag() = 0;
 };

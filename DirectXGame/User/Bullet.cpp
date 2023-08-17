@@ -56,6 +56,11 @@ const CollisionData& Bullet::GetCollisionData()
 	return collisionData_;
 }
 
+const bool Bullet::GetDeathAnimationFlag()
+{
+	return false;
+}
+
 void Bullet::SetCamera(Camera* camera)
 {
 	camera_ = camera;

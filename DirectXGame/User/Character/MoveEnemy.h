@@ -55,6 +55,9 @@ public:
 	//オブジェクトの衝突判定処理
 	void OnCollision();
 
+	//死亡アニメーションフラグの取得
+	const bool GetDeathAnimationFlag();
+
 public://セッター
 
 	//blenderで出力したデータを読み込むときに初期座標をセットする関数
@@ -73,8 +76,6 @@ public://ゲッター
 	const bool GetIsDead();
 
 	bool GetSpawnFlag();
-
-	bool GetDeathAnimationFlag();
 
 	bool GetLockOnFlag();
 
