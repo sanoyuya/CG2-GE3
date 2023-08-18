@@ -15,4 +15,6 @@ public:
 	void Draw();
 
 	void CreateNormalBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner);
+
+	void CreateLockOnBullet(myMath::Vector3 startPos, myMath::Vector3 targetPos, myMath::Vector3 controlPos);
 };

@@ -17,6 +17,12 @@ void NormalEnemy::Initialize()
 	enemyTrans_.Initialize();
 	enemyTrans_.scale = { 10.0f,10.0f,10.0f };
 
+	lockOnSprite_ = std::make_unique<Sprite>();
+	lockOnTex_ = lockOnSprite_->LoadTexture("Resources/reticle.png");
+	lockOnSprite_->Sprite3DInitialize(lockOnTex_);
+	lockOnTrans_.Initialize();
+	lockOnTrans_.scale = { 1.0f / 5.0f,1.0f / 5.0f ,1.0f / 5.0f };
+
 	// パーティクル生成
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
 	emitter_->Initialize();
@@ -29,6 +35,8 @@ void NormalEnemy::Update()
 	{
 		//敵のモデルの更新処理
 		enemyTrans_.TransUpdate(camera_);
+		lockOnTrans_.translation = enemyTrans_.parentToTranslation;
+		lockOnTrans_.TransUpdate(camera_);
 		//弾の生成処理と更新処理
 		BulletUpdate();
 		//死亡処理
@@ -48,6 +56,10 @@ void NormalEnemy::Draw()
 	if (spawnFlag_ == true && deathAnimationFlag_ == false)
 	{
 		enemy_->DrawModel(&enemyTrans_);
+		if (lockOnFlag == true)
+		{
+			lockOnSprite_->DrawSprite3D(camera_, lockOnTrans_, BillboardFlag::AllBillboard);
+		}
 	}
 	else
 	{
@@ -106,13 +118,18 @@ const bool NormalEnemy::GetDeathAnimationFlag()
 	return deathAnimationFlag_;
 }
 
+void NormalEnemy::LockOn()
+{
+	lockOnFlag = true;
+}
+
 void NormalEnemy::OnCollision()
 {
 	emitter_->Create(enemyTrans_.parentToTranslation);
 	deathAnimationFlag_ = true;
 }
 
-bool NormalEnemy::GetLockOnFlag()
+const bool NormalEnemy::GetLockOnFlag()
 {
 	return lockOnFlag;
 }

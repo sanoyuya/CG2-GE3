@@ -360,9 +360,6 @@
     <ClCompile Include="User\UI\Radar.cpp">
       <Filter>User\ソース ファイル\UI</Filter>
     </ClCompile>
-    <ClCompile Include="User\UI\Reticle.cpp">
-      <Filter>User\ソース ファイル\UI</Filter>
-    </ClCompile>
     <ClCompile Include="User\UI\HPBar.cpp">
       <Filter>User\ソース ファイル\UI</Filter>
     </ClCompile>
@@ -407,6 +404,9 @@
     </ClCompile>
     <ClCompile Include="User\Character\LockOnBullet.cpp">
       <Filter>User\ソース ファイル\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="User\UI\Reticle.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -700,9 +700,6 @@
     <ClInclude Include="User\UI\Radar.h">
       <Filter>User\ヘッダー ファイル\UI</Filter>
     </ClInclude>
-    <ClInclude Include="User\UI\Reticle.h">
-      <Filter>User\ヘッダー ファイル\UI</Filter>
-    </ClInclude>
     <ClInclude Include="User\GameTimer.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
@@ -744,6 +741,9 @@
     </ClInclude>
     <ClInclude Include="User\Character\LockOnBullet.h">
       <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="User\UI\Reticle.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

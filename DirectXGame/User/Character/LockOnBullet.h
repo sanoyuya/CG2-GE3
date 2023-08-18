@@ -64,6 +64,11 @@ public://BulletBaseで必要な奴
 	//死亡アニメーションフラグの取得
 	const bool GetDeathAnimationFlag();
 
+	//ロックオン
+	void LockOn();
+
+	const bool GetLockOnFlag();
+
 	void SetCamera(Camera* camera);
 	void SetPos(const myMath::Vector3& position);
 	void SetDirectionVector(const myMath::Vector3& directionVector);

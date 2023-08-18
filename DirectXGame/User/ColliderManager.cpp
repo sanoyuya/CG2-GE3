@@ -34,6 +34,20 @@ void ColliderManager::Update(Player* player)
 						}
 					}
 				}
+
+				//レティクルと敵の当たり判定
+				if (object1->GetName() == "reticle" && object2->GetName() == "enemy")
+				{
+					if (object2->GetDeathAnimationFlag() == false && object2->GetLockOnFlag() == false)
+					{
+						if (Collision::RayToSphere(object1->GetCollisionData().rayStartPos, object1->GetCollisionData().rayEndPos,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						{
+ 							object2->LockOn();//ロックオン
+							AddLockOnEnemy(object2);
+						}
+					}
+				}
 			}
 
 			//playerの弾と敵の当たり判定
@@ -63,9 +77,25 @@ void ColliderManager::SubCollision(GameObject* object)
 	objects.remove(object);
 }
 
+void ColliderManager::AddLockOnEnemy(GameObject* lockOnEnemy)
+{
+	lockOnEnemys.push_back(lockOnEnemy);
+}
+
+void ColliderManager::ResetLockOnEnemy()
+{
+	lockOnEnemys.clear();
+}
+
+std::vector<GameObject*> ColliderManager::GetLockOnEnemy()
+{
+	return lockOnEnemys;
+}
+
 void ColliderManager::Reset()
 {
 	objects.clear();
+	lockOnEnemys.clear();
 }
 
 ColliderManager* ColliderManager::GetInstance()

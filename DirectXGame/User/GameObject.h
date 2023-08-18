@@ -6,6 +6,9 @@ struct CollisionData
 {
 	myMath::Vector3 center = {};
 	float radius = 0.0f;
+
+	myMath::Vector3 rayStartPos = {};
+	myMath::Vector3 rayEndPos = {};
 };
 
 //オブジェクト基底クラス
@@ -39,4 +42,10 @@ public:
 
 	//死亡アニメーションフラグの取得
 	virtual const bool GetDeathAnimationFlag() = 0;
+
+	//ロックオン
+	virtual void LockOn() = 0;
+
+	//ロックオンフラグの取得
+	virtual const bool GetLockOnFlag() = 0;
 };

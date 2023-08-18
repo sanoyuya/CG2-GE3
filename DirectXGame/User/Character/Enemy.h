@@ -43,7 +43,9 @@ public:
 	//死亡アニメーションフラグの取得
 	virtual const bool GetDeathAnimationFlag() = 0;
 
-	virtual bool GetLockOnFlag() = 0;
+	virtual void LockOn() = 0;
+
+	virtual const bool GetLockOnFlag() = 0;
 
 	//blenderで出力したデータを読み込むときに初期座標をセットする関数
 	virtual void SetPosition(const myMath::Vector3& position) = 0;

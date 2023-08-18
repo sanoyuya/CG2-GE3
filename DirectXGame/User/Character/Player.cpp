@@ -60,10 +60,13 @@ void Player::Update()
 	}
 	else
 	{
+		reticle_->SetCamera(camera_);
 		//レティクルの更新処理
-		reticle_->Update(camera_);
+		reticle_->Update();
 		//自機の移動処理
 		Move();
+		//ロックオン攻撃
+		LockOnAttack();
 	}
 
 	//Transformの更新処理
@@ -99,7 +102,7 @@ void Player::Draw()
 	if (hp_ > 0)
 	{
 		//レティクルの描画
-		reticle_->Draw(camera_);
+		reticle_->Draw();
 		//プレイヤーのモデル描画
 		player_->DrawModel(&playerTrans_);
 		//機体のエンジンから火が出るパーティクルの描画
@@ -139,12 +142,22 @@ const bool Player::GetDeathAnimationFlag()
 	return deathAnimation_.get();
 }
 
+void Player::LockOn()
+{
+}
+
+const bool Player::GetLockOnFlag()
+{
+	return false;
+}
+
 void Player::Reset()
 {
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };
 	hp_ = 10;
 	//レティクルのリセット
 	reticle_->Reset();
+	lockOnAttackFlag = false;
 }
 
 const bool Player::GetDamageFlag()
@@ -248,4 +261,28 @@ void Player::SmokeUpdate(Camera* camera)
 	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
 	//パーティクルの更新
 	smokeEmitter_->Update(camera);
+}
+
+void Player::LockOnAttack()
+{
+	if (input_->KeyboardKeepPush(DIK_SPACE))
+	{
+		lockOnAttackFlag = true;
+	}
+
+	if (lockOnAttackFlag == true)
+	{
+		if (input_->KeyboardTriggerRelease(DIK_SPACE))
+		{
+			for (size_t i = 0; i < ColliderManager::GetInstance()->GetLockOnEnemy().size(); i++)
+			{
+				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRand(playerTrans_.parentToTranslation.x - 5.0f,playerTrans_.parentToTranslation.x + 5.0f)),
+				static_cast<float>(myMath::GetRand(playerTrans_.parentToTranslation.y - 5.0f,playerTrans_.parentToTranslation.y + 5.0f)) ,
+				static_cast<float>(myMath::GetRand(playerTrans_.parentToTranslation.z - 5.0f,playerTrans_.parentToTranslation.z + 5.0f)) };
+				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, ColliderManager::GetInstance()->GetLockOnEnemy()[i]->GetCollisionData().center, controlPoint);
+			}
+			ColliderManager::GetInstance()->ResetLockOnEnemy();
+			lockOnAttackFlag = false;
+		}
+	}
 }

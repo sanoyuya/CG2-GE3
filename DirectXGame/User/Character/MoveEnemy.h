@@ -30,6 +30,9 @@ private:
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
 
 	bool lockOnFlag = false;
+	std::unique_ptr<Sprite>lockOnSprite_;
+	Transform lockOnTrans_;
+	uint32_t lockOnTex_ = 0;
 
 	float time_ = 0.0f;
 	float addY = 0.0f;
@@ -58,6 +61,10 @@ public:
 	//死亡アニメーションフラグの取得
 	const bool GetDeathAnimationFlag();
 
+	void LockOn();
+
+	const bool GetLockOnFlag();
+
 public://セッター
 
 	//blenderで出力したデータを読み込むときに初期座標をセットする関数
@@ -76,8 +83,6 @@ public://ゲッター
 	const bool GetIsDead();
 
 	bool GetSpawnFlag();
-
-	bool GetLockOnFlag();
 
 	const Transform& GetTrans();
 

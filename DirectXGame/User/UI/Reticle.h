@@ -2,12 +2,14 @@
 #include"DrawOversight.h"
 #include"Camera.h"
 #include"InputManager.h"
+#include"GameObject.h"
 
-class Reticle
+class Reticle:public GameObject
 {
 private:
 
 	InputManager* input_ = nullptr;
+	Camera* camera_ = nullptr;
 
 	std::unique_ptr<Sprite>reticle_;
 	Transform reticleTrans_;
@@ -18,22 +20,53 @@ private:
 
 	Transform cameraTrans_;
 
+	std::string name_ = "reticle";
+
+	Transform rayStartTrans_;
+	Transform rayEndTrans_;
+	CollisionData collisionData;
+
 public:
 
 	Reticle() = default;
 	~Reticle() = default;
 
+	//初期化処理
 	void Initialize();
 
-	void Update(Camera* camera);
+	//更新処理
+	void Update();
 
-	void Draw(Camera* camera);
+	//描画処理
+	void Draw();
+
+	//オブジェクトの名前取得処理
+	std::string GetName();
+
+	//オブジェクトの当たり判定取得処理
+	const CollisionData& GetCollisionData();
+
+	//オブジェクトの衝突判定処理
+	void OnCollision();
+
+	//死亡フラグの取得
+	const bool GetIsDead();
+
+	//死亡アニメーションフラグの取得
+	const bool GetDeathAnimationFlag();
+
+	//ロックオンフラグの取得
+	const bool GetLockOnFlag();
+
+	void LockOn();
 
 	void Reset();
 
 	const float GetReticleLimit();
 
 	const Transform& GetTransform();
+
+	void SetCamera(Camera* camera);
 
 private:
 

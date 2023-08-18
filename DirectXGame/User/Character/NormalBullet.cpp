@@ -67,6 +67,15 @@ const bool NormalBullet::GetDeathAnimationFlag()
 	return false;
 }
 
+void NormalBullet::LockOn()
+{
+}
+
+const bool NormalBullet::GetLockOnFlag()
+{
+	return false;
+}
+
 void NormalBullet::SetCamera(Camera* camera)
 {
 	camera_ = camera;

@@ -39,6 +39,11 @@ public://GameObjectで必要な奴
 	//死亡アニメーションフラグの取得
 	virtual const bool GetDeathAnimationFlag() = 0;
 
+	//ロックオン
+	virtual void LockOn() = 0;
+
+	virtual const bool GetLockOnFlag() = 0;
+
 public://Bulletで必要な奴
 	virtual void SetCamera(Camera* camera) = 0;
 	virtual void SetPos(const myMath::Vector3& position) = 0;

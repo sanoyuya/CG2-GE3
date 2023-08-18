@@ -58,6 +58,8 @@ private:
 
 	CollisionData collisionData_;
 
+	bool lockOnAttackFlag = false;
+
 public:
 
 	Player() = default;
@@ -80,6 +82,11 @@ public:
 	const bool GetIsDead();
 
 	const bool GetDeathAnimationFlag();
+
+	void LockOn();
+
+	//ロックオンフラグの取得
+	const bool GetLockOnFlag();
 
 	void Reset();
 
@@ -106,4 +113,6 @@ private:
 	void BulletUpdate();
 
 	void SmokeUpdate(Camera* camera);
+
+	void LockOnAttack();
 };

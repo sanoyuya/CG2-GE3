@@ -68,6 +68,15 @@ const bool LockOnBullet::GetDeathAnimationFlag()
 	return false;
 }
 
+void LockOnBullet::LockOn()
+{
+}
+
+const bool LockOnBullet::GetLockOnFlag()
+{
+	return false;
+}
+
 void LockOnBullet::SetCamera(Camera* camera)
 {
 	camera_ = camera;
@@ -124,7 +133,7 @@ void LockOnBullet::BulletMove()
 	bulletTrans_.translation = myMath::Beziers(startPos_, targetPos_, controlPos_, beziersTime_);
 
 	//ベジエ補間にイージング補間をかける
-	beziersTime_ = static_cast<float>(Easing::EaseInCirc(deathTimer_, 0.0f, 60.0f, 60.0f));
+	beziersTime_ = static_cast<float>(Easing::EaseInCirc(deathTimer_, 0.0f, 30.0f, 30.0f));
 
 	bulletTrans_.TransUpdate(camera_);
 }
