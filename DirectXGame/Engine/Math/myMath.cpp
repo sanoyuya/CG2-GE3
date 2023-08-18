@@ -169,6 +169,26 @@ namespace myMath
 		return get_rand_uni_real(engine);
 	}
 
+	int8_t GetRandPlusOrMinus()
+	{
+		// —”¶¬Ší
+		static std::random_device rand;
+		static std::default_random_engine engine(rand());
+
+		// •ª•z¶¬Ší
+		std::uniform_real_distribution<double> get_rand_uni_real(0, 1);
+
+		// —”‚ğ¶¬
+		if (get_rand_uni_real(engine) <= 0.5f)
+		{
+			return -1;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+
 	// “ñ‚Â‚Ì’l‚ª‚Ù‚Ú“™‚µ‚¢‚©
 	bool Approximately(float a, float b)
 	{

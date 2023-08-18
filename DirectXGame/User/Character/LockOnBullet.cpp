@@ -39,7 +39,7 @@ void LockOnBullet::Update()
 
 void LockOnBullet::Draw()
 {
-	bullet_->DrawModel(&bulletTrans_);
+	bullet_->DrawModel(&bulletTrans_, { 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f });
 	smokeEmitter_->Draw();
 }
 
@@ -130,10 +130,10 @@ void LockOnBullet::SmokeUpdate()
 void LockOnBullet::BulletMove()
 {
 	//弾の移動にベジエ補間をかける
-	bulletTrans_.translation = myMath::Beziers(startPos_, targetPos_, controlPos_, beziersTime_);
+	bulletTrans_.translation = myMath::Beziers(startPos_, targetPos_, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_));
 
 	//ベジエ補間にイージング補間をかける
-	beziersTime_ = static_cast<float>(Easing::EaseInCirc(deathTimer_, 0.0f, 30.0f, 30.0f));
+	beziersTime_ = static_cast<float>(Easing::EaseInOutCubic(deathTimer_, 0.0f, static_cast<float>(maxDeathTime_), static_cast<float>(maxDeathTime_)));
 
 	bulletTrans_.TransUpdate(camera_);
 }

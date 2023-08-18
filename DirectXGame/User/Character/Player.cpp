@@ -265,20 +265,20 @@ void Player::SmokeUpdate(Camera* camera)
 
 void Player::LockOnAttack()
 {
-	if (input_->KeyboardKeepPush(DIK_SPACE))
+	if (input_->KeyboardKeepPush(DIK_SPACE) || input_->ControllerButtonKeepPush(A))
 	{
 		lockOnAttackFlag = true;
 	}
 
 	if (lockOnAttackFlag == true)
 	{
-		if (input_->KeyboardTriggerRelease(DIK_SPACE))
+		if (input_->KeyboardTriggerRelease(DIK_SPACE) || input_->ControllerButtonTriggerRelease(A))
 		{
 			for (size_t i = 0; i < ColliderManager::GetInstance()->GetLockOnEnemy().size(); i++)
 			{
-				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRand(playerTrans_.parentToTranslation.x - 5.0f,playerTrans_.parentToTranslation.x + 5.0f)),
-				static_cast<float>(myMath::GetRand(playerTrans_.parentToTranslation.y - 5.0f,playerTrans_.parentToTranslation.y + 5.0f)) ,
-				static_cast<float>(myMath::GetRand(playerTrans_.parentToTranslation.z - 5.0f,playerTrans_.parentToTranslation.z + 5.0f)) };
+				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRandPlusOrMinus() *myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)),
+				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) ,
+				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) };
 				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, ColliderManager::GetInstance()->GetLockOnEnemy()[i]->GetCollisionData().center, controlPoint);
 			}
 			ColliderManager::GetInstance()->ResetLockOnEnemy();

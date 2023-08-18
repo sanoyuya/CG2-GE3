@@ -110,6 +110,8 @@ namespace myMath
 	/// <param name="max">Å‘å’l</param>
 	double GetRand(double min, double max);
 
+	int8_t GetRandPlusOrMinus();
+
 	/// <summary>
 	/// “ñ‚Â‚Ì’l‚ª‚Ù‚Ú“™‚µ‚¢‚©
 	/// </summary>
