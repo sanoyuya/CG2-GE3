@@ -1,16 +1,12 @@
-#include "Bullet.h"
+#include "NormalBullet.h"
 #include"ColliderManager.h"
 
-Bullet::Bullet()
-{
-}
-
-Bullet::~Bullet()
+NormalBullet::~NormalBullet()
 {
 	ColliderManager::GetInstance()->SubCollision(this);
 }
 
-void Bullet::Initialize()
+void NormalBullet::Initialize()
 {
 	bullet_ = std::make_unique<Model>();
 	bulletTex_ = bullet_->CreateObjModel("Resources/sphere");
@@ -25,7 +21,7 @@ void Bullet::Initialize()
 	collisionData_.radius = 1.0f;
 }
 
-void Bullet::Update()
+void NormalBullet::Update()
 {
 	deathTimer_++;
 	if (deathTimer_ > maxDeathTime_)
@@ -40,53 +36,63 @@ void Bullet::Update()
 	SmokeUpdate();
 }
 
-void Bullet::Draw()
+void NormalBullet::Draw()
 {
 	bullet_->DrawModel(&bulletTrans_);
 	smokeEmitter_->Draw();
 }
 
-std::string Bullet::GetName()
+std::string NormalBullet::GetName()
 {
 	return name_;
 }
 
-const CollisionData& Bullet::GetCollisionData()
+const CollisionData& NormalBullet::GetCollisionData()
 {
 	return collisionData_;
 }
 
-const bool Bullet::GetDeathAnimationFlag()
+void NormalBullet::OnCollision()
+{
+	isDead_ = true;
+}
+
+const bool NormalBullet::GetIsDead()
+{
+	return isDead_;
+}
+
+const bool NormalBullet::GetDeathAnimationFlag()
 {
 	return false;
 }
 
-void Bullet::SetCamera(Camera* camera)
+void NormalBullet::SetCamera(Camera* camera)
 {
 	camera_ = camera;
 }
 
-void Bullet::SetPos(const myMath::Vector3& position)
+void NormalBullet::SetPos(const myMath::Vector3& position)
 {
 	bulletTrans_.translation = position;
 }
 
-void Bullet::SetDirectionVector(const myMath::Vector3& directionVector)
+void NormalBullet::SetDirectionVector(const myMath::Vector3& directionVector)
 {
 	directionVector_ = directionVector;
 }
 
-void Bullet::SetOwner(BulletOwner owner)
+void NormalBullet::SetOwner(BulletOwner owner)
 {
 	owner_ = owner;
 }
 
-void Bullet::SetName(const std::string& name)
+void NormalBullet::SetName(const std::string& name)
 {
 	name_ = name;
 }
 
-void Bullet::SmokeUpdate()
+void NormalBullet::SmokeUpdate()
 {
 	//エンジンの座標に合わせるため、モデルの中心座標から位置をずらせるように子を作成
 	smokeTrans_.parent = &bulletTrans_;
@@ -98,20 +104,4 @@ void Bullet::SmokeUpdate()
 	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
 	//パーティクルの更新
 	smokeEmitter_->Update(camera_);
-}
-
-const bool Bullet::GetIsDead()
-{
-	return isDead_;
-}
-
-void Bullet::OnCollision()
-{
-	//ColliderManager::GetInstance()->SubCollision(this);
-	isDead_ = true;
-}
-
-const myMath::Vector3& Bullet::GetPosition()
-{
-	return bulletTrans_.translation;
 }

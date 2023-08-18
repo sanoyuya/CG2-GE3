@@ -101,6 +101,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Character\NormalBullet.cpp" />
+    <ClCompile Include="User\BulletBase.cpp" />
     <ClCompile Include="User\Character\MoveEnemy.cpp" />
     <ClCompile Include="User\Particle\EnemySpawnParticleEmitter.cpp" />
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp" />
@@ -124,7 +126,6 @@
     <ClCompile Include="User\PlayerDamageEffect.cpp" />
     <ClCompile Include="User\ColliderManager.cpp" />
     <ClCompile Include="User\Character\EnemyManager.cpp" />
-    <ClCompile Include="User\Bullet.cpp" />
     <ClCompile Include="User\RailCamera.cpp" />
     <ClCompile Include="User\Character\Player.cpp" />
     <ClCompile Include="User\Character\Enemy.cpp" />
@@ -335,6 +336,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Character\NormalBullet.h" />
+    <ClInclude Include="User\BulletBase.h" />
     <ClInclude Include="User\Character\MoveEnemy.h" />
     <ClInclude Include="User\Particle\EnemySpawnParticleEmitter.h" />
     <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h" />
@@ -359,7 +362,6 @@
     <ClInclude Include="User\PlayerDamageEffect.h" />
     <ClInclude Include="User\ColliderManager.h" />
     <ClInclude Include="User\Character\EnemyManager.h" />
-    <ClInclude Include="User\Bullet.h" />
     <ClInclude Include="User\RailCamera.h" />
     <ClInclude Include="User\Character\Player.h" />
     <ClInclude Include="User\Character\Enemy.h" />

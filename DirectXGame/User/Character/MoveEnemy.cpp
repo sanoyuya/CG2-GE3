@@ -37,13 +37,13 @@ void MoveEnemy::Update()
 		//“G‚Ìƒ‚ƒfƒ‹‚ÌXVˆ—
 		enemyTrans_.TransUpdate(camera_);
 		//’e‚Ì¶¬ˆ—‚ÆXVˆ—
-		BulletUpdate(camera_);
+		BulletUpdate();
 		//€–Sˆ—
-		DeathUpdate(camera_, gameTimer_);
+		DeathUpdate();
 	}
 	else
 	{
-		SpawnUpdate(camera_, gameTimer_);
+		SpawnUpdate();
 	}
 }
 
@@ -59,9 +59,6 @@ void MoveEnemy::Draw()
 		//€–S‰‰o‚Ì•`‰æˆ—
 		emitter_->Draw();
 	}
-
-	//’e‚Ì•`‰æˆ—
-	BulletDraw();
 }
 
 std::string MoveEnemy::GetName()
@@ -130,7 +127,7 @@ const Transform& MoveEnemy::GetTrans()
 	return enemyTrans_;
 }
 
-void MoveEnemy::BulletUpdate(Camera* camera)
+void MoveEnemy::BulletUpdate()
 {
 	myMath::Vector3 frontVec = player_->GetTransform().parentToTranslation - enemyTrans_.translation;
 	frontVec = frontVec.normalization();
@@ -144,30 +141,19 @@ void MoveEnemy::BulletUpdate(Camera* camera)
 		{
 			if (75.0f >= length)
 			{
-				CreateBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+				bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 			}
 
 			bulletTimer = 0.0f;
 		}
 	}
-
-	//’e‚ÌXVˆ—
-	BulletManager::BulletUpdate(camera);
 }
 
-void MoveEnemy::BulletDraw()
+void MoveEnemy::SpawnUpdate()
 {
-	for (const std::unique_ptr<Bullet>& bullet : bullets_)
+	if (spawnTime_ <= gameTimer_->GetIntTime())
 	{
-		bullet->Draw();//’e‚Ì•`‰æ
-	}
-}
-
-void MoveEnemy::SpawnUpdate(Camera* camera, GameTimer* gameTimer)
-{
-	if (spawnTime_ <= gameTimer->GetIntTime())
-	{
-		enemyTrans_.TransUpdate(camera);
+		enemyTrans_.TransUpdate(camera_);
 		if (spawnAnimationFlag_ == false)
 		{
 			emitter_->Create(enemyTrans_.parentToTranslation);
@@ -177,7 +163,7 @@ void MoveEnemy::SpawnUpdate(Camera* camera, GameTimer* gameTimer)
 
 	if (spawnAnimationFlag_ == true)
 	{
-		emitter_->Update(camera);
+		emitter_->Update(camera_);
 		spawnAnimationTimer_++;
 	}
 
@@ -187,10 +173,10 @@ void MoveEnemy::SpawnUpdate(Camera* camera, GameTimer* gameTimer)
 	}
 }
 
-void MoveEnemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
+void MoveEnemy::DeathUpdate()
 {
 	//€–SŠÔ‚É‚È‚Á‚½‚ç€‚Ê
-	if (deathTime_ <= gameTimer->GetIntTime())
+	if (deathTime_ <= gameTimer_->GetIntTime())
 	{
 		isDead_ = true;
 	}
@@ -198,7 +184,7 @@ void MoveEnemy::DeathUpdate(Camera* camera, GameTimer* gameTimer)
 	//€–S‰‰o‚ÌXVˆ—
 	if (deathAnimationFlag_ == true)
 	{
-		emitter_->Update(camera);
+		emitter_->Update(camera_);
 		deathAnimationTimer_++;
 	}
 

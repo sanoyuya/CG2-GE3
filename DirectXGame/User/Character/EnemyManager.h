@@ -25,7 +25,7 @@ public:
 
 	void Initialize(EnemyData& enemyData);
 
-	void Update(Camera* camera,Player* player, GameTimer* gameTimer);
+	void Update(Camera* camera,Player* player, GameTimer* gameTimer, BulletManager* bulletManager);
 
 	void Draw();
 

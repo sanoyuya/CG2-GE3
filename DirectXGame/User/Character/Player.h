@@ -18,12 +18,13 @@ struct PlayerData
 	myMath::Vector3 scale;
 };
 
-class Player:public GameObject, public BulletManager
+class Player:public GameObject
 {
 private:
 
 	InputManager* input_ = nullptr;
 	Camera* camera_ = nullptr;
+	BulletManager* bulletManager_ = nullptr;
 
 	std::string name_ = "player";
 
@@ -94,15 +95,15 @@ public:
 
 	void SetCamera(Camera* camera);
 
+	void SetBulletManager(BulletManager* bulletManager);
+
 private:
 
 	void Move();
 
 	void Rotation(Camera* camera);
 
-	void BulletUpdate(Camera* camera);
-
-	void BulletDraw();
+	void BulletUpdate();
 
 	void SmokeUpdate(Camera* camera);
 };

@@ -160,6 +160,18 @@
     <Filter Include="User\ソース ファイル\Object">
       <UniqueIdentifier>{06c67e16-a22f-44bb-b1a5-8837b7bc669e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\Object\Bullet">
+      <UniqueIdentifier>{2044a206-4123-453d-8394-411a1ffcd958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Object\Bullet">
+      <UniqueIdentifier>{06f73f22-8819-4055-b27c-734b500186a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Object\Enemy">
+      <UniqueIdentifier>{2060a3c3-8208-4e86-abc0-962719b5285a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ソース ファイル\Object\Enemy">
+      <UniqueIdentifier>{77a267b7-7ed6-48ec-86f1-35c51d3c057c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -363,22 +375,7 @@
     <ClCompile Include="User\Scene\DemoScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\Character\Enemy.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
     <ClCompile Include="User\Character\Player.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Character\NormalEnemy.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Character\EnemyManager.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Bullet.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="User\BulletManager.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp">
@@ -387,8 +384,26 @@
     <ClCompile Include="User\Particle\EnemySpawnParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="User\BulletBase.cpp">
+      <Filter>User\ソース ファイル\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="User\BulletManager.cpp">
+      <Filter>User\ソース ファイル\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\NormalBullet.cpp">
+      <Filter>User\ソース ファイル\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\Enemy.cpp">
+      <Filter>User\ソース ファイル\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\EnemyManager.cpp">
+      <Filter>User\ソース ファイル\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Character\NormalEnemy.cpp">
+      <Filter>User\ソース ファイル\Object\Enemy</Filter>
+    </ClCompile>
     <ClCompile Include="User\Character\MoveEnemy.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
+      <Filter>User\ソース ファイル\Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -694,22 +709,7 @@
     <ClInclude Include="User\Character\Player.h">
       <Filter>User\ヘッダー ファイル\Object</Filter>
     </ClInclude>
-    <ClInclude Include="User\Character\Enemy.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Character\NormalEnemy.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Character\EnemyManager.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Bullet.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
     <ClInclude Include="User\GameObject.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="User\BulletManager.h">
       <Filter>User\ヘッダー ファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h">
@@ -718,8 +718,26 @@
     <ClInclude Include="User\Particle\EnemySpawnParticleEmitter.h">
       <Filter>User\ヘッダー ファイル\Particle</Filter>
     </ClInclude>
+    <ClInclude Include="User\BulletBase.h">
+      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="User\BulletManager.h">
+      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\NormalBullet.h">
+      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\Enemy.h">
+      <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\EnemyManager.h">
+      <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="User\Character\MoveEnemy.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
+      <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\NormalEnemy.h">
+      <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

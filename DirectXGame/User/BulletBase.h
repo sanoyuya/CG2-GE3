@@ -1,20 +1,19 @@
 #pragma once
-#include"myMath.h"
-#include <string>
+#include"GameObject.h"
+#include"Camera.h"
 
-struct CollisionData
+enum class BulletOwner
 {
-	myMath::Vector3 center = {};
-	float radius = 0.0f;
+	Player,
+	Enemy
 };
 
-//オブジェクト基底クラス
-class GameObject
+class BulletBase :public GameObject
 {
-public:
+public://GameObjectで必要な奴
 
 	//デストラクタ
-	virtual ~GameObject() = default;
+	virtual ~BulletBase() = default;
 
 	//初期化処理
 	virtual void Initialize() = 0;
@@ -39,4 +38,11 @@ public:
 
 	//死亡アニメーションフラグの取得
 	virtual const bool GetDeathAnimationFlag() = 0;
+
+public://Bulletで必要な奴
+	virtual void SetCamera(Camera* camera) = 0;
+	virtual void SetPos(const myMath::Vector3& position) = 0;
+	virtual void SetDirectionVector(const myMath::Vector3& directionVector) = 0;
+	virtual void SetOwner(BulletOwner owner) = 0;
+	virtual void SetName(const std::string& name) = 0;
 };

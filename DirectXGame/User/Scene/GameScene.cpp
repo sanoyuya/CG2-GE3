@@ -41,6 +41,8 @@ void GameScene::Initialize()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
 
+	bulletManager_ = std::make_unique<BulletManager>();
+
 	radar_= std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
 
@@ -94,12 +96,14 @@ void GameScene::Update()
 	
 	gameTimer_->Update();
 	player_->SetCamera(camera_->GetCameraPtr());
+	player_->SetBulletManager(bulletManager_.get());
 	player_->Update();
 	camera_->Update(player_.get());
 	gameLevelData_->Update(camera_->GetCameraPtr());
 	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
 	playerDamageEffect_->Update(player_.get());
-	enemyManager_->Update(camera_->GetCameraPtr(), player_.get(),gameTimer_.get());
+	enemyManager_->Update(camera_->GetCameraPtr(), player_.get(),gameTimer_.get(), bulletManager_.get());
+	bulletManager_->Update(camera_->GetCameraPtr());
 	ColliderManager::GetInstance()->Update(player_.get());
 	radar_->Update(camera_->GetCameraPtr());
 }
@@ -110,6 +114,7 @@ void GameScene::Draw()
 	gameLevelData_->Draw();
 	enemyManager_->Draw();
 	player_->Draw();
+	bulletManager_->Draw();
 	radar_->Draw(enemyManager_.get(),player_.get());
 	SceneChangeAnimation::GetInstance()->Draw();
 }

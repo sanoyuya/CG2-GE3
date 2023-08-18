@@ -1,7 +1,7 @@
 #pragma once
 #include"Enemy.h"
 
-class NormalEnemy:public Enemy, public BulletManager
+class NormalEnemy:public Enemy
 {
 private:
 
@@ -80,12 +80,9 @@ public://ÉQÉbÉ^Å[
 
 private:
 
-	void BulletUpdate(Camera* camera);
+	void BulletUpdate();
 
-	void BulletDraw();
+	void SpawnUpdate();
 
-	void SpawnUpdate(Camera* camera, GameTimer* gameTimer);
-
-	void DeathUpdate(Camera* camera, GameTimer* gameTimer);
+	void DeathUpdate();
 };
-

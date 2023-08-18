@@ -12,6 +12,7 @@
 #include"PlayerDamageEffect.h"
 #include"Radar.h"
 #include"GameTimer.h"
+#include"BulletManager.h"
 
 class GameScene :public BaseScene
 {
@@ -38,6 +39,8 @@ private:
 	std::unique_ptr<PlayerDamageEffect>playerDamageEffect_;
 
 	std::unique_ptr<EnemyManager>enemyManager_;
+
+	std::unique_ptr<BulletManager>bulletManager_;
 
 	std::unique_ptr<Radar>radar_;
 

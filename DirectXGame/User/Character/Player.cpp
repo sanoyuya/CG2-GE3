@@ -85,7 +85,7 @@ void Player::Update()
 	Rotation(camera_);
 
 	//弾の更新処理
-	BulletUpdate(camera_);
+	BulletUpdate();
 	//エンジンの煙の更新処理
 	SmokeUpdate(camera_);
 	//死亡演出のパーティクルの更新処理
@@ -96,9 +96,6 @@ void Player::Update()
 
 void Player::Draw()
 {
-	//弾の描画
-	BulletDraw();
-
 	if (hp_ > 0)
 	{
 		//レティクルの描画
@@ -180,6 +177,11 @@ void Player::SetCamera(Camera* camera)
 	camera_ = camera;
 }
 
+void Player::SetBulletManager(BulletManager* bulletManager)
+{
+	bulletManager_ = bulletManager;
+}
+
 void Player::Move()
 {
 	//先に補間先の座標を定義する
@@ -222,27 +224,15 @@ void Player::Rotation(Camera* camera)
 	ImGui::End();
 }
 
-void Player::BulletUpdate(Camera* camera)
+void Player::BulletUpdate()
 {
 	if (hp_ > 0)
 	{
 		if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 		{
 			//弾の作成
-			CreateBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
+			bulletManager_->CreateNormalBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
 		}
-	}
-
-	//弾の更新処理
-	BulletManager::BulletUpdate(camera);
-}
-
-void Player::BulletDraw()
-{
-	for (const std::unique_ptr<Bullet>& bullet : bullets_)
-	{
-		//弾の描画
-		bullet->Draw();
 	}
 }
 

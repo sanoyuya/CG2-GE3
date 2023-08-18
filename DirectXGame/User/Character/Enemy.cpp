@@ -14,3 +14,8 @@ void Enemy::SetGameTimer(GameTimer* gameTimer)
 {
 	gameTimer_ = gameTimer;
 }
+
+void Enemy::SetBulletManager(BulletManager* bulletManager)
+{
+	bulletManager_ = bulletManager;
+}

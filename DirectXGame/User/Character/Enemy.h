@@ -13,6 +13,7 @@ protected:
 	Camera* camera_ = nullptr;
 	Player* player_ = nullptr;
 	GameTimer* gameTimer_ = nullptr;
+	BulletManager* bulletManager_ = nullptr;
 
 public:
 
@@ -60,6 +61,8 @@ public:
 	void SetPlayer(Player* player);
 
 	void SetGameTimer(GameTimer* gameTimer);
+
+	void SetBulletManager(BulletManager* bulletManager);
 
 	virtual bool GetSpawnFlag() = 0;
 

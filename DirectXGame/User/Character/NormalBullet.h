@@ -1,15 +1,9 @@
 #pragma once
+#include"BulletBase.h"
 #include"DrawOversight.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
-#include"GameObject.h"
 
-enum class BulletOwner
-{
-	Player,
-	Enemy
-};
-
-class Bullet:public GameObject
+class NormalBullet :public BulletBase
 {
 private:
 
@@ -35,17 +29,21 @@ private:
 
 	CollisionData collisionData_;
 
-public:
+public://BulletBaseで必要な奴
 
-	Bullet();
-	~Bullet();
+	//デストラクタ
+	~NormalBullet();
 
+	//初期化処理
 	void Initialize();
 
+	//更新処理
 	void Update();
 
+	//描画処理
 	void Draw();
 
+	//オブジェクトの名前取得処理
 	std::string GetName();
 
 	//オブジェクトの当たり判定取得処理
@@ -53,6 +51,9 @@ public:
 
 	//オブジェクトの衝突判定処理
 	void OnCollision();
+
+	//死亡フラグの取得
+	const bool GetIsDead();
 
 	//死亡アニメーションフラグの取得
 	const bool GetDeathAnimationFlag();
@@ -63,11 +64,7 @@ public:
 	void SetOwner(BulletOwner owner);
 	void SetName(const std::string& name);
 
-public:
+private:
 
 	void SmokeUpdate();
-
-	const bool GetIsDead();
-
-	const myMath::Vector3& GetPosition();
 };

@@ -20,7 +20,7 @@ void EnemyManager::Initialize(EnemyData& enemyData)
 	}
 }
 
-void EnemyManager::Update(Camera* camera, Player* player, GameTimer* gameTimer)
+void EnemyManager::Update(Camera* camera, Player* player, GameTimer* gameTimer, BulletManager* bulletManager)
 {
 	enemys_.remove_if([](std::unique_ptr<Enemy>& enemy) { return enemy->GetIsDead(); });
 	for (const std::unique_ptr<Enemy>& enemy : enemys_)
@@ -28,6 +28,7 @@ void EnemyManager::Update(Camera* camera, Player* player, GameTimer* gameTimer)
 		enemy->SetCamera(camera);
 		enemy->SetPlayer(player);
 		enemy->SetGameTimer(gameTimer);
+		enemy->SetBulletManager(bulletManager);
 		enemy->Update();
 	}
 }
