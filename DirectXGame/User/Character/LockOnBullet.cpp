@@ -81,10 +81,12 @@ void LockOnBullet::SetPos(const myMath::Vector3& position)
 
 void LockOnBullet::SetDirectionVector(const myMath::Vector3& directionVector)
 {
+	directionVector;
 }
 
 void LockOnBullet::SetOwner(BulletOwner owner)
 {
+	owner_ = owner;
 }
 
 void LockOnBullet::SetName(const std::string& name)

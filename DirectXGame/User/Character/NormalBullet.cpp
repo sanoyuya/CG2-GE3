@@ -94,10 +94,12 @@ void NormalBullet::SetName(const std::string& name)
 
 void NormalBullet::SetTargetPos(const myMath::Vector3& position)
 {
+	position;
 }
 
 void NormalBullet::SetControlPos(const myMath::Vector3& position)
 {
+	position;
 }
 
 void NormalBullet::SmokeUpdate()
