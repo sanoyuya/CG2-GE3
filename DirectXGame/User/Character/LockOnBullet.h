@@ -3,13 +3,13 @@
 #include"DrawOversight.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
 
-class NormalBullet :public BulletBase
+class LockOnBullet :public BulletBase
 {
 private:
 
 	Camera* camera_ = nullptr;
 
-	std::string name_ = "bullet";
+	std::string name_ = "playerBullet";
 
 	bool isDead_ = false;
 	uint8_t deathTimer_ = 0;
@@ -29,10 +29,16 @@ private:
 
 	CollisionData collisionData_;
 
+	myMath::Vector3 startPos_ = {};
+	myMath::Vector3 targetPos_ = {};
+	myMath::Vector3 controlPos_ = {};
+
+	float beziersTime_ = 0.0f;
+
 public://BulletBaseで必要な奴
 
 	//デストラクタ
-	~NormalBullet();
+	~LockOnBullet();
 
 	//初期化処理
 	void Initialize();
@@ -69,4 +75,6 @@ public://BulletBaseで必要な奴
 private:
 
 	void SmokeUpdate();
+
+	void BulletMove();
 };

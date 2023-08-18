@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Character\LockOnBullet.cpp" />
     <ClCompile Include="User\Character\NormalBullet.cpp" />
     <ClCompile Include="User\BulletBase.cpp" />
     <ClCompile Include="User\Character\MoveEnemy.cpp" />
@@ -336,6 +337,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Character\LockOnBullet.h" />
     <ClInclude Include="User\Character\NormalBullet.h" />
     <ClInclude Include="User\BulletBase.h" />
     <ClInclude Include="User\Character\MoveEnemy.h" />

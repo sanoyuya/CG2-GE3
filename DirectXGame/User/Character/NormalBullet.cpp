@@ -92,6 +92,14 @@ void NormalBullet::SetName(const std::string& name)
 	name_ = name;
 }
 
+void NormalBullet::SetTargetPos(const myMath::Vector3& position)
+{
+}
+
+void NormalBullet::SetControlPos(const myMath::Vector3& position)
+{
+}
+
 void NormalBullet::SmokeUpdate()
 {
 	//エンジンの座標に合わせるため、モデルの中心座標から位置をずらせるように子を作成

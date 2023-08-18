@@ -405,6 +405,9 @@
     <ClCompile Include="User\Character\MoveEnemy.cpp">
       <Filter>User\ソース ファイル\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="User\Character\LockOnBullet.cpp">
+      <Filter>User\ソース ファイル\Object\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -738,6 +741,9 @@
     </ClInclude>
     <ClInclude Include="User\Character\NormalEnemy.h">
       <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Character\LockOnBullet.h">
+      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

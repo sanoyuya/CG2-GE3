@@ -45,4 +45,6 @@ public://Bullet‚Å•K—v‚È“z
 	virtual void SetDirectionVector(const myMath::Vector3& directionVector) = 0;
 	virtual void SetOwner(BulletOwner owner) = 0;
 	virtual void SetName(const std::string& name) = 0;
+	virtual void SetTargetPos(const myMath::Vector3& position) = 0;
+	virtual void SetControlPos(const myMath::Vector3& position) = 0;
 };
