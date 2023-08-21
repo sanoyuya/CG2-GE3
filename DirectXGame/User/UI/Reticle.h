@@ -15,15 +15,12 @@ private:
 	Transform reticleTrans_;
 	uint32_t reticleTex_ = 0;
 
-	const float reticleSpeed_ = 0.5f;
-	const float reticleLimit_ = 15.0f;
+	const float reticleSpeed_ = 1.5f;
+	const float reticleLimit_ = 45.0f;
 
 	Transform cameraTrans_;
 
 	std::string name_ = "reticle";
-
-	Transform rayStartTrans_;
-	Transform rayEndTrans_;
 	CollisionData collisionData;
 
 public:

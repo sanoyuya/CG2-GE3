@@ -8,6 +8,10 @@ MoveEnemy::~MoveEnemy()
 	{
 		ColliderManager::GetInstance()->SubCollision(this);
 	}
+	if (lockOnFlag == true)
+	{
+		ColliderManager::GetInstance()->SubLockOnEnemy(this);
+	}
 }
 
 void MoveEnemy::Initialize()

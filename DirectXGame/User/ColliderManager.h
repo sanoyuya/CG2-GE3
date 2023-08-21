@@ -12,7 +12,7 @@ private:
 
 	std::list<GameObject*>objects;
 
-	std::vector<GameObject*>lockOnEnemys;
+	std::list<GameObject*>lockOnEnemys;
 
 public:
 
@@ -22,7 +22,8 @@ public:
 	void SubCollision(GameObject* object);
 
 	void ResetLockOnEnemy();
-	std::vector<GameObject*> GetLockOnEnemy();
+	std::list<GameObject*> GetLockOnEnemy();
+	void SubLockOnEnemy(GameObject* lockOnEnemy);
 
 	void Reset();
 

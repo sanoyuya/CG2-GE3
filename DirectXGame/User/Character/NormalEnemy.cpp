@@ -7,6 +7,10 @@ NormalEnemy::~NormalEnemy()
 	{
 		ColliderManager::GetInstance()->SubCollision(this);
 	}
+	if (lockOnFlag == true)
+	{
+		ColliderManager::GetInstance()->SubLockOnEnemy(this);
+	}
 }
 
 void NormalEnemy::Initialize()

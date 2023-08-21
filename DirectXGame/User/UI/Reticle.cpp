@@ -11,15 +11,8 @@ void Reticle::Initialize()
 	reticleTex_ = reticle_->LoadTexture("Resources/reticle.png");
 	reticle_->Sprite3DInitialize(reticleTex_);
 	reticleTrans_.Initialize();
-	reticleTrans_.translation = { 0.0f,-reticleLimit_,30.0f };
-	reticleTrans_.scale = { 0.125f,0.125f,1.0f };
-
-	rayStartTrans_.Initialize();
-	rayStartTrans_.parent = &reticleTrans_;
-	rayStartTrans_.translation = { 0.0f ,0.0f ,-30.0f };
-	rayEndTrans_.Initialize();
-	rayEndTrans_.parent = &reticleTrans_;
-	rayEndTrans_.translation = { 0.0f ,0.0f ,1000.0f };
+	reticleTrans_.translation = { 0.0f,-reticleLimit_,100.0f };
+	reticleTrans_.scale = { 0.25f,0.25f,1.0f };
 
 	ColliderManager::GetInstance()->AddCollision(this);
 }
@@ -57,11 +50,9 @@ void Reticle::Update()
 
 	//スプライトの更新処理
 	reticleTrans_.TransUpdate(camera_);
-	rayStartTrans_.TransUpdate(camera_);
-	rayEndTrans_.TransUpdate(camera_);
 
-	collisionData.rayStartPos = rayStartTrans_.parentToTranslation;
-	collisionData.rayEndPos = rayEndTrans_.parentToTranslation;
+	collisionData.rayStartPos = camera_->GetEye();
+	collisionData.rayEndPos = reticleTrans_.parentToTranslation;
 }
 
 void Reticle::Draw()
@@ -85,7 +76,7 @@ void Reticle::LockOn()
 
 void Reticle::Reset()
 {
-	reticleTrans_.translation = { 0.0f,-reticleLimit_,30.0f };
+	reticleTrans_.translation = { 0.0f,-reticleLimit_,100.0f };
 }
 
 const float Reticle::GetReticleLimit()

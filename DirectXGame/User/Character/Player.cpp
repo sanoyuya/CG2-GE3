@@ -21,7 +21,7 @@ void Player::Initialize()
 	playerTex_ = player_->CreateObjModel("Resources/F-35E");
 	player_->SetModel(playerTex_);
 	playerTrans_.Initialize();
-	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };
+	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,10.0f };
 	playerTrans_.scale = { 0.5f,0.5f,0.5f };
 	cameraTrans_.Initialize();
 
@@ -148,12 +148,12 @@ void Player::LockOn()
 
 const bool Player::GetLockOnFlag()
 {
-	return false;
+	return lockOnAttackFlag;
 }
 
 void Player::Reset()
 {
-	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 3,10.0f };
+	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,10.0f };
 	hp_ = 10;
 	//レティクルのリセット
 	reticle_->Reset();
@@ -198,8 +198,8 @@ void Player::SetBulletManager(BulletManager* bulletManager)
 void Player::Move()
 {
 	//先に補間先の座標を定義する
-	float reticleX = reticle_->GetTransform().translation.x / 2;
-	float reticleY = reticle_->GetTransform().translation.y / 2;
+	float reticleX = reticle_->GetTransform().translation.x / 6;
+	float reticleY = reticle_->GetTransform().translation.y / 6;
 	//そのまま移動させると動きが硬いので補完する
 	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
 	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
@@ -211,7 +211,7 @@ void Player::Rotation(Camera* camera)
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-	float angleZ = -(reticle_->GetTransform().translation.x / 2 - playerTrans_.translation.x) / 5.0f;
+	float angleZ = -(reticle_->GetTransform().translation.x / 6 - playerTrans_.translation.x) / 5.0f;
 	//モデルのZ軸回転
 	PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 
@@ -274,12 +274,12 @@ void Player::LockOnAttack()
 	{
 		if (input_->KeyboardTriggerRelease(DIK_SPACE) || input_->ControllerButtonTriggerRelease(A))
 		{
-			for (size_t i = 0; i < ColliderManager::GetInstance()->GetLockOnEnemy().size(); i++)
+			for (auto& lockOnEnemy : ColliderManager::GetInstance()->GetLockOnEnemy())
 			{
 				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRandPlusOrMinus() *myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)),
 				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) ,
 				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) };
-				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, ColliderManager::GetInstance()->GetLockOnEnemy()[i]->GetCollisionData().center, controlPoint);
+				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, lockOnEnemy->GetCollisionData().center, controlPoint);
 			}
 			ColliderManager::GetInstance()->ResetLockOnEnemy();
 			lockOnAttackFlag = false;
