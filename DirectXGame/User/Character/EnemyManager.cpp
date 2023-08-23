@@ -11,6 +11,7 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Initialize(EnemyData& enemyData)
 {
+	//“G‚ğjsonƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚Ş
 	Load(enemyData);
 
 	for (std::unique_ptr<Enemy>& enemy : enemys_)

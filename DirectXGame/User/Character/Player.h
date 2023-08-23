@@ -115,4 +115,6 @@ private:
 	void SmokeUpdate(Camera* camera);
 
 	void LockOnAttack();
+
+	void ImGuiUpdate();
 };

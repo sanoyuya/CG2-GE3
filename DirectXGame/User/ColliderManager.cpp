@@ -44,7 +44,7 @@ void ColliderManager::Update(Player* player)
 							object2->GetCollisionData().center, object2->GetCollisionData().radius))
 						{
 							object2->LockOn();//ロックオン
-							AddLockOnEnemy(object2);
+							AddLockOnEnemy(object2);//ロックオン敵listに敵を追加
 						}
 					}
 				}

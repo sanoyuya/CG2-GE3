@@ -40,6 +40,7 @@ void Player::Initialize()
 
 	collisionData_.radius = 1.0f;
 
+	//マネージャーに当たり判定を渡す
 	ColliderManager::GetInstance()->AddCollision(this);
 }
 
@@ -60,6 +61,7 @@ void Player::Update()
 	}
 	else
 	{
+		//カメラのセット
 		reticle_->SetCamera(camera_);
 		//レティクルの更新処理
 		reticle_->Update();
@@ -95,6 +97,8 @@ void Player::Update()
 	deathAnimation_->ParticleUpdate(camera_);
 	//死亡演出で死亡させたときのフラグの値を貰う
 	deathFlag_ = deathAnimation_->GetDeathFlag();
+
+	ImGuiUpdate();
 }
 
 void Player::Draw()
@@ -127,9 +131,9 @@ const CollisionData& Player::GetCollisionData()
 
 void Player::OnCollision()
 {
-	hp_--;
-	hp_ = max(hp_, 0);
-	damageFlag_ = true;
+	hp_--;//hp減少
+	hp_ = max(hp_, 0);//0を下回らない処理
+	damageFlag_ = true;//ダメージエフェクトを表示
 }
 
 const bool Player::GetIsDead()
@@ -226,15 +230,6 @@ void Player::Rotation(Camera* camera)
 
 	//プレイヤーの横向きの回転をワールド座標に変換し、後でカメラに足せるように変数に格納
 	targetPos = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
-
-	ImGui::Begin("rot");
-	ImGui::InputFloat3("playerRot", &playerTrans_.rotation.x);
-	ImGui::InputFloat3("cameraFrontVec", &cameraFrontVec.x);
-	myMath::Vector3 cameraTarget = camera->GetTarget();
-	ImGui::InputFloat3("cameraTarget", &cameraTarget.x);
-	myMath::Vector3 cameraPos = camera->GetEye();
-	ImGui::InputFloat3("cameraPos", &cameraPos.x);
-	ImGui::End();
 }
 
 void Player::BulletUpdate()
@@ -276,13 +271,29 @@ void Player::LockOnAttack()
 		{
 			for (auto& lockOnEnemy : ColliderManager::GetInstance()->GetLockOnEnemy())
 			{
-				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRandPlusOrMinus() *myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)),
+				//制御点を設定
+				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)),
 				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) ,
 				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) };
+
+				//弾を生成
 				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, lockOnEnemy->GetCollisionData().center, controlPoint);
 			}
+			//ロックオン敵listをリセット
 			ColliderManager::GetInstance()->ResetLockOnEnemy();
 			lockOnAttackFlag = false;
 		}
 	}
+}
+
+void Player::ImGuiUpdate()
+{
+	ImGui::Begin("rot");
+	/*ImGui::InputFloat3("playerRot", &playerTrans_.rotation.x);
+	ImGui::InputFloat3("cameraFrontVec", &cameraFrontVec.x);
+	myMath::Vector3 cameraTarget = camera->GetTarget();
+	ImGui::InputFloat3("cameraTarget", &cameraTarget.x);
+	myMath::Vector3 cameraPos = camera->GetEye();
+	ImGui::InputFloat3("cameraPos", &cameraPos.x);*/
+	ImGui::End();
 }
