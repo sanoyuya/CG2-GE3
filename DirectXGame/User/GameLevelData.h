@@ -20,7 +20,9 @@ private:
 
 	uint32_t playerTex_ = 0;
 	uint32_t sphereTex_ = 0;
+	uint32_t groundTex_ = 0;
 	uint32_t buildingTex_ = 0;
+	uint32_t convenienceStoreTex_ = 0;
 	uint32_t tex_ = 0;
 
 	PlayerData playerData_;

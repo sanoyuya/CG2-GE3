@@ -19,10 +19,10 @@ void GameScene::Initialize()
 
 	//天球
 	skyDome_ = std::make_unique<Model>();
-	skyDomeTex_ = Model::CreateObjModel("Resources/skydome2");
+	skyDomeTex_ = Model::CreateObjModel("Resources/skydome");
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
-	skyDomeTrans_.scale = { 2.0f,2.0f ,2.0f };
+	skyDomeTrans_.scale = { 5.0f,5.0f ,5.0f };
 
 	//レベルエディタの初期化&読み込み
 	gameLevelData_ = std::make_unique<GameLevelData>();

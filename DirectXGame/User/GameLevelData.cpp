@@ -36,7 +36,9 @@ void GameLevelData::CreateModel()
 {
 	playerTex_ = Model::CreateObjModel("Resources/greenDice");
 	sphereTex_ = Model::CreateObjModel("Resources/sphere");
+	groundTex_= Model::CreateObjModel("Resources/ground");
 	buildingTex_ = Model::CreateObjModel("Resources/building");
+	convenienceStoreTex_= Model::CreateObjModel("Resources/convenienceStore");
 	tex_ = Model::CreateObjModel("Resources/purpleDice");
 }
 
@@ -89,6 +91,24 @@ void GameLevelData::Load()
 			//Enemy‚ğ“o˜^
 			enemyData_.enemys.push_back(std::move(enemy));
 		}
+		else if (objectData.fileName == "ground")
+		{
+			//ƒtƒ@ƒCƒ‹–¼‚©‚ç“o˜^Ï‚İƒ‚ƒfƒ‹‚ğŒŸõ
+			std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
+			model->Initialize();
+
+			//À•W
+			model->SetPos(objectData.translation);
+			//Šgk
+			model->SetScale({ objectData.scaling.y ,objectData.scaling.x ,objectData.scaling.z });
+			//–¼‘O
+			model->SetName(objectData.fileName);
+
+			model->SetModel(groundTex_);
+			model->SetShader(ShaderMode::Phong);
+
+			objects_.push_back(std::move(model));
+		}
 		else if (objectData.fileName == "building")
 		{
 			//ƒtƒ@ƒCƒ‹–¼‚©‚ç“o˜^Ï‚İƒ‚ƒfƒ‹‚ğŒŸõ
@@ -103,6 +123,27 @@ void GameLevelData::Load()
 			model->SetName(objectData.fileName);
 
 			model->SetModel(buildingTex_);
+			model->SetShader(ShaderMode::Phong);
+
+			objects_.push_back(std::move(model));
+		}
+		else if (objectData.fileName == "convenienceStore")
+		{
+			//ƒtƒ@ƒCƒ‹–¼‚©‚ç“o˜^Ï‚İƒ‚ƒfƒ‹‚ğŒŸõ
+			std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
+			model->Initialize();
+
+			//À•W
+			model->SetPos(objectData.translation);
+			//‰ñ“]Šp
+			//blender‚Åo—Í‚³‚ê‚½’l‚ğ•ÏŠ·‚·‚é
+			model->SetRot({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y - 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
+			//Šgk
+			model->SetScale(objectData.scaling);
+			//–¼‘O
+			model->SetName(objectData.fileName);
+
+			model->SetModel(convenienceStoreTex_);
 			model->SetShader(ShaderMode::Phong);
 
 			objects_.push_back(std::move(model));
