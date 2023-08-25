@@ -1,5 +1,6 @@
 #include "NormalEnemy.h"
 #include"ColliderManager.h"
+#include"EasingFunction.h"
 
 NormalEnemy::~NormalEnemy()
 {
@@ -49,6 +50,24 @@ void NormalEnemy::Update()
 	else
 	{
 		SpawnUpdate();
+	}
+
+	if (lockOnAnimationFlag == true)
+	{
+		lockOnAnimationTimer++;
+
+		//ägèkââèo
+		lockOnTrans_.scale = { static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
+			static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
+			1.0f };
+
+		//âÒì]ââèo
+		lockOnTrans_.rotation.z = static_cast<float>(Easing::EaseOutCirc(lockOnAnimationTimer, 0.0f, -myMath::AX_2PIF, 15.0f));
+
+		if (lockOnAnimationTimer > 15.0f)
+		{
+			lockOnAnimationFlag = false;
+		}
 	}
 
 	collisionData_.center = enemyTrans_.translation;
@@ -125,6 +144,7 @@ const bool NormalEnemy::GetDeathAnimationFlag()
 void NormalEnemy::LockOn()
 {
 	lockOnFlag = true;
+	lockOnAnimationFlag = true;
 }
 
 void NormalEnemy::OnCollision()

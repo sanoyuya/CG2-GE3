@@ -30,6 +30,8 @@ private:
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
 
 	bool lockOnFlag = false;
+	bool lockOnAnimationFlag = false;//ƒNƒ‰ƒX•ª‚¯‚·‚é—\’è
+	float lockOnAnimationTimer = 0.0f;
 	std::unique_ptr<Sprite>lockOnSprite_;
 	Transform lockOnTrans_;
 	uint32_t lockOnTex_ = 0;

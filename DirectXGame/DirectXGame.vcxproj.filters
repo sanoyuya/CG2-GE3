@@ -411,6 +411,9 @@
     <ClCompile Include="User\Scene\StageSelectScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="User\LockOnAnimation.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -750,6 +753,9 @@
     </ClInclude>
     <ClInclude Include="User\Scene\StageSelectScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="User\LockOnAnimation.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -195,7 +195,7 @@ namespace Easing
 	/// <param name="endPoint">I—¹ˆÊ’u</param>
 	/// <param name="maxTime">‡ŒvŠÔ</param>
 	/// <returns>double</returns>
-	double EaseOutBack(double time, const double startPoint, const double endPoint, const double maxTime);
+	double EaseOutBack(double time, const double startPoint, const double endPoint, const double maxTime, float upPower=3.0f, float downPower=2.0f);
 
 	/// <summary>
 	/// EaseOutBounce

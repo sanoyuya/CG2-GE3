@@ -156,12 +156,12 @@ double Easing::easeOutExpo(double time, const double startPoint, const double en
 	return ret;
 }
 
-double Easing::EaseOutBack(double time, const double startPoint, const double endPoint, const double maxTime)
+double Easing::EaseOutBack(double time, const double startPoint, const double endPoint, const double maxTime,float upPower,float downPower)
 {
 	double x = time / maxTime;
 	const double c1 = 1.70158f;
 	const double c3 = c1 + 1.0f;
-	double v = 1.0f + c3 * pow(x - 1.0f, 3.0f) + c1 * pow(x - 1.0f, 2.0f);
+	double v = 1.0f + c3 * pow(x - 1.0f, upPower) + c1 * pow(x - 1.0f, downPower);
 	double ret = (endPoint - startPoint) * v + startPoint;
 	return ret;
 }

@@ -1,6 +1,7 @@
 #include "MoveEnemy.h"
 #include"PhysicsMath.h"
 #include"ColliderManager.h"
+#include"EasingFunction.h"
 
 MoveEnemy::~MoveEnemy()
 {
@@ -55,6 +56,24 @@ void MoveEnemy::Update()
 	else
 	{
 		SpawnUpdate();
+	}
+
+	if (lockOnAnimationFlag == true)
+	{
+		lockOnAnimationTimer++;
+
+		//ägèkââèo
+		lockOnTrans_.scale = { static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
+			static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
+			1.0f };
+
+		//âÒì]ââèo
+		lockOnTrans_.rotation.z = static_cast<float>(Easing::EaseOutCirc(lockOnAnimationTimer, 0.0f, -myMath::AX_2PIF, 15.0f));
+
+		if (lockOnAnimationTimer > 15.0f)
+		{
+			lockOnAnimationFlag = false;
+		}
 	}
 }
 
@@ -129,6 +148,7 @@ const bool MoveEnemy::GetDeathAnimationFlag()
 void MoveEnemy::LockOn()
 {
 	lockOnFlag = true;
+	lockOnAnimationFlag = true;
 }
 
 void MoveEnemy::OnCollision()
