@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Scene\StageSelectScene.cpp" />
     <ClCompile Include="User\Character\LockOnBullet.cpp" />
     <ClCompile Include="User\Character\NormalBullet.cpp" />
     <ClCompile Include="User\BulletBase.cpp" />
@@ -337,6 +338,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Scene\StageSelectScene.h" />
     <ClInclude Include="User\Character\LockOnBullet.h" />
     <ClInclude Include="User\Character\NormalBullet.h" />
     <ClInclude Include="User\BulletBase.h" />

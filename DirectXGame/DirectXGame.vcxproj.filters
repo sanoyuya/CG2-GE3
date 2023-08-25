@@ -408,6 +408,9 @@
     <ClCompile Include="User\UI\Reticle.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="User\Scene\StageSelectScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -744,6 +747,9 @@
     </ClInclude>
     <ClInclude Include="User\UI\Reticle.h">
       <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Scene\StageSelectScene.h">
+      <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
