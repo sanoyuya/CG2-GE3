@@ -119,6 +119,9 @@ void GameLevelData::Load()
 			model->SetPos(objectData.translation);
 			//Šgk
 			model->SetScale(objectData.scaling);
+			//‰ñ“]Šp
+			//blender‚Åo—Í‚³‚ê‚½’l‚ð•ÏŠ·‚·‚é
+			model->SetRot({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y + 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
 			//–¼‘O
 			model->SetName(objectData.fileName);
 
@@ -139,7 +142,7 @@ void GameLevelData::Load()
 			//blender‚Åo—Í‚³‚ê‚½’l‚ð•ÏŠ·‚·‚é
 			model->SetRot({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y - 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
 			//Šgk
-			model->SetScale(objectData.scaling);
+			//model->SetScale({ objectData.scaling.x ,objectData.scaling.y ,objectData.scaling.z });
 			//–¼‘O
 			model->SetName(objectData.fileName);
 
