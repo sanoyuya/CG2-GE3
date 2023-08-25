@@ -85,6 +85,8 @@ public:
 
 	void LockOn();
 
+	void CancelLockOn();
+
 	//ロックオンフラグの取得
 	const bool GetLockOnFlag();
 

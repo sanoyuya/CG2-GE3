@@ -41,6 +41,8 @@ private:
 
 	CollisionData collisionData_;
 
+	std::unique_ptr<LockOnAnimation>lockOnAnimation_;
+
 public:
 
 	MoveEnemy() = default;
@@ -64,6 +66,8 @@ public:
 	const bool GetDeathAnimationFlag();
 
 	void LockOn();
+
+	void CancelLockOn();
 
 	const bool GetLockOnFlag();
 

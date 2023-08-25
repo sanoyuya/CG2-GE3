@@ -71,6 +71,10 @@ void NormalBullet::LockOn()
 {
 }
 
+void NormalBullet::CancelLockOn()
+{
+}
+
 const bool NormalBullet::GetLockOnFlag()
 {
 	return false;

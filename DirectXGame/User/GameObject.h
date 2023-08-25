@@ -46,6 +46,9 @@ public:
 	//ロックオン
 	virtual void LockOn() = 0;
 
+	//ロックオン解除
+	virtual void CancelLockOn() = 0;
+
 	//ロックオンフラグの取得
 	virtual const bool GetLockOnFlag() = 0;
 };

@@ -24,6 +24,7 @@ public:
 	void ResetLockOnEnemy();
 	std::list<GameObject*> GetLockOnEnemy();
 	void SubLockOnEnemy(GameObject* lockOnEnemy);
+	void CancelLockOn();
 
 	void Reset();
 

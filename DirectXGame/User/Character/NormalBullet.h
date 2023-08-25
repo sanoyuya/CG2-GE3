@@ -61,6 +61,8 @@ public://BulletBaseで必要な奴
 	//ロックオン
 	void LockOn();
 
+	void CancelLockOn();
+
 	const bool GetLockOnFlag();
 
 	void SetCamera(Camera* camera);

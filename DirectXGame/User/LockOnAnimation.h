@@ -9,13 +9,18 @@ private:
 	Transform lockOnTrans_;
 	uint32_t lockOnTex_ = 0;
 
+	bool lockOnAnimationFlag = false;
+	float lockOnAnimationTimer = 0.0f;
+
 public:
 
 	void Initialize();
 
 	void Create();
 
-	void Update();
+	void Cancel();
 
-	void Draw();
+	void Update(const myMath::Vector3& position, Camera* camera);
+
+	void Draw(Camera* camera);
 };

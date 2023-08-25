@@ -23,15 +23,12 @@ void MoveEnemy::Initialize()
 	enemyTrans_.Initialize();
 	enemyTrans_.scale = { 10.0f,10.0f,10.0f };
 
-	lockOnSprite_= std::make_unique<Sprite>();
-	lockOnTex_ = lockOnSprite_->LoadTexture("Resources/reticle.png");
-	lockOnSprite_->Sprite3DInitialize(lockOnTex_);
-	lockOnTrans_.Initialize();
-	lockOnTrans_.scale = { 1.0f / 5.0f,1.0f / 5.0f ,1.0f / 5.0f };
-
 	// パーティクル生成
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
 	emitter_->Initialize();
+
+	lockOnAnimation_ = std::make_unique<LockOnAnimation>();
+	lockOnAnimation_->Initialize();
 }
 
 void MoveEnemy::Update()
@@ -46,8 +43,7 @@ void MoveEnemy::Update()
 		//敵のモデルの更新処理
 		enemyTrans_.TransUpdate(camera_);
 		collisionData_.center = enemyTrans_.translation;
-		lockOnTrans_.translation = enemyTrans_.parentToTranslation;
-		lockOnTrans_.TransUpdate(camera_);
+		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
 		//弾の生成処理と更新処理
 		BulletUpdate();
 		//死亡処理
@@ -56,24 +52,6 @@ void MoveEnemy::Update()
 	else
 	{
 		SpawnUpdate();
-	}
-
-	if (lockOnAnimationFlag == true)
-	{
-		lockOnAnimationTimer++;
-
-		//拡縮演出
-		lockOnTrans_.scale = { static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
-			static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
-			1.0f };
-
-		//回転演出
-		lockOnTrans_.rotation.z = static_cast<float>(Easing::EaseOutCirc(lockOnAnimationTimer, 0.0f, -myMath::AX_2PIF, 15.0f));
-
-		if (lockOnAnimationTimer > 15.0f)
-		{
-			lockOnAnimationFlag = false;
-		}
 	}
 }
 
@@ -85,7 +63,7 @@ void MoveEnemy::Draw()
 		enemy_->DrawModel(&enemyTrans_);
 		if (lockOnFlag == true)
 		{
-			lockOnSprite_->DrawSprite3D(camera_, lockOnTrans_, BillboardFlag::AllBillboard);
+			lockOnAnimation_->Draw(camera_);
 		}
 	}
 	else
@@ -148,7 +126,13 @@ const bool MoveEnemy::GetDeathAnimationFlag()
 void MoveEnemy::LockOn()
 {
 	lockOnFlag = true;
-	lockOnAnimationFlag = true;
+	lockOnAnimation_->Create();
+}
+
+void MoveEnemy::CancelLockOn()
+{
+	lockOnFlag = false;
+	lockOnAnimation_->Cancel();
 }
 
 void MoveEnemy::OnCollision()

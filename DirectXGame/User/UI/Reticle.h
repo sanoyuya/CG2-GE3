@@ -57,6 +57,8 @@ public:
 
 	void LockOn();
 
+	void CancelLockOn();
+
 	void Reset();
 
 	const float GetReticleLimit();

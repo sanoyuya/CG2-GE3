@@ -150,6 +150,10 @@ void Player::LockOn()
 {
 }
 
+void Player::CancelLockOn()
+{
+}
+
 const bool Player::GetLockOnFlag()
 {
 	return lockOnAttackFlag;

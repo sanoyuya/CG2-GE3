@@ -28,6 +28,7 @@ void LockOnBullet::Update()
 	if (deathTimer_ > maxDeathTime_)
 	{
 		isDead_ = true;
+		ColliderManager::GetInstance()->CancelLockOn();
 	}
 	
 	BulletMove();
@@ -69,6 +70,10 @@ const bool LockOnBullet::GetDeathAnimationFlag()
 }
 
 void LockOnBullet::LockOn()
+{
+}
+
+void LockOnBullet::CancelLockOn()
 {
 }
 

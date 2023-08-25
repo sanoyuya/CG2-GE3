@@ -5,6 +5,7 @@
 #include"EnemyDeathParticleEmitter.h"
 #include"GameTimer.h"
 #include"Transform.h"
+#include"LockOnAnimation.h"
 
 class Enemy :public GameObject
 {
@@ -44,6 +45,8 @@ public:
 	virtual const bool GetDeathAnimationFlag() = 0;
 
 	virtual void LockOn() = 0;
+
+	virtual void CancelLockOn() = 0;
 
 	virtual const bool GetLockOnFlag() = 0;
 

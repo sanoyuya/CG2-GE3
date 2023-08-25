@@ -97,6 +97,17 @@ void ColliderManager::SubLockOnEnemy(GameObject* lockOnEnemy)
 	lockOnEnemys.remove(lockOnEnemy);
 }
 
+void ColliderManager::CancelLockOn()
+{
+	for (auto& object : objects)
+	{
+		if (object->GetName() == "enemy")
+		{
+			object->CancelLockOn();
+		}
+	}
+}
+
 void ColliderManager::Reset()
 {
 	objects.clear();

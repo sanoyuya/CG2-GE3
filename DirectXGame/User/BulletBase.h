@@ -42,6 +42,9 @@ public://GameObjectで必要な奴
 	//ロックオン
 	virtual void LockOn() = 0;
 
+	//ロックオン解除
+	virtual void CancelLockOn() = 0;
+
 	virtual const bool GetLockOnFlag() = 0;
 
 public://Bulletで必要な奴
