@@ -304,7 +304,7 @@ void Model::PiplineSet(BlendMode bMode, ShaderMode sMode)
 	}
 }
 
-uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
+uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing, bool flipX, bool flipY, bool flipZ)
 {
 	std::string path = filePath;
 
@@ -323,7 +323,7 @@ uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing)
 		std::unique_ptr<ModelData> data;
 		data = std::make_unique<ModelData>();
 
-		Obj::Create(filePath.c_str(), smoothing, data.get());
+		Obj::Create(filePath.c_str(), smoothing, data.get(), flipX, flipY, flipZ);
 
 		data->modelHandle = sModelCount_;
 

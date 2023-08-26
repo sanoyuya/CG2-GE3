@@ -7,7 +7,7 @@
 #include"myMath.h"
 #include"File.h"
 
-void Obj::Create(const char* filePath, bool smoothing, ModelData* data)
+void Obj::Create(const char* filePath, bool smoothing, ModelData* data, bool flipX, bool flipY, bool flipZ)
 {
 	std::vector<std::string> files;
 	files = GetFileNames(filePath);
@@ -39,6 +39,7 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data)
 	std::vector<myMath::Vector2> texcoords;
 
 	PosNormalUv tmp = { {},{},{} };
+	PosNormalUv triangle[3];
 
 	//1行ずつ読み込む
 	std::string line;
@@ -69,6 +70,10 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data)
 			line_stream >> position.x;
 			line_stream >> position.y;
 			line_stream >> position.z;
+
+			position.x *= GetFlip(flipX) * -1;
+			position.y *= GetFlip(flipY);
+			position.z *= GetFlip(flipZ);
 			//座標データに追加
 			positions.emplace_back(position);
 		}
@@ -92,12 +97,17 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data)
 			line_stream >> normal.x;
 			line_stream >> normal.y;
 			line_stream >> normal.z;
+
+			normal.x *= GetFlip(flipX) * -1;
+			normal.y *= GetFlip(flipY);
+			normal.z *= GetFlip(flipZ);
 			//法線ベクトルデータに追加
 			normals.emplace_back(normal);
 		}
 		//先頭文字ならポリゴン(三角形)
 		if (key == "f")
 		{
+			uint8_t count = 0;
 			//半角スペース区切りで行の続きを読み込む
 			std::string index_string;
 			while (std::getline(line_stream, index_string, ' '))
@@ -117,7 +127,9 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data)
 				tmp.pos = positions[static_cast<size_t>(indexPosition) - 1];
 				tmp.normal = normals[static_cast<size_t>(indexNormal) - 1];
 				tmp.uv = texcoords[static_cast<size_t>(indexTexcoord) - 1];
-				data->vertices.push_back(tmp);
+
+				triangle[count] = tmp;
+				count++;
 
 				if (smoothing)
 				{
@@ -127,6 +139,9 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data)
 				//インデックスデータの追加
 				data->indices.emplace_back(static_cast<uint32_t>(data->indices.size()));
 			}
+			data->vertices.push_back(triangle[2]);
+			data->vertices.push_back(triangle[1]);
+			data->vertices.push_back(triangle[0]);
 		}
 	}
 
@@ -250,5 +265,17 @@ void Obj::CalculateSmoothedVertexNormals(ModelData* data)
 		{
 			data->vertices[index].normal = { normal.x,normal.y,normal.z };
 		}
+	}
+}
+
+int8_t Obj::GetFlip(bool flip)
+{
+	if (flip == false)
+	{
+		return 1;
+	}
+	else
+	{
+		return -1;
 	}
 }

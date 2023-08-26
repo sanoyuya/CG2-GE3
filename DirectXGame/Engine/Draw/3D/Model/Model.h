@@ -162,7 +162,17 @@ public:
 	/// <param name="filePath">ファイル名</param>
 	/// <param name="smoothing">スムージングするかどうか(初期値:false)</param>
 	/// <returns></returns>
-	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false);
+
+	/// <summary>
+	/// モデルの生成
+	/// </summary>
+	/// <param name="filePath">ファイル名</param>
+	/// <param name="smoothing">スムージングするかどうか(初期値:false)</param>
+	/// <param name="flipX">X軸反転するかどうか(初期値:false)</param>
+	/// <param name="flipY">Y軸反転するかどうか(初期値:false)</param>
+	/// <param name="flipZ">Z軸反転するかどうか(初期値:false)</param>
+	/// <returns></returns>
+	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false, bool flipX = false, bool flipY = false, bool flipZ = false);
 
 	static uint32_t CreateAssimpModel(const std::string& filePath);
 
