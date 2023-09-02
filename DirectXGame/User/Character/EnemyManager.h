@@ -7,7 +7,7 @@
 #include"NormalEnemy.h"
 #include"MoveEnemy.h"
 
-struct EnemyData
+struct EnemyList
 {
 	std::list<std::unique_ptr<Enemy>>enemys;
 };
@@ -23,15 +23,15 @@ public:
 	EnemyManager();
 	~EnemyManager();
 
-	void Initialize(EnemyData& enemyData);
+	void Initialize(EnemyList& enemyData);
 
 	void Update(Camera* camera,Player* player, GameTimer* gameTimer, BulletManager* bulletManager);
 
 	void Draw();
 
-	void Load(EnemyData& enemyData);
+	void Load(EnemyList& enemyData);
 
-	void ReLoad(EnemyData& enemyData);
+	void ReLoad(EnemyList& enemyData);
 
 	void Reset();
 

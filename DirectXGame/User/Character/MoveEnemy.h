@@ -41,6 +41,8 @@ private:
 
 	CollisionData collisionData_;
 
+	MoveEnemyProperty moveEnemyProperty_;
+
 	std::unique_ptr<LockOnAnimation>lockOnAnimation_;
 
 public:
@@ -83,6 +85,8 @@ public://セッター
 	void SetSpawnTimer(const float timer);
 	//blenderで出力したデータを読み込むときに死亡タイマーをセットする関数
 	void SetDeathTimer(const float timer);
+
+	void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty);
 
 public://ゲッター
 

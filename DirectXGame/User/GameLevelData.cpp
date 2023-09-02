@@ -88,6 +88,8 @@ void GameLevelData::Load()
 			//blender‘¤‚ÅÝ’è‚µ‚½ŽžŠÔ‚ð‘—‚é
 			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
 			enemy->SetDeathTimer(objectData.timer.deathTimer);
+
+			enemy->SetMoveEnemyProperty(objectData.enemyProperty);
 			//Enemy‚ð“o˜^
 			enemyData_.enemys.push_back(std::move(enemy));
 		}
@@ -195,7 +197,7 @@ const CameraData& GameLevelData::GetCameraData()
 	return cameraData_;
 }
 
-EnemyData& GameLevelData::GetEnemyData()
+EnemyList& GameLevelData::GetEnemyData()
 {
 	return enemyData_;
 }

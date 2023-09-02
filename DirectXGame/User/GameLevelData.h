@@ -27,7 +27,7 @@ private:
 
 	PlayerData playerData_;
 	CameraData cameraData_;
-	EnemyData enemyData_;
+	EnemyList enemyData_;
 
 public:
 
@@ -64,5 +64,5 @@ public:
 
 	const PlayerData& GetPlayerData();
 	const CameraData& GetCameraData();
-	EnemyData& GetEnemyData();
+	EnemyList& GetEnemyData();
 };

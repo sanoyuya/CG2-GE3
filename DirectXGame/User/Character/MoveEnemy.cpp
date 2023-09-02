@@ -108,6 +108,14 @@ void MoveEnemy::SetDeathTimer(const float timer)
 	deathTime_ = timer;
 }
 
+void MoveEnemy::SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)
+{
+	moveEnemyProperty_ = moveEnemyProperty;
+	moveEnemyProperty_.spawnPosRotation = { myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.y) + myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.z) - myMath::AX_PIF / 2 };
+	moveEnemyProperty_.movePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y) + myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
+	moveEnemyProperty_.escapePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.y) + myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.z) - myMath::AX_PIF / 2 };
+}
+
 const bool MoveEnemy::GetIsDead()
 {
 	return isDead_;

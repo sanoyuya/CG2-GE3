@@ -7,6 +7,19 @@
 #include"Transform.h"
 #include"LockOnAnimation.h"
 
+struct MoveEnemyProperty
+{
+	myMath::Vector3 spawnPos;
+	myMath::Vector3 spawnPosRotation;
+	float toMovePosTime;
+	myMath::Vector3 movePos;
+	myMath::Vector3 movePosRotation;
+	float waitTime;
+	float toEscapePosTime;
+	myMath::Vector3 escapePos;
+	myMath::Vector3 escapePosRotation;
+};
+
 class Enemy :public GameObject
 {
 protected:
@@ -60,6 +73,8 @@ public:
 	virtual void SetSpawnTimer(const float timer) = 0;
 	//blenderで出力したデータを読み込むときに死亡タイマーをセットする関数
 	virtual void SetDeathTimer(const float timer) = 0;
+	//blenderで出力したデータを読み込むときにMoveEnemyの情報をセットする関数
+	virtual void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty) = 0;
 
 	void SetCamera(Camera* camera);
 

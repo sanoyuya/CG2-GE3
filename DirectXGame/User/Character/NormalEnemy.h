@@ -78,6 +78,8 @@ public://セッター
 	//blenderで出力したデータを読み込むときに死亡タイマーをセットする関数
 	void SetDeathTimer(const float timer);
 
+	void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty);
+
 public://ゲッター
 
 	bool GetSpawnFlag();

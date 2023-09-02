@@ -104,6 +104,11 @@ void NormalEnemy::SetDeathTimer(const float timer)
 	deathTime_ = timer;
 }
 
+void NormalEnemy::SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)
+{
+	moveEnemyProperty;
+}
+
 const bool NormalEnemy::GetIsDead()
 {
 	return isDead_;

@@ -115,6 +115,9 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.enemyProperty.spawnPos.x = static_cast<float>(enemyProperty["spawnPosition"][1]);
 			objectData.enemyProperty.spawnPos.y = static_cast<float>(enemyProperty["spawnPosition"][2]);
 			objectData.enemyProperty.spawnPos.z = static_cast<float>(enemyProperty["spawnPosition"][0]);
+			objectData.enemyProperty.spawnPosRotation.x = static_cast<float>(enemyProperty["spawnPositionRotation"][1]);
+			objectData.enemyProperty.spawnPosRotation.y = static_cast<float>(enemyProperty["spawnPositionRotation"][2]);
+			objectData.enemyProperty.spawnPosRotation.z = static_cast<float>(enemyProperty["spawnPositionRotation"][0]);
 
 			//移動地点に向かうまでの時間
 			objectData.enemyProperty.toMovePosTime = static_cast<float>(enemyProperty["toMovePositionTime"]);
@@ -123,6 +126,9 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.enemyProperty.movePos.x = static_cast<float>(enemyProperty["movePosition"][1]);
 			objectData.enemyProperty.movePos.y = static_cast<float>(enemyProperty["movePosition"][2]);
 			objectData.enemyProperty.movePos.z = static_cast<float>(enemyProperty["movePosition"][0]);
+			objectData.enemyProperty.movePosRotation.x = static_cast<float>(enemyProperty["movePositionRotation"][1]);
+			objectData.enemyProperty.movePosRotation.y = static_cast<float>(enemyProperty["movePositionRotation"][2]);
+			objectData.enemyProperty.movePosRotation.z = static_cast<float>(enemyProperty["movePositionRotation"][0]);
 
 			//移動地点での待機時間
 			objectData.enemyProperty.waitTime = static_cast<float>(enemyProperty["waitTime"]);
@@ -134,6 +140,9 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.enemyProperty.escapePos.x = static_cast<float>(enemyProperty["escapePosition"][1]);
 			objectData.enemyProperty.escapePos.y = static_cast<float>(enemyProperty["escapePosition"][2]);
 			objectData.enemyProperty.escapePos.z = static_cast<float>(enemyProperty["escapePosition"][0]);
+			objectData.enemyProperty.escapePosRotation.x = static_cast<float>(enemyProperty["escapePositionRotation"][1]);
+			objectData.enemyProperty.escapePosRotation.y = static_cast<float>(enemyProperty["escapePositionRotation"][2]);
+			objectData.enemyProperty.escapePosRotation.z = static_cast<float>(enemyProperty["escapePositionRotation"][0]);
 		}
 	}
 	else if (type.compare("CAMERA") == 0)

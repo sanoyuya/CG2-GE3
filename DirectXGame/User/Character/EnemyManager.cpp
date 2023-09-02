@@ -9,7 +9,7 @@ EnemyManager::~EnemyManager()
 {
 }
 
-void EnemyManager::Initialize(EnemyData& enemyData)
+void EnemyManager::Initialize(EnemyList& enemyData)
 {
 	//“G‚ğjsonƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚Ş
 	Load(enemyData);
@@ -42,12 +42,12 @@ void EnemyManager::Draw()
 	}
 }
 
-void EnemyManager::Load(EnemyData& enemyData)
+void EnemyManager::Load(EnemyList& enemyData)
 {
 	std::swap(enemys_, enemyData.enemys);
 }
 
-void EnemyManager::ReLoad(EnemyData& enemyData)
+void EnemyManager::ReLoad(EnemyList& enemyData)
 {
 	Reset();
 	Initialize(enemyData);
