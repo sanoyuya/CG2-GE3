@@ -97,6 +97,7 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.collider.size.z = static_cast<float>(collider["size"][0]);
 		}
 
+		//タイマーのパラメータ読み込み
 		nlohmann::json& timer = object["timer"];
 		if (timer != nullptr)
 		{
@@ -104,6 +105,35 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.timer.spawnTimer = static_cast<float>(timer["spawn"]);
 			//死亡時間
 			objectData.timer.deathTimer = static_cast<float>(timer["death"]);
+		}
+
+		//敵情報のパラメータ読み込み
+		nlohmann::json& enemyProperty = object["enemy_move_properties"];
+		if (enemyProperty != nullptr)
+		{
+			//出現地点
+			objectData.enemyProperty.spawnPos.x = static_cast<float>(enemyProperty["spawnPosition"][1]);
+			objectData.enemyProperty.spawnPos.y = static_cast<float>(enemyProperty["spawnPosition"][2]);
+			objectData.enemyProperty.spawnPos.z = static_cast<float>(enemyProperty["spawnPosition"][0]);
+
+			//移動地点に向かうまでの時間
+			objectData.enemyProperty.toMovePosTime = static_cast<float>(enemyProperty["toMovePositionTime"]);
+
+			//移動地点の座標
+			objectData.enemyProperty.movePos.x = static_cast<float>(enemyProperty["movePosition"][1]);
+			objectData.enemyProperty.movePos.y = static_cast<float>(enemyProperty["movePosition"][2]);
+			objectData.enemyProperty.movePos.z = static_cast<float>(enemyProperty["movePosition"][0]);
+
+			//移動地点での待機時間
+			objectData.enemyProperty.waitTime = static_cast<float>(enemyProperty["waitTime"]);
+
+			//逃走地点に向かうまでの時間
+			objectData.enemyProperty.toEscapePosTime= static_cast<float>(enemyProperty["toEscapePositionTime"]);
+
+			//逃走地点
+			objectData.enemyProperty.escapePos.x = static_cast<float>(enemyProperty["escapePosition"][1]);
+			objectData.enemyProperty.escapePos.y = static_cast<float>(enemyProperty["escapePosition"][2]);
+			objectData.enemyProperty.escapePos.z = static_cast<float>(enemyProperty["escapePosition"][0]);
 		}
 	}
 	else if (type.compare("CAMERA") == 0)

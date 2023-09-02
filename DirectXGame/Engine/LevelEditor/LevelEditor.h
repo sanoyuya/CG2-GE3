@@ -19,6 +19,16 @@ struct LevelData {
 		float deathTimer;
 	};
 
+	struct EnemyProperty
+	{
+		myMath::Vector3 spawnPos;
+		float toMovePosTime;
+		myMath::Vector3 movePos;
+		float waitTime;
+		float toEscapePosTime;
+		myMath::Vector3 escapePos;
+	};
+
 	struct ObjectData {
 		//ファイル名
 		std::string fileName;
@@ -32,6 +42,8 @@ struct LevelData {
 		Collider collider;
 		//タイマー
 		Timer timer;
+		//敵のプロパティ
+		EnemyProperty enemyProperty;
 	};
 
 	// オブジェクト配列
