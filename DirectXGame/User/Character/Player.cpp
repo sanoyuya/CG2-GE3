@@ -292,12 +292,12 @@ void Player::LockOnAttack()
 
 void Player::ImGuiUpdate()
 {
-	ImGui::Begin("rot");
-	/*ImGui::InputFloat3("playerRot", &playerTrans_.rotation.x);
-	ImGui::InputFloat3("cameraFrontVec", &cameraFrontVec.x);
-	myMath::Vector3 cameraTarget = camera->GetTarget();
-	ImGui::InputFloat3("cameraTarget", &cameraTarget.x);
-	myMath::Vector3 cameraPos = camera->GetEye();
-	ImGui::InputFloat3("cameraPos", &cameraPos.x);*/
+	ImGui::Begin("HP");
+	int maxHp = static_cast<int>(maxHp_);
+	ImGui::InputInt("playerMaxHP", &maxHp);
+	maxHp_ = static_cast<int8_t>(maxHp);
+	int hp = static_cast<int>(hp_);
+	ImGui::InputInt("playerHP", &hp);
+	hp_ = static_cast<int8_t>(hp);
 	ImGui::End();
 }
