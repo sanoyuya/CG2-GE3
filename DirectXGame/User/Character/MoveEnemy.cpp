@@ -21,6 +21,8 @@ void MoveEnemy::Initialize()
 	enemyTex_ = enemy_->CreateObjModel("Resources/enemy");
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
+	enemyTrans_.translation = moveEnemyProperty_.spawnPos;
+	enemyTrans_.rotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
 	enemyTrans_.scale = { 10.0f,10.0f,10.0f };
 
 	// パーティクル生成
@@ -33,13 +35,14 @@ void MoveEnemy::Initialize()
 
 void MoveEnemy::Update()
 {
-	time_++;
+	/*time_++;
 	addY = PhysicsMath::SimpleHarmonicMotion(time_,0.5f,120.0f);
-	enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
+	enemyTrans_.translation.y = enemyTrans_.translation.y + addY;*/
 
 	//出現していたら
 	if (spawnFlag_ == true)
 	{
+		PhaseUpdate();
 		//敵のモデルの更新処理
 		enemyTrans_.TransUpdate(camera_);
 		collisionData_.center = enemyTrans_.translation;
@@ -53,6 +56,65 @@ void MoveEnemy::Update()
 	{
 		SpawnUpdate();
 	}
+}
+
+void MoveEnemy::PhaseUpdate()
+{
+	switch (phase)
+	{
+	case ActionPhase::MOVE:
+
+		PhaseMove(moveEnemyProperty_.spawnPos, moveEnemyProperty_.movePos, moveEnemyProperty_.spawnPosRotation, moveEnemyProperty_.movePosRotation, moveEnemyProperty_.toMovePosTime * 60);
+
+		actionTimer++;
+
+		if (moveEnemyProperty_.toMovePosTime * 60 <= actionTimer)
+		{
+			actionTimer = 0;
+			phase = ActionPhase::WAIT;
+		}
+
+		break;
+	case ActionPhase::WAIT:
+
+		if (moveEnemyProperty_.waitTime * 60 <= actionTimer)
+		{
+			actionTimer = 0;
+			waitFinishPos = enemyTrans_.translation;
+			waitFinishRot = enemyTrans_.rotation;
+			phase = ActionPhase::ESCAPE;
+		}
+
+		addY = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.02f, 120.0f);
+		enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
+
+		actionTimer++;
+
+		break;
+	case ActionPhase::ESCAPE:
+
+		PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * 60);
+
+		actionTimer++;
+
+		if (moveEnemyProperty_.toEscapePosTime * 60 <= actionTimer)
+		{
+			isDead_ = true;
+		}
+
+		break;
+	}
+}
+
+void MoveEnemy::PhaseMove(const myMath::Vector3& startPosition, const myMath::Vector3& endPosition, const myMath::Vector3& startRotation, const myMath::Vector3& endRotation, const float maxTime)
+{
+	enemyTrans_.translation = { static_cast<float>(Easing::EaseInOutCubic(actionTimer, startPosition.x, endPosition.x, maxTime)),
+	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startPosition.y, endPosition.y, maxTime)),
+	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startPosition.z, endPosition.z, maxTime)) };
+
+	enemyTrans_.rotation = { static_cast<float>(Easing::EaseInOutCubic(actionTimer, startRotation.x, endRotation.x, maxTime)),
+	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startRotation.y, endRotation.y, maxTime)),
+	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startRotation.z, endRotation.z, maxTime)) };
 }
 
 void MoveEnemy::Draw()
@@ -111,9 +173,9 @@ void MoveEnemy::SetDeathTimer(const float timer)
 void MoveEnemy::SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)
 {
 	moveEnemyProperty_ = moveEnemyProperty;
-	moveEnemyProperty_.spawnPosRotation = { myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.y) + myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.z) - myMath::AX_PIF / 2 };
-	moveEnemyProperty_.movePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y) + myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
-	moveEnemyProperty_.escapePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.y) + myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.z) - myMath::AX_PIF / 2 };
+	moveEnemyProperty_.spawnPosRotation = { myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.z) - myMath::AX_PIF / 2 };
+	moveEnemyProperty_.movePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
+	moveEnemyProperty_.escapePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.z) - myMath::AX_PIF / 2 };
 }
 
 const bool MoveEnemy::GetIsDead()

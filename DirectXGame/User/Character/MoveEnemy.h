@@ -1,6 +1,16 @@
 #pragma once
 #include"Enemy.h"
 
+enum class ActionPhase
+{
+	//ˆÚ“®
+	MOVE,
+	//‘Ò‹@
+	WAIT,
+	//“¦‘–
+	ESCAPE
+};
+
 class MoveEnemy :public Enemy
 {
 private:
@@ -43,6 +53,11 @@ private:
 
 	MoveEnemyProperty moveEnemyProperty_;
 
+	ActionPhase phase = ActionPhase::MOVE;
+	uint16_t actionTimer = 0;
+	myMath::Vector3 waitFinishPos = {};
+	myMath::Vector3 waitFinishRot = {};
+
 	std::unique_ptr<LockOnAnimation>lockOnAnimation_;
 
 public:
@@ -53,6 +68,10 @@ public:
 	void Initialize();
 
 	void Update();
+
+	void PhaseUpdate();
+
+	void PhaseMove(const myMath::Vector3& startPosition, const myMath::Vector3& endPosition, const myMath::Vector3& startRotation, const myMath::Vector3& endRotation,const float maxTime);
 
 	void Draw();
 

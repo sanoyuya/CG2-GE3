@@ -671,7 +671,42 @@
             },
             "timer": {
                 "spawn": 0.0,
-                "death": 20.0
+                "death": 30.0
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    0.0,
+                    90.0,
+                    30.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    0.0
+                ],
+                "toMovePositionTime": 3.0,
+                "movePosition": [
+                    0.0,
+                    90.0,
+                    50.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    0.0
+                ],
+                "waitTime": 3.0,
+                "toEscapePositionTime": 3.0,
+                "escapePosition": [
+                    0.0,
+                    120.0,
+                    90.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    0.0
+                ]
             }
         },
         {

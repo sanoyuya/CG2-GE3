@@ -45,7 +45,7 @@ void Radar::Draw(EnemyManager* enemys, Player* player)
 		if (enemy->GetSpawnFlag() == true && radarSize >= length)
 		{
 			radarEnemys_[count]->DrawSprite2D({ center_.x + difference.x * cosf(angle) + difference.y * sinf(angle),
-				center_.y + difference.y * cosf(angle) - difference.x * sinf(angle) }, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f,1.0f }, enemy->GetTrans().rotation.y + myMath::AX_PIF/2 - angle);
+				center_.y + difference.y * cosf(angle) - difference.x * sinf(angle) }, { 1.0f,1.0f ,1.0f ,1.0f }, { 1.0f,1.0f }, enemy->GetTrans().rotation.y - myMath::AX_PIF / 2 - angle);
 		}
 		count++;
 	}
