@@ -66,7 +66,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\GameObject;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh;$(ProjectDir)User\GameObject\Bullet;$(ProjectDir)User\GameObject\Enemy;$(ProjectDir)User\GameObject\Player;$(ProjectDir)User\Other</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -87,7 +87,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\Character;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\GameObject;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh;$(ProjectDir)User\GameObject\Bullet;$(ProjectDir)User\GameObject\Enemy;$(ProjectDir)User\GameObject\Player;$(ProjectDir)User\Other</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -101,21 +101,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="User\LockOnAnimation.cpp" />
+    <ClCompile Include="User\Particle\LockOnAnimation.cpp" />
     <ClCompile Include="User\Scene\StageSelectScene.cpp" />
-    <ClCompile Include="User\Character\LockOnBullet.cpp" />
-    <ClCompile Include="User\Character\NormalBullet.cpp" />
-    <ClCompile Include="User\BulletBase.cpp" />
-    <ClCompile Include="User\Character\MoveEnemy.cpp" />
+    <ClCompile Include="User\GameObject\Bullet\LockOnBullet.cpp" />
+    <ClCompile Include="User\GameObject\Bullet\NormalBullet.cpp" />
+    <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp" />
+    <ClCompile Include="User\GameObject\Enemy\MoveEnemy.cpp" />
     <ClCompile Include="User\Particle\EnemySpawnParticleEmitter.cpp" />
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp" />
-    <ClCompile Include="User\BulletManager.cpp" />
-    <ClCompile Include="User\Character\NormalEnemy.cpp" />
+    <ClCompile Include="User\GameObject\Bullet\BulletManager.cpp" />
+    <ClCompile Include="User\GameObject\Enemy\NormalEnemy.cpp" />
     <ClCompile Include="User\Scene\DemoScene.cpp" />
-    <ClCompile Include="User\GameTimer.cpp" />
-    <ClCompile Include="User\GameLevelData.cpp" />
-    <ClCompile Include="User\PlayerDeathAnimation.cpp" />
-    <ClCompile Include="User\UI\Reticle.cpp" />
+    <ClCompile Include="User\Other\GameTimer.cpp" />
+    <ClCompile Include="User\Other\GameLevelData.cpp" />
+    <ClCompile Include="User\Particle\PlayerDeathAnimation.cpp" />
+    <ClCompile Include="User\GameObject\Player\Reticle.cpp" />
     <ClCompile Include="User\UI\HPBar.cpp" />
     <ClCompile Include="User\Scene\GameClearScene.cpp" />
     <ClCompile Include="User\Scene\GameOverScene.cpp" />
@@ -126,12 +126,12 @@
     <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp" />
     <ClCompile Include="User\Particle\ParticleEmitter.cpp" />
     <ClCompile Include="User\Scene\SceneChangeAnimation.cpp" />
-    <ClCompile Include="User\PlayerDamageEffect.cpp" />
-    <ClCompile Include="User\ColliderManager.cpp" />
-    <ClCompile Include="User\Character\EnemyManager.cpp" />
-    <ClCompile Include="User\RailCamera.cpp" />
-    <ClCompile Include="User\Character\Player.cpp" />
-    <ClCompile Include="User\Character\Enemy.cpp" />
+    <ClCompile Include="User\Particle\PlayerDamageEffect.cpp" />
+    <ClCompile Include="User\GameObject\ColliderManager.cpp" />
+    <ClCompile Include="User\GameObject\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="User\Other\RailCamera.cpp" />
+    <ClCompile Include="User\GameObject\Player\Player.cpp" />
+    <ClCompile Include="User\GameObject\Enemy\Enemy.cpp" />
     <ClCompile Include="Engine\LevelEditor\EditorObject.cpp" />
     <ClCompile Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.cpp" />
     <ClCompile Include="User\Scene\EngineOP.cpp" />
@@ -161,7 +161,7 @@
     <ClCompile Include="Engine\Math\Matrix4.cpp" />
     <ClCompile Include="Engine\Draw\3D\Model\Model.cpp" />
     <ClCompile Include="Engine\Input\Mouse.cpp" />
-    <ClCompile Include="User\MyGame.cpp" />
+    <ClCompile Include="User\Other\MyGame.cpp" />
     <ClCompile Include="Engine\Math\myMath.cpp" />
     <ClCompile Include="Engine\Draw\3D\Model\Obj.cpp" />
     <ClCompile Include="Engine\Math\PhysicsMath.cpp" />
@@ -339,43 +339,43 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="User\LockOnAnimation.h" />
+    <ClInclude Include="User\Particle\LockOnAnimation.h" />
     <ClInclude Include="User\Scene\StageSelectScene.h" />
-    <ClInclude Include="User\Character\LockOnBullet.h" />
-    <ClInclude Include="User\Character\NormalBullet.h" />
-    <ClInclude Include="User\BulletBase.h" />
-    <ClInclude Include="User\Character\MoveEnemy.h" />
+    <ClInclude Include="User\GameObject\Bullet\LockOnBullet.h" />
+    <ClInclude Include="User\GameObject\Bullet\NormalBullet.h" />
+    <ClInclude Include="User\GameObject\Bullet\BulletBase.h" />
+    <ClInclude Include="User\GameObject\Enemy\MoveEnemy.h" />
     <ClInclude Include="User\Particle\EnemySpawnParticleEmitter.h" />
     <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h" />
-    <ClInclude Include="User\BulletManager.h" />
-    <ClInclude Include="User\Character\NormalEnemy.h" />
+    <ClInclude Include="User\GameObject\Bullet\BulletManager.h" />
+    <ClInclude Include="User\GameObject\Enemy\NormalEnemy.h" />
     <ClInclude Include="User\Scene\DemoScene.h" />
-    <ClInclude Include="User\GameTimer.h" />
-    <ClInclude Include="User\PlayerDeathAnimation.h" />
-    <ClInclude Include="User\UI\Reticle.h" />
+    <ClInclude Include="User\Other\GameTimer.h" />
+    <ClInclude Include="User\Particle\PlayerDeathAnimation.h" />
+    <ClInclude Include="User\GameObject\Player\Reticle.h" />
     <ClInclude Include="User\UI\HPBar.h" />
     <ClInclude Include="User\Scene\GameClearScene.h" />
     <ClInclude Include="User\Scene\GameOverScene.h" />
     <ClInclude Include="User\Particle\PlayerEngineSmokeParticleEmitter.h" />
     <ClInclude Include="User\Particle\ParticleBase.h" />
     <ClInclude Include="User\Particle\EnemyDeathParticleEmitter.h" />
-    <ClInclude Include="User\GameObject.h" />
+    <ClInclude Include="User\GameObject\GameObject.h" />
     <ClInclude Include="User\UI\Radar.h" />
     <ClInclude Include="Engine\Math\EasingFunction.h" />
     <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h" />
     <ClInclude Include="User\Particle\ParticleEmitter.h" />
     <ClInclude Include="User\Scene\SceneChangeAnimation.h" />
-    <ClInclude Include="User\PlayerDamageEffect.h" />
-    <ClInclude Include="User\ColliderManager.h" />
-    <ClInclude Include="User\Character\EnemyManager.h" />
-    <ClInclude Include="User\RailCamera.h" />
-    <ClInclude Include="User\Character\Player.h" />
-    <ClInclude Include="User\Character\Enemy.h" />
+    <ClInclude Include="User\Particle\PlayerDamageEffect.h" />
+    <ClInclude Include="User\GameObject\ColliderManager.h" />
+    <ClInclude Include="User\GameObject\Enemy\EnemyManager.h" />
+    <ClInclude Include="User\Other\RailCamera.h" />
+    <ClInclude Include="User\GameObject\Player\Player.h" />
+    <ClInclude Include="User\GameObject\Enemy\Enemy.h" />
     <ClInclude Include="Engine\LevelEditor\EditorObject.h" />
     <ClInclude Include="Engine\Light\CircleShadow.h" />
     <ClInclude Include="Engine\Light\DirectionalLight.h" />
     <ClInclude Include="Engine\Draw\2D\PostEffect\MultiTexturePostEffect.h" />
-    <ClInclude Include="User\GameLevelData.h" />
+    <ClInclude Include="User\Other\GameLevelData.h" />
     <ClInclude Include="User\Scene\EngineOP.h" />
     <ClInclude Include="Engine\Collision\Collision.h" />
     <ClInclude Include="Engine\Other\AbstractSceneFactory.h" />
