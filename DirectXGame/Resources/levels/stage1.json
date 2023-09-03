@@ -94,7 +94,7 @@
             "name": "enemy.007",
             "transform": {
                 "translation": [
-                    -20.0,
+                    40.0,
                     -90.0,
                     20.0
                 ],
@@ -109,7 +109,7 @@
                     10.0
                 ]
             },
-            "file_name": "normalEnemy",
+            "file_name": "moveEnemy",
             "collider": {
                 "type": "Sphere",
                 "center": [
@@ -124,8 +124,43 @@
                 ]
             },
             "timer": {
-                "spawn": 30.0,
-                "death": 50.0
+                "spawn": 35.0,
+                "death": 60.0
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    40.0,
+                    -80.0,
+                    30.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ],
+                "toMovePositionTime": 3.0,
+                "movePosition": [
+                    40.0,
+                    -90.0,
+                    20.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ],
+                "waitTime": 3.0,
+                "toEscapePositionTime": 3.0,
+                "escapePosition": [
+                    40.0,
+                    -70.0,
+                    40.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ]
             }
         },
         {
@@ -133,7 +168,7 @@
             "name": "enemy.014",
             "transform": {
                 "translation": [
-                    -20.0,
+                    40.0,
                     -110.0,
                     20.0
                 ],
@@ -148,7 +183,7 @@
                     10.0
                 ]
             },
-            "file_name": "normalEnemy",
+            "file_name": "moveEnemy",
             "collider": {
                 "type": "Sphere",
                 "center": [
@@ -163,8 +198,43 @@
                 ]
             },
             "timer": {
-                "spawn": 30.0,
-                "death": 50.0
+                "spawn": 35.0,
+                "death": 60.0
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    40.0,
+                    -120.0,
+                    30.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ],
+                "toMovePositionTime": 3.0,
+                "movePosition": [
+                    40.0,
+                    -110.0,
+                    20.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ],
+                "waitTime": 3.0,
+                "toEscapePositionTime": 3.0,
+                "escapePosition": [
+                    40.0,
+                    -130.0,
+                    40.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ]
             }
         },
         {
@@ -172,7 +242,7 @@
             "name": "enemy.008",
             "transform": {
                 "translation": [
-                    -20.0,
+                    40.0,
                     -100.0,
                     25.0
                 ],
@@ -187,7 +257,7 @@
                     10.0
                 ]
             },
-            "file_name": "normalEnemy",
+            "file_name": "moveEnemy",
             "collider": {
                 "type": "Sphere",
                 "center": [
@@ -202,8 +272,43 @@
                 ]
             },
             "timer": {
-                "spawn": 30.0,
-                "death": 50.0
+                "spawn": 35.0,
+                "death": 60.0
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    40.0,
+                    -100.0,
+                    15.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ],
+                "toMovePositionTime": 3.0,
+                "movePosition": [
+                    40.0,
+                    -100.0,
+                    25.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ],
+                "waitTime": 3.0,
+                "toEscapePositionTime": 3.0,
+                "escapePosition": [
+                    40.0,
+                    -100.0,
+                    40.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    180.0
+                ]
             }
         },
         {
