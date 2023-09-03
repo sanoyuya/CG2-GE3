@@ -98,7 +98,9 @@ void Player::Update()
 	//Ž€–S‰‰o‚ÅŽ€–S‚³‚¹‚½‚Æ‚«‚Ìƒtƒ‰ƒO‚Ì’l‚ð–á‚¤
 	deathFlag_ = deathAnimation_->GetDeathFlag();
 
+#ifdef _DEBUG
 	ImGuiUpdate();
+#endif _DEBUG
 }
 
 void Player::Draw()
