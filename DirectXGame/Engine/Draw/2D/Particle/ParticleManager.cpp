@@ -79,6 +79,60 @@ void ParticleManager::Update(Camera* camera)
 	BillboardUpdate(camera);
 }
 
+void ParticleManager::RandomXMoveUpdate(Camera* camera,float xMoveMin, float xMoveMax)
+{
+	//寿命が尽きたパーティクルを全削除
+	particles_.remove_if([](OneParticle& x)
+		{
+			return x.flame >= x.num_flame;
+		}
+	);
+
+	//全パーティクル更新
+	for (std::forward_list<OneParticle>::iterator it = particles_.begin();
+		it != particles_.end();
+		it++)
+	{
+		//経過フレーム数をカウント
+		it->flame++;
+		//速度に加速度を加算
+		it->velocity = it->velocity + it->accel;
+		//速度による移動
+		it->position.x = it->position.x + static_cast<float>(myMath::GetRand(xMoveMin, xMoveMax));
+		it->position.y = it->position.y + it->velocity.y;
+		it->position.z = it->position.z + it->velocity.z;
+
+		//進行度を0～1の範囲に換算
+		float f = (float)it->flame / it->num_flame;
+		//スケールの線形補間
+		it->scale = (it->e_scale - it->s_scale) * f;
+		it->scale += it->s_scale;
+
+		it->color.w -= 1.0f / it->num_flame;
+	}
+
+	//定数バッファへデータ転送
+	PosScaleColor* vertMap = nullptr;
+	result_ = vertexBuffer_->GetResource()->Map(0, nullptr, (void**)&vertMap);
+	assert(SUCCEEDED(result_));
+
+	//パーティクルの情報を1つずつ反映
+	for (std::forward_list<OneParticle>::iterator it = particles_.begin(); it != particles_.end(); it++)
+	{
+		//座標
+		vertMap->pos = it->position;
+		//スケール
+		vertMap->scale = it->scale;
+		//カラー
+		vertMap->color = it->color;
+		//次の頂点へ
+		vertMap++;
+	}
+	vertexBuffer_->GetResource()->Unmap(0, nullptr);
+
+	BillboardUpdate(camera);
+}
+
 void ParticleManager::Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color)
 {
 	//リストに要素を追加

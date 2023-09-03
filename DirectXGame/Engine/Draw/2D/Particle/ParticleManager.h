@@ -77,6 +77,8 @@ public:
 
 	void Update(Camera* camera);
 
+	void RandomXMoveUpdate(Camera* camera, float xMoveMin, float xMoveMax);
+
 	void Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color);
 	
 	void Draw();

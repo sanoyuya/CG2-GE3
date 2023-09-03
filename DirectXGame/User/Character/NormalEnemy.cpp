@@ -22,9 +22,12 @@ void NormalEnemy::Initialize()
 	enemyTrans_.Initialize();
 	enemyTrans_.scale = { 10.0f,10.0f,10.0f };
 
-	// パーティクル生成
+	//死亡アニメーションパーティクル初期化
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
 	emitter_->Initialize();
+	//スポーンアニメーションパーティクル初期化
+	spawnEmitter_ = std::make_unique<EnemySpawnParticleEmitter>();
+	spawnEmitter_->Initialize();
 
 	lockOnAnimation_= std::make_unique<LockOnAnimation>();
 	lockOnAnimation_->Initialize();
@@ -53,6 +56,10 @@ void NormalEnemy::Update()
 
 void NormalEnemy::Draw()
 {
+	if (spawnFlag_ == false)
+	{
+		spawnEmitter_->Draw();
+	}
 	//死んでいないときのみ描画
 	if (spawnFlag_ == true && deathAnimationFlag_ == false)
 	{
@@ -179,18 +186,15 @@ void NormalEnemy::SpawnUpdate()
 	if (spawnTime_ <= gameTimer_->GetIntTime())
 	{
 		enemyTrans_.TransUpdate(camera_);
-		if (spawnAnimationFlag_ == false)
-		{
-			emitter_->Create(enemyTrans_.parentToTranslation);
-		}
-		spawnAnimationFlag_ = true;
-	}
 
-	if (spawnAnimationFlag_ == true)
-	{
-		emitter_->Update(camera_);
+		if (spawnAnimationTimer_ < maxSpawnAnimationTime_ / 2)
+		{
+			spawnEmitter_->Create(enemyTrans_.parentToTranslation);
+		}
 		spawnAnimationTimer_++;
 	}
+
+	spawnEmitter_->Update(camera_);
 
 	if (spawnAnimationTimer_ > maxSpawnAnimationTime_)
 	{

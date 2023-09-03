@@ -38,6 +38,7 @@ private:
 	const uint8_t maxDeathAnimationTime_ = 60;
 
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
+	std::unique_ptr<EnemySpawnParticleEmitter>spawnEmitter_;
 
 	bool lockOnFlag = false;
 	bool lockOnAnimationFlag = false;//ƒNƒ‰ƒX•ª‚¯‚·‚é—\’è

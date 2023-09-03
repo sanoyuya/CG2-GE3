@@ -25,9 +25,12 @@ void MoveEnemy::Initialize()
 	enemyTrans_.rotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
 	enemyTrans_.scale = { 10.0f,10.0f,10.0f };
 
-	// パーティクル生成
+	//死亡アニメーションパーティクル初期化
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
 	emitter_->Initialize();
+	//スポーンアニメーションパーティクル初期化
+	spawnEmitter_= std::make_unique<EnemySpawnParticleEmitter>();
+	spawnEmitter_->Initialize();
 
 	lockOnAnimation_ = std::make_unique<LockOnAnimation>();
 	lockOnAnimation_->Initialize();
@@ -35,10 +38,6 @@ void MoveEnemy::Initialize()
 
 void MoveEnemy::Update()
 {
-	/*time_++;
-	addY = PhysicsMath::SimpleHarmonicMotion(time_,0.5f,120.0f);
-	enemyTrans_.translation.y = enemyTrans_.translation.y + addY;*/
-
 	//出現していたら
 	if (spawnFlag_ == true)
 	{
@@ -119,6 +118,10 @@ void MoveEnemy::PhaseMove(const myMath::Vector3& startPosition, const myMath::Ve
 
 void MoveEnemy::Draw()
 {
+	if (spawnFlag_ == false)
+	{
+		spawnEmitter_->Draw();
+	}
 	//死んでいないときのみ描画
 	if (spawnFlag_ == true && deathAnimationFlag_ == false)
 	{
@@ -248,18 +251,15 @@ void MoveEnemy::SpawnUpdate()
 	if (spawnTime_ <= gameTimer_->GetIntTime())
 	{
 		enemyTrans_.TransUpdate(camera_);
-		if (spawnAnimationFlag_ == false)
-		{
-			emitter_->Create(enemyTrans_.parentToTranslation);
-		}
-		spawnAnimationFlag_ = true;
-	}
 
-	if (spawnAnimationFlag_ == true)
-	{
-		emitter_->Update(camera_);
+		if (spawnAnimationTimer_ < maxSpawnAnimationTime_ / 2)
+		{
+			spawnEmitter_->Create(enemyTrans_.parentToTranslation);
+		}
 		spawnAnimationTimer_++;
 	}
+
+	spawnEmitter_->Update(camera_);
 
 	if (spawnAnimationTimer_ > maxSpawnAnimationTime_)
 	{

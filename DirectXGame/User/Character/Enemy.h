@@ -3,6 +3,7 @@
 #include<list>
 #include"Player.h"
 #include"EnemyDeathParticleEmitter.h"
+#include"EnemySpawnParticleEmitter.h"
 #include"GameTimer.h"
 #include"Transform.h"
 #include"LockOnAnimation.h"
