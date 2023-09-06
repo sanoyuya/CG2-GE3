@@ -129,10 +129,10 @@ void Sprite3D::DrawAnimationSpriteXY3D(Camera* camera, Transform& transform, uin
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{(float)x / (float)sheetsNumX,(float)y / (float)sheetsNumY},{color.x, color.y, color.z, color.w}},//左上インデックス0
-		{{left,bottom,0.0f},{(float)x / (float)sheetsNumX,((float)y + 1) / (float)sheetsNumY},{color.x, color.y, color.z, color.w}},//左下インデックス1
-		{{right,top,0.0f},{((float)x + 1) / (float)sheetsNumX,(float)y / (float)sheetsNumY},{color.x, color.y, color.z, color.w}},//右上インデックス2
-		{{right,bottom,0.0f},{((float)x + 1) / (float)sheetsNumX,((float)y + 1) / (float)sheetsNumY},{color.x, color.y, color.z, color.w}},//右下インデックス3
+		{{left,top,0.0f},{static_cast<float>(x) / static_cast<float>(sheetsNumX),static_cast<float>(y) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//左上インデックス0
+		{{left,bottom,0.0f},{static_cast<float>(x) / static_cast<float>(sheetsNumX),(static_cast<float>(y) + 1) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//左下インデックス1
+		{{right,top,0.0f},{(static_cast<float>(x) + 1) / static_cast<float>(sheetsNumX),static_cast<float>(y) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//右上インデックス2
+		{{right,bottom,0.0f},{(static_cast<float>(x) + 1) / static_cast<float>(sheetsNumX),(static_cast<float>(y) + 1) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//右下インデックス3
 	};
 
 	//インデックスデータ
