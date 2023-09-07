@@ -27,6 +27,8 @@ public://GameObjectで必要な奴
 	//オブジェクトの名前取得処理
 	virtual std::string GetName() = 0;
 
+	virtual const Transform& GetTransform() = 0;
+
 	//オブジェクトの当たり判定取得処理
 	virtual const CollisionData& GetCollisionData() = 0;
 
@@ -53,6 +55,6 @@ public://Bulletで必要な奴
 	virtual void SetDirectionVector(const myMath::Vector3& directionVector) = 0;
 	virtual void SetOwner(BulletOwner owner) = 0;
 	virtual void SetName(const std::string& name) = 0;
-	virtual void SetTargetPos(const myMath::Vector3& position) = 0;
+	virtual void SetTargetPos(GameObject* lockOnEnemy) = 0;
 	virtual void SetControlPos(const myMath::Vector3& position) = 0;
 };

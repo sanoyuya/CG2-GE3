@@ -43,13 +43,13 @@ void BulletManager::CreateNormalBullet(myMath::Vector3 position, myMath::Vector3
 	bullets_.push_back(std::move(newBullet));
 }
 
-void BulletManager::CreateLockOnBullet(myMath::Vector3 startPos, myMath::Vector3 targetPos, myMath::Vector3 controlPos)
+void BulletManager::CreateLockOnBullet(myMath::Vector3 startPos, GameObject* lockOnEnemy, myMath::Vector3 controlPos)
 {
 	//’e‚ğ¶¬‚µA‰Šú‰»
 	std::unique_ptr<BulletBase> newBullet = std::make_unique<LockOnBullet>();
 	newBullet->SetPos(startPos);
 	newBullet->SetControlPos(controlPos);
-	newBullet->SetTargetPos(targetPos);
+	newBullet->SetTargetPos(lockOnEnemy);
 	newBullet->Initialize();
 
 	//’e‚ğ“o˜^‚·‚é

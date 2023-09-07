@@ -81,6 +81,11 @@ std::string NormalEnemy::GetName()
 	return name_;
 }
 
+const Transform& NormalEnemy::GetTransform()
+{
+	return enemyTrans_;
+}
+
 const CollisionData& NormalEnemy::GetCollisionData()
 {
 	return collisionData_;

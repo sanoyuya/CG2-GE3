@@ -35,6 +35,8 @@ private:
 
 	float beziersTime_ = 0.0f;
 
+	GameObject* lockOnEnemy_ = nullptr;
+
 public://BulletBaseで必要な奴
 
 	//デストラクタ
@@ -51,6 +53,8 @@ public://BulletBaseで必要な奴
 
 	//オブジェクトの名前取得処理
 	std::string GetName();
+
+	const Transform& GetTransform();
 
 	//オブジェクトの当たり判定取得処理
 	const CollisionData& GetCollisionData();
@@ -77,7 +81,7 @@ public://BulletBaseで必要な奴
 	void SetDirectionVector(const myMath::Vector3& directionVector);
 	void SetOwner(BulletOwner owner);
 	void SetName(const std::string& name);
-	void SetTargetPos(const myMath::Vector3& position);
+	void SetTargetPos(GameObject* lockOnEnemy);
 	void SetControlPos(const myMath::Vector3& position);
 
 private:

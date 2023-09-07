@@ -46,6 +46,8 @@ public:
 	//オブジェクトの名前取得処理
 	virtual std::string GetName() = 0;
 
+	virtual const Transform& GetTransform() = 0;
+
 	//オブジェクトの当たり判定取得処理
 	virtual const CollisionData& GetCollisionData() = 0;
 

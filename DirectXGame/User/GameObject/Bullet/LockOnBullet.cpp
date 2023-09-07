@@ -49,6 +49,11 @@ std::string LockOnBullet::GetName()
 	return name_;
 }
 
+const Transform& LockOnBullet::GetTransform()
+{
+	return bulletTrans_;
+}
+
 const CollisionData& LockOnBullet::GetCollisionData()
 {
 	return collisionData_;
@@ -108,9 +113,9 @@ void LockOnBullet::SetName(const std::string& name)
 	name_ = name;
 }
 
-void LockOnBullet::SetTargetPos(const myMath::Vector3& position)
+void LockOnBullet::SetTargetPos(GameObject* lockOnEnemy)
 {
-	targetPos_ = position;
+	lockOnEnemy_ = lockOnEnemy;
 }
 
 void LockOnBullet::SetControlPos(const myMath::Vector3& position)
@@ -135,7 +140,7 @@ void LockOnBullet::SmokeUpdate()
 void LockOnBullet::BulletMove()
 {
 	//弾の移動にベジエ補間をかける
-	bulletTrans_.translation = myMath::Beziers(startPos_, targetPos_, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_));
+	bulletTrans_.translation = myMath::Beziers(startPos_, lockOnEnemy_->GetTransform().translation, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_));
 
 	//ベジエ補間にイージング補間をかける
 	beziersTime_ = static_cast<float>(Easing::EaseInOutCubic(deathTimer_, 0.0f, static_cast<float>(maxDeathTime_), static_cast<float>(maxDeathTime_)));

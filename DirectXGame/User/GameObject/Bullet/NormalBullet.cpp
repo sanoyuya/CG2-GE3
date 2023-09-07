@@ -47,6 +47,11 @@ std::string NormalBullet::GetName()
 	return name_;
 }
 
+const Transform& NormalBullet::GetTransform()
+{
+	return bulletTrans_;
+}
+
 const CollisionData& NormalBullet::GetCollisionData()
 {
 	return collisionData_;
@@ -105,9 +110,9 @@ void NormalBullet::SetName(const std::string& name)
 	name_ = name;
 }
 
-void NormalBullet::SetTargetPos(const myMath::Vector3& position)
+void NormalBullet::SetTargetPos(GameObject* lockOnEnemy)
 {
-	position;
+	lockOnEnemy;
 }
 
 void NormalBullet::SetControlPos(const myMath::Vector3& position)

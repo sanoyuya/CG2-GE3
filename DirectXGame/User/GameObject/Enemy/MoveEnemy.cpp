@@ -143,6 +143,11 @@ std::string MoveEnemy::GetName()
 	return name_;
 }
 
+const Transform& MoveEnemy::GetTransform()
+{
+	return enemyTrans_;
+}
+
 const CollisionData& MoveEnemy::GetCollisionData()
 {
 	return collisionData_;

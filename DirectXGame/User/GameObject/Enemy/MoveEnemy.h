@@ -78,6 +78,8 @@ public:
 
 	std::string GetName();
 
+	const Transform& GetTransform();
+
 	//オブジェクトの当たり判定取得処理
 	const CollisionData& GetCollisionData();
 

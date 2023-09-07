@@ -283,7 +283,7 @@ void Player::LockOnAttack()
 				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) };
 
 				//弾を生成
-				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, lockOnEnemy->GetCollisionData().center, controlPoint);
+				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, lockOnEnemy, controlPoint);
 			}
 			//ロックオン敵listをリセット
 			ColliderManager::GetInstance()->ResetLockOnEnemy();
