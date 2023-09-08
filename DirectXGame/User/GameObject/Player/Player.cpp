@@ -168,6 +168,8 @@ void Player::Reset()
 	//レティクルのリセット
 	reticle_->Reset();
 	lockOnAttackFlag = false;
+	//マネージャーに当たり判定を渡す
+	ColliderManager::GetInstance()->AddCollision(this);
 }
 
 const bool Player::GetDamageFlag()

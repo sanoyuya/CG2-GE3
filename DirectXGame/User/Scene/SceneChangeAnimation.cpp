@@ -20,26 +20,25 @@ void SceneChangeAnimation::Update()
 	{
 		alpha_ = static_cast<float>(Easing::EaseInQuint(static_cast<double>(animationTimer_), 0.0f, 1.0f, 90.0f));
 	}
-}
-
-void SceneChangeAnimation::Change(const std::string& sceneName)
-{
-	if (animationTimer_ == maxAnimationTime / 2)
+	else if (animationTimer_ == 91.0f)
 	{
-		SceneManager::GetInstance()->ChangeScene(sceneName);
+		SceneManager::GetInstance()->ChangeScene(sceneName_);
 	}
-}
+	else
+	{
+		alpha_ = static_cast<float>(Easing::EaseInOutQuint(static_cast<double>(animationTimer_ - 90.0f), 1.0f, 0.0f, 90.0f));
+	}
 
-void SceneChangeAnimation::ChangeAfter()
-{
 	if (animationTimer_ >= maxAnimationTime)
 	{
 		Reset();
 	}
-	else if (animationTimer_ > 90.0f)
-	{
-		alpha_ = static_cast<float>(Easing::EaseInOutQuint(static_cast<double>(animationTimer_ - 90.0f), 1.0f, 0.0f, 90.0f));
-	}
+}
+
+void SceneChangeAnimation::Change(const std::string& sceneName)
+{
+	animationFlag_ = true;
+	sceneName_ = sceneName;
 }
 
 void SceneChangeAnimation::Draw()

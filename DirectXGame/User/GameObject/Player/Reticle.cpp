@@ -81,6 +81,8 @@ void Reticle::CancelLockOn()
 void Reticle::Reset()
 {
 	reticleTrans_.translation = { 0.0f,-reticleLimit_,100.0f };
+
+	ColliderManager::GetInstance()->AddCollision(this);
 }
 
 const float Reticle::GetReticleLimit()

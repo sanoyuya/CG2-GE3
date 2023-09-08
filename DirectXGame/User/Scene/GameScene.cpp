@@ -60,19 +60,16 @@ void GameScene::Destroy()
 void GameScene::Update()
 {
 	SceneChangeAnimation::GetInstance()->Update();
-	SceneChangeAnimation::GetInstance()->ChangeAfter();
 
 	//プレイヤーのHPが0になったらゲームオーバー
 	if (player_->GetIsDead()==true)
 	{
-		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
 		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");
 	}
 
 	//カメラが最後まで到達したらゲームクリア
 	if (camera_->GetTime() >= 0.95f)
 	{
-		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
 		SceneChangeAnimation::GetInstance()->Change("GAMECLEAR");
 	}
 
@@ -84,6 +81,7 @@ void GameScene::Update()
 		camera_->ReLoad(gameLevelData_->GetCameraData());
 		player_->Reset();
 		enemyManager_->ReLoad(gameLevelData_->GetEnemyData());
+		bulletManager_->Reset();
 	}
 
 	lightManager_->Update();

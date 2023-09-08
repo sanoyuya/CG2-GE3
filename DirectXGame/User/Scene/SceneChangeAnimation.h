@@ -5,6 +5,8 @@ class SceneChangeAnimation
 {
 private:
 
+	std::string sceneName_ = "";
+
 	bool animationFlag_ = false;
 	uint8_t animationTimer_ = 0;
 	const uint8_t maxAnimationTime = 180;
@@ -21,8 +23,6 @@ public:
 	void Update();
 
 	void Change(const std::string& sceneName);
-
-	void ChangeAfter();
 
 	void Draw();
 

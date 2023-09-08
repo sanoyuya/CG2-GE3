@@ -56,3 +56,8 @@ void BulletManager::CreateLockOnBullet(myMath::Vector3 startPos, GameObject* loc
 	ColliderManager::GetInstance()->AddCollision(newBullet.get());
 	bullets_.push_back(std::move(newBullet));
 }
+
+void BulletManager::Reset()
+{
+	bullets_.clear();
+}

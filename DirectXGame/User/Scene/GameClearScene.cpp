@@ -35,13 +35,11 @@ void GameClearScene::Destroy()
 
 void GameClearScene::Update()
 {
+	SceneChangeAnimation::GetInstance()->Update();
 	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 	{
-		SceneChangeAnimation::GetInstance()->SetAnimationFlag(true);
+		SceneChangeAnimation::GetInstance()->Change("TITLE");
 	}
-	SceneChangeAnimation::GetInstance()->Update();
-	SceneChangeAnimation::GetInstance()->ChangeAfter();
-	SceneChangeAnimation::GetInstance()->Change("TITLE");
 }
 
 void GameClearScene::Draw()
