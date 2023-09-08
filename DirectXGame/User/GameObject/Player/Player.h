@@ -49,7 +49,7 @@ private:
 
 	bool damageFlag_ = false;
 
-	myMath::Vector3 targetPos = {};
+	myMath::Vector3 targetPos_ = {};
 
 	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
@@ -58,7 +58,8 @@ private:
 
 	CollisionData collisionData_;
 
-	bool lockOnAttackFlag = false;
+	bool lockOnAttackFlag_ = false;
+	int8_t lockOnTimer_ = 0;
 
 public:
 

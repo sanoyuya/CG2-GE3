@@ -158,7 +158,7 @@ void Player::CancelLockOn()
 
 const bool Player::GetLockOnFlag()
 {
-	return lockOnAttackFlag;
+	return lockOnAttackFlag_;
 }
 
 void Player::Reset()
@@ -167,7 +167,7 @@ void Player::Reset()
 	hp_ = 10;
 	//レティクルのリセット
 	reticle_->Reset();
-	lockOnAttackFlag = false;
+	lockOnAttackFlag_ = false;
 	//マネージャーに当たり判定を渡す
 	ColliderManager::GetInstance()->AddCollision(this);
 }
@@ -194,7 +194,7 @@ void Player::SetDamageFlag(const bool damageFlag)
 
 const myMath::Vector3& Player::GetAddTargetPos()
 {
-	return targetPos;
+	return targetPos_;
 }
 
 void Player::SetCamera(Camera* camera)
@@ -237,7 +237,7 @@ void Player::Rotation(Camera* camera)
 	camera->SetUp(cameraUp);
 
 	//プレイヤーの横向きの回転をワールド座標に変換し、後でカメラに足せるように変数に格納
-	targetPos = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
+	targetPos_ = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
 }
 
 void Player::BulletUpdate()
@@ -270,10 +270,18 @@ void Player::LockOnAttack()
 {
 	if (input_->KeyboardKeepPush(DIK_SPACE) || input_->ControllerButtonKeepPush(A))
 	{
-		lockOnAttackFlag = true;
+		lockOnTimer_++;
+		if (lockOnTimer_ >= 30.0f)
+		{
+			lockOnAttackFlag_ = true;
+		}
+	}
+	else
+	{
+		lockOnTimer_ = 0;
 	}
 
-	if (lockOnAttackFlag == true)
+	if (lockOnAttackFlag_ == true)
 	{
 		if (input_->KeyboardTriggerRelease(DIK_SPACE) || input_->ControllerButtonTriggerRelease(A))
 		{
@@ -289,7 +297,7 @@ void Player::LockOnAttack()
 			}
 			//ロックオン敵listをリセット
 			ColliderManager::GetInstance()->ResetLockOnEnemy();
-			lockOnAttackFlag = false;
+			lockOnAttackFlag_ = false;
 		}
 	}
 }
