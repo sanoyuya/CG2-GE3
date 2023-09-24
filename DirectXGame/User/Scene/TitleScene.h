@@ -4,17 +4,8 @@
 #include"DrawOversight.h"
 #include"Camera.h"
 #include"AudioManager.h"
-#include"Collision.h"
 #include"LightManager.h"
-#include"ParticleEmitter.h"
-#include"EnemyDeathParticleEmitter.h"
-
-enum class SceneNum
-{
-	NONE,
-	GAME,
-	DEMO
-};
+#include"PlayerEngineSmokeParticleEmitter.h"
 
 //タイトルシーン
 class TitleScene :public BaseScene
@@ -40,10 +31,25 @@ private:
 	uint32_t titleTex_ = 0;
 	std::unique_ptr<Sprite>title_;
 
+	uint32_t pressButtonTex_ = 0;
+	std::unique_ptr<Sprite>pressButton_;
+
 	float time_ = 0.0f;
 	myMath::Vector2 position_ = { 640.0f,0.0f };
 
-	SceneNum sceneNum_ = SceneNum::NONE;
+	std::unique_ptr<Model>player_;
+	Transform playerTrans_;
+	uint32_t playerTex_;
+
+	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
+	Transform smokeTrans_;
+
+	bool animationFlag_ = false;
+	uint8_t animationTime_ = 0;
+
+	uint32_t animationBoxTex_ = 0;
+	std::array<std::unique_ptr<Sprite>,2>animationBox_;
+	float animationBoxScale_ = 0.0f;
 
 public:
 
@@ -60,6 +66,8 @@ public:
 	void Draw()override;
 
 private:
-	
-	void camUpdate();
+
+	void SmokeUpdate();
+
+	void PlayerUpdate();
 };

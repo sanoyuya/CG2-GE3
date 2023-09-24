@@ -33,6 +33,9 @@ void MyGame::Update()
 	//基底クラスの更新処理
 	YFramework::Update();
 
+	//シーンチェンジアニメーションの更新処理
+	SceneChangeAnimation::GetInstance()->Update();
+
 	//シーンマネージャーの更新処理
 	SceneManager::GetInstance()->Update();
 }
