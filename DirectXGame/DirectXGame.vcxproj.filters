@@ -172,6 +172,12 @@
     <Filter Include="User\ソース ファイル\Object\Enemy">
       <UniqueIdentifier>{77a267b7-7ed6-48ec-86f1-35c51d3c057c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\Stage">
+      <UniqueIdentifier>{f8be45a6-1a68-40e8-be97-1e32c1e400b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Stage">
+      <UniqueIdentifier>{8bdcd7f0-45f7-446c-8841-ccb8d8e95c09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -413,6 +419,12 @@
     </ClCompile>
     <ClCompile Include="User\Particle\LockOnAnimation.cpp">
       <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>User\ソース ファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractStageFactory.cpp">
+      <Filter>User\ソース ファイル\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -756,6 +768,15 @@
     </ClInclude>
     <ClInclude Include="User\Particle\LockOnAnimation.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>User\ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseStage.h">
+      <Filter>User\ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractStageFactory.h">
+      <Filter>User\ヘッダー ファイル\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -101,6 +101,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractStageFactory.cpp" />
+    <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="User\Particle\LockOnAnimation.cpp" />
     <ClCompile Include="User\Scene\StageSelectScene.cpp" />
     <ClCompile Include="User\GameObject\Bullet\LockOnBullet.cpp" />
@@ -339,6 +341,9 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractStageFactory.h" />
+    <ClInclude Include="BaseStage.h" />
+    <ClInclude Include="StageManager.h" />
     <ClInclude Include="User\Particle\LockOnAnimation.h" />
     <ClInclude Include="User\Scene\StageSelectScene.h" />
     <ClInclude Include="User\GameObject\Bullet\LockOnBullet.h" />
