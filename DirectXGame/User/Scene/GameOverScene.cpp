@@ -35,7 +35,6 @@ void GameOverScene::Destroy()
 
 void GameOverScene::Update()
 {
-	SceneChangeAnimation::GetInstance()->Update();
 	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 	{
 		SceneChangeAnimation::GetInstance()->Change("TITLE");

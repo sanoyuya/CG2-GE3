@@ -1,5 +1,4 @@
 #include "GameScene.h"
-#include"SceneManager.h"
 #include"PhysicsMath.h"
 #include<imgui.h>
 #include"ColliderManager.h"
@@ -59,8 +58,6 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
-	SceneChangeAnimation::GetInstance()->Update();
-
 	//プレイヤーのHPが0になったらゲームオーバー
 	if (player_->GetIsDead()==true)
 	{

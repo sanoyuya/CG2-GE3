@@ -5,6 +5,7 @@
 #include"GameClearScene.h"
 #include"GameOverScene.h"
 #include"DemoScene.h"
+#include"StageSelectScene.h"
 
 std::unique_ptr<BaseScene> SceneFactory::CreateScene(const std::string& sceneName)
 {
@@ -30,6 +31,10 @@ std::unique_ptr<BaseScene> SceneFactory::CreateScene(const std::string& sceneNam
     else if (sceneName == "GAMEOVER")
     {
         newScene = new GameOverScene();
+    }
+    else if (sceneName == "STAGESELECT")
+    {
+        newScene = new StageSelectScene();
     }
     else if (sceneName == "DEMO")
     {
