@@ -1,6 +1,7 @@
 #include "MyGame.h"
 #include"SceneManager.h"
 #include"SceneChangeAnimation.h"
+#include"Enemy.h"
 
 void MyGame::Initialize()
 {
@@ -15,6 +16,8 @@ void MyGame::Initialize()
 	postEffect_->Initialize(windowsApp_.get());
 
 	SceneChangeAnimation::GetInstance()->StaticInitialize();
+
+	Enemy::StaticInitialize();
 
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("EngineOP");

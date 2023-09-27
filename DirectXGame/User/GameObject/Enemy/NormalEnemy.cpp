@@ -151,6 +151,9 @@ void NormalEnemy::CancelLockOn()
 void NormalEnemy::OnCollision()
 {
 	emitter_->Create(enemyTrans_.parentToTranslation);
+
+	AudioManager::GetInstance()->PlayWave(sound_, false);
+
 	deathAnimationFlag_ = true;
 }
 

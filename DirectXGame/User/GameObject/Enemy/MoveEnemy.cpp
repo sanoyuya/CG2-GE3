@@ -2,6 +2,7 @@
 #include"PhysicsMath.h"
 #include"ColliderManager.h"
 #include"EasingFunction.h"
+#include"AudioManager.h"
 
 MoveEnemy::~MoveEnemy()
 {
@@ -216,6 +217,9 @@ void MoveEnemy::CancelLockOn()
 void MoveEnemy::OnCollision()
 {
 	emitter_->Create(enemyTrans_.parentToTranslation);
+
+	AudioManager::GetInstance()->PlayWave(sound_, false);
+
 	deathAnimationFlag_ = true;
 }
 

@@ -7,6 +7,7 @@
 #include"GameTimer.h"
 #include"Transform.h"
 #include"LockOnAnimation.h"
+#include"AudioManager.h"
 
 struct MoveEnemyProperty
 {
@@ -29,6 +30,12 @@ protected:
 	Player* player_ = nullptr;
 	GameTimer* gameTimer_ = nullptr;
 	BulletManager* bulletManager_ = nullptr;
+
+	static uint32_t sound_;
+
+public:
+
+	static void StaticInitialize();
 
 public:
 
