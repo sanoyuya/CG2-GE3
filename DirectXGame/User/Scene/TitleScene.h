@@ -51,6 +51,10 @@ private:
 	std::array<std::unique_ptr<Sprite>,2>animationBox_;
 	float animationBoxScale_ = 0.0f;
 
+	std::array<std::unique_ptr<Model>, 5>cloud_;
+	std::array<Transform, 5>cloudTrans_;
+	uint32_t cloudTex_ = 0;
+
 public:
 
 	//‰Šú‰»ˆ—

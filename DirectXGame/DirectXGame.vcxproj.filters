@@ -420,10 +420,10 @@
     <ClCompile Include="User\Particle\LockOnAnimation.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="StageManager.cpp">
+    <ClCompile Include="User\Stage\StageManager.cpp">
       <Filter>User\ソース ファイル\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractStageFactory.cpp">
+    <ClCompile Include="User\Stage\AbstractStageFactory.cpp">
       <Filter>User\ソース ファイル\Stage</Filter>
     </ClCompile>
   </ItemGroup>
@@ -769,13 +769,13 @@
     <ClInclude Include="User\Particle\LockOnAnimation.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="StageManager.h">
+    <ClInclude Include="User\Stage\StageManager.h">
       <Filter>User\ヘッダー ファイル\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="BaseStage.h">
+    <ClInclude Include="User\Stage\BaseStage.h">
       <Filter>User\ヘッダー ファイル\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractStageFactory.h">
+    <ClInclude Include="User\Stage\AbstractStageFactory.h">
       <Filter>User\ヘッダー ファイル\Stage</Filter>
     </ClInclude>
   </ItemGroup>
