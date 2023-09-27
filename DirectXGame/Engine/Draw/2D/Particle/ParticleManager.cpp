@@ -51,10 +51,12 @@ void ParticleManager::Update(Camera* camera)
 		it->position = it->position + it->velocity;
 
 		//進行度を0～1の範囲に換算
-		float f = (float)it->flame / it->num_flame;
+		float f = it->flame / it->num_flame;
 		//スケールの線形補間
 		it->scale = (it->e_scale - it->s_scale) * f;
 		it->scale += it->s_scale;
+
+		it->color.w = 1.0f - 1.0f * it->flame / it->num_flame;
 	}
 
 	//定数バッファへデータ転送
