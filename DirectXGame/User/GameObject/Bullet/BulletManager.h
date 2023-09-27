@@ -8,7 +8,11 @@ private:
 
 	std::list<std::unique_ptr<BulletBase>>bullets_;
 
+	uint32_t sound_ = 0;
+
 public:
+
+	void Initialize();
 
 	void Update(Camera* camera);
 

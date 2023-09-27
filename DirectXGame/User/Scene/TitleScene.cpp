@@ -116,10 +116,13 @@ void TitleScene::Update()
 
 	for (uint8_t i = 0; i < 5; i++)
 	{
-		if (cloudTrans_[i].translation.x < playerTrans_.parentToTranslation.x - 50.0f)
+		if (animationFlag_ == false)
 		{
-			cloudTrans_[i].translation = { playerTrans_.parentToTranslation.x + 75.0f,static_cast<float>(myMath::GetRand(-7.5f,-5.0f)) ,static_cast<float>(myMath::GetRand(-5.0f,5.0f)) };
-			cloudTrans_[i].scale = { static_cast<float>(myMath::GetRand(4.0f,8.0f)),static_cast<float>(myMath::GetRand(2.0f,4.0f)) ,static_cast<float>(myMath::GetRand(4.0f,8.0f)) };
+			if (cloudTrans_[i].translation.x < playerTrans_.parentToTranslation.x - 50.0f)
+			{
+				cloudTrans_[i].translation = { playerTrans_.parentToTranslation.x + 75.0f,static_cast<float>(myMath::GetRand(-7.5f,-5.0f)) ,static_cast<float>(myMath::GetRand(-5.0f,5.0f)) };
+				cloudTrans_[i].scale = { static_cast<float>(myMath::GetRand(4.0f,8.0f)),static_cast<float>(myMath::GetRand(2.0f,4.0f)) ,static_cast<float>(myMath::GetRand(4.0f,8.0f)) };
+			}
 		}
 
 		cloudTrans_[i].TransUpdate(camera_.get());

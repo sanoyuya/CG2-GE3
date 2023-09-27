@@ -1,6 +1,12 @@
 #include "BulletManager.h"
 #include"ColliderManager.h"
 #include"LockOnBullet.h"
+#include"AudioManager.h"
+
+void BulletManager::Initialize()
+{
+	sound_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/bullet.mp3", 0.1f);
+}
 
 void BulletManager::Update(Camera* camera)
 {
@@ -55,6 +61,8 @@ void BulletManager::CreateLockOnBullet(myMath::Vector3 startPos, GameObject* loc
 	//’e‚ð“o˜^‚·‚é
 	ColliderManager::GetInstance()->AddCollision(newBullet.get());
 	bullets_.push_back(std::move(newBullet));
+
+	AudioManager::GetInstance()->PlayWave(sound_, false);
 }
 
 void BulletManager::Reset()

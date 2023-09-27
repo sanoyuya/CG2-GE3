@@ -41,6 +41,7 @@ void GameScene::Initialize()
 	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
 
 	bulletManager_ = std::make_unique<BulletManager>();
+	bulletManager_->Initialize();
 
 	radar_= std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
