@@ -48,6 +48,8 @@ private:
 
 	uint32_t bgm_ = 0;
 
+	bool poseFlag_ = false;
+
 public:
 
 	//‰Šú‰»ˆ—

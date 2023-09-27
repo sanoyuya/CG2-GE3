@@ -43,7 +43,7 @@ void GameScene::Initialize()
 	bulletManager_ = std::make_unique<BulletManager>();
 	bulletManager_->Initialize();
 
-	radar_= std::make_unique<Radar>();
+	radar_ = std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
 
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
@@ -60,7 +60,7 @@ void GameScene::Destroy()
 void GameScene::Update()
 {
 	//プレイヤーのHPが0になったらゲームオーバー
-	if (player_->GetIsDead()==true)
+	if (player_->GetIsDead() == true)
 	{
 		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");
 	}
@@ -82,6 +82,18 @@ void GameScene::Update()
 		bulletManager_->Reset();
 	}
 
+	if (input_->KeyboardTriggerPush(DIK_P) || input_->ControllerButtonTriggerPush(START))
+	{
+		if (poseFlag_ == false)
+		{
+			poseFlag_ = true;
+		}
+		else
+		{
+			poseFlag_ = false;
+		}
+	}
+
 	lightManager_->Update();
 
 	//ポイントライト
@@ -89,19 +101,22 @@ void GameScene::Update()
 	lightManager_->SetPointLightPos(0, lightPos_);
 	lightManager_->SetPointLightColor(0, lightColor_);
 	lightManager_->SetPointLightAtten(0, lightAtten_);
-	
-	gameTimer_->Update();
-	player_->SetCamera(camera_->GetCameraPtr());
-	player_->SetBulletManager(bulletManager_.get());
-	player_->Update();
-	camera_->Update(player_.get());
-	gameLevelData_->Update(camera_->GetCameraPtr());
-	skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//天球
-	playerDamageEffect_->Update(player_.get());
-	enemyManager_->Update(camera_->GetCameraPtr(), player_.get(),gameTimer_.get(), bulletManager_.get());
-	bulletManager_->Update(camera_->GetCameraPtr());
-	ColliderManager::GetInstance()->Update(player_.get());
-	radar_->Update(camera_->GetCameraPtr());
+
+	if (poseFlag_ == false)
+	{
+		gameTimer_->Update();
+		player_->SetCamera(camera_->GetCameraPtr());
+		player_->SetBulletManager(bulletManager_.get());
+		player_->Update();
+		camera_->Update(player_.get());
+		gameLevelData_->Update(camera_->GetCameraPtr());
+		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//天球
+		playerDamageEffect_->Update(player_.get());
+		enemyManager_->Update(camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
+		bulletManager_->Update(camera_->GetCameraPtr());
+		ColliderManager::GetInstance()->Update(player_.get());
+		radar_->Update(camera_->GetCameraPtr());
+	}
 }
 
 void GameScene::Draw()
@@ -111,6 +126,6 @@ void GameScene::Draw()
 	enemyManager_->Draw();
 	player_->Draw();
 	bulletManager_->Draw();
-	radar_->Draw(enemyManager_.get(),player_.get());
+	radar_->Draw(enemyManager_.get(), player_.get());
 	SceneChangeAnimation::GetInstance()->Draw();
 }
