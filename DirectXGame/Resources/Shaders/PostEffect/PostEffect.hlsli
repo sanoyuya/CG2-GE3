@@ -1,6 +1,7 @@
 cbuffer cbuff0 : register(b0)
 {
     float power;
+    float grayScalePower;
 };
 
 //頂点シェーダーからの出力構造体

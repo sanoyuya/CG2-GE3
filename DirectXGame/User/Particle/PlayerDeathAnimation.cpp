@@ -1,4 +1,5 @@
 #include "PlayerDeathAnimation.h"
+#include"PostEffect.h"
 
 void PlayerDeathAnimation::Initialize()
 {
@@ -12,11 +13,13 @@ void PlayerDeathAnimation::Update(const myMath::Vector3 position)
 	if (animationFlag_ == false)
 	{
 		deathParticleEmitter_->Create(position);
+		PostEffect::SetEffectMode(EffectMode::GrayScale);
 		animationFlag_ = true;
 	}
 	else
 	{
 		deathAnimationTimer++;
+		PostEffect::SetGrayScale(deathAnimationTimer / 60);
 		if (deathAnimationTimer >= 60.0f)
 		{
 			deathFlag_ = true;

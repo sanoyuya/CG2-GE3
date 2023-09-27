@@ -1,11 +1,12 @@
 #include "PostEffect.h"
 #include <d3dx12.h>
+#include <algorithm>
 
 const float PostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
 std::array <Blob, 9> PostEffect::sBlob_;//シェーダオブジェクト
 std::array <PipelineSet, 9> PostEffect::sPip_;
 EffectMode PostEffect::sEffectMode_ = EffectMode::None;//何も掛けない状態で初期化
-float PostEffect::power_ = 0.0f;
+PowerGrayScale PostEffect::constBuffMap_;
 
 void PostEffect::Initialize(WindowsApp* windowsApp)
 {
@@ -29,7 +30,6 @@ void PostEffect::Initialize(WindowsApp* windowsApp)
 
 void PostEffect::Draw()
 {
-	constBuffMap_ = power_;
 	constBuffMaterial_->Update(&constBuffMap_);
 
 	//パイプラインステートとルートシグネチャの設定コマンド
@@ -156,9 +156,17 @@ void PostEffect::SetEffectMode(const EffectMode& mode)
 
 void PostEffect::SetPower(const float power)
 {
-	if (power_ != power)
+	if (constBuffMap_.power != power)
 	{
-		power_ = power;
+		constBuffMap_.power = power;
+	}
+}
+
+void PostEffect::SetGrayScale(const float grayScale)
+{
+	if (constBuffMap_.grayScale != grayScale)
+	{
+		constBuffMap_.grayScale = std::clamp(grayScale, 0.0f, 1.0f);;
 	}
 }
 

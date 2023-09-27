@@ -15,6 +15,12 @@ struct VertexPosUV
 	myMath::Vector2 uv;//uv座標
 };
 
+struct PowerGrayScale
+{
+	float power;
+	float grayScale;
+};
+
 enum EffectMode
 {
 	None,//何もしない
@@ -52,7 +58,7 @@ private:
 	// 定数バッファ
 	std::unique_ptr<ConstantBuffer> constBuffMaterial_ = {};
 	//定数バッファのマッピング用ポインタ
-	float constBuffMap_ = {};
+	static PowerGrayScale constBuffMap_;
 	//プロジェクション行列
 	static myMath::Matrix4 matProjection_;
 
@@ -65,8 +71,6 @@ private:
 	static const float sClearColor_[4];
 
 	static EffectMode sEffectMode_;
-
-	static float power_;
 
 public:
 
@@ -95,6 +99,7 @@ public:
 	static void SetEffectMode(const EffectMode& mode);
 
 	static void SetPower(const float power);
+	static void SetGrayScale(const float grayScale);
 
 private:
 

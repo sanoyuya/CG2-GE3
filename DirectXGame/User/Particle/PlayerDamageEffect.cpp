@@ -11,7 +11,7 @@ PlayerDamageEffect::~PlayerDamageEffect()
 
 void PlayerDamageEffect::Update(Player* player)
 {
-	if (player->GetDamageFlag())
+	if (player->GetDamageFlag() && player->GetHp() > 1)
 	{
 		damageFlag_ = true;
 		PostEffect::SetEffectMode(EffectMode::GaussianBlur);
