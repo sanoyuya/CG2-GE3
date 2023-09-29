@@ -35,6 +35,9 @@ void MoveEnemy::Initialize()
 
 	lockOnAnimation_ = std::make_unique<LockOnAnimation>();
 	lockOnAnimation_->Initialize();
+
+	hitEffect_ = std::make_unique<HitEffect>();
+	hitEffect_->Initialize();
 }
 
 void MoveEnemy::Update()
@@ -136,6 +139,7 @@ void MoveEnemy::Draw()
 	{
 		//Ž€–S‰‰o‚Ì•`‰æˆ—
 		emitter_->Draw();
+		hitEffect_->Draw(camera_);
 	}
 }
 
@@ -216,8 +220,11 @@ void MoveEnemy::CancelLockOn()
 
 void MoveEnemy::OnCollision()
 {
+	//”š”­‰‰o
 	emitter_->Create(enemyTrans_.parentToTranslation);
-
+	//Hit‰‰o
+	hitEffect_->Create(enemyTrans_.parentToTranslation);
+	//”š”­‰¹
 	AudioManager::GetInstance()->PlayWave(sound_, false);
 
 	deathAnimationFlag_ = true;
@@ -288,6 +295,7 @@ void MoveEnemy::DeathUpdate()
 	if (deathAnimationFlag_ == true)
 	{
 		emitter_->Update(camera_);
+		hitEffect_->Update(camera_);
 		deathAnimationTimer_++;
 	}
 

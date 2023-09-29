@@ -2,6 +2,7 @@
 #include"SceneManager.h"
 #include"SceneChangeAnimation.h"
 #include"Enemy.h"
+#include"HitEffect.h"
 
 void MyGame::Initialize()
 {
@@ -18,6 +19,8 @@ void MyGame::Initialize()
 	SceneChangeAnimation::GetInstance()->StaticInitialize();
 
 	Enemy::StaticInitialize();
+
+	HitEffect::StaticInitialize();
 
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("EngineOP");

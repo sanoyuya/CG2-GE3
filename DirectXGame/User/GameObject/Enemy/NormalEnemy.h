@@ -1,5 +1,6 @@
 #pragma once
 #include"Enemy.h"
+#include"HitEffect.h"
 
 class NormalEnemy:public Enemy
 {
@@ -35,6 +36,8 @@ private:
 	CollisionData collisionData_;
 
 	std::unique_ptr<LockOnAnimation>lockOnAnimation_;
+
+	std::unique_ptr<HitEffect>hitEffect_;
 
 public:
 

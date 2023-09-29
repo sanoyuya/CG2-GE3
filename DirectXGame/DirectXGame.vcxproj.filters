@@ -142,12 +142,6 @@
     <Filter Include="Engine\リソース ファイル\Particle">
       <UniqueIdentifier>{f9b797fa-c9fc-4e10-999d-9978cd0749d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="User\ソース ファイル\Particle">
-      <UniqueIdentifier>{9caaa770-535b-492f-93ee-9f513a63da22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\Particle">
-      <UniqueIdentifier>{a8ccdc58-cbd6-45cf-b9b4-bf9de8406dd4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="User\ソース ファイル\UI">
       <UniqueIdentifier>{f5d1c6b7-49dd-44c7-9da9-98d045efd00e}</UniqueIdentifier>
     </Filter>
@@ -177,6 +171,18 @@
     </Filter>
     <Filter Include="User\ヘッダー ファイル\Stage">
       <UniqueIdentifier>{8bdcd7f0-45f7-446c-8841-ccb8d8e95c09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ソース ファイル\Effect">
+      <UniqueIdentifier>{a39a1a1b-7e46-417f-be4f-7c9400f50192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ソース ファイル\Effect\Particle">
+      <UniqueIdentifier>{9caaa770-535b-492f-93ee-9f513a63da22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Effect">
+      <UniqueIdentifier>{918b6de9-8536-4dc9-9fcb-52c1b3a5b7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Effect\Particle">
+      <UniqueIdentifier>{a8ccdc58-cbd6-45cf-b9b4-bf9de8406dd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -336,32 +342,26 @@
     <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="User\Particle\PlayerDamageEffect.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Math\EasingFunction.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
     <ClCompile Include="User\Scene\SceneChangeAnimation.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\Particle\EnemyDeathParticleEmitter.cpp">
-      <Filter>User\ソース ファイル\Particle</Filter>
+    <ClCompile Include="User\Effect\Particle\EnemyDeathParticleEmitter.cpp">
+      <Filter>User\ソース ファイル\Effect\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="User\Particle\ParticleEmitter.cpp">
-      <Filter>User\ソース ファイル\Particle</Filter>
+    <ClCompile Include="User\Effect\Particle\ParticleEmitter.cpp">
+      <Filter>User\ソース ファイル\Effect\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="User\Particle\PlayerEngineSmokeParticleEmitter.cpp">
-      <Filter>User\ソース ファイル\Particle</Filter>
+    <ClCompile Include="User\Effect\Particle\PlayerEngineSmokeParticleEmitter.cpp">
+      <Filter>User\ソース ファイル\Effect\Particle</Filter>
     </ClCompile>
     <ClCompile Include="User\Scene\GameClearScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="User\Scene\GameOverScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Particle\PlayerDeathAnimation.cpp">
-      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="User\UI\Radar.cpp">
       <Filter>User\ソース ファイル\UI</Filter>
@@ -378,14 +378,11 @@
     <ClCompile Include="User\Scene\DemoScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameObject\Player\Player.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="User\Particle\EnemySpawnParticleEmitter.cpp">
-      <Filter>User\ソース ファイル\Particle</Filter>
+    <ClCompile Include="User\Effect\Particle\EnemySpawnParticleEmitter.cpp">
+      <Filter>User\ソース ファイル\Effect\Particle</Filter>
     </ClCompile>
     <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp">
       <Filter>User\ソース ファイル\Object\Bullet</Filter>
@@ -417,14 +414,26 @@
     <ClCompile Include="User\Scene\StageSelectScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\Particle\LockOnAnimation.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\Stage\StageManager.cpp">
       <Filter>User\ソース ファイル\Stage</Filter>
     </ClCompile>
     <ClCompile Include="User\Stage\AbstractStageFactory.cpp">
       <Filter>User\ソース ファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Effect\HitEffect.cpp">
+      <Filter>User\ソース ファイル\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Effect\LockOnAnimation.cpp">
+      <Filter>User\ソース ファイル\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Effect\PlayerDamageEffect.cpp">
+      <Filter>User\ソース ファイル\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Effect\PlayerDeathAnimation.cpp">
+      <Filter>User\ソース ファイル\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject\Player\Player.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -682,35 +691,29 @@
     <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="User\Particle\PlayerDamageEffect.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Math\EasingFunction.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
     <ClInclude Include="User\Scene\SceneChangeAnimation.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\Particle\EnemyDeathParticleEmitter.h">
-      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    <ClInclude Include="User\Effect\Particle\EnemyDeathParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="User\Particle\ParticleBase.h">
-      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    <ClInclude Include="User\Effect\Particle\ParticleBase.h">
+      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="User\Particle\ParticleEmitter.h">
-      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    <ClInclude Include="User\Effect\Particle\ParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="User\Particle\PlayerEngineSmokeParticleEmitter.h">
-      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    <ClInclude Include="User\Effect\Particle\PlayerEngineSmokeParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
     <ClInclude Include="User\Scene\GameClearScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="User\Scene\GameOverScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Particle\PlayerDeathAnimation.h">
-      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="User\UI\HPBar.h">
       <Filter>User\ヘッダー ファイル\UI</Filter>
@@ -733,8 +736,8 @@
     <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="User\Particle\EnemySpawnParticleEmitter.h">
-      <Filter>User\ヘッダー ファイル\Particle</Filter>
+    <ClInclude Include="User\Effect\Particle\EnemySpawnParticleEmitter.h">
+      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
     <ClInclude Include="User\GameObject\Bullet\BulletBase.h">
       <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
@@ -766,9 +769,6 @@
     <ClInclude Include="User\Scene\StageSelectScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\Particle\LockOnAnimation.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="User\Stage\StageManager.h">
       <Filter>User\ヘッダー ファイル\Stage</Filter>
     </ClInclude>
@@ -777,6 +777,18 @@
     </ClInclude>
     <ClInclude Include="User\Stage\AbstractStageFactory.h">
       <Filter>User\ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Effect\HitEffect.h">
+      <Filter>User\ヘッダー ファイル\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Effect\LockOnAnimation.h">
+      <Filter>User\ヘッダー ファイル\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Effect\PlayerDamageEffect.h">
+      <Filter>User\ヘッダー ファイル\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Effect\PlayerDeathAnimation.h">
+      <Filter>User\ヘッダー ファイル\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
