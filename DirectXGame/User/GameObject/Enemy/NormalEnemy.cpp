@@ -20,7 +20,6 @@ void NormalEnemy::Initialize()
 	enemyTex_ = enemy_->CreateObjModel("Resources/enemy");
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
-	enemyTrans_.scale = { 10.0f,10.0f,10.0f };
 
 	//死亡アニメーションパーティクル初期化
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();

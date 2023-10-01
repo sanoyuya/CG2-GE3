@@ -14,6 +14,12 @@ private:
 
 	myMath::Vector2 leftUpPoint_ = {};
 
+	bool animationFlag_ = false;
+	uint8_t animationTimer_ = 0;
+	uint8_t maxAnimationTimer_ = 30;
+
+	float hpBarScale_ = 0.0f;
+
 public:
 
 	HPBar() = default;
