@@ -16,6 +16,7 @@ void HPBar::Update(const int8_t hp)
 	if (hp_ != hp)
 	{
 		hp_ = hp;
+		animationTimer_ = 0;
 		animationFlag_ = true;
 	}
 
