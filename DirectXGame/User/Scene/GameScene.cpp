@@ -53,7 +53,7 @@ void GameScene::Initialize()
 void GameScene::Destroy()
 {
 	ColliderManager::GetInstance()->Reset();
-	MultiTexturePostEffect::SetEffectMode(EffectMode::None);
+	MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::None);
 	audioManager_->StopWave(bgm_);
 }
 

@@ -14,7 +14,7 @@ void PlayerDamageEffect::Update(Player* player)
 	if (player->GetDamageFlag() && player->GetHp() > 1)
 	{
 		damageFlag_ = true;
-		MultiTexturePostEffect::SetEffectMode(EffectMode::GaussianBlur);
+		MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::GaussianBlur);
 		power_ = 10.0f;
 		player->SetDamageFlag(false);
 	}
@@ -25,7 +25,7 @@ void PlayerDamageEffect::Update(Player* player)
 		{
 			power_ = 0.0f;
 			damageFlag_ = false;
-			MultiTexturePostEffect::SetEffectMode(EffectMode::None);
+			MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::None);
 		}
 		power_ -= 0.5f;
 	}

@@ -1,6 +1,21 @@
 #pragma once
 #include"PostEffect.h"
 
+enum class MultiTextureEffectMode
+{
+	None,//何もしない
+	BrightnessUP,//明度を2倍で出力
+	Inverse,//色反転
+	Blur,//ぼかし
+	GaussianBlur,//ガウシアンブラー	
+	GrayScale,//モノクロ
+	SepiaColor,//セピアカラー
+	UVShift,//UVずらし
+	Bloom,//ブルーム
+	MultiTexture,//マルチテクスチャ基底
+	HighLumi
+};
+
 class MultiTexturePostEffect
 {
 private:
@@ -32,14 +47,14 @@ private:
 	static myMath::Matrix4 matProjection_;
 
 	//シェーダオブジェクト
-	static std::array<Blob, 10> sBlob_;
+	static std::array<Blob, 11> sBlob_;
 	//パイプライン
-	static std::array<PipelineSet, 10> sPip_;
+	static std::array<PipelineSet, 11> sPip_;
 
 	//画面クリアカラー
 	static const float sClearColor_[4];
 
-	static EffectMode sEffectMode_;
+	static MultiTextureEffectMode sEffectMode_;
 
 public:
 
@@ -65,7 +80,7 @@ public:
 
 public:
 
-	static void SetEffectMode(const EffectMode& mode);
+	static void SetEffectMode(const MultiTextureEffectMode& mode);
 
 	static void SetPower(const float power);
 	static void SetGrayScale(const float grayScale);

@@ -515,6 +515,9 @@
     <FxCompile Include="Resources\Shaders\Particle\ParticleGS.hlsl">
       <Filter>Engine\リソース ファイル\Particle</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\highLumiPS.hlsl">
+      <Filter>Engine\リソース ファイル\PosEffect</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Input\Keyboard.h">

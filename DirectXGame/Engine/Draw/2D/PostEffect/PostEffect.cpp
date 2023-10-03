@@ -316,13 +316,6 @@ void PostEffect::LoadShader()
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[7].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/UVShiftPS.hlsl", "main", "ps_5_0", sBlob_[7].ps.Get());
 #pragma endregion UVShift
-
-#pragma region Bloom
-	//頂点シェーダの読み込みとコンパイル
-	sBlob_[8].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[8].vs.Get());
-	//ピクセルシェーダの読み込みとコンパイル
-	sBlob_[8].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BloomPS.hlsl", "main", "ps_5_0", sBlob_[8].ps.Get());
-#pragma endregion Bloom
 }
 
 void PostEffect::DrawCommand()
@@ -395,10 +388,6 @@ void PostEffect::SetPipline()
 	case UVShift:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[7].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[7].rootSignature.Get());
-		break;
-	case Bloom:
-		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[8].pipelineState.Get());
-		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[8].rootSignature.Get());
 		break;
 	}
 }

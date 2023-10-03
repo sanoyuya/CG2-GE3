@@ -5,9 +5,9 @@
 
 const float MultiTexturePostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
 myMath::Matrix4 MultiTexturePostEffect::matProjection_;
-std::array <Blob, 10> MultiTexturePostEffect::sBlob_;//シェーダオブジェクト
-std::array <PipelineSet, 10> MultiTexturePostEffect::sPip_;
-EffectMode MultiTexturePostEffect::sEffectMode_;
+std::array <Blob, 11> MultiTexturePostEffect::sBlob_;//シェーダオブジェクト
+std::array <PipelineSet, 11> MultiTexturePostEffect::sPip_;
+MultiTextureEffectMode MultiTexturePostEffect::sEffectMode_;
 PowerGrayScale MultiTexturePostEffect::powerGrayScale_;
 
 void MultiTexturePostEffect::Initialize(WindowsApp* windowsApp)
@@ -174,7 +174,7 @@ void MultiTexturePostEffect::PostDrawScene()
 	}
 }
 
-void MultiTexturePostEffect::SetEffectMode(const EffectMode& mode)
+void MultiTexturePostEffect::SetEffectMode(const MultiTextureEffectMode& mode)
 {
 	sEffectMode_ = mode;
 }
@@ -218,7 +218,6 @@ void MultiTexturePostEffect::CreateRTV()
 	for (int8_t i = 0; i < 2; i++)
 	{
 		//デスクリプタヒープにRTV作成
-		//DirectXBase::GetInstance()->GetDevice()->CreateRenderTargetView(texBuff_[i].Get(), &renderTargetViewDesc, descHeapRTV_->GetCPUDescriptorHandleForHeapStart());
 		DirectXBase::GetInstance()->GetDevice()->CreateRenderTargetView(texBuff_[i].Get(),
 			nullptr, CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeapRTV_->GetCPUDescriptorHandleForHeapStart(),
 				i, DirectXBase::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)));
@@ -361,6 +360,13 @@ void MultiTexturePostEffect::LoadShader()
 	//ピクセルシェーダの読み込みとコンパイル
 	sBlob_[9].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/MultiTexturePostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
 #pragma endregion マルチテクスチャ
+
+#pragma region 高輝度抽出
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[10].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[10].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/HighLumiPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
+#pragma endregion 高輝度抽出
 }
 
 void MultiTexturePostEffect::DrawCommand()
@@ -414,45 +420,51 @@ void MultiTexturePostEffect::SetPipline()
 {
 	switch (sEffectMode_)
 	{
-	case None:
+	case MultiTextureEffectMode::None:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[0].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[0].rootSignature.Get());
 		break;
-	case BrightnessUP:
+	case MultiTextureEffectMode::BrightnessUP:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[1].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[1].rootSignature.Get());
 		break;
-	case Inverse:
+	case MultiTextureEffectMode::Inverse:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[2].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[2].rootSignature.Get());
 		break;
-	case Blur:
+	case MultiTextureEffectMode::Blur:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[3].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[3].rootSignature.Get());
 		break;
-	case GaussianBlur:
+	case MultiTextureEffectMode::GaussianBlur:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[4].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[4].rootSignature.Get());
 		break;
-	case GrayScale:
+	case MultiTextureEffectMode::GrayScale:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[5].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[5].rootSignature.Get());
 		break;
-	case SepiaColor:
+	case MultiTextureEffectMode::SepiaColor:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[6].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[6].rootSignature.Get());
 		break;
-	case UVShift:
+	case MultiTextureEffectMode::UVShift:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[7].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[7].rootSignature.Get());
 		break;
-	case Bloom:
+	case MultiTextureEffectMode::Bloom:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[8].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[8].rootSignature.Get());
 		break;
-	case MultiTexture:
+	case MultiTextureEffectMode::MultiTexture:
 		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[9].pipelineState.Get());
 		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[9].rootSignature.Get());
+		break;
+	case MultiTextureEffectMode::HighLumi:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[10].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[10].rootSignature.Get());
+		break;
+	default:
 		break;
 	}
 }

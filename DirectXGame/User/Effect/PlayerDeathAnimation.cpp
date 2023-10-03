@@ -13,7 +13,7 @@ void PlayerDeathAnimation::Update(const myMath::Vector3 position)
 	if (animationFlag_ == false)
 	{
 		deathParticleEmitter_->Create(position);
-		MultiTexturePostEffect::SetEffectMode(EffectMode::GrayScale);
+		MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::GrayScale);
 		animationFlag_ = true;
 	}
 	else

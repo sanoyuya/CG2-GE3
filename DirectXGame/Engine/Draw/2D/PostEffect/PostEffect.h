@@ -31,8 +31,6 @@ enum EffectMode
 	GrayScale,//モノクロ
 	SepiaColor,//セピアカラー
 	UVShift,//UVずらし
-	Bloom,//ブルーム
-	MultiTexture//マルチテクスチャ基底
 };
 
 class PostEffect

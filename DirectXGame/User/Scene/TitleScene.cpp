@@ -5,6 +5,7 @@
 #include"PostEffect.h"
 #include"EasingFunction.h"
 #include"SceneChangeAnimation.h"
+#include"MultiTexturePostEffect.h"
 
 void TitleScene::Initialize()
 {
@@ -67,6 +68,8 @@ void TitleScene::Initialize()
 
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/title.mp3",0.1f);
 	audioManager_->PlayWave(bgm_);
+
+	MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::None);
 }
 
 void TitleScene::Destroy()
