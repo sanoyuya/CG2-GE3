@@ -26,16 +26,20 @@ private:
 	std::unique_ptr<ConstantBuffer> constBuffMaterial_ = {};
 	//定数バッファのマッピング用ポインタ
 	myMath::Matrix4 constBuffMap_ = {};
+	//定数バッファのマッピング用ポインタ
+	static PowerGrayScale powerGrayScale_;
 	//プロジェクション行列
 	static myMath::Matrix4 matProjection_;
 
 	//シェーダオブジェクト
-	static std::array<Blob, 5> sBlob_;
+	static std::array<Blob, 10> sBlob_;
 	//パイプライン
-	static std::array<PipelineSet, 5> sPip_;
+	static std::array<PipelineSet, 10> sPip_;
 
 	//画面クリアカラー
 	static const float sClearColor_[4];
+
+	static EffectMode sEffectMode_;
 
 public:
 
@@ -59,6 +63,13 @@ public:
 	/// </summary>
 	void PostDrawScene();
 
+public:
+
+	static void SetEffectMode(const EffectMode& mode);
+
+	static void SetPower(const float power);
+	static void SetGrayScale(const float grayScale);
+
 private:
 
 	void VertSetting();
@@ -79,4 +90,6 @@ private:
 	void DrawCommand();
 	//SRVの作成
 	void CreateSRV();
+
+	void SetPipline();
 };

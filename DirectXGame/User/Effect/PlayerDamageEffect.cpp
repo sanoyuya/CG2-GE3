@@ -1,5 +1,5 @@
 #include "PlayerDamageEffect.h"
-#include"PostEffect.h"
+#include"MultiTexturePostEffect.h"
 
 PlayerDamageEffect::PlayerDamageEffect()
 {
@@ -14,7 +14,7 @@ void PlayerDamageEffect::Update(Player* player)
 	if (player->GetDamageFlag() && player->GetHp() > 1)
 	{
 		damageFlag_ = true;
-		PostEffect::SetEffectMode(EffectMode::GaussianBlur);
+		MultiTexturePostEffect::SetEffectMode(EffectMode::GaussianBlur);
 		power_ = 10.0f;
 		player->SetDamageFlag(false);
 	}
@@ -25,7 +25,7 @@ void PlayerDamageEffect::Update(Player* player)
 		{
 			power_ = 0.0f;
 			damageFlag_ = false;
-			PostEffect::SetEffectMode(EffectMode::None);
+			MultiTexturePostEffect::SetEffectMode(EffectMode::None);
 		}
 		power_ -= 0.5f;
 	}
@@ -33,5 +33,5 @@ void PlayerDamageEffect::Update(Player* player)
 	{
 		power_ = 0.0f;
 	}
-	PostEffect::SetPower(power_);
+	MultiTexturePostEffect::SetPower(power_);
 }

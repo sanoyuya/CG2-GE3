@@ -13,7 +13,7 @@ void MyGame::Initialize()
 	YFramework::Initialize();
 
 	//ポストエフェクトの初期化
-	postEffect_ = std::make_unique<PostEffect>();
+	postEffect_ = std::make_unique<MultiTexturePostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
 
 	SceneChangeAnimation::GetInstance()->StaticInitialize();

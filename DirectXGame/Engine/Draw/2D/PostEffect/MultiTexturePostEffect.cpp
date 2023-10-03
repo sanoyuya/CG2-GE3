@@ -1,11 +1,14 @@
 #include "MultiTexturePostEffect.h"
 #include <d3dx12.h>
 #include"InputManager.h"
+#include <algorithm>
 
 const float MultiTexturePostEffect::sClearColor_[4] = { 0.25f,0.5f,0.1f,0.0f };//緑っぽい色
 myMath::Matrix4 MultiTexturePostEffect::matProjection_;
-std::array <Blob, 5> MultiTexturePostEffect::sBlob_;//シェーダオブジェクト
-std::array <PipelineSet, 5> MultiTexturePostEffect::sPip_;
+std::array <Blob, 10> MultiTexturePostEffect::sBlob_;//シェーダオブジェクト
+std::array <PipelineSet, 10> MultiTexturePostEffect::sPip_;
+EffectMode MultiTexturePostEffect::sEffectMode_;
+PowerGrayScale MultiTexturePostEffect::powerGrayScale_;
 
 void MultiTexturePostEffect::Initialize(WindowsApp* windowsApp)
 {
@@ -31,11 +34,11 @@ void MultiTexturePostEffect::Draw()
 {
 	matProjection_ = myMath::MakeIdentity();
 	constBuffMap_ = matProjection_;
-	constBuffMaterial_->Update(&constBuffMap_);
+
+	constBuffMaterial_->Update(&powerGrayScale_);
 
 	// パイプラインステートとルートシグネチャの設定コマンド
-	DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[0].pipelineState.Get());
-	DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[0].rootSignature.Get());
+	SetPipline();
 
 	//描画コマンド
 	DrawCommand();
@@ -171,6 +174,27 @@ void MultiTexturePostEffect::PostDrawScene()
 	}
 }
 
+void MultiTexturePostEffect::SetEffectMode(const EffectMode& mode)
+{
+	sEffectMode_ = mode;
+}
+
+void MultiTexturePostEffect::SetPower(const float power)
+{
+	if (powerGrayScale_.power != power)
+	{
+		powerGrayScale_.power = power;
+	}
+}
+
+void MultiTexturePostEffect::SetGrayScale(const float grayScale)
+{
+	if (powerGrayScale_.grayScale != grayScale)
+	{
+		powerGrayScale_.grayScale = std::clamp(grayScale, 0.0f, 1.0f);
+	}
+}
+
 void MultiTexturePostEffect::CreateRTV()
 {
 	//RTV用デスクリプタヒープ設定
@@ -262,16 +286,81 @@ void MultiTexturePostEffect::CreatePipline()
 
 	for (int8_t i = 0; i < sPip_.size(); i++)
 	{
-		Pipeline::CreateMultiTexturePipline(sBlob_[0], sPip_[0]);
+		Pipeline::CreateMultiTexturePipline(sBlob_[i], sPip_[i]);
 	}
 }
 
 void MultiTexturePostEffect::LoadShader()
 {
+#pragma region None
 	//頂点シェーダの読み込みとコンパイル
 	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
 	//ピクセルシェーダの読み込みとコンパイル
-	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/MultiTexturePostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
+	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
+#pragma endregion None
+
+#pragma region BrightnessUP
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[1].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[1].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[1].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BrightnessPS.hlsl", "main", "ps_5_0", sBlob_[1].ps.Get());
+#pragma endregion BrightnessUP
+
+#pragma region Inverse
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[2].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[2].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[2].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/InversePS.hlsl", "main", "ps_5_0", sBlob_[2].ps.Get());
+#pragma endregion Inverse
+
+#pragma region Blur
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[3].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[3].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BlurPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
+#pragma endregion Blur
+
+#pragma region GaussianBlur
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[4].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[4].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[4].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/GaussianBlurPS.hlsl", "main", "ps_5_0", sBlob_[4].ps.Get());
+#pragma endregion GaussianBlur
+
+#pragma region GrayScale
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[5].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[5].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[5].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/GrayScalePS.hlsl", "main", "ps_5_0", sBlob_[5].ps.Get());
+#pragma endregion GrayScale
+
+#pragma region SepiaColor
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[6].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[6].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[6].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/SepiaColorPS.hlsl", "main", "ps_5_0", sBlob_[6].ps.Get());
+#pragma endregion SepiaColor
+
+#pragma region UVShift
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[7].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[7].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[7].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/UVShiftPS.hlsl", "main", "ps_5_0", sBlob_[7].ps.Get());
+#pragma endregion UVShift
+
+#pragma region Bloom
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[8].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[8].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[8].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/BloomPS.hlsl", "main", "ps_5_0", sBlob_[8].ps.Get());
+#pragma endregion Bloom
+
+#pragma region マルチテクスチャ
+	//頂点シェーダの読み込みとコンパイル
+	sBlob_[9].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/PostEffectVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
+	//ピクセルシェーダの読み込みとコンパイル
+	sBlob_[9].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/PostEffect/MultiTexturePostEffectPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
+#pragma endregion マルチテクスチャ
 }
 
 void MultiTexturePostEffect::DrawCommand()
@@ -318,5 +407,52 @@ void MultiTexturePostEffect::CreateSRV()
 		DirectXBase::GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_[i].Get(), &srvDesc,
 			CD3DX12_CPU_DESCRIPTOR_HANDLE(handle_[i].cpuHandle, 0,
 				DirectXBase::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)));
+	}
+}
+
+void MultiTexturePostEffect::SetPipline()
+{
+	switch (sEffectMode_)
+	{
+	case None:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[0].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[0].rootSignature.Get());
+		break;
+	case BrightnessUP:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[1].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[1].rootSignature.Get());
+		break;
+	case Inverse:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[2].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[2].rootSignature.Get());
+		break;
+	case Blur:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[3].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[3].rootSignature.Get());
+		break;
+	case GaussianBlur:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[4].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[4].rootSignature.Get());
+		break;
+	case GrayScale:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[5].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[5].rootSignature.Get());
+		break;
+	case SepiaColor:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[6].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[6].rootSignature.Get());
+		break;
+	case UVShift:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[7].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[7].rootSignature.Get());
+		break;
+	case Bloom:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[8].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[8].rootSignature.Get());
+		break;
+	case MultiTexture:
+		DirectXBase::GetInstance()->GetCommandList()->SetPipelineState(sPip_[9].pipelineState.Get());
+		DirectXBase::GetInstance()->GetCommandList()->SetGraphicsRootSignature(sPip_[9].rootSignature.Get());
+		break;
 	}
 }

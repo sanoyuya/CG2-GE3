@@ -3,7 +3,7 @@
 #include<imgui.h>
 #include"ColliderManager.h"
 #include"SceneChangeAnimation.h"
-#include"PostEffect.h"
+#include"MultiTexturePostEffect.h"
 
 void GameScene::Initialize()
 {
@@ -53,7 +53,7 @@ void GameScene::Initialize()
 void GameScene::Destroy()
 {
 	ColliderManager::GetInstance()->Reset();
-	PostEffect::SetEffectMode(EffectMode::None);
+	MultiTexturePostEffect::SetEffectMode(EffectMode::None);
 	audioManager_->StopWave(bgm_);
 }
 

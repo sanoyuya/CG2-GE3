@@ -166,7 +166,7 @@ void PostEffect::SetGrayScale(const float grayScale)
 {
 	if (constBuffMap_.grayScale != grayScale)
 	{
-		constBuffMap_.grayScale = std::clamp(grayScale, 0.0f, 1.0f);;
+		constBuffMap_.grayScale = std::clamp(grayScale, 0.0f, 1.0f);
 	}
 }
 
