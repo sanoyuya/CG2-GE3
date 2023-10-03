@@ -1,5 +1,6 @@
 #include "HPBar.h"
 #include"EasingFunction.h"
+
 void HPBar::Initialize(const int8_t maxHp, const myMath::Vector2 leftUpPoint)
 {
 	hpBar_ = std::make_unique<Sprite>();
