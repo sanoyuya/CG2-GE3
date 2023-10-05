@@ -8,7 +8,7 @@ NormalEnemy::~NormalEnemy()
 	{
 		ColliderManager::GetInstance()->SubCollision(this);
 	}
-	if (lockOnFlag == true)
+	if (lockOnFlag_ == true)
 	{
 		ColliderManager::GetInstance()->SubLockOnEnemy(this);
 	}
@@ -53,6 +53,11 @@ void NormalEnemy::Update()
 		SpawnUpdate();
 	}
 
+	if (lockOnFlag_ == false && player_->GetIsBulletAttack() == false)
+	{
+		lockOnFlag_ = false;
+	}
+
 	collisionData_.center = enemyTrans_.translation;
 }
 
@@ -66,7 +71,7 @@ void NormalEnemy::Draw()
 	if (spawnFlag_ == true && deathAnimationFlag_ == false)
 	{
 		enemy_->DrawModel(&enemyTrans_);
-		if (lockOnFlag == true)
+		if (lockOnFlag_ == true)
 		{
 			lockOnAnimation_->Draw(camera_);
 		}
@@ -141,13 +146,13 @@ const bool NormalEnemy::GetDeathAnimationFlag()
 
 void NormalEnemy::LockOn()
 {
-	lockOnFlag = true;
+	lockOnFlag_ = true;
 	lockOnAnimation_->Create();
 }
 
 void NormalEnemy::CancelLockOn()
 {
-	lockOnFlag = false;
+	lockOnFlag_ = false;
 	lockOnAnimation_->Cancel();
 }
 
@@ -165,7 +170,7 @@ void NormalEnemy::OnCollision()
 
 const bool NormalEnemy::GetLockOnFlag()
 {
-	return lockOnFlag;
+	return lockOnFlag_;
 }
 
 const Transform& NormalEnemy::GetTrans()

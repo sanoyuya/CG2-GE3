@@ -41,7 +41,7 @@ private:
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
 	std::unique_ptr<EnemySpawnParticleEmitter>spawnEmitter_;
 
-	bool lockOnFlag = false;
+	bool lockOnFlag_ = false;
 	std::unique_ptr<Sprite>lockOnSprite_;
 	Transform lockOnTrans_;
 	uint32_t lockOnTex_ = 0;

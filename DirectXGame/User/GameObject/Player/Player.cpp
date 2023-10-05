@@ -67,8 +67,22 @@ void Player::Update()
 		reticle_->Update();
 		//自機の移動処理
 		Move();
-		//ロックオン攻撃
-		LockOnAttack();
+		if (isBulletAttack_ == false)
+		{
+			//弾の更新処理
+			NormalBulletAttack();
+			//ロックオン攻撃
+			LockOnAttack();
+		}
+		else
+		{
+			coolTime_++;
+			if (coolTime_ >= maxCoolTime_)
+			{
+				coolTime_ = 0;
+				isBulletAttack_ = false;
+			}
+		}
 	}
 
 	//Transformの更新処理
@@ -89,8 +103,6 @@ void Player::Update()
 	//自機の回転処理
 	Rotation(camera_);
 
-	//弾の更新処理
-	BulletUpdate();
 	//エンジンの煙の更新処理
 	SmokeUpdate(camera_);
 	//死亡演出のパーティクルの更新処理
@@ -207,6 +219,11 @@ void Player::SetBulletManager(BulletManager* bulletManager)
 	bulletManager_ = bulletManager;
 }
 
+const bool Player::GetIsBulletAttack()
+{
+	return isBulletAttack_;
+}
+
 void Player::Move()
 {
 	//先に補間先の座標を定義する
@@ -240,7 +257,7 @@ void Player::Rotation(Camera* camera)
 	targetPos_ = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
 }
 
-void Player::BulletUpdate()
+void Player::NormalBulletAttack()
 {
 	if (hp_ > 0)
 	{
@@ -295,8 +312,14 @@ void Player::LockOnAttack()
 				//弾を生成
 				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, lockOnEnemy, controlPoint);
 			}
-			//ロックオン敵listをリセット
-			ColliderManager::GetInstance()->ResetLockOnEnemy();
+
+			//ロックオン攻撃をしたらオーバーヒートするように
+			if (ColliderManager::GetInstance()->GetLockOnEnemy().size() > 0)
+			{
+				isBulletAttack_ = true;
+				//ロックオン敵listをリセット
+				ColliderManager::GetInstance()->ResetLockOnEnemy();
+			}
 			lockOnAttackFlag_ = false;
 		}
 	}

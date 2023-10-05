@@ -61,6 +61,10 @@ private:
 	bool lockOnAttackFlag_ = false;
 	int8_t lockOnTimer_ = 0;
 
+	uint8_t coolTime_ = 0;
+	const uint8_t maxCoolTime_ = 60;
+	bool isBulletAttack_ = false;
+
 public:
 
 	Player() = default;
@@ -107,13 +111,15 @@ public:
 
 	void SetBulletManager(BulletManager* bulletManager);
 
+	const bool GetIsBulletAttack();
+
 private:
 
 	void Move();
 
 	void Rotation(Camera* camera);
 
-	void BulletUpdate();
+	void NormalBulletAttack();
 
 	void SmokeUpdate(Camera* camera);
 

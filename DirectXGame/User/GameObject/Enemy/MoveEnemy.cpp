@@ -10,7 +10,7 @@ MoveEnemy::~MoveEnemy()
 	{
 		ColliderManager::GetInstance()->SubCollision(this);
 	}
-	if (lockOnFlag == true)
+	if (lockOnFlag_ == true)
 	{
 		ColliderManager::GetInstance()->SubLockOnEnemy(this);
 	}
@@ -57,6 +57,11 @@ void MoveEnemy::Update()
 	else
 	{
 		SpawnUpdate();
+	}
+
+	if (lockOnFlag_== false &&player_->GetIsBulletAttack() == false)
+	{
+		lockOnFlag_ = false;
 	}
 }
 
@@ -129,7 +134,7 @@ void MoveEnemy::Draw()
 	if (spawnFlag_ == true && deathAnimationFlag_ == false)
 	{
 		enemy_->DrawModel(&enemyTrans_);
-		if (lockOnFlag == true)
+		if (lockOnFlag_ == true)
 		{
 			lockOnAnimation_->Draw(camera_);
 		}
@@ -207,13 +212,13 @@ const bool MoveEnemy::GetDeathAnimationFlag()
 
 void MoveEnemy::LockOn()
 {
-	lockOnFlag = true;
+	lockOnFlag_ = true;
 	lockOnAnimation_->Create();
 }
 
 void MoveEnemy::CancelLockOn()
 {
-	lockOnFlag = false;
+	lockOnFlag_ = false;
 	lockOnAnimation_->Cancel();
 }
 
@@ -231,7 +236,7 @@ void MoveEnemy::OnCollision()
 
 const bool MoveEnemy::GetLockOnFlag()
 {
-	return lockOnFlag;
+	return lockOnFlag_;
 }
 
 const Transform& MoveEnemy::GetTrans()

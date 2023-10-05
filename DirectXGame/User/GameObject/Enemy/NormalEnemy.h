@@ -31,7 +31,7 @@ private:
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
 	std::unique_ptr<EnemySpawnParticleEmitter>spawnEmitter_;
 
-	bool lockOnFlag = false;
+	bool lockOnFlag_ = false;
 
 	CollisionData collisionData_;
 
