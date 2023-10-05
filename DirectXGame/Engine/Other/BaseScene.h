@@ -1,8 +1,15 @@
 #pragma once
+#include"WindowsApp.h"
+#include"myMath.h"
 
 //シーン基底クラス
 class BaseScene
 {
+protected:
+
+	static myMath::Vector2 windowsSize_;
+	static myMath::Vector2 windowsCenter_;
+
 public:
 
 	virtual ~BaseScene() = default;
@@ -18,4 +25,6 @@ public:
 
 	//描画処理
 	virtual void Draw() = 0;
+
+	static void StaticInitialize(WindowsApp* windowsApp);
 };

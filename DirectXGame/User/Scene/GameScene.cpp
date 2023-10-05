@@ -4,6 +4,7 @@
 #include"ColliderManager.h"
 #include"SceneChangeAnimation.h"
 #include"MultiTexturePostEffect.h"
+#include"Retention.h"
 
 void GameScene::Initialize()
 {
@@ -25,7 +26,23 @@ void GameScene::Initialize()
 
 	//レベルエディタの初期化&読み込み
 	gameLevelData_ = std::make_unique<GameLevelData>();
-	gameLevelData_->Initialize("stage1");
+	switch (Retention::GetInstance()->GetStageNum())
+	{
+	case Stage::Tutorial:
+		gameLevelData_->Initialize("stage0");
+		break;
+	case Stage::Stage1:
+		gameLevelData_->Initialize("stage1");
+		break;
+	case Stage::Stage2:
+		gameLevelData_->Initialize("stage2");
+		break;
+	case Stage::Stage3:
+		gameLevelData_->Initialize("stage3");
+		break;
+	default:
+		break;
+	}
 
 	gameTimer_ = std::make_unique<GameTimer>();
 

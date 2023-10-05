@@ -200,6 +200,11 @@ EnemyList& GameLevelData::GetEnemyData()
 	return enemyData_;
 }
 
+void GameLevelData::SetFileName(const std::string& fileName)
+{
+	fileName_ = fileName;
+}
+
 void GameLevelData::ReLoad()
 {
 	//íœ‚µ‚ÄÄ“Ç‚İ‚İ

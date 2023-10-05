@@ -101,9 +101,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Other\BaseScene.cpp" />
+    <ClCompile Include="User\Other\Retention.cpp" />
     <ClCompile Include="User\Effect\HitEffect.cpp" />
-    <ClCompile Include="User\Stage\AbstractStageFactory.cpp" />
-    <ClCompile Include="User\Stage\StageManager.cpp" />
     <ClCompile Include="User\Effect\LockOnAnimation.cpp" />
     <ClCompile Include="User\Scene\StageSelectScene.cpp" />
     <ClCompile Include="User\GameObject\Bullet\LockOnBullet.cpp" />
@@ -346,10 +346,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Other\Retention.h" />
     <ClInclude Include="User\Effect\HitEffect.h" />
-    <ClInclude Include="User\Stage\AbstractStageFactory.h" />
-    <ClInclude Include="User\Stage\BaseStage.h" />
-    <ClInclude Include="User\Stage\StageManager.h" />
     <ClInclude Include="User\Effect\LockOnAnimation.h" />
     <ClInclude Include="User\Scene\StageSelectScene.h" />
     <ClInclude Include="User\GameObject\Bullet\LockOnBullet.h" />

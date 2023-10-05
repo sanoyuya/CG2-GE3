@@ -65,4 +65,6 @@ public:
 	const PlayerData& GetPlayerData();
 	const CameraData& GetCameraData();
 	EnemyList& GetEnemyData();
+
+	void SetFileName(const std::string& fileName);
 };

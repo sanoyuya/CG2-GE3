@@ -112,7 +112,7 @@ void TitleScene::Update()
 		}
 		if (animationTime_ > 100)
 		{
-			SceneChangeAnimation::GetInstance()->Change("GAME");
+			SceneChangeAnimation::GetInstance()->Change("STAGESELECT");
 		}
 		animationTime_++;
 	}

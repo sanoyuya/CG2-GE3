@@ -16,6 +16,8 @@ void MyGame::Initialize()
 	postEffect_ = std::make_unique<MultiTexturePostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
 
+	BaseScene::StaticInitialize(windowsApp_.get());
+
 	SceneChangeAnimation::GetInstance()->StaticInitialize();
 
 	Enemy::StaticInitialize();

@@ -166,12 +166,6 @@
     <Filter Include="User\ソース ファイル\Object\Enemy">
       <UniqueIdentifier>{77a267b7-7ed6-48ec-86f1-35c51d3c057c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="User\ソース ファイル\Stage">
-      <UniqueIdentifier>{f8be45a6-1a68-40e8-be97-1e32c1e400b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\Stage">
-      <UniqueIdentifier>{8bdcd7f0-45f7-446c-8841-ccb8d8e95c09}</UniqueIdentifier>
-    </Filter>
     <Filter Include="User\ソース ファイル\Effect">
       <UniqueIdentifier>{a39a1a1b-7e46-417f-be4f-7c9400f50192}</UniqueIdentifier>
     </Filter>
@@ -414,12 +408,6 @@
     <ClCompile Include="User\Scene\StageSelectScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\Stage\StageManager.cpp">
-      <Filter>User\ソース ファイル\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Stage\AbstractStageFactory.cpp">
-      <Filter>User\ソース ファイル\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="User\Effect\HitEffect.cpp">
       <Filter>User\ソース ファイル\Effect</Filter>
     </ClCompile>
@@ -434,6 +422,12 @@
     </ClCompile>
     <ClCompile Include="User\GameObject\Player\Player.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Other\Retention.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Other\BaseScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -772,15 +766,6 @@
     <ClInclude Include="User\Scene\StageSelectScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\Stage\StageManager.h">
-      <Filter>User\ヘッダー ファイル\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Stage\BaseStage.h">
-      <Filter>User\ヘッダー ファイル\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Stage\AbstractStageFactory.h">
-      <Filter>User\ヘッダー ファイル\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="User\Effect\HitEffect.h">
       <Filter>User\ヘッダー ファイル\Effect</Filter>
     </ClInclude>
@@ -792,6 +777,9 @@
     </ClInclude>
     <ClInclude Include="User\Effect\PlayerDeathAnimation.h">
       <Filter>User\ヘッダー ファイル\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Other\Retention.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
