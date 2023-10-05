@@ -13,11 +13,14 @@ void ColliderManager::Update(Player* player)
 				//player‚Æ“G‚Ì’e‚Ì“–‚½‚è”»’è
 				if (object1->GetName() == "player" && object2->GetName() == "enemyBullet")
 				{
-					if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
-						object2->GetCollisionData().center, object2->GetCollisionData().radius))
+					if (object2->GetDeathFlag() == false)
 					{
-						object1->OnCollision();//player‚ÌHPŒ¸­
-						object2->OnCollision();//“G‚Ì’e‚ğÁ–Å‚³‚¹‚é
+						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						{
+							object1->OnCollision();//player‚ÌHPŒ¸­
+							object2->OnCollision();//“G‚Ì’e‚ğÁ–Å‚³‚¹‚é
+						}
 					}
 				}
 
@@ -60,6 +63,20 @@ void ColliderManager::Update(Player* player)
 					{
 						object1->OnCollision();//player‚Ì’e‚ğÁ–Å‚³‚¹‚é
 						object2->OnCollision();//“G‚ğÁ–Å‚³‚¹‚é
+					}
+				}
+			}
+
+			//player‚Ì’e‚Æ“G‚Ì’e‚Ì“–‚½‚è”»’è
+			if (object1->GetName() == "playerBullet" && object2->GetName() == "enemyBullet")
+			{
+				if (object2->GetDeathAnimationFlag() == false&& object2->GetDeathFlag() == false)
+				{
+					if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+						object2->GetCollisionData().center, object2->GetCollisionData().radius))
+					{
+						object1->OnCollision();//player‚Ì’e‚ğÁ–Å‚³‚¹‚é
+						object2->BulletDeathAnimation();//“G‚Ì’e‚ğÁ–Å‚³‚¹‚é
 					}
 				}
 			}

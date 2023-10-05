@@ -2,6 +2,7 @@
 #include"BulletBase.h"
 #include"DrawOversight.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
+#include"EnemyDeathParticleEmitter.h"
 
 class NormalBullet :public BulletBase
 {
@@ -29,6 +30,13 @@ private:
 
 	CollisionData collisionData_;
 
+	bool deathAnimationFlag_ = false;
+	uint8_t animationTimer_ = 0;
+	uint8_t maxAnimationTime_ = 60;
+
+	std::unique_ptr<EnemyDeathParticleEmitter>deathParticleEmitter_;
+	bool deathFlag_ = false;
+
 public://BulletBaseで必要な奴
 
 	//デストラクタ
@@ -53,6 +61,10 @@ public://BulletBaseで必要な奴
 
 	//オブジェクトの衝突判定処理
 	void OnCollision();
+
+	void BulletDeathAnimation();
+
+	const bool GetDeathFlag();
 
 	//死亡フラグの取得
 	const bool GetIsDead();

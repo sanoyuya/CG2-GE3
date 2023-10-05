@@ -40,6 +40,11 @@ public:
 	//オブジェクトの衝突判定処理
 	virtual void OnCollision() = 0;
 
+	//弾の爆発処理
+	virtual void BulletDeathAnimation() {};
+
+	virtual const bool GetDeathFlag() { return false; };
+
 	//死亡フラグの取得
 	virtual const bool GetIsDead() = 0;
 

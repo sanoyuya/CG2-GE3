@@ -18,15 +18,31 @@ void NormalBullet::Initialize()
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
 
+	//死亡アニメーションパーティクル初期化
+	deathParticleEmitter_ = std::make_unique<EnemyDeathParticleEmitter>();
+	deathParticleEmitter_->Initialize();
+
 	collisionData_.radius = 1.0f;
 }
 
 void NormalBullet::Update()
 {
 	deathTimer_++;
-	if (deathTimer_ > maxDeathTime_)
+	if (deathAnimationFlag_ == false)
 	{
-		isDead_ = true;
+		if (deathTimer_ > maxDeathTime_)
+		{
+			isDead_ = true;
+		}
+	}
+	else
+	{
+		if (animationTimer_ > maxAnimationTime_)
+		{
+			isDead_ = true;
+		}
+		deathParticleEmitter_->Update(camera_);
+		animationTimer_++;
 	}
 	bulletTrans_.translation += directionVector_ * speed_;
 	bulletTrans_.TransUpdate(camera_);
@@ -38,8 +54,16 @@ void NormalBullet::Update()
 
 void NormalBullet::Draw()
 {
-	bullet_->DrawModel(&bulletTrans_);
 	smokeEmitter_->Draw();
+
+	if (deathAnimationFlag_ == true)
+	{
+		deathParticleEmitter_->Draw();
+	}
+	else
+	{
+		bullet_->DrawModel(&bulletTrans_);
+	}
 }
 
 std::string NormalBullet::GetName()
@@ -60,6 +84,18 @@ const CollisionData& NormalBullet::GetCollisionData()
 void NormalBullet::OnCollision()
 {
 	isDead_ = true;
+}
+
+void NormalBullet::BulletDeathAnimation()
+{
+	deathAnimationFlag_ = true;
+	deathFlag_ = true;
+	deathParticleEmitter_->Create(bulletTrans_.translation);
+}
+
+const bool NormalBullet::GetDeathFlag()
+{
+	return deathFlag_;
 }
 
 const bool NormalBullet::GetIsDead()

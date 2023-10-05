@@ -23,6 +23,7 @@ void StageSelectScene::Update()
 void StageSelectScene::Draw()
 {
 	stageNumSprite_->DrawAnimationSpriteX2D(windowsCenter_, 10, stageNum_);
+	SceneChangeAnimation::GetInstance()->Draw();
 }
 
 void StageSelectScene::Select()
