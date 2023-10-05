@@ -67,6 +67,19 @@ void ColliderManager::Update(Player* player)
 				}
 			}
 
+			if (object1->GetName() == "lockOnBullet" && object2->GetName() == "enemy")
+			{
+				if (object2->GetDeathAnimationFlag() == false)
+				{
+					if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+						object2->GetCollisionData().center, object2->GetCollisionData().radius))
+					{
+						object1->OnCollision();//player‚Ì’e‚ðÁ–Å‚³‚¹‚é
+						object2->OnCollision();//“G‚ðÁ–Å‚³‚¹‚é
+					}
+				}
+			}
+
 			//player‚Ì’e‚Æ“G‚Ì’e‚Ì“–‚½‚è”»’è
 			if (object1->GetName() == "playerBullet" && object2->GetName() == "enemyBullet")
 			{

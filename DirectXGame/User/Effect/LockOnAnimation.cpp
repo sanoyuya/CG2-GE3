@@ -12,33 +12,34 @@ void LockOnAnimation::Initialize()
 
 void LockOnAnimation::Create()
 {
-	lockOnAnimationFlag = true;
+	lockOnAnimationFlag_ = true;
 }
 
 void LockOnAnimation::Cancel()
 {
-	lockOnAnimationFlag = false;
+	lockOnAnimationFlag_ = false;
+	lockOnAnimationTimer_ = 0;
 }
 
 void LockOnAnimation::Update(const myMath::Vector3& position,Camera* camera)
 {
 	lockOnTrans_.translation = position;
 
-	if (lockOnAnimationFlag == true)
+	if (lockOnAnimationFlag_ == true)
 	{
-		lockOnAnimationTimer++;
+		lockOnAnimationTimer_++;
 
 		//ägèkââèo
-		lockOnTrans_.scale = { static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
-			static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
+		lockOnTrans_.scale = { static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer_,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
+			static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer_,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
 			1.0f };
 
 		//âÒì]ââèo
-		lockOnTrans_.rotation.z = static_cast<float>(Easing::EaseOutCirc(lockOnAnimationTimer, 0.0f, -myMath::AX_2PIF, 15.0f));
+		lockOnTrans_.rotation.z = static_cast<float>(Easing::EaseOutCirc(lockOnAnimationTimer_, 0.0f, -myMath::AX_2PIF, 15.0f));
 
-		if (lockOnAnimationTimer > 15.0f)
+		if (lockOnAnimationTimer_ > 15.0f)
 		{
-			lockOnAnimationFlag = false;
+			lockOnAnimationFlag_ = false;
 		}
 	}
 

@@ -9,8 +9,8 @@ private:
 	Transform lockOnTrans_;
 	uint32_t lockOnTex_ = 0;
 
-	bool lockOnAnimationFlag = false;
-	float lockOnAnimationTimer = 0.0f;
+	bool lockOnAnimationFlag_ = false;
+	float lockOnAnimationTimer_ = 0.0f;
 
 public:
 

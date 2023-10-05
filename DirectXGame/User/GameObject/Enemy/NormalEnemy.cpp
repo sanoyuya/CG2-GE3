@@ -53,11 +53,6 @@ void NormalEnemy::Update()
 		SpawnUpdate();
 	}
 
-	if (lockOnFlag_ == false && player_->GetIsBulletAttack() == false)
-	{
-		lockOnFlag_ = false;
-	}
-
 	collisionData_.center = enemyTrans_.translation;
 }
 

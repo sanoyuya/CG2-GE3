@@ -58,11 +58,6 @@ void MoveEnemy::Update()
 	{
 		SpawnUpdate();
 	}
-
-	if (lockOnFlag_== false &&player_->GetIsBulletAttack() == false)
-	{
-		lockOnFlag_ = false;
-	}
 }
 
 void MoveEnemy::PhaseUpdate()

@@ -9,7 +9,7 @@ private:
 
 	Camera* camera_ = nullptr;
 
-	std::string name_ = "playerBullet";
+	std::string name_ = "lockOnBullet";
 
 	bool isDead_ = false;
 	uint8_t deathTimer_ = 0;
