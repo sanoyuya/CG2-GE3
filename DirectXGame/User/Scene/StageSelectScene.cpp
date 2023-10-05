@@ -28,16 +28,16 @@ void StageSelectScene::Draw()
 
 void StageSelectScene::Select()
 {
-	if (input_->KeyboardTriggerPush(DIK_SPACE))
+	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 	{
 		Retention::GetInstance()->SetStageNum(static_cast<Stage>(stageNum_));
 		SceneChangeAnimation::GetInstance()->Change("GAME");
 	}
-	else if (input_->KeyboardTriggerPush(DIK_RIGHT))
+	else if (input_->KeyboardTriggerPush(DIK_RIGHT) || input_->ControllerStickTriggerPush(L_RIGHT))
 	{
 		stageNum_++;
 	}
-	else if (input_->KeyboardTriggerPush(DIK_LEFT))
+	else if (input_->KeyboardTriggerPush(DIK_LEFT) || input_->ControllerStickTriggerPush(L_LEFT))
 	{
 		stageNum_--;
 	}
