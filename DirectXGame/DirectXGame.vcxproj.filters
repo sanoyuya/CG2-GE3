@@ -330,9 +330,6 @@
     <ClCompile Include="User\Other\RailCamera.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameObject\ColliderManager.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
@@ -427,7 +424,10 @@
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Other\BaseScene.cpp">
-      <Filter>User\ソース ファイル\Scene</Filter>
+      <Filter>Engine\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject\ColliderManager.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -682,9 +682,6 @@
     <ClInclude Include="User\Scene\TitleScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\GameObject\ColliderManager.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
@@ -780,6 +777,9 @@
     </ClInclude>
     <ClInclude Include="User\Other\Retention.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameObject\ColliderManager.h">
+      <Filter>User\ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
