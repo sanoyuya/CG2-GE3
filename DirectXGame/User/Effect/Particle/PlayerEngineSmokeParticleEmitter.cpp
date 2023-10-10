@@ -32,10 +32,8 @@ void PlayerEngineSmokeParticleEmitter::Create(const myMath::Vector3 center)
 
 		myMath::Vector3 acc{};
 
-		myMath::Vector4 col = { 1.0f,1.0f,1.0f,1.0f };
-
 		//追加
-		particleMan_->Add(lifeTime, pos, vel, acc, size_, 0.0f, col);
+		particleMan_->Add(lifeTime, pos, vel, acc, size_, 0.0f, color_);
 	}
 }
 
@@ -52,4 +50,9 @@ void PlayerEngineSmokeParticleEmitter::Draw()
 void PlayerEngineSmokeParticleEmitter::SetSize(const float size)
 {
 	size_ = size;
+}
+
+void PlayerEngineSmokeParticleEmitter::SetColor(myMath::Vector4 color)
+{
+	color_ = color;
 }

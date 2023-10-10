@@ -8,7 +8,8 @@ private:
 	std::unique_ptr<ParticleManager>particleMan_;
 	uint32_t tex_;
 
-	float size_ = 0.0f;
+	float size_ = 0.5f;
+	myMath::Vector4 color_ = { 1.0f,1.0f,1.0f,1.0f };
 
 public:
 
@@ -40,4 +41,6 @@ public:
 	void Draw();
 
 	void SetSize(const float size);
+
+	void SetColor(myMath::Vector4 color);
 };

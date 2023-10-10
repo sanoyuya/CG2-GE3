@@ -65,6 +65,8 @@ private:
 	const uint8_t maxCoolTime_ = 60;
 	bool isBulletAttack_ = false;
 
+	Transform controlTrans_;
+
 public:
 
 	Player() = default;

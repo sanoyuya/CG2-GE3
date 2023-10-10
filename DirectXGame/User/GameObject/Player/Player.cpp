@@ -38,6 +38,9 @@ void Player::Initialize()
 	deathAnimation_ = std::make_unique<PlayerDeathAnimation>();
 	deathAnimation_->Initialize();
 
+	controlTrans_.Initialize();
+	controlTrans_.translation.z = 10.0f;
+
 	collisionData_.radius = 1.0f;
 
 	//マネージャーに当たり判定を渡す
@@ -87,6 +90,9 @@ void Player::Update()
 
 	//Transformの更新処理
 	playerTrans_.TransUpdate(camera_);
+
+	controlTrans_.parent = &playerTrans_;
+	controlTrans_.TransUpdate(camera_);
 
 	collisionData_.center = playerTrans_.parentToTranslation;
 
@@ -306,9 +312,9 @@ void Player::LockOnAttack()
 			for (auto& lockOnEnemy : ColliderManager::GetInstance()->GetLockOnEnemy())
 			{
 				//制御点を設定
-				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)),
-				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) ,
-				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) };
+				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(controlTrans_.parentToTranslation.x + 0.1f,controlTrans_.parentToTranslation.x + 0.2f)),
+				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(controlTrans_.parentToTranslation.y + 0.1f,controlTrans_.parentToTranslation.y + 0.2f)) ,
+				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(controlTrans_.parentToTranslation.z + 0.1f,controlTrans_.parentToTranslation.z + 0.2f)) };
 
 				//弾を生成
 				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, lockOnEnemy, controlPoint);

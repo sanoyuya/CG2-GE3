@@ -17,6 +17,7 @@ void NormalBullet::Initialize()
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
+	smokeEmitter_->SetSize(2.0f);
 
 	//死亡アニメーションパーティクル初期化
 	deathParticleEmitter_ = std::make_unique<EnemyDeathParticleEmitter>();
@@ -49,7 +50,10 @@ void NormalBullet::Update()
 
 	collisionData_.center = bulletTrans_.translation;
 
-	SmokeUpdate();
+	//パーティクルを毎フレーム作成
+	smokeEmitter_->Create(bulletTrans_.translation);
+	//パーティクルの更新
+	smokeEmitter_->Update(camera_);
 }
 
 void NormalBullet::Draw()
@@ -62,7 +66,8 @@ void NormalBullet::Draw()
 	}
 	else
 	{
-		bullet_->DrawModel(&bulletTrans_);
+		//当たり判定描画用球
+		//bullet_->DrawModel(&bulletTrans_);
 	}
 }
 
@@ -154,19 +159,4 @@ void NormalBullet::SetTargetPos(GameObject* lockOnEnemy)
 void NormalBullet::SetControlPos(const myMath::Vector3& position)
 {
 	position;
-}
-
-void NormalBullet::SmokeUpdate()
-{
-	//エンジンの座標に合わせるため、モデルの中心座標から位置をずらせるように子を作成
-	smokeTrans_.parent = &bulletTrans_;
-	//モデルの中心座標から位置をずらす
-	smokeTrans_.translation = { 0.0f,0.0f,-1.0f };
-	//子の更新処理
-	smokeTrans_.TransUpdate(camera_);
-	//パーティクルを毎フレーム作成
-	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
-	smokeEmitter_->SetSize(2.0f);
-	//パーティクルの更新
-	smokeEmitter_->Update(camera_);
 }

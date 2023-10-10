@@ -141,8 +141,8 @@ void GameScene::Draw()
 	skyDome_->DrawModel(&skyDomeTrans_);
 	gameLevelData_->Draw();
 	enemyManager_->Draw();
-	player_->Draw();
 	bulletManager_->Draw();
+	player_->Draw();
 	radar_->Draw(enemyManager_.get(), player_.get());
 	SceneChangeAnimation::GetInstance()->Draw();
 }

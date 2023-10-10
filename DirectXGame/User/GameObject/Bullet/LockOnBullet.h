@@ -13,7 +13,7 @@ private:
 
 	bool isDead_ = false;
 	uint8_t deathTimer_ = 0;
-	const uint8_t maxDeathTime_ = 60;
+	const uint8_t maxDeathTime_ = 120;
 
 	myMath::Vector3 directionVector_;//方向ベクトル
 	const float speed_ = 1.5f;
@@ -26,6 +26,9 @@ private:
 
 	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
+	Transform actualTrans_;
+	float angle_ = 0.0f;
+	float isPlus_ = 0.0f;
 
 	CollisionData collisionData_;
 
@@ -85,8 +88,6 @@ public://BulletBaseで必要な奴
 	void SetControlPos(const myMath::Vector3& position);
 
 private:
-
-	void SmokeUpdate();
 
 	void BulletMove();
 };
