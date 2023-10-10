@@ -13,7 +13,7 @@
 class DirectXBase
 {
 public:
-	//ƒGƒCƒŠƒAƒXƒeƒ“ƒvƒŒ[ƒg
+	//ã‚¨ã‚¤ãƒªã‚¢ã‚¹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	template<class T>using ComPtr = Microsoft::WRL::ComPtr<T>;
 private:
 
@@ -25,26 +25,26 @@ private:
 	ComPtr<ID3D12GraphicsCommandList> commandList_;
 	ComPtr<ID3D12CommandQueue> commandQueue_;
 	ComPtr<ID3D12DescriptorHeap> rtvHeap_;
-	//ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ìİ’è
+	//ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®è¨­å®š
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc_{};
 	
-	//ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ìİ’è
+	//ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®è¨­å®š
 	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc_{};
-	//ƒoƒbƒNƒoƒbƒtƒ@
+	//ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡
 	std::vector<ComPtr<ID3D12Resource>>backBuffers_;
-	//ƒtƒFƒ“ƒX‚Ì¶¬
+	//ãƒ•ã‚§ãƒ³ã‚¹ã®ç”Ÿæˆ
 	ComPtr<ID3D12Fence> fence_;
 	uint64_t fenceVal_ = 0;
-	//ƒŠƒ\[ƒXƒoƒŠƒA‚Ìİ’è
+	//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ã®è¨­å®š
 	D3D12_RESOURCE_BARRIER barrierDesc_{};
 	ComPtr<ID3D12Resource>depthBuff_;
 	ComPtr<ID3D12DescriptorHeap> dsvHeap_;
 
-	//ƒfƒXƒNƒvƒŠƒ^ƒq[ƒv
+	//ãƒ‡ã‚¹ã‚¯ãƒ—ãƒªã‚¿ãƒ’ãƒ¼ãƒ—
 	std::unique_ptr<DescriptorHeap> descriptorHeap_;
 
-	//”wŒi‚ÌƒNƒŠƒAƒJƒ‰[
-	FLOAT clearColor_[4] = { 0.1f,0.25f,0.5f,0.0f };//”wŒi‚ÌF(…F)İ’è
+	//èƒŒæ™¯ã®ã‚¯ãƒªã‚¢ã‚«ãƒ©ãƒ¼
+	FLOAT clearColor_[4] = { 0.1f,0.25f,0.5f,0.0f };//èƒŒæ™¯ã®è‰²(æ°´è‰²)è¨­å®š
 
 public:
 	
@@ -55,10 +55,10 @@ public:
 
 private:
 
-#pragma region ‰Šú‰»ŠÖ˜A
+#pragma region åˆæœŸåŒ–é–¢é€£
 
 	/// <summary>
-	/// ƒfƒoƒCƒX‚Ì‰Šú‰»
+	/// ãƒ‡ãƒã‚¤ã‚¹ã®åˆæœŸåŒ–
 	/// </summary>
 	void DeviceInitialize();
 
@@ -68,26 +68,26 @@ private:
 	void DebugInfo();
 
 	/// <summary>
-	/// ƒfƒoƒbƒOƒŒƒCƒ„[‚ğƒIƒ“‚É
+	/// ãƒ‡ãƒãƒƒã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã‚ªãƒ³ã«
 	/// </summary>
 	void DebugLayer();
 	/// <summary>
-	/// ƒRƒ}ƒ“ƒhƒAƒƒP[ƒ^‚Ì‰Šú‰»
+	/// ã‚³ãƒãƒ³ãƒ‰ã‚¢ãƒ­ã‚±ãƒ¼ã‚¿ã®åˆæœŸåŒ–
 	/// </summary>
 	void CommandInitialize();
 
 	/// <summary>
-	/// ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ì‰Šú‰»
+	/// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®åˆæœŸåŒ–
 	/// </summary>
 	void SwapChainInitialize(WindowsApp* windowsApp);
 
 	/// <summary>
-	/// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚Ì‰Šú‰»
+	/// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®åˆæœŸåŒ–
 	/// </summary>
 	void RenderTargetInitialize();
 
 	/// <summary>
-	/// [“xƒeƒXƒg
+	/// æ·±åº¦ãƒ†ã‚¹ãƒˆ
 	/// </summary>
 	void DepthInitialize(WindowsApp* windowsApp);
 
@@ -95,22 +95,22 @@ private:
 
 public:
 
-	//ƒQƒbƒ^[
+	//ã‚²ãƒƒã‚¿ãƒ¼
 	ComPtr<ID3D12Device> GetDevice();
 	ComPtr<ID3D12GraphicsCommandList> GetCommandList();
 	ComPtr<ID3D12DescriptorHeap>GetRtvHeap();
 	DescriptorHeap* GetDescriptorHeap();
 	size_t GetBackBuffer()const;
 
-	//ƒZƒbƒ^[
+	//ã‚»ãƒƒã‚¿ãƒ¼
 	
 	/// <summary>
-	/// ”wŒi‚ÌF‚ğƒZƒbƒg
+	/// èƒŒæ™¯ã®è‰²ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="color">RGBA(‰Šú’l { 0.1f , 0.25f , 0.5f , 0.0f } )</param>
+	/// <param name="color">RGBA(åˆæœŸå€¤ { 0.1f , 0.25f , 0.5f , 0.0f } )</param>
 	void SetClearColor(myMath::Vector4 color = { 0.1f,0.25f,0.5f,0.0f });
 
-	//ƒVƒ“ƒOƒ‹ƒgƒ“
+	//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
 	static DirectXBase* GetInstance();
 
 private:
@@ -118,7 +118,7 @@ private:
 	DirectXBase() = default;
 	~DirectXBase() = default;
 
-	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^E‘ã“ü‰‰Zqíœ
+	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ä»£å…¥æ¼”ç®—å­å‰Šé™¤
 	DirectXBase& operator=(const DirectXBase&) = delete;
 	DirectXBase(const DirectXBase&) = delete;
 };

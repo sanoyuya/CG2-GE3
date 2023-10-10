@@ -6,7 +6,7 @@ void Reticle::Initialize()
 {
 	input_ = InputManager::GetInstance();
 
-	//ƒXƒvƒ‰ƒCƒg‚Ì‰Šú‰»
+	//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®åˆæœŸåŒ–
 	reticle_ = std::make_unique<Sprite>();
 	reticleTex_ = reticle_->LoadTexture("Resources/reticle.png");
 	reticle_->Sprite3DInitialize(reticleTex_);
@@ -38,17 +38,17 @@ const bool Reticle::GetIsDead()
 
 void Reticle::Update()
 {
-	//ƒJƒƒ‰‚ğe‚É‚·‚éˆ×‚És—ñ‚ğTransform‚ÌmatWorld‚É“o˜^
+	//ã‚«ãƒ¡ãƒ©ã‚’è¦ªã«ã™ã‚‹ç‚ºã«è¡Œåˆ—ã‚’Transformã®matWorldã«ç™»éŒ²
 	cameraTrans_.matWorld = camera_->GetMatView();
-	//ƒŒƒeƒBƒNƒ‹‚Ìe‚ÉƒJƒƒ‰‚ğİ’è
+	//ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã®è¦ªã«ã‚«ãƒ¡ãƒ©ã‚’è¨­å®š
 	reticleTrans_.parent = &cameraTrans_;
 
-	//ˆÚ“®ˆ—
+	//ç§»å‹•å‡¦ç†
 	Move();
-	//ˆÚ“®§ŒÀˆ—
+	//ç§»å‹•åˆ¶é™å‡¦ç†
 	ReticleLimit();
 
-	//ƒXƒvƒ‰ƒCƒg‚ÌXVˆ—
+	//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æ›´æ–°å‡¦ç†
 	reticleTrans_.TransUpdate(camera_);
 
 	collisionData.rayStartPos = camera_->GetEye();
@@ -102,7 +102,7 @@ void Reticle::SetCamera(Camera* camera)
 
 void Reticle::Move()
 {
-#pragma region ƒL[ƒ{[ƒh
+#pragma region ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
 	if (input_->KeyboardKeepPush(DIK_UP))
 	{
 		reticleTrans_.translation += {0.0f, reticleSpeed_, 0.0f};
@@ -119,19 +119,19 @@ void Reticle::Move()
 	{
 		reticleTrans_.translation += {reticleSpeed_, 0.0f, 0.0f};
 	}
-#pragma endregion ƒL[ƒ{[ƒh
+#pragma endregion ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
 
-#pragma region ƒRƒ“ƒgƒ[ƒ‰[
+#pragma region ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 
-	//LƒXƒeƒBƒbƒN‚ğŒX‚¯‚é‚±‚Æ‚ÅˆÚ“®‚Å‚«‚é‚æ‚¤‚É‚·‚é
+	//Lã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‚’å‚¾ã‘ã‚‹ã“ã¨ã§ç§»å‹•ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
 	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_ * input_->GetLeftStickVec().y, 0.0f};
 
-#pragma endregion ƒRƒ“ƒgƒ[ƒ‰[
+#pragma endregion ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 }
 
 void Reticle::ReticleLimit()
 {
 	reticleTrans_.translation.x = std::clamp(reticleTrans_.translation.x, -reticleLimit_, reticleLimit_);
-	//‰æ–Ê”ä—¦‚É‡‚í‚¹‚½§ŒÀˆ—(x:y,16:9)
+	//ç”»é¢æ¯”ç‡ã«åˆã‚ã›ãŸåˆ¶é™å‡¦ç†(x:y,16:9)
 	reticleTrans_.translation.y = std::clamp(reticleTrans_.translation.y, -reticleLimit_ / 16 * 9, reticleLimit_ / 16 * 9);
 }

@@ -19,34 +19,34 @@ void Sprite3D::DrawSprite3D(Camera* camera, Transform& transform, BillboardFlag 
 	float top = ((0.0f - anchorpoint.y) * texture_->height) * isFlipY;
 	float bottom = ((1.0f - anchorpoint.y) * texture_->height) * isFlipY;
 
-	//’¸“_ƒf[ƒ^
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{0.0f,0.0f},{color.x, color.y, color.z, color.w}},//¶ãƒCƒ“ƒfƒbƒNƒX0
-		{{left,bottom,0.0f},{0.0f,1.0f},{color.x, color.y, color.z, color.w}},//¶‰ºƒCƒ“ƒfƒbƒNƒX1
-		{{right,top,0.0f},{1.0f,0.0f},{color.x, color.y, color.z, color.w}},//‰EãƒCƒ“ƒfƒbƒNƒX2
-		{{right,bottom,0.0f},{1.0f,1.0f},{color.x, color.y, color.z, color.w}},//‰E‰ºƒCƒ“ƒfƒbƒNƒX3
+		{{left,top,0.0f},{0.0f,0.0f},{color.x, color.y, color.z, color.w}},//å·¦ä¸Šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹0
+		{{left,bottom,0.0f},{0.0f,1.0f},{color.x, color.y, color.z, color.w}},//å·¦ä¸‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹1
+		{{right,top,0.0f},{1.0f,0.0f},{color.x, color.y, color.z, color.w}},//å³ä¸Šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹2
+		{{right,bottom,0.0f},{1.0f,1.0f},{color.x, color.y, color.z, color.w}},//å³ä¸‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹3
 	};
 
-	//ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿
 	uint32_t indices[] =
 	{
-		1,0,3,//OŠpŒ`1‚Â–Ú
-		2,3,0,//OŠpŒ`2‚Â–Ú
+		1,0,3,//ä¸‰è§’å½¢1ã¤ç›®
+		2,3,0,//ä¸‰è§’å½¢2ã¤ç›®
 	};
 
-	//’¸“_ƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	vertexBuffer_->Update(vertices);
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	indexBuffer_->Update(indices);
 
 	Update(camera, transform, flag);
 
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Æƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ìİ’èƒRƒ}ƒ“ƒh
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã¨ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	SpriteCommon::BlendSet(blendMode_);
 
-	//•`‰æƒRƒ}ƒ“ƒh
+	//æç”»ã‚³ãƒãƒ³ãƒ‰
 	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
@@ -63,34 +63,34 @@ void Sprite3D::DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Ve
 	float top = -clipRadius.y * isFlipY;
 	float bottom = clipRadius.y * isFlipY;
 
-	//’¸“_ƒf[ƒ^
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) / texture_->width,(clipCenter.y - clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//¶ãƒCƒ“ƒfƒbƒNƒX0
-		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / texture_->width,(clipCenter.y + clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//¶‰ºƒCƒ“ƒfƒbƒNƒX1
-		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / texture_->width,(clipCenter.y - clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//‰EãƒCƒ“ƒfƒbƒNƒX2
-		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / texture_->width,(clipCenter.y + clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//‰E‰ºƒCƒ“ƒfƒbƒNƒX3
+		{{left,top,0.0f},{(clipCenter.x - clipRadius.x) / texture_->width,(clipCenter.y - clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//å·¦ä¸Šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹0
+		{{left,bottom,0.0f},{(clipCenter.x - clipRadius.x) / texture_->width,(clipCenter.y + clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//å·¦ä¸‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹1
+		{{right,top,0.0f},{(clipCenter.x + clipRadius.x) / texture_->width,(clipCenter.y - clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//å³ä¸Šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹2
+		{{right,bottom,0.0f},{(clipCenter.x + clipRadius.x) / texture_->width,(clipCenter.y + clipRadius.y) / texture_->height},{color.x, color.y, color.z, color.w}},//å³ä¸‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹3
 	};
 
-	//ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿
 	uint32_t indices[] =
 	{
-		1,0,3,//OŠpŒ`1‚Â–Ú
-		2,3,0,//OŠpŒ`2‚Â–Ú
+		1,0,3,//ä¸‰è§’å½¢1ã¤ç›®
+		2,3,0,//ä¸‰è§’å½¢2ã¤ç›®
 	};
 
-	//’¸“_ƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	vertexBuffer_->Update(vertices);
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	indexBuffer_->Update(indices);
 
 	Update(camera, transform, billboardFlag);
 
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Æƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ìİ’èƒRƒ}ƒ“ƒh
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã¨ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	SpriteCommon::BlendSet(blendMode_);
 
-	//•`‰æƒRƒ}ƒ“ƒh
+	//æç”»ã‚³ãƒãƒ³ãƒ‰
 	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
@@ -117,43 +117,43 @@ void Sprite3D::DrawAnimationSpriteXY3D(Camera* camera, Transform& transform, uin
 	float top = ((0.0f - anchorpoint.y) * texture_->height / sheetsNumY) * isFlipY;
 	float bottom = ((1.0f - anchorpoint.y) * texture_->height / sheetsNumY) * isFlipY;
 
-	uint16_t animationXYNum = sheetsNumX * sheetsNumY;//•ªŠ„”(‘‡Œv)
+	uint16_t animationXYNum = sheetsNumX * sheetsNumY;//åˆ†å‰²æ•°(ç·åˆè¨ˆ)
 	uint16_t x = nowNum % sheetsNumX;
 	uint16_t y = nowNum / sheetsNumX;
 
 	if (nowNum + 1 > animationXYNum)
 	{
-		nowNum = 0;//0–‡–Ú‚É–ß‚·ˆ—
+		nowNum = 0;//0æšç›®ã«æˆ»ã™å‡¦ç†
 	}
 
-	//’¸“_ƒf[ƒ^
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{static_cast<float>(x) / static_cast<float>(sheetsNumX),static_cast<float>(y) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//¶ãƒCƒ“ƒfƒbƒNƒX0
-		{{left,bottom,0.0f},{static_cast<float>(x) / static_cast<float>(sheetsNumX),(static_cast<float>(y) + 1) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//¶‰ºƒCƒ“ƒfƒbƒNƒX1
-		{{right,top,0.0f},{(static_cast<float>(x) + 1) / static_cast<float>(sheetsNumX),static_cast<float>(y) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//‰EãƒCƒ“ƒfƒbƒNƒX2
-		{{right,bottom,0.0f},{(static_cast<float>(x) + 1) / static_cast<float>(sheetsNumX),(static_cast<float>(y) + 1) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//‰E‰ºƒCƒ“ƒfƒbƒNƒX3
+		{{left,top,0.0f},{static_cast<float>(x) / static_cast<float>(sheetsNumX),static_cast<float>(y) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//å·¦ä¸Šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹0
+		{{left,bottom,0.0f},{static_cast<float>(x) / static_cast<float>(sheetsNumX),(static_cast<float>(y) + 1) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//å·¦ä¸‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹1
+		{{right,top,0.0f},{(static_cast<float>(x) + 1) / static_cast<float>(sheetsNumX),static_cast<float>(y) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//å³ä¸Šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹2
+		{{right,bottom,0.0f},{(static_cast<float>(x) + 1) / static_cast<float>(sheetsNumX),(static_cast<float>(y) + 1) / static_cast<float>(sheetsNumY)},{color.x, color.y, color.z, color.w}},//å³ä¸‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹3
 	};
 
-	//ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿
 	uint32_t indices[] =
 	{
-		1,0,3,//OŠpŒ`1‚Â–Ú
-		2,3,0,//OŠpŒ`2‚Â–Ú
+		1,0,3,//ä¸‰è§’å½¢1ã¤ç›®
+		2,3,0,//ä¸‰è§’å½¢2ã¤ç›®
 	};
 
-	//’¸“_ƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	vertexBuffer_->Update(vertices);
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	indexBuffer_->Update(indices);
 
 	Update(camera, transform, billboardFlag);
 
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Æƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ìİ’èƒRƒ}ƒ“ƒh
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã¨ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	SpriteCommon::BlendSet(blendMode_);
 
-	//•`‰æƒRƒ}ƒ“ƒh
+	//æç”»ã‚³ãƒãƒ³ãƒ‰
 	SpriteCommon::DrawCommand(texture_, vertexBuffer_->GetView(), indexBuffer_->GetView(), constBuffMaterial_.get());
 }
 
@@ -179,11 +179,11 @@ void Sprite3D::Update(Camera* camera, Transform transform, BillboardFlag flag)
 	myMath::Matrix4 mTrans, mRot, mScale;
 	myMath::Matrix4 mat = camera->GetMatView();
 
-	//•½sˆÚ“®s—ñ
+	//å¹³è¡Œç§»å‹•è¡Œåˆ—
 	mTrans.MakeTranslation(transform.translation);
-	//‰ñ“]s—ñ
+	//å›è»¢è¡Œåˆ—
 	mRot.MakeRotation(transform.rotation);
-	//ƒXƒP[ƒ‹s—ñ
+	//ã‚¹ã‚±ãƒ¼ãƒ«è¡Œåˆ—
 	mScale.MakeScaling(transform.scale);
 
 	switch (flag)

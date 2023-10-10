@@ -10,46 +10,46 @@ enum class BulletOwner
 
 class BulletBase :public GameObject
 {
-public://GameObject‚Å•K—v‚È“z
+public://GameObjectã§å¿…è¦ãªå¥´
 
-	//ƒfƒXƒgƒ‰ƒNƒ^
+	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	virtual ~BulletBase() = default;
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	virtual void Initialize() = 0;
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	virtual void Update() = 0;
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	virtual void Draw() = 0;
 
-	//ƒIƒuƒWƒFƒNƒg‚Ì–¼‘Oæ“¾ˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰å–å¾—å‡¦ç†
 	virtual std::string GetName() = 0;
 
 	virtual const Transform& GetTransform() = 0;
 
-	//ƒIƒuƒWƒFƒNƒg‚Ì“–‚½‚è”»’èæ“¾ˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å½“ãŸã‚Šåˆ¤å®šå–å¾—å‡¦ç†
 	virtual const CollisionData& GetCollisionData() = 0;
 
-	//ƒIƒuƒWƒFƒNƒg‚ÌÕ“Ë”»’èˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¡çªåˆ¤å®šå‡¦ç†
 	virtual void OnCollision() = 0;
 
-	//€–Sƒtƒ‰ƒO‚Ìæ“¾
+	//æ­»äº¡ãƒ•ãƒ©ã‚°ã®å–å¾—
 	virtual const bool GetIsDead() = 0;
 
-	//€–SƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒ‰ƒO‚Ìæ“¾
+	//æ­»äº¡ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚°ã®å–å¾—
 	virtual const bool GetDeathAnimationFlag() = 0;
 
-	//ƒƒbƒNƒIƒ“
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³
 	virtual void LockOn() = 0;
 
-	//ƒƒbƒNƒIƒ“‰ğœ
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³è§£é™¤
 	virtual void CancelLockOn() = 0;
 
 	virtual const bool GetLockOnFlag() = 0;
 
-public://Bullet‚Å•K—v‚È“z
+public://Bulletã§å¿…è¦ãªå¥´
 	virtual void SetCamera(Camera* camera) = 0;
 	virtual void SetPos(const myMath::Vector3& position) = 0;
 	virtual void SetDirectionVector(const myMath::Vector3& directionVector) = 0;

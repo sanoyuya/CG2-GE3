@@ -21,7 +21,7 @@ public:
 
 	const Stage GetStageNum();
 
-	//シングルトン
+	//繧ｷ繝ｳ繧ｰ繝ｫ繝医Φ
 	static Retention* GetInstance();
 
 private:
@@ -29,7 +29,7 @@ private:
 	Retention() = default;
 	~Retention() = default;
 
-	//コピーコンストラクタ・代入演算子削除
+	//繧ｳ繝斐�ｼ繧ｳ繝ｳ繧ｹ繝医Λ繧ｯ繧ｿ繝ｻ莉｣蜈･貍皮ｮ怜ｭ仙炎髯､
 	Retention& operator=(const Retention&) = delete;
 	Retention(const Retention&) = delete;
 };

@@ -68,6 +68,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\GameObject;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Effect\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh;$(ProjectDir)User\GameObject\Bullet;$(ProjectDir)User\GameObject\Enemy;$(ProjectDir)User\GameObject\Player;$(ProjectDir)User\Other;$(ProjectDir)User\Stage;$(ProjectDir)User\Effect</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -89,6 +90,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\GameObject;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Effect\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh;$(ProjectDir)User\GameObject\Bullet;$(ProjectDir)User\GameObject\Enemy;$(ProjectDir)User\GameObject\Player;$(ProjectDir)User\Other;$(ProjectDir)User\Stage;$(ProjectDir)User\Effect</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -437,6 +439,7 @@
     <ClInclude Include="Engine\Other\YFramework.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="Resources\Shaders\Particle\Particle.hlsli" />
     <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli" />
     <None Include="Resources\Shaders\Model\Phong\PhongShader.hlsli" />

@@ -2,7 +2,7 @@
 #include"WindowsApp.h"
 #include"myMath.h"
 
-//ƒV[ƒ“Šî’êƒNƒ‰ƒX
+//ã‚·ãƒ¼ãƒ³åŸºåº•ã‚¯ãƒ©ã‚¹
 class BaseScene
 {
 protected:
@@ -14,16 +14,16 @@ public:
 
 	virtual ~BaseScene() = default;
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	virtual void Initialize() = 0;
 
-	//I—¹ˆ—
+	//çµ‚äº†å‡¦ç†
 	virtual void Destroy() = 0;
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	virtual void Update() = 0;
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	virtual void Draw() = 0;
 
 	static void StaticInitialize(WindowsApp* windowsApp);

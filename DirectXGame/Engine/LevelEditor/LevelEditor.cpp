@@ -8,36 +8,36 @@ LevelData* LevelEditor::LoadLevelEditorFile(const std::string& fileName)
 {
 	const std::string fullpath = sDefaultBaseDirectory_ + fileName + sExtension_;
 
-	// ƒtƒ@ƒCƒ‹ƒXƒgƒŠ[ƒ€
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚¹ãƒˆãƒªãƒ¼ãƒ 
 	std::ifstream file;
 
-	// ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	file.open(fullpath);
-	// ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“¸”s‚ğƒ`ƒFƒbƒN
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³å¤±æ•—ã‚’ãƒã‚§ãƒƒã‚¯
 	if (file.fail())
 	{
 		assert(0);
 	}
 
-	//json•¶š—ñ‚©‚ç‰ğ“€‚µ‚½ƒf[ƒ^
+	//jsonæ–‡å­—åˆ—ã‹ã‚‰è§£å‡ã—ãŸãƒ‡ãƒ¼ã‚¿
 	nlohmann::json deserialized;
 
-	//‰ğ“€
+	//è§£å‡
 	file >> deserialized;
 
-	//³‚µ‚¢ƒŒƒxƒ‹ƒf[ƒ^ƒtƒ@ƒCƒ‹‚©ƒ`ƒFƒbƒN
+	//æ­£ã—ã„ãƒ¬ãƒ™ãƒ«ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«ã‹ãƒã‚§ãƒƒã‚¯
 	assert(deserialized.is_object());
 	assert(deserialized.contains("name"));
 	assert(deserialized["name"].is_string());
-	//"name"‚ğ•¶š—ñ‚Æ‚µ‚Äæ“¾
+	//"name"ã‚’æ–‡å­—åˆ—ã¨ã—ã¦å–å¾—
 	std::string name = deserialized["name"].get<std::string>();
-	//³‚µ‚¢ƒŒƒxƒ‹ƒf[ƒ^ƒtƒ@ƒCƒ‹‚©ƒ`ƒFƒbƒN
+	//æ­£ã—ã„ãƒ¬ãƒ™ãƒ«ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«ã‹ãƒã‚§ãƒƒã‚¯
 	assert(name.compare("scene") == 0);
 
-	//ƒŒƒxƒ‹ƒf[ƒ^Ši”[—pƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+	//ãƒ¬ãƒ™ãƒ«ãƒ‡ãƒ¼ã‚¿æ ¼ç´ç”¨ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 	LevelData* levelData = new LevelData();
 
-	//"objects"‚Ì‘SƒIƒuƒWƒFƒNƒg‚ğ‘–¸
+	//"objects"ã®å…¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’èµ°æŸ»
 	for (nlohmann::json& object : deserialized["objects"])
 	{
 		ObjectDataLoad(levelData, object);
@@ -50,68 +50,68 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 {
 	assert(object.contains("type"));
 
-	//í•Ê‚ğæ“¾
+	//ç¨®åˆ¥ã‚’å–å¾—
 	std::string type = object["type"].get<std::string>();
 
 	//mesh
 	if (type.compare("MESH") == 0) {
 
-		//—v‘f’Ç‰Á
+		//è¦ç´ è¿½åŠ 
 		levelData->objects_.emplace_back(LevelData::ObjectData{});
-		//¡’Ç‰Á‚µ‚½—v‘f‚ÌQÆ‚ğ“¾‚é
+		//ä»Šè¿½åŠ ã—ãŸè¦ç´ ã®å‚ç…§ã‚’å¾—ã‚‹
 		LevelData::ObjectData& objectData = levelData->objects_.back();
 
 		if (object.contains("file_name"))
 		{
-			// ƒtƒ@ƒCƒ‹–¼
+			// ãƒ•ã‚¡ã‚¤ãƒ«å
 			objectData.fileName = object["file_name"];
 		}
 
-		//ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚Ìƒpƒ‰ƒ[ƒ^“Ç‚İ‚İ
+		//ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
 		nlohmann::json& transform = object["transform"];
 
-		//•½sˆÚ“®
+		//å¹³è¡Œç§»å‹•
 		objectData.translation.x = static_cast<float>(transform["translation"][1]);
 		objectData.translation.y = static_cast<float>(transform["translation"][2]);
 		objectData.translation.z = -static_cast<float>(transform["translation"][0]);
-		//‰ñ“]Šp
+		//å›è»¢è§’
 		objectData.rotation.x = -static_cast<float>(transform["rotation"][1]);
 		objectData.rotation.y = -static_cast<float>(transform["rotation"][2]);
 		objectData.rotation.z = static_cast<float>(transform["rotation"][0]);
-		//ƒXƒP[ƒŠƒ“ƒO
+		//ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°
 		objectData.scaling.x = static_cast<float>(transform["scaling"][1]);
 		objectData.scaling.y = static_cast<float>(transform["scaling"][2]);
 		objectData.scaling.z = static_cast<float>(transform["scaling"][0]);
 
-		//ƒRƒ‰ƒCƒ_[‚Ìƒpƒ‰ƒ[ƒ^“Ç‚İ‚İ
+		//ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
 		nlohmann::json& collider = object["collider"];
 		if (collider != nullptr)
 		{
-			//’†S“_
+			//ä¸­å¿ƒç‚¹
 			objectData.collider.center.x = static_cast<float>(collider["center"][1]);
 			objectData.collider.center.y = static_cast<float>(collider["center"][2]);
 			objectData.collider.center.z = static_cast<float>(collider["center"][0]);
-			//‘å‚«‚³
+			//å¤§ãã•
 			objectData.collider.size.x = static_cast<float>(collider["size"][1]);
 			objectData.collider.size.y = static_cast<float>(collider["size"][2]);
 			objectData.collider.size.z = static_cast<float>(collider["size"][0]);
 		}
 
-		//ƒ^ƒCƒ}[‚Ìƒpƒ‰ƒ[ƒ^“Ç‚İ‚İ
+		//ã‚¿ã‚¤ãƒãƒ¼ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
 		nlohmann::json& timer = object["timer"];
 		if (timer != nullptr)
 		{
-			//oŒ»ŠÔ
+			//å‡ºç¾æ™‚é–“
 			objectData.timer.spawnTimer = static_cast<float>(timer["spawn"]);
-			//€–SŠÔ
+			//æ­»äº¡æ™‚é–“
 			objectData.timer.deathTimer = static_cast<float>(timer["death"]);
 		}
 
-		//“Gî•ñ‚Ìƒpƒ‰ƒ[ƒ^“Ç‚İ‚İ
+		//æ•µæƒ…å ±ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
 		nlohmann::json& enemyProperty = object["enemy_move_properties"];
 		if (enemyProperty != nullptr)
 		{
-			//oŒ»’n“_
+			//å‡ºç¾åœ°ç‚¹
 			objectData.enemyProperty.spawnPos.x = static_cast<float>(enemyProperty["spawnPosition"][1]);
 			objectData.enemyProperty.spawnPos.y = static_cast<float>(enemyProperty["spawnPosition"][2]);
 			objectData.enemyProperty.spawnPos.z = static_cast<float>(enemyProperty["spawnPosition"][0]);
@@ -119,10 +119,10 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.enemyProperty.spawnPosRotation.y = static_cast<float>(enemyProperty["spawnPositionRotation"][2]);
 			objectData.enemyProperty.spawnPosRotation.z = static_cast<float>(enemyProperty["spawnPositionRotation"][0]);
 
-			//ˆÚ“®’n“_‚ÉŒü‚©‚¤‚Ü‚Å‚ÌŠÔ
+			//ç§»å‹•åœ°ç‚¹ã«å‘ã‹ã†ã¾ã§ã®æ™‚é–“
 			objectData.enemyProperty.toMovePosTime = static_cast<float>(enemyProperty["toMovePositionTime"]);
 
-			//ˆÚ“®’n“_‚ÌÀ•W
+			//ç§»å‹•åœ°ç‚¹ã®åº§æ¨™
 			objectData.enemyProperty.movePos.x = static_cast<float>(enemyProperty["movePosition"][1]);
 			objectData.enemyProperty.movePos.y = static_cast<float>(enemyProperty["movePosition"][2]);
 			objectData.enemyProperty.movePos.z = static_cast<float>(enemyProperty["movePosition"][0]);
@@ -130,13 +130,13 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.enemyProperty.movePosRotation.y = static_cast<float>(enemyProperty["movePositionRotation"][2]);
 			objectData.enemyProperty.movePosRotation.z = static_cast<float>(enemyProperty["movePositionRotation"][0]);
 
-			//ˆÚ“®’n“_‚Å‚Ì‘Ò‹@ŠÔ
+			//ç§»å‹•åœ°ç‚¹ã§ã®å¾…æ©Ÿæ™‚é–“
 			objectData.enemyProperty.waitTime = static_cast<float>(enemyProperty["waitTime"]);
 
-			//“¦‘–’n“_‚ÉŒü‚©‚¤‚Ü‚Å‚ÌŠÔ
+			//é€ƒèµ°åœ°ç‚¹ã«å‘ã‹ã†ã¾ã§ã®æ™‚é–“
 			objectData.enemyProperty.toEscapePosTime= static_cast<float>(enemyProperty["toEscapePositionTime"]);
 
-			//“¦‘–’n“_
+			//é€ƒèµ°åœ°ç‚¹
 			objectData.enemyProperty.escapePos.x = static_cast<float>(enemyProperty["escapePosition"][1]);
 			objectData.enemyProperty.escapePos.y = static_cast<float>(enemyProperty["escapePosition"][2]);
 			objectData.enemyProperty.escapePos.z = static_cast<float>(enemyProperty["escapePosition"][0]);
@@ -147,49 +147,49 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 	}
 	else if (type.compare("CAMERA") == 0)
 	{
-		//—v‘f’Ç‰Á
+		//è¦ç´ è¿½åŠ 
 		levelData->objects_.emplace_back(LevelData::ObjectData{});
-		//¡’Ç‰Á‚µ‚½—v‘f‚ÌQÆ‚ğ“¾‚é
+		//ä»Šè¿½åŠ ã—ãŸè¦ç´ ã®å‚ç…§ã‚’å¾—ã‚‹
 		LevelData::ObjectData& objectData = levelData->objects_.back();
 
 		if (object.contains("file_name"))
 		{
-			// ƒtƒ@ƒCƒ‹–¼
+			// ãƒ•ã‚¡ã‚¤ãƒ«å
 			objectData.fileName = object["file_name"];
 		}
 
-		//ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚Ìƒpƒ‰ƒ[ƒ^“Ç‚İ‚İ
+		//ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
 		nlohmann::json& transform = object["transform"];
 
-		//•½sˆÚ“®
+		//å¹³è¡Œç§»å‹•
 		objectData.translation.x = static_cast<float>(transform["translation"][1]);
 		objectData.translation.y = static_cast<float>(transform["translation"][2]);
 		objectData.translation.z = -static_cast<float>(transform["translation"][0]);
-		//‰ñ“]Šp
+		//å›è»¢è§’
 		objectData.rotation.x = -static_cast<float>(transform["rotation"][1]);
 		objectData.rotation.y = -static_cast<float>(transform["rotation"][2]);
 		objectData.rotation.z = static_cast<float>(transform["rotation"][0]);
-		//ƒXƒP[ƒŠƒ“ƒO
+		//ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°
 		objectData.scaling.x = static_cast<float>(transform["scaling"][1]);
 		objectData.scaling.y = static_cast<float>(transform["scaling"][2]);
 		objectData.scaling.z = static_cast<float>(transform["scaling"][0]);
 
-		//ƒRƒ‰ƒCƒ_[‚Ìƒpƒ‰ƒ[ƒ^“Ç‚İ‚İ
+		//ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
 		nlohmann::json& collider = object["collider"];
 		if (collider != nullptr)
 		{
-			//’†S“_
+			//ä¸­å¿ƒç‚¹
 			objectData.collider.center.x = static_cast<float>(collider["center"][1]);
 			objectData.collider.center.y = static_cast<float>(collider["center"][2]);
 			objectData.collider.center.z = static_cast<float>(collider["center"][0]);
-			//‘å‚«‚³
+			//å¤§ãã•
 			objectData.collider.size.x = static_cast<float>(collider["size"][1]);
 			objectData.collider.size.y = static_cast<float>(collider["size"][2]);
 			objectData.collider.size.z = static_cast<float>(collider["size"][0]);
 		}
 	}
 
-	//ƒIƒuƒWƒFƒNƒg‘–¸‚ğÄ‹AŠÖ”‚É‚Ü‚Æ‚ßAÄ‹AŒÄo‚Å}‚ğ‘–¸‚·‚é
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆèµ°æŸ»ã‚’å†å¸°é–¢æ•°ã«ã¾ã¨ã‚ã€å†å¸°å‘¼å‡ºã§æã‚’èµ°æŸ»ã™ã‚‹
 	if (object.contains("children"))
 	{
 		for (nlohmann::json& object_ : object["children"])

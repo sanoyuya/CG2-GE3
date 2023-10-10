@@ -2,7 +2,7 @@
 
 void EnemySpawnParticleEmitter::Initialize()
 {
-	// ƒp[ƒeƒBƒNƒ‹¶¬
+	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ç”Ÿæˆ
 	particleMan_ = std::make_unique<ParticleManager>();
 	tex_ = particleMan_->LoadTexture("Resources/particle.png");
 	particleMan_->Initialize(tex_);
@@ -12,41 +12,41 @@ void EnemySpawnParticleEmitter::Create(const myMath::Vector3 center)
 {
 	for (int i = 0; i < 5; i++)
 	{
-		//‰ŠúÀ•W(¶¬‚·‚éêŠ‚Ì’†SÀ•W)
+		//åˆæœŸåº§æ¨™(ç”Ÿæˆã™ã‚‹å ´æ‰€ã®ä¸­å¿ƒåº§æ¨™)
 		myMath::Vector3 pos{};
 		pos.x = center.x;
 		pos.y = center.y - 3.0f;
 		pos.z = center.z;
 
-		//‘¬“x
+		//é€Ÿåº¦
 		myMath::Vector3 vel = { -0.02f,0.2f ,0.0f };
 
-		//d—Í‚Ì‚æ‚¤‚Èˆ—
+		//é‡åŠ›ã®ã‚ˆã†ãªå‡¦ç†
 		myMath::Vector3 acc{};
 
 		myMath::Vector4 col = { 115.0f / 255.0f,78.0f / 255.0f,149.0f / 255.0f,1.0f };
 
-		//’Ç‰Á
+		//è¿½åŠ 
 		particleMan_->Add(30.0f, pos, vel, acc, 3.0f, 0.0f, col);
 	}
 
 	for (int i = 0; i < 5; i++)
 	{
-		//‰ŠúÀ•W(¶¬‚·‚éêŠ‚Ì’†SÀ•W)
+		//åˆæœŸåº§æ¨™(ç”Ÿæˆã™ã‚‹å ´æ‰€ã®ä¸­å¿ƒåº§æ¨™)
 		myMath::Vector3 pos{};
 		pos.x = center.x;
 		pos.y = center.y - 3.0f;
 		pos.z = center.z;
 
-		//‘¬“x
+		//é€Ÿåº¦
 		myMath::Vector3 vel = { -0.02f,0.2f ,0.0f };
 
-		//d—Í‚Ì‚æ‚¤‚Èˆ—
+		//é‡åŠ›ã®ã‚ˆã†ãªå‡¦ç†
 		myMath::Vector3 acc{};
 
 		myMath::Vector4 col = { 0.0f / 255.0f,0.0f / 255.0f,0.0f / 255.0f,1.0f };
 
-		//’Ç‰Á
+		//è¿½åŠ 
 		particleMan_->Add(30.0f, pos, vel, acc, 3.0f, 0.0f, col);
 	}
 }

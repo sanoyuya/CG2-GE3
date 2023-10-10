@@ -155,30 +155,30 @@ namespace myMath
 		mat.m[3][2] = eye.z;
 	}
 
-	// ƒ‰ƒ“ƒ_ƒ€‚È’l‚ğæ“¾
+	// ãƒ©ãƒ³ãƒ€ãƒ ãªå€¤ã‚’å–å¾—
 	double GetRand(double min, double max)
 	{
-		// —”¶¬Ší
+		// ä¹±æ•°ç”Ÿæˆå™¨
 		static std::random_device rand;
 		static std::default_random_engine engine(rand());
 
-		// •ª•z¶¬Ší
+		// åˆ†å¸ƒç”Ÿæˆå™¨
 		std::uniform_real_distribution<double> get_rand_uni_real(min, max);
 
-		// —”‚ğ¶¬
+		// ä¹±æ•°ã‚’ç”Ÿæˆ
 		return get_rand_uni_real(engine);
 	}
 
 	int8_t GetRandPlusOrMinus()
 	{
-		// —”¶¬Ší
+		// ä¹±æ•°ç”Ÿæˆå™¨
 		static std::random_device rand;
 		static std::default_random_engine engine(rand());
 
-		// •ª•z¶¬Ší
+		// åˆ†å¸ƒç”Ÿæˆå™¨
 		std::uniform_real_distribution<double> get_rand_uni_real(0, 1);
 
-		// —”‚ğ¶¬
+		// ä¹±æ•°ã‚’ç”Ÿæˆ
 		if (get_rand_uni_real(engine) <= 0.5f)
 		{
 			return -1;
@@ -189,7 +189,7 @@ namespace myMath
 		}
 	}
 
-	// “ñ‚Â‚Ì’l‚ª‚Ù‚Ú“™‚µ‚¢‚©
+	// äºŒã¤ã®å€¤ãŒã»ã¼ç­‰ã—ã„ã‹
 	bool Approximately(float a, float b)
 	{
 		float tmp = 1e-06f * std::max(abs(a), abs(b));

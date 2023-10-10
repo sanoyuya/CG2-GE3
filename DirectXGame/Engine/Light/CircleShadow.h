@@ -2,13 +2,13 @@
 #include"myMath.h"
 
 /// <summary>
-/// ŠÛ‰e
+/// ä¸¸å½±
 /// </summary>
 class CircleShadow
 {
-public://ƒTƒuƒNƒ‰ƒX
+public://ã‚µãƒ–ã‚¯ãƒ©ã‚¹
 
-	//’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 	struct ConstBufferData
 	{
 		myMath::Vector4 dir;
@@ -21,22 +21,22 @@ public://ƒTƒuƒNƒ‰ƒX
 		float pad4;
 	};
 
-private://ƒƒ“ƒo•Ï”
+private://ãƒ¡ãƒ³ãƒå¤‰æ•°
 
-	//•ûŒü(’PˆÊƒxƒNƒgƒ‹)
+	//æ–¹å‘(å˜ä½ãƒ™ã‚¯ãƒˆãƒ«)
 	myMath::Vector4 dir_ = { 1,0,0,0 };
-	//ƒLƒƒƒXƒ^[‚Æƒ‰ƒCƒg‚Ì‹——£
+	//ã‚­ãƒ£ã‚¹ã‚¿ãƒ¼ã¨ãƒ©ã‚¤ãƒˆã®è·é›¢
 	float distanceCasterLight_ = 100.0f;
-	//ƒLƒƒƒXƒ^[À•W(ƒ[ƒ‹ƒhÀ•WŒn)
+	//ã‚­ãƒ£ã‚¹ã‚¿ãƒ¼åº§æ¨™(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»)
 	myMath::Vector3 casterPos_ = { 0,0,0 };
-	//‹——£Œ¸ŠŒW”
+	//è·é›¢æ¸›è¡°ä¿‚æ•°
 	myMath::Vector3 atten_ = { 0.5f,0.6f,0.0f };
-	//Œ¸ŠŠp“x
+	//æ¸›è¡°è§’åº¦
 	myMath::Vector2 factorAngleCos_ = { 0.2f,0.5f };
-	//—LŒøƒtƒ‰ƒO
+	//æœ‰åŠ¹ãƒ•ãƒ©ã‚°
 	bool active_ = false;
 
-public://ƒƒ“ƒoŠÖ”
+public://ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	inline void SetDir(const myMath::Vector4& dir) { dir_ = dir.normalization(); }
 	inline const myMath::Vector4& GetDir() { return dir_; }

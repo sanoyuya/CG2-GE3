@@ -2,54 +2,54 @@
 #include<wrl.h>
 #include <d3d12.h>
 /// <summary>
-/// ’¸“_ƒoƒbƒtƒ@
+/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 /// </summary>
 class VertexBuffer
 {
 private:
-	// ƒoƒbƒtƒ@
+	// ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertexBuffer_ = nullptr;
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_ = {};
 
 	void* bufferMappedPtr_ = nullptr;
 
-	// ƒoƒbƒtƒ@‚Ì¶¬‚É¬Œ÷‚µ‚½‚©
+	// ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆã«æˆåŠŸã—ãŸã‹
 	bool isValid_ = false;
 	char PADING_[7];
 public:
 
 	/// <summary>
-	/// ƒoƒbƒtƒ@‚ğ¶¬
+	/// ãƒãƒƒãƒ•ã‚¡ã‚’ç”Ÿæˆ
 	/// </summary>
-	/// <param name="length">—v‘f”</param>
-	/// <param name="singleSize">’P‘Ì‚ÌƒTƒCƒY</param>
-	/// <param name="data">”z—ñ‚Ìæ“ªƒAƒhƒŒƒX</param>
+	/// <param name="length">è¦ç´ æ•°</param>
+	/// <param name="singleSize">å˜ä½“ã®ã‚µã‚¤ã‚º</param>
+	/// <param name="data">é…åˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹</param>
 	void Create(size_t length, size_t singleSize, const void* data = nullptr);
 
 	/// <summary>
-	/// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚ğæ“¾
+	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã‚’å–å¾—
 	/// </summary>
-	/// <returns>’¸“_ƒoƒbƒtƒ@ƒrƒ…[</returns>
+	/// <returns>é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼</returns>
 	D3D12_VERTEX_BUFFER_VIEW GetView() const;
 
 	/// <summary>
-	/// ƒoƒbƒtƒ@‚ğæ“¾
+	/// ãƒãƒƒãƒ•ã‚¡ã‚’å–å¾—
 	/// </summary>
-	/// <returns>ƒoƒbƒtƒ@</returns>
+	/// <returns>ãƒãƒƒãƒ•ã‚¡</returns>
 	ID3D12Resource* GetResource();
 
 	/// <summary>
-	/// ƒoƒbƒtƒ@‚Ì¶¬‚É¬Œ÷‚µ‚½‚©‚ğæ“¾
+	/// ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆã«æˆåŠŸã—ãŸã‹ã‚’å–å¾—
 	/// </summary>
-	/// <returns>¬Œ÷‚µ‚½‚©</returns>
+	/// <returns>æˆåŠŸã—ãŸã‹</returns>
 	bool IsValid();
 
 	/// <summary>
-	/// ƒf[ƒ^‚ÌXV
+	/// ãƒ‡ãƒ¼ã‚¿ã®æ›´æ–°
 	/// </summary>
-	/// <param name="data">ƒf[ƒ^</param>
+	/// <param name="data">ãƒ‡ãƒ¼ã‚¿</param>
 	void Update(void* data);
 
 	~VertexBuffer() = default;

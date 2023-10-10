@@ -5,20 +5,20 @@ void ConstantBuffer::Create(size_t size)
 {
 	bufferSize_ = size;
 
-	//’è”ƒoƒbƒtƒ@‚Ìİ’è
-	D3D12_HEAP_PROPERTIES heapProp{};//ƒq[ƒvİ’è
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPU‚Ö‚Ì“]‘——p
-	//ƒŠƒ\[ƒXİ’è
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+	D3D12_HEAP_PROPERTIES heapProp{};//ãƒ’ãƒ¼ãƒ—è¨­å®š
+	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUã¸ã®è»¢é€ç”¨
+	//ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	D3D12_RESOURCE_DESC resDesc{};
 	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = (bufferSize_ + 0xff) & ~0xff;//’¸“_ƒf[ƒ^‘S‘Ì‚ÌƒTƒCƒY
+	resDesc.Width = (bufferSize_ + 0xff) & ~0xff;//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º
 	resDesc.Height = 1;
 	resDesc.DepthOrArraySize = 1;
 	resDesc.MipLevels = 1;
 	resDesc.SampleDesc.Count = 1;
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	//’è”ƒoƒbƒtƒ@‚Ì¶¬
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
@@ -60,7 +60,7 @@ void ConstantBuffer::Update(void* data)
 		return;
 	}
 
-	// ’¸“_ƒf[ƒ^‚ğƒ}ƒbƒsƒ“ƒOæ‚Éİ’è
+	// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ãƒãƒƒãƒ”ãƒ³ã‚°å…ˆã«è¨­å®š
 	memcpy(bufferMappedPtr_, data, bufferSize_);
 }
 

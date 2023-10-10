@@ -41,30 +41,30 @@ public:
 
 	virtual ~Enemy() = default;
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	virtual void Initialize() = 0;
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	virtual void Update() = 0;
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	virtual void Draw() = 0;
 
-	//ƒIƒuƒWƒFƒNƒg‚Ì–¼‘Oæ“¾ˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰å–å¾—å‡¦ç†
 	virtual std::string GetName() = 0;
 
 	virtual const Transform& GetTransform() = 0;
 
-	//ƒIƒuƒWƒFƒNƒg‚Ì“–‚½‚è”»’èæ“¾ˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å½“ãŸã‚Šåˆ¤å®šå–å¾—å‡¦ç†
 	virtual const CollisionData& GetCollisionData() = 0;
 
-	//ƒIƒuƒWƒFƒNƒg‚ÌÕ“Ë”»’èˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¡çªåˆ¤å®šå‡¦ç†
 	virtual void OnCollision() = 0;
 
-	//€–Sƒtƒ‰ƒO‚Ìæ“¾
+	//æ­»äº¡ãƒ•ãƒ©ã‚°ã®å–å¾—
 	virtual const bool GetIsDead() = 0;
 
-	//€–SƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒ‰ƒO‚Ìæ“¾
+	//æ­»äº¡ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚°ã®å–å¾—
 	virtual const bool GetDeathAnimationFlag() = 0;
 
 	virtual void LockOn() = 0;
@@ -73,17 +73,17 @@ public:
 
 	virtual const bool GetLockOnFlag() = 0;
 
-	//blender‚Åo—Í‚µ‚½ƒf[ƒ^‚ğ“Ç‚İ‚Ş‚Æ‚«‚É‰ŠúÀ•W‚ğƒZƒbƒg‚·‚éŠÖ”
+	//blenderã§å‡ºåŠ›ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€ã¨ãã«åˆæœŸåº§æ¨™ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
 	virtual void SetPosition(const myMath::Vector3& position) = 0;
-	//blender‚Åo—Í‚µ‚½ƒf[ƒ^‚ğ“Ç‚İ‚Ş‚Æ‚«‚É‰ŠúŠp“x‚ğƒZƒbƒg‚·‚éŠÖ”
+	//blenderã§å‡ºåŠ›ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€ã¨ãã«åˆæœŸè§’åº¦ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
 	virtual void SetRotation(const myMath::Vector3& rotation) = 0;
-	//blender‚Åo—Í‚µ‚½ƒf[ƒ^‚ğ“Ç‚İ‚Ş‚Æ‚«‚É“–‚½‚è”»’è‚Ì‘å‚«‚³‚ğƒZƒbƒg‚·‚éŠÖ”
+	//blenderã§å‡ºåŠ›ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€ã¨ãã«å½“ãŸã‚Šåˆ¤å®šã®å¤§ãã•ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
 	virtual void SetColliderSize(const float size) = 0;
-	//blender‚Åo—Í‚µ‚½ƒf[ƒ^‚ğ“Ç‚İ‚Ş‚Æ‚«‚ÉƒXƒ|[ƒ“ƒ^ƒCƒ}[‚ğƒZƒbƒg‚·‚éŠÖ”
+	//blenderã§å‡ºåŠ›ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€ã¨ãã«ã‚¹ãƒãƒ¼ãƒ³ã‚¿ã‚¤ãƒãƒ¼ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
 	virtual void SetSpawnTimer(const float timer) = 0;
-	//blender‚Åo—Í‚µ‚½ƒf[ƒ^‚ğ“Ç‚İ‚Ş‚Æ‚«‚É€–Sƒ^ƒCƒ}[‚ğƒZƒbƒg‚·‚éŠÖ”
+	//blenderã§å‡ºåŠ›ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€ã¨ãã«æ­»äº¡ã‚¿ã‚¤ãƒãƒ¼ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
 	virtual void SetDeathTimer(const float timer) = 0;
-	//blender‚Åo—Í‚µ‚½ƒf[ƒ^‚ğ“Ç‚İ‚Ş‚Æ‚«‚ÉMoveEnemy‚Ìî•ñ‚ğƒZƒbƒg‚·‚éŠÖ”
+	//blenderã§å‡ºåŠ›ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€ã¨ãã«MoveEnemyã®æƒ…å ±ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
 	virtual void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty) = 0;
 
 	void SetCamera(Camera* camera);

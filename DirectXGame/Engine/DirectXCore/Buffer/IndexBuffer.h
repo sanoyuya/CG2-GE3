@@ -4,20 +4,20 @@
 #include <cstdint>
 
 /// <summary>
-/// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 /// </summary>
 class IndexBuffer
 {
 private:
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@¶¬‚ª¬Œ÷‚µ‚½‚©
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ç”ŸæˆãŒæˆåŠŸã—ãŸã‹
 	bool isValid_ = false;
 	char PADING_[7];
 
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+	// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
 
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒrƒ…[
+	// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼
 	D3D12_INDEX_BUFFER_VIEW bufferView_{};
 
 	void* bufferMappedPtr_ = nullptr;
@@ -27,26 +27,26 @@ private:
 public:
 
 	/// <summary>
-	/// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ð¶¬
+	/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ç”Ÿæˆ
 	/// </summary>
-	/// <param name="length">ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ì—v‘f”</param>
-	/// <param name="data">ƒCƒ“ƒfƒbƒNƒX”z—ñ‚Ìæ“ªƒAƒhƒŒƒX(uint32_t)</param>
+	/// <param name="length">ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®è¦ç´ æ•°</param>
+	/// <param name="data">ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹(uint32_t)</param>
 	void Create(size_t length, const uint32_t* data = nullptr);
 
 	/// <summary>
-	/// ¬Œ÷‚µ‚½‚©
+	/// æˆåŠŸã—ãŸã‹
 	/// </summary>
 	bool IsValid();
 
 	/// <summary>
-	/// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒrƒ…[‚ðŽæ“¾
+	/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã‚’å–å¾—
 	/// </summary>
 	D3D12_INDEX_BUFFER_VIEW GetView() const;
 
 	/// <summary>
-	/// ƒf[ƒ^‚ÌXV
+	/// ãƒ‡ãƒ¼ã‚¿ã®æ›´æ–°
 	/// </summary>
-	/// <param name="data">ƒf[ƒ^</param>
+	/// <param name="data">ãƒ‡ãƒ¼ã‚¿</param>
 	void Update(void* data);
 
 	IndexBuffer() = default;

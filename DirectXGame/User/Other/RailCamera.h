@@ -7,7 +7,7 @@ struct CameraData
 {
 	myMath::Vector3 position;
 
-	//§Œä“_
+	//åˆ¶å¾¡ç‚¹
 	std::vector<myMath::Vector3> controlPoints;
 };
 
@@ -21,7 +21,7 @@ private:
 	myMath::Vector3 target_;
 	myMath::Vector3 up_;
 
-	//§Œä“_
+	//åˆ¶å¾¡ç‚¹
 	std::vector<myMath::Vector3> controlPoints_;
 	float time_ = 0.0f;
 

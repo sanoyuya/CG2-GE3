@@ -2,13 +2,13 @@
 #include"myMath.h"
 
 /// <summary>
-/// “_ŒõŒ¹
+/// ç‚¹å…‰æº
 /// </summary>
 class PointLight
 {
-public://ƒTƒuƒNƒ‰ƒX
+public://ã‚µãƒ–ã‚¯ãƒ©ã‚¹
 
-	//’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 	struct ConstBufferData
 	{
 		myMath::Vector3 lightPos;
@@ -19,18 +19,18 @@ public://ƒTƒuƒNƒ‰ƒX
 		uint8_t active;
 	};
 
-private://ƒƒ“ƒo•Ï”
+private://ãƒ¡ãƒ³ãƒå¤‰æ•°
 
-	//ƒ‰ƒCƒgÀ•W(ƒ[ƒ‹ƒhÀ•WŒn)
+	//ãƒ©ã‚¤ãƒˆåº§æ¨™(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»)
 	myMath::Vector3 lightPos_ = { 0,0,0 };
-	//ƒ‰ƒCƒg‚ÌF
+	//ãƒ©ã‚¤ãƒˆã®è‰²
 	myMath::Vector3 lightColor_ = { 1,1,1 };
-	//ƒ‰ƒCƒg‹——£Œ¸ŠŒW”
+	//ãƒ©ã‚¤ãƒˆè·é›¢æ¸›è¡°ä¿‚æ•°
 	myMath::Vector3 lightAtten_ = { 1.0f,1.0f ,1.0f };
-	//—LŒøƒtƒ‰ƒO
+	//æœ‰åŠ¹ãƒ•ãƒ©ã‚°
 	bool active_ = false;
 
-public://ƒƒ“ƒoŠÖ”
+public://ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	inline void SetLightPos(const myMath::Vector3& lightPos) { lightPos_ = lightPos; }
 	inline const myMath::Vector3& GetLightPos() { return lightPos_; }

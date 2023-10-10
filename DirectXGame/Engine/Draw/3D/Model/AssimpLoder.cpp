@@ -46,7 +46,7 @@ std::wstring ToWideString(const std::string& str)
 
 bool AssimpLoder::Load(ImportSettings settings, ModelData* data)
 {
-	//‘‚¢‚Ä‚È‚¢‚È‚çƒXƒLƒbƒv
+	//æ›¸ã„ã¦ãªã„ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
 	if (settings.filename == nullptr)
 	{
 		return false;
@@ -74,13 +74,13 @@ bool AssimpLoder::Load(ImportSettings settings, ModelData* data)
 
 	if (scene == nullptr)
 	{
-		//ƒGƒ‰[‚ª‚Å‚½‚ç•\¦
+		//ã‚¨ãƒ©ãƒ¼ãŒã§ãŸã‚‰è¡¨ç¤º
 		OutputDebugStringA(importer.GetErrorString());
 		assert(0);
 		return false;
 	}
 
-	//“Ç‚İ‚ñ‚¾ƒf[ƒ^‚ğMesh\‘¢‘Ì‚É•ÏŠ·
+	//èª­ã¿è¾¼ã‚“ã ãƒ‡ãƒ¼ã‚¿ã‚’Meshæ§‹é€ ä½“ã«å¤‰æ›
 	meshs.clear();
 	meshs.resize(scene->mNumMeshes);
 	for (size_t i = 0; i < meshs.size(); i++)
@@ -111,7 +111,7 @@ void AssimpLoder::LoadMesh(Mesh& dst, const aiMesh* src, bool inverseU, bool inv
 	/*	auto tangent = (src->HasTangentsAndBitangents()) ? &(src->mTangents[i]) : &zero3D;
 		auto color = (src->HasVertexColors(0)) ? &(src->mColors[0][i]) : &zeroColor;*/
 
-		// ”½“]ƒIƒvƒVƒ‡ƒ“‚ª‚ ‚Á‚½‚çUV‚ğ”½“]‚³‚¹‚é
+		// åè»¢ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãŒã‚ã£ãŸã‚‰UVã‚’åè»¢ã•ã›ã‚‹
 		if (inverseU)
 		{
 			uv->x = 1 - uv->x;
@@ -146,17 +146,17 @@ void AssimpLoder::LoadMesh(Mesh& dst, const aiMesh* src, bool inverseU, bool inv
 	data->maxVert = static_cast<uint32_t>(data->vertices.size());
 	data->maxIndex = static_cast<uint32_t>(dst.indices.size());
 
-	//’¸“_ƒoƒbƒtƒ@EƒCƒ“ƒfƒbƒNƒX¶¬
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ»ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç”Ÿæˆ
 	data->vertexBuffer = std::make_unique<VertexBuffer>();
 	data->vertexBuffer->Create(data->maxVert, sizeof(PosNormalUv));
 
 	data->indexBuffer = std::make_unique<IndexBuffer>();
 	data->indexBuffer->Create(data->maxIndex);
 
-	//’¸“_ƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	data->vertexBuffer->Update(data->vertices.data());
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	data->indexBuffer->Update(dst.indices.data());
 
 	data->constBuffMaterial = std::make_unique<ConstantBuffer>();
@@ -170,7 +170,7 @@ void AssimpLoder::LoadTexture(const wchar_t* filename, Mesh& dst, const aiMateri
 	aiString path;
 	if (src->Get(AI_MATKEY_TEXTURE_DIFFUSE(0), path) == AI_SUCCESS)
 	{
-		// ƒeƒNƒXƒ`ƒƒƒpƒX‚Í‘Š‘ÎƒpƒX‚Å“ü‚Á‚Ä‚¢‚é‚Ì‚ÅAƒtƒ@ƒCƒ‹‚ÌêŠ‚Æ‚­‚Á‚Â‚¯‚é
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã¯ç›¸å¯¾ãƒ‘ã‚¹ã§å…¥ã£ã¦ã„ã‚‹ã®ã§ã€ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€ã¨ãã£ã¤ã‘ã‚‹
 		auto dir = GetDirectoryPath(filename);
 		auto file = std::string(path.C_Str());
 		dst.diffuseMap = dir + ToWideString(file);

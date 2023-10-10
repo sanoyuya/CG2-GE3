@@ -45,42 +45,42 @@ public:
 	{
 	};
 
-	//ƒ{ƒCƒXˆ—ƒpƒX‚ÌŠJn
+	//ãƒœã‚¤ã‚¹å‡¦ç†ãƒ‘ã‚¹ã®é–‹å§‹æ™‚
 	STDMETHOD_(void, OnVoiceProcessingPassStart)(THIS_ UINT32 BytesRequired)
 	{
 		static_cast<void>(BytesRequired);
 	};
 
-	//ƒ{ƒCƒXˆ—ƒpƒX‚ÌI—¹
+	//ãƒœã‚¤ã‚¹å‡¦ç†ãƒ‘ã‚¹ã®çµ‚äº†æ™‚
 	STDMETHOD_(void, OnVoiceProcessingPassEnd) (THIS)
 	{
 	};
 
-	//ƒoƒbƒtƒ@ƒXƒgƒŠ[ƒ€‚ÌÄ¶‚ªI—¹‚µ‚½‚Æ‚«
+	//ãƒãƒƒãƒ•ã‚¡ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®å†ç”ŸãŒçµ‚äº†ã—ãŸã¨ã
 	STDMETHOD_(void, OnStreamEnd) (THIS)
 	{
 	};
 
-	//ƒoƒbƒtƒ@‚Ìg—pŠJn
+	//ãƒãƒƒãƒ•ã‚¡ã®ä½¿ç”¨é–‹å§‹æ™‚
 	STDMETHOD_(void, OnBufferStart) (THIS_ void* pBufferContext)
 	{
 		static_cast<void>(pBufferContext);
 
 	};
 
-	//ƒoƒbƒtƒ@‚Ì––”ö‚É’B‚µ‚½
+	//ãƒãƒƒãƒ•ã‚¡ã®æœ«å°¾ã«é”ã—ãŸæ™‚
 	STDMETHOD_(void, OnBufferEnd) (THIS_ void* pBufferContext)
 	{
 		static_cast<void>(pBufferContext);
 	};
 
-	//Ä¶‚ªƒ‹[ƒvˆÊ’u‚É’B‚µ‚½
+	//å†ç”ŸãŒãƒ«ãƒ¼ãƒ—ä½ç½®ã«é”ã—ãŸæ™‚
 	STDMETHOD_(void, OnLoopEnd) (THIS_ void* pBufferContext)
 	{
 		static_cast<void>(pBufferContext);
 	};
 
-	//ƒ{ƒCƒX‚ÌÀsƒGƒ‰[
+	//ãƒœã‚¤ã‚¹ã®å®Ÿè¡Œã‚¨ãƒ©ãƒ¼æ™‚
 	STDMETHOD_(void, OnVoiceError) (THIS_ void* pBufferContext, HRESULT Error)
 	{
 		static_cast<void>(pBufferContext);
@@ -115,60 +115,60 @@ public:
 	void Update();
 
 	/// <summary>
-	/// Ä¶‚³‚ê‚Ä‚¢‚é‚©
+	/// å†ç”Ÿã•ã‚Œã¦ã„ã‚‹ã‹
 	/// </summary>
-	/// <param name="handle">ƒTƒEƒ“ƒhƒf[ƒ^</param>
+	/// <param name="handle">ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿</param>
 	/// <returns></returns>
 	bool NowPlay(const uint32_t handle);
 
 	/// <summary>
-	/// ‰¹—Ê•ÏX
+	/// éŸ³é‡å¤‰æ›´
 	/// </summary>
-	/// <param name="handle">ƒTƒEƒ“ƒhƒf[ƒ^</param>
-	/// <param name="volume">‰¹‚Ì‘å‚«‚³ ( 0 ` 1.0f )</param>
+	/// <param name="handle">ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="volume">éŸ³ã®å¤§ãã• ( 0 ï½ 1.0f )</param>
 	void ChangeVolume(const uint32_t handle, float volume);
 
 	/// <summary>
-	/// Œ»İ‚Ì‰¹—Ê‚Ìæ“¾
+	/// ç¾åœ¨ã®éŸ³é‡ã®å–å¾—
 	/// </summary>
-	/// <param name="handle">ƒTƒEƒ“ƒhƒf[ƒ^</param>
+	/// <param name="handle">ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿</param>
 	/// <returns></returns>
 	float GetVolume(const uint32_t handle);
 
 	/// <summary>
-	/// ƒTƒEƒ“ƒh“Ç‚İ‚İ
+	/// ã‚µã‚¦ãƒ³ãƒ‰èª­ã¿è¾¼ã¿
 	/// </summary>
-	/// <param name="fileName">ƒTƒEƒ“ƒhƒf[ƒ^</param>
-	/// <param name="volume">‰¹‚Ì‘å‚«‚³ ( 0 ` 1.0f )</param>
+	/// <param name="fileName">ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="volume">éŸ³ã®å¤§ãã• ( 0 ï½ 1.0f )</param>
 	/// <returns></returns>
 	uint32_t LoadAudio(std::string fileName, const float volume = 1.0f);
 
 	/// <summary>
-	/// ƒTƒEƒ“ƒh‚ğÄ¶‚·‚é
+	/// ã‚µã‚¦ãƒ³ãƒ‰ã‚’å†ç”Ÿã™ã‚‹
 	/// </summary>
-	/// <param name="handle">ƒTƒEƒ“ƒhƒf[ƒ^</param>
-	/// <param name="loopFlag">ƒ‹[ƒv‚·‚é‚©‚µ‚È‚¢‚©(ƒ‹[ƒv‚·‚é‚È‚çtrue)</param>
+	/// <param name="handle">ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="loopFlag">ãƒ«ãƒ¼ãƒ—ã™ã‚‹ã‹ã—ãªã„ã‹(ãƒ«ãƒ¼ãƒ—ã™ã‚‹ãªã‚‰true)</param>
 	/// <returns></returns>
 	int32_t PlayWave(const uint32_t handle, bool loopFlag = false);
 
 	/// <summary>
 	/// 
 	/// </summary>
-	/// <param name="handles">ƒTƒEƒ“ƒhƒf[ƒ^</param>
+	/// <param name="handles">ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿</param>
 	/// <returns></returns>
 	int32_t PlayWaveArray(const std::vector<uint32_t>& handles);
 
 	/// <summary>
-	/// ƒTƒEƒ“ƒh‚ğ~‚ß‚é
+	/// ã‚µã‚¦ãƒ³ãƒ‰ã‚’æ­¢ã‚ã‚‹
 	/// </summary>
-	/// <param name="handle">ƒTƒEƒ“ƒhƒf[ƒ^</param>
+	/// <param name="handle">ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿</param>
 	void StopWave(const uint32_t handle);
 
 private:
 	AudioManager();
 	~AudioManager();
 
-	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^E‘ã“ü‰‰Zqíœ
+	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ä»£å…¥æ¼”ç®—å­å‰Šé™¤
 	AudioManager& operator=(const AudioManager&) = delete;
 	AudioManager(const AudioManager&) = delete;
 };

@@ -25,10 +25,10 @@ void MoveEnemy::Initialize()
 	enemyTrans_.translation = moveEnemyProperty_.spawnPos;
 	enemyTrans_.rotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
 
-	//€–SƒAƒjƒ[ƒVƒ‡ƒ“ƒp[ƒeƒBƒNƒ‹‰Šú‰»
+	//æ­»äº¡ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«åˆæœŸåŒ–
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
 	emitter_->Initialize();
-	//ƒXƒ|[ƒ“ƒAƒjƒ[ƒVƒ‡ƒ“ƒp[ƒeƒBƒNƒ‹‰Šú‰»
+	//ã‚¹ãƒãƒ¼ãƒ³ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«åˆæœŸåŒ–
 	spawnEmitter_= std::make_unique<EnemySpawnParticleEmitter>();
 	spawnEmitter_->Initialize();
 
@@ -41,17 +41,17 @@ void MoveEnemy::Initialize()
 
 void MoveEnemy::Update()
 {
-	//oŒ»‚µ‚Ä‚¢‚½‚ç
+	//å‡ºç¾ã—ã¦ã„ãŸã‚‰
 	if (spawnFlag_ == true)
 	{
 		PhaseUpdate();
-		//“G‚Ìƒ‚ƒfƒ‹‚ÌXVˆ—
+		//æ•µã®ãƒ¢ãƒ‡ãƒ«ã®æ›´æ–°å‡¦ç†
 		enemyTrans_.TransUpdate(camera_);
 		collisionData_.center = enemyTrans_.translation;
 		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
-		//’e‚Ì¶¬ˆ—‚ÆXVˆ—
+		//å¼¾ã®ç”Ÿæˆå‡¦ç†ã¨æ›´æ–°å‡¦ç†
 		BulletUpdate();
-		//€–Sˆ—
+		//æ­»äº¡å‡¦ç†
 		DeathUpdate();
 	}
 	else
@@ -125,7 +125,7 @@ void MoveEnemy::Draw()
 	{
 		spawnEmitter_->Draw();
 	}
-	//€‚ñ‚Å‚¢‚È‚¢‚Æ‚«‚Ì‚İ•`‰æ
+	//æ­»ã‚“ã§ã„ãªã„ã¨ãã®ã¿æç”»
 	if (spawnFlag_ == true && deathAnimationFlag_ == false)
 	{
 		enemy_->DrawModel(&enemyTrans_);
@@ -136,7 +136,7 @@ void MoveEnemy::Draw()
 	}
 	else
 	{
-		//€–S‰‰o‚Ì•`‰æˆ—
+		//æ­»äº¡æ¼”å‡ºã®æç”»å‡¦ç†
 		emitter_->Draw();
 		hitEffect_->Draw(camera_);
 	}
@@ -219,11 +219,11 @@ void MoveEnemy::CancelLockOn()
 
 void MoveEnemy::OnCollision()
 {
-	//”š”­‰‰o
+	//çˆ†ç™ºæ¼”å‡º
 	emitter_->Create(enemyTrans_.parentToTranslation);
-	//Hit‰‰o
+	//Hitæ¼”å‡º
 	hitEffect_->Create(enemyTrans_.parentToTranslation);
-	//”š”­‰¹
+	//çˆ†ç™ºéŸ³
 	AudioManager::GetInstance()->PlayWave(sound_, false);
 
 	deathAnimationFlag_ = true;
@@ -284,13 +284,13 @@ void MoveEnemy::SpawnUpdate()
 
 void MoveEnemy::DeathUpdate()
 {
-	//€–SŠÔ‚É‚È‚Á‚½‚ç€‚Ê
+	//æ­»äº¡æ™‚é–“ã«ãªã£ãŸã‚‰æ­»ã¬
 	if (deathTime_ <= gameTimer_->GetIntTime())
 	{
 		isDead_ = true;
 	}
 
-	//€–S‰‰o‚ÌXVˆ—
+	//æ­»äº¡æ¼”å‡ºã®æ›´æ–°å‡¦ç†
 	if (deathAnimationFlag_ == true)
 	{
 		emitter_->Update(camera_);

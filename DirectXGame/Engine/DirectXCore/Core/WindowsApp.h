@@ -7,41 +7,41 @@ private:
 
 	WNDCLASSEX w_{};
 	HWND hwnd_;
-	MSG msg_{};//ƒƒbƒZ[ƒW
-	float windowWidth_ = 1280.0f;//‰¡•
-	float windowHeight_ = 720.0f;//c•
+	MSG msg_{};//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+	float windowWidth_ = 1280.0f;//æ¨ªå¹…
+	float windowHeight_ = 720.0f;//ç¸¦å¹…
 
 public:
 
-	//ƒfƒXƒgƒ‰ƒNƒ^
+	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~WindowsApp();
 
 	/// <summary>
-	/// ƒEƒBƒ“ƒhƒE‚Ìì¬
+	/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
 	/// </summary>
 	/// <param name="title"></param>
-	/// <param name="width">ƒEƒBƒ“ƒhƒE‚Ì‰¡•‚Ì‘å‚«‚³</param>
-	/// <param name="height">ƒEƒBƒ“ƒhƒE‚Ìc•‚Ì‘å‚«‚³</param>
+	/// <param name="width">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®æ¨ªå¹…ã®å¤§ãã•</param>
+	/// <param name="height">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ç¸¦å¹…ã®å¤§ãã•</param>
 	void CreatWindow(const wchar_t* title = L"DirectXGame", const float width = 1280.0f, const float height = 720.0f);
 
 	/// <summary>
-	/// ƒƒbƒZ[ƒWƒEƒBƒ“ƒhƒE
+	/// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
 	/// </summary>
 	/// <returns></returns>
 	bool MessageWindow();
 
 	/// <summary>
-	/// ƒEƒBƒ“ƒhƒE‚ð•\Ž¦
+	/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’è¡¨ç¤º
 	/// </summary>
 	void Appearance();
 
-	//ƒQƒbƒ^[
+	//ã‚²ãƒƒã‚¿ãƒ¼
 	WNDCLASSEX GetW();
 	HWND GetHwnd();
 	float GetWidth();
 	float GetHeight();
 
-	//ƒZƒbƒ^[
+	//ã‚»ãƒƒã‚¿ãƒ¼
 	void SetW(WNDCLASSEX W);
 	void SetHwnd(HWND Hwnd);
 };

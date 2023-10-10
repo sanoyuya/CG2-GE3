@@ -34,8 +34,8 @@ private:
 
 	Transform cameraTrans_;
 
-	myMath::Vector3 directionVector_;//•ûŒüƒxƒNƒgƒ‹(ƒ[ƒJƒ‹)
-	myMath::Vector3 parentToDirectionVector_;//eq‚ğ”½‰f‚³‚¹‚½•ûŒüƒxƒNƒgƒ‹
+	myMath::Vector3 directionVector_;//æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«(ãƒ­ãƒ¼ã‚«ãƒ«)
+	myMath::Vector3 parentToDirectionVector_;//è¦ªå­ã‚’åæ˜ ã•ã›ãŸæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 
 	std::unique_ptr<Reticle>reticle_;
 
@@ -78,12 +78,12 @@ public:
 
 	std::string GetName();
 
-	//ƒIƒuƒWƒFƒNƒg‚Ì“–‚½‚è”»’èæ“¾ˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å½“ãŸã‚Šåˆ¤å®šå–å¾—å‡¦ç†
 	const CollisionData& GetCollisionData();
 
 	void OnCollision();
 
-	//€–Sƒtƒ‰ƒO‚Ìæ“¾
+	//æ­»äº¡ãƒ•ãƒ©ã‚°ã®å–å¾—
 	const bool GetIsDead();
 
 	const bool GetDeathAnimationFlag();
@@ -92,7 +92,7 @@ public:
 
 	void CancelLockOn();
 
-	//ƒƒbƒNƒIƒ“ƒtƒ‰ƒO‚Ìæ“¾
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³ãƒ•ãƒ©ã‚°ã®å–å¾—
 	const bool GetLockOnFlag();
 
 	void Reset();

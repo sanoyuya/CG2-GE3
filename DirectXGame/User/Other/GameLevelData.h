@@ -35,23 +35,23 @@ public:
 	~GameLevelData();
 
 	/// <summary>
-	/// ‰Šú‰»ˆ—
+	/// åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	void Initialize(const std::string& fileName);
 
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
 	/// <param name="camera"></param>
 	void Update(Camera* camera);
 
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Draw();
 
 	/// <summary>
-	/// Ä“Ç‚İ‚İ
+	/// å†èª­ã¿è¾¼ã¿
 	/// </summary>
 	void ReLoad();
 

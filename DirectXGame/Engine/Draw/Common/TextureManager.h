@@ -5,21 +5,21 @@
 
 struct TextureData
 {
-	//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
 
-	//ƒfƒXƒNƒvƒŠƒ^ƒq[ƒv
+	//ãƒ‡ã‚¹ã‚¯ãƒ—ãƒªã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> srvHeap;
 
-	//GPUƒfƒXƒNƒvƒŠƒ^ƒnƒ“ƒhƒ‹
+	//GPUãƒ‡ã‚¹ã‚¯ãƒ—ãƒªã‚¿ãƒãƒ³ãƒ‰ãƒ«
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle{};
 
-	//‰¡•
+	//æ¨ªå¹…
 	size_t width = 0;
-	//c•
+	//ç¸¦å¹…
 	size_t height = 0;
 
-	//ƒJƒ‰[
+	//ã‚«ãƒ©ãƒ¼
 	myMath::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
 
 	std::string path;
@@ -38,10 +38,10 @@ private:
 
 	static TextureManager* sTextureManager_;
 
-	//ƒeƒNƒXƒ`ƒƒ”
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°
 	uint32_t nextTexture_;
 
-	// ƒq[ƒvİ’è
+	// ãƒ’ãƒ¼ãƒ—è¨­å®š
 	D3D12_HEAP_PROPERTIES textureHeapProp_{};
 
 	static std::vector<std::string>sFilePaths_;
@@ -51,28 +51,28 @@ private:
 public:
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰
 	/// </summary>
-	/// <param name="filepath">ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹ƒpƒX</param>
-	/// <returns>ƒeƒNƒXƒ`ƒƒƒnƒ“ƒhƒ‹</returns>
+	/// <param name="filepath">ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</param>
+	/// <returns>ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ãƒ‰ãƒ«</returns>
 	uint32_t LoadTexture(const std::string& path);
 
 	/// <summary>
-	/// Ã“I‰Šú‰»ˆ—
+	/// é™çš„åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	void StaticInitialize();
 
 	/// <summary>
-	/// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğŠ“¾
+	/// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ‰€å¾—
 	/// </summary>
-	/// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+	/// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 	static TextureManager* GetInstance();
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰
 	/// </summary>
-	/// <param name="filepath">ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹ƒpƒX</param>
-	/// <returns>ƒeƒNƒXƒ`ƒƒƒnƒ“ƒhƒ‹</returns>
+	/// <param name="filepath">ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</param>
+	/// <returns>ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ãƒ‰ãƒ«</returns>
 	static uint32_t Load(const std::string& path);
 
 	static TextureData* GetTextureData(uint32_t handle);

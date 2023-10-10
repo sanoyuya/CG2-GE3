@@ -11,26 +11,26 @@
 #include"Pipeline.h"
 #include"Transform.h"
 
-//ƒp[ƒeƒBƒNƒ‹1—±
+//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«1ç²’
 struct OneParticle
 {
-	//À•W
+	//åº§æ¨™
 	myMath::Vector3 position = {};
-	//‘¬“x
+	//é€Ÿåº¦
 	myMath::Vector3 velocity = {};
-	//‰Á‘¬“x
+	//åŠ é€Ÿåº¦
 	myMath::Vector3 accel = {};
-	//Œ»İƒtƒŒ[ƒ€
+	//ç¾åœ¨ãƒ•ãƒ¬ãƒ¼ãƒ 
 	float flame = 0;
-	//I—¹ƒtƒŒ[ƒ€
+	//çµ‚äº†ãƒ•ãƒ¬ãƒ¼ãƒ 
 	float num_flame = 0;
-	//ƒXƒP[ƒ‹
+	//ã‚¹ã‚±ãƒ¼ãƒ«
 	float scale = 1.0f;
-	//‰Šú’l
+	//åˆæœŸå€¤
 	float s_scale = 1.0f;
-	//ÅI’l
+	//æœ€çµ‚å€¤
 	float e_scale = 0.0f;
-	//ƒJƒ‰[
+	//ã‚«ãƒ©ãƒ¼
 	myMath::Vector4 color = {};
 };
 
@@ -41,30 +41,30 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D12Device>sDevice_;
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>sCmdList_;
 
-	std::forward_list<OneParticle>particles_; //’¸“_”
-	static const uint32_t vertexCount_ = 4096; //’¸“_”
-	//’¸“_ƒf[ƒ^”z—ñ
+	std::forward_list<OneParticle>particles_; //é ‚ç‚¹æ•°
+	static const uint32_t vertexCount_ = 4096; //é ‚ç‚¹æ•°
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿é…åˆ—
 	static PosScaleColor vertices_[vertexCount_];
 
 	HRESULT result_ = S_FALSE;
 	char PADING_[4] = {};
 
-	//’¸“_ƒoƒbƒtƒ@
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<VertexBuffer> vertexBuffer_ = {};
-	//’¸“_ƒ}ƒbƒv
+	//é ‚ç‚¹ãƒãƒƒãƒ—
 	PosUvColor* vertMap_ = {};
 
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<ConstantBuffer> constBuffer_ = {};
 
-	//’è”ƒoƒbƒtƒ@‚Ìƒ}ƒbƒsƒ“ƒO—pƒ|ƒCƒ“ƒ^
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒã‚¤ãƒ³ã‚¿
 	matMatBillboard constBuffMap_ = {};
 
 	TextureData* texture_ = {};
 
-	BlendMode blendMode_ = BlendMode::Alpha;//‰Šú’l”¼“§–¾‡¬
-	static Blob sBlob_;//ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
-	static std::array<PipelineSet, 6> sPip_;//ƒpƒCƒvƒ‰ƒCƒ“
+	BlendMode blendMode_ = BlendMode::Alpha;//åˆæœŸå€¤åŠé€æ˜åˆæˆ
+	static Blob sBlob_;//ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	static std::array<PipelineSet, 6> sPip_;//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³
 
 public:
 

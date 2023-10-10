@@ -6,24 +6,24 @@ void InputManager::Initialize(WindowsApp* windowsApp)
 {
 	HRESULT result;
 
-	//ƒNƒ‰ƒX“Ç‚İ‚İ
+	//ã‚¯ãƒ©ã‚¹èª­ã¿è¾¼ã¿
 	keyboard = std::make_unique<Keyboard>();
 	mouse = std::make_unique<Mouse>();
 	controller = std::make_unique<Controller>();
 
-	//DirectInput‚Ì‰Šú‰»
+	//DirectInputã®åˆæœŸåŒ–
 	result = DirectInput8Create(windowsApp->GetW().hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
 	assert(SUCCEEDED(result));
 
-	keyboard->Initialize(directInput.Get(), windowsApp);//ƒL[ƒ{[ƒh‰Šú‰»ˆ—
-	mouse->Initialize(directInput.Get(), windowsApp);//ƒ}ƒEƒX‰Šú‰»ˆ—
+	keyboard->Initialize(directInput.Get(), windowsApp);//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰åˆæœŸåŒ–å‡¦ç†
+	mouse->Initialize(directInput.Get(), windowsApp);//ãƒã‚¦ã‚¹åˆæœŸåŒ–å‡¦ç†
 }
 
 void InputManager::Update()
 {
-	keyboard->Update();//ƒL[ƒ{[ƒh‚ÌXVˆ—
-	mouse->Update();//ƒ}ƒEƒX‚ÌXVˆ—
-	controller->Update();//ƒRƒ“ƒgƒ[ƒ‰[‚ÌXVˆ—
+	keyboard->Update();//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®æ›´æ–°å‡¦ç†
+	mouse->Update();//ãƒã‚¦ã‚¹ã®æ›´æ–°å‡¦ç†
+	controller->Update();//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®æ›´æ–°å‡¦ç†
 }
 
 bool InputManager::KeyboardTriggerPush(int keyName)

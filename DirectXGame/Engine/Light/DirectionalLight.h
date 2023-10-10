@@ -2,56 +2,56 @@
 #include"myMath.h"
 
 /// <summary>
-/// ƒ‰ƒCƒg
+/// ãƒ©ã‚¤ãƒˆ
 /// </summary>
 class DirectionalLight
 {
-public://ƒTƒuƒNƒ‰ƒX
+public://ã‚µãƒ–ã‚¯ãƒ©ã‚¹
 
-	//’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 	struct ConstBufferData
 	{
-		myMath::Vector4 lightv;//ƒ‰ƒCƒg‚Ö‚Ì•ûŒü‚ğ•\‚·ƒxƒNƒgƒ‹
-		myMath::Vector3 lightcolor;//ƒ‰ƒCƒg‚ÌF
+		myMath::Vector4 lightv;//ãƒ©ã‚¤ãƒˆã¸ã®æ–¹å‘ã‚’è¡¨ã™ãƒ™ã‚¯ãƒˆãƒ«
+		myMath::Vector3 lightcolor;//ãƒ©ã‚¤ãƒˆã®è‰²
 		bool active;
 	};
 
 private:
 
-	//ƒ‰ƒCƒgŒõü•ûŒü(’PˆÊƒxƒNƒgƒ‹)
+	//ãƒ©ã‚¤ãƒˆå…‰ç·šæ–¹å‘(å˜ä½ãƒ™ã‚¯ãƒˆãƒ«)
 	myMath::Vector4 lightdir_ = { 1,0,0,0 };
-	//ƒ‰ƒCƒgF
+	//ãƒ©ã‚¤ãƒˆè‰²
 	myMath::Vector3 lightcolor_ = { 1,1,1 };
-	//ƒ_[ƒeƒBƒtƒ‰ƒO
+	//ãƒ€ãƒ¼ãƒ†ã‚£ãƒ•ãƒ©ã‚°
 	bool dirty_ = false;
-	//—LŒøƒtƒ‰ƒO
+	//æœ‰åŠ¹ãƒ•ãƒ©ã‚°
 	bool active_ = false;
 
 public:
 
 	/// <summary>
-	/// ƒ‰ƒCƒg•ûŒü‚ğƒZƒbƒg
+	/// ãƒ©ã‚¤ãƒˆæ–¹å‘ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="light">ƒ‰ƒCƒg•ûŒü</param>
+	/// <param name="light">ãƒ©ã‚¤ãƒˆæ–¹å‘</param>
 	inline void SetLightDir(const myMath::Vector4& lightdir){ lightdir_ = lightdir.normalization(); }
 	inline const myMath::Vector4& GetLightDir() { return lightdir_; }
 
 	/// <summary>
-	/// ƒ‰ƒCƒgF‚ğƒZƒbƒg
+	/// ãƒ©ã‚¤ãƒˆè‰²ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="lightcolor">ƒ‰ƒCƒgF</param>
+	/// <param name="lightcolor">ãƒ©ã‚¤ãƒˆè‰²</param>
 	inline void SetLightColor(const myMath::Vector3& lightcolor) { lightcolor_ = lightcolor; }
 	inline const myMath::Vector3& GetLightColor() { return lightcolor_; }
 
 	/// <summary>
-	/// —LŒøƒtƒ‰ƒO‚ğƒZƒbƒg
+	/// æœ‰åŠ¹ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="active">—LŒøƒtƒ‰ƒO</param>
+	/// <param name="active">æœ‰åŠ¹ãƒ•ãƒ©ã‚°</param>
 	inline void SetActive(bool active) { active_ = active; }
 
 	/// <summary>
-	/// —LŒøƒ`ƒFƒbƒN
+	/// æœ‰åŠ¹ãƒã‚§ãƒƒã‚¯
 	/// </summary>
-	/// <returns>—LŒøƒtƒ‰ƒO</returns>
+	/// <returns>æœ‰åŠ¹ãƒ•ãƒ©ã‚°</returns>
 	inline bool IsActive() { return active_; }
 };

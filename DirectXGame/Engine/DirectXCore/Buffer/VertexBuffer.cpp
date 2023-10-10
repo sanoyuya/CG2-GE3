@@ -3,17 +3,17 @@
 
 void VertexBuffer::Create(size_t length, size_t singleSize, const void* data)
 {
-	//ƒq[ƒvİ’è
+	//ãƒ’ãƒ¼ãƒ—è¨­å®š
 	D3D12_HEAP_PROPERTIES heapProp{};
-	//ƒŠƒ\[ƒXİ’è
+	//ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	D3D12_RESOURCE_DESC resDesc{};
 
-	//’¸“_ƒf[ƒ^‘S‘Ì‚ÌƒTƒCƒY = ’¸“_ƒf[ƒ^ƒTƒCƒYˆê‚Â•ª‚ÌƒTƒCƒY * ’¸“_ƒf[ƒ^‚Ì—v‘f”
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º = é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºä¸€ã¤åˆ†ã®ã‚µã‚¤ã‚º * é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®è¦ç´ æ•°
 	uint32_t sizeVB = static_cast<uint32_t>(singleSize * length);
 	
-	//’¸“_ƒoƒbƒtƒ@‚Ìİ’è
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPU‚Ö‚Ì“]‘——p
-	//ƒŠƒ\[ƒXİ’è
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUã¸ã®è»¢é€ç”¨
+	//ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 	resDesc.Width = sizeVB;
 	resDesc.Height = 1;
@@ -22,7 +22,7 @@ void VertexBuffer::Create(size_t length, size_t singleSize, const void* data)
 	resDesc.SampleDesc.Count = 1;
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	// ƒŠƒ\[ƒX‚ğ¶¬
+	// ãƒªã‚½ãƒ¼ã‚¹ã‚’ç”Ÿæˆ
 	HRESULT result = DirectXBase::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
@@ -31,17 +31,17 @@ void VertexBuffer::Create(size_t length, size_t singleSize, const void* data)
 		nullptr,
 		IID_PPV_ARGS(vertexBuffer_.ReleaseAndGetAddressOf()));
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìİ’è
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®è¨­å®š
 	vertexBufferView_.BufferLocation = vertexBuffer_->GetGPUVirtualAddress();
 	vertexBufferView_.SizeInBytes = static_cast<uint32_t>(length * singleSize);
 	vertexBufferView_.StrideInBytes = static_cast<uint32_t>(singleSize);
 
 	result = vertexBuffer_->Map(0, nullptr, &bufferMappedPtr_);
 
-	// ƒ}ƒbƒsƒ“ƒO‚·‚é
+	// ãƒãƒƒãƒ”ãƒ³ã‚°ã™ã‚‹
 	if (data != nullptr)
 	{
-		// ’¸“_ƒf[ƒ^‚ğƒ}ƒbƒsƒ“ƒOæ‚Éİ’è
+		// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ãƒãƒƒãƒ”ãƒ³ã‚°å…ˆã«è¨­å®š
 		memcpy(bufferMappedPtr_, data, length * singleSize);
 	}
 
@@ -55,7 +55,7 @@ void VertexBuffer::Update(void* data)
 		return;
 	}
 
-	// ’¸“_ƒf[ƒ^‚ğƒ}ƒbƒsƒ“ƒOæ‚Éİ’è
+	// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ãƒãƒƒãƒ”ãƒ³ã‚°å…ˆã«è¨­å®š
 	memcpy(bufferMappedPtr_, data, vertexBufferView_.SizeInBytes);
 }
 

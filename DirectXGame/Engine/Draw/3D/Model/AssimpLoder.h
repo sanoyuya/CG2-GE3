@@ -13,33 +13,33 @@ struct aiMaterial;
 
 //struct Vertex
 //{
-//	myMath::Vector3 position; // ˆÊ’uÀ•W
-//	myMath::Vector3 normal; // –@ü
-//	myMath::Vector2 uv; // uvÀ•W
-//	myMath::Vector3 tangent; // Ú‹óŠÔ
-//	myMath::Vector4 color; // ’¸“_F
+//	myMath::Vector3 position; // ä½ç½®åº§æ¨™
+//	myMath::Vector3 normal; // æ³•ç·š
+//	myMath::Vector2 uv; // uvåº§æ¨™
+//	myMath::Vector3 tangent; // æ¥ç©ºé–“
+//	myMath::Vector4 color; // é ‚ç‚¹è‰²
 //};
 
 struct Mesh
 {
-	std::vector<PosNormalUv> vertices;	//’¸“_ƒf[ƒ^”z—ñ
-	std::vector<uint32_t> indices;	//ƒCƒ“ƒfƒbƒNƒX”z—ñ
-	std::wstring diffuseMap;		//ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹
+	std::vector<PosNormalUv> vertices;	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿é…åˆ—
+	std::vector<uint32_t> indices;	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
+	std::wstring diffuseMap;		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«
 };
 
 struct ImportSettings
 {
-	const wchar_t* filename = nullptr;	//ƒtƒ@ƒCƒ‹ƒpƒX
-	std::vector<Mesh>& meshes;			//o—Íæ‚ÌƒƒbƒVƒ…”z—ñ
-	bool inverseU = false;				//UÀ•W‚ğ”½“]‚³‚¹‚é‚©
-	bool inverseV = false;				//VÀ•W‚ğ”½“]‚³‚¹‚é‚©
+	const wchar_t* filename = nullptr;	//ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	std::vector<Mesh>& meshes;			//å‡ºåŠ›å…ˆã®ãƒ¡ãƒƒã‚·ãƒ¥é…åˆ—
+	bool inverseU = false;				//Uåº§æ¨™ã‚’åè»¢ã•ã›ã‚‹ã‹
+	bool inverseV = false;				//Våº§æ¨™ã‚’åè»¢ã•ã›ã‚‹ã‹
 };
 
 class AssimpLoder
 {
 public:
 
-	static bool Load(ImportSettings setting, ModelData* data); // ƒ‚ƒfƒ‹‚ğƒ[ƒh‚·‚é
+	static bool Load(ImportSettings setting, ModelData* data); // ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
 
 private:
 

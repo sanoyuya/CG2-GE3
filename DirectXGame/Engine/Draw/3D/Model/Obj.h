@@ -22,7 +22,7 @@ private:
 	static void CalculateSmoothedVertexNormals(ModelData* data);
 	static int8_t GetFlip(bool flip);
 
-	//コピーコンストラクタ・代入演算子削除
+	//繧ｳ繝斐�ｼ繧ｳ繝ｳ繧ｹ繝医Λ繧ｯ繧ｿ繝ｻ莉｣蜈･貍皮ｮ怜ｭ仙炎髯､
 	Obj& operator=(const Obj&) = delete;
 	Obj(const Obj&) = delete;
 };

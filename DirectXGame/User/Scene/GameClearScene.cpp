@@ -18,7 +18,7 @@ void GameClearScene::Initialize()
 	resultTex_ = result_->LoadTexture("Resources/defaultGameClear.png");
 	result_->Sprite2DInitialize(resultTex_);
 
-	//“V‹…
+	//å¤©çƒ
 	skyDome_ = std::make_unique<Model>();
 	skyDomeTex_ = Model::CreateObjModel("Resources/skydome2");
 	skyDome_->SetModel(skyDomeTex_);

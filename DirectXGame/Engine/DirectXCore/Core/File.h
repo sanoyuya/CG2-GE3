@@ -5,8 +5,8 @@
 #include<filesystem>
 
 /// <summary>
-/// ƒfƒBƒŒƒNƒgƒŠ‚©‚çƒtƒ@ƒCƒ‹–¼ˆê——‚ðŠ“¾
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«åä¸€è¦§ã‚’æ‰€å¾—
 /// </summary>
-/// <param name="folderPath">ƒfƒBƒŒƒNƒgƒŠƒpƒX</param>
-/// <returns>ƒtƒ@ƒCƒ‹–¼ˆê——</returns>
+/// <param name="folderPath">ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ‘ã‚¹</param>
+/// <returns>ãƒ•ã‚¡ã‚¤ãƒ«åä¸€è¦§</returns>
 std::vector<std::string> GetFileNames(const std::string& folderPath);

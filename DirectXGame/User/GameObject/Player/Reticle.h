@@ -28,31 +28,31 @@ public:
 	Reticle() = default;
 	~Reticle() = default;
 
-	//����������
+	//初期化処理
 	void Initialize();
 
-	//�X�V����
+	//更新処理
 	void Update();
 
-	//�`�揈��
+	//描画処理
 	void Draw();
 
-	//�I�u�W�F�N�g�̖��O�擾����
+	//オブジェクトの名前取得処理
 	std::string GetName();
 
-	//�I�u�W�F�N�g�̓����蔻��擾����
+	//オブジェクトの当たり判定取得処理
 	const CollisionData& GetCollisionData();
 
-	//�I�u�W�F�N�g�̏Փ˔��菈��
+	//オブジェクトの衝突判定処理
 	void OnCollision();
 
-	//���S�t���O�̎擾
+	//死亡フラグの取得
 	const bool GetIsDead();
 
-	//���S�A�j���[�V�����t���O�̎擾
+	//死亡アニメーションフラグの取得
 	const bool GetDeathAnimationFlag();
 
-	//���b�N�I���t���O�̎擾
+	//ロックオンフラグの取得
 	const bool GetLockOnFlag();
 
 	void LockOn();

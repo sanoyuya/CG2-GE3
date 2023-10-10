@@ -5,7 +5,7 @@ class FPS
 {
 private:
 
-	//‹L˜^ŠÔ(FPSŒÅ’è—p)
+	//è¨˜éŒ²æ™‚é–“(FPSå›ºå®šç”¨)
 	std::chrono::steady_clock::time_point reference_;
 
 public:
@@ -13,9 +13,9 @@ public:
 	void Initialize();
 
 	/// <summary>
-	/// fpsŒÅ’è‚ÌXVˆ—
+	/// fpså›ºå®šã®æ›´æ–°å‡¦ç†
 	/// </summary>
-	/// <param name="fixedFps">fpsŒÅ’è’l</param>
-	/// <param name="flag">”¼’[‚Èƒ‚ƒjƒ^[‚©‚Ç‚¤‚©(”¼’[‚È‚çtrue)</param>
+	/// <param name="fixedFps">fpså›ºå®šå€¤</param>
+	/// <param name="flag">åŠç«¯ãªãƒ¢ãƒ‹ã‚¿ãƒ¼ã‹ã©ã†ã‹(åŠç«¯ãªã‚‰true)</param>
 	void Update(float fixedFps = 60.0f, bool flag = true);
 };

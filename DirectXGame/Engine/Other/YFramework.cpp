@@ -8,29 +8,29 @@
 
 void YFramework::Initialize()
 {
-	windowsApp_ = std::make_unique<WindowsApp>();//WindowsAppƒNƒ‰ƒX“Ç‚İ‚İ
-	windowsApp_->CreatWindow(title_.c_str(), windowWidth_, windowHeight_);//ƒEƒBƒ“ƒhƒEì¬
+	windowsApp_ = std::make_unique<WindowsApp>();//WindowsAppã‚¯ãƒ©ã‚¹èª­ã¿è¾¼ã¿
+	windowsApp_->CreatWindow(title_.c_str(), windowWidth_, windowHeight_);//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½œæˆ
 
 	fps_ = std::make_unique<FPS>();
 	fps_->Initialize();
 
-	//DirectX‰Šú‰»ˆ— ‚±‚±‚©‚ç
+	//DirectXåˆæœŸåŒ–å‡¦ç† ã“ã“ã‹ã‚‰
 
-	//DirectXBaseƒNƒ‰ƒX“Ç‚İ‚İ
+	//DirectXBaseã‚¯ãƒ©ã‚¹èª­ã¿è¾¼ã¿
 	DirectXBase::GetInstance()->Initialize(windowsApp_.get());
 
-	//imGui‚Ì‰Šú‰»
+	//imGuiã®åˆæœŸåŒ–
 	ImGuiManager::GetInstance()->Initialize(windowsApp_.get());
 
-	//ƒL[æ“¾ŠJn
+	//ã‚­ãƒ¼å–å¾—é–‹å§‹
 	InputManager::GetInstance()->Initialize(windowsApp_.get());
 
-	// ƒI[ƒfƒBƒI‚Ì‰Šú‰»
+	// ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®åˆæœŸåŒ–
 	AudioManager::GetInstance()->Initialize();
 
-	//DirectX‰Šú‰»ˆ— ‚±‚±‚Ü‚Å
+	//DirectXåˆæœŸåŒ–å‡¦ç† ã“ã“ã¾ã§
 
-	//•`‰æ‰Šú‰»ˆ—‚±‚±‚©‚ç
+	//æç”»åˆæœŸåŒ–å‡¦ç†ã“ã“ã‹ã‚‰
 
 	Camera::StaticInitialize(windowsApp_.get());
 
@@ -45,11 +45,11 @@ void YFramework::Initialize()
 
 	LightManager::StaticInitialize(DirectXBase::GetInstance()->GetDevice().Get());
 
-	//•`‰æ‰Šú‰»ˆ—‚±‚±‚Ü‚Å
+	//æç”»åˆæœŸåŒ–å‡¦ç†ã“ã“ã¾ã§
 
 	windowsApp_->Appearance();
 
-	//ƒV[ƒ“ƒtƒ@ƒNƒgƒŠ[‚ğ¶¬‚µAƒ}ƒl[ƒWƒƒ‚ÉƒZƒbƒg
+	//ã‚·ãƒ¼ãƒ³ãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼ã‚’ç”Ÿæˆã—ã€ãƒãƒãƒ¼ã‚¸ãƒ£ã«ã‚»ãƒƒãƒˆ
 	AbstractSceneFactory* sceneFactory = new SceneFactory();
 	SceneManager::GetInstance()->SetSceneFactory(sceneFactory);
 }
@@ -72,7 +72,7 @@ void YFramework::Update()
 	InputManager::GetInstance()->Update();
 	AudioManager::GetInstance()->Update();
 
-	DirectXBase::GetInstance()->SetClearColor();//”wŒiF‚ğİ’è ‰Šú’l(…F)
+	DirectXBase::GetInstance()->SetClearColor();//èƒŒæ™¯è‰²ã‚’è¨­å®š åˆæœŸå€¤(æ°´è‰²)
 }
 
 void YFramework::SetWindowData(const std::string& title, const float width, const float height)
@@ -82,8 +82,8 @@ void YFramework::SetWindowData(const std::string& title, const float width, cons
 	MultiByteToWideChar(CP_ACP, 0, title.c_str(), -1, wtitle, _countof(wtitle));
 
 	title_ = wtitle;
-	windowWidth_ = width;//‰¡•
-	windowHeight_ = height;//c•
+	windowWidth_ = width;//æ¨ªå¹…
+	windowHeight_ = height;//ç¸¦å¹…
 }
 
 void YFramework::SetWindowColor(const myMath::Vector4& color)
@@ -93,13 +93,13 @@ void YFramework::SetWindowColor(const myMath::Vector4& color)
 
 void YFramework::Run()
 {
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	Initialize();
 
-	// ƒQ[ƒ€ƒ‹[ƒv
+	// ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
 	while (true)
 	{
-		//XVˆ—
+		//æ›´æ–°å‡¦ç†
 		ImGuiManager::GetInstance()->Begin();
 
 		Update();
@@ -115,7 +115,7 @@ void YFramework::Run()
 			break;
 		}
 
-		//•`‰æˆ—
+		//æç”»å‡¦ç†
 		PostEffectDraw();
 
 #ifdef _DEBUG
@@ -126,7 +126,7 @@ void YFramework::Run()
 
 		DirectXBase::GetInstance()->PostDraw();
 
-		//FPS§Œä
+		//FPSåˆ¶å¾¡
 		fps_->Update();
 	}
 	Destroy();

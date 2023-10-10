@@ -5,15 +5,15 @@ void Keyboard::Initialize(IDirectInput8* directInput,WindowsApp* windowsApp)
 {
 	HRESULT result;
 
-	//ƒL[ƒ{[ƒhƒfƒoƒCƒX‚Ì¶¬
+	//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ‡ãƒã‚¤ã‚¹ã®ç”Ÿæˆ
 	result = directInput->CreateDevice(GUID_SysKeyboard, &keyboard_, NULL);
 	assert(SUCCEEDED(result));
 
-	//“ü—Íƒf[ƒ^Œ`Ž®‚ÌƒZƒbƒg
-	result = keyboard_->SetDataFormat(&c_dfDIKeyboard);//•W€Œ`Ž®
+	//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿å½¢å¼ã®ã‚»ãƒƒãƒˆ
+	result = keyboard_->SetDataFormat(&c_dfDIKeyboard);//æ¨™æº–å½¢å¼
 	assert(SUCCEEDED(result));
 
-	//”r‘¼§ŒäƒŒƒxƒ‹‚ÌƒZƒbƒg
+	//æŽ’ä»–åˆ¶å¾¡ãƒ¬ãƒ™ãƒ«ã®ã‚»ãƒƒãƒˆ
 	result = keyboard_->SetCooperativeLevel(windowsApp->GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 	assert(SUCCEEDED(result));
 }
@@ -23,7 +23,7 @@ void Keyboard::Update()
 	for (int i = 0; i < _countof(oldkey_); i++) {
 		oldkey_[i] = key_[i];
 	}
-	//ƒL[ƒ{[ƒhî•ñ‚ÌŽæ“¾ŠJŽn
+	//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æƒ…å ±ã®å–å¾—é–‹å§‹
 	keyboard_->Acquire();
 	keyboard_->GetDeviceState(sizeof(key_), key_);
 }

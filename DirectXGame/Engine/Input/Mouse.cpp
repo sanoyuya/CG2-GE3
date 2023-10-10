@@ -8,22 +8,22 @@ void Mouse::Initialize(IDirectInput8* directInput, WindowsApp* windowsApp)
 	width_ = windowsApp->GetWidth();
 	height_ = windowsApp->GetHeight();
 
-	//ƒ}ƒEƒXƒfƒoƒCƒX‚Ì¶¬
+	//ãƒžã‚¦ã‚¹ãƒ‡ãƒã‚¤ã‚¹ã®ç”Ÿæˆ
 	result = directInput->CreateDevice(GUID_SysMouse, &mouse_, NULL);
 	assert(SUCCEEDED(result));
 
-	//“ü—Íƒf[ƒ^Œ`Ž®‚ÌƒZƒbƒg
-	result = mouse_->SetDataFormat(&c_dfDIMouse2);//•W€Œ`Ž®
+	//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿å½¢å¼ã®ã‚»ãƒƒãƒˆ
+	result = mouse_->SetDataFormat(&c_dfDIMouse2);//æ¨™æº–å½¢å¼
 	assert(SUCCEEDED(result));
 
-	//”r‘¼§ŒäƒŒƒxƒ‹‚ÌƒZƒbƒg
+	//æŽ’ä»–åˆ¶å¾¡ãƒ¬ãƒ™ãƒ«ã®ã‚»ãƒƒãƒˆ
 	result = mouse_->SetCooperativeLevel(windowsApp->GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 	assert(SUCCEEDED(result));
 }
 
 void Mouse::Update()
 {
-	//ƒ}ƒEƒXî•ñ‚ÌŽæ“¾ŠJŽn
+	//ãƒžã‚¦ã‚¹æƒ…å ±ã®å–å¾—é–‹å§‹
 	mouse_->Acquire();
 	oldMouseState_ = mouseState_;
 	mouse_->GetDeviceState(sizeof(mouseState_), &mouseState_);

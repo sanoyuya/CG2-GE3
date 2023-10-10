@@ -8,37 +8,37 @@ class ImGuiManager
 {
 private:
 
-	//SRV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	//SRVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>srvHeap_;
 
 public:
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize(WindowsApp* windowsApp);
 
 	/// <summary>
-	/// ‰ğ•úˆ—
+	/// è§£æ”¾å‡¦ç†
 	/// </summary>
 	void Destroy();
 
 	/// <summary>
-	/// ImGuió•tŠJn
+	/// ImGuiå—ä»˜é–‹å§‹
 	/// </summary>
 	void Begin();
 
 	/// <summary>
-	/// ImGuió•tI—¹
+	/// ImGuiå—ä»˜çµ‚äº†
 	/// </summary>
 	void End();
 
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Draw();
 
-	//ƒVƒ“ƒOƒ‹ƒgƒ“
+	//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
 	static ImGuiManager* GetInstance();
 
 private:
@@ -46,7 +46,7 @@ private:
 	ImGuiManager() = default;
 	~ImGuiManager() = default;
 
-	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^E‘ã“ü‰‰Zqíœ
+	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ä»£å…¥æ¼”ç®—å­å‰Šé™¤
 	ImGuiManager& operator=(const ImGuiManager&) = delete;
 	ImGuiManager(const ImGuiManager&) = delete;
 };

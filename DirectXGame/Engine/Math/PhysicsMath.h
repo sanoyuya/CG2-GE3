@@ -4,29 +4,29 @@
 namespace PhysicsMath
 {
 	/// <summary>
-	/// •âŠ®(“™‘¬)
+	/// è£œå®Œ(ç­‰é€Ÿ)
 	/// </summary>
-	/// <param name="x1">ˆÚ“®‚µ‚½‚¢•Ï”</param>
-	/// <param name="x2">ˆÚ“®‚µ‚½‚¢‹——£</param>
-	/// <param name="flame">ŠÔ</param>
-	/// <returns>•âŠ®Œã‚Ì’l</returns>
+	/// <param name="x1">ç§»å‹•ã—ãŸã„å¤‰æ•°</param>
+	/// <param name="x2">ç§»å‹•ã—ãŸã„è·é›¢</param>
+	/// <param name="flame">æ™‚é–“</param>
+	/// <returns>è£œå®Œå¾Œã®å€¤</returns>
 	float Complement(float& x1, float& x2, float flame);
 
 	/// <summary>
-	/// ’PU“®‚ğ‚µ‚½’l‚ğ•Ô‚·
+	/// å˜æŒ¯å‹•ã‚’ã—ãŸå€¤ã‚’è¿”ã™
 	/// </summary>
-	/// <param name="time">Œo‰ßŠÔ</param>
-	/// <param name="amplitude">U•</param>
-	/// <param name="period">üŠú</param>
+	/// <param name="time">çµŒéæ™‚é–“</param>
+	/// <param name="amplitude">æŒ¯å¹…</param>
+	/// <param name="period">å‘¨æœŸ</param>
 	/// <returns></returns>
 	float SimpleHarmonicMotion(float time,float amplitude = 10.0f, float period = 60.0f);
 
 	/// <summary>
-	/// ‰~‰^“®‚ğ‚µ‚½’l‚ğ•Ô‚·(•¡‘f””Å)
+	/// å††é‹å‹•ã‚’ã—ãŸå€¤ã‚’è¿”ã™(è¤‡ç´ æ•°ç‰ˆ)
 	/// </summary>
-	/// <param name="CenterPoint">’†S“_</param>
-	/// <param name="radius">’†S“_‚©‚ç‚Ì”¼Œa</param>
-	/// <param name="angle">Šp“x</param>
+	/// <param name="CenterPoint">ä¸­å¿ƒç‚¹</param>
+	/// <param name="radius">ä¸­å¿ƒç‚¹ã‹ã‚‰ã®åŠå¾„</param>
+	/// <param name="angle">è§’åº¦</param>
 	/// <returns></returns>
 	myMath::Vector2 CircularMotion(myMath::Vector2 CenterPoint, float radius, float angle);
 

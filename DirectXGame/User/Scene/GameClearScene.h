@@ -9,14 +9,14 @@ class GameClearScene :public BaseScene
 {
 private:
 
-	//ƒNƒ‰ƒX“Ç‚İ‚İ
+	//ã‚¯ãƒ©ã‚¹èª­ã¿è¾¼ã¿
 	InputManager* input_ = nullptr;
 	AudioManager* audioManager_ = nullptr;
 	std::unique_ptr<LightManager>lightManager_;
 
 	std::unique_ptr<Camera>camera_;
 
-	//“V‹…
+	//å¤©çƒ
 	std::unique_ptr<Model>skyDome_;
 	Transform skyDomeTrans_;
 	uint32_t skyDomeTex_;
@@ -33,15 +33,15 @@ private:
 
 public:
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	void Initialize()override;
 
-	//I—¹ˆ—
+	//çµ‚äº†å‡¦ç†
 	void Destroy()override;
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	void Update()override;
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	void Draw()override;
 };

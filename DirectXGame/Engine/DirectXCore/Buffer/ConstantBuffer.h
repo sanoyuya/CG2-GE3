@@ -3,20 +3,20 @@
 #include <d3d12.h>
 
 /// <summary>
-/// �萔�o�b�t�@
+/// 定数バッファ
 /// </summary>
 class ConstantBuffer
 {
 private:
 
-	// �萔�o�b�t�@�����ɐ���������
+	// 定数バッファ生成に成功したか
 	bool isValid_ = false;
 	char PADING_[7] = {};
 
-	// �萔�o�b�t�@
+	// 定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
 
-	// �萔�o�b�t�@�r���[�̐ݒ�
+	// 定数バッファビューの設定
 	D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferView_ = {};
 
 	void* bufferMappedPtr_ = nullptr;
@@ -25,42 +25,42 @@ private:
 
 public:
 	/// <summary>
-	/// �萔�o�b�t�@�𐶐�
+	/// 定数バッファを生成
 	/// </summary>
-	/// <param name="size">�f�[�^�T�C�Y</param>
+	/// <param name="size">データサイズ</param>
 	void Create(size_t size);
 
 	/// <summary>
-	/// �o�b�t�@�����ɐ�����������Ԃ�
+	/// バッファ生成に成功したかを返す
 	/// </summary>
-	/// <returns>�o�b�t�@�����ɐ���������</returns>
+	/// <returns>バッファ生成に成功したか</returns>
 	bool IsValid();
 
 	/// <summary>
-	/// �o�b�t�@��GPU��̃A�h���X��Ԃ�
+	/// バッファのGPU上のアドレスを返す
 	/// </summary>
-	/// <returns>�o�b�t�@��GPU��̃A�h���X</returns>
+	/// <returns>バッファのGPU上のアドレス</returns>
 	D3D12_GPU_VIRTUAL_ADDRESS GetAddress() const;
 
 	/// <summary>
-	/// �萔�o�b�t�@�r���[��Ԃ�
+	/// 定数バッファビューを返す
 	/// </summary>
-	/// <returns>�萔�o�b�t�@�r���[</returns>
+	/// <returns>定数バッファビュー</returns>
 	D3D12_CONSTANT_BUFFER_VIEW_DESC GetViewDesc();
 
 	/// <summary>
-	/// �f�[�^�̍X�V
+	/// データの更新
 	/// </summary>
-	/// <param name="data">�f�[�^</param>
+	/// <param name="data">データ</param>
 	void Update(void* data);
 
 	/// <summary>
-	/// �o�b�t�@���擾
+	/// バッファを取得
 	/// </summary>
 	ID3D12Resource* GetResource();
 
 	/// <summary>
-	/// �}�b�v�p�|�C���^���擾
+	/// マップ用ポインタを取得
 	/// </summary>
 	/// <returns></returns>
 	void* GetPtr();

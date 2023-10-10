@@ -8,32 +8,36 @@ private:
 	std::unique_ptr<ParticleManager>particleMan_;
 	uint32_t tex_;
 
+	float size_ = 0.0f;
+
 public:
 
 	/// <summary>
-	/// ƒfƒXƒgƒ‰ƒNƒ^
+	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// </summary>
 	~PlayerEngineSmokeParticleEmitter() = default;
 
 	/// <summary>
-	/// ‰Šú‰»ˆ—
+	/// åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// ¶¬ˆ—
+	/// ç”Ÿæˆå‡¦ç†
 	/// </summary>
-	/// <param name="center">’†SÀ•W</param>
+	/// <param name="center">ä¸­å¿ƒåº§æ¨™</param>
 	void Create(const myMath::Vector3 center);
 
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
-	/// <param name="camera">ƒJƒƒ‰‚Ìƒ|ƒCƒ“ƒ^</param>
+	/// <param name="camera">ã‚«ãƒ¡ãƒ©ã®ãƒã‚¤ãƒ³ã‚¿</param>
 	void Update(Camera* camera);
 
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Draw();
+
+	void SetSize(const float size);
 };

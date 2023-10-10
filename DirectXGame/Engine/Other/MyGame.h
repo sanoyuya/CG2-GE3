@@ -3,29 +3,29 @@
 #include"AbstractSceneFactory.h"
 #include"MultiTexturePostEffect.h"
 
-//ƒQ[ƒ€‘S‘Ì
+//ã‚²ãƒ¼ãƒ å…¨ä½“
 class MyGame :public YFramework
 {
 private:
 
-	//ƒV[ƒ“ƒtƒ@ƒNƒgƒŠ[
+	//ã‚·ãƒ¼ãƒ³ãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼
 	std::unique_ptr<AbstractSceneFactory>sceneFactory_;
 
-	//ƒ|ƒXƒgƒGƒtƒFƒNƒg
+	//ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	std::unique_ptr<MultiTexturePostEffect>postEffect_;
 
 public:
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	void Initialize()override;
 
-	//I—¹ˆ—
+	//çµ‚äº†å‡¦ç†
 	void Destroy()override;
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	void Update()override;
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	void SceneDraw()override;
 	void PostEffectDraw()override;
 };

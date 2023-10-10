@@ -63,7 +63,7 @@ void AudioManager::Initialize()
 	xAudio2->SetDebugConfiguration(&debug, 0);
 #endif
 
-	//ƒ}ƒXƒ^[ƒ{ƒCƒX‚ğ¶¬
+	//ãƒã‚¹ã‚¿ãƒ¼ãƒœã‚¤ã‚¹ã‚’ç”Ÿæˆ
 	result = xAudio2->CreateMasteringVoice(&masterVoice);
 	assert(SUCCEEDED(result));
 }
@@ -90,7 +90,7 @@ void AudioManager::Update()
 			}
 		}
 
-		//‘S•”Ä¶‚µ‚«‚Á‚½‚çíœ
+		//å…¨éƒ¨å†ç”Ÿã—ãã£ãŸã‚‰å‰Šé™¤
 		std::vector<PlayAudioArray>::iterator itr = playHandleArray.begin();
 		for (; itr != playHandleArray.end();)
 		{
@@ -237,13 +237,13 @@ int32_t AudioManager::PlayWave(const uint32_t Handle, bool LoopFlag)
 		itr++;
 	}
 
-	//“¯‚É“¯‚¶‰¹Œ¹‚ğÄ¶‚µ‚È‚¢
+	//åŒæ™‚ã«åŒã˜éŸ³æºã‚’å†ç”Ÿã—ãªã„
 	if (itr->playTrigger_)
 	{
 		return -1;
 	}
 
-	//ƒ‹[ƒvÄ¶‚ÅÄ¶‚µ‚æ‚¤‚Æ‚µ‚½‚çŠù‚É—¬‚ê‚Ä‚¢‚é‚à‚Ì‚ğ’â~
+	//ãƒ«ãƒ¼ãƒ—å†ç”Ÿã§å†ç”Ÿã—ã‚ˆã†ã¨ã—ãŸã‚‰æ—¢ã«æµã‚Œã¦ã„ã‚‹ã‚‚ã®ã‚’åœæ­¢
 	if (LoopFlag && NowPlay(Handle))
 	{
 		itr->pSourceVoice_->Stop();
@@ -262,10 +262,10 @@ int32_t AudioManager::PlayWave(const uint32_t Handle, bool LoopFlag)
 		buffer.LoopCount = XAUDIO2_LOOP_INFINITE;
 	}
 
-	//‰¹—Ê‚Ìİ’è
+	//éŸ³é‡ã®è¨­å®š
 	itr->pSourceVoice_->SetVolume(itr->volume_);
 
-	//”gŒ`ƒf[ƒ^‚ÌÄ¶
+	//æ³¢å½¢ãƒ‡ãƒ¼ã‚¿ã®å†ç”Ÿ
 	result = itr->pSourceVoice_->SubmitSourceBuffer(&buffer);
 	result = itr->pSourceVoice_->Start();
 

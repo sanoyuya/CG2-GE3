@@ -7,43 +7,43 @@ class Keyboard
 {
 private:
 
-	//ƒL[ƒ{[ƒh
+	//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
 	Microsoft::WRL::ComPtr<IDirectInputDevice8> keyboard_ = nullptr;
 	BYTE oldkey_[256] = {};
 	BYTE key_[256] = {};
 
 public:
 
-	//‰Šú‰»ˆ—(•’ig‚í‚È‚¢)
+	//åˆæœŸåŒ–å‡¦ç†(æ™®æ®µä½¿ã‚ãªã„)
 	void Initialize(IDirectInput8* directInput, WindowsApp* windowsApp);
-	//XVˆ—(•’ig‚í‚È‚¢)
+	//æ›´æ–°å‡¦ç†(æ™®æ®µä½¿ã‚ãªã„)
 	void Update();
 
 	/// <summary>
-	/// keyName‚Åw’è‚µ‚½ƒL[‚ğ‰Ÿ‚µ‚½uŠÔ
+	/// keyNameã§æŒ‡å®šã—ãŸã‚­ãƒ¼ã‚’æŠ¼ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="keyName">DIK_ZZ</param>
+	/// <param name="keyName">DIK_ã€‡ã€‡</param>
 	/// <returns></returns>
 	bool TriggerPush(int keyName);
 
 	/// <summary>
-	/// keyName‚Åw’è‚µ‚½ƒL[‚ğ‰Ÿ‚µ‚Ä‚¢‚éŠÔ
+	/// keyNameã§æŒ‡å®šã—ãŸã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã„ã‚‹é–“
 	/// </summary>
-	/// <param name="keyName">DIK_ZZ</param>
+	/// <param name="keyName">DIK_ã€‡ã€‡</param>
 	/// <returns></returns>
 	bool KeepPush(int keyName);
 
 	/// <summary>
-	/// keyName‚Åw’è‚µ‚½ƒL[‚ğ—£‚µ‚½uŠÔ
+	/// keyNameã§æŒ‡å®šã—ãŸã‚­ãƒ¼ã‚’é›¢ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="keyName">DIK_ZZ</param>
+	/// <param name="keyName">DIK_ã€‡ã€‡</param>
 	/// <returns></returns>
 	bool TriggerRelease(int keyName);
 
 	/// <summary>
-	/// keyName‚Åw’è‚µ‚½ƒL[‚ğ‰Ÿ‚µ‚Ä‚¢‚È‚¢ŠÔ
+	/// keyNameã§æŒ‡å®šã—ãŸã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã„ãªã„é–“
 	/// </summary>
-	/// <param name="keyName">DIK_ZZ</param>
+	/// <param name="keyName">DIK_ã€‡ã€‡</param>
 	/// <returns></returns>
 	bool KeepRelease(int keyName);
 };

@@ -6,29 +6,29 @@ class ParticleBase
 public:
 
 	/// <summary>
-	/// Šî’êƒNƒ‰ƒX‚ÌƒfƒXƒgƒ‰ƒNƒ^
+	/// åŸºåº•ã‚¯ãƒ©ã‚¹ã®ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// </summary>
 	virtual ~ParticleBase() = default;
 
 	/// <summary>
-	/// ‰Šú‰»ˆ—
+	/// åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	virtual void Initialize() = 0;
 
 	/// <summary>
-	/// ¶¬ˆ—
+	/// ç”Ÿæˆå‡¦ç†
 	/// </summary>
-	/// <param name="center">’†SÀ•W</param>
+	/// <param name="center">ä¸­å¿ƒåº§æ¨™</param>
 	virtual void Create(const myMath::Vector3 center) = 0;
 
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
-	/// <param name="camera">ƒJƒƒ‰‚Ìƒ|ƒCƒ“ƒ^</param>
+	/// <param name="camera">ã‚«ãƒ¡ãƒ©ã®ãƒã‚¤ãƒ³ã‚¿</param>
 	virtual void Update(Camera* camera) = 0;
 
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	virtual void Draw() = 0;
 };

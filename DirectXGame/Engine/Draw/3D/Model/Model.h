@@ -25,9 +25,9 @@ public:
 
 	TextureData* textureData;
 
-	//’¸“_ƒoƒbƒtƒ@
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<VertexBuffer> vertexBuffer;
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<IndexBuffer> indexBuffer;
 
 private:
@@ -36,7 +36,7 @@ private:
 
 public:
 
-	//ƒCƒ“ƒfƒbƒNƒX‚Ì”
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®æ•°
 	uint32_t maxIndex = 0;
 
 private:
@@ -45,27 +45,27 @@ private:
 
 public:
 
-	//’¸“_‚Ì”
+	//é ‚ç‚¹ã®æ•°
 	uint32_t maxVert = 0;
-	//ƒ[ƒ‹ƒhs—ñ
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	myMath::Matrix4 matWorld;
-	//’¸“_ƒf[ƒ^
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 	std::vector<PosNormalUv>vertices;
-	//’¸“_ƒCƒ“ƒfƒbƒNƒX
+	//é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 	std::vector<uint32_t> indices;
-	//’¸“_–@üƒXƒ€[ƒWƒ“ƒO—pƒf[ƒ^
+	//é ‚ç‚¹æ³•ç·šã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°ç”¨ãƒ‡ãƒ¼ã‚¿
 	std::unordered_map<uint32_t, std::vector<uint32_t>>smoothData;
-	//ƒ}ƒeƒŠƒAƒ‹
+	//ãƒãƒ†ãƒªã‚¢ãƒ«
 	ModelMaterial modelMaterial{};
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<ConstantBuffer> constBuffMaterial;
 
-	// ’è”ƒoƒbƒtƒ@ƒrƒ…[‚Ìİ’è
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®è¨­å®š
 	D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferView = {};
 
 private:
 
-	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^E‘ã“ü‰‰Zqíœ
+	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ä»£å…¥æ¼”ç®—å­å‰Šé™¤
 	ModelData& operator=(const ModelData&) = delete;
 	ModelData(const ModelData&) = delete;
 };
@@ -89,59 +89,59 @@ protected:
 
 private:
 
-	static std::array<Blob,6> sBlob_;//ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+	static std::array<Blob,6> sBlob_;//ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 	static std::array<std::array<PipelineSet, 6>,6> sPip_;
 
-	BlendMode blendMode_ = BlendMode::Alpha;//‰Šú’l”¼“§–¾‡¬
+	BlendMode blendMode_ = BlendMode::Alpha;//åˆæœŸå€¤åŠé€æ˜åˆæˆ
 
 	static ShaderMode sShaderMode_;
 
-	ShaderMode shaderMode_ = sShaderMode_;//•W€
+	ShaderMode shaderMode_ = sShaderMode_;//æ¨™æº–
 
 	std::unique_ptr<ConstantBuffer> constantBuff_;
 
 	myMath::Vector4 tmp_;
 
-	//ƒ‰ƒCƒg
+	//ãƒ©ã‚¤ãƒˆ
 	static LightManager* sLightManager_;
 
 public:
 
 	/// <summary>
-	/// ƒ[ƒ‹ƒhs—ñ‚Ìæ“¾
+	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®å–å¾—
 	/// </summary>
-	/// <returns>ƒ[ƒ‹ƒhs—ñ</returns>
+	/// <returns>ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—</returns>
 	const myMath::Matrix4& GetMatWorld();
 
 	/// <summary>
-	/// ’¸“_À•W‚ğæ“¾
+	/// é ‚ç‚¹åº§æ¨™ã‚’å–å¾—
 	/// </summary>
-	/// <returns>’¸“_À•W”z—ñ</returns>
+	/// <returns>é ‚ç‚¹åº§æ¨™é…åˆ—</returns>
 	const std::vector<PosNormalUv>GetVertices();
 
 	/// <summary>
-	/// ƒCƒ“ƒfƒbƒNƒX‚ğæ“¾
+	/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å–å¾—
 	/// </summary>
-	/// <returns>ƒCƒ“ƒfƒbƒNƒXÀ•W”z—ñ</returns>
+	/// <returns>ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹åº§æ¨™é…åˆ—</returns>
 	const std::vector<uint32_t>GetIndices();
 
 	/// <summary>
-	/// ƒ‚ƒfƒ‹ƒf[ƒ^‚ÌƒZƒbƒg
+	/// ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ã®ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="modelHandle">ƒ‚ƒfƒ‹‚Ìƒnƒ“ƒhƒ‹</param>
+	/// <param name="modelHandle">ãƒ¢ãƒ‡ãƒ«ã®ãƒãƒ³ãƒ‰ãƒ«</param>
 	void SetModel(const uint32_t modelHandle);
 
 	/// <summary>
-	/// ƒuƒŒƒ“ƒhƒ‚[ƒh‚ÌƒZƒbƒg
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã®ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="mode">ƒuƒŒƒ“ƒhƒ‚[ƒh</param>
+	/// <param name="mode">ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
 	void SetModelBlendMode(const BlendMode& mode);
 
 	/// <summary>
-	/// ƒ‚ƒfƒ‹’P‘Ì‚ÌƒVƒF[ƒ_[ƒ‚[ƒh‚ÌƒZƒbƒg
+	/// ãƒ¢ãƒ‡ãƒ«å˜ä½“ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã®ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="mode">ƒVƒF[ƒ_[ƒ‚[ƒh</param>
+	/// <param name="mode">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ¢ãƒ¼ãƒ‰</param>
 	void SetShaderMode(const ShaderMode& mode);
 
 	static void SetStaticShaderMode(const ShaderMode& mode);
@@ -150,45 +150,45 @@ public:
 	virtual ~Model();
 
 	/// <summary>
-	/// ƒ‚ƒfƒ‹‚Ì•`‰æ
+	/// ãƒ¢ãƒ‡ãƒ«ã®æç”»
 	/// </summary>
-	/// <param name="transform">Transform‚Ìƒf[ƒ^</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="transform">Transformã®ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
 	void DrawModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f });
 
 	/// <summary>
-	/// ƒ‚ƒfƒ‹‚Ì¶¬
+	/// ãƒ¢ãƒ‡ãƒ«ã®ç”Ÿæˆ
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹–¼</param>
-	/// <param name="smoothing">ƒXƒ€[ƒWƒ“ƒO‚·‚é‚©‚Ç‚¤‚©(‰Šú’l:false)</param>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+	/// <param name="smoothing">ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°ã™ã‚‹ã‹ã©ã†ã‹(åˆæœŸå€¤:false)</param>
 	/// <returns></returns>
 
 	/// <summary>
-	/// ƒ‚ƒfƒ‹‚Ì¶¬
+	/// ãƒ¢ãƒ‡ãƒ«ã®ç”Ÿæˆ
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹–¼</param>
-	/// <param name="smoothing">ƒXƒ€[ƒWƒ“ƒO‚·‚é‚©‚Ç‚¤‚©(‰Šú’l:false)</param>
-	/// <param name="flipX">X²”½“]‚·‚é‚©‚Ç‚¤‚©(‰Šú’l:false)</param>
-	/// <param name="flipY">Y²”½“]‚·‚é‚©‚Ç‚¤‚©(‰Šú’l:false)</param>
-	/// <param name="flipZ">Z²”½“]‚·‚é‚©‚Ç‚¤‚©(‰Šú’l:false)</param>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+	/// <param name="smoothing">ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°ã™ã‚‹ã‹ã©ã†ã‹(åˆæœŸå€¤:false)</param>
+	/// <param name="flipX">Xè»¸åè»¢ã™ã‚‹ã‹ã©ã†ã‹(åˆæœŸå€¤:false)</param>
+	/// <param name="flipY">Yè»¸åè»¢ã™ã‚‹ã‹ã©ã†ã‹(åˆæœŸå€¤:false)</param>
+	/// <param name="flipZ">Zè»¸åè»¢ã™ã‚‹ã‹ã©ã†ã‹(åˆæœŸå€¤:false)</param>
 	/// <returns></returns>
 	static uint32_t CreateObjModel(const std::string& filePath, bool smoothing = false, bool flipX = false, bool flipY = false, bool flipZ = false);
 
 	static uint32_t CreateAssimpModel(const std::string& filePath);
 
 	/// <summary>
-	/// ƒ‰ƒCƒg‚ÌƒZƒbƒg
+	/// ãƒ©ã‚¤ãƒˆã®ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="light">ƒ‰ƒCƒg</param>
+	/// <param name="light">ãƒ©ã‚¤ãƒˆ</param>
 	static void SetLight(LightManager* lightManager_);
 
 	/// <summary>
-	/// Ã“I‰Šú‰»ˆ—
+	/// é™çš„åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	static void StaticInitialize();
 
 	/// <summary>
-	/// Ã“I‰ğ•úˆ—
+	/// é™çš„è§£æ”¾å‡¦ç†
 	/// </summary>
 	static void StaticDestory();
 
@@ -197,9 +197,9 @@ private:
 	static void LoadShader();
 
 	/// <summary>
-	/// ƒpƒCƒvƒ‰ƒCƒ“İ’è‚ğ“K—p
+	/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³è¨­å®šã‚’é©ç”¨
 	/// </summary>
-	/// <param name="bMode">ƒuƒŒƒ“ƒhƒ‚[ƒh</param>
-	/// <param name="sMode">ƒVƒF[ƒ_[ƒ‚[ƒh</param>
+	/// <param name="bMode">ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
+	/// <param name="sMode">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ¢ãƒ¼ãƒ‰</param>
 	void PiplineSet(BlendMode bMode, ShaderMode sMode);
 };

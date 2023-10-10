@@ -11,7 +11,7 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Initialize(EnemyList& enemyData)
 {
-	//“G‚ğjsonƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚Ş
+	//æ•µã‚’jsonãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã‚€
 	Load(enemyData);
 
 	for (std::unique_ptr<Enemy>& enemy : enemys_)

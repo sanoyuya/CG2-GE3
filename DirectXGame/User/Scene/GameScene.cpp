@@ -17,14 +17,14 @@ void GameScene::Initialize()
 	lightColor_ = { 1.0f,1.0f ,1.0f };
 	lightAtten_ = { 0.3f,0.1f,0.1f };
 
-	//“V‹…
+	//å¤©çƒ
 	skyDome_ = std::make_unique<Model>();
 	skyDomeTex_ = Model::CreateObjModel("Resources/skydome");
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
 	skyDomeTrans_.scale = { 5.0f,5.0f ,5.0f };
 
-	//ƒŒƒxƒ‹ƒGƒfƒBƒ^‚Ì‰Šú‰»&“Ç‚İ‚İ
+	//ãƒ¬ãƒ™ãƒ«ã‚¨ãƒ‡ã‚£ã‚¿ã®åˆæœŸåŒ–&èª­ã¿è¾¼ã¿
 	gameLevelData_ = std::make_unique<GameLevelData>();
 	switch (Retention::GetInstance()->GetStageNum())
 	{
@@ -76,13 +76,13 @@ void GameScene::Destroy()
 
 void GameScene::Update()
 {
-	//ƒvƒŒƒCƒ„[‚ÌHP‚ª0‚É‚È‚Á‚½‚çƒQ[ƒ€ƒI[ƒo[
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®HPãŒ0ã«ãªã£ãŸã‚‰ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
 	if (player_->GetIsDead() == true)
 	{
 		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");
 	}
 
-	//ƒJƒƒ‰‚ªÅŒã‚Ü‚Å“’B‚µ‚½‚çƒQ[ƒ€ƒNƒŠƒA
+	//ã‚«ãƒ¡ãƒ©ãŒæœ€å¾Œã¾ã§åˆ°é”ã—ãŸã‚‰ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢
 	if (camera_->GetTime() >= 0.95f)
 	{
 		SceneChangeAnimation::GetInstance()->Change("GAMECLEAR");
@@ -113,7 +113,7 @@ void GameScene::Update()
 
 	lightManager_->Update();
 
-	//ƒ|ƒCƒ“ƒgƒ‰ƒCƒg
+	//ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆ
 	lightManager_->SetPointLightActive(0, true);
 	lightManager_->SetPointLightPos(0, lightPos_);
 	lightManager_->SetPointLightColor(0, lightColor_);
@@ -127,7 +127,7 @@ void GameScene::Update()
 		player_->Update();
 		camera_->Update(player_.get());
 		gameLevelData_->Update(camera_->GetCameraPtr());
-		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//“V‹…
+		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//å¤©çƒ
 		playerDamageEffect_->Update(player_.get());
 		enemyManager_->Update(camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
 		bulletManager_->Update(camera_->GetCameraPtr());

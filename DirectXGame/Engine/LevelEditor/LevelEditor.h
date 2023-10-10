@@ -5,7 +5,7 @@
 #include<json.hpp>
 #include"Enemy.h"
 
-//ƒŒƒxƒ‹ƒf[ƒ^
+//ãƒ¬ãƒ™ãƒ«ãƒ‡ãƒ¼ã‚¿
 struct LevelData {
 
 	struct Collider
@@ -21,40 +21,40 @@ struct LevelData {
 	};
 
 	struct ObjectData {
-		//ƒtƒ@ƒCƒ‹–¼
+		//ãƒ•ã‚¡ã‚¤ãƒ«å
 		std::string fileName;
-		//•½sˆÚ“®
+		//å¹³è¡Œç§»å‹•
 		myMath::Vector3 translation;
-		//‰ñ“]Šp
+		//å›è»¢è§’
 		myMath::Vector3 rotation;
-		//ƒXƒP[ƒŠƒ“ƒO
+		//ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°
 		myMath::Vector3 scaling;
-		//“–‚½‚è”»’è
+		//å½“ãŸã‚Šåˆ¤å®š
 		Collider collider;
-		//ƒ^ƒCƒ}[
+		//ã‚¿ã‚¤ãƒãƒ¼
 		Timer timer;
-		//“G‚ÌƒvƒƒpƒeƒB
+		//æ•µã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 		MoveEnemyProperty enemyProperty;
 	};
 
-	// ƒIƒuƒWƒFƒNƒg”z—ñ
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé…åˆ—
 	std::vector<ObjectData> objects_;
 };
 
 class LevelEditor
 {
 public:
-	//ƒfƒtƒHƒ‹ƒg‚Ì“Ç‚İ‚İƒfƒBƒŒƒNƒgƒŠ
+	//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®èª­ã¿è¾¼ã¿ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 	static const std::string sDefaultBaseDirectory_;
-	//ƒtƒ@ƒCƒ‹Šg’£q
+	//ãƒ•ã‚¡ã‚¤ãƒ«æ‹¡å¼µå­
 	static const std::string sExtension_;
 
 public:
 
 	/// <summary>
-	/// jsonƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+	/// jsonãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 	/// </summary>
-	/// <param name="fileName">ƒtƒ@ƒCƒ‹–¼</param>
+	/// <param name="fileName">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
 	/// <returns></returns>
 	static LevelData* LoadLevelEditorFile(const std::string& fileName);
 

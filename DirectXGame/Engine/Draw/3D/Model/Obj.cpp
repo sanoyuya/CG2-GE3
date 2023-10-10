@@ -21,51 +21,51 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data, bool fli
 		}
 	}
 
-	//ƒtƒ@ƒCƒ‹ƒXƒgƒŠ[ƒ€
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚¹ãƒˆãƒªãƒ¼ãƒ 
 	std::ifstream file;
-	//objƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	//objãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	file.open(fileName);
-	//ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“¸”s‚ğƒ`ƒFƒbƒN
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³å¤±æ•—ã‚’ãƒã‚§ãƒƒã‚¯
 	if (file.fail())
 	{
 		assert(0);
 	}
 
-	//’¸“_À•W
+	//é ‚ç‚¹åº§æ¨™
 	std::vector<myMath::Vector3> positions;
-	//–@üƒxƒNƒgƒ‹
+	//æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
 	std::vector<myMath::Vector3> normals;
-	//ƒeƒNƒXƒ`ƒƒUV
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£UV
 	std::vector<myMath::Vector2> texcoords;
 
 	PosNormalUv tmp = { {},{},{} };
 	PosNormalUv triangle[3];
 
-	//1s‚¸‚Â“Ç‚İ‚Ş
+	//1è¡Œãšã¤èª­ã¿è¾¼ã‚€
 	std::string line;
 	while (std::getline(file, line))
 	{
-		//1s•ª‚Ì•¶š—ñ‚ğƒXƒgƒŠ[ƒ€‚É•ÏŠ·‚µ‚Ä‰ğÍ‚µ‚â‚·‚­‚·‚é
+		//1è¡Œåˆ†ã®æ–‡å­—åˆ—ã‚’ã‚¹ãƒˆãƒªãƒ¼ãƒ ã«å¤‰æ›ã—ã¦è§£æã—ã‚„ã™ãã™ã‚‹
 		std::istringstream line_stream(line);
 
-		//”¼ŠpƒXƒy[ƒX‹æØ‚è‚Ås‚Ìæ“ª•¶š‚ğæ“¾
+		//åŠè§’ã‚¹ãƒšãƒ¼ã‚¹åŒºåˆ‡ã‚Šã§è¡Œã®å…ˆé ­æ–‡å­—ã‚’å–å¾—
 		std::string key;
 		std::getline(line_stream, key, ' ');
 
-		//æ“ª•¶š—ñ‚ªmtllib‚È‚çƒ}ƒeƒŠƒAƒ‹
+		//å…ˆé ­æ–‡å­—åˆ—ãŒmtllibãªã‚‰ãƒãƒ†ãƒªã‚¢ãƒ«
 		if (key == "mtllib")
 		{
-			//ƒ}ƒeƒŠƒAƒ‹‚Ìƒtƒ@ƒCƒ‹–¼“Ç‚İ‚İ
+			//ãƒãƒ†ãƒªã‚¢ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«åèª­ã¿è¾¼ã¿
 			std::string filename;
 			line_stream >> filename;
-			//ƒ}ƒeƒŠƒAƒ‹“Ç‚İ‚İ
+			//ãƒãƒ†ãƒªã‚¢ãƒ«èª­ã¿è¾¼ã¿
 			LoadMaterial(filePath, filename, data);
 
 		}
-		//æ“ª•¶š—ñ‚ªV‚È‚ç’¸“_À•W
+		//å…ˆé ­æ–‡å­—åˆ—ãŒVãªã‚‰é ‚ç‚¹åº§æ¨™
 		if (key == "v")
 		{
-			//X,Y,ZÀ•W“Ç‚İ‚İ
+			//X,Y,Zåº§æ¨™èª­ã¿è¾¼ã¿
 			myMath::Vector3 position{};
 			line_stream >> position.x;
 			line_stream >> position.y;
@@ -74,25 +74,25 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data, bool fli
 			position.x *= GetFlip(flipX) * -1;
 			position.y *= GetFlip(flipY);
 			position.z *= GetFlip(flipZ);
-			//À•Wƒf[ƒ^‚É’Ç‰Á
+			//åº§æ¨™ãƒ‡ãƒ¼ã‚¿ã«è¿½åŠ 
 			positions.emplace_back(position);
 		}
-		//æ“ª•¶š—ñ‚ªvt‚È‚çƒeƒNƒXƒ`ƒƒ
+		//å…ˆé ­æ–‡å­—åˆ—ãŒvtãªã‚‰ãƒ†ã‚¯ã‚¹ãƒãƒ£
 		if (key == "vt")
 		{
-			//U,V¬•ª“Ç‚İ‚İ
+			//U,Væˆåˆ†èª­ã¿è¾¼ã¿
 			myMath::Vector2 texcoord;
 			line_stream >> texcoord.x;
 			line_stream >> texcoord.y;
-			//V•ûŒü”½“]
+			//Væ–¹å‘åè»¢
 			texcoord.y = 1.0f - texcoord.y;
-			//ƒeƒNƒXƒ`ƒƒÀ•Wƒf[ƒ^‚É’Ç‰Á
+			//ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ãƒ‡ãƒ¼ã‚¿ã«è¿½åŠ 
 			texcoords.emplace_back(texcoord);
 		}
-		//æ“ª•¶š—ñ‚ªvn‚È‚ç–@üƒxƒNƒgƒ‹
+		//å…ˆé ­æ–‡å­—åˆ—ãŒvnãªã‚‰æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
 		if (key == "vn")
 		{
-			//X,Y,Z¬•ª“Ç‚İ‚İ
+			//X,Y,Zæˆåˆ†èª­ã¿è¾¼ã¿
 			myMath::Vector3 normal{};
 			line_stream >> normal.x;
 			line_stream >> normal.y;
@@ -101,29 +101,29 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data, bool fli
 			normal.x *= GetFlip(flipX) * -1;
 			normal.y *= GetFlip(flipY);
 			normal.z *= GetFlip(flipZ);
-			//–@üƒxƒNƒgƒ‹ƒf[ƒ^‚É’Ç‰Á
+			//æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ãƒ‡ãƒ¼ã‚¿ã«è¿½åŠ 
 			normals.emplace_back(normal);
 		}
-		//æ“ª•¶š‚È‚çƒ|ƒŠƒSƒ“(OŠpŒ`)
+		//å…ˆé ­æ–‡å­—ãªã‚‰ãƒãƒªã‚´ãƒ³(ä¸‰è§’å½¢)
 		if (key == "f")
 		{
 			uint8_t count = 0;
-			//”¼ŠpƒXƒy[ƒX‹æØ‚è‚Ås‚Ì‘±‚«‚ğ“Ç‚İ‚Ş
+			//åŠè§’ã‚¹ãƒšãƒ¼ã‚¹åŒºåˆ‡ã‚Šã§è¡Œã®ç¶šãã‚’èª­ã¿è¾¼ã‚€
 			std::string index_string;
 			while (std::getline(line_stream, index_string, ' '))
 			{
-				//’¸“_ƒCƒ“ƒfƒbƒNƒX1ŒÂ•ª•¶š—ñ‚ğƒXƒgƒŠ[ƒ€‚É•ÏŠ·‚µ‚Ä‰ğÍ‚µ‚â‚·‚­‚·‚é
+				//é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹1å€‹åˆ†æ–‡å­—åˆ—ã‚’ã‚¹ãƒˆãƒªãƒ¼ãƒ ã«å¤‰æ›ã—ã¦è§£æã—ã‚„ã™ãã™ã‚‹
 				std::istringstream index_stream(index_string);
 				uint16_t indexPosition, indexTexcoord, indexNormal;
 				index_stream >> indexPosition;
-				//ƒXƒ‰ƒbƒVƒ…‚ğ”ò‚Î‚·
+				//ã‚¹ãƒ©ãƒƒã‚·ãƒ¥ã‚’é£›ã°ã™
 				index_stream.seekg(1, std::ios_base::cur);
 				index_stream >> indexTexcoord;
-				//ƒXƒ‰ƒbƒVƒ…‚ğ”ò‚Î‚·
+				//ã‚¹ãƒ©ãƒƒã‚·ãƒ¥ã‚’é£›ã°ã™
 				index_stream.seekg(1, std::ios_base::cur);
 				index_stream >> indexNormal;
 
-				//’¸“_ƒf[ƒ^‚Ì’Ç‰Á
+				//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®è¿½åŠ 
 				tmp.pos = positions[static_cast<size_t>(indexPosition) - 1];
 				tmp.normal = normals[static_cast<size_t>(indexNormal) - 1];
 				tmp.uv = texcoords[static_cast<size_t>(indexTexcoord) - 1];
@@ -136,7 +136,7 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data, bool fli
 					data->smoothData[static_cast<size_t>(indexPosition)].emplace_back(static_cast<uint32_t>(data->vertices.size() - 1));
 				}
 
-				//ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^‚Ì’Ç‰Á
+				//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿ã®è¿½åŠ 
 				data->indices.emplace_back(static_cast<uint32_t>(data->indices.size()));
 			}
 			data->vertices.push_back(triangle[2]);
@@ -145,7 +145,7 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data, bool fli
 		}
 	}
 
-	//ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 	file.close();
 
 	if (smoothing)
@@ -156,17 +156,17 @@ void Obj::Create(const char* filePath, bool smoothing, ModelData* data, bool fli
 	data->maxVert = static_cast<uint32_t>(data->vertices.size());
 	data->maxIndex = static_cast<uint32_t>(data->indices.size());
 
-	//’¸“_ƒoƒbƒtƒ@EƒCƒ“ƒfƒbƒNƒX¶¬
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ»ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç”Ÿæˆ
 	data->vertexBuffer = std::make_unique<VertexBuffer>();
 	data->vertexBuffer->Create(data->maxVert, sizeof(PosNormalUv));
 
 	data->indexBuffer = std::make_unique<IndexBuffer>();
 	data->indexBuffer->Create(data->maxIndex);
 
-	//’¸“_ƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	data->vertexBuffer->Update(data->vertices.data());
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	data->indexBuffer->Update(data->indices.data());
 
 	data->constBuffMaterial = std::make_unique<ConstantBuffer>();
@@ -190,10 +190,10 @@ void Obj::LoadMaterial(const std::string& directoryPath, const std::string& file
 	std::string line;
 	while (std::getline(file, line))
 	{
-		//1s•ª‚Ì•¶š—ñ‚ğƒXƒgƒŠ[ƒ€‚É•ÏŠ·‚µ‚Ä‰ğÍ‚µ‚â‚·‚­‚·‚é
+		//1è¡Œåˆ†ã®æ–‡å­—åˆ—ã‚’ã‚¹ãƒˆãƒªãƒ¼ãƒ ã«å¤‰æ›ã—ã¦è§£æã—ã‚„ã™ãã™ã‚‹
 		std::istringstream line_stream(line);
 
-		//”¼ŠpƒXƒy[ƒX‹æØ‚è‚Ås‚Ìæ“ª•¶š‚ğæ“¾
+		//åŠè§’ã‚¹ãƒšãƒ¼ã‚¹åŒºåˆ‡ã‚Šã§è¡Œã®å…ˆé ­æ–‡å­—ã‚’å–å¾—
 		std::string key;
 		std::getline(line_stream, key, ' ');
 
@@ -231,7 +231,7 @@ void Obj::LoadMaterial(const std::string& directoryPath, const std::string& file
 		}
 	}
 
-	//ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 	file.close();
 }
 
@@ -249,9 +249,9 @@ void Obj::CalculateSmoothedVertexNormals(ModelData* data)
 	auto itr = data->smoothData.begin();
 	for (; itr != data->smoothData.end(); itr++)
 	{
-		//Še–Ê—p‚Ì‹¤’Ê“_ƒRƒŒƒNƒVƒ‡ƒ“
+		//å„é¢ç”¨ã®å…±é€šç‚¹ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
 		std::vector<uint32_t>& v = itr->second;
-		//‘S’¸“_‚Ì–@ü‚ğ•½‹Ï‚·‚é
+		//å…¨é ‚ç‚¹ã®æ³•ç·šã‚’å¹³å‡ã™ã‚‹
 		myMath::Vector3 normal = {};
 		for (uint32_t index : v)
 		{
@@ -260,7 +260,7 @@ void Obj::CalculateSmoothedVertexNormals(ModelData* data)
 
 		normal = normal / static_cast<float>(v.size());
 		normal.normalization();
-		//‹¤’Ê–@ü‚ğg—p‚·‚é‘S‚Ä‚Ì’¸“_ƒf[ƒ^‚É‘‚«‚Ş
+		//å…±é€šæ³•ç·šã‚’ä½¿ç”¨ã™ã‚‹å…¨ã¦ã®é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã«æ›¸ãè¾¼ã‚€
 		for (uint32_t index : v)
 		{
 			data->vertices[index].normal = { normal.x,normal.y,normal.z };

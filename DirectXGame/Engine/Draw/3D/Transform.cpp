@@ -6,25 +6,25 @@ myMath::Matrix4 Transform::sDefaultViewMat_ = { 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.
 
 void Transform::Initialize()
 {
-	//’è”ƒoƒbƒtƒ@¶¬(3DÀ•W•ÏŠ·s—ñ)
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ(3Dåº§æ¨™å¤‰æ›è¡Œåˆ—)
 	constBuff_ = std::make_shared<ConstantBuffer>();
 	constBuff_->Create(sizeof(worldViewpojCamera));
 
-	//ƒXƒP[ƒ‹A‰ñ“]A•½sˆÚ“®s—ñ‚ÌŒvZ
+	//ã‚¹ã‚±ãƒ¼ãƒ«ã€å›è»¢ã€å¹³è¡Œç§»å‹•è¡Œåˆ—ã®è¨ˆç®—
 	matScale.MakeScaling(scale);
 	matRot.MakeRotation(rotation);
 	matTrans.MakeTranslation(translation);
 
-	//ƒ[ƒ‹ƒhs—ñ‚Ì‡¬
-	//•ÏŒ`‚ğƒŠƒZƒbƒg
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®åˆæˆ
+	//å¤‰å½¢ã‚’ãƒªã‚»ãƒƒãƒˆ
 	matWorld = myMath::MakeIdentity();
-	//ƒ[ƒ‹ƒhs—ñ‚ÉƒXƒP[ƒŠƒ“ƒO‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã‚’åæ˜ 
 	matWorld *= matScale;
-	//ƒ[ƒ‹ƒhs—ñ‚É‰ñ“]‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«å›è»¢ã‚’åæ˜ 
 	matWorld *= matRot;
-	//ƒ[ƒ‹ƒhs—ñ‚É•½sˆÚ“®‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«å¹³è¡Œç§»å‹•ã‚’åæ˜ 
 	matWorld *= matTrans;
-	//es—ñ‚Ìw’è‚ª‚ ‚éê‡‚ÍAŠ|‚¯Z‚·‚é
+	//è¦ªè¡Œåˆ—ã®æŒ‡å®šãŒã‚ã‚‹å ´åˆã¯ã€æ›ã‘ç®—ã™ã‚‹
 	if (parent)
 	{
 		matWorld *= parent->matWorld;
@@ -33,7 +33,7 @@ void Transform::Initialize()
 		matTrans *= parent->matTrans;
 	}
 
-	//’è”ƒoƒbƒtƒ@‚É‘‚«‚İ
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«æ›¸ãè¾¼ã¿
 	constBuffMap_.matWorld = matWorld * sDefaultViewMat_ * sDefaultProjectionMat_;
 	constBuffMap_.world = matWorld;
 	constBuffMap_.cameraPos = { 0.0f,0.0f,-50.0f };
@@ -43,21 +43,21 @@ void Transform::Initialize()
 
 void Transform::TransUpdate(Camera* camera)
 {
-	//ƒXƒP[ƒ‹A‰ñ“]A•½sˆÚ“®s—ñ‚ÌŒvZ
+	//ã‚¹ã‚±ãƒ¼ãƒ«ã€å›è»¢ã€å¹³è¡Œç§»å‹•è¡Œåˆ—ã®è¨ˆç®—
 	matScale.MakeScaling(scale);
 	matRot.MakeRotation(rotation);
 	matTrans.MakeTranslation(translation);
 
-	//ƒ[ƒ‹ƒhs—ñ‚Ì‡¬
-	//•ÏŒ`‚ğƒŠƒZƒbƒg
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®åˆæˆ
+	//å¤‰å½¢ã‚’ãƒªã‚»ãƒƒãƒˆ
 	matWorld = myMath::MakeIdentity();
-	//ƒ[ƒ‹ƒhs—ñ‚ÉƒXƒP[ƒŠƒ“ƒO‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã‚’åæ˜ 
 	matWorld *= matScale;
-	//ƒ[ƒ‹ƒhs—ñ‚É‰ñ“]‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«å›è»¢ã‚’åæ˜ 
 	matWorld *= matRot;
-	//ƒ[ƒ‹ƒhs—ñ‚É•½sˆÚ“®‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«å¹³è¡Œç§»å‹•ã‚’åæ˜ 
 	matWorld *= matTrans;
-	//es—ñ‚Ìw’è‚ª‚ ‚éê‡‚ÍAŠ|‚¯Z‚·‚é
+	//è¦ªè¡Œåˆ—ã®æŒ‡å®šãŒã‚ã‚‹å ´åˆã¯ã€æ›ã‘ç®—ã™ã‚‹
 	if (parent)
 	{
 		matWorld *= parent->matWorld;
@@ -69,7 +69,7 @@ void Transform::TransUpdate(Camera* camera)
 	parentToTranslation.y = matWorld.m[3][1];
 	parentToTranslation.z = matWorld.m[3][2];
 
-	//’è”ƒoƒbƒtƒ@‚É‘‚«‚İ
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«æ›¸ãè¾¼ã¿
 	constBuffMap_.matWorld = matWorld * camera->GetMatViewInverse() * camera->GetMatProjection();
 	constBuffMap_.world = matWorld;
 	constBuffMap_.cameraPos = camera->GetEye();
@@ -83,21 +83,21 @@ void Transform::Update()
 
 void Transform::MakeWorldMatrix()
 {
-	//ƒXƒP[ƒ‹A‰ñ“]A•½sˆÚ“®s—ñ‚ÌŒvZ
+	//ã‚¹ã‚±ãƒ¼ãƒ«ã€å›è»¢ã€å¹³è¡Œç§»å‹•è¡Œåˆ—ã®è¨ˆç®—
 	matScale.MakeScaling(scale);
 	matRot.MakeRotation(rotation);
 	matTrans.MakeTranslation(translation);
 
-	//ƒ[ƒ‹ƒhs—ñ‚Ì‡¬
-	//•ÏŒ`‚ğƒŠƒZƒbƒg
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®åˆæˆ
+	//å¤‰å½¢ã‚’ãƒªã‚»ãƒƒãƒˆ
 	matWorld = myMath::MakeIdentity();
-	//ƒ[ƒ‹ƒhs—ñ‚ÉƒXƒP[ƒŠƒ“ƒO‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã‚’åæ˜ 
 	matWorld *= matScale;
-	//ƒ[ƒ‹ƒhs—ñ‚É‰ñ“]‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«å›è»¢ã‚’åæ˜ 
 	matWorld *= matRot;
-	//ƒ[ƒ‹ƒhs—ñ‚É•½sˆÚ“®‚ğ”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«å¹³è¡Œç§»å‹•ã‚’åæ˜ 
 	matWorld *= matTrans;
-	//es—ñ‚Ìw’è‚ª‚ ‚éê‡‚ÍAŠ|‚¯Z‚·‚é
+	//è¦ªè¡Œåˆ—ã®æŒ‡å®šãŒã‚ã‚‹å ´åˆã¯ã€æ›ã‘ç®—ã™ã‚‹
 	if (parent)
 	{
 		matWorld *= parent->matWorld;
@@ -125,13 +125,13 @@ namespace myMath
 
 		Matrix4 matScal, matRot, matTrans;
 
-		//ƒXƒP[ƒŠƒ“ƒO”{—¦
+		//ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°å€ç‡
 		matScal.MakeScaling(transform.scale);
 
-		//‰ñ“]s—ñ
+		//å›è»¢è¡Œåˆ—
 		matRot.MakeRotation(transform.rotation);
 
-		// matWorld_‚ÉˆÚ“®—Ê‚ğŠ|‚¯Z
+		// matWorld_ã«ç§»å‹•é‡ã‚’æ›ã‘ç®—
 		matTrans.MakeTranslation(transform.translation);
 
 		matWorld = matScal * matRot * matTrans;
@@ -146,9 +146,9 @@ namespace myMath
 
 	Vector3 GetWorldPosition(Transform& transform)
 	{
-		//ƒ[ƒ‹ƒhÀ•W‚ğ“ü‚ê‚é•Ï”
+		//ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’å…¥ã‚Œã‚‹å¤‰æ•°
 		Vector3 worldPos;
-		//ƒ[ƒ‹ƒhs—ñ‚Ì•½sˆÚ“®¬•ª‚ğæ“¾(ƒ[ƒ‹ƒhÀ•W)
+		//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®å¹³è¡Œç§»å‹•æˆåˆ†ã‚’å–å¾—(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™)
 		worldPos.x = transform.matWorld.m[3][0];
 		worldPos.y = transform.matWorld.m[3][1];
 		worldPos.z = transform.matWorld.m[3][2];

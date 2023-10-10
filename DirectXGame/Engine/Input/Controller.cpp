@@ -27,11 +27,11 @@ void Controller::Update()
 	oldControllerState_ = controllerState_;
 	ZeroMemory(&controllerState_, sizeof(XINPUT_STATE));
 
-	//ƒRƒ“ƒgƒ[ƒ‰[æ“¾
+	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å–å¾—
 	DWORD dwResult = XInputGetState(0, &controllerState_);
 
 	if (dwResult == ERROR_SUCCESS) {
-		//ƒRƒ“ƒgƒ[ƒ‰[‚ªÚ‘±‚³‚ê‚Ä‚¢‚é
+		//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ãŒæ¥ç¶šã•ã‚Œã¦ã„ã‚‹
 		if (0 < shakeTimer_) {
 			shakeTimer_--;
 			XINPUT_VIBRATION vibration;
@@ -50,13 +50,13 @@ void Controller::Update()
 		}
 	}
 	else {
-		//ƒRƒ“ƒgƒ[ƒ‰[‚ªÚ‘±‚³‚ê‚Ä‚¢‚È‚¢
+		//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ãŒæ¥ç¶šã•ã‚Œã¦ã„ãªã„
 	}
 }
 
 bool Controller::ButtonTriggerPush(ControllerButton button)
 {
-	//ƒgƒŠƒK[
+	//ãƒˆãƒªã‚¬ãƒ¼
 	if (button == LT) {
 		return oldControllerState_.Gamepad.bLeftTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD && ButtonKeepPush(button);
 	}
@@ -83,7 +83,7 @@ bool Controller::ButtonKeepPush(ControllerButton button)
 
 bool Controller::ButtonTriggerRelease(ControllerButton button)
 {
-	//ƒgƒŠƒK[
+	//ãƒˆãƒªã‚¬ãƒ¼
 	if (button == LT) {
 		return oldControllerState_.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD && !ButtonKeepPush(button);
 	}

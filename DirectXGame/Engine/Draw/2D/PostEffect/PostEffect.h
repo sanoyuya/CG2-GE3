@@ -11,8 +11,8 @@
 
 struct VertexPosUV
 {
-	myMath::Vector3 pos;//À•W
-	myMath::Vector2 uv;//uvÀ•W
+	myMath::Vector3 pos;//åº§æ¨™
+	myMath::Vector2 uv;//uvåº§æ¨™
 };
 
 struct PowerGrayScale
@@ -23,14 +23,14 @@ struct PowerGrayScale
 
 enum EffectMode
 {
-	None,//‰½‚à‚µ‚È‚¢
-	BrightnessUP,//–¾“x‚ğ2”{‚Åo—Í
-	Inverse,//F”½“]
-	Blur,//‚Ú‚©‚µ
-	GaussianBlur,//ƒKƒEƒVƒAƒ“ƒuƒ‰[	
-	GrayScale,//ƒ‚ƒmƒNƒ
-	SepiaColor,//ƒZƒsƒAƒJƒ‰[
-	UVShift,//UV‚¸‚ç‚µ
+	None,//ä½•ã‚‚ã—ãªã„
+	BrightnessUP,//æ˜åº¦ã‚’2å€ã§å‡ºåŠ›
+	Inverse,//è‰²åè»¢
+	Blur,//ã¼ã‹ã—
+	GaussianBlur,//ã‚¬ã‚¦ã‚·ã‚¢ãƒ³ãƒ–ãƒ©ãƒ¼	
+	GrayScale,//ãƒ¢ãƒã‚¯ãƒ­
+	SepiaColor,//ã‚»ãƒ”ã‚¢ã‚«ãƒ©ãƒ¼
+	UVShift,//UVãšã‚‰ã—
 };
 
 class PostEffect
@@ -41,32 +41,32 @@ private:
 
 	DescriptorHeap::DescriptorHeapViewHandle handle_;
 
-	//[“xƒoƒbƒtƒ@
+	//æ·±åº¦ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource>depthBuff_;
-	//RTV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	//RTVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>descHeapRTV_;
-	//DSV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	//DSVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>descHeapDSV_;
 
-	//’¸“_ƒoƒbƒtƒ@
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<VertexBuffer> vertexBuffer_ = {};
-	//’¸“_ƒ}ƒbƒv
+	//é ‚ç‚¹ãƒãƒƒãƒ—
 	PosUvColor* vertMap_ = {};
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<IndexBuffer> indexBuffer_ = {};
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<ConstantBuffer> constBuffMaterial_ = {};
-	//’è”ƒoƒbƒtƒ@‚Ìƒ}ƒbƒsƒ“ƒO—pƒ|ƒCƒ“ƒ^
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒã‚¤ãƒ³ã‚¿
 	static PowerGrayScale constBuffMap_;
-	//ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	//ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 	static myMath::Matrix4 matProjection_;
 
-	//ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+	//ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	static std::array<Blob, 9> sBlob_;
-	//ƒpƒCƒvƒ‰ƒCƒ“
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³
 	static std::array<PipelineSet, 9> sPip_;
 
-	//‰æ–ÊƒNƒŠƒAƒJƒ‰[
+	//ç”»é¢ã‚¯ãƒªã‚¢ã‚«ãƒ©ãƒ¼
 	static const float sClearColor_[4];
 
 	static EffectMode sEffectMode_;
@@ -74,22 +74,22 @@ private:
 public:
 
 	/// <summary>
-	/// ‰Šú‰»ˆ—
+	/// åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	void Initialize(WindowsApp* windowsApp);
 
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Draw();
 
 	/// <summary>
-	/// ƒV[ƒ“•`‰æ‘Oˆ—
+	/// ã‚·ãƒ¼ãƒ³æç”»å‰å‡¦ç†
 	/// </summary>
 	void PreDrawScene(WindowsApp* windowsApp);
 
 	/// <summary>
-	/// ƒV[ƒ“•`‰æˆ—Œã
+	/// ã‚·ãƒ¼ãƒ³æç”»å‡¦ç†å¾Œ
 	/// </summary>
 	void PostDrawScene();
 
@@ -104,22 +104,22 @@ private:
 
 	void VertSetting();
 	void CreateBuff();
-	//texBuff_‚Ì¶¬
+	//texBuff_ã®ç”Ÿæˆ
 	void CreateTexBuff(WindowsApp* windowsApp);
-	//RTV‚Ìì¬
+	//RTVã®ä½œæˆ
 	void CreateRTV();
-	//[“xƒoƒbƒtƒ@‚Ì¶¬
+	//æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	void CreateDepth(WindowsApp* windowsApp);
-	//DSV‚Ìì¬
+	//DSVã®ä½œæˆ
 	void CreateDSV();
-	//ƒpƒCƒvƒ‰ƒCƒ“¶¬
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ç”Ÿæˆ
 	void CreatePipline();
-	//ƒVƒF[ƒ_[“Ç‚İ‚İ
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼èª­ã¿è¾¼ã¿
 	void LoadShader();
-	//•`‰æƒRƒ}ƒ“ƒh
+	//æç”»ã‚³ãƒãƒ³ãƒ‰
 	void DrawCommand();
-	//SRV‚Ìì¬
+	//SRVã®ä½œæˆ
 	void CreateSRV();
-	//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Æƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ìİ’èƒRƒ}ƒ“ƒh
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã¨ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	void SetPipline();
 };

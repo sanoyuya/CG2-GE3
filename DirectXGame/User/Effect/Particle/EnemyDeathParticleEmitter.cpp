@@ -2,7 +2,7 @@
 
 void EnemyDeathParticleEmitter::Initialize()
 {
-	// ƒp[ƒeƒBƒNƒ‹¶¬
+	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ç”Ÿæˆ
 	particleMan_ = std::make_unique<ParticleManager>();
 	tex_ = particleMan_->LoadTexture("Resources/particle2.png");
 	particleMan_->Initialize(tex_);
@@ -10,66 +10,66 @@ void EnemyDeathParticleEmitter::Initialize()
 
 void EnemyDeathParticleEmitter::Create(const myMath::Vector3 center)
 {
-	//•F
+	//é»’è‰²
 	for (int i = 0; i < 5; i++)
 	{
-		//‰ŠúÀ•W(¶¬‚·‚éêŠ‚Ì’†SÀ•W)
+		//åˆæœŸåº§æ¨™(ç”Ÿæˆã™ã‚‹å ´æ‰€ã®ä¸­å¿ƒåº§æ¨™)
 		myMath::Vector3 pos{};
 		pos.x = center.x;
 		pos.y = center.y;
 		pos.z = center.z;
 
-		//‘¬“x
+		//é€Ÿåº¦
 		myMath::Vector3 vel = { static_cast<float>(myMath::GetRand(-0.05f,0.05f)),static_cast<float>(myMath::GetRand(-0.05f,0.05f)) ,static_cast<float>(myMath::GetRand(-0.05f,0.05f)) };
 
-		//d—Í‚Ì‚æ‚¤‚Èˆ—
+		//é‡åŠ›ã®ã‚ˆã†ãªå‡¦ç†
 		myMath::Vector3 acc{};
 
 		myMath::Vector4 col = { 0.0f,0.0f,0.0f,1.0f };
 
-		//’Ç‰Á
+		//è¿½åŠ 
 		particleMan_->Add(60.0f, pos, vel, acc, 3.0f, 10.0f, col);
 	}
 
-	//ŠDF
+	//ç°è‰²
 	for (int i = 0; i < 5; i++)
 	{
-		//‰ŠúÀ•W(¶¬‚·‚éêŠ‚Ì’†SÀ•W)
+		//åˆæœŸåº§æ¨™(ç”Ÿæˆã™ã‚‹å ´æ‰€ã®ä¸­å¿ƒåº§æ¨™)
 		myMath::Vector3 pos{};
 		pos.x = center.x;
 		pos.y = center.y;
 		pos.z = center.z;
 
-		//‘¬“x
+		//é€Ÿåº¦
 		myMath::Vector3 vel = { static_cast<float>(myMath::GetRand(-0.1f,0.1f)),static_cast<float>(myMath::GetRand(-0.1f,0.1f)) ,static_cast<float>(myMath::GetRand(-0.1f,0.1f)) };
 
-		//d—Í‚Ì‚æ‚¤‚Èˆ—
+		//é‡åŠ›ã®ã‚ˆã†ãªå‡¦ç†
 		myMath::Vector3 acc{};
 
 		myMath::Vector4 col = { 108.0f / 255.0f,103.0f / 255.0f ,110.0f / 255.0f,1.0f };
 
-		//’Ç‰Á
+		//è¿½åŠ 
 		particleMan_->Add(60.0f, pos, vel, acc, 3.0f, 10.0f, col);
 	}
 
-	//ƒIƒŒƒ“ƒWF
+	//ã‚ªãƒ¬ãƒ³ã‚¸è‰²
 	for (int i = 0; i < 5; i++)
 	{
-		//‰ŠúÀ•W(¶¬‚·‚éêŠ‚Ì’†SÀ•W)
+		//åˆæœŸåº§æ¨™(ç”Ÿæˆã™ã‚‹å ´æ‰€ã®ä¸­å¿ƒåº§æ¨™)
 		myMath::Vector3 pos{};
 		pos.x = center.x;
 		pos.y = center.y;
 		pos.z = center.z;
 
-		//‘¬“x
+		//é€Ÿåº¦
 		myMath::Vector3 vel = { static_cast<float>(myMath::GetRand(-0.01f,0.01f)),static_cast<float>(myMath::GetRand(-0.01f,0.01f)) ,static_cast<float>(myMath::GetRand(-0.01f,0.01f)) };
 
-		//d—Í‚Ì‚æ‚¤‚Èˆ—
+		//é‡åŠ›ã®ã‚ˆã†ãªå‡¦ç†
 		myMath::Vector3 acc{};
 
 		myMath::Vector4 col = { 245.0f / 255.0f,130.0f / 255.0f,32.0f / 255.0f,1.0f };
 
-		//’Ç‰Á
+		//è¿½åŠ 
 		particleMan_->Add(60.0f, pos, vel, acc, 3.0f, 10.0f, col);
 	}
 }

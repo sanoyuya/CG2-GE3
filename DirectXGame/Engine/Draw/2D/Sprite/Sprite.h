@@ -8,9 +8,9 @@ class Sprite:public Sprite2D, public Sprite3D
 public:
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İ
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹–¼</param>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
 	/// <returns></returns>
 	uint32_t LoadTexture(const std::string& filePath);
 };

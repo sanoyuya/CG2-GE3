@@ -2,48 +2,48 @@
 
 void FPS::Initialize()
 {
-	reference_ = std::chrono::steady_clock::now();//Œ»İ‚ÌŠÔ‚ğ‘ã“ü
+	reference_ = std::chrono::steady_clock::now();//ç¾åœ¨ã®æ™‚é–“ã‚’ä»£å…¥
 }
 
 void FPS::Update(float fixedFps, bool flag)
 {
-	//1/fixedFps•b‚Ò‚Á‚½‚è
+	//1/fixedFpsç§’ã´ã£ãŸã‚Š
 	std::chrono::microseconds minTime(uint64_t(1000000.0f / fixedFps));
-	//1/fixedFps•b‚æ‚è‚í‚¸‚©‚É’Z‚¢ŠÔ
+	//1/fixedFpsç§’ã‚ˆã‚Šã‚ãšã‹ã«çŸ­ã„æ™‚é–“
 	std::chrono::microseconds minCheckTime(uint64_t(1000000.0f / (fixedFps + 5.0f)));
 
-	//Œ»İŠÔ‚ğæ“¾
+	//ç¾åœ¨æ™‚é–“ã‚’å–å¾—
 	std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
-	//‘O‰ñ‹L˜^‚©‚ç‚ÌŒo‰ßŠÔ‚ğæ“¾‚·‚é
+	//å‰å›è¨˜éŒ²ã‹ã‚‰ã®çµŒéæ™‚é–“ã‚’å–å¾—ã™ã‚‹
 	std::chrono::microseconds elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - reference_);
 
 	if (flag == false)
 	{
-		//1/fixedFps•b(‚æ‚è‚í‚¸‚©‚É’Z‚¢ŠÔ)Œo‚Á‚Ä‚¢‚È‚¢ê‡
+		//1/fixedFpsç§’(ã‚ˆã‚Šã‚ãšã‹ã«çŸ­ã„æ™‚é–“)çµŒã£ã¦ã„ãªã„å ´åˆ
 		if (elapsed < minTime)
 		{
-			//1/fixedFps•bŒo‰ß‚·‚é‚Ü‚Å”÷¬‚ÈƒXƒŠ[ƒv‚ğŒJ‚è•Ô‚·
+			//1/fixedFpsç§’çµŒéã™ã‚‹ã¾ã§å¾®å°ãªã‚¹ãƒªãƒ¼ãƒ—ã‚’ç¹°ã‚Šè¿”ã™
 			while (std::chrono::steady_clock::now() - reference_ < minTime)
 			{
-				//1ƒ}ƒCƒNƒ•bƒXƒŠ[ƒv
+				//1ãƒã‚¤ã‚¯ãƒ­ç§’ã‚¹ãƒªãƒ¼ãƒ—
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
 			}
 		}
 	}
 	else
 	{
-		//1/fixedFps•b(‚æ‚è‚í‚¸‚©‚É’Z‚¢ŠÔ)Œo‚Á‚Ä‚¢‚È‚¢ê‡
+		//1/fixedFpsç§’(ã‚ˆã‚Šã‚ãšã‹ã«çŸ­ã„æ™‚é–“)çµŒã£ã¦ã„ãªã„å ´åˆ
 		if (elapsed < minCheckTime)
 		{
-			//1/fixedFps•bŒo‰ß‚·‚é‚Ü‚Å”÷¬‚ÈƒXƒŠ[ƒv‚ğŒJ‚è•Ô‚·
+			//1/fixedFpsç§’çµŒéã™ã‚‹ã¾ã§å¾®å°ãªã‚¹ãƒªãƒ¼ãƒ—ã‚’ç¹°ã‚Šè¿”ã™
 			while (std::chrono::steady_clock::now() - reference_ < minCheckTime)
 			{
-				//1ƒ}ƒCƒNƒ•bƒXƒŠ[ƒv
+				//1ãƒã‚¤ã‚¯ãƒ­ç§’ã‚¹ãƒªãƒ¼ãƒ—
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
 			}
 		}
 	}
 	
-	//Œ»İ‚ÌŠÔ‚ğ‹L˜^‚·‚é
+	//ç¾åœ¨ã®æ™‚é–“ã‚’è¨˜éŒ²ã™ã‚‹
 	reference_ = std::chrono::steady_clock::now();
 }

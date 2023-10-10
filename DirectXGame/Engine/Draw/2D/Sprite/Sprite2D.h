@@ -18,27 +18,27 @@ private:
 	HRESULT result_ = S_FALSE;
 	char PADING_[4] = {};
 
-	//’¸“_ƒoƒbƒtƒ@
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<VertexBuffer> vertexBuffer_ = {};
-	//’¸“_ƒ}ƒbƒv
+	//é ‚ç‚¹ãƒãƒƒãƒ—
 	PosUvColor* vertMap_ = {};
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<IndexBuffer> indexBuffer_ = {};
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğƒ}ƒbƒsƒ“ƒO
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒãƒƒãƒ”ãƒ³ã‚°
 	uint16_t* indexMap_ = 0;
 
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<ConstantBuffer> constBuffMaterial_ = {};
 
-	//’è”ƒoƒbƒtƒ@‚Ìƒ}ƒbƒsƒ“ƒO—pƒ|ƒCƒ“ƒ^
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒã‚¤ãƒ³ã‚¿
 	myMath::Matrix4 constBuffMap_ = {};
 
-	//ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	//ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 	static myMath::Matrix4 matProjection_;
 
-	BlendMode blendMode_ = BlendMode::Alpha;//‰Šú’l”¼“§–¾‡¬
+	BlendMode blendMode_ = BlendMode::Alpha;//åˆæœŸå€¤åŠé€æ˜åˆæˆ
 
 	TextureData* texture_ = {};
 
@@ -48,105 +48,105 @@ public:
 	virtual ~Sprite2D() {}
 
 	/// <summary>
-	/// Ã“I‰Šú‰»ˆ—
+	/// é™çš„åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
-	/// <param name="windowsApp">windowsApp‚Ìƒ|ƒCƒ“ƒ^</param>
+	/// <param name="windowsApp">windowsAppã®ãƒã‚¤ãƒ³ã‚¿</param>
 	static void StaticInitialize(WindowsApp* windowsApp);
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚Ì‰Šú‰»ˆ—(2D)
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®åˆæœŸåŒ–å‡¦ç†(2D)
 	/// </summary>
-	/// <param name="handle">ƒeƒNƒXƒ`ƒƒ‚Ìƒnƒ“ƒhƒ‹</param>
+	/// <param name="handle">ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒãƒ³ãƒ‰ãƒ«</param>
 	void Sprite2DInitialize(uint32_t handle);
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚Ì•`‰æ(2D)
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æç”»(2D)
 	/// </summary>
-	/// <param name="position">À•W</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="scale">‘å‚«‚³(‰Šú’l:{ 1.0f,1.0f })</param>
-	/// <param name="rotation">‰ñ“](‰Šú’l:0.0f)</param>
-	/// <param name="anchorpoint">’†S“_(‰Šú’l:{ 0.5f,0.5f })</param>
-	/// <param name="flipX">X”½“](‰Šú’l:false)</param>
-	/// <param name="flipY">Y”½“](‰Šú’l:false)</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="scale">å¤§ãã•(åˆæœŸå€¤:{ 1.0f,1.0f })</param>
+	/// <param name="rotation">å›è»¢(åˆæœŸå€¤:0.0f)</param>
+	/// <param name="anchorpoint">ä¸­å¿ƒç‚¹(åˆæœŸå€¤:{ 0.5f,0.5f })</param>
+	/// <param name="flipX">Xåè»¢(åˆæœŸå€¤:false)</param>
+	/// <param name="flipY">Yåè»¢(åˆæœŸå€¤:false)</param>
 	void DrawSprite2D(myMath::Vector2 position, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚ÌØ‚è”²‚«•`‰æ(2D)
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®åˆ‡ã‚ŠæŠœãæç”»(2D)
 	/// </summary>
-	/// <param name="position">À•W</param>
-	/// <param name="clipCenter">Ø‚èæ‚è‚·‚é’†SÀ•W</param>
-	/// <param name="clipRadius">Ø‚èæ‚è‚·‚é”¼Œa</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="scale">‘å‚«‚³(‰Šú’l:{ 1.0f,1.0f })</param>
-	/// <param name="rotation">‰ñ“](‰Šú’l:0.0f)</param>
-	/// <param name="flipX">X”½“](‰Šú’l:false)</param>
-	/// <param name="flipY">Y”½“](‰Šú’l:false)</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="clipCenter">åˆ‡ã‚Šå–ã‚Šã™ã‚‹ä¸­å¿ƒåº§æ¨™</param>
+	/// <param name="clipRadius">åˆ‡ã‚Šå–ã‚Šã™ã‚‹åŠå¾„</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="scale">å¤§ãã•(åˆæœŸå€¤:{ 1.0f,1.0f })</param>
+	/// <param name="rotation">å›è»¢(åˆæœŸå€¤:0.0f)</param>
+	/// <param name="flipX">Xåè»¢(åˆæœŸå€¤:false)</param>
+	/// <param name="flipY">Yåè»¢(åˆæœŸå€¤:false)</param>
 	void DrawSpriteClip2D(myMath::Vector2 position, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// ‰¡˜A”ÔƒXƒvƒ‰ƒCƒg•`‰æ(2D)
+	/// æ¨ªé€£ç•ªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»(2D)
 	/// </summary>
-	/// <param name="position">À•W</param>
-	/// <param name="sheetsNum">–‡”</param>
-	/// <param name="nowNum">‰½–‡–Ú‚©</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="scale">‘å‚«‚³(‰Šú’l:{ 1.0f,1.0f })</param>
-	/// <param name="rotation">‰ñ“](‰Šú’l:0.0f)</param>
-	/// <param name="anchorpoint">’†S“_(‰Šú’l:{ 0.5f,0.5f })</param>
-	/// <param name="flipX">X”½“](‰Šú’l:false)</param>
-	/// <param name="flipY">Y”½“](‰Šú’l:false)</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="sheetsNum">æšæ•°</param>
+	/// <param name="nowNum">ä½•æšç›®ã‹</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="scale">å¤§ãã•(åˆæœŸå€¤:{ 1.0f,1.0f })</param>
+	/// <param name="rotation">å›è»¢(åˆæœŸå€¤:0.0f)</param>
+	/// <param name="anchorpoint">ä¸­å¿ƒç‚¹(åˆæœŸå€¤:{ 0.5f,0.5f })</param>
+	/// <param name="flipX">Xåè»¢(åˆæœŸå€¤:false)</param>
+	/// <param name="flipY">Yåè»¢(åˆæœŸå€¤:false)</param>
 	void DrawAnimationSpriteX2D(myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// c˜A”ÔƒXƒvƒ‰ƒCƒg•`‰æ(2D)
+	/// ç¸¦é€£ç•ªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»(2D)
 	/// </summary>
-	/// <param name="position">À•W</param>
-	/// <param name="sheetsNum">–‡”</param>
-	/// <param name="nowNum">‰½–‡–Ú‚©</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="scale">‘å‚«‚³(‰Šú’l:{ 1.0f,1.0f })</param>
-	/// <param name="rotation">‰ñ“](‰Šú’l:0.0f)</param>
-	/// <param name="anchorpoint">’†S“_(‰Šú’l:{ 0.5f,0.5f })</param>
-	/// <param name="flipX">X”½“](‰Šú’l:false)</param>
-	/// <param name="flipY">Y”½“](‰Šú’l:false)</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="sheetsNum">æšæ•°</param>
+	/// <param name="nowNum">ä½•æšç›®ã‹</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="scale">å¤§ãã•(åˆæœŸå€¤:{ 1.0f,1.0f })</param>
+	/// <param name="rotation">å›è»¢(åˆæœŸå€¤:0.0f)</param>
+	/// <param name="anchorpoint">ä¸­å¿ƒç‚¹(åˆæœŸå€¤:{ 0.5f,0.5f })</param>
+	/// <param name="flipX">Xåè»¢(åˆæœŸå€¤:false)</param>
+	/// <param name="flipY">Yåè»¢(åˆæœŸå€¤:false)</param>
 	void DrawAnimationSpriteY2D(myMath::Vector2 position, uint16_t sheetsNum, uint16_t& nowNum, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// c‰¡˜A”ÔƒXƒvƒ‰ƒCƒg•`‰æ(2D)
+	/// ç¸¦æ¨ªé€£ç•ªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»(2D)
 	/// </summary>
-	/// <param name="position">À•W</param>
-	/// <param name="sheetsNumX">‰¡‚Ì–‡”</param>
-	/// <param name="sheetsNumY">c‚Ì–‡”</param>
-	/// <param name="nowNum">‰½–‡–Ú‚©</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="scale">‘å‚«‚³(‰Šú’l:{ 1.0f,1.0f })</param>
-	/// <param name="rotation">‰ñ“](‰Šú’l:0.0f)</param>
-	/// <param name="anchorpoint">’†S“_(‰Šú’l:{ 0.5f,0.5f })</param>
-	/// <param name="flipX">X”½“](‰Šú’l:false)</param>
-	/// <param name="flipY">Y”½“](‰Šú’l:false)</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="sheetsNumX">æ¨ªã®æšæ•°</param>
+	/// <param name="sheetsNumY">ç¸¦ã®æšæ•°</param>
+	/// <param name="nowNum">ä½•æšç›®ã‹</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="scale">å¤§ãã•(åˆæœŸå€¤:{ 1.0f,1.0f })</param>
+	/// <param name="rotation">å›è»¢(åˆæœŸå€¤:0.0f)</param>
+	/// <param name="anchorpoint">ä¸­å¿ƒç‚¹(åˆæœŸå€¤:{ 0.5f,0.5f })</param>
+	/// <param name="flipX">Xåè»¢(åˆæœŸå€¤:false)</param>
+	/// <param name="flipY">Yåè»¢(åˆæœŸå€¤:false)</param>
 	void DrawAnimationSpriteXY2D(myMath::Vector2 position, uint16_t sheetsNumX, uint16_t sheetsNumY, uint16_t& nowNum, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	void DrawCircleGaugeSprite2D(myMath::Vector2 position, float angle = 0.0f, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// ƒuƒŒƒ“ƒhƒ‚[ƒh‚ÌƒZƒbƒg(2D)
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã®ã‚»ãƒƒãƒˆ(2D)
 	/// </summary>
-	/// <param name="mode">ƒ‚[ƒh</param>
+	/// <param name="mode">ãƒ¢ãƒ¼ãƒ‰</param>
 	void SetSprite2DBlendMode(const BlendMode& mode);
 
 private:
 
 	/// <summary>
-	/// ƒoƒbƒtƒ@‚Ì¶¬ˆ—
+	/// ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆå‡¦ç†
 	/// </summary>
 	void CreateBuff();
 
 	/// <summary>
-	/// s—ñŒvZ
+	/// è¡Œåˆ—è¨ˆç®—
 	/// </summary>
-	/// <param name="position">À•W</param>
-	/// <param name="scale">‘å‚«‚³</param>
-	/// <param name="rotation">Šp“x</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="scale">å¤§ãã•</param>
+	/// <param name="rotation">è§’åº¦</param>
 	void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
 };

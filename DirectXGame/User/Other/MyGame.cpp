@@ -9,10 +9,10 @@ void MyGame::Initialize()
 	YFramework::SetWindowData("AirBattle");
 	YFramework::SetWindowColor();
 
-	//Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
+	//åŸºåº•ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–å‡¦ç†
 	YFramework::Initialize();
 
-	//ƒ|ƒXƒgƒGƒtƒFƒNƒg‚Ì‰Šú‰»
+	//ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®åˆæœŸåŒ–
 	postEffect_ = std::make_unique<MultiTexturePostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
 
@@ -24,7 +24,7 @@ void MyGame::Initialize()
 
 	HitEffect::StaticInitialize();
 
-	//ƒV[ƒ“ƒ}ƒl[ƒWƒƒ[‚ÉÅ‰‚ÌƒV[ƒ“‚ğƒZƒbƒg
+	//ã‚·ãƒ¼ãƒ³ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«æœ€åˆã®ã‚·ãƒ¼ãƒ³ã‚’ã‚»ãƒƒãƒˆ
 	SceneManager::GetInstance()->ChangeScene("EngineOP");
 }
 
@@ -32,19 +32,19 @@ void MyGame::Destroy()
 {
 	SceneManager::GetInstance()->Destroy();
 
-	//Šî’êƒNƒ‰ƒX‚ÌI—¹ˆ—
+	//åŸºåº•ã‚¯ãƒ©ã‚¹ã®çµ‚äº†å‡¦ç†
 	YFramework::Destroy();
 }
 
 void MyGame::Update()
 {
-	//Šî’êƒNƒ‰ƒX‚ÌXVˆ—
+	//åŸºåº•ã‚¯ãƒ©ã‚¹ã®æ›´æ–°å‡¦ç†
 	YFramework::Update();
 
-	//ƒV[ƒ“ƒ`ƒFƒ“ƒWƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXVˆ—
+	//ã‚·ãƒ¼ãƒ³ãƒã‚§ãƒ³ã‚¸ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®æ›´æ–°å‡¦ç†
 	SceneChangeAnimation::GetInstance()->Update();
 
-	//ƒV[ƒ“ƒ}ƒl[ƒWƒƒ[‚ÌXVˆ—
+	//ã‚·ãƒ¼ãƒ³ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®æ›´æ–°å‡¦ç†
 	SceneManager::GetInstance()->Update();
 }
 

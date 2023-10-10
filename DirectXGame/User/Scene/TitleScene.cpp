@@ -28,13 +28,13 @@ void TitleScene::Initialize()
 	pressButtonTex_ = pressButton_->LoadTexture("Resources/pressAButton.png");
 	pressButton_->Sprite2DInitialize(pressButtonTex_);
 
-	//“V‹…
+	//å¤©çƒ
 	skyDome_ = std::make_unique<Model>();
 	skyDomeTex_ = skyDome_->CreateObjModel("Resources/skydome");
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
 
-	//í“¬‹@
+	//æˆ¦é—˜æ©Ÿ
 	player_ = std::make_unique<Model>();
 	playerTex_ = player_->CreateObjModel("Resources/F-35E");
 	player_->SetModel(playerTex_);
@@ -42,11 +42,11 @@ void TitleScene::Initialize()
 	playerTrans_.parent = &skyDomeTrans_;
 	playerTrans_.rotation.y = myMath::AX_PIF / 2;
 
-	//ƒp[ƒeƒBƒNƒ‹‚Ì‰Šú‰»
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®åˆæœŸåŒ–
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
-	//ƒGƒ“ƒWƒ“‚ÌÀ•W‚É‡‚í‚¹‚é‚½‚ßAƒ‚ƒfƒ‹‚Ì’†SÀ•W‚©‚çˆÊ’u‚ğ‚¸‚ç‚¹‚é‚æ‚¤‚Éq‚ğì¬
+	//ã‚¨ãƒ³ã‚¸ãƒ³ã®åº§æ¨™ã«åˆã‚ã›ã‚‹ãŸã‚ã€ãƒ¢ãƒ‡ãƒ«ã®ä¸­å¿ƒåº§æ¨™ã‹ã‚‰ä½ç½®ã‚’ãšã‚‰ã›ã‚‹ã‚ˆã†ã«å­ã‚’ä½œæˆ
 	smokeTrans_.parent = &playerTrans_;
 
 	animationBoxTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
@@ -96,7 +96,7 @@ void TitleScene::Update()
 	camera_->SetTarget(skyDomeTrans_.translation);
 	camera_->Update(true);
 
-	skyDomeTrans_.TransUpdate(camera_.get());//“V‹…
+	skyDomeTrans_.TransUpdate(camera_.get());//å¤©çƒ
 	PlayerUpdate();
 
 	time_++;
@@ -131,7 +131,7 @@ void TitleScene::Update()
 		cloudTrans_[i].TransUpdate(camera_.get());
 	}
 
-	//ƒ|ƒCƒ“ƒgƒ‰ƒCƒg
+	//ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆ
 	/*lightManager_->SetPointLightActive(0, true);
 	lightManager_->SetPointLightPos(0, { 0.0f,0.0f ,0.0f });
 	lightManager_->SetPointLightColor(0, { 1.0f,1.0f,1.0f });
@@ -165,13 +165,13 @@ void TitleScene::Draw()
 
 void TitleScene::SmokeUpdate()
 {
-	//ƒ‚ƒfƒ‹‚Ì’†SÀ•W‚©‚çˆÊ’u‚ğ‚¸‚ç‚·
+	//ãƒ¢ãƒ‡ãƒ«ã®ä¸­å¿ƒåº§æ¨™ã‹ã‚‰ä½ç½®ã‚’ãšã‚‰ã™
 	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
-	//q‚ÌXVˆ—
+	//å­ã®æ›´æ–°å‡¦ç†
 	smokeTrans_.TransUpdate(camera_.get());
-	//ƒp[ƒeƒBƒNƒ‹‚ğ–ˆƒtƒŒ[ƒ€ì¬
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ä½œæˆ
 	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
-	//ƒp[ƒeƒBƒNƒ‹‚ÌXV
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æ›´æ–°
 	smokeEmitter_->Update(camera_.get());
 }
 
@@ -187,7 +187,7 @@ void TitleScene::PlayerUpdate()
 	}
 	playerTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(time_, 0.5f, 240.0f);
 
-	playerTrans_.TransUpdate(camera_.get());//í“¬‹@
+	playerTrans_.TransUpdate(camera_.get());//æˆ¦é—˜æ©Ÿ
 
 	SmokeUpdate();
 }

@@ -12,11 +12,11 @@ void Player::Initialize()
 {
 	input_ = InputManager::GetInstance();
 
-	//ƒŒƒeƒBƒNƒ‹‚Ì‰Šú‰»
+	//ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã®åˆæœŸåŒ–
 	reticle_ = std::make_unique<Reticle>();
 	reticle_->Initialize();
 
-	//ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åˆæœŸåŒ–
 	player_ = std::make_unique<Model>();
 	playerTex_ = player_->CreateObjModel("Resources/F-35E");
 	player_->SetModel(playerTex_);
@@ -25,53 +25,53 @@ void Player::Initialize()
 	playerTrans_.scale = { 0.5f,0.5f,0.5f };
 	cameraTrans_.Initialize();
 
-	//HPƒo[‚Ì‰Šú‰»
+	//HPãƒãƒ¼ã®åˆæœŸåŒ–
 	hpBar_ = std::make_unique<HPBar>();
 	hpBar_->Initialize(maxHp_, { 100.0f,100.0f });
 
-	//ƒp[ƒeƒBƒNƒ‹‚Ì‰Šú‰»
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®åˆæœŸåŒ–
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
 
-	//€–S‰‰o‚Ì‰Šú‰»
+	//æ­»äº¡æ¼”å‡ºã®åˆæœŸåŒ–
 	deathAnimation_ = std::make_unique<PlayerDeathAnimation>();
 	deathAnimation_->Initialize();
 
 	collisionData_.radius = 1.0f;
 
-	//ƒ}ƒl[ƒWƒƒ[‚É“–‚½‚è”»’è‚ğ“n‚·
+	//ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«å½“ãŸã‚Šåˆ¤å®šã‚’æ¸¡ã™
 	ColliderManager::GetInstance()->AddCollision(this);
 }
 
 void Player::Update()
 {
-	//ƒJƒƒ‰‚ğe‚É‚·‚éˆ×‚És—ñ‚ğTransform‚ÌmatWorld‚É“o˜^
+	//ã‚«ãƒ¡ãƒ©ã‚’è¦ªã«ã™ã‚‹ç‚ºã«è¡Œåˆ—ã‚’Transformã®matWorldã«ç™»éŒ²
 	cameraTrans_.matWorld = camera_->GetMatView();
-	//ƒŒƒeƒBƒNƒ‹‚Ìe‚ÉƒJƒƒ‰‚ğİ’è
+	//ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã®è¦ªã«ã‚«ãƒ¡ãƒ©ã‚’è¨­å®š
 	playerTrans_.parent = &cameraTrans_;
 
-	//HPƒo[‚ÌXV
+	//HPãƒãƒ¼ã®æ›´æ–°
 	hpBar_->Update(hp_);
 
 	if (hp_ <= 0)
 	{
-		//€–S‰‰o‚ÌXVˆ—
+		//æ­»äº¡æ¼”å‡ºã®æ›´æ–°å‡¦ç†
 		deathAnimation_->Update(playerTrans_.parentToTranslation);
 	}
 	else
 	{
-		//ƒJƒƒ‰‚ÌƒZƒbƒg
+		//ã‚«ãƒ¡ãƒ©ã®ã‚»ãƒƒãƒˆ
 		reticle_->SetCamera(camera_);
-		//ƒŒƒeƒBƒNƒ‹‚ÌXVˆ—
+		//ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã®æ›´æ–°å‡¦ç†
 		reticle_->Update();
-		//©‹@‚ÌˆÚ“®ˆ—
+		//è‡ªæ©Ÿã®ç§»å‹•å‡¦ç†
 		Move();
 		if (isBulletAttack_ == false)
 		{
-			//’e‚ÌXVˆ—
+			//å¼¾ã®æ›´æ–°å‡¦ç†
 			NormalBulletAttack();
-			//ƒƒbƒNƒIƒ“UŒ‚
+			//ãƒ­ãƒƒã‚¯ã‚ªãƒ³æ”»æ’ƒ
 			LockOnAttack();
 		}
 		else
@@ -85,29 +85,29 @@ void Player::Update()
 		}
 	}
 
-	//Transform‚ÌXVˆ—
+	//Transformã®æ›´æ–°å‡¦ç†
 	playerTrans_.TransUpdate(camera_);
 
 	collisionData_.center = playerTrans_.parentToTranslation;
 
-	//ƒ[ƒJƒ‹‚Ì³–ÊƒxƒNƒgƒ‹
+	//ãƒ­ãƒ¼ã‚«ãƒ«ã®æ­£é¢ãƒ™ã‚¯ãƒˆãƒ«
 	directionVector_ = reticle_->GetTransform().translation - playerTrans_.translation;
-	//³‹K‰»
+	//æ­£è¦åŒ–
 	directionVector_.normalization();
 
-	//ƒ[ƒ‹ƒh‚Ì³–ÊƒxƒNƒgƒ‹
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰ã®æ­£é¢ãƒ™ã‚¯ãƒˆãƒ«
 	parentToDirectionVector_ = reticle_->GetTransform().parentToTranslation - playerTrans_.parentToTranslation;
-	//³‹K‰»
+	//æ­£è¦åŒ–
 	parentToDirectionVector_.normalization();
 
-	//©‹@‚Ì‰ñ“]ˆ—
+	//è‡ªæ©Ÿã®å›è»¢å‡¦ç†
 	Rotation(camera_);
 
-	//ƒGƒ“ƒWƒ“‚Ì‰Œ‚ÌXVˆ—
+	//ã‚¨ãƒ³ã‚¸ãƒ³ã®ç…™ã®æ›´æ–°å‡¦ç†
 	SmokeUpdate(camera_);
-	//€–S‰‰o‚Ìƒp[ƒeƒBƒNƒ‹‚ÌXVˆ—
+	//æ­»äº¡æ¼”å‡ºã®ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æ›´æ–°å‡¦ç†
 	deathAnimation_->ParticleUpdate(camera_);
-	//€–S‰‰o‚Å€–S‚³‚¹‚½‚Æ‚«‚Ìƒtƒ‰ƒO‚Ì’l‚ğ–á‚¤
+	//æ­»äº¡æ¼”å‡ºã§æ­»äº¡ã•ã›ãŸã¨ãã®ãƒ•ãƒ©ã‚°ã®å€¤ã‚’è²°ã†
 	deathFlag_ = deathAnimation_->GetDeathFlag();
 
 #ifdef _DEBUG
@@ -119,17 +119,17 @@ void Player::Draw()
 {
 	if (hp_ > 0)
 	{
-		//ƒŒƒeƒBƒNƒ‹‚Ì•`‰æ
+		//ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã®æç”»
 		reticle_->Draw();
-		//ƒvƒŒƒCƒ„[‚Ìƒ‚ƒfƒ‹•`‰æ
+		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ‡ãƒ«æç”»
 		player_->DrawModel(&playerTrans_);
-		//‹@‘Ì‚ÌƒGƒ“ƒWƒ“‚©‚ç‰Î‚ªo‚éƒp[ƒeƒBƒNƒ‹‚Ì•`‰æ
+		//æ©Ÿä½“ã®ã‚¨ãƒ³ã‚¸ãƒ³ã‹ã‚‰ç«ãŒå‡ºã‚‹ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æç”»
 		smokeEmitter_->Draw();
-		//HPƒo[‚Ì•`‰æ
+		//HPãƒãƒ¼ã®æç”»
 		hpBar_->Draw();
 	}
 
-	//€–S‰‰o‚Ì•`‰æ
+	//æ­»äº¡æ¼”å‡ºã®æç”»
 	deathAnimation_->Draw();
 }
 
@@ -145,9 +145,9 @@ const CollisionData& Player::GetCollisionData()
 
 void Player::OnCollision()
 {
-	hp_--;//hpŒ¸­
-	hp_ = max(hp_, 0);//0‚ğ‰º‰ñ‚ç‚È‚¢ˆ—
-	damageFlag_ = true;//ƒ_ƒ[ƒWƒGƒtƒFƒNƒg‚ğ•\¦
+	hp_--;//hpæ¸›å°‘
+	hp_ = max(hp_, 0);//0ã‚’ä¸‹å›ã‚‰ãªã„å‡¦ç†
+	damageFlag_ = true;//ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’è¡¨ç¤º
 }
 
 const bool Player::GetIsDead()
@@ -177,10 +177,10 @@ void Player::Reset()
 {
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,10.0f };
 	hp_ = 10;
-	//ƒŒƒeƒBƒNƒ‹‚ÌƒŠƒZƒbƒg
+	//ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã®ãƒªã‚»ãƒƒãƒˆ
 	reticle_->Reset();
 	lockOnAttackFlag_ = false;
-	//ƒ}ƒl[ƒWƒƒ[‚É“–‚½‚è”»’è‚ğ“n‚·
+	//ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«å½“ãŸã‚Šåˆ¤å®šã‚’æ¸¡ã™
 	ColliderManager::GetInstance()->AddCollision(this);
 }
 
@@ -226,22 +226,22 @@ const bool Player::GetIsBulletAttack()
 
 void Player::Move()
 {
-	//æ‚É•âŠÔæ‚ÌÀ•W‚ğ’è‹`‚·‚é
+	//å…ˆã«è£œé–“å…ˆã®åº§æ¨™ã‚’å®šç¾©ã™ã‚‹
 	float reticleX = reticle_->GetTransform().translation.x / 6;
 	float reticleY = reticle_->GetTransform().translation.y / 6;
-	//‚»‚Ì‚Ü‚ÜˆÚ“®‚³‚¹‚é‚Æ“®‚«‚ªd‚¢‚Ì‚Å•âŠ®‚·‚é
+	//ãã®ã¾ã¾ç§»å‹•ã•ã›ã‚‹ã¨å‹•ããŒç¡¬ã„ã®ã§è£œå®Œã™ã‚‹
 	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
 	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
 }
 
 void Player::Rotation(Camera* camera)
 {
-	//ƒŒƒeƒBƒNƒ‹‚Ì•ûŒü‚ÉŒü‚­‚æ‚¤‚É‰ñ“]
+	//ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã®æ–¹å‘ã«å‘ãã‚ˆã†ã«å›è»¢
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
 	float angleZ = -(reticle_->GetTransform().translation.x / 6 - playerTrans_.translation.x) / 5.0f;
-	//ƒ‚ƒfƒ‹‚ÌZ²‰ñ“]
+	//ãƒ¢ãƒ‡ãƒ«ã®Zè»¸å›è»¢
 	PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 
 	myMath::Vector3 cameraFrontVec = camera->GetTarget() - camera->GetEye();
@@ -253,7 +253,7 @@ void Player::Rotation(Camera* camera)
 	};
 	camera->SetUp(cameraUp);
 
-	//ƒvƒŒƒCƒ„[‚Ì‰¡Œü‚«‚Ì‰ñ“]‚ğƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·‚µAŒã‚ÅƒJƒƒ‰‚É‘«‚¹‚é‚æ‚¤‚É•Ï”‚ÉŠi”[
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ¨ªå‘ãã®å›è»¢ã‚’ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›ã—ã€å¾Œã§ã‚«ãƒ¡ãƒ©ã«è¶³ã›ã‚‹ã‚ˆã†ã«å¤‰æ•°ã«æ ¼ç´
 	targetPos_ = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
 }
 
@@ -263,7 +263,7 @@ void Player::NormalBulletAttack()
 	{
 		if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 		{
-			//’e‚Ìì¬
+			//å¼¾ã®ä½œæˆ
 			bulletManager_->CreateNormalBullet(playerTrans_.parentToTranslation, parentToDirectionVector_, BulletOwner::Player);
 		}
 	}
@@ -271,15 +271,16 @@ void Player::NormalBulletAttack()
 
 void Player::SmokeUpdate(Camera* camera)
 {
-	//ƒGƒ“ƒWƒ“‚ÌÀ•W‚É‡‚í‚¹‚é‚½‚ßAƒ‚ƒfƒ‹‚Ì’†SÀ•W‚©‚çˆÊ’u‚ğ‚¸‚ç‚¹‚é‚æ‚¤‚Éq‚ğì¬
+	//ã‚¨ãƒ³ã‚¸ãƒ³ã®åº§æ¨™ã«åˆã‚ã›ã‚‹ãŸã‚ã€ãƒ¢ãƒ‡ãƒ«ã®ä¸­å¿ƒåº§æ¨™ã‹ã‚‰ä½ç½®ã‚’ãšã‚‰ã›ã‚‹ã‚ˆã†ã«å­ã‚’ä½œæˆ
 	smokeTrans_.parent = &playerTrans_;
-	//ƒ‚ƒfƒ‹‚Ì’†SÀ•W‚©‚çˆÊ’u‚ğ‚¸‚ç‚·
+	//ãƒ¢ãƒ‡ãƒ«ã®ä¸­å¿ƒåº§æ¨™ã‹ã‚‰ä½ç½®ã‚’ãšã‚‰ã™
 	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
-	//q‚ÌXVˆ—
+	//å­ã®æ›´æ–°å‡¦ç†
 	smokeTrans_.TransUpdate(camera);
-	//ƒp[ƒeƒBƒNƒ‹‚ğ–ˆƒtƒŒ[ƒ€ì¬
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ä½œæˆ
 	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
-	//ƒp[ƒeƒBƒNƒ‹‚ÌXV
+	smokeEmitter_->SetSize(0.5f);
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æ›´æ–°
 	smokeEmitter_->Update(camera);
 }
 
@@ -304,20 +305,20 @@ void Player::LockOnAttack()
 		{
 			for (auto& lockOnEnemy : ColliderManager::GetInstance()->GetLockOnEnemy())
 			{
-				//§Œä“_‚ğİ’è
+				//åˆ¶å¾¡ç‚¹ã‚’è¨­å®š
 				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)),
 				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) ,
 				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(playerTrans_.parentToTranslation.x + 1.0f,playerTrans_.parentToTranslation.x + 2.0f)) };
 
-				//’e‚ğ¶¬
+				//å¼¾ã‚’ç”Ÿæˆ
 				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, lockOnEnemy, controlPoint);
 			}
 
-			//ƒƒbƒNƒIƒ“UŒ‚‚ğ‚µ‚½‚çƒI[ƒo[ƒq[ƒg‚·‚é‚æ‚¤‚É
+			//ãƒ­ãƒƒã‚¯ã‚ªãƒ³æ”»æ’ƒã‚’ã—ãŸã‚‰ã‚ªãƒ¼ãƒãƒ¼ãƒ’ãƒ¼ãƒˆã™ã‚‹ã‚ˆã†ã«
 			if (ColliderManager::GetInstance()->GetLockOnEnemy().size() > 0)
 			{
 				isBulletAttack_ = true;
-				//ƒƒbƒNƒIƒ““Glist‚ğƒŠƒZƒbƒg
+				//ãƒ­ãƒƒã‚¯ã‚ªãƒ³æ•µlistã‚’ãƒªã‚»ãƒƒãƒˆ
 				ColliderManager::GetInstance()->ResetLockOnEnemy();
 			}
 			lockOnAttackFlag_ = false;

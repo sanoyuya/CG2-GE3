@@ -29,7 +29,7 @@ void BulletManager::Draw()
 
 void BulletManager::CreateNormalBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner)
 {
-	//’e‚ğ¶¬‚µA‰Šú‰»
+	//å¼¾ã‚’ç”Ÿæˆã—ã€åˆæœŸåŒ–
 	std::unique_ptr<BulletBase> newBullet = std::make_unique<NormalBullet>();
 	newBullet->SetPos(position);
 	newBullet->SetDirectionVector(frontVec);
@@ -44,21 +44,21 @@ void BulletManager::CreateNormalBullet(myMath::Vector3 position, myMath::Vector3
 	}
 	newBullet->Initialize();
 
-	//’e‚ğ“o˜^‚·‚é
+	//å¼¾ã‚’ç™»éŒ²ã™ã‚‹
 	ColliderManager::GetInstance()->AddCollision(newBullet.get());
 	bullets_.push_back(std::move(newBullet));
 }
 
 void BulletManager::CreateLockOnBullet(myMath::Vector3 startPos, GameObject* lockOnEnemy, myMath::Vector3 controlPos)
 {
-	//’e‚ğ¶¬‚µA‰Šú‰»
+	//å¼¾ã‚’ç”Ÿæˆã—ã€åˆæœŸåŒ–
 	std::unique_ptr<BulletBase> newBullet = std::make_unique<LockOnBullet>();
 	newBullet->SetPos(startPos);
 	newBullet->SetControlPos(controlPos);
 	newBullet->SetTargetPos(lockOnEnemy);
 	newBullet->Initialize();
 
-	//’e‚ğ“o˜^‚·‚é
+	//å¼¾ã‚’ç™»éŒ²ã™ã‚‹
 	ColliderManager::GetInstance()->AddCollision(newBullet.get());
 	bullets_.push_back(std::move(newBullet));
 

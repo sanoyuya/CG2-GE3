@@ -2,36 +2,36 @@
 
 namespace myMath
 {
-	//2ŸŒ³ƒxƒNƒgƒ‹
+	//2æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«
 	class Vector2
 	{
 	public:
-		float x;//x¬•ª
-		float y;//y¬•ª
+		float x;//xæˆåˆ†
+		float y;//yæˆåˆ†
 
 	public:
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		Vector2();//ƒ[ƒƒxƒNƒgƒ‹‚Æ‚µ‚Ä¶¬
-		Vector2(float x, float y);//x¬•ªAy¬•ª‚ğw’è‚µ‚Ä‚Ì¶¬
+		// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		Vector2();//ã‚¼ãƒ­ãƒ™ã‚¯ãƒˆãƒ«ã¨ã—ã¦ç”Ÿæˆ
+		Vector2(float x, float y);//xæˆåˆ†ã€yæˆåˆ†ã‚’æŒ‡å®šã—ã¦ã®ç”Ÿæˆ
 
-		//ƒƒ“ƒoŠÖ”
-		float length()const;//ƒmƒ‹ƒ€‚ğ‹‚ß‚é
-		Vector2& normalization();//³‹K‰»‚·‚é
-		float dot(const Vector2& v)const;//“àÏ‚ğ‹‚ß‚é
-		float cross(const Vector2& v)const;//ŠOÏ‚ğ‹‚ß‚é
+		//ãƒ¡ãƒ³ãƒé–¢æ•°
+		float length()const;//ãƒãƒ«ãƒ ã‚’æ±‚ã‚ã‚‹
+		Vector2& normalization();//æ­£è¦åŒ–ã™ã‚‹
+		float dot(const Vector2& v)const;//å†…ç©ã‚’æ±‚ã‚ã‚‹
+		float cross(const Vector2& v)const;//å¤–ç©ã‚’æ±‚ã‚ã‚‹
 
-		//’P€‰‰ZqƒI[ƒo[ƒ[ƒh
+		//å˜é …æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 		Vector2 operator+()const;
 		Vector2 operator-()const;
 
-		//‘ã“ü‰‰ZqƒI[ƒo[ƒ[ƒh
+		//ä»£å…¥æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 		Vector2& operator+=(const Vector2& v);
 		Vector2& operator-=(const Vector2& v);
 		Vector2& operator*=(float s);
 		Vector2& operator/=(float s);
 	};
 
-	//2€‰‰Zq
+	//2é …æ¼”ç®—å­
 	const Vector2 operator+(const Vector2& v1, const Vector2& v2);
 	const Vector2 operator-(const Vector2& v1, const Vector2& v2);
 	const Vector2 operator*(const Vector2& v, float s);

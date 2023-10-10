@@ -10,9 +10,9 @@ namespace myMath
 		float m[4][4];
 
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
-		/// <returns>’PˆÊs—ñ‚Æ‚µ‚Ä‰Šú‰»‚³‚ê‚Ü‚·</returns>
+		/// <returns>å˜ä½è¡Œåˆ—ã¨ã—ã¦åˆæœŸåŒ–ã•ã‚Œã¾ã™</returns>
 		Matrix4();
 
 		Matrix4(float m00, float m01, float m02, float m03,
@@ -21,106 +21,106 @@ namespace myMath
 			float m30, float m31, float m32, float m33);
 
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
 		Matrix4(const DirectX::XMMATRIX& Matrix4);
 
 		/// <summary>
-		/// Šg‘ås—ñ‚ğì¬
+		/// æ‹¡å¤§è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="scale"> : Šg‘å—¦</param>
+		/// <param name="scale"> : æ‹¡å¤§ç‡</param>
 		void MakeScaling(const Vector3& scale);
 
 		/// <summary>
-		/// Šg‘ås—ñ‚ğì¬
+		/// æ‹¡å¤§è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="x,y,z"> : Šg‘å—¦</param>
+		/// <param name="x,y,z"> : æ‹¡å¤§ç‡</param>
 		void MakeScaling(float x, float y, float z);
 
 		/// <summary>
-		/// •½sˆÚ“®s—ñ‚ğì¬
+		/// å¹³è¡Œç§»å‹•è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="trans"> : •½sˆÚ“®</param>
+		/// <param name="trans"> : å¹³è¡Œç§»å‹•</param>
 		void MakeTranslation(const Vector3& trans);
 
 		/// <summary>
-		/// •½sˆÚ“®s—ñ‚ğì¬
+		/// å¹³è¡Œç§»å‹•è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="x,y,z"> : •½sˆÚ“®</param>
+		/// <param name="x,y,z"> : å¹³è¡Œç§»å‹•</param>
 		void MakeTranslation(float x, float y, float z);
 
 		/// <summary>
-		/// Y²ü‚è‚Ì‰ñ“]s—ñ‚ğì¬
+		/// Yè»¸å‘¨ã‚Šã®å›è»¢è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="angle"> : ‰ñ“]Šp“x(’PˆÊFƒ‰ƒWƒAƒ“)</param>
+		/// <param name="angle"> : å›è»¢è§’åº¦(å˜ä½ï¼šãƒ©ã‚¸ã‚¢ãƒ³)</param>
 		void MakeRotationY(float angle);
 
 		/// <summary>
-		/// Z²ü‚è‚Ì‰ñ“]s—ñ‚ğì¬
+		/// Zè»¸å‘¨ã‚Šã®å›è»¢è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="angle"> : ‰ñ“]Šp“x(’PˆÊFƒ‰ƒWƒAƒ“)</param>
+		/// <param name="angle"> : å›è»¢è§’åº¦(å˜ä½ï¼šãƒ©ã‚¸ã‚¢ãƒ³)</param>
 		void MakeRotationZ(float angle);
 
 		/// <summary>
-		/// X²ü‚è‚Ì‰ñ“]s—ñ‚ğì¬
+		/// Xè»¸å‘¨ã‚Šã®å›è»¢è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="angle"> : ‰ñ“]Šp“x(’PˆÊFƒ‰ƒWƒAƒ“)</param>
+		/// <param name="angle"> : å›è»¢è§’åº¦(å˜ä½ï¼šãƒ©ã‚¸ã‚¢ãƒ³)</param>
 		void MakeRotationX(float angle);
 
 		/// <summary>
-		/// X²ü‚è‚Ì‰ñ“]s—ñ‚ğì¬
+		/// Xè»¸å‘¨ã‚Šã®å›è»¢è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="Rotat"> : ‰ñ“]Šp“x(’PˆÊFƒ‰ƒWƒAƒ“)</param>
+		/// <param name="Rotat"> : å›è»¢è§’åº¦(å˜ä½ï¼šãƒ©ã‚¸ã‚¢ãƒ³)</param>
 		void MakeRotation(const Vector3& Rotat);
 
 		/// <summary>
-		/// X²ü‚è‚Ì‰ñ“]s—ñ‚ğì¬
+		/// Xè»¸å‘¨ã‚Šã®å›è»¢è¡Œåˆ—ã‚’ä½œæˆ
 		/// </summary>
-		/// <param name="x,y,z"> : ‰ñ“]Šp“x(’PˆÊFƒ‰ƒWƒAƒ“)</param>
+		/// <param name="x,y,z"> : å›è»¢è§’åº¦(å˜ä½ï¼šãƒ©ã‚¸ã‚¢ãƒ³)</param>
 		void MakeRotation(float x, float y, float z);
 
 		/// <summary>
-		/// DirectX::XMMATRIXŒ^‚Ö‚ÌˆÃ–Ù‚ÌŒ^•ÏŠ·B
+		/// DirectX::XMMATRIXå‹ã¸ã®æš—é»™ã®å‹å¤‰æ›ã€‚
 		/// </summary>
 		operator DirectX::XMMATRIX() const;
 
 		/// <summary>
-		/// ‘ã“ü‰‰Zq
+		/// ä»£å…¥æ¼”ç®—å­
 		/// </summary>
 		Matrix4& operator=(const Matrix4& _m);
 
 		/// <summary>
-		/// ‰ÁZ
+		/// åŠ ç®—
 		/// </summary>
 		Matrix4& operator+=(const Matrix4& mat);
 
 		/// <summary>
-		/// Œ¸Z
+		/// æ¸›ç®—
 		/// </summary>
 		Matrix4& operator-=(const Matrix4& mat);
 
 		/// <summary>
-		/// æZ
+		/// ä¹—ç®—
 		/// </summary>
 		Matrix4& operator*=(const Matrix4& mat);
 
 		/// <summary>
-		/// ‰ÁZ
+		/// åŠ ç®—
 		/// </summary>
 		Matrix4 operator+(const Matrix4& mat) const;
 
 		/// <summary>
-		/// Œ¸Z
+		/// æ¸›ç®—
 		/// </summary>
 		Matrix4 operator-(const Matrix4& mat) const;
 
 		/// <summary>
-		/// æZ
+		/// ä¹—ç®—
 		/// </summary>
 		Matrix4 operator*(const Matrix4& mat) const;
 
 		/// <summary>
-		/// ƒxƒNƒgƒ‹‚Æs—ñ‚ÌŠ|‚¯Z
+		/// ãƒ™ã‚¯ãƒˆãƒ«ã¨è¡Œåˆ—ã®æ›ã‘ç®—
 		/// </summary>
 		/// <param name="mat"></param>
 		/// <param name="vec"></param>
@@ -129,14 +129,14 @@ namespace myMath
 	};
 
 	/// <summary>
-	/// ’PˆÊs—ñ
+	/// å˜ä½è¡Œåˆ—
 	/// </summary>
 	Matrix4 MakeIdentity();
 
 	/// <summary>
-	/// ‹ts—ñ‚ğ‹‚ß‚é
+	/// é€†è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	/// </summary>
-	/// <param name="mat">‹ts—ñ‚É‚µ‚½‚¢s—ñ</param>
-	/// <returns>‹ts—ñor’PˆÊs—ñ</returns>
+	/// <param name="mat">é€†è¡Œåˆ—ã«ã—ãŸã„è¡Œåˆ—</param>
+	/// <returns>é€†è¡Œåˆ—orå˜ä½è¡Œåˆ—</returns>
 	Matrix4 MakeInverse(Matrix4& mat);
 }

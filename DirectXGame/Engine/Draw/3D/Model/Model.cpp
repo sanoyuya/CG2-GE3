@@ -13,9 +13,9 @@ std::vector<std::string>Model::sFilePaths_;
 std::unordered_map<std::string, std::unique_ptr<ModelData>> Model::sModelDatas_;
 LightManager* Model::sLightManager_ = nullptr;
 uint32_t Model::sModelCount_;
-std::array <Blob, 6> Model::sBlob_;//ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+std::array <Blob, 6> Model::sBlob_;//ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 std::array <std::array<PipelineSet, 6>, 6> Model::sPip_;
-ShaderMode Model::sShaderMode_ = ShaderMode::Basic;//•W€
+ShaderMode Model::sShaderMode_ = ShaderMode::Basic;//æ¨™æº–
 
 void Model::StaticInitialize()
 {
@@ -26,12 +26,12 @@ void Model::StaticInitialize()
 
 	for (int i = 0; i < sPip_.size(); i++)
 	{
-		Pipeline::CreateBasicModelPipline(sBlob_[0], (BlendMode)i, sDevice_.Get(), sPip_[0]);//BasicƒVƒF[ƒ_[—p
-		Pipeline::CreatePhongModelPipline(sBlob_[1], (BlendMode)i, sDevice_.Get(), sPip_[1]);//PhongƒVƒF[ƒ_[—p
-		Pipeline::CreatePhongModelPipline(sBlob_[2], (BlendMode)i, sDevice_.Get(), sPip_[2]);//ToonƒVƒF[ƒ_[—p
-		Pipeline::CreatePhongModelPipline(sBlob_[3], (BlendMode)i, sDevice_.Get(), sPip_[3]);//ƒŠƒ€ƒ‰ƒCƒg—p
-		Pipeline::CreateMultiPhongModelPipline(sBlob_[4], (BlendMode)i, sDevice_.Get(), sPip_[4]);//ƒ}ƒ‹ƒ`ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg—p
-		Pipeline::CreateBasicModelPipline(sBlob_[5], (BlendMode)i, sDevice_.Get(), sPip_[5]);//’PFƒVƒF[ƒ_[—p
+		Pipeline::CreateBasicModelPipline(sBlob_[0], (BlendMode)i, sDevice_.Get(), sPip_[0]);//Basicã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
+		Pipeline::CreatePhongModelPipline(sBlob_[1], (BlendMode)i, sDevice_.Get(), sPip_[1]);//Phongã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
+		Pipeline::CreatePhongModelPipline(sBlob_[2], (BlendMode)i, sDevice_.Get(), sPip_[2]);//Toonã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
+		Pipeline::CreatePhongModelPipline(sBlob_[3], (BlendMode)i, sDevice_.Get(), sPip_[3]);//ãƒªãƒ ãƒ©ã‚¤ãƒˆç”¨
+		Pipeline::CreateMultiPhongModelPipline(sBlob_[4], (BlendMode)i, sDevice_.Get(), sPip_[4]);//ãƒãƒ«ãƒãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆç”¨
+		Pipeline::CreateBasicModelPipline(sBlob_[5], (BlendMode)i, sDevice_.Get(), sPip_[5]);//å˜è‰²ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 	}
 
 	sFilePaths_.resize(sMaxModel_);
@@ -51,59 +51,59 @@ void Model::StaticDestory()
 
 void Model::LoadShader()
 {
-#pragma region BasicƒVƒF[ƒ_[—p
+#pragma region Basicã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 
-	//’¸“_ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[0].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Basic/ModelBasicVS.hlsl", "main", "vs_5_0", sBlob_[0].vs.Get());
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[0].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Basic/ModelBasicPS.hlsl", "main", "ps_5_0", sBlob_[0].ps.Get());
 
-#pragma endregion BasicƒVƒF[ƒ_[—p
+#pragma endregion Basicã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 
-#pragma region PhongƒVƒF[ƒ_[—p
+#pragma region Phongã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 
-	//’¸“_ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[1].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/PhongVS.hlsl", "main", "vs_5_0", sBlob_[1].vs.Get());
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[1].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/PhongPS.hlsl", "main", "ps_5_0", sBlob_[1].ps.Get());
 
-#pragma endregion PhongƒVƒF[ƒ_[—p
+#pragma endregion Phongã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 
-#pragma region ToonƒVƒF[ƒ_[—p
+#pragma region Toonã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 
-	//’¸“_ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[2].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Toon/ToonVS.hlsl", "main", "vs_5_0", sBlob_[2].vs.Get());
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[2].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Toon/ToonPS.hlsl", "main", "ps_5_0", sBlob_[2].ps.Get());
 
-#pragma endregion ToonƒVƒF[ƒ_[—p
+#pragma endregion Toonã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 
-#pragma region ƒŠƒ€ƒ‰ƒCƒg—p
+#pragma region ãƒªãƒ ãƒ©ã‚¤ãƒˆç”¨
 
-	//’¸“_ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[3].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/RimLight/RimLightVS.hlsl", "main", "vs_5_0", sBlob_[3].vs.Get());
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[3].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/RimLight/RimLightPS.hlsl", "main", "ps_5_0", sBlob_[3].ps.Get());
 
-#pragma endregion ƒŠƒ€ƒ‰ƒCƒg—p
+#pragma endregion ãƒªãƒ ãƒ©ã‚¤ãƒˆç”¨
 
-#pragma region ƒ}ƒ‹ƒ`ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg—p
+#pragma region ãƒãƒ«ãƒãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆç”¨
 
-	//’¸“_ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[4].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/PhongVS.hlsl", "main", "vs_5_0", sBlob_[4].vs.Get());
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[4].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Phong/MultiPhongPS.hlsl", "main", "ps_5_0", sBlob_[4].ps.Get());
 
-#pragma endregion ƒ}ƒ‹ƒ`ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg—p
+#pragma endregion ãƒãƒ«ãƒãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆç”¨
 
-#pragma region BasicƒVƒF[ƒ_[—p
+#pragma region Basicã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 
-	//’¸“_ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[5].vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Basic/ModelBasicVS.hlsl", "main", "vs_5_0", sBlob_[5].vs.Get());
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_[5].ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Model/Basic/SimpleColorPS.hlsl", "main", "ps_5_0", sBlob_[5].ps.Get());
 
-#pragma endregion BasicƒVƒF[ƒ_[—p
+#pragma endregion Basicã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 }
 
 void Model::PiplineSet(BlendMode bMode, ShaderMode sMode)
@@ -310,7 +310,7 @@ uint32_t Model::CreateObjModel(const std::string& filePath, bool smoothing, bool
 
 	path += smoothing ? " : true" : " : false";
 
-	//ˆê‰ñ“Ç‚İ‚ñ‚¾‚±‚Æ‚ª‚ ‚éƒtƒ@ƒCƒ‹‚Í‚»‚Ì‚Ü‚Ü•Ô‚·
+	//ä¸€å›èª­ã¿è¾¼ã‚“ã ã“ã¨ãŒã‚ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã¯ãã®ã¾ã¾è¿”ã™
 	auto itr = find_if(sModelDatas_.begin(), sModelDatas_.end(), [&](std::pair<const std::string, std::unique_ptr<ModelData, std::default_delete<ModelData>>>& p)
 		{
 			return p.second->filePath == path;
@@ -349,7 +349,7 @@ uint32_t Model::CreateAssimpModel(const std::string& filePath)
 {
 	std::string path = filePath;
 
-	//ˆê‰ñ“Ç‚İ‚ñ‚¾‚±‚Æ‚ª‚ ‚éƒtƒ@ƒCƒ‹‚Í‚»‚Ì‚Ü‚Ü•Ô‚·
+	//ä¸€å›èª­ã¿è¾¼ã‚“ã ã“ã¨ãŒã‚ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã¯ãã®ã¾ã¾è¿”ã™
 	auto itr = find_if(sModelDatas_.begin(), sModelDatas_.end(), [&](std::pair<const std::string, std::unique_ptr<ModelData, std::default_delete<ModelData>>>& p)
 		{
 			return p.second->filePath == path;
@@ -362,7 +362,7 @@ uint32_t Model::CreateAssimpModel(const std::string& filePath)
 		std::unique_ptr<ModelData> data;
 		data = std::make_unique<ModelData>();
 
-		std::vector<Mesh> sMeshes_;//ƒƒbƒVƒ…‚Ì”z—ñ
+		std::vector<Mesh> sMeshes_;//ãƒ¡ãƒƒã‚·ãƒ¥ã®é…åˆ—
 		ImportSettings sSet_ = { nullptr,sMeshes_,false,false };
 
 		wchar_t wfilepath[256];
@@ -405,35 +405,35 @@ void Model::DrawModel(Transform* transform, myMath::Vector4 color)
 
 	PiplineSet(static_cast<BlendMode>(blendMode_), static_cast<ShaderMode>(shaderMode_));
 
-	// ƒvƒŠƒ~ƒeƒBƒuŒ`ó‚Ìİ’èƒRƒ}ƒ“ƒh
-	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // OŠpŒ`ƒŠƒXƒg
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–å½¢çŠ¶ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
+	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // ä¸‰è§’å½¢ãƒªã‚¹ãƒˆ
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìİ’èƒRƒ}ƒ“ƒh
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	sCmdList_->IASetVertexBuffers(0, 1, &vbView);
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒrƒ…[‚Ìİ’èƒRƒ}ƒ“ƒh
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	sCmdList_->IASetIndexBuffer(&ibView);
 
-	// ’è”ƒoƒbƒtƒ@ƒrƒ…[(CBV)‚Ìİ’èƒRƒ}ƒ“ƒh
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼(CBV)ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	sCmdList_->SetGraphicsRootConstantBufferView(0, transform->GetconstBuff()->GetGPUVirtualAddress());
 	sCmdList_->SetGraphicsRootConstantBufferView(1, modelData_->constBuffMaterial->GetAddress());
-	//ƒ‹[ƒgƒpƒ‰ƒ[ƒ^2”Ô‚ÉFî•ñ‚ğİ’è
+	//ãƒ«ãƒ¼ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿2ç•ªã«è‰²æƒ…å ±ã‚’è¨­å®š
 	sCmdList_->SetGraphicsRootConstantBufferView(2, constantBuff_->GetAddress());
 
-	//ƒ‰ƒCƒg‚Ì•`‰æ
+	//ãƒ©ã‚¤ãƒˆã®æç”»
 	if (shaderMode_ != ShaderMode::Basic && shaderMode_ != ShaderMode::SimpleColor)
 	{
-		//ƒ‹[ƒgƒpƒ‰ƒ[ƒ^2”Ô‚Éƒ‰ƒCƒgî•ñ‚ğİ’è
+		//ãƒ«ãƒ¼ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿2ç•ªã«ãƒ©ã‚¤ãƒˆæƒ…å ±ã‚’è¨­å®š
 		sLightManager_->Draw(sCmdList_.Get(), 4);
 	}
 
-	// SRVƒq[ƒv‚Ìİ’èƒRƒ}ƒ“ƒh
+	// SRVãƒ’ãƒ¼ãƒ—ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	sCmdList_->SetDescriptorHeaps(1, modelData_->textureData->srvHeap.GetAddressOf());
 
-	// SRVƒq[ƒv‚Ìæ“ª‚É‚ ‚éSRV‚ğƒ‹[ƒgƒpƒ‰ƒ[ƒ^3”Ô‚Éİ’è
+	// SRVãƒ’ãƒ¼ãƒ—ã®å…ˆé ­ã«ã‚ã‚‹SRVã‚’ãƒ«ãƒ¼ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿3ç•ªã«è¨­å®š
 	sCmdList_->SetGraphicsRootDescriptorTable(3, modelData_->textureData->gpuHandle);
 
-	// •`‰æƒRƒ}ƒ“ƒh
+	// æç”»ã‚³ãƒãƒ³ãƒ‰
 	sCmdList_->DrawIndexedInstanced(modelData_->maxIndex, 1, 0, 0, 0);
 }
 

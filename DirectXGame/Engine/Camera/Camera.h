@@ -3,7 +3,7 @@
 #include"WindowsApp.h"
 
 /// <summary>
-/// ƒJƒƒ‰
+/// ã‚«ãƒ¡ãƒ©
 /// </summary>
 class Camera
 {
@@ -15,49 +15,49 @@ private:
 	float aspect_ = 0.0f;
 	float nearClip_ = 0.0f;
 	float farClip_ = 0.0f;
-	float angle_ = 0.0f;				//ƒJƒƒ‰Šp“x
-	float distance_ = 50.0f;			//ƒJƒƒ‰‹——£
-	myMath::Matrix4 matView_;		//ƒrƒ…[s—ñ
-	myMath::Matrix4 matViewInverse_;	//‹tƒrƒ…[s—ñ	
-	myMath::Matrix4 matProjection_;	//Ë‰es—ñ
-	myMath::Vector3 eye_;			//‹“_À•W
-	myMath::Vector3 target_;			//’‹“_À•W
-	myMath::Vector3 up_;				//ã•ûŒüƒxƒNƒgƒ‹
+	float angle_ = 0.0f;				//ã‚«ãƒ¡ãƒ©è§’åº¦
+	float distance_ = 50.0f;			//ã‚«ãƒ¡ãƒ©è·é›¢
+	myMath::Matrix4 matView_;		//ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
+	myMath::Matrix4 matViewInverse_;	//é€†ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—	
+	myMath::Matrix4 matProjection_;	//å°„å½±è¡Œåˆ—
+	myMath::Vector3 eye_;			//è¦–ç‚¹åº§æ¨™
+	myMath::Vector3 target_;			//æ³¨è¦–ç‚¹åº§æ¨™
+	myMath::Vector3 up_;				//ä¸Šæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 
-	//bool projectionFlag = false;	//•½s“Š‰e‚Æ“§‹“Š‰e‚ğØ‚è‘Ö‚¦‚éƒtƒ‰ƒO
+	//bool projectionFlag = false;	//å¹³è¡ŒæŠ•å½±ã¨é€è¦–æŠ•å½±ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ãƒ•ãƒ©ã‚°
 
 public:
 
 	static void StaticInitialize(WindowsApp* windowsApp);
 
 	/// <summary>
-	/// ‰Šú‰»ˆ—
+	/// åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
-	/// <param name="projectionFlag">•½s“Š‰e‚Æ“§‹“Š‰e‚ğØ‚è‘Ö‚¦‚éƒtƒ‰ƒO false:2D,true:3D</param>
+	/// <param name="projectionFlag">å¹³è¡ŒæŠ•å½±ã¨é€è¦–æŠ•å½±ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ãƒ•ãƒ©ã‚° false:2D,true:3D</param>
 	void Initialize(bool projectionFlag);
 
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
-	/// <param name="projectionFlag">•½s“Š‰e‚Æ“§‹“Š‰e‚ğØ‚è‘Ö‚¦‚éƒtƒ‰ƒO false:2D,true:3D</param>
+	/// <param name="projectionFlag">å¹³è¡ŒæŠ•å½±ã¨é€è¦–æŠ•å½±ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ãƒ•ãƒ©ã‚° false:2D,true:3D</param>
 	void Update(bool projectionFlag);
 
 private:
 
 	/// <summary>
-	/// ƒrƒ…[s—ñ‚ÌŒvZ
+	/// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®è¨ˆç®—
 	/// </summary>
 	void UpdateMatView();
 
 	/// <summary>
-	/// “Š‰eŒvZ
+	/// æŠ•å½±è¨ˆç®—
 	/// </summary>
-	/// <param name="projectionFlag">•½s“Š‰e‚Æ“§‹“Š‰e‚ğØ‚è‘Ö‚¦‚éƒtƒ‰ƒO</param>
+	/// <param name="projectionFlag">å¹³è¡ŒæŠ•å½±ã¨é€è¦–æŠ•å½±ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ãƒ•ãƒ©ã‚°</param>
 	void UpdateMatProjection(bool projectionFlag);
 
 public:
 
-	//ƒQƒbƒ^[
+	//ã‚²ãƒƒã‚¿ãƒ¼
 	const myMath::Matrix4& GetMatView();
 	const myMath::Matrix4& GetMatViewInverse();
 	const myMath::Matrix4& GetMatProjection();
@@ -65,7 +65,7 @@ public:
 	const myMath::Vector3& GetTarget();
 	const myMath::Vector3& GetUp();
 
-	//ƒZƒbƒ^[
+	//ã‚»ãƒƒã‚¿ãƒ¼
 	void SetEye(const myMath::Vector3& eye);
 	void SetTarget(const myMath::Vector3& target);
 	void SetUp(const myMath::Vector3& up);

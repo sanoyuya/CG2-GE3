@@ -14,30 +14,30 @@ public:
 	static Microsoft::WRL::ComPtr<ID3D12Device>sDevice_;
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>sCmdList_;
 
-	static Blob sBlob_;//ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+	static Blob sBlob_;//ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
-	static std::array<PipelineSet, 6> sPip_;//ƒpƒCƒvƒ‰ƒCƒ“
+	static std::array<PipelineSet, 6> sPip_;//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³
 
 public:
 
 	/// <summary>
-	/// Ã“I‰Šú‰»ˆ—
+	/// é™çš„åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	static void StaticInitialize();
 
 	/// <summary>
-	/// ƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è‚ğ“K—p
+	/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®šã‚’é©ç”¨
 	/// </summary>
 	/// <param name="mode"></param>
 	static void BlendSet(BlendMode mode);
 
 	/// <summary>
-	/// ƒRƒ}ƒ“ƒhƒŠƒXƒgÀs
+	/// ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆå®Ÿè¡Œ
 	/// </summary>
-	/// <param name="textureData">ƒeƒNƒXƒ`ƒƒƒf[ƒ^</param>
+	/// <param name="textureData">ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‡ãƒ¼ã‚¿</param>
 	/// <param name="vbView"></param>
 	/// <param name="ibView"></param>
-	/// <param name="constBuff">’è”ƒoƒbƒtƒ@</param>
+	/// <param name="constBuff">å®šæ•°ãƒãƒƒãƒ•ã‚¡</param>
 	static void DrawCommand(TextureData* textureData, D3D12_VERTEX_BUFFER_VIEW vbView, D3D12_INDEX_BUFFER_VIEW ibView, ConstantBuffer* constBuff);
 
 private:

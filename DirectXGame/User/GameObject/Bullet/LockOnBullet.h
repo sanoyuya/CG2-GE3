@@ -15,7 +15,7 @@ private:
 	uint8_t deathTimer_ = 0;
 	const uint8_t maxDeathTime_ = 60;
 
-	myMath::Vector3 directionVector_;//•ûŒüƒxƒNƒgƒ‹
+	myMath::Vector3 directionVector_;//æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 	const float speed_ = 1.5f;
 
 	std::unique_ptr<Model>bullet_;
@@ -37,41 +37,41 @@ private:
 
 	GameObject* lockOnEnemy_ = nullptr;
 
-public://BulletBase‚Å•K—v‚È“z
+public://BulletBaseã§å¿…è¦ãªå¥´
 
-	//ƒfƒXƒgƒ‰ƒNƒ^
+	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~LockOnBullet();
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	void Initialize();
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	void Update();
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	void Draw();
 
-	//ƒIƒuƒWƒFƒNƒg‚Ì–¼‘Oæ“¾ˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰å–å¾—å‡¦ç†
 	std::string GetName();
 
 	const Transform& GetTransform();
 
-	//ƒIƒuƒWƒFƒNƒg‚Ì“–‚½‚è”»’èæ“¾ˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å½“ãŸã‚Šåˆ¤å®šå–å¾—å‡¦ç†
 	const CollisionData& GetCollisionData();
 
-	//ƒIƒuƒWƒFƒNƒg‚ÌÕ“Ë”»’èˆ—
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¡çªåˆ¤å®šå‡¦ç†
 	void OnCollision();
 
-	//€–Sƒtƒ‰ƒO‚Ìæ“¾
+	//æ­»äº¡ãƒ•ãƒ©ã‚°ã®å–å¾—
 	const bool GetIsDead();
 
-	//€–SƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒ‰ƒO‚Ìæ“¾
+	//æ­»äº¡ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚°ã®å–å¾—
 	const bool GetDeathAnimationFlag();
 
-	//ƒƒbƒNƒIƒ“
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³
 	void LockOn();
 
-	//ƒƒbƒNƒIƒ“‰ğœ
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³è§£é™¤
 	void CancelLockOn();
 
 	const bool GetLockOnFlag();

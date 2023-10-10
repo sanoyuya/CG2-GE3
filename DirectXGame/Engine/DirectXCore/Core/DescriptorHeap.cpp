@@ -5,13 +5,13 @@ void DescriptorHeap::Initialize()
 {
 	device_ = DirectXBase::GetInstance()->GetDevice();
 
-	// ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ìİ’è
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®è¨­å®š
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;//ƒVƒF[ƒ_‚©‚çŒ©‚¦‚é‚æ‚¤‚É
+	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;//ã‚·ã‚§ãƒ¼ãƒ€ã‹ã‚‰è¦‹ãˆã‚‹ã‚ˆã†ã«
 	srvHeapDesc.NumDescriptors = static_cast<uint32_t>(maxSRV_ + maxUAV_ + maxCBV_);
 
-	// İ’è‚ğŒ³‚ÉSRV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğ¶¬
+	// è¨­å®šã‚’å…ƒã«SRVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ç”Ÿæˆ
 	device_->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(descriptorHeap_.ReleaseAndGetAddressOf()));
 
     startCpuHandle_ = descriptorHeap_->GetCPUDescriptorHandleForHeapStart();
@@ -27,14 +27,14 @@ UINT64 DescriptorHeap::CreateSRV(D3D12_SHADER_RESOURCE_VIEW_DESC& desc, ID3D12Re
 		assert(0);
 	}
 
-	//SRVƒq[ƒv‚Ìæ“ªƒnƒ“ƒhƒ‹‚ğæ“¾
+	//SRVãƒ’ãƒ¼ãƒ—ã®å…ˆé ­ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
 	DescriptorHeapViewHandle handle{};
 
-	//ƒnƒ“ƒhƒ‹‚Ìƒ|ƒCƒ“ƒ^‚¸‚ç‚µ
+	//ãƒãƒ³ãƒ‰ãƒ«ã®ãƒã‚¤ãƒ³ã‚¿ãšã‚‰ã—
 	handle.cpuHandle.ptr = startCpuHandle_.ptr + (static_cast<SIZE_T>(countSRV_) * incrementSize_);
 	handle.gpuHandle.ptr = startGpuHandle_.ptr + (static_cast<SIZE_T>(countSRV_) * incrementSize_);
 
-	// ƒnƒ“ƒhƒ‹‚Ìw‚·ˆÊ’u‚ÉƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[ì¬
+	// ãƒãƒ³ãƒ‰ãƒ«ã®æŒ‡ã™ä½ç½®ã«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ä½œæˆ
 	device_->CreateShaderResourceView(resource, &desc, handle.cpuHandle);
 	countSRV_++;
 
@@ -48,14 +48,14 @@ UINT64 DescriptorHeap::CreateUAV(D3D12_UNORDERED_ACCESS_VIEW_DESC& desc, ID3D12R
 		assert(0);
 	}
 
-	//SRVƒq[ƒv‚Ìæ“ªƒnƒ“ƒhƒ‹‚ğæ“¾
+	//SRVãƒ’ãƒ¼ãƒ—ã®å…ˆé ­ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
 	DescriptorHeapViewHandle handle{};
 
-	//ƒnƒ“ƒhƒ‹‚Ìƒ|ƒCƒ“ƒ^‚¸‚ç‚µ
+	//ãƒãƒ³ãƒ‰ãƒ«ã®ãƒã‚¤ãƒ³ã‚¿ãšã‚‰ã—
 	handle.cpuHandle.ptr = startCpuHandle_.ptr + (static_cast<SIZE_T>(maxSRV_ + countUAV_) * incrementSize_);
 	handle.gpuHandle.ptr = startGpuHandle_.ptr + (static_cast<SIZE_T>(maxSRV_ + countUAV_) * incrementSize_);
 
-	// ƒnƒ“ƒhƒ‹‚Ìw‚·ˆÊ’u‚ÉƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[ì¬
+	// ãƒãƒ³ãƒ‰ãƒ«ã®æŒ‡ã™ä½ç½®ã«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ä½œæˆ
 	device_->CreateUnorderedAccessView(resource, nullptr, &desc, handle.cpuHandle);
 
 	countUAV_++;
@@ -69,14 +69,14 @@ UINT64 DescriptorHeap::CreateCBV(D3D12_CONSTANT_BUFFER_VIEW_DESC& desc)
 		assert(0);
 	}
 
-	//SRVƒq[ƒv‚Ìæ“ªƒnƒ“ƒhƒ‹‚ğæ“¾
+	//SRVãƒ’ãƒ¼ãƒ—ã®å…ˆé ­ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
 	DescriptorHeapViewHandle handle{};
 
-	//ƒnƒ“ƒhƒ‹‚Ìƒ|ƒCƒ“ƒ^‚¸‚ç‚µ
+	//ãƒãƒ³ãƒ‰ãƒ«ã®ãƒã‚¤ãƒ³ã‚¿ãšã‚‰ã—
 	handle.cpuHandle.ptr = startCpuHandle_.ptr + (static_cast<SIZE_T>(maxSRV_ + maxUAV_ +countCBV_) * incrementSize_);
 	handle.gpuHandle.ptr = startGpuHandle_.ptr + (static_cast<SIZE_T>(maxSRV_ + maxUAV_ + countCBV_) * incrementSize_);
 
-	// ƒnƒ“ƒhƒ‹‚Ìw‚·ˆÊ’u‚ÉƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[ì¬
+	// ãƒãƒ³ãƒ‰ãƒ«ã®æŒ‡ã™ä½ç½®ã«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ä½œæˆ
 	device_->CreateConstantBufferView(&desc, handle.cpuHandle);
 
 	countCBV_++;
@@ -93,7 +93,7 @@ DescriptorHeap::DescriptorHeapViewHandle DescriptorHeap::AddSRV()
 
 	DescriptorHeapViewHandle handle{};
 
-	//ƒnƒ“ƒhƒ‹‚Ìƒ|ƒCƒ“ƒ^‚¸‚ç‚µ
+	//ãƒãƒ³ãƒ‰ãƒ«ã®ãƒã‚¤ãƒ³ã‚¿ãšã‚‰ã—
 	handle.cpuHandle.ptr = startCpuHandle_.ptr + (static_cast<SIZE_T>(countSRV_) * incrementSize_);
 	handle.gpuHandle.ptr = startGpuHandle_.ptr + (static_cast<SIZE_T>(countSRV_) * incrementSize_);
 

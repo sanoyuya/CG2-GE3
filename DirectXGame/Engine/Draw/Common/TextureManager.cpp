@@ -10,7 +10,7 @@ void TextureManager::LoadFile(const std::string& path, DirectX::TexMetadata& met
 	HRESULT result = 0;
 
 	MultiByteToWideChar(CP_ACP, 0, path.c_str(), -1, wfilepath, _countof(wfilepath));
-	// WICƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh
+	// WICãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰
 	result = LoadFromWICFile(
 		wfilepath,
 		DirectX::WIC_FLAGS_NONE,
@@ -30,7 +30,7 @@ TextureData* TextureManager::FromTextureData(const std::string& path)
 
 	LoadFile(path, metadata, scratchImg);
 
-	//ƒ~ƒbƒvƒ}ƒbƒv¶¬
+	//ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ç”Ÿæˆ
 	HRESULT hr = GenerateMipMaps(
 		scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(),
 		DirectX::TEX_FILTER_DEFAULT, 0, mipChain);
@@ -41,7 +41,7 @@ TextureData* TextureManager::FromTextureData(const std::string& path)
 		metadata = scratchImg.GetMetadata();
 	}
 
-	//“Ç‚İ‚ñ‚¾ƒfƒBƒtƒ…[ƒYƒeƒNƒXƒ`ƒƒ‚ğSRGB‚Æ‚µ‚Äˆµ‚¤
+	//èª­ã¿è¾¼ã‚“ã ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’SRGBã¨ã—ã¦æ‰±ã†
 	metadata.format = DirectX::MakeSRGB(metadata.format);
 
 	result->texBuff = CreateTexBuff(metadata, scratchImg);
@@ -61,7 +61,7 @@ uint32_t TextureManager::LoadTexture(const std::string& path)
 		assert(0);
 	}
 
-	//ˆê‰ñ“Ç‚İ‚ñ‚¾‚±‚Æ‚ª‚ ‚éƒtƒ@ƒCƒ‹‚Í‚»‚Ì‚Ü‚Ü•Ô‚·
+	//ä¸€å›èª­ã¿è¾¼ã‚“ã ã“ã¨ãŒã‚ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã¯ãã®ã¾ã¾è¿”ã™
 	auto itr = find_if(sTextureDatas_.begin(), sTextureDatas_.end(), [&](std::pair<const std::string, std::unique_ptr<TextureData, std::default_delete<TextureData>>>& p)
 		{
 			return p.second->path == path;
@@ -96,7 +96,7 @@ void TextureManager::StaticInitialize()
 {
 	directX_ = DirectXBase::GetInstance();
 
-	// ƒq[ƒvİ’è
+	// ãƒ’ãƒ¼ãƒ—è¨­å®š
 	textureHeapProp_.Type = D3D12_HEAP_TYPE_CUSTOM;
 	textureHeapProp_.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
 	textureHeapProp_.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
@@ -123,17 +123,17 @@ TextureData* TextureManager::GetTextureData(uint32_t handle)
 Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg)
 {
 	Microsoft::WRL::ComPtr<ID3D12Resource> result;
-	// ƒŠƒ\[ƒXİ’è
+	// ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	D3D12_RESOURCE_DESC textureResourceDesc{};
 	textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
 	textureResourceDesc.Format = metadata.format;
-	textureResourceDesc.Width = metadata.width;//•
-	textureResourceDesc.Height = (uint32_t)metadata.height;//‚‚³
+	textureResourceDesc.Width = metadata.width;//å¹…
+	textureResourceDesc.Height = (uint32_t)metadata.height;//é«˜ã•
 	textureResourceDesc.DepthOrArraySize = (UINT16)metadata.arraySize;
 	textureResourceDesc.MipLevels = (UINT16)metadata.mipLevels;
 	textureResourceDesc.SampleDesc.Count = 1;
 
-	// ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@‚Ì¶¬
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	HRESULT hr = directX_->GetDevice()->CreateCommittedResource(
 		&textureHeapProp_,
 		D3D12_HEAP_FLAG_NONE,
@@ -142,18 +142,18 @@ Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::Te
 		nullptr,
 		IID_PPV_ARGS(result.ReleaseAndGetAddressOf()));
 
-	//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@‚Éƒf[ƒ^“]‘—
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ã«ãƒ‡ãƒ¼ã‚¿è»¢é€
 	for (size_t i = 0; i < metadata.mipLevels; i++)
 	{
-		// ƒ~ƒbƒvƒ}ƒbƒvƒŒƒxƒ‹‚ğw’è‚µ‚ÄƒCƒ[ƒW‚ğæ“¾
+		// ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ãƒ¬ãƒ™ãƒ«ã‚’æŒ‡å®šã—ã¦ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’å–å¾—
 		const DirectX::Image* img = scratchImg.GetImage(i, 0, 0);
-		// ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@‚Éƒf[ƒ^“]‘—
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ã«ãƒ‡ãƒ¼ã‚¿è»¢é€
 		hr = result->WriteToSubresource(
 			static_cast<uint32_t>(i),
-			nullptr,              // ‘S—Ìˆæ‚ÖƒRƒs[
-			img->pixels,          // Œ³ƒf[ƒ^ƒAƒhƒŒƒX
-			static_cast<uint32_t>(img->rowPitch),  // 1ƒ‰ƒCƒ“ƒTƒCƒY
-			static_cast<uint32_t>(img->slicePitch) // 1–‡ƒTƒCƒY
+			nullptr,              // å…¨é ˜åŸŸã¸ã‚³ãƒ”ãƒ¼
+			img->pixels,          // å…ƒãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹
+			static_cast<uint32_t>(img->rowPitch),  // 1ãƒ©ã‚¤ãƒ³ã‚µã‚¤ã‚º
+			static_cast<uint32_t>(img->slicePitch) // 1æšã‚µã‚¤ã‚º
 		);
 		assert(SUCCEEDED(hr));
 	}
@@ -163,7 +163,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::Te
 
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::CreateShaderResourceView(ID3D12Resource* texBuff, DirectX::TexMetadata& metadata)
 {
-	// ƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[İ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼è¨­å®š
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	srvDesc.Format = metadata.format;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;

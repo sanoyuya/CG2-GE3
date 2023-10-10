@@ -5,10 +5,10 @@ namespace PhysicsMath
 {
 	float Complement(float& x1, float& x2, float flame)
 	{
-		float distanceX = x2 - x1;//‹——£‚ğo‚·
-		float dividedDistanceX = distanceX / flame;//‹——£‚ğflame‚ÅŠ„‚Á‚½’l
+		float distanceX = x2 - x1;//è·é›¢ã‚’å‡ºã™
+		float dividedDistanceX = distanceX / flame;//è·é›¢ã‚’flameã§å‰²ã£ãŸå€¤
 
-		x1 += dividedDistanceX;//‹——£‚ğflame‚ÅŠ„‚Á‚½’l‚ğ‘«‚·
+		x1 += dividedDistanceX;//è·é›¢ã‚’flameã§å‰²ã£ãŸå€¤ã‚’è¶³ã™
 
 		return x1;
 	}

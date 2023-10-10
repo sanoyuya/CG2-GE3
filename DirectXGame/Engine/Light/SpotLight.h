@@ -2,13 +2,13 @@
 #include"myMath.h"
 
 /// <summary>
-/// ƒXƒ|ƒbƒgƒ‰ƒCƒg
+/// ã‚¹ãƒãƒƒãƒˆãƒ©ã‚¤ãƒˆ
 /// </summary>
 class SpotLight
 {
-public://ƒTƒuƒNƒ‰ƒX
+public://ã‚µãƒ–ã‚¯ãƒ©ã‚¹
 
-	//’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 	struct ConstBufferData
 	{
 		myMath::Vector4 lightv;
@@ -23,22 +23,22 @@ public://ƒTƒuƒNƒ‰ƒX
 		float pad4;
 	};
 
-private://ƒƒ“ƒo•Ï”
+private://ãƒ¡ãƒ³ãƒå¤‰æ•°
 
-	//ƒ‰ƒCƒg•ûŒü(’PˆÊƒxƒNƒgƒ‹)
+	//ãƒ©ã‚¤ãƒˆæ–¹å‘(å˜ä½ãƒ™ã‚¯ãƒˆãƒ«)
 	myMath::Vector4 lightDir_ = { 1,0,0,0 };
-	//ƒ‰ƒCƒgÀ•W(ƒ[ƒ‹ƒhÀ•WŒn)
+	//ãƒ©ã‚¤ãƒˆåº§æ¨™(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»)
 	myMath::Vector3 lightPos_ = { 0,0,0 };
-	//ƒ‰ƒCƒg‚ÌF
+	//ãƒ©ã‚¤ãƒˆã®è‰²
 	myMath::Vector3 lightColor_ = { 1,1,1 };
-	//ƒ‰ƒCƒg‹——£Œ¸ŠŒW”
+	//ãƒ©ã‚¤ãƒˆè·é›¢æ¸›è¡°ä¿‚æ•°
 	myMath::Vector3 lightAtten_ = { 1.0f,1.0f ,1.0f };
-	//ƒ‰ƒCƒgŒ¸ŠŠp“x(ŠJnŠp“xAI—¹Šp“x)
+	//ãƒ©ã‚¤ãƒˆæ¸›è¡°è§’åº¦(é–‹å§‹è§’åº¦ã€çµ‚äº†è§’åº¦)
 	myMath::Vector2 lightFactorAngleCos_ = { 0.5f,0.2f };
-	//—LŒøƒtƒ‰ƒO
+	//æœ‰åŠ¹ãƒ•ãƒ©ã‚°
 	bool active_ = false;
 
-public://ƒƒ“ƒoŠÖ”
+public://ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	inline void SetLightDir(const myMath::Vector4& lightDir) { lightDir_ = lightDir.normalization(); }
 	inline const myMath::Vector4& GetLightDir() { return lightDir_; }

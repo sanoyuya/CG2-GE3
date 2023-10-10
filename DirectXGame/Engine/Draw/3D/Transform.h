@@ -9,24 +9,24 @@ class Transform
 {
 private:
 
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	std::shared_ptr<ConstantBuffer> constBuff_;
-	//’è”ƒoƒbƒtƒ@‚Ìƒ}ƒbƒsƒ“ƒO—pƒ|ƒCƒ“ƒ^
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒã‚¤ãƒ³ã‚¿
 	worldViewpojCamera constBuffMap_;
 
-	//‰Šú‰»—p‚Ìƒrƒ…[s—ñŒvZ
+	//åˆæœŸåŒ–ç”¨ã®ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—è¨ˆç®—
 	static myMath::Matrix4 sDefaultViewMat_;
 
-	//‰Šú‰»—p‚ÌƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñŒvZ
+	//åˆæœŸåŒ–ç”¨ã®ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—è¨ˆç®—
 	static myMath::Matrix4 sDefaultProjectionMat_;
 
 public:
 
-	// ƒ[ƒJƒ‹À•W
+	// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
 	myMath::Vector3 translation = { 0.0f, 0.0f, 0.0f };
-	// X,Y,Z²‰ñ‚è‚Ìƒ[ƒJƒ‹‰ñ“]Šp
+	// X,Y,Zè»¸å›ã‚Šã®ãƒ­ãƒ¼ã‚«ãƒ«å›è»¢è§’
 	myMath::Vector3 rotation = { 0.0f, 0.0f, 0.0f };
-	// ƒ[ƒJƒ‹ƒXƒP[ƒ‹
+	// ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
 	myMath::Vector3 scale = { 1.0f, 1.0f, 1.0f };
 
 	myMath::Matrix4 matWorld;
@@ -34,7 +34,7 @@ public:
 	myMath::Matrix4 matScale;
 	myMath::Matrix4 matTrans;
 
-	// e‚Æ‚È‚éƒ[ƒ‹ƒh•ÏŠ·‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	// è¦ªã¨ãªã‚‹ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	const Transform* parent = nullptr;
 
 	myMath::Vector3 parentToTranslation = { 0.0f, 0.0f, 0.0f };
@@ -42,11 +42,11 @@ public:
 public:
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 	/// <summary>
-	/// s—ñ‚ğ“]‘—‚·‚é
+	/// è¡Œåˆ—ã‚’è»¢é€ã™ã‚‹
 	/// </summary>
 	void TransUpdate(Camera* camera);
 
@@ -64,7 +64,7 @@ namespace myMath
 	Matrix4 MakeWorldMatrix4(Transform& transform);
 
 	/// <summary>
-	/// ƒ[ƒ‹ƒhÀ•Wæ“¾
+	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™å–å¾—
 	/// </summary>
 	Vector3 GetWorldPosition(Transform& transform);
 }

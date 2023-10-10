@@ -5,7 +5,7 @@
 #include<string>
 
 /// <summary>
-/// シーン工場(概念)
+/// 繧ｷ繝ｼ繝ｳ蟾･蝣ｴ(讎ょｿｵ)
 /// </summary>
 class AbstractSceneFactory
 {
@@ -13,6 +13,6 @@ public:
 
 	virtual ~AbstractSceneFactory() = default;
 
-	//シーン生成
+	//繧ｷ繝ｼ繝ｳ逕滓��
 	virtual std::unique_ptr<BaseScene> CreateScene(const std::string& sceneName) = 0;
 };

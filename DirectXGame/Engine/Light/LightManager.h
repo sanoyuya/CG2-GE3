@@ -11,111 +11,111 @@
 
 class LightManager
 {
-public://’è”
+public://å®šæ•°
 
 	static const uint8_t DirLightNum = 3;
 	static const uint8_t PointLightNum = 3;
 	static const uint8_t SpotLightNum = 3;
 	static const uint8_t CircleShadowNum = 1;
 
-public://ƒTƒuƒNƒ‰ƒX
+public://ã‚µãƒ–ã‚¯ãƒ©ã‚¹
 
-	//’è”ƒoƒbƒtƒ@—p\‘¢‘Ì
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨æ§‹é€ ä½“
 	struct ConstBufferData
 	{
-		//ŠÂ‹«Œõ‚ÌF
+		//ç’°å¢ƒå…‰ã®è‰²
 		myMath::Vector3 ambientColor;
 		float pad1;
-		//•½sŒõŒ¹—p
+		//å¹³è¡Œå…‰æºç”¨
 		DirectionalLight::ConstBufferData dirLights[DirLightNum];
-		//“_ŒõŒ¹—p
+		//ç‚¹å…‰æºç”¨
 		PointLight::ConstBufferData pointLights[PointLightNum];
-		//ƒXƒ|ƒbƒgƒ‰ƒCƒg—p
+		//ã‚¹ãƒãƒƒãƒˆãƒ©ã‚¤ãƒˆç”¨
 		SpotLight::ConstBufferData spotLights[SpotLightNum];
-		//ŠÛ‰e—p
+		//ä¸¸å½±ç”¨
 		CircleShadow::ConstBufferData circleShadows[CircleShadowNum];
 	};
 
-private://Ã“Iƒƒ“ƒo•Ï”
+private://é™çš„ãƒ¡ãƒ³ãƒå¤‰æ•°
 
-	//ƒfƒoƒCƒX
+	//ãƒ‡ãƒã‚¤ã‚¹
 	static Microsoft::WRL::ComPtr<ID3D12Device> sDevice_;
 
-public://Ã“Iƒƒ“ƒoŠÖ”
+public://é™çš„ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	static void StaticInitialize(ID3D12Device* device_);
 
 	/// <summary>
-	/// ƒCƒ“ƒXƒ^ƒ“ƒX¶¬
+	/// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
 	/// </summary>
-	/// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+	/// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 	static LightManager* Create();
 
-private://ƒƒ“ƒo•Ï”
+private://ãƒ¡ãƒ³ãƒå¤‰æ•°
 
-	//’è”ƒoƒbƒtƒ@
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<ConstantBuffer> constBuff_;
-	//ŠÂ‹«Œõ‚ÌF
+	//ç’°å¢ƒå…‰ã®è‰²
 	myMath::Vector3 ambientColor_ = { 1,1,1 };
-	//•½sŒõŒ¹‚Ì”z—ñ
+	//å¹³è¡Œå…‰æºã®é…åˆ—
 	DirectionalLight dirLights_[DirLightNum];
-	//“_ŒõŒ¹‚Ì”z—ñ
+	//ç‚¹å…‰æºã®é…åˆ—
 	PointLight pointLights_[PointLightNum];
-	//ƒXƒ|ƒbƒgƒ‰ƒCƒg‚Ì”z—ñ
+	//ã‚¹ãƒãƒƒãƒˆãƒ©ã‚¤ãƒˆã®é…åˆ—
 	SpotLight spotLights_[SpotLightNum];
-	//ŠÛ‰e‚Ì”z—ñ
+	//ä¸¸å½±ã®é…åˆ—
 	CircleShadow circleShadows_[CircleShadowNum];
-	//ƒ_[ƒeƒBƒtƒ‰ƒO
+	//ãƒ€ãƒ¼ãƒ†ã‚£ãƒ•ãƒ©ã‚°
 	bool dirty_ = false;
 
 public:
 	/// <summary>
-	/// ‰Šú‰»ˆ—
+	/// åˆæœŸåŒ–å‡¦ç†
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Draw(ID3D12GraphicsCommandList* cmdList, uint32_t rootParameterIndex);
 
 	/// <summary>
-	/// ’è”ƒoƒbƒtƒ@“]‘—
+	/// å®šæ•°ãƒãƒƒãƒ•ã‚¡è»¢é€
 	/// </summary>
 	void TransferConstBuffer();
 
 	/// <summary>
-	/// ŠÂ‹«Œõ‚Ìƒ‰ƒCƒg‚ğƒZƒbƒg
+	/// ç’°å¢ƒå…‰ã®ãƒ©ã‚¤ãƒˆã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="color">ƒ‰ƒCƒg‚ÌF</param>
+	/// <param name="color">ãƒ©ã‚¤ãƒˆã®è‰²</param>
 	void SetAmbientColor(const myMath::Vector3& color);
 
 #pragma region DirLight
 
 	/// <summary>
-	/// •½sŒõŒ¹‚Ì—LŒøƒtƒ‰ƒO‚ğƒZƒbƒg
+	/// å¹³è¡Œå…‰æºã®æœ‰åŠ¹ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="index">ƒ‰ƒCƒg”Ô†</param>
-	/// <param name="active">—LŒøƒtƒ‰ƒO</param>
+	/// <param name="index">ãƒ©ã‚¤ãƒˆç•ªå·</param>
+	/// <param name="active">æœ‰åŠ¹ãƒ•ãƒ©ã‚°</param>
 	void SetDirLightActive(int8_t index, bool active);
 
 	/// <summary>
-	/// •½sŒõŒ¹‚Ìƒ‰ƒCƒg•ûŒü‚ğƒZƒbƒg
+	/// å¹³è¡Œå…‰æºã®ãƒ©ã‚¤ãƒˆæ–¹å‘ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="index">ƒ‰ƒCƒg”Ô†</param>
-	/// <param name="lightDer">ƒ‰ƒCƒg•ûŒü</param>
+	/// <param name="index">ãƒ©ã‚¤ãƒˆç•ªå·</param>
+	/// <param name="lightDer">ãƒ©ã‚¤ãƒˆæ–¹å‘</param>
 	void SetDirLightDir(int8_t index, const myMath::Vector4& lightDir);
 
 	/// <summary>
-	/// •½sŒõŒ¹‚Ìƒ‰ƒCƒg‚ÌF‚ğƒZƒbƒg
+	/// å¹³è¡Œå…‰æºã®ãƒ©ã‚¤ãƒˆã®è‰²ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="index">ƒ‰ƒCƒg”Ô†</param>
-	/// <param name="lightColor">ƒ‰ƒCƒg‚ÌF</param>
+	/// <param name="index">ãƒ©ã‚¤ãƒˆç•ªå·</param>
+	/// <param name="lightColor">ãƒ©ã‚¤ãƒˆã®è‰²</param>
 	void SetDirLightColor(int8_t index, const myMath::Vector3& lightColor);
 
 #pragma endregion
@@ -123,36 +123,36 @@ public:
 #pragma region PointLight
 
 	/// <summary>
-	/// “_ŒõŒ¹‚Ì—LŒøƒtƒ‰ƒO‚ğƒZƒbƒg
+	/// ç‚¹å…‰æºã®æœ‰åŠ¹ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="index">ƒ‰ƒCƒg”Ô†</param>
-	/// <param name="active">—LŒøƒtƒ‰ƒO</param>
+	/// <param name="index">ãƒ©ã‚¤ãƒˆç•ªå·</param>
+	/// <param name="active">æœ‰åŠ¹ãƒ•ãƒ©ã‚°</param>
 	void SetPointLightActive(int8_t index, bool active);
 
 	/// <summary>
-	/// “_ŒõŒ¹‚ÌÀ•W‚ğƒZƒbƒg
+	/// ç‚¹å…‰æºã®åº§æ¨™ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="index">ƒ‰ƒCƒg”Ô†</param>
-	/// <param name="lightPos">À•W</param>
+	/// <param name="index">ãƒ©ã‚¤ãƒˆç•ªå·</param>
+	/// <param name="lightPos">åº§æ¨™</param>
 	void SetPointLightPos(int8_t index, const myMath::Vector3& lightPos);
 
 	/// <summary>
-	/// “_ŒõŒ¹‚Ìƒ‰ƒCƒg‚ÌF‚ğƒZƒbƒg
+	/// ç‚¹å…‰æºã®ãƒ©ã‚¤ãƒˆã®è‰²ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="index">ƒ‰ƒCƒg”Ô†</param>
-	/// <param name="lightColor">ƒ‰ƒCƒg‚ÌF</param>
+	/// <param name="index">ãƒ©ã‚¤ãƒˆç•ªå·</param>
+	/// <param name="lightColor">ãƒ©ã‚¤ãƒˆã®è‰²</param>
 	void SetPointLightColor(int8_t index, const myMath::Vector3& lightColor);
 
 	/// <summary>
-	/// “_ŒõŒ¹‚Ì‹——£Œ¸ŠŒW”‚ğƒZƒbƒg
+	/// ç‚¹å…‰æºã®è·é›¢æ¸›è¡°ä¿‚æ•°ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="index">ƒ‰ƒCƒg”Ô†</param>
-	/// <param name="lightAtten">‹——£Œ¸ŠŒW”</param>
+	/// <param name="index">ãƒ©ã‚¤ãƒˆç•ªå·</param>
+	/// <param name="lightAtten">è·é›¢æ¸›è¡°ä¿‚æ•°</param>
 	void SetPointLightAtten(int8_t index, const myMath::Vector3& lightAtten);
 
 #pragma endregion
 
-#pragma region ƒXƒ|ƒbƒgƒ‰ƒCƒg
+#pragma region ã‚¹ãƒãƒƒãƒˆãƒ©ã‚¤ãƒˆ
 
 	void SetSpotLightActive(int8_t index, bool active);
 	void SetSpotLightDir(int8_t index, const myMath::Vector4& lightDir);
@@ -163,7 +163,7 @@ public:
 
 #pragma endregion
 
-#pragma region ŠÛ‰e
+#pragma region ä¸¸å½±
 
 	void SetCircleShadowActive(int8_t index, bool active);
 	void SetCircleShadowCasterPos(int8_t index, const myMath::Vector3& casterPos);

@@ -47,7 +47,7 @@ void GameLevelData::Load()
 	std::unique_ptr<LevelData> levelData_ = std::make_unique<LevelData>();
 	levelData_.reset(LevelEditor::LoadLevelEditorFile(fileName_));
 
-	//ƒŒƒxƒ‹ƒf[ƒ^‚©‚çƒIƒuƒWƒFƒNƒg‚ğ¶¬A”z’u
+	//ãƒ¬ãƒ™ãƒ«ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã€é…ç½®
 	for (auto& objectData : levelData_->objects_)
 	{
 		if (objectData.fileName == "player")
@@ -60,48 +60,48 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "cameraPoint")
 		{
-			//§Œä“_‚ğ“o˜^
+			//åˆ¶å¾¡ç‚¹ã‚’ç™»éŒ²
 			cameraData_.controlPoints.push_back(objectData.translation);
 		}
 		else if (objectData.fileName == "normalEnemy")
 		{
 			std::unique_ptr<Enemy>enemy = std::make_unique<NormalEnemy>();
 			enemy->SetPosition(objectData.translation);
-			//blenderã‚ÆÀ•WŒn‚ªáŠ±‚¸‚ê‚Ä‚¢‚é‚Ì‚ÅáŠ±C³‚µ‚Ä‘—‚é
+			//blenderä¸Šã¨åº§æ¨™ç³»ãŒè‹¥å¹²ãšã‚Œã¦ã„ã‚‹ã®ã§è‹¥å¹²ä¿®æ­£ã—ã¦é€ã‚‹
 			enemy->SetRotation({ myMath::ChangeRadians(objectData.rotation.x), myMath::ChangeRadians(objectData.rotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(objectData.rotation.z) - myMath::AX_PIF / 2 });
-			//”¼Œa‚³‚¦•ª‚©‚ê‚Î—Ç‚¢‚Ì‚Åx‚Ì’l‚Ì‚İ‘—‚é
+			//åŠå¾„ã•ãˆåˆ†ã‹ã‚Œã°è‰¯ã„ã®ã§xã®å€¤ã®ã¿é€ã‚‹
 			enemy->SetColliderSize(objectData.collider.size.x);
-			//blender‘¤‚Åİ’è‚µ‚½ŠÔ‚ğ‘—‚é
+			//blenderå´ã§è¨­å®šã—ãŸæ™‚é–“ã‚’é€ã‚‹
 			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
 			enemy->SetDeathTimer(objectData.timer.deathTimer);
-			//Enemy‚ğ“o˜^
+			//Enemyã‚’ç™»éŒ²
 			enemyData_.enemys.push_back(std::move(enemy));
 		}
 		else if (objectData.fileName == "moveEnemy")
 		{
 			std::unique_ptr<Enemy>enemy = std::make_unique<MoveEnemy>();
 			
-			//”¼Œa‚³‚¦•ª‚©‚ê‚Î—Ç‚¢‚Ì‚Åx‚Ì’l‚Ì‚İ‘—‚é
+			//åŠå¾„ã•ãˆåˆ†ã‹ã‚Œã°è‰¯ã„ã®ã§xã®å€¤ã®ã¿é€ã‚‹
 			enemy->SetColliderSize(objectData.collider.size.x);
-			//blender‘¤‚Åİ’è‚µ‚½ŠÔ‚ğ‘—‚é
+			//blenderå´ã§è¨­å®šã—ãŸæ™‚é–“ã‚’é€ã‚‹
 			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
 			enemy->SetDeathTimer(objectData.timer.deathTimer);
 
 			enemy->SetMoveEnemyProperty(objectData.enemyProperty);
-			//Enemy‚ğ“o˜^
+			//Enemyã‚’ç™»éŒ²
 			enemyData_.enemys.push_back(std::move(enemy));
 		}
 		else if (objectData.fileName == "ground")
 		{
-			//ƒtƒ@ƒCƒ‹–¼‚©‚ç“o˜^Ï‚İƒ‚ƒfƒ‹‚ğŒŸõ
+			//ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰ç™»éŒ²æ¸ˆã¿ãƒ¢ãƒ‡ãƒ«ã‚’æ¤œç´¢
 			std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
 			model->Initialize();
 
-			//À•W
+			//åº§æ¨™
 			model->SetPos(objectData.translation);
-			//Šgk
+			//æ‹¡ç¸®
 			model->SetScale({ objectData.scaling.y ,objectData.scaling.x ,objectData.scaling.z });
-			//–¼‘O
+			//åå‰
 			model->SetName(objectData.fileName);
 
 			model->SetModel(groundTex_);
@@ -111,18 +111,18 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "building")
 		{
-			//ƒtƒ@ƒCƒ‹–¼‚©‚ç“o˜^Ï‚İƒ‚ƒfƒ‹‚ğŒŸõ
+			//ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰ç™»éŒ²æ¸ˆã¿ãƒ¢ãƒ‡ãƒ«ã‚’æ¤œç´¢
 			std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
 			model->Initialize();
 
-			//À•W
+			//åº§æ¨™
 			model->SetPos(objectData.translation);
-			//Šgk
+			//æ‹¡ç¸®
 			model->SetScale(objectData.scaling);
-			//‰ñ“]Šp
-			//blender‚Åo—Í‚³‚ê‚½’l‚ğ•ÏŠ·‚·‚é
+			//å›è»¢è§’
+			//blenderã§å‡ºåŠ›ã•ã‚ŒãŸå€¤ã‚’å¤‰æ›ã™ã‚‹
 			model->SetRot({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y + 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
-			//–¼‘O
+			//åå‰
 			model->SetName(objectData.fileName);
 
 			model->SetModel(buildingTex_);
@@ -132,18 +132,18 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "convenienceStore")
 		{
-			//ƒtƒ@ƒCƒ‹–¼‚©‚ç“o˜^Ï‚İƒ‚ƒfƒ‹‚ğŒŸõ
+			//ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰ç™»éŒ²æ¸ˆã¿ãƒ¢ãƒ‡ãƒ«ã‚’æ¤œç´¢
 			std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
 			model->Initialize();
 
-			//À•W
+			//åº§æ¨™
 			model->SetPos(objectData.translation);
-			//‰ñ“]Šp
-			//blender‚Åo—Í‚³‚ê‚½’l‚ğ•ÏŠ·‚·‚é
+			//å›è»¢è§’
+			//blenderã§å‡ºåŠ›ã•ã‚ŒãŸå€¤ã‚’å¤‰æ›ã™ã‚‹
 			model->SetRot({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y - 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
-			//Šgk
+			//æ‹¡ç¸®
 			//model->SetScale({ objectData.scaling.x ,objectData.scaling.y ,objectData.scaling.z });
-			//–¼‘O
+			//åå‰
 			model->SetName(objectData.fileName);
 
 			model->SetModel(convenienceStoreTex_);
@@ -153,21 +153,21 @@ void GameLevelData::Load()
 		}
 		else
 		{
-			//ƒtƒ@ƒCƒ‹–¼‚©‚ç“o˜^Ï‚İƒ‚ƒfƒ‹‚ğŒŸõ
+			//ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰ç™»éŒ²æ¸ˆã¿ãƒ¢ãƒ‡ãƒ«ã‚’æ¤œç´¢
 			std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
 			model->Initialize();
 
-			//À•W
+			//åº§æ¨™
 			model->SetPos(objectData.translation);
-			//‰ñ“]Šp
+			//å›è»¢è§’
 			model->SetRot(objectData.rotation);
-			//Šgk
+			//æ‹¡ç¸®
 			model->SetScale(objectData.scaling);
-			//–¼‘O
+			//åå‰
 			model->SetName(objectData.fileName);
-			//ƒRƒ‰ƒCƒ_[‚Ì’†SÀ•W
+			//ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®ä¸­å¿ƒåº§æ¨™
 			model->SetColliderCenter(objectData.collider.center);
-			//ƒRƒ‰ƒCƒ_[ƒTƒCƒY
+			//ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚µã‚¤ã‚º
 			model->SetColliderSize(objectData.collider.size);
 
 			if (objectData.fileName == "sphere")
@@ -207,7 +207,7 @@ void GameLevelData::SetFileName(const std::string& fileName)
 
 void GameLevelData::ReLoad()
 {
-	//íœ‚µ‚ÄÄ“Ç‚İ‚İ
+	//å‰Šé™¤ã—ã¦å†èª­ã¿è¾¼ã¿
 	models_.clear();
 	objects_.clear();
 	cameraData_.controlPoints.clear();

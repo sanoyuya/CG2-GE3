@@ -2,7 +2,7 @@
 
 Microsoft::WRL::ComPtr<ID3D12Device>SpriteCommon::sDevice_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>SpriteCommon::sCmdList_;
-Blob SpriteCommon::sBlob_;//ÉVÉFÅ[É_ÉIÉuÉWÉFÉNÉg
+Blob SpriteCommon::sBlob_;//„Ç∑„Çß„Éº„ÉÄ„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà
 std::array<PipelineSet, 6> SpriteCommon::sPip_;
 
 void SpriteCommon::StaticInitialize()
@@ -20,9 +20,9 @@ void SpriteCommon::StaticInitialize()
 
 void SpriteCommon::LoadShader()
 {
-	//í∏ì_ÉVÉFÅ[É_ÇÃì«Ç›çûÇ›Ç∆ÉRÉìÉpÉCÉã
+	//È†ÇÁÇπ„Ç∑„Çß„Éº„ÉÄ„ÅÆË™≠„ÅøËæº„Åø„Å®„Ç≥„É≥„Éë„Ç§„É´
 	sBlob_.vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Sprite/SpriteVS.hlsl", "main", "vs_5_0", sBlob_.vs.Get());
-	//ÉsÉNÉZÉãÉVÉFÅ[É_ÇÃì«Ç›çûÇ›Ç∆ÉRÉìÉpÉCÉã
+	//„Éî„ÇØ„Çª„É´„Ç∑„Çß„Éº„ÉÄ„ÅÆË™≠„ÅøËæº„Åø„Å®„Ç≥„É≥„Éë„Ç§„É´
 	sBlob_.ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Sprite/SpritePS.hlsl", "main", "ps_5_0", sBlob_.ps.Get());
 }
 
@@ -76,21 +76,21 @@ void SpriteCommon::BlendSet(BlendMode mode)
 
 void SpriteCommon::DrawCommand(TextureData* textureData, D3D12_VERTEX_BUFFER_VIEW vbView, D3D12_INDEX_BUFFER_VIEW ibView, ConstantBuffer* constBuff)
 {
-	// ÉvÉäÉ~ÉeÉBÉuå`èÛÇÃê›íËÉRÉ}ÉìÉh
-	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // éOäpå`ÉäÉXÉg
-	// í∏ì_ÉoÉbÉtÉ@ÉrÉÖÅ[ÇÃê›íËÉRÉ}ÉìÉh
+	// „Éó„É™„Éü„ÉÜ„Ç£„ÉñÂΩ¢Áä∂„ÅÆË®≠ÂÆö„Ç≥„Éû„É≥„Éâ
+	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // ‰∏âËßíÂΩ¢„É™„Çπ„Éà
+	// È†ÇÁÇπ„Éê„ÉÉ„Éï„Ç°„Éì„É•„Éº„ÅÆË®≠ÂÆö„Ç≥„Éû„É≥„Éâ
 	sCmdList_->IASetVertexBuffers(0, 1, &vbView);
-	//íËêîÉoÉbÉtÉ@ÉrÉÖÅ[(CBV)ÇÃê›íËÉRÉ}ÉìÉh
+	//ÂÆöÊï∞„Éê„ÉÉ„Éï„Ç°„Éì„É•„Éº(CBV)„ÅÆË®≠ÂÆö„Ç≥„Éû„É≥„Éâ
 	sCmdList_->SetGraphicsRootConstantBufferView(0, constBuff->GetAddress());
-	//SRVÉqÅ[ÉvÇÃê›íËÉRÉ}ÉìÉh
+	//SRV„Éí„Éº„Éó„ÅÆË®≠ÂÆö„Ç≥„Éû„É≥„Éâ
 	sCmdList_->SetDescriptorHeaps(1, textureData->srvHeap.GetAddressOf());
-	//SRVÉqÅ[ÉvÇÃêÊì™ÉnÉìÉhÉãÇéÊìæ(SRVÇéwÇµÇƒÇ¢ÇÈÇÕÇ∏)
+	//SRV„Éí„Éº„Éó„ÅÆÂÖàÈ†≠„Éè„É≥„Éâ„É´„ÇíÂèñÂæó(SRV„ÇíÊåá„Åó„Å¶„ÅÑ„Çã„ÅØ„Åö)
 	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = textureData->gpuHandle;
-	//SRVÉqÅ[ÉvêÊì™Ç…Ç†ÇÈSRVÇÉãÅ[ÉgÉpÉâÉÅÅ[É^Å[1î‘Ç…ê›íË
+	//SRV„Éí„Éº„ÉóÂÖàÈ†≠„Å´„ÅÇ„ÇãSRV„Çí„É´„Éº„Éà„Éë„É©„É°„Éº„Çø„Éº1Áï™„Å´Ë®≠ÂÆö
 	sCmdList_->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
-	//ÉCÉìÉfÉbÉNÉXÉoÉbÉtÉ@ÉrÉÖÅ[ÇÃê›íËÉRÉ}ÉìÉh
+	//„Ç§„É≥„Éá„ÉÉ„ÇØ„Çπ„Éê„ÉÉ„Éï„Ç°„Éì„É•„Éº„ÅÆË®≠ÂÆö„Ç≥„Éû„É≥„Éâ
 	sCmdList_->IASetIndexBuffer(&ibView);
 
-	// ï`âÊÉRÉ}ÉìÉh
+	// ÊèèÁîª„Ç≥„Éû„É≥„Éâ
 	sCmdList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }

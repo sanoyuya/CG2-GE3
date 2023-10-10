@@ -11,9 +11,9 @@ void Camera::StaticInitialize(WindowsApp* windowsApp)
 
 void Camera::Initialize(bool projectionFlag)
 {
-	eye_ = { 0,0,-distance_ };//‹“_À•W
-	target_ = { 0,0,0 };//’‹“_À•W
-	up_ = { 0,1,0 };//ã•ûŒüƒxƒNƒgƒ‹
+	eye_ = { 0,0,-distance_ };//è¦–ç‚¹åº§æ¨™
+	target_ = { 0,0,0 };//æ³¨è¦–ç‚¹åº§æ¨™
+	up_ = { 0,1,0 };//ä¸Šæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 	aspect_ = sWidth_ / sHeight_;
 	nearClip_ = 0.1f;
 	farClip_ = 1000.0f;
@@ -38,12 +38,12 @@ void Camera::UpdateMatProjection(bool projectionFlag)
 {
 	if (projectionFlag == false)
 	{
-		//•½s“Š‰e
+		//å¹³è¡ŒæŠ•å½±
 		myMath::MakeOrthogonalL(0.0f, sWidth_, sHeight_,0.0f , nearClip_, farClip_, matProjection_);
 	}
 	else
 	{
-		//“§‹“Š‰e
+		//é€è¦–æŠ•å½±
 		myMath::MakePerspectiveL(myMath::ChangeRadians(60.0f), aspect_, nearClip_, farClip_, matProjection_);
 	}
 }

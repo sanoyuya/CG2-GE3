@@ -29,12 +29,12 @@ void LockOnAnimation::Update(const myMath::Vector3& position,Camera* camera)
 	{
 		lockOnAnimationTimer_++;
 
-		//Šgk‰‰o
+		//æ‹¡ç¸®æ¼”å‡º
 		lockOnTrans_.scale = { static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer_,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
 			static_cast<float>(Easing::EaseOutBack(lockOnAnimationTimer_,0.0f,1.0f / 5.0f,15.0f,6.0f,4.0f)),
 			1.0f };
 
-		//‰ñ“]‰‰o
+		//å›è»¢æ¼”å‡º
 		lockOnTrans_.rotation.z = static_cast<float>(Easing::EaseOutCirc(lockOnAnimationTimer_, 0.0f, -myMath::AX_2PIF, 15.0f));
 
 		if (lockOnAnimationTimer_ > 15.0f)

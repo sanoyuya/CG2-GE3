@@ -14,7 +14,7 @@ void LockOnBullet::Initialize()
 	bullet_->SetModel(bulletTex_);
 	bulletTrans_.Initialize();
 
-	//ƒp[ƒeƒBƒNƒ‹‚Ì‰Šú‰»
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®åˆæœŸåŒ–
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
 	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
@@ -94,7 +94,7 @@ void LockOnBullet::SetCamera(Camera* camera)
 
 void LockOnBullet::SetPos(const myMath::Vector3& position)
 {
-	bulletTrans_.translation = position;//”O‚Ì‚½‚ß
+	bulletTrans_.translation = position;//å¿µã®ãŸã‚
 	startPos_ = position;
 }
 
@@ -125,24 +125,25 @@ void LockOnBullet::SetControlPos(const myMath::Vector3& position)
 
 void LockOnBullet::SmokeUpdate()
 {
-	//ƒGƒ“ƒWƒ“‚ÌÀ•W‚É‡‚í‚¹‚é‚½‚ßAƒ‚ƒfƒ‹‚Ì’†SÀ•W‚©‚çˆÊ’u‚ğ‚¸‚ç‚¹‚é‚æ‚¤‚Éq‚ğì¬
+	//ã‚¨ãƒ³ã‚¸ãƒ³ã®åº§æ¨™ã«åˆã‚ã›ã‚‹ãŸã‚ã€ãƒ¢ãƒ‡ãƒ«ã®ä¸­å¿ƒåº§æ¨™ã‹ã‚‰ä½ç½®ã‚’ãšã‚‰ã›ã‚‹ã‚ˆã†ã«å­ã‚’ä½œæˆ
 	smokeTrans_.parent = &bulletTrans_;
-	//ƒ‚ƒfƒ‹‚Ì’†SÀ•W‚©‚çˆÊ’u‚ğ‚¸‚ç‚·
+	//ãƒ¢ãƒ‡ãƒ«ã®ä¸­å¿ƒåº§æ¨™ã‹ã‚‰ä½ç½®ã‚’ãšã‚‰ã™
 	smokeTrans_.translation = { 0.0f,0.0f,-1.0f };
-	//q‚ÌXVˆ—
+	//å­ã®æ›´æ–°å‡¦ç†
 	smokeTrans_.TransUpdate(camera_);
-	//ƒp[ƒeƒBƒNƒ‹‚ğ–ˆƒtƒŒ[ƒ€ì¬
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ä½œæˆ
 	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
-	//ƒp[ƒeƒBƒNƒ‹‚ÌXV
+	smokeEmitter_->SetSize(2.0f);
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æ›´æ–°
 	smokeEmitter_->Update(camera_);
 }
 
 void LockOnBullet::BulletMove()
 {
-	//’e‚ÌˆÚ“®‚ÉƒxƒWƒG•âŠÔ‚ğ‚©‚¯‚é
+	//å¼¾ã®ç§»å‹•ã«ãƒ™ã‚¸ã‚¨è£œé–“ã‚’ã‹ã‘ã‚‹
 	bulletTrans_.translation = myMath::Beziers(startPos_, lockOnEnemy_->GetTransform().translation, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_));
 
-	//ƒxƒWƒG•âŠÔ‚ÉƒC[ƒWƒ“ƒO•âŠÔ‚ğ‚©‚¯‚é
+	//ãƒ™ã‚¸ã‚¨è£œé–“ã«ã‚¤ãƒ¼ã‚¸ãƒ³ã‚°è£œé–“ã‚’ã‹ã‘ã‚‹
 	beziersTime_ = static_cast<float>(Easing::EaseInOutCubic(deathTimer_, 0.0f, static_cast<float>(maxDeathTime_), static_cast<float>(maxDeathTime_)));
 
 	bulletTrans_.TransUpdate(camera_);

@@ -20,163 +20,163 @@ public:
 	void Initialize(WindowsApp* windowsApp);
 	void Update();
 
-#pragma region	ƒL[ƒ{[ƒh
+#pragma region	ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
 
 	/// <summary>
-	/// keyName‚Åw’è‚µ‚½ƒL[‚ğ‰Ÿ‚µ‚½uŠÔ
+	/// keyNameã§æŒ‡å®šã—ãŸã‚­ãƒ¼ã‚’æŠ¼ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="keyName">DIK_ZZ</param>
+	/// <param name="keyName">DIK_ã€‡ã€‡</param>
 	/// <returns></returns>
 	bool KeyboardTriggerPush(int keyName);
 
 	/// <summary>
-	/// keyName‚Åw’è‚µ‚½ƒL[‚ğ‰Ÿ‚µ‚Ä‚¢‚éŠÔ
+	/// keyNameã§æŒ‡å®šã—ãŸã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã„ã‚‹é–“
 	/// </summary>
-	/// <param name="keyName">DIK_ZZ</param>
+	/// <param name="keyName">DIK_ã€‡ã€‡</param>
 	/// <returns></returns>
 	bool KeyboardKeepPush(int keyName);
 
 	/// <summary>
-	/// keyName‚Åw’è‚µ‚½ƒL[‚ğ—£‚µ‚½uŠÔ
+	/// keyNameã§æŒ‡å®šã—ãŸã‚­ãƒ¼ã‚’é›¢ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="keyName">DIK_ZZ</param>
+	/// <param name="keyName">DIK_ã€‡ã€‡</param>
 	/// <returns></returns>
 	bool KeyboardTriggerRelease(int keyName);
 
 	/// <summary>
-	/// keyName‚Åw’è‚µ‚½ƒL[‚ğ‰Ÿ‚µ‚Ä‚¢‚È‚¢ŠÔ
+	/// keyNameã§æŒ‡å®šã—ãŸã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã„ãªã„é–“
 	/// </summary>
-	/// <param name="keyName">DIK_ZZ</param>
+	/// <param name="keyName">DIK_ã€‡ã€‡</param>
 	/// <returns></returns>
 	bool KeyboardKeepRelease(int keyName);
 
 #pragma endregion
 
-#pragma region ƒ}ƒEƒX
+#pragma region ãƒã‚¦ã‚¹
 
 	/// <summary>
-	/// button‚Åw’è‚µ‚½ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½uŠÔ
+	/// buttonã§æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="button">LEFT,RIGHT,CENTER‚Ì‚Ç‚ê‚©</param>
+	/// <param name="button">LEFT,RIGHT,CENTERã®ã©ã‚Œã‹</param>
 	/// <returns></returns>
 	bool MouseTriggerPush(MouseButton button);
 
 	/// <summary>
-	/// button‚Åw’è‚µ‚½ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚Ä‚¢‚éŠÔ
+	/// buttonã§æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ã¦ã„ã‚‹é–“
 	/// </summary>
-	/// <param name="button">LEFT,RIGHT,CENTER‚Ì‚Ç‚ê‚©</param>
+	/// <param name="button">LEFT,RIGHT,CENTERã®ã©ã‚Œã‹</param>
 	/// <returns></returns>
 	bool MouseKeepPush(MouseButton button);
 
 	/// <summary>
-	/// button‚Åw’è‚µ‚½ƒ{ƒ^ƒ“‚ğ—£‚µ‚½uŠÔ
+	/// buttonã§æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã‚’é›¢ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="button">LEFT,RIGHT,CENTER‚Ì‚Ç‚ê‚©</param>
+	/// <param name="button">LEFT,RIGHT,CENTERã®ã©ã‚Œã‹</param>
 	/// <returns></returns>
 	bool MouseTriggerRelease(MouseButton button);
 
 	/// <summary>
-	/// button‚Åw’è‚µ‚½ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚Ä‚¢‚È‚¢ŠÔ
+	/// buttonã§æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ã¦ã„ãªã„é–“
 	/// </summary>
-	/// <param name="button">LEFT,RIGHT,CENTER‚Ì‚Ç‚ê‚©</param>
+	/// <param name="button">LEFT,RIGHT,CENTERã®ã©ã‚Œã‹</param>
 	/// <returns></returns>
 	bool MouseKeepRelease(MouseButton button);
 
-	//ƒ}ƒEƒX‚ÌÀ•Wæ“¾
+	//ãƒã‚¦ã‚¹ã®åº§æ¨™å–å¾—
 	myMath::Vector2 GetmousePos();
 
 #pragma endregion
 
-#pragma region	ƒQ[ƒ€ƒpƒbƒh
+#pragma region	ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰
 
 	/// <summary>
-	/// button‚Åw’è‚µ‚½ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½uŠÔ
+	/// buttonã§æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="button">A‚âLB“™</param>
+	/// <param name="button">Aã‚„LBç­‰</param>
 	/// <returns></returns>
 	bool ControllerButtonTriggerPush(ControllerButton button);
 
 	/// <summary>
-	/// button‚Åw’è‚µ‚½ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚Ä‚¢‚éŠÔ
+	/// buttonã§æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ã¦ã„ã‚‹é–“
 	/// </summary>
-	/// <param name="button">A‚âLB“™</param>
+	/// <param name="button">Aã‚„LBç­‰</param>
 	/// <returns></returns>
 	bool ControllerButtonKeepPush(ControllerButton button);
 
 	/// <summary>
-	/// button‚Åw’è‚µ‚½ƒ{ƒ^ƒ“‚ğ—£‚µ‚½uŠÔ
+	/// buttonã§æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã‚’é›¢ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="button">A‚âLB“™</param>
+	/// <param name="button">Aã‚„LBç­‰</param>
 	/// <returns></returns>
 	bool ControllerButtonTriggerRelease(ControllerButton button);
 
 	/// <summary>
-	/// button‚Åw’è‚µ‚½ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚Ä‚¢‚È‚¢ŠÔ
+	/// buttonã§æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ã¦ã„ãªã„é–“
 	/// </summary>
-	/// <param name="button">A‚âLB“™</param>
+	/// <param name="button">Aã‚„LBç­‰</param>
 	/// <returns></returns>
 	bool ControllerButtonKeepRelease(ControllerButton button);
 
 	/// <summary>
-	/// stick‚Åw’è‚µ‚½•ûŒü‚É“|‚µ‚½uŠÔ
+	/// stickã§æŒ‡å®šã—ãŸæ–¹å‘ã«å€’ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="stick">¶ƒXƒeƒBƒbƒN‚È‚çL_ZZ,‰EƒXƒeƒBƒbƒN‚È‚çR_ZZ</param>
-	/// <param name="deadRange">ƒfƒbƒhƒ][ƒ“‚Ì”ÍˆÍ‰Šú’l0.3f</param>
-	/// <param name="deadRate">ƒfƒbƒhƒ][ƒ“”»’è‚Ì“x‡‚¢‰Šú’l1.0f</param>
+	/// <param name="stick">å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãªã‚‰L_ã€‡ã€‡,å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãªã‚‰R_ã€‡ã€‡</param>
+	/// <param name="deadRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®ç¯„å›²åˆæœŸå€¤0.3f</param>
+	/// <param name="deadRate">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³åˆ¤å®šã®åº¦åˆã„åˆæœŸå€¤1.0f</param>
 	/// <returns></returns>
 	bool ControllerStickTriggerPush(ControllerStick stick, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
 
 	/// <summary>
-	/// stick‚Åw’è‚µ‚½•ûŒü‚É“|‚µ‚Ä‚¢‚éŠÔ
+	/// stickã§æŒ‡å®šã—ãŸæ–¹å‘ã«å€’ã—ã¦ã„ã‚‹é–“
 	/// </summary>
-	/// <param name="stick">¶ƒXƒeƒBƒbƒN‚È‚çL_ZZ,‰EƒXƒeƒBƒbƒN‚È‚çR_ZZ</param>
-	/// <param name="deadRange">ƒfƒbƒhƒ][ƒ“‚Ì”ÍˆÍ‰Šú’l0.3f</param>
-	/// <param name="deadRate">ƒfƒbƒhƒ][ƒ“”»’è‚Ì“x‡‚¢‰Šú’l1.0f</param>
+	/// <param name="stick">å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãªã‚‰L_ã€‡ã€‡,å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãªã‚‰R_ã€‡ã€‡</param>
+	/// <param name="deadRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®ç¯„å›²åˆæœŸå€¤0.3f</param>
+	/// <param name="deadRate">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³åˆ¤å®šã®åº¦åˆã„åˆæœŸå€¤1.0f</param>
 	/// <returns></returns>
 	bool ControllerStickKeepPush(ControllerStick stick, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
 
 	/// <summary>
-	/// stick‚Åw’è‚µ‚½•ûŒü‚©‚ç–ß‚µ‚½uŠÔ
+	/// stickã§æŒ‡å®šã—ãŸæ–¹å‘ã‹ã‚‰æˆ»ã—ãŸç¬é–“
 	/// </summary>
-	/// <param name="stick">¶ƒXƒeƒBƒbƒN‚È‚çL_ZZ,‰EƒXƒeƒBƒbƒN‚È‚çR_ZZ</param>
-	/// <param name="deadRange">ƒfƒbƒhƒ][ƒ“‚Ì”ÍˆÍ‰Šú’l0.3f</param>
-	/// <param name="deadRate">ƒfƒbƒhƒ][ƒ“”»’è‚Ì“x‡‚¢‰Šú’l1.0f</param>
+	/// <param name="stick">å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãªã‚‰L_ã€‡ã€‡,å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãªã‚‰R_ã€‡ã€‡</param>
+	/// <param name="deadRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®ç¯„å›²åˆæœŸå€¤0.3f</param>
+	/// <param name="deadRate">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³åˆ¤å®šã®åº¦åˆã„åˆæœŸå€¤1.0f</param>
 	/// <returns></returns>
 	bool ControllerStickTriggerRelease(ControllerStick stick, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
 
 	/// <summary>
-	/// stick‚Åw’è‚µ‚½•ûŒü‚É“|‚µ‚Ä‚¢‚È‚¢ŠÔ
+	/// stickã§æŒ‡å®šã—ãŸæ–¹å‘ã«å€’ã—ã¦ã„ãªã„é–“
 	/// </summary>
-	/// <param name="stick">¶ƒXƒeƒBƒbƒN‚È‚çL_ZZ,‰EƒXƒeƒBƒbƒN‚È‚çR_ZZ</param>
-	/// <param name="deadRange">ƒfƒbƒhƒ][ƒ“‚Ì”ÍˆÍ‰Šú’l0.3f</param>
-	/// <param name="deadRate">ƒfƒbƒhƒ][ƒ“”»’è‚Ì“x‡‚¢‰Šú’l1.0f</param>
+	/// <param name="stick">å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãªã‚‰L_ã€‡ã€‡,å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãªã‚‰R_ã€‡ã€‡</param>
+	/// <param name="deadRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®ç¯„å›²åˆæœŸå€¤0.3f</param>
+	/// <param name="deadRate">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³åˆ¤å®šã®åº¦åˆã„åˆæœŸå€¤1.0f</param>
 	/// <returns></returns>
 	bool ControllerStickKeepRelease(ControllerStick stick, const float& deadRange = 0.3f, const myMath::Vector2& deadRate = { 1.0f,1.0f });
 
 	/// <summary>
-	/// ƒQ[ƒ€ƒpƒbƒh‚ÌU“®
+	/// ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•
 	/// </summary>
-	/// <param name="power">U“®‚Ì‹­‚³0.0f`1.0f</param>
-	/// <param name="span">U“®‚ÌŠÔƒtƒŒ[ƒ€</param>
+	/// <param name="power">æŒ¯å‹•ã®å¼·ã•0.0fï½1.0f</param>
+	/// <param name="span">æŒ¯å‹•ã®æ™‚é–“ãƒ•ãƒ¬ãƒ¼ãƒ </param>
 	void ShakeController(const float& power, const float& span);
 
 	/// <summary>
-	/// LƒXƒeƒBƒbƒN‚ÌŒX‚«‚Ìæ“¾
+	/// Lã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å‚¾ãã®å–å¾—
 	/// </summary>
-	/// <param name="deadRate">ƒfƒbƒhƒ][ƒ“”»’è‚Ì“x‡‚¢‰Šú’l1.0f</param>
+	/// <param name="deadRate">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³åˆ¤å®šã®åº¦åˆã„åˆæœŸå€¤1.0f</param>
 	/// <returns></returns>
 	myMath::Vector2 GetLeftStickVec(const myMath::Vector2& deadRate = { 1.0f,1.0f });
 
 	/// <summary>
-	/// RƒXƒeƒBƒbƒN‚ÌŒX‚«‚Ìæ“¾
+	/// Rã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å‚¾ãã®å–å¾—
 	/// </summary>
-	/// <param name="deadRate">ƒfƒbƒhƒ][ƒ“”»’è‚Ì“x‡‚¢‰Šú’l1.0f</param>
+	/// <param name="deadRate">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³åˆ¤å®šã®åº¦åˆã„åˆæœŸå€¤1.0f</param>
 	/// <returns></returns>
 	myMath::Vector2 GetRightStickVec(const myMath::Vector2& deadRate = { 1.0f,1.0f });
 
 #pragma endregion
 
-	//ƒVƒ“ƒOƒ‹ƒgƒ“
+	//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
 	static InputManager* GetInstance();
 
 private:
@@ -184,7 +184,7 @@ private:
 	InputManager() = default;
 	~InputManager() = default;
 
-	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^E‘ã“ü‰‰Zqíœ
+	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ä»£å…¥æ¼”ç®—å­å‰Šé™¤
 	InputManager& operator=(const InputManager&) = delete;
 	InputManager(const InputManager&) = delete;
 };

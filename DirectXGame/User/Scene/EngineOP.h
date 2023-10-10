@@ -16,21 +16,21 @@ private:
 	std::unique_ptr<Sprite>back_;
 	uint32_t backTex_ = 0;
 
-	//ƒAƒjƒ[ƒVƒ‡ƒ“ŠÖ˜A
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–¢é€£
 	uint16_t animationTimer_ = 0;
 	uint16_t animationEndTime_ = 180;
 
 public:
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	void Initialize()override;
 
-	//I—¹ˆ—
+	//çµ‚äº†å‡¦ç†
 	void Destroy()override;
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	void Update()override;
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	void Draw()override;
 };

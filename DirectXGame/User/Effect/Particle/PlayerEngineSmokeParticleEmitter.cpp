@@ -2,7 +2,7 @@
 
 void PlayerEngineSmokeParticleEmitter::Initialize()
 {
-	// ƒp[ƒeƒBƒNƒ‹¶¬
+	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ç”Ÿæˆ
 	particleMan_ = std::make_unique<ParticleManager>();
 	tex_ = particleMan_->LoadTexture("Resources/particle.png");
 	particleMan_->Initialize(tex_);
@@ -14,28 +14,28 @@ void PlayerEngineSmokeParticleEmitter::Create(const myMath::Vector3 center)
 	{
 		const float lifeTime = 15.0f;
 		const float radius = 0.125f;
-		//‰ŠúÀ•W(¶¬‚·‚éêŠ‚Ì’†SÀ•W)
+		//åˆæœŸåº§æ¨™(ç”Ÿæˆã™ã‚‹å ´æ‰€ã®ä¸­å¿ƒåº§æ¨™)
 		myMath::Vector3 pos{};
-		//’†S“_‚©‚ç”¼Œa1m‚Ì‰~‚Ì’†‚Éƒ‰ƒ“ƒ_ƒ€‚Éİ’è
+		//ä¸­å¿ƒç‚¹ã‹ã‚‰åŠå¾„1mã®å††ã®ä¸­ã«ãƒ©ãƒ³ãƒ€ãƒ ã«è¨­å®š
 		pos.x = center.x + static_cast<float>(myMath::GetRand(-radius, radius));
 		pos.y = center.y + static_cast<float>(myMath::GetRand(-radius, radius));
 		pos.z = center.z;
 
-		//¶¬‚µ‚½À•W‚©‚ç’†SÀ•W‚ÉŒü‚©‚¤ˆ—
+		//ç”Ÿæˆã—ãŸåº§æ¨™ã‹ã‚‰ä¸­å¿ƒåº§æ¨™ã«å‘ã‹ã†å‡¦ç†
 		myMath::Vector3 particleFrontVec = center - pos;
-		//³–ÊƒxƒNƒgƒ‹‚ğ³‹K‰»
+		//æ­£é¢ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–
 		particleFrontVec.normalization();
 		
 		const float speed = radius * 2 / lifeTime;
-		//³–ÊƒxƒNƒgƒ‹‚Ì•ûŒü‚Éspeed•ªi‚Ş
+		//æ­£é¢ãƒ™ã‚¯ãƒˆãƒ«ã®æ–¹å‘ã«speedåˆ†é€²ã‚€
 		myMath::Vector3 vel = particleFrontVec * speed;
 
 		myMath::Vector3 acc{};
 
 		myMath::Vector4 col = { 1.0f,1.0f,1.0f,1.0f };
 
-		//’Ç‰Á
-		particleMan_->Add(lifeTime, pos, vel, acc, 0.5f, 0.0f, col);
+		//è¿½åŠ 
+		particleMan_->Add(lifeTime, pos, vel, acc, size_, 0.0f, col);
 	}
 }
 
@@ -47,4 +47,9 @@ void PlayerEngineSmokeParticleEmitter::Update(Camera* camera)
 void PlayerEngineSmokeParticleEmitter::Draw()
 {
 	particleMan_->Draw();
+}
+
+void PlayerEngineSmokeParticleEmitter::SetSize(const float size)
+{
+	size_ = size;
 }

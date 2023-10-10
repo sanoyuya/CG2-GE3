@@ -3,7 +3,7 @@
 PosScaleColor ParticleManager::vertices_[vertexCount_];
 Microsoft::WRL::ComPtr<ID3D12Device>ParticleManager::sDevice_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>ParticleManager::sCmdList_;
-Blob ParticleManager::sBlob_;//ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+Blob ParticleManager::sBlob_;//ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 std::array<PipelineSet, 6> ParticleManager::sPip_;
 
 ParticleManager::ParticleManager()
@@ -31,49 +31,49 @@ void ParticleManager::Initialize(uint32_t handle)
 
 void ParticleManager::Update(Camera* camera)
 {
-	//õ–½‚ªs‚«‚½ƒp[ƒeƒBƒNƒ‹‚ğ‘Síœ
+	//å¯¿å‘½ãŒå°½ããŸãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’å…¨å‰Šé™¤
 	particles_.remove_if([](OneParticle& x)
 		{
 			return x.flame >= x.num_flame;
 		}
 	);
 
-	//‘Sƒp[ƒeƒBƒNƒ‹XV
+	//å…¨ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æ›´æ–°
 	for (std::forward_list<OneParticle>::iterator it = particles_.begin();
 		it != particles_.end();
 		it++)
 	{
-		//Œo‰ßƒtƒŒ[ƒ€”‚ğƒJƒEƒ“ƒg
+		//çµŒéãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
 		it->flame++;
-		//‘¬“x‚É‰Á‘¬“x‚ğ‰ÁZ
+		//é€Ÿåº¦ã«åŠ é€Ÿåº¦ã‚’åŠ ç®—
 		it->velocity = it->velocity + it->accel;
-		//‘¬“x‚É‚æ‚éˆÚ“®
+		//é€Ÿåº¦ã«ã‚ˆã‚‹ç§»å‹•
 		it->position = it->position + it->velocity;
 
-		//is“x‚ğ0`1‚Ì”ÍˆÍ‚ÉŠ·Z
+		//é€²è¡Œåº¦ã‚’0ï½1ã®ç¯„å›²ã«æ›ç®—
 		float f = it->flame / it->num_flame;
-		//ƒXƒP[ƒ‹‚ÌüŒ`•âŠÔ
+		//ã‚¹ã‚±ãƒ¼ãƒ«ã®ç·šå½¢è£œé–“
 		it->scale = (it->e_scale - it->s_scale) * f;
 		it->scale += it->s_scale;
 
 		it->color.w = 1.0f - 1.0f * it->flame / it->num_flame;
 	}
 
-	//’è”ƒoƒbƒtƒ@‚Öƒf[ƒ^“]‘—
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¸ãƒ‡ãƒ¼ã‚¿è»¢é€
 	PosScaleColor* vertMap = nullptr;
 	result_ = vertexBuffer_->GetResource()->Map(0, nullptr, (void**)&vertMap);
 	assert(SUCCEEDED(result_));
 
-	//ƒp[ƒeƒBƒNƒ‹‚Ìî•ñ‚ğ1‚Â‚¸‚Â”½‰f
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æƒ…å ±ã‚’1ã¤ãšã¤åæ˜ 
 	for (std::forward_list<OneParticle>::iterator it = particles_.begin();it != particles_.end();it++)
 	{
-		//À•W
+		//åº§æ¨™
 		vertMap->pos = it->position;
-		//ƒXƒP[ƒ‹
+		//ã‚¹ã‚±ãƒ¼ãƒ«
 		vertMap->scale = it->scale;
-		//ƒJƒ‰[
+		//ã‚«ãƒ©ãƒ¼
 		vertMap->color = it->color;
-		//Ÿ‚Ì’¸“_‚Ö
+		//æ¬¡ã®é ‚ç‚¹ã¸
 		vertMap++;
 	}
 	vertexBuffer_->GetResource()->Unmap(0, nullptr);
@@ -83,51 +83,51 @@ void ParticleManager::Update(Camera* camera)
 
 void ParticleManager::RandomXMoveUpdate(Camera* camera,float xMoveMin, float xMoveMax)
 {
-	//õ–½‚ªs‚«‚½ƒp[ƒeƒBƒNƒ‹‚ğ‘Síœ
+	//å¯¿å‘½ãŒå°½ããŸãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’å…¨å‰Šé™¤
 	particles_.remove_if([](OneParticle& x)
 		{
 			return x.flame >= x.num_flame;
 		}
 	);
 
-	//‘Sƒp[ƒeƒBƒNƒ‹XV
+	//å…¨ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æ›´æ–°
 	for (std::forward_list<OneParticle>::iterator it = particles_.begin();
 		it != particles_.end();
 		it++)
 	{
-		//Œo‰ßƒtƒŒ[ƒ€”‚ğƒJƒEƒ“ƒg
+		//çµŒéãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
 		it->flame++;
-		//‘¬“x‚É‰Á‘¬“x‚ğ‰ÁZ
+		//é€Ÿåº¦ã«åŠ é€Ÿåº¦ã‚’åŠ ç®—
 		it->velocity = it->velocity + it->accel;
-		//‘¬“x‚É‚æ‚éˆÚ“®
+		//é€Ÿåº¦ã«ã‚ˆã‚‹ç§»å‹•
 		it->position.x = it->position.x + static_cast<float>(myMath::GetRand(xMoveMin, xMoveMax));
 		it->position.y = it->position.y + it->velocity.y;
 		it->position.z = it->position.z + it->velocity.z;
 
-		//is“x‚ğ0`1‚Ì”ÍˆÍ‚ÉŠ·Z
+		//é€²è¡Œåº¦ã‚’0ï½1ã®ç¯„å›²ã«æ›ç®—
 		float f = (float)it->flame / it->num_flame;
-		//ƒXƒP[ƒ‹‚ÌüŒ`•âŠÔ
+		//ã‚¹ã‚±ãƒ¼ãƒ«ã®ç·šå½¢è£œé–“
 		it->scale = (it->e_scale - it->s_scale) * f;
 		it->scale += it->s_scale;
 
 		it->color.w -= 1.0f / it->num_flame;
 	}
 
-	//’è”ƒoƒbƒtƒ@‚Öƒf[ƒ^“]‘—
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¸ãƒ‡ãƒ¼ã‚¿è»¢é€
 	PosScaleColor* vertMap = nullptr;
 	result_ = vertexBuffer_->GetResource()->Map(0, nullptr, (void**)&vertMap);
 	assert(SUCCEEDED(result_));
 
-	//ƒp[ƒeƒBƒNƒ‹‚Ìî•ñ‚ğ1‚Â‚¸‚Â”½‰f
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æƒ…å ±ã‚’1ã¤ãšã¤åæ˜ 
 	for (std::forward_list<OneParticle>::iterator it = particles_.begin(); it != particles_.end(); it++)
 	{
-		//À•W
+		//åº§æ¨™
 		vertMap->pos = it->position;
-		//ƒXƒP[ƒ‹
+		//ã‚¹ã‚±ãƒ¼ãƒ«
 		vertMap->scale = it->scale;
-		//ƒJƒ‰[
+		//ã‚«ãƒ©ãƒ¼
 		vertMap->color = it->color;
-		//Ÿ‚Ì’¸“_‚Ö
+		//æ¬¡ã®é ‚ç‚¹ã¸
 		vertMap++;
 	}
 	vertexBuffer_->GetResource()->Unmap(0, nullptr);
@@ -137,11 +137,11 @@ void ParticleManager::RandomXMoveUpdate(Camera* camera,float xMoveMin, float xMo
 
 void ParticleManager::Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color)
 {
-	//ƒŠƒXƒg‚É—v‘f‚ğ’Ç‰Á
+	//ãƒªã‚¹ãƒˆã«è¦ç´ ã‚’è¿½åŠ 
 	particles_.emplace_front();
-	//’Ç‰Á‚µ‚½—v‘f‚ÌQÆ
+	//è¿½åŠ ã—ãŸè¦ç´ ã®å‚ç…§
 	OneParticle& p = particles_.front();
-	//’l‚ÌƒZƒbƒg
+	//å€¤ã®ã‚»ãƒƒãƒˆ
 	p.position = position;
 	p.velocity = velocity;
 	p.accel = accel;
@@ -153,9 +153,9 @@ void ParticleManager::Add(float life, myMath::Vector3 position, myMath::Vector3 
 
 void ParticleManager::Draw()
 {
-	//ƒuƒŒƒ“ƒhƒ‚[ƒh‚É‘Î‰
+	//ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã«å¯¾å¿œ
 	BlendSet(blendMode_);
-	//•`‰æƒRƒ}ƒ“ƒh
+	//æç”»ã‚³ãƒãƒ³ãƒ‰
 	DrawCommand();
 }
 
@@ -168,7 +168,7 @@ void ParticleManager::CreateBuff()
 {
 	for (int i = 0; i < vertexCount_; i++)
 	{
-		//x,y,z‘S‚Ä[-5.0f,+5.0f]‚Åƒ‰ƒ“ƒ_ƒ€‚É•ª•z
+		//x,y,zå…¨ã¦[-5.0f,+5.0f]ã§ãƒ©ãƒ³ãƒ€ãƒ ã«åˆ†å¸ƒ
 		const float rnd_width = 10.0f;
 		vertices_[i].pos.x = (float)rand() / RAND_MAX * rnd_width - rnd_width / 2.0f;
 		vertices_[i].pos.y = (float)rand() / RAND_MAX * rnd_width - rnd_width / 2.0f;
@@ -185,11 +185,11 @@ void ParticleManager::CreateBuff()
 
 void ParticleManager::LoadShader()
 {
-	//’¸“_ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_.vs = DrawCommon::ShaderCompile(L"Resources/Shaders/Particle/ParticleVS.hlsl", "main", "vs_5_0", sBlob_.vs.Get());
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_.ps = DrawCommon::ShaderCompile(L"Resources/Shaders/Particle/ParticlePS.hlsl", "main", "ps_5_0", sBlob_.ps.Get());
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ì“Ç‚İ‚İ‚ÆƒRƒ“ƒpƒCƒ‹
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®èª­ã¿è¾¼ã¿ã¨ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	sBlob_.gs = DrawCommon::ShaderCompile(L"Resources/Shaders/Particle/ParticleGS.hlsl", "main", "gs_5_0", sBlob_.gs.Get());
 }
 
@@ -234,48 +234,48 @@ void ParticleManager::BlendSet(BlendMode mode)
 
 void ParticleManager::DrawCommand()
 {
-	// ƒvƒŠƒ~ƒeƒBƒuŒ`ó‚Ìİ’èƒRƒ}ƒ“ƒh
-	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST); // OŠpŒ`ƒŠƒXƒg
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìİ’èƒRƒ}ƒ“ƒh
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–å½¢çŠ¶ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
+	sCmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST); // ä¸‰è§’å½¢ãƒªã‚¹ãƒˆ
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	D3D12_VERTEX_BUFFER_VIEW vbView = vertexBuffer_->GetView();
 	sCmdList_->IASetVertexBuffers(0, 1, &vbView);
-	//’è”ƒoƒbƒtƒ@ƒrƒ…[(CBV)‚Ìİ’èƒRƒ}ƒ“ƒh
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼(CBV)ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	sCmdList_->SetGraphicsRootConstantBufferView(0, constBuffer_.get()->GetAddress());
-	//SRVƒq[ƒv‚Ìİ’èƒRƒ}ƒ“ƒh
+	//SRVãƒ’ãƒ¼ãƒ—ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
 	sCmdList_->SetDescriptorHeaps(1, texture_->srvHeap.GetAddressOf());
-	//SRVƒq[ƒv‚Ìæ“ªƒnƒ“ƒhƒ‹‚ğæ“¾(SRV‚ğw‚µ‚Ä‚¢‚é‚Í‚¸)
+	//SRVãƒ’ãƒ¼ãƒ—ã®å…ˆé ­ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—(SRVã‚’æŒ‡ã—ã¦ã„ã‚‹ã¯ãš)
 	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = texture_->gpuHandle;
-	//SRVƒq[ƒvæ“ª‚É‚ ‚éSRV‚ğƒ‹[ƒgƒpƒ‰ƒ[ƒ^[1”Ô‚Éİ’è
+	//SRVãƒ’ãƒ¼ãƒ—å…ˆé ­ã«ã‚ã‚‹SRVã‚’ãƒ«ãƒ¼ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼1ç•ªã«è¨­å®š
 	sCmdList_->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
-	// •`‰æƒRƒ}ƒ“ƒh
+	// æç”»ã‚³ãƒãƒ³ãƒ‰
 	sCmdList_->DrawInstanced(static_cast<UINT>(std::distance(particles_.begin(), particles_.end())), 1, 0, 0);
 }
 
 void ParticleManager::BillboardUpdate(Camera* camera)
 {
-	//ƒJƒƒ‰Z²(‹“_•ûŒü)
+	//ã‚«ãƒ¡ãƒ©Zè»¸(è¦–ç‚¹æ–¹å‘)
 	myMath::Vector3 cameraZ = camera->GetTarget() - camera->GetEye();
 
-	//ƒxƒNƒgƒ‹‚ğ³‹K‰»
+	//ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–
 	cameraZ = cameraZ.normalization();
 
-	//ƒJƒƒ‰‚ÌX²(‰E•ûŒü)
+	//ã‚«ãƒ¡ãƒ©ã®Xè»¸(å³æ–¹å‘)
 	myMath::Vector3 cameraX;
-	//X²‚Íã•ûŒü->Z²‚ÌŠOÏ‚ÅŒˆ‚Ü‚é
+	//Xè»¸ã¯ä¸Šæ–¹å‘->Zè»¸ã®å¤–ç©ã§æ±ºã¾ã‚‹
 	cameraX = camera->GetUp().cross(cameraZ);
-	//ƒxƒNƒgƒ‹‚ğ³‹K‰»
+	//ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–
 	cameraX = cameraX.normalization();
 
-	//ƒJƒƒ‰‚ÌY²(ã•ûŒü)
+	//ã‚«ãƒ¡ãƒ©ã®Yè»¸(ä¸Šæ–¹å‘)
 	myMath::Vector3 cameraY;
-	//Y²‚ÍZ²->X²‚ÌŠOÏ‚ÅŒˆ‚Ü‚é
+	//Yè»¸ã¯Zè»¸->Xè»¸ã®å¤–ç©ã§æ±ºã¾ã‚‹
 	cameraY = cameraZ.cross(cameraX);
-	//ƒxƒNƒgƒ‹‚ğ³‹K‰»
+	//ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–
 	cameraY = cameraY.normalization();
 
-	//ƒJƒƒ‰‰ñ“]s—ñ
+	//ã‚«ãƒ¡ãƒ©å›è»¢è¡Œåˆ—
 	myMath::Matrix4 matCameraRot;
-	//ƒJƒƒ‰À•WŒn->ƒ[ƒ‹ƒhÀ•WŒn‚Ì•ÏŠ·s—ñ
+	//ã‚«ãƒ¡ãƒ©åº§æ¨™ç³»->ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»ã®å¤‰æ›è¡Œåˆ—
 	matCameraRot.m[0][0] = cameraX.x;
 	matCameraRot.m[0][1] = cameraX.y;
 	matCameraRot.m[0][2] = cameraX.z;

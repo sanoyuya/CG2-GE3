@@ -11,11 +11,11 @@
 
 enum class BillboardFlag
 {
-	NonBillboard,//ƒrƒ‹ƒ{[ƒh‚ğ‚µ‚È‚¢
-	AllBillboard,//‚·‚×‚Ä‘Å‚¿Á‚·
-	XBillboard,//X²‚ğ‘Å‚¿Á‚·
-	YBillboard,//Y²‚ğ‘Å‚¿Á‚·
-	XYBillboard//Z²‚ğ‘Å‚¿Á‚·
+	NonBillboard,//ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰ã‚’ã—ãªã„
+	AllBillboard,//ã™ã¹ã¦æ‰“ã¡æ¶ˆã™
+	XBillboard,//Xè»¸ã‚’æ‰“ã¡æ¶ˆã™
+	YBillboard,//Yè»¸ã‚’æ‰“ã¡æ¶ˆã™
+	XYBillboard//Zè»¸ã‚’æ‰“ã¡æ¶ˆã™
 };
 
 class Sprite3D
@@ -25,24 +25,24 @@ private:
 	HRESULT result_ = S_FALSE;
 	char PADING_[4] = {};
 
-	//’¸“_ƒoƒbƒtƒ@
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<VertexBuffer> vertexBuffer_ = {};
-	//’¸“_ƒ}ƒbƒv
+	//é ‚ç‚¹ãƒãƒƒãƒ—
 	PosUvColor* vertMap_ = {};
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<IndexBuffer> indexBuffer_ = {};
 
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğƒ}ƒbƒsƒ“ƒO
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒãƒƒãƒ”ãƒ³ã‚°
 	uint16_t* indexMap_ = 0;
 
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	std::unique_ptr<ConstantBuffer> constBuffMaterial_ = {};
 
-	//’è”ƒoƒbƒtƒ@‚Ìƒ}ƒbƒsƒ“ƒO—pƒ|ƒCƒ“ƒ^
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒã‚¤ãƒ³ã‚¿
 	myMath::Matrix4 constBuffMap_ = {};
 
-	BlendMode blendMode_ = BlendMode::Alpha;//‰Šú’l”¼“§–¾‡¬
+	BlendMode blendMode_ = BlendMode::Alpha;//åˆæœŸå€¤åŠé€æ˜åˆæˆ
 
 	TextureData* texture_ = {};
 
@@ -52,97 +52,97 @@ public:
 	virtual ~Sprite3D() {}
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚Ì‰Šú‰»ˆ—(3D)
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®åˆæœŸåŒ–å‡¦ç†(3D)
 	/// </summary>
 	void Sprite3DInitialize(uint32_t handle);
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚Ì•`‰æ(3D)
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æç”»(3D)
 	/// </summary>
-	/// <param name="camera">ƒJƒƒ‰</param>
-	/// <param name="transform">Transform‚Ìƒf[ƒ^</param>
-	/// <param name="billboardFlag">ƒrƒ‹ƒ{[ƒh‚Ìí—Ş(‰Šú’l:NonBillboard)</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="anchorpoint">’†S“_(‰Šú’l:{ 0.5f,0.5f })</param>
-	/// <param name="flipX">X”½“]</param>
-	/// <param name="flipY">Y”½“]</param>
+	/// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+	/// <param name="transform">Transformã®ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="billboardFlag">ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰ã®ç¨®é¡(åˆæœŸå€¤:NonBillboard)</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="anchorpoint">ä¸­å¿ƒç‚¹(åˆæœŸå€¤:{ 0.5f,0.5f })</param>
+	/// <param name="flipX">Xåè»¢</param>
+	/// <param name="flipY">Yåè»¢</param>
 	void DrawSprite3D(Camera* camera, Transform& transform, BillboardFlag billboardFlag = BillboardFlag::NonBillboard, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚ÌØ‚èæ‚è•`‰æ(3D)
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®åˆ‡ã‚Šå–ã‚Šæç”»(3D)
 	/// </summary>
-	/// <param name="camera">ƒJƒƒ‰</param>
-	/// <param name="transform">Transform‚Ìƒf[ƒ^</param>
-	/// <param name="clipCenter">Ø‚èæ‚è‚·‚é’†SÀ•W</param>
-	/// <param name="clipRadius">Ø‚èæ‚è‚·‚é”¼Œa</param>
-	/// <param name="billboardFlag">ƒrƒ‹ƒ{[ƒh‚Ìí—Ş(‰Šú’l:NonBillboard)</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="flipX">X”½“]</param>
-	/// <param name="flipY">Y”½“]</param>
+	/// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+	/// <param name="transform">Transformã®ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="clipCenter">åˆ‡ã‚Šå–ã‚Šã™ã‚‹ä¸­å¿ƒåº§æ¨™</param>
+	/// <param name="clipRadius">åˆ‡ã‚Šå–ã‚Šã™ã‚‹åŠå¾„</param>
+	/// <param name="billboardFlag">ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰ã®ç¨®é¡(åˆæœŸå€¤:NonBillboard)</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="flipX">Xåè»¢</param>
+	/// <param name="flipY">Yåè»¢</param>
 	void DrawSpriteClip3D(Camera* camera, Transform& transform, myMath::Vector2 clipCenter, myMath::Vector2 clipRadius, BillboardFlag billboardFlag = BillboardFlag::NonBillboard, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// ‰¡˜A”ÔƒXƒvƒ‰ƒCƒg•`‰æ(3D)
+	/// æ¨ªé€£ç•ªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»(3D)
 	/// </summary>
-	/// <param name="camera">ƒJƒƒ‰</param>
-	/// <param name="transform">Transform‚Ìƒf[ƒ^</param>
-	/// <param name="sheetsNum">–‡”</param>
-	/// <param name="nowNum">‰½–‡–Ú‚©</param>
-	/// <param name="billboardFlag">ƒrƒ‹ƒ{[ƒh‚Ìí—Ş(‰Šú’l:NonBillboard)</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="anchorpoint">’†S“_</param>
-	/// <param name="flipX">X”½“]</param>
-	/// <param name="flipY">Y”½“]</param>
+	/// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+	/// <param name="transform">Transformã®ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="sheetsNum">æšæ•°</param>
+	/// <param name="nowNum">ä½•æšç›®ã‹</param>
+	/// <param name="billboardFlag">ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰ã®ç¨®é¡(åˆæœŸå€¤:NonBillboard)</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="anchorpoint">ä¸­å¿ƒç‚¹</param>
+	/// <param name="flipX">Xåè»¢</param>
+	/// <param name="flipY">Yåè»¢</param>
 	void DrawAnimationSpriteX3D(Camera* camera, Transform& transform, uint16_t sheetsNum, uint16_t& nowNum, BillboardFlag billboardFlag = BillboardFlag::NonBillboard, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// c˜A”ÔƒXƒvƒ‰ƒCƒg•`‰æ(3D)
+	/// ç¸¦é€£ç•ªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»(3D)
 	/// </summary>
-	/// <param name="camera">ƒJƒƒ‰</param>
-	/// <param name="transform">Transform‚Ìƒf[ƒ^</param>
-	/// <param name="sheetsNum">–‡”</param>
-	/// <param name="nowNum">‰½–‡–Ú‚©</param>
-	/// <param name="billboardFlag">ƒrƒ‹ƒ{[ƒh‚Ìí—Ş(‰Šú’l:NonBillboard)</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="anchorpoint">’†S“_</param>
-	/// <param name="flipX">X”½“]</param>
-	/// <param name="flipY">Y”½“]</param>
+	/// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+	/// <param name="transform">Transformã®ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="sheetsNum">æšæ•°</param>
+	/// <param name="nowNum">ä½•æšç›®ã‹</param>
+	/// <param name="billboardFlag">ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰ã®ç¨®é¡(åˆæœŸå€¤:NonBillboard)</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="anchorpoint">ä¸­å¿ƒç‚¹</param>
+	/// <param name="flipX">Xåè»¢</param>
+	/// <param name="flipY">Yåè»¢</param>
 	void DrawAnimationSpriteY3D(Camera* camera, Transform& transform, uint16_t sheetsNum, uint16_t& nowNum, BillboardFlag billboardFlag = BillboardFlag::NonBillboard, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// c‰¡˜A”ÔƒXƒvƒ‰ƒCƒg•`‰æ(3D)
+	/// ç¸¦æ¨ªé€£ç•ªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»(3D)
 	/// </summary>
-	/// <param name="camera">ƒJƒƒ‰</param>
-	/// <param name="transform">Transform‚Ìƒf[ƒ^</param>
-	/// <param name="sheetsNumX">‰¡‚Ì–‡”</param>
-	/// <param name="sheetsNumY">c‚Ì–‡”</param>
-	/// <param name="nowNum">‰½–‡–Ú‚©</param>
-	/// <param name="billboardFlag">ƒrƒ‹ƒ{[ƒh‚Ìí—Ş(‰Šú’l:NonBillboard)</param>
-	/// <param name="color">F(‰Šú’l:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	/// <param name="anchorpoint">’†S“_</param>
-	/// <param name="flipX">X”½“]</param>
-	/// <param name="flipY">Y”½“]</param>
+	/// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+	/// <param name="transform">Transformã®ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="sheetsNumX">æ¨ªã®æšæ•°</param>
+	/// <param name="sheetsNumY">ç¸¦ã®æšæ•°</param>
+	/// <param name="nowNum">ä½•æšç›®ã‹</param>
+	/// <param name="billboardFlag">ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰ã®ç¨®é¡(åˆæœŸå€¤:NonBillboard)</param>
+	/// <param name="color">è‰²(åˆæœŸå€¤:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
+	/// <param name="anchorpoint">ä¸­å¿ƒç‚¹</param>
+	/// <param name="flipX">Xåè»¢</param>
+	/// <param name="flipY">Yåè»¢</param>
 	void DrawAnimationSpriteXY3D(Camera* camera, Transform& transform, uint16_t sheetsNumX, uint16_t sheetsNumY, uint16_t& nowNum, BillboardFlag billboardFlag = BillboardFlag::NonBillboard, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 anchorpoint = { 0.5f,0.5f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
-	/// ƒuƒŒƒ“ƒhƒ‚[ƒh‚ÌƒZƒbƒg(3D)
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã®ã‚»ãƒƒãƒˆ(3D)
 	/// </summary>
-	/// <param name="mode">ƒ‚[ƒh</param>
+	/// <param name="mode">ãƒ¢ãƒ¼ãƒ‰</param>
 	void SetSprite3DBlendMode(const BlendMode& mode);
 
 private:
 
 	/// <summary>
-	/// ƒoƒbƒtƒ@‚Ì¶¬ˆ—
+	/// ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆå‡¦ç†
 	/// </summary>
 	void CreateBuff();
 
 	/// <summary>
-	/// s—ñŒvZ
+	/// è¡Œåˆ—è¨ˆç®—
 	/// </summary>
-	/// <param name="camera">ƒJƒƒ‰‚Ìƒ|ƒCƒ“ƒ^</param>
-	/// <param name="transform">ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€</param>
-	/// <param name="flag">ƒrƒ‹ƒ{[ƒh‚Ìí—Ş</param>
+	/// <param name="camera">ã‚«ãƒ¡ãƒ©ã®ãƒã‚¤ãƒ³ã‚¿</param>
+	/// <param name="transform">ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ </param>
+	/// <param name="flag">ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰ã®ç¨®é¡</param>
 	void Update(Camera* camera, Transform transform,BillboardFlag flag);
 	//void Update(myMath::Vector2 position, myMath::Vector2 scale, float rotation);
 };

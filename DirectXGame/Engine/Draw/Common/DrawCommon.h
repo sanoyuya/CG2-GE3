@@ -5,23 +5,23 @@
 
 struct PosUvColor
 {
-	myMath::Vector3 pos;//À•W
-	myMath::Vector2 uv;//uvÀ•W
-	myMath::Vector4 color;//F
+	myMath::Vector3 pos;//åº§æ¨™
+	myMath::Vector2 uv;//uvåº§æ¨™
+	myMath::Vector4 color;//è‰²
 };
 
 struct PosNormalUv
 {
-	myMath::Vector3 pos;//À•W
-	myMath::Vector3 normal;//–@ü
-	myMath::Vector2 uv;//uvÀ•W
+	myMath::Vector3 pos;//åº§æ¨™
+	myMath::Vector3 normal;//æ³•ç·š
+	myMath::Vector2 uv;//uvåº§æ¨™
 };
 
 struct PosScaleColor
 {
-	myMath::Vector3 pos; // xyzÀ•W
-	float scale;//ƒXƒP[ƒ‹
-	myMath::Vector4 color;//ƒJƒ‰[
+	myMath::Vector3 pos; // xyzåº§æ¨™
+	float scale;//ã‚¹ã‚±ãƒ¼ãƒ«
+	myMath::Vector4 color;//ã‚«ãƒ©ãƒ¼
 };
 
 struct matMatBillboard
@@ -30,39 +30,39 @@ struct matMatBillboard
 	myMath::Matrix4 matBillboard;
 };
 
-//ƒ}ƒeƒŠƒAƒ‹‚æ‚¤’è”ƒoƒbƒtƒ@\‘¢‘Ì
+//ãƒãƒ†ãƒªã‚¢ãƒ«ã‚ˆã†å®šæ•°ãƒãƒƒãƒ•ã‚¡æ§‹é€ ä½“
 struct ConstBuffDataMaterial
 {
-	//ƒAƒ“ƒrƒGƒ“ƒgŒW”
+	//ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆä¿‚æ•°
 	myMath::Vector3 ambient;
-	//ƒpƒfƒBƒ“ƒO
+	//ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
 	float pad1;
-	//ƒfƒBƒtƒ…[ƒYŒW”
+	//ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºä¿‚æ•°
 	myMath::Vector3 diffuse;
-	//ƒpƒfƒBƒ“ƒO
+	//ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
 	float pad2;
-	//ƒXƒyƒLƒ…ƒ‰[ŒW”
+	//ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼ä¿‚æ•°
 	myMath::Vector3 specular;
-	//ƒAƒ‹ƒtƒ@
+	//ã‚¢ãƒ«ãƒ•ã‚¡
 	float alpha;
 };
 
-//ƒ}ƒeƒŠƒAƒ‹
+//ãƒãƒ†ãƒªã‚¢ãƒ«
 struct ModelMaterial
 {
-	//ƒ}ƒeƒŠƒAƒ‹–¼
+	//ãƒãƒ†ãƒªã‚¢ãƒ«å
 	std::string name;
-	//ƒAƒ“ƒrƒGƒ“ƒg‰e‹¿“x
+	//ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆå½±éŸ¿åº¦
 	myMath::Vector3 ambient = { 0.06f, 0.06f, 0.06f };
-	//ƒfƒBƒtƒ…[ƒY‰e‹¿“x
+	//ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºå½±éŸ¿åº¦
 	myMath::Vector3 diffuse = { 0.0f,0.0f,0.0f };
-	//ƒXƒyƒLƒ…ƒ‰[‰e‹¿“x
+	//ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼å½±éŸ¿åº¦
 	myMath::Vector3 specular = { 0.0f,0.0f,0.0f };
 
 	float shininess = 1.0f;
-	//ƒAƒ‹ƒtƒ@
+	//ã‚¢ãƒ«ãƒ•ã‚¡
 	float alpha = 1.0f;
-	//ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
 	std::string textureFiename;
 
 	ConstBuffDataMaterial GetConstBuffMaterial();
@@ -70,11 +70,11 @@ struct ModelMaterial
 
 struct worldViewpojCamera
 {
-	//ƒ[ƒ‹ƒhs—ñ
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	myMath::Matrix4 world;
-	//ƒ[ƒ‹ƒhÀ•W
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™
 	myMath::Matrix4 matWorld;
-	//ƒJƒƒ‰À•W(ƒ[ƒ‹ƒhÀ•W)
+	//ã‚«ãƒ¡ãƒ©åº§æ¨™(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™)
 	myMath::Vector3 cameraPos;
 };
 
@@ -83,12 +83,12 @@ class DrawCommon
 public:
 
 	/// <summary>
-	/// ƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	/// </summary>
-	/// <param name="shaderFileName">ƒVƒF[ƒ_[‚Ì–¼‘O</param>
-	/// <param name="entrypointName">ƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg–¼</param>
-	/// <param name="shaderModelName">ƒVƒF[ƒ_[ƒ‚ƒfƒ‹‚Ìw’è</param>
-	/// <param name="blob">ƒVƒF[ƒ_[ƒIƒuƒWƒFƒNƒg</param>
+	/// <param name="shaderFileName">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®åå‰</param>
+	/// <param name="entrypointName">ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆå</param>
+	/// <param name="shaderModelName">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ¢ãƒ‡ãƒ«ã®æŒ‡å®š</param>
+	/// <param name="blob">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 	/// <returns></returns>
 	static ID3DBlob* ShaderCompile(const wchar_t* shaderFileName, LPCSTR entrypointName, LPCSTR shaderModelName, ID3DBlob* blob);
 };

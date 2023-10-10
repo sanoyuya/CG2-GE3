@@ -8,9 +8,9 @@
 
 void ImGuiManager::Initialize(WindowsApp* windowsApp)
 {
-	//ImGui‚ÌƒRƒ“ƒeƒLƒXƒg‚ð¶¬
+	//ImGuiã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ç”Ÿæˆ
 	ImGui::CreateContext();
-	//ImGui‚ÌƒXƒ^ƒCƒ‹‚ðÝ’è
+	//ImGuiã®ã‚¹ã‚¿ã‚¤ãƒ«ã‚’è¨­å®š
 	ImGui::StyleColorsDark();
 
 	ImGui_ImplWin32_Init(windowsApp->GetHwnd());
@@ -26,7 +26,7 @@ void ImGuiManager::Initialize(WindowsApp* windowsApp)
 	);
 
 	ImGuiIO& io = ImGui::GetIO();
-	//•W€ƒtƒHƒ“ƒg‚ð’Ç‰Á‚·‚é
+	//æ¨™æº–ãƒ•ã‚©ãƒ³ãƒˆã‚’è¿½åŠ ã™ã‚‹
 	io.Fonts->AddFontDefault();
 }
 
@@ -39,7 +39,7 @@ void ImGuiManager::Destroy()
 
 void ImGuiManager::Begin()
 {
-	//ImGuiƒtƒŒ[ƒ€ŠJŽn
+	//ImGuiãƒ•ãƒ¬ãƒ¼ãƒ é–‹å§‹
 	ImGui_ImplDX12_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -53,7 +53,7 @@ void ImGuiManager::End()
 void ImGuiManager::Draw()
 {
 	DirectXBase::GetInstance()->GetCommandList()->SetDescriptorHeaps(1, DirectXBase::GetInstance()->GetDescriptorHeap()->GetHeap().GetAddressOf());
-	//•`‰æƒRƒ}ƒ“ƒhŽÀs
+	//æç”»ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), DirectXBase::GetInstance()->GetCommandList().Get());
 }
 

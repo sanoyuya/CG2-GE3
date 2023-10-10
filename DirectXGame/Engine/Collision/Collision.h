@@ -2,49 +2,49 @@
 #include"myMath.h"
 
 /// <summary>
-/// ‹…
+/// çƒ
 /// </summary>
 struct Sphere
 {
-	//’†SÀ•W
+	//ä¸­å¿ƒåº§æ¨™
 	myMath::Vector3 center = { 0.0f,0.0f ,0.0f };
-	//”¼Œa
+	//åŠå¾„
 	float radius = 1.0f;
 };
 
 /// <summary>
-/// •½–Ê
+/// å¹³é¢
 /// </summary>
 struct Plane
 {
-	//–@üƒxƒNƒgƒ‹
+	//æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
 	myMath::Vector3 normal = { 0.0f,1.0f,0.0f };
-	//Œ´“_
+	//åŸç‚¹
 	float destance = 0.0f;
 };
 
 /// <summary>
-/// OŠpŒ`
+/// ä¸‰è§’å½¢
 /// </summary>
 class Triangle
 {
 public:
-	//’¸“_À•W3‚Â
+	//é ‚ç‚¹åº§æ¨™3ã¤
 	myMath::Vector3 p0;
 	myMath::Vector3 p1;
 	myMath::Vector3 p2;
-	//–@üƒxƒNƒgƒ‹
+	//æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
 	myMath::Vector3 normal;
 };
 
 /// <summary>
-/// ƒŒƒC
+/// ãƒ¬ã‚¤
 /// </summary>
 struct Ray
 {
-	//n“_À•W
+	//å§‹ç‚¹åº§æ¨™
 	myMath::Vector3 start = { 0.0f,0.0f ,0.0f };
-	//•ûŒü
+	//æ–¹å‘
 	myMath::Vector3 dir = { 1.0f,0.0f,0.0f };
 };
 

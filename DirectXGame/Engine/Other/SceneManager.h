@@ -2,41 +2,41 @@
 #include"BaseScene.h"
 #include"AbstractSceneFactory.h"
 
-//ƒV[ƒ“ŠÇ—
+//ã‚·ãƒ¼ãƒ³ç®¡ç†
 class SceneManager
 {
 private:
 
-	//Œ»İ‚ÌƒV[ƒ“
+	//ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³
 	std::unique_ptr<BaseScene> scene_;
 	std::unique_ptr<BaseScene> nextScene_;
 
-	//ƒV[ƒ“ƒtƒ@ƒNƒgƒŠ[
+	//ã‚·ãƒ¼ãƒ³ãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼
 	AbstractSceneFactory* sceneFactory_ = nullptr;
 
-	//ƒV[ƒ“‚Ì–¼‘O
+	//ã‚·ãƒ¼ãƒ³ã®åå‰
 	std::string sceneName_;
 	std::string nextSceneName_;
 
 public:
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	void Update();
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	void Draw();
 
-	//I—¹ˆ—
+	//çµ‚äº†å‡¦ç†
 	void Destroy();
 
-	//ŸƒV[ƒ“—\–ñ
+	//æ¬¡ã‚·ãƒ¼ãƒ³äºˆç´„
 	void ChangeScene(const std::string& sceneName);
 
 	void SetSceneFactory(AbstractSceneFactory* sceneFactory);
 
 	std::string GetSceneName();
 
-	//ƒVƒ“ƒOƒ‹ƒgƒ“
+	//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
 	static SceneManager* GetInstance();
 
 private:
@@ -44,7 +44,7 @@ private:
 	SceneManager() = default;
 	~SceneManager() = default;
 
-	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^E‘ã“ü‰‰Zqíœ
+	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ä»£å…¥æ¼”ç®—å­å‰Šé™¤
 	SceneManager& operator=(const SceneManager&) = delete;
 	SceneManager(const SceneManager&) = delete;
 };

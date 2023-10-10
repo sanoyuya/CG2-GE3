@@ -15,14 +15,14 @@
 #include<memory>
 #include"ImGuiManager.h"
 
-//ƒQ[ƒ€‘S‘Ì
+//ã‚²ãƒ¼ãƒ å…¨ä½“
 class YFramework
 {
 protected:
 
 	std::wstring title_ = L"";
-	float windowWidth_ = 0.0f;//‰¡•
-	float windowHeight_ = 0.0f;//c•
+	float windowWidth_ = 0.0f;//æ¨ªå¹…
+	float windowHeight_ = 0.0f;//ç¸¦å¹…
 
 	myMath::Vector4 windowColor_ = { 0.0f ,0.0f ,0.0f ,0.0f };
 
@@ -35,38 +35,38 @@ public:
 
 	virtual ~YFramework() = default;
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	virtual void Initialize();
 
-	//I—¹ˆ—
+	//çµ‚äº†å‡¦ç†
 	virtual void Destroy();
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	virtual void Update();
 
-	//•`‰æˆ—
+	//æç”»å‡¦ç†
 	virtual void SceneDraw() = 0;
 	virtual void PostEffectDraw() = 0;
 
-	//I—¹ƒtƒ‰ƒO‚Ìæ“¾
+	//çµ‚äº†ãƒ•ãƒ©ã‚°ã®å–å¾—
 	virtual bool& GetEndRequest();
 
 public:
 
 	/// <summary>
-	/// ƒEƒBƒ“ƒhƒE‚Ìİ’è
+	/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¨­å®š
 	/// </summary>
-	/// <param name="title">ƒ^ƒCƒgƒ‹ƒo[‚Ì–¼‘O</param>
-	/// <param name="width">ƒEƒBƒ“ƒhƒE‚Ì‰¡•</param>
-	/// <param name="height">ƒEƒBƒ“ƒhƒE‚Ìc•</param>
+	/// <param name="title">ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ã®åå‰</param>
+	/// <param name="width">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®æ¨ªå¹…</param>
+	/// <param name="height">ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ç¸¦å¹…</param>
 	void SetWindowData(const std::string& title = "DirectXGame", const float width = 1280.0f, const float height = 720.0f);
 
 	/// <summary>
-	/// ƒEƒBƒ“ƒhƒE‚ÌF‚ğ•ÏX
+	/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è‰²ã‚’å¤‰æ›´
 	/// </summary>
 	/// <param name="color"></param>
 	void SetWindowColor(const myMath::Vector4& color = { 0.1f,0.25f,0.5f,0.0f });
 
-	//Àsˆ—
+	//å®Ÿè¡Œå‡¦ç†
 	void Run();
 };

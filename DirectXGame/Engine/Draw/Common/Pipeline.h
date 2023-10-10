@@ -6,100 +6,100 @@
 
 enum class BlendMode
 {
-	None,//ƒm[ƒuƒŒƒ“ƒh
-	Alpha,//”¼“§–¾‡¬
-	Add,//‰ÁZ‡¬
-	Sub,//Œ¸Z‡¬
-	Mul,//æZ‡¬
-	Inv//F”½“]
+	None,//ãƒãƒ¼ãƒ–ãƒ¬ãƒ³ãƒ‰
+	Alpha,//åŠé€æ˜åˆæˆ
+	Add,//åŠ ç®—åˆæˆ
+	Sub,//æ¸›ç®—åˆæˆ
+	Mul,//ä¹—ç®—åˆæˆ
+	Inv//è‰²åè»¢
 };
 
 enum class ShaderMode
 {
-	Basic,//•W€
-	Phong,//ƒtƒHƒ“ƒVƒF[ƒfƒBƒ“ƒO
-	Toon,//ƒgƒD[ƒ“ƒVƒF[ƒfƒBƒ“ƒO
-	RimLight,//ƒŠƒ€ƒ‰ƒCƒg
-	MultiPhong,//ƒ}ƒ‹ƒ`ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg—p
-	SimpleColor//’PFƒVƒF[ƒ_[—p
+	Basic,//æ¨™æº–
+	Phong,//ãƒ•ã‚©ãƒ³ã‚·ã‚§ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°
+	Toon,//ãƒˆã‚¥ãƒ¼ãƒ³ã‚·ã‚§ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°
+	RimLight,//ãƒªãƒ ãƒ©ã‚¤ãƒˆ
+	MultiPhong,//ãƒãƒ«ãƒãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆç”¨
+	SimpleColor//å˜è‰²ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨
 };
 
 struct PipelineSet
 {
-	//ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ
+	//ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature;
-	//ƒpƒCƒvƒ‰ƒ“ƒXƒe[ƒg‚Ì¶¬
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã®ç”Ÿæˆ
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
 };
 
 struct Blob
 {
-	//’¸“_ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+	//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	Microsoft::WRL::ComPtr<ID3DBlob>vs;
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	Microsoft::WRL::ComPtr<ID3DBlob>ps;
-	//ƒWƒIƒƒgƒŠƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+	//ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	Microsoft::WRL::ComPtr<ID3DBlob>gs;
 };
 
 class Pipeline
 {
-public://ƒXƒvƒ‰ƒCƒg
+public://ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg—pƒpƒCƒvƒ‰ƒCƒ“‚Ì¶¬
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã®ç”Ÿæˆ
 	/// </summary>
-	/// <param name="blob">ƒVƒF[ƒ_[ƒIƒuƒWƒFƒNƒg</param>
-	/// <param name="blend">ƒuƒŒƒ“ƒhƒ‚[ƒh</param>
-	/// <param name="device">ƒfƒoƒCƒX</param>
-	/// <param name="pip">ƒpƒCƒvƒ‰ƒCƒ“</param>
+	/// <param name="blob">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+	/// <param name="blend">ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
+	/// <param name="device">ãƒ‡ãƒã‚¤ã‚¹</param>
+	/// <param name="pip">ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³</param>
 	static void CreateSpritePipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 
 	/// <summary>
-	/// ƒp[ƒeƒBƒNƒ‹—pƒpƒCƒvƒ‰ƒCƒ“‚Ì¶¬
+	/// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã®ç”Ÿæˆ
 	/// </summary>
-	/// <param name="blob">ƒVƒF[ƒ_[ƒIƒuƒWƒFƒNƒg</param>
-	/// <param name="blend">ƒuƒŒƒ“ƒhƒ‚[ƒh</param>
-	/// <param name="device">ƒfƒoƒCƒX</param>
-	/// <param name="pip">ƒpƒCƒvƒ‰ƒCƒ“</param>
+	/// <param name="blob">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+	/// <param name="blend">ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
+	/// <param name="device">ãƒ‡ãƒã‚¤ã‚¹</param>
+	/// <param name="pip">ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³</param>
 	static void CreateParticlePipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 
-public://ƒ‚ƒfƒ‹
+public://ãƒ¢ãƒ‡ãƒ«
 
 	/// <summary>
-	/// Basicƒ‚ƒfƒ‹—pƒpƒCƒvƒ‰ƒCƒ“¶¬
+	/// Basicãƒ¢ãƒ‡ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ç”Ÿæˆ
 	/// </summary>
-	/// <param name="blob">ƒVƒF[ƒ_[ƒIƒuƒWƒFƒNƒg</param>
-	/// <param name="blend">ƒuƒŒƒ“ƒhƒ‚[ƒh</param>
-	/// <param name="device">ƒfƒoƒCƒX</param>
-	/// <param name="pip">ƒpƒCƒvƒ‰ƒCƒ“</param>
+	/// <param name="blob">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+	/// <param name="blend">ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
+	/// <param name="device">ãƒ‡ãƒã‚¤ã‚¹</param>
+	/// <param name="pip">ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³</param>
 	static void CreateBasicModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 
 	/// <summary>
-	/// Phongƒ‚ƒfƒ‹—pƒpƒCƒvƒ‰ƒCƒ“¶¬
+	/// Phongãƒ¢ãƒ‡ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ç”Ÿæˆ
 	/// </summary>
-	/// <param name="blob">ƒVƒF[ƒ_[ƒIƒuƒWƒFƒNƒg</param>
-	/// <param name="blend">ƒuƒŒƒ“ƒhƒ‚[ƒh</param>
-	/// <param name="device">ƒfƒoƒCƒX</param>
-	/// <param name="pip">ƒpƒCƒvƒ‰ƒCƒ“</param>
+	/// <param name="blob">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+	/// <param name="blend">ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
+	/// <param name="device">ãƒ‡ãƒã‚¤ã‚¹</param>
+	/// <param name="pip">ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³</param>
 	static void CreatePhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 
 	/// <summary>
-	/// ƒ}ƒ‹ƒ`ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgPhongƒ‚ƒfƒ‹—pƒpƒCƒvƒ‰ƒCƒ“¶¬
+	/// ãƒãƒ«ãƒãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆPhongãƒ¢ãƒ‡ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ç”Ÿæˆ
 	/// </summary>
-	/// <param name="blob">ƒVƒF[ƒ_[ƒIƒuƒWƒFƒNƒg</param>
-	/// <param name="blend">ƒuƒŒƒ“ƒhƒ‚[ƒh</param>
-	/// <param name="device">ƒfƒoƒCƒX</param>
-	/// <param name="pip">ƒpƒCƒvƒ‰ƒCƒ“</param>
+	/// <param name="blob">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+	/// <param name="blend">ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰</param>
+	/// <param name="device">ãƒ‡ãƒã‚¤ã‚¹</param>
+	/// <param name="pip">ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³</param>
 	static void CreateMultiPhongModelPipline(Blob& blob, BlendMode blend, ID3D12Device* device, std::array<PipelineSet, 6>& pip);
 	
-public://ƒ|ƒXƒgƒGƒtƒFƒNƒg
+public://ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 
 	/// <summary>
-	/// ƒ|ƒXƒgƒGƒtƒFƒNƒg—pƒpƒCƒvƒ‰ƒCƒ“¶¬
+	/// ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ç”Ÿæˆ
 	/// </summary>
-	/// <param name="blob">ƒVƒF[ƒ_[ƒIƒuƒWƒFƒNƒg</param>
-	/// <param name="pip">ƒpƒCƒvƒ‰ƒCƒ“</param>
+	/// <param name="blob">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+	/// <param name="pip">ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³</param>
 	static void CreatePostEffectPipline(Blob& blob, PipelineSet& pip);
 
 	static void CreateMultiTexturePipline(Blob& blob, PipelineSet& pip);

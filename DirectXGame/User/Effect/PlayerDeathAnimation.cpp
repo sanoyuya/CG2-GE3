@@ -39,7 +39,7 @@ void PlayerDeathAnimation::Draw()
 {
 	if (animationFlag_ == true)
 	{
-		//Ž€–S‰‰o‚Ì•`‰æ
+		//æ­»äº¡æ¼”å‡ºã®æç”»
 		deathParticleEmitter_->Draw();
 	}
 }

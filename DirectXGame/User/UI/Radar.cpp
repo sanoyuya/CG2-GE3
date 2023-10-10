@@ -21,27 +21,27 @@ void Radar::Initialize(EnemyManager* enemys)
 
 void Radar::Update(Camera* camera)
 {
-	//ƒJƒƒ‰‚Ì•ûŒüƒxƒNƒgƒ‹‚ðì¬
+	//ã‚«ãƒ¡ãƒ©ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’ä½œæˆ
 	cameraFrontVec_ = camera->GetTarget() - camera->GetEye();
-	//³‹K‰»
+	//æ­£è¦åŒ–
 	cameraFrontVec_.normalization();
 }
 
 void Radar::Draw(EnemyManager* enemys, Player* player)
 {
 	uint8_t count = 0;
-	//ƒJƒƒ‰‚ÌangleY‚ÌŽæ“¾(³–ÊƒxƒNƒgƒ‹‚©‚çŽæ“¾)
+	//ã‚«ãƒ¡ãƒ©ã®angleYã®å–å¾—(æ­£é¢ãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰å–å¾—)
 	float angle = -(atan2(cameraFrontVec_.z, cameraFrontVec_.x) + myMath::AX_PIF / 2);
 
 	for (auto& enemy : enemys->GetEnemyList())
 	{
-		//Ž©‹@‚Æ“G‚Æ‚ÌˆÊ’u‚Ì·
+		//è‡ªæ©Ÿã¨æ•µã¨ã®ä½ç½®ã®å·®
 		myMath::Vector2 difference = { player->GetTransform().parentToTranslation.x - enemy->GetTrans().translation.x,
 			enemy->GetTrans().translation.z - player->GetTransform().parentToTranslation.z };
-		//Ž©‹@‚Æ“G‚Æ‚Ì‹——£‚ÌŽZo
+		//è‡ªæ©Ÿã¨æ•µã¨ã®è·é›¢ã®ç®—å‡º
 		float length = sqrt(difference.x * difference.x) + sqrt(difference.y * difference.y);
 
-		//“G‚ªoŒ»‚µ‚Ä‚¢‚é‚©‚ÂƒŒ[ƒ_[‚Ì“à‘¤‚Ì”ÍˆÍ“à‚É‚¢‚é‚È‚ç
+		//æ•µãŒå‡ºç¾ã—ã¦ã„ã‚‹ã‹ã¤ãƒ¬ãƒ¼ãƒ€ãƒ¼ã®å†…å´ã®ç¯„å›²å†…ã«ã„ã‚‹ãªã‚‰
 		if (enemy->GetSpawnFlag() == true && radarSize >= length)
 		{
 			radarEnemys_[count]->DrawSprite2D({ center_.x + difference.x * cosf(angle) + difference.y * sinf(angle),

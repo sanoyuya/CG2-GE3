@@ -5,98 +5,98 @@
 #include"Matrix4.h"
 #include<vector>
 
-//2D•ÏŠ·s—ñ(’è”ƒoƒbƒtƒ@)
+//2Då¤‰æ›è¡Œåˆ—(å®šæ•°ãƒãƒƒãƒ•ã‚¡)
 struct ConstBufferDataTransform
 {
-	DirectX::XMMATRIX mat;//3D•ÏŠ·s—ñ
+	DirectX::XMMATRIX mat;//3Då¤‰æ›è¡Œåˆ—
 };
 
 namespace myMath
 {
-	//ƒÎ
+	//Ï€
 	constexpr float AX_PIF = 3.141592654f;
 	constexpr float AX_2PIF = 6.283185307f;
 	constexpr double AX_PI = 3.141592654;
 	constexpr double AX_2PI = 6.283185307;
 
-	//ƒÃ
+	//Îµ
 	constexpr float EPSILON = 2.2204460492503131E-16f;
 
 	/// <summary>
-	/// •½s“Š‰e•ÏŠ·s—ñ‚ğ¶¬(¶èŒn)
+	/// å¹³è¡ŒæŠ•å½±å¤‰æ›è¡Œåˆ—ã‚’ç”Ÿæˆ(å·¦æ‰‹ç³»)
 	/// </summary>
-	/// <param name="left"> : ¶‘¤</param>
-	/// <param name="right"> : ‰E‘¤</param>
-	/// <param name="bottom"> : ‰º‘¤</param>
-	/// <param name="top"> : ã‘¤</param>
-	/// <param name="near_"> : ƒjƒAƒNƒŠƒbƒv‹——£</param>
-	/// <param name="far_"> : ƒtƒ@[ƒNƒŠƒbƒv‹——£</param>
-	/// <param name="matrix"> : ‘ã“ü‚·‚és—ñ</param>
+	/// <param name="left"> : å·¦å´</param>
+	/// <param name="right"> : å³å´</param>
+	/// <param name="bottom"> : ä¸‹å´</param>
+	/// <param name="top"> : ä¸Šå´</param>
+	/// <param name="near_"> : ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—è·é›¢</param>
+	/// <param name="far_"> : ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—è·é›¢</param>
+	/// <param name="matrix"> : ä»£å…¥ã™ã‚‹è¡Œåˆ—</param>
 	void MakeOrthogonalL(float left, float right, float bottom, float top, float near_, float far_, Matrix4& matrix);
 
 	/// <summary>
-	/// •½s“Š‰e•ÏŠ·s—ñ‚ğ¶¬(‰EèŒn)
+	/// å¹³è¡ŒæŠ•å½±å¤‰æ›è¡Œåˆ—ã‚’ç”Ÿæˆ(å³æ‰‹ç³»)
 	/// </summary>
-	/// <param name="left"> : ¶‘¤</param>
-	/// <param name="right"> : ‰E‘¤</param>
-	/// <param name="bottom"> : ‰º‘¤</param>
-	/// <param name="top"> : ã‘¤</param>
-	/// <param name="near_"> : ƒjƒAƒNƒŠƒbƒv‹——£</param>
-	/// <param name="far_"> : ƒtƒ@[ƒNƒŠƒbƒv‹——£</param>
-	/// <param name="matrix"> : ‘ã“ü‚·‚és—ñ</param>
+	/// <param name="left"> : å·¦å´</param>
+	/// <param name="right"> : å³å´</param>
+	/// <param name="bottom"> : ä¸‹å´</param>
+	/// <param name="top"> : ä¸Šå´</param>
+	/// <param name="near_"> : ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—è·é›¢</param>
+	/// <param name="far_"> : ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—è·é›¢</param>
+	/// <param name="matrix"> : ä»£å…¥ã™ã‚‹è¡Œåˆ—</param>
 	void MakeOrthogonalR(float left, float right, float bottom, float top, float near_, float far_, Matrix4& matrix);
 
 	/// <summary>
-	/// “§‹“Š‰e•ÏŠ·s—ñ‚ğ¶¬(¶èŒn)
+	/// é€è¦–æŠ•å½±å¤‰æ›è¡Œåˆ—ã‚’ç”Ÿæˆ(å·¦æ‰‹ç³»)
 	/// </summary>
-	/// <param name="fovAngleY"> : ã‰º‰æŠp</param>
-	/// <param name="aspect"> : ƒAƒXƒyƒNƒg”ä(‰æ–Ê‰¡•/‰æ–Êc•)</param>
-	/// <param name="near_"> : ƒjƒAƒNƒŠƒbƒv‹——£</param>
-	/// <param name="far_"> : ƒtƒ@[ƒNƒŠƒbƒv‹——£</param>
-	/// <param name="matrix"> : ‘ã“ü‚·‚és—ñ</param>
+	/// <param name="fovAngleY"> : ä¸Šä¸‹ç”»è§’</param>
+	/// <param name="aspect"> : ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”(ç”»é¢æ¨ªå¹…/ç”»é¢ç¸¦å¹…)</param>
+	/// <param name="near_"> : ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—è·é›¢</param>
+	/// <param name="far_"> : ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—è·é›¢</param>
+	/// <param name="matrix"> : ä»£å…¥ã™ã‚‹è¡Œåˆ—</param>
 	void MakePerspectiveL(float fovAngleY, float aspect, float near_, float far_, Matrix4& matrix);
 
 	/// <summary>
-	/// “§‹“Š‰e•ÏŠ·s—ñ‚ğ¶¬(‰EèŒn)
+	/// é€è¦–æŠ•å½±å¤‰æ›è¡Œåˆ—ã‚’ç”Ÿæˆ(å³æ‰‹ç³»)
 	/// </summary>
-	/// <param name="fovAngleY"> : ã‰º‰æŠp</param>
-	/// <param name="aspect"> : ƒAƒXƒyƒNƒg”ä(‰æ–Ê‰¡•/‰æ–Êc•)</param>
-	/// <param name="near_"> : ƒjƒAƒNƒŠƒbƒv‹——£</param>
-	/// <param name="far_"> : ƒtƒ@[ƒNƒŠƒbƒv‹——£</param>
-	/// <param name="matrix"> : ‘ã“ü‚·‚és—ñ</param>
+	/// <param name="fovAngleY"> : ä¸Šä¸‹ç”»è§’</param>
+	/// <param name="aspect"> : ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”(ç”»é¢æ¨ªå¹…/ç”»é¢ç¸¦å¹…)</param>
+	/// <param name="near_"> : ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—è·é›¢</param>
+	/// <param name="far_"> : ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—è·é›¢</param>
+	/// <param name="matrix"> : ä»£å…¥ã™ã‚‹è¡Œåˆ—</param>
 	void MakePerspectiveR(float fovAngleY, float aspect, float near_, float far_, Matrix4& matrix);
 
 	/// <summary>
-	/// SinACos‚ğ—¼•ûo‚·
+	/// Sinã€Cosã‚’ä¸¡æ–¹å‡ºã™
 	/// </summary>
-	/// <param name="sin_"> : sin‚ÌŒ‹‰Ê‚ğ‘ã“ü‚·‚é</param>
-	/// <param name="cos_"> : cos‚ÌŒ‹‰Ê‚ğ‘ã“ü‚·‚é</param>
-	/// <param name="angle"> : ƒ‰ƒWƒAƒ“Šp</param>
+	/// <param name="sin_"> : sinã®çµæœã‚’ä»£å…¥ã™ã‚‹</param>
+	/// <param name="cos_"> : cosã®çµæœã‚’ä»£å…¥ã™ã‚‹</param>
+	/// <param name="angle"> : ãƒ©ã‚¸ã‚¢ãƒ³è§’</param>
 	void SinCos(float& sin_, float& cos_, float angle);
 
 	/// <summary>
-	/// “x”–@‚©‚çƒ‰ƒWƒAƒ“•ÏŠ·
+	/// åº¦æ•°æ³•ã‹ã‚‰ãƒ©ã‚¸ã‚¢ãƒ³å¤‰æ›
 	/// </summary>
-	/// <param name="angle"> : Šp“x</param>
+	/// <param name="angle"> : è§’åº¦</param>
 	float ChangeRadians(const float& angle);
 
 	/// <summary>
-	/// ƒ‰ƒWƒAƒ“‚©‚ç“x”–@•ÏŠ·
+	/// ãƒ©ã‚¸ã‚¢ãƒ³ã‹ã‚‰åº¦æ•°æ³•å¤‰æ›
 	/// </summary>
-	/// <param name="angle"> : Šp“x</param>
+	/// <param name="angle"> : è§’åº¦</param>
 	float ChangeDira(const float& angle);
 
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Æs—ñ‚ÌŠ|‚¯Z
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã¨è¡Œåˆ—ã®æ›ã‘ç®—
 	/// </summary>
-	/// <param name="x">Š|‚¯‚ç‚ê‚éƒxƒNƒgƒ‹‚ÌXÀ•W</param>
-	/// <param name="y">Š|‚¯‚ç‚ê‚éƒxƒNƒgƒ‹‚ÌYÀ•W</param>
-	/// <param name="z">Š|‚¯‚ç‚ê‚éƒxƒNƒgƒ‹‚ÌZÀ•W</param>
-	/// <param name="mat">Š|‚¯‚és—ñ</param>
+	/// <param name="x">æ›ã‘ã‚‰ã‚Œã‚‹ãƒ™ã‚¯ãƒˆãƒ«ã®Xåº§æ¨™</param>
+	/// <param name="y">æ›ã‘ã‚‰ã‚Œã‚‹ãƒ™ã‚¯ãƒˆãƒ«ã®Yåº§æ¨™</param>
+	/// <param name="z">æ›ã‘ã‚‰ã‚Œã‚‹ãƒ™ã‚¯ãƒˆãƒ«ã®Zåº§æ¨™</param>
+	/// <param name="mat">æ›ã‘ã‚‹è¡Œåˆ—</param>
 	void CoordinateTransformation3D(float& x, float& y, float& z, Matrix4& mat);
 
 	/// <summary>
-	/// ƒrƒ…[•ÏŠ·s—ñ‚ğ¶¬
+	/// ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—ã‚’ç”Ÿæˆ
 	/// </summary>
 	/// <param name="eye"></param>
 	/// <param name="target"></param>
@@ -104,38 +104,38 @@ namespace myMath
 	void MakeLookL(Vector3& eye, Vector3& target, Vector3& up, Matrix4& mat);
 
 	/// <summary>
-	/// ƒ‰ƒ“ƒ_ƒ€‚È’l‚ğæ“¾
+	/// ãƒ©ãƒ³ãƒ€ãƒ ãªå€¤ã‚’å–å¾—
 	/// </summary>
-	/// <param name="min">Å¬’l</param>
-	/// <param name="max">Å‘å’l</param>
+	/// <param name="min">æœ€å°å€¤</param>
+	/// <param name="max">æœ€å¤§å€¤</param>
 	double GetRand(double min, double max);
 
 	int8_t GetRandPlusOrMinus();
 
 	/// <summary>
-	/// “ñ‚Â‚Ì’l‚ª‚Ù‚Ú“™‚µ‚¢‚©
+	/// äºŒã¤ã®å€¤ãŒã»ã¼ç­‰ã—ã„ã‹
 	/// </summary>
 	bool Approximately(float a, float b);
 
 	/// <summary>
-	/// ƒGƒ‹ƒ~[ƒg‹Èü
+	/// ã‚¨ãƒ«ãƒŸãƒ¼ãƒˆæ›²ç·š
 	/// </summary>
-	/// <param name="p0">§Œä“_</param>
-	/// <param name="p1">§Œä“_</param>
-	/// <param name="v0">§Œä“_</param>
-	/// <param name="v1">§Œä“_</param>
-	/// <param name="t">ŠÔ(0.0`1.0)</param>
+	/// <param name="p0">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="p1">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="v0">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="v1">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="t">æ™‚é–“(0.0ï½1.0)</param>
 	/// <returns></returns>
 	Vector3 HermiteGetPoint(Vector3 p0, Vector3 p1, Vector3 v0, Vector3 v1, float t);
 
 	/// <summary>
-	/// ƒLƒƒƒbƒgƒ€ƒ‹[ƒƒ€ƒXƒvƒ‰ƒCƒ“ 
+	/// ã‚­ãƒ£ãƒƒãƒˆãƒ ãƒ«ãƒ¼ãƒ­ãƒ ã‚¹ãƒ—ãƒ©ã‚¤ãƒ³ 
 	/// </summary>
-	/// <param name="points">§Œä“_</param>
-	/// <param name="t">ŠÔ(0.0`1.0)</param>
+	/// <param name="points">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="t">æ™‚é–“(0.0ï½1.0)</param>
 	Vector3 CatmullRomSpline(std::vector<Vector3>& points, float t);
 
-	//üŒ`•âŠ®(1ŸŠÖ”•âŠ®)
+	//ç·šå½¢è£œå®Œ(1æ¬¡é–¢æ•°è£œå®Œ)
 	const Vector3 lerp(const Vector3& start, const Vector3& end, const float t);
 
 	Vector3 Beziers(Vector3 startPos, Vector3 endPos,Vector3 controlPoint, float t);
