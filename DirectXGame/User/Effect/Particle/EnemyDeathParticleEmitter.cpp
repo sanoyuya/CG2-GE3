@@ -25,7 +25,7 @@ void EnemyDeathParticleEmitter::Create(const myMath::Vector3 center)
 		//重力のような処理
 		myMath::Vector3 acc{};
 
-		myMath::Vector4 col = { 0.0f,0.0f,0.0f,1.0f };
+		myMath::Vector4 col = { 0 / 255.0f,0 / 255.0f,0 / 255.0f,1.0f };
 
 		//追加
 		particleMan_->Add(60.0f, pos, vel, acc, 3.0f, 10.0f, col);

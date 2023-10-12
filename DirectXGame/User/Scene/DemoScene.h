@@ -16,6 +16,9 @@ private:
 	Transform modelTrans_;
 	uint32_t modelTex_;
 
+	float flame_;
+	uint16_t num_ = 0;
+
 public:
 
 	//初期化処理

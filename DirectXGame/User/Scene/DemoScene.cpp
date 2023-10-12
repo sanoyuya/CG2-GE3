@@ -9,7 +9,7 @@ void DemoScene::Initialize()
 	camera_->Update(true);
 
 	sprite_ = std::make_unique<Sprite>();
-	spriteTex_ = sprite_->LoadTexture("Resources/reimu.png");
+	spriteTex_ = sprite_->LoadTexture("Resources/default/GodQueenProject/faleg/1_1.jpg");
 	sprite_->Sprite2DInitialize(spriteTex_);
 
 	model_= std::make_unique<Model>();
@@ -26,6 +26,11 @@ void DemoScene::Destroy()
 
 void DemoScene::Update()
 {
+	if (flame_ < 2)
+	{
+		num_++;
+		flame_ = 0.0f;
+	}
 	angle_+=0.01f;
 	modelTrans_.TransUpdate(camera_.get());
 }
@@ -33,4 +38,5 @@ void DemoScene::Update()
 void DemoScene::Draw()
 {
 	model_->DrawModel(&modelTrans_);
+	sprite_->DrawAnimationSpriteY2D(windowsCenter_, 16, num_,{1,1,1,1},{1,1},-myMath::AX_PIF/2);
 }
