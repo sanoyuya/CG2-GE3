@@ -2,6 +2,8 @@
 #include"PhysicsMath.h"
 #include"ColliderManager.h"
 #include<imgui.h>
+myMath::Vector3 Player::targetPos_;
+CameraFlag Player::cameraFlag_;
 
 Player::~Player()
 {
@@ -21,7 +23,7 @@ void Player::Initialize()
 	playerTex_ = player_->CreateObjModel("Resources/F-35E");
 	player_->SetModel(playerTex_);
 	playerTrans_.Initialize();
-	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,10.0f };
+	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,0.0f };
 	playerTrans_.scale = { 0.5f,0.5f,0.5f };
 	cameraTrans_.Initialize();
 
@@ -49,10 +51,8 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	//カメラを親にする為に行列をTransformのmatWorldに登録
-	cameraTrans_.matWorld = camera_->GetMatView();
 	//レティクルの親にカメラを設定
-	playerTrans_.parent = &cameraTrans_;
+	playerTrans_.parent = &camera_->GetCenterTrans();
 
 	//HPバーの更新
 	hpBar_->Update(hp_);
@@ -65,11 +65,12 @@ void Player::Update()
 	else
 	{
 		//カメラのセット
-		reticle_->SetCamera(camera_);
+		reticle_->SetCamera(camera_->GetCameraPtr());
 		//レティクルの更新処理
 		reticle_->Update();
 		//自機の移動処理
 		Move();
+		CameraRotation();
 		if (isBulletAttack_ == false)
 		{
 			//弾の更新処理
@@ -89,10 +90,10 @@ void Player::Update()
 	}
 
 	//Transformの更新処理
-	playerTrans_.TransUpdate(camera_);
+	playerTrans_.TransUpdate(camera_->GetCameraPtr());
 
 	controlTrans_.parent = &playerTrans_;
-	controlTrans_.TransUpdate(camera_);
+	controlTrans_.TransUpdate(camera_->GetCameraPtr());
 
 	collisionData_.center = playerTrans_.parentToTranslation;
 
@@ -107,12 +108,12 @@ void Player::Update()
 	parentToDirectionVector_.normalization();
 
 	//自機の回転処理
-	Rotation(camera_);
+	Rotation(camera_->GetCameraPtr());
 
 	//エンジンの煙の更新処理
-	SmokeUpdate(camera_);
+	SmokeUpdate(camera_->GetCameraPtr());
 	//死亡演出のパーティクルの更新処理
-	deathAnimation_->ParticleUpdate(camera_);
+	deathAnimation_->ParticleUpdate(camera_->GetCameraPtr());
 	//死亡演出で死亡させたときのフラグの値を貰う
 	deathFlag_ = deathAnimation_->GetDeathFlag();
 
@@ -181,7 +182,7 @@ const bool Player::GetLockOnFlag()
 
 void Player::Reset()
 {
-	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,10.0f };
+	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,0.0f };
 	hp_ = 10;
 	//レティクルのリセット
 	reticle_->Reset();
@@ -215,7 +216,7 @@ const myMath::Vector3& Player::GetAddTargetPos()
 	return targetPos_;
 }
 
-void Player::SetCamera(Camera* camera)
+void Player::SetCamera(RailCamera* camera)
 {
 	camera_ = camera;
 }
@@ -233,22 +234,27 @@ const bool Player::GetIsBulletAttack()
 void Player::Move()
 {
 	//先に補間先の座標を定義する
-	float reticleX = reticle_->GetTransform().translation.x / 6;
+	float reticleX = -reticle_->GetTransform().translation.x / 6;
 	float reticleY = reticle_->GetTransform().translation.y / 6;
 	//そのまま移動させると動きが硬いので補完する
 	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
 	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
 }
 
+const CameraFlag& Player::GetCameraFlag()
+{
+	return cameraFlag_;
+}
+
 void Player::Rotation(Camera* camera)
 {
 	//レティクルの方向に向くように回転
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
-	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
+	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) - myMath::AX_PIF / 2;
 
-	float angleZ = -(reticle_->GetTransform().translation.x / 6 - playerTrans_.translation.x) / 5.0f;
-	//モデルのZ軸回転
-	PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
+	//float angleZ = reticle_->GetTransform().translation.x / 6 - playerTrans_.translation.x / 5.0f;
+	////モデルのZ軸回転
+	//PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 
 	myMath::Vector3 cameraFrontVec = camera->GetTarget() - camera->GetEye();
 	myMath::Vector3 cameraUp =
@@ -330,6 +336,28 @@ void Player::LockOnAttack()
 			lockOnAttackFlag_ = false;
 		}
 	}
+}
+
+void Player::CameraRotation()
+{
+	if (input_->KeyboardTriggerPush(DIK_K))
+	{
+		cameraFlagNum_++;
+		if (cameraFlagNum_ > 3)
+		{
+			cameraFlagNum_ = 0;
+		}
+	}
+	else if (input_->KeyboardTriggerPush(DIK_H))
+	{
+		cameraFlagNum_--;
+		if (cameraFlagNum_ < 0)
+		{
+			cameraFlagNum_ = 3;
+		}
+	}
+
+	cameraFlag_ = static_cast<CameraFlag>(cameraFlagNum_);
 }
 
 void Player::ImGuiUpdate()

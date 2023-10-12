@@ -1,6 +1,6 @@
 #pragma once
 #include"DrawOversight.h"
-#include"Camera.h"
+#include"RailCamera.h"
 #include"InputManager.h"
 #include"myMath.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
@@ -23,7 +23,7 @@ class Player:public GameObject
 private:
 
 	InputManager* input_ = nullptr;
-	Camera* camera_ = nullptr;
+	RailCamera* camera_ = nullptr;
 	BulletManager* bulletManager_ = nullptr;
 
 	std::string name_ = "player";
@@ -49,7 +49,7 @@ private:
 
 	bool damageFlag_ = false;
 
-	myMath::Vector3 targetPos_ = {};
+	static myMath::Vector3 targetPos_;
 
 	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
@@ -66,6 +66,9 @@ private:
 	bool isBulletAttack_ = false;
 
 	Transform controlTrans_;
+
+	static CameraFlag cameraFlag_;
+	int8_t cameraFlagNum_ = 2;
 
 public:
 
@@ -107,19 +110,23 @@ public:
 
 	void SetDamageFlag(const bool damageFlag);
 
-	const myMath::Vector3& GetAddTargetPos();
+	static const myMath::Vector3& GetAddTargetPos();
 
-	void SetCamera(Camera* camera);
+	void SetCamera(RailCamera* camera);
 
 	void SetBulletManager(BulletManager* bulletManager);
 
 	const bool GetIsBulletAttack();
+
+	static const CameraFlag& GetCameraFlag();
 
 private:
 
 	void Move();
 
 	void Rotation(Camera* camera);
+
+	void CameraRotation();
 
 	void NormalBulletAttack();
 

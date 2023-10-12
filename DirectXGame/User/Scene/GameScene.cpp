@@ -52,7 +52,7 @@ void GameScene::Initialize()
 
 	camera_ = std::make_unique<RailCamera>();
 	camera_->Initialize(gameLevelData_->GetCameraData());
-	camera_->Update(player_.get());
+	camera_->Update();
 
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
@@ -122,10 +122,10 @@ void GameScene::Update()
 	if (poseFlag_ == false)
 	{
 		gameTimer_->Update();
-		player_->SetCamera(camera_->GetCameraPtr());
+		player_->SetCamera(camera_.get());
 		player_->SetBulletManager(bulletManager_.get());
 		player_->Update();
-		camera_->Update(player_.get());
+		camera_->Update();
 		gameLevelData_->Update(camera_->GetCameraPtr());
 		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//天球
 		playerDamageEffect_->Update(player_.get());
