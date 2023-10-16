@@ -3,6 +3,8 @@
 #include"SceneChangeAnimation.h"
 #include"Enemy.h"
 #include"HitEffect.h"
+#include"Pose.h"
+#include"Retention.h"
 
 void MyGame::Initialize()
 {
@@ -16,13 +18,15 @@ void MyGame::Initialize()
 	postEffect_ = std::make_unique<MultiTexturePostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
 
-	BaseScene::StaticInitialize(windowsApp_.get());
+	Retention::GetInstance()->SetWindowData(windowsApp_.get());
 
 	SceneChangeAnimation::GetInstance()->StaticInitialize();
 
 	Enemy::StaticInitialize();
 
 	HitEffect::StaticInitialize();
+
+	Pose::GetInstance()->Initialize();
 
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("EngineOP");

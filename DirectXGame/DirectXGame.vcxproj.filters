@@ -423,11 +423,11 @@
     <ClCompile Include="User\Other\Retention.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Other\BaseScene.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\GameObject\ColliderManager.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Other\Pose.cpp">
+      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -780,6 +780,9 @@
     </ClInclude>
     <ClInclude Include="User\GameObject\ColliderManager.h">
       <Filter>User\ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Other\Pose.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
