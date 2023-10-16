@@ -11,26 +11,32 @@ void RailCamera::Initialize(const CameraData& cameraData)
 	camera_->Initialize(true);
 	camera_->SetEye(position_);
 
-	center_.Initialize();
+	//レールの大元
+	railTrans_.Initialize();
 
-	front_.Initialize();
-	front_.translation.z = 10.0f;
-	front_.parent = &center_;
-	back_.Initialize();
-	back_.translation.z = -10.0f;
-	back_.parent = &center_;
-	left_.Initialize();
-	left_.translation.x = 10.0f;
-	left_.parent = &center_;
-	right_.Initialize();
-	right_.translation.x = -10.0f;
-	right_.parent = &center_;
+	//カメラの基準(中心)
+	CameraCenter_.Initialize();
+	CameraCenter_.parent = &railTrans_;//レールの子
+
+	CameraFront_.Initialize();//カメラの基準の子
+	CameraFront_.translation.z = 10.0f;
+	CameraFront_.parent = &CameraCenter_;
+	CameraBack_.Initialize();//カメラの基準の子
+	CameraBack_.translation.z = -10.0f;
+	CameraBack_.parent = &CameraCenter_;
+	CameraLeft_.Initialize();//カメラの基準の子
+	CameraLeft_.translation.x = 10.0f;
+	CameraLeft_.parent = &CameraCenter_;
+	CameraRight_.Initialize();//カメラの基準の子
+	CameraRight_.translation.x = -10.0f;
+	CameraRight_.parent = &CameraCenter_;
 }
 
 void RailCamera::Update()
 {
-	center_.translation = myMath::CatmullRomSpline(controlPoints_, time_);
+	railTrans_.translation = myMath::CatmullRomSpline(controlPoints_, time_);
 
+	//ここGameTimerで一括管理したい
 	time_ += 0.00025f;
 	if (time_ >= 1.0f)
 	{
@@ -39,59 +45,62 @@ void RailCamera::Update()
 
 	frontPos_ = myMath::CatmullRomSpline(controlPoints_, time_);
 
-	frontVec_ = frontPos_ - center_.translation;
+	//正面ベクトル
+	frontVec_ = frontPos_ - railTrans_.translation;
 	frontVec_.normalization();
-
-	/*center_.rotation.x = -std::atan2(frontVec_.y, frontVec_.z);
-	center_.rotation.y = -std::atan2(frontVec_.z, frontVec_.x) + myMath::AX_PIF / 2;*/
+	
+	//方向ベクトルの方向に向く
+	/*railTrans_.rotation.x = -std::atan2(frontVec_.y, frontVec_.z);
+	railTrans_.rotation.y = -std::atan2(frontVec_.z, frontVec_.x) + myMath::AX_PIF / 2;*/
+	railTrans_.TransUpdate(camera_.get());
 
 	switch (Player::GetCameraFlag())
 	{
 	case CameraFlag::Front:
-		PhysicsMath::Complement(position_.x, front_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(position_.y, front_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(position_.z, front_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(position_.x, CameraFront_.parentToTranslation.x, 20.0f);
+		PhysicsMath::Complement(position_.y, CameraFront_.parentToTranslation.y, 20.0f);
+		PhysicsMath::Complement(position_.z, CameraFront_.parentToTranslation.z, 20.0f);
 
-		PhysicsMath::Complement(target_.x, back_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(target_.y, back_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(target_.z, back_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(target_.x, CameraBack_.parentToTranslation.x, 20.0f);
+		PhysicsMath::Complement(target_.y, CameraBack_.parentToTranslation.y, 20.0f);
+		PhysicsMath::Complement(target_.z, CameraBack_.parentToTranslation.z, 20.0f);
 		break;
 	case CameraFlag::Back:
-		PhysicsMath::Complement(position_.x, back_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(position_.y, back_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(position_.z, back_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(position_.x, CameraBack_.parentToTranslation.x, 20.0f);
+		PhysicsMath::Complement(position_.y, CameraBack_.parentToTranslation.y, 20.0f);
+		PhysicsMath::Complement(position_.z, CameraBack_.parentToTranslation.z, 20.0f);
 
-		PhysicsMath::Complement(target_.x, front_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(target_.y, front_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(target_.z, front_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(target_.x, CameraFront_.parentToTranslation.x, 20.0f);
+		PhysicsMath::Complement(target_.y, CameraFront_.parentToTranslation.y, 20.0f);
+		PhysicsMath::Complement(target_.z, CameraFront_.parentToTranslation.z, 20.0f);
 		break;
 	case CameraFlag::Left:
-		PhysicsMath::Complement(position_.x, left_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(position_.y, left_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(position_.z, left_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(position_.x, CameraLeft_.parentToTranslation.x, 20.0f);
+		PhysicsMath::Complement(position_.y, CameraLeft_.parentToTranslation.y, 20.0f);
+		PhysicsMath::Complement(position_.z, CameraLeft_.parentToTranslation.z, 20.0f);
 
-		PhysicsMath::Complement(target_.x, right_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(target_.y, right_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(target_.z, right_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(target_.x, CameraRight_.parentToTranslation.x, 20.0f);
+		PhysicsMath::Complement(target_.y, CameraRight_.parentToTranslation.y, 20.0f);
+		PhysicsMath::Complement(target_.z, CameraRight_.parentToTranslation.z, 20.0f);
 		break;
 	case CameraFlag::Right:
-		PhysicsMath::Complement(position_.x, right_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(position_.y, right_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(position_.z, right_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(position_.x, CameraRight_.parentToTranslation.x, 20.0f);
+		PhysicsMath::Complement(position_.y, CameraRight_.parentToTranslation.y, 20.0f);
+		PhysicsMath::Complement(position_.z, CameraRight_.parentToTranslation.z, 20.0f);
 
-		PhysicsMath::Complement(target_.x, left_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(target_.y, left_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(target_.z, left_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(target_.x, CameraLeft_.parentToTranslation.x, 20.0f);
+		PhysicsMath::Complement(target_.y, CameraLeft_.parentToTranslation.y, 20.0f);
+		PhysicsMath::Complement(target_.z, CameraLeft_.parentToTranslation.z, 20.0f);
 		break;
 	default:
 		break;
 	}
 
-	center_.TransUpdate(GetCameraPtr());
-	front_.TransUpdate(GetCameraPtr());
-	back_.TransUpdate(GetCameraPtr());
-	left_.TransUpdate(GetCameraPtr());
-	right_.TransUpdate(GetCameraPtr());
+	CameraCenter_.TransUpdate(GetCameraPtr());
+	CameraFront_.TransUpdate(GetCameraPtr());
+	CameraBack_.TransUpdate(GetCameraPtr());
+	CameraLeft_.TransUpdate(GetCameraPtr());
+	CameraRight_.TransUpdate(GetCameraPtr());
 
 	camera_->SetEye(position_);
 	camera_->SetTarget(target_+ Player::GetAddTargetPos());
@@ -116,21 +125,21 @@ const float RailCamera::GetTime()
 	return time_;
 }
 
-const Transform& RailCamera::GetCenterTrans()
+const Transform& RailCamera::GetRailTrans()
 {
-	return center_;
+	return railTrans_;
 }
 
 void RailCamera::ImGuiUpdate()
 {
-	ImGui::Begin("CameraFlag");
+	/*ImGui::Begin("CameraFlag");
 	ImGui::Text("centerPos:%f,%f,%f", center_.parentToTranslation.x, center_.parentToTranslation.y, center_.parentToTranslation.z);
 	ImGui::Text("frontPos:%f,%f,%f", front_.parentToTranslation.x, front_.parentToTranslation.y, front_.parentToTranslation.z);
 	ImGui::Text("backPos:%f,%f,%f", back_.parentToTranslation.x, back_.parentToTranslation.y, back_.parentToTranslation.z);
 	ImGui::Text("leftPos:%f,%f,%f", left_.parentToTranslation.x, left_.parentToTranslation.y, left_.parentToTranslation.z);
-	ImGui::Text("rightPos:%f,%f,%f", right_.parentToTranslation.x, right_.parentToTranslation.y, right_.parentToTranslation.z);
+	ImGui::Text("rightPos:%f,%f,%f", CameraRight_.parentToTranslation.x, right_.parentToTranslation.y, right_.parentToTranslation.z);
 	ImGui::Text("targetPos:%f,%f,%f", target_.x, target_.y, target_.z);
-	ImGui::End();
+	ImGui::End();*/
 }
 
 void RailCamera::Load(const CameraData& cameraData)

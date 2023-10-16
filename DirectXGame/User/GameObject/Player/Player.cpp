@@ -52,7 +52,7 @@ void Player::Initialize()
 void Player::Update()
 {
 	//レティクルの親にカメラを設定
-	playerTrans_.parent = &camera_->GetCenterTrans();
+	playerTrans_.parent = &camera_->GetRailTrans();
 
 	//HPバーの更新
 	hpBar_->Update(hp_);
@@ -256,17 +256,19 @@ void Player::Rotation(Camera* camera)
 	////モデルのZ軸回転
 	//PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 
-	myMath::Vector3 cameraFrontVec = camera->GetTarget() - camera->GetEye();
+	camera;
+
+	/*myMath::Vector3 cameraFrontVec = camera->GetTarget() - camera->GetEye();
 	myMath::Vector3 cameraUp =
 	{
 		sinf(cameraFrontVec.y) * sinf(playerTrans_.rotation.z),
 		cosf(cameraFrontVec.y) * cosf(playerTrans_.rotation.z),
 		0.0f
 	};
-	camera->SetUp(cameraUp);
+	camera->SetUp(cameraUp);*/
 
 	//プレイヤーの横向きの回転をワールド座標に変換し、後でカメラに足せるように変数に格納
-	targetPos_ = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
+	//targetPos_ = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
 }
 
 void Player::NormalBulletAttack()

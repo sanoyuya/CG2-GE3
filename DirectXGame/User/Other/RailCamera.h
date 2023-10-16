@@ -31,11 +31,13 @@ private:
 
 	CameraFlag flag_ = CameraFlag::Back;
 
-	Transform center_;
-	Transform front_;
-	Transform back_;
-	Transform right_;
-	Transform left_;
+	Transform railTrans_;
+
+	Transform CameraCenter_;
+	Transform CameraFront_;
+	Transform CameraBack_;
+	Transform CameraRight_;
+	Transform CameraLeft_;
 
 	myMath::Vector3 frontVec_ = {};
 	myMath::Vector3 frontPos_ = {};
@@ -56,7 +58,7 @@ public:
 
 	const float GetTime();
 
-	const Transform& GetCenterTrans();
+	const Transform& GetRailTrans();
 
 private:
 
