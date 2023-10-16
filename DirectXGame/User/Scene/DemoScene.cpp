@@ -1,4 +1,5 @@
 #include "DemoScene.h"
+#include"Retention.h"
 
 void DemoScene::Initialize()
 {
@@ -38,5 +39,5 @@ void DemoScene::Update()
 void DemoScene::Draw()
 {
 	model_->DrawModel(&modelTrans_);
-	sprite_->DrawAnimationSpriteY2D(windowsCenter_, 16, num_,{1,1,1,1},{1,1},-myMath::AX_PIF/2);
+	sprite_->DrawAnimationSpriteY2D(Retention::GetInstance()->GetWindowsCenter(), 16, num_, {1,1,1,1}, {1,1}, -myMath::AX_PIF / 2);
 }

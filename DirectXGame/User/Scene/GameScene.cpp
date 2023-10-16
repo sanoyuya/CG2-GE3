@@ -5,6 +5,7 @@
 #include"SceneChangeAnimation.h"
 #include"MultiTexturePostEffect.h"
 #include"Retention.h"
+#include"Pose.h"
 
 void GameScene::Initialize()
 {
@@ -101,13 +102,13 @@ void GameScene::Update()
 
 	if (input_->KeyboardTriggerPush(DIK_P) || input_->ControllerButtonTriggerPush(START))
 	{
-		if (poseFlag_ == false)
+		if (Pose::GetInstance()->GetPoseFlag() == false)
 		{
-			poseFlag_ = true;
+			Pose::GetInstance()->SetPoseFlag(true);
 		}
 		else
 		{
-			poseFlag_ = false;
+			Pose::GetInstance()->SetPoseFlag(false);
 		}
 	}
 
@@ -119,7 +120,7 @@ void GameScene::Update()
 	lightManager_->SetPointLightColor(0, lightColor_);
 	lightManager_->SetPointLightAtten(0, lightAtten_);
 
-	if (poseFlag_ == false)
+	if (Pose::GetInstance()->GetPoseFlag() == false)
 	{
 		gameTimer_->Update();
 		player_->SetCamera(camera_->GetCameraPtr());
@@ -144,5 +145,6 @@ void GameScene::Draw()
 	bulletManager_->Draw();
 	player_->Draw();
 	radar_->Draw(enemyManager_.get(), player_.get());
+	Pose::GetInstance()->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
 }
