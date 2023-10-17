@@ -28,8 +28,13 @@ void MyGame::Initialize()
 
 	Pose::GetInstance()->Initialize();
 
+#ifdef _DEBUG
+	//シーンマネージャーに最初のシーンをセット
+	SceneManager::GetInstance()->ChangeScene("TITLE");
+#elif
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("EngineOP");
+#endif
 }
 
 void MyGame::Destroy()

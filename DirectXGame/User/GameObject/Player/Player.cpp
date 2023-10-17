@@ -250,7 +250,7 @@ void Player::Rotation(Camera* camera)
 {
 	//レティクルの方向に向くように回転
 	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
-	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) - myMath::AX_PIF / 2;
+	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
 	//float angleZ = reticle_->GetTransform().translation.x / 6 - playerTrans_.translation.x / 5.0f;
 	////モデルのZ軸回転

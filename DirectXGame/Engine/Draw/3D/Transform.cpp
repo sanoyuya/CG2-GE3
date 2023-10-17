@@ -41,7 +41,7 @@ void Transform::Initialize()
 	constBuff_->Update(&constBuffMap_);
 }
 
-void Transform::TransUpdate(Camera* camera)
+void Transform::TransUpdate(Camera* camera, myMath::Quaternion* q)
 {
 	//スケール、回転、平行移動行列の計算
 	matScale.MakeScaling(scale);
@@ -55,6 +55,10 @@ void Transform::TransUpdate(Camera* camera)
 	matWorld *= matScale;
 	//ワールド行列に回転を反映
 	matWorld *= matRot;
+	if (q != nullptr)
+	{
+		matWorld *= q->Rotate();
+	}
 	//ワールド行列に平行移動を反映
 	matWorld *= matTrans;
 	//親行列の指定がある場合は、掛け算する

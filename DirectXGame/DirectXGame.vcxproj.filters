@@ -429,6 +429,9 @@
     <ClCompile Include="User\Other\Pose.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Math\Quaternion.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -783,6 +786,9 @@
     </ClInclude>
     <ClInclude Include="User\Other\Pose.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\Quaternion.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

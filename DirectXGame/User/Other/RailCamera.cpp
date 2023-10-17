@@ -48,11 +48,14 @@ void RailCamera::Update()
 	//正面ベクトル
 	frontVec_ = frontPos_ - railTrans_.translation;
 	frontVec_.normalization();
+
+	myMath::Vector3 baseVec = { 0.0f,0.0f,1.0f };
+
+	myMath::Quaternion q(baseVec, frontVec_);
 	
 	//方向ベクトルの方向に向く
-	/*railTrans_.rotation.x = -std::atan2(frontVec_.y, frontVec_.z);
-	railTrans_.rotation.y = -std::atan2(frontVec_.z, frontVec_.x) + myMath::AX_PIF / 2;*/
-	railTrans_.TransUpdate(camera_.get());
+	//railTrans_.rotation = { q.GetEulerAngles().x,q.GetEulerAngles().y,0.0f };
+	railTrans_.TransUpdate(camera_.get(),&q);
 
 	switch (Player::GetCameraFlag())
 	{

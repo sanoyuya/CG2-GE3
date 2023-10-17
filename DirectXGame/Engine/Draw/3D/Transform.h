@@ -48,7 +48,7 @@ public:
 	/// <summary>
 	/// 行列を転送する
 	/// </summary>
-	void TransUpdate(Camera* camera);
+	void TransUpdate(Camera* camera, myMath::Quaternion* q = nullptr);
 
 	void Update();
 

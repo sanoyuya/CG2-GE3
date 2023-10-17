@@ -3,6 +3,7 @@
 #include"Vector3.h"
 #include"Vector4.h"
 #include"Matrix4.h"
+#include"Quaternion.h"
 #include<vector>
 
 //2D変換行列(定数バッファ)
