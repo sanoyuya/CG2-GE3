@@ -72,7 +72,7 @@ void Player::Update()
 		reticle_->Update();
 		//自機の移動処理
 		Move();
-		
+
 		if (isBulletAttack_ == false)
 		{
 			//弾の更新処理
@@ -365,7 +365,7 @@ void Player::LockOnAttack()
 
 void Player::CameraRotation()
 {
-	if (input_->KeyboardTriggerPush(DIK_K))
+	if (input_->KeyboardTriggerPush(DIK_H) || input_->ControllerButtonTriggerPush(LB))
 	{
 		cameraFlagNum_++;
 		if (cameraFlagNum_ > 3)
@@ -373,7 +373,7 @@ void Player::CameraRotation()
 			cameraFlagNum_ = 0;
 		}
 	}
-	else if (input_->KeyboardTriggerPush(DIK_H))
+	else if (input_->KeyboardTriggerPush(DIK_K) || input_->ControllerButtonTriggerPush(RB))
 	{
 		cameraFlagNum_--;
 		if (cameraFlagNum_ < 0)
