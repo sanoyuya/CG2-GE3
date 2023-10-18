@@ -113,8 +113,6 @@ void RailCamera::Update()
 	camera_->SetEye(position_);
 	camera_->SetTarget(target_);
 	camera_->Update(true);
-
-	ImGuiUpdate();
 }
 
 void RailCamera::ReLoad(const CameraData& cameraData)

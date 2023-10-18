@@ -32,6 +32,7 @@ public:
 	void CancelLockOn();
 
 	void Reset();
+	void ImGuiUpdate();
 
 public:
 
@@ -44,7 +45,6 @@ private:
 	~ColliderManager() = default;
 
 	void AddLockOnEnemy(GameObject* lockOnEnemy);
-	void ImGuiUpdate();
 
 	//コピーコンストラクタ・代入演算子削除
 	ColliderManager& operator=(const ColliderManager&) = delete;

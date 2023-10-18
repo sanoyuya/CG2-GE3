@@ -118,10 +118,6 @@ void Player::Update()
 	deathAnimation_->ParticleUpdate(camera_->GetCameraPtr());
 	//死亡演出で死亡させたときのフラグの値を貰う
 	deathFlag_ = deathAnimation_->GetDeathFlag();
-
-#ifdef _DEBUG
-	ImGuiUpdate();
-#endif _DEBUG
 }
 
 void Player::Draw()

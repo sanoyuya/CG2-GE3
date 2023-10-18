@@ -65,9 +65,10 @@ public:
 
 	myMath::Quaternion& GetQuaternion();
 
+	void ImGuiUpdate();
+
 private:
 
-	void ImGuiUpdate();
 	void Load(const CameraData& cameraData);
 	void Reset();
 };

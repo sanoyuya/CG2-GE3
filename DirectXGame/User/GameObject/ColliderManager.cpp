@@ -116,8 +116,6 @@ void ColliderManager::Update(Player* player)
 			}
 		}
 	}
-
-	ImGuiUpdate();
 }
 
 void ColliderManager::AddCollision(GameObject* object)

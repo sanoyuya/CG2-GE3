@@ -122,6 +122,8 @@ public:
 
 	static const CameraFlag& GetCameraFlag();
 
+	void ImGuiUpdate();
+
 private:
 
 	void Move();
@@ -135,6 +137,4 @@ private:
 	void SmokeUpdate(Camera* camera);
 
 	void LockOnAttack();
-
-	void ImGuiUpdate();
 };
