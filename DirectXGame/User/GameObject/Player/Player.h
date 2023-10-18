@@ -68,7 +68,9 @@ private:
 	Transform controlTrans_;
 
 	static CameraFlag cameraFlag_;
-	int8_t cameraFlagNum_ = 2;
+	int8_t cameraFlagNum_ = 0;
+
+	myMath::Vector3 addMovePos_ = {};
 
 public:
 
@@ -124,7 +126,7 @@ private:
 
 	void Move();
 
-	void Rotation(Camera* camera);
+	void Rotation();
 
 	void CameraRotation();
 

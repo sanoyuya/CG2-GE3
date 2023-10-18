@@ -14,6 +14,11 @@ private:
 
 	std::list<GameObject*>lockOnEnemys;
 
+	bool isEnemyBulletToPlayer_ = true;
+	bool isPlayerToEnemy_ = true;
+	bool isPlayerBulletToEnemy_ = true;
+	bool isPlayerBulletToEnemyBullet_ = true;
+
 public:
 
 	void Update(Player* player);
@@ -39,6 +44,7 @@ private:
 	~ColliderManager() = default;
 
 	void AddLockOnEnemy(GameObject* lockOnEnemy);
+	void ImGuiUpdate();
 
 	//コピーコンストラクタ・代入演算子削除
 	ColliderManager& operator=(const ColliderManager&) = delete;

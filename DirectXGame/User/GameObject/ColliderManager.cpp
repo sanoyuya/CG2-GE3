@@ -1,4 +1,5 @@
 #include "ColliderManager.h"
+#include<imgui.h>
 
 void ColliderManager::Update(Player* player)
 {
@@ -10,30 +11,40 @@ void ColliderManager::Update(Player* player)
 		{
 			if (player->GetHp() > 0)
 			{
-				//playerと敵の弾の当たり判定
-				if (object1->GetName() == "player" && object2->GetName() == "enemyBullet")
+#ifdef _DEBUG
+				if (isEnemyBulletToPlayer_==true)
+#endif _DEBUG
 				{
-					if (object2->GetDeathFlag() == false)
+					//playerと敵の弾の当たり判定
+					if (object1->GetName() == "player" && object2->GetName() == "enemyBullet")
 					{
-						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
-							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						if (object2->GetDeathFlag() == false)
 						{
-							object1->OnCollision();//playerのHP減少
-							object2->OnCollision();//敵の弾を消滅させる
+							if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+								object2->GetCollisionData().center, object2->GetCollisionData().radius))
+							{
+								object1->OnCollision();//playerのHP減少
+								object2->OnCollision();//敵の弾を消滅させる
+							}
 						}
 					}
 				}
 
-				//playerと敵の当たり判定
-				if (object1->GetName() == "player" && object2->GetName() == "enemy")
+#ifdef _DEBUG
+				if (isPlayerToEnemy_ == true)
+#endif _DEBUG
 				{
-					if (object2->GetDeathAnimationFlag() == false)
+					//playerと敵の当たり判定
+					if (object1->GetName() == "player" && object2->GetName() == "enemy")
 					{
-						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
-							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						if (object2->GetDeathAnimationFlag() == false)
 						{
-							object1->OnCollision();//playerのHP減少
-							object2->OnCollision();//敵を消滅させる
+							if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+								object2->GetCollisionData().center, object2->GetCollisionData().radius))
+							{
+								object1->OnCollision();//playerのHP減少
+								object2->OnCollision();//敵を消滅させる
+							}
 						}
 					}
 				}
@@ -53,48 +64,60 @@ void ColliderManager::Update(Player* player)
 				}
 			}
 
-			//playerの弾と敵の当たり判定
-			if (object1->GetName() == "playerBullet" && object2->GetName() == "enemy")
+#ifdef _DEBUG
+			if (isPlayerBulletToEnemy_ == true)
+#endif _DEBUG
 			{
-				if (object2->GetDeathAnimationFlag() == false)
+				//playerの弾と敵の当たり判定
+				if (object1->GetName() == "playerBullet" && object2->GetName() == "enemy")
 				{
-					if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
-						object2->GetCollisionData().center, object2->GetCollisionData().radius))
+					if (object2->GetDeathAnimationFlag() == false)
 					{
-						object1->OnCollision();//playerの弾を消滅させる
-						object2->OnCollision();//敵を消滅させる
+						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						{
+							object1->OnCollision();//playerの弾を消滅させる
+							object2->OnCollision();//敵を消滅させる
+						}
+					}
+				}
+
+				if (object1->GetName() == "lockOnBullet" && object2->GetName() == "enemy")
+				{
+					if (object2->GetDeathAnimationFlag() == false)
+					{
+						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						{
+							object1->OnCollision();//playerの弾を消滅させる
+							object2->OnCollision();//敵を消滅させる
+						}
 					}
 				}
 			}
 
-			if (object1->GetName() == "lockOnBullet" && object2->GetName() == "enemy")
+#ifdef _DEBUG
+			if (isPlayerBulletToEnemyBullet_ == true)
+#endif _DEBUG
 			{
-				if (object2->GetDeathAnimationFlag() == false)
+				//playerの弾と敵の弾の当たり判定
+				if (object1->GetName() == "playerBullet" && object2->GetName() == "enemyBullet")
 				{
-					if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
-						object2->GetCollisionData().center, object2->GetCollisionData().radius))
+					if (object2->GetDeathAnimationFlag() == false && object2->GetDeathFlag() == false)
 					{
-						object1->OnCollision();//playerの弾を消滅させる
-						object2->OnCollision();//敵を消滅させる
-					}
-				}
-			}
-
-			//playerの弾と敵の弾の当たり判定
-			if (object1->GetName() == "playerBullet" && object2->GetName() == "enemyBullet")
-			{
-				if (object2->GetDeathAnimationFlag() == false&& object2->GetDeathFlag() == false)
-				{
-					if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
-						object2->GetCollisionData().center, object2->GetCollisionData().radius))
-					{
-						object1->OnCollision();//playerの弾を消滅させる
-						object2->BulletDeathAnimation();//敵の弾を消滅させる
+						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						{
+							object1->OnCollision();//playerの弾を消滅させる
+							object2->BulletDeathAnimation();//敵の弾を消滅させる
+						}
 					}
 				}
 			}
 		}
 	}
+
+	ImGuiUpdate();
 }
 
 void ColliderManager::AddCollision(GameObject* object)
@@ -110,6 +133,16 @@ void ColliderManager::SubCollision(GameObject* object)
 void ColliderManager::AddLockOnEnemy(GameObject* lockOnEnemy)
 {
 	lockOnEnemys.push_back(lockOnEnemy);
+}
+
+void ColliderManager::ImGuiUpdate()
+{
+	ImGui::Begin("Collider");
+	ImGui::Checkbox("isEnemyBulletToPlayer", &isEnemyBulletToPlayer_);
+	ImGui::Checkbox("isPlayerToEnemy_", &isPlayerToEnemy_);
+	ImGui::Checkbox("isPlayerBulletToEnemy_", &isPlayerBulletToEnemy_);
+	ImGui::Checkbox("isPlayerBulletToEnemyBullet_", &isPlayerBulletToEnemyBullet_);
+	ImGui::End();
 }
 
 void ColliderManager::ResetLockOnEnemy()

@@ -1,6 +1,7 @@
 #include "Reticle.h"
 #include <algorithm>
 #include "ColliderManager.h"
+myMath::Vector2 Reticle::addTargetAngle_;
 
 void Reticle::Initialize()
 {
@@ -100,6 +101,11 @@ void Reticle::SetCamera(Camera* camera)
 	camera_ = camera;
 }
 
+const myMath::Vector2 Reticle::GetAddTargetAngle()
+{
+	return addTargetAngle_;
+}
+
 void Reticle::Move()
 {
 #pragma region キーボード
@@ -127,6 +133,9 @@ void Reticle::Move()
 	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_ * input_->GetLeftStickVec().y, 0.0f};
 
 #pragma endregion コントローラー
+
+	addTargetAngle_.x = myMath::ChangeRadians(reticleTrans_.translation.x / 45.0f * 15.0f);
+	addTargetAngle_.y = -myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 15.0f);
 }
 
 void Reticle::ReticleLimit()

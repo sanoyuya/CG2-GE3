@@ -24,6 +24,8 @@ class RailCamera
 private:
 
 	std::unique_ptr<Camera>camera_;
+	std::unique_ptr<Camera>camera2_;
+	Transform cameraTrans_;
 
 	myMath::Vector3 position_;
 	myMath::Vector3 target_;
@@ -32,12 +34,13 @@ private:
 	CameraFlag flag_ = CameraFlag::Back;
 
 	Transform railTrans_;
+	myMath::Quaternion q_;
 
-	Transform CameraCenter_;
-	Transform CameraFront_;
-	Transform CameraBack_;
-	Transform CameraRight_;
-	Transform CameraLeft_;
+	Transform cameraCenter_;
+	Transform cameraFront_;
+	Transform cameraBack_;
+	Transform cameraRight_;
+	Transform cameraLeft_;
 
 	myMath::Vector3 frontVec_ = {};
 	myMath::Vector3 frontPos_ = {};
@@ -59,6 +62,8 @@ public:
 	const float GetTime();
 
 	const Transform& GetRailTrans();
+
+	myMath::Quaternion& GetQuaternion();
 
 private:
 

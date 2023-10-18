@@ -23,6 +23,8 @@ private:
 	std::string name_ = "reticle";
 	CollisionData collisionData;
 
+	static myMath::Vector2 addTargetAngle_;
+
 public:
 
 	Reticle() = default;
@@ -66,6 +68,8 @@ public:
 	const Transform& GetTransform();
 
 	void SetCamera(Camera* camera);
+
+	static const myMath::Vector2 GetAddTargetAngle();
 
 private:
 

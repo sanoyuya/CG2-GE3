@@ -24,6 +24,7 @@ void Player::Initialize()
 	player_->SetModel(playerTex_);
 	playerTrans_.Initialize();
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,0.0f };
+
 	playerTrans_.scale = { 0.5f,0.5f,0.5f };
 	cameraTrans_.Initialize();
 
@@ -64,13 +65,14 @@ void Player::Update()
 	}
 	else
 	{
+		CameraRotation();
 		//カメラのセット
 		reticle_->SetCamera(camera_->GetCameraPtr());
 		//レティクルの更新処理
 		reticle_->Update();
 		//自機の移動処理
 		Move();
-		CameraRotation();
+		
 		if (isBulletAttack_ == false)
 		{
 			//弾の更新処理
@@ -108,7 +110,7 @@ void Player::Update()
 	parentToDirectionVector_.normalization();
 
 	//自機の回転処理
-	Rotation(camera_->GetCameraPtr());
+	Rotation();
 
 	//エンジンの煙の更新処理
 	SmokeUpdate(camera_->GetCameraPtr());
@@ -128,10 +130,20 @@ void Player::Draw()
 	{
 		//レティクルの描画
 		reticle_->Draw();
-		//プレイヤーのモデル描画
-		player_->DrawModel(&playerTrans_);
-		//機体のエンジンから火が出るパーティクルの描画
-		smokeEmitter_->Draw();
+		if (cameraFlag_ != CameraFlag::Front)
+		{
+			//プレイヤーのモデル描画
+			player_->DrawModel(&playerTrans_);
+			//機体のエンジンから火が出るパーティクルの描画
+			smokeEmitter_->Draw();
+		}
+		else
+		{
+			//機体のエンジンから火が出るパーティクルの描画
+			smokeEmitter_->Draw();
+			//プレイヤーのモデル描画
+			player_->DrawModel(&playerTrans_);
+		}
 		//HPバーの描画
 		hpBar_->Draw();
 	}
@@ -233,12 +245,24 @@ const bool Player::GetIsBulletAttack()
 
 void Player::Move()
 {
-	//先に補間先の座標を定義する
-	float reticleX = -reticle_->GetTransform().translation.x / 6;
-	float reticleY = reticle_->GetTransform().translation.y / 6;
-	//そのまま移動させると動きが硬いので補完する
-	PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
-	PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
+	if (cameraFlag_ == CameraFlag::Back)
+	{
+		//先に補間先の座標を定義する
+		float reticleX = reticle_->GetTransform().translation.x / 4;
+		float reticleY = reticle_->GetTransform().translation.y / 4;
+		//そのまま移動させると動きが硬いので補完する
+		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
+		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
+	}
+	else
+	{
+		//先に補間先の座標を定義する
+		float reticleX = 0.0f;
+		float reticleY = 0.0f;
+		//そのまま移動させると動きが硬いので補完する
+		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
+		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
+	}
 }
 
 const CameraFlag& Player::GetCameraFlag()
@@ -246,29 +270,28 @@ const CameraFlag& Player::GetCameraFlag()
 	return cameraFlag_;
 }
 
-void Player::Rotation(Camera* camera)
+void Player::Rotation()
 {
-	//レティクルの方向に向くように回転
-	playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
-	playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
-
-	//float angleZ = reticle_->GetTransform().translation.x / 6 - playerTrans_.translation.x / 5.0f;
-	////モデルのZ軸回転
-	//PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
-
-	camera;
-
-	/*myMath::Vector3 cameraFrontVec = camera->GetTarget() - camera->GetEye();
-	myMath::Vector3 cameraUp =
+	if (cameraFlag_ == CameraFlag::Back)
 	{
-		sinf(cameraFrontVec.y) * sinf(playerTrans_.rotation.z),
-		cosf(cameraFrontVec.y) * cosf(playerTrans_.rotation.z),
-		0.0f
-	};
-	camera->SetUp(cameraUp);*/
+		//レティクルの方向に向くように回転
+		playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
+		playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-	//プレイヤーの横向きの回転をワールド座標に変換し、後でカメラに足せるように変数に格納
-	//targetPos_ = (playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,1 }) - playerTrans_.matWorld.Transform(playerTrans_.matWorld, { 0,0,0 })) * 0.1f;
+		float angleZ = -(reticle_->GetTransform().translation.x / 4 - playerTrans_.translation.x) / 8.0f;
+		//モデルのZ軸回転
+		PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
+	}
+	else
+	{
+		float baseRot = 0.0f;
+		//レティクルの方向に向くように回転
+		playerTrans_.rotation.x = PhysicsMath::Complement(playerTrans_.rotation.x, baseRot, 30.0f);
+		playerTrans_.rotation.y = PhysicsMath::Complement(playerTrans_.rotation.y, baseRot, 30.0f);
+
+		//モデルのZ軸回転
+		PhysicsMath::Complement(playerTrans_.rotation.z, baseRot, 15.0f);
+	}
 }
 
 void Player::NormalBulletAttack()
