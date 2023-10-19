@@ -37,6 +37,22 @@ private:
 	float flame_;
 	uint16_t num_ = 0;
 
+	std::unique_ptr<Sprite>ground_;
+	Transform groundTrans_;
+	uint32_t groundTex_ = 0;
+
+	std::unique_ptr<Sprite>ground2_;
+	Transform ground2Trans_;
+	uint32_t ground2Tex_ = 0;
+
+	std::unique_ptr<Sprite>ground3_;
+	Transform ground3Trans_;
+	uint32_t ground3Tex_ = 0;
+
+	std::unique_ptr<Sprite>ground4_;
+	Transform ground4Trans_;
+	uint32_t ground4Tex_ = 0;
+
 public:
 
 	//初期化処理
