@@ -25,7 +25,7 @@ void LockOnBullet::Initialize()
 	actualTrans_.Initialize();
 	isPlus_ = myMath::GetRandPlusOrMinus();
 
-	collisionData_.radius = 1.0f;
+	collisionData_.radius = 0.01f;
 }
 
 void LockOnBullet::Update()
