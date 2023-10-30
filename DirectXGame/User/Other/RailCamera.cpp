@@ -141,7 +141,6 @@ void RailCamera::ImGuiUpdate()
 	ImGui::Text("leftPos:%f,%f,%f", cameraLeft_.parentToTranslation.x, cameraLeft_.parentToTranslation.y, cameraLeft_.parentToTranslation.z);
 	ImGui::Text("rightPos:%f,%f,%f", cameraRight_.parentToTranslation.x, cameraRight_.parentToTranslation.y, cameraRight_.parentToTranslation.z);
 	ImGui::Text("targetPos:%f,%f,%f", target_.x, target_.y, target_.z);
-	//ImGui::SliderFloat("timer")
 	ImGui::End();
 }
 

@@ -137,6 +137,7 @@ void GameScene::Update()
 		radar_->Update(camera_->GetCameraPtr());
 	}
 #ifdef _DEBUG
+	gameTimer_->ImGuiUpdate();
 	camera_->ImGuiUpdate();
 	player_->ImGuiUpdate();
 	ColliderManager::GetInstance()->ImGuiUpdate();

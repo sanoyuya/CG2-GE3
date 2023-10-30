@@ -23,6 +23,8 @@ public:
 
 	void Reset();
 
+	void ImGuiUpdate();
+
 	const float& GetFlameCount();
 
 	const uint32_t& GetIntTime();
