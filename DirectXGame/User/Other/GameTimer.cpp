@@ -10,6 +10,7 @@ void GameTimer::Update()
 
 void GameTimer::Reset()
 {
+	flameCount_ = 0;
 	intTime_ = 0;
 }
 
