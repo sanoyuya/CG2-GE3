@@ -53,7 +53,7 @@ void GameScene::Initialize()
 
 	camera_ = std::make_unique<RailCamera>();
 	camera_->Initialize(gameLevelData_->GetCameraData());
-	camera_->Update();
+	camera_->Update(gameTimer_.get());
 
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
@@ -84,7 +84,7 @@ void GameScene::Update()
 	}
 
 	//カメラが最後まで到達したらゲームクリア
-	if (camera_->GetTime() >= 0.95f)
+	if (gameTimer_->GetFlameCount() / gameTimer_->GetGameTime() >= 0.95f)
 	{
 		SceneChangeAnimation::GetInstance()->Change("GAMECLEAR");
 	}
@@ -122,11 +122,12 @@ void GameScene::Update()
 
 	if (Pose::GetInstance()->GetPoseFlag() == false)
 	{
+		camera_->BeginUpdate(gameTimer_.get());
 		gameTimer_->Update();
 		player_->SetCamera(camera_.get());
 		player_->SetBulletManager(bulletManager_.get());
 		player_->Update();
-		camera_->Update();
+		camera_->Update(gameTimer_.get());
 		gameLevelData_->Update(camera_->GetCameraPtr());
 		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//天球
 		playerDamageEffect_->Update(player_.get());

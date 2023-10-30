@@ -38,18 +38,14 @@ void RailCamera::Initialize(const CameraData& cameraData)
 	cameraRight_.parent = &cameraCenter_;
 }
 
-void RailCamera::Update()
+void RailCamera::BeginUpdate(GameTimer* gameTimer)
 {
-	camera2_->SetEye(myMath::CatmullRomSpline(controlPoints_, time_));
+	camera2_->SetEye(myMath::CatmullRomSpline(controlPoints_, gameTimer->GetFlameCount() / gameTimer->GetGameTime()));
+}
 
-	//ここGameTimerで一括管理したい
-	time_ += 0.00025f;
-	if (time_ >= 1.0f)
-	{
-		time_ = 0.0f;
-	}
-
-	frontPos_ = myMath::CatmullRomSpline(controlPoints_, time_);
+void RailCamera::Update(GameTimer* gameTimer)
+{
+	frontPos_ = myMath::CatmullRomSpline(controlPoints_, gameTimer->GetFlameCount() / gameTimer->GetGameTime());
 
 	camera2_->SetTarget(frontPos_);
 	camera2_->Update(true);
@@ -126,11 +122,6 @@ Camera* RailCamera::GetCameraPtr()
 	return camera_.get();
 }
 
-const float RailCamera::GetTime()
-{
-	return time_;
-}
-
 const Transform& RailCamera::GetRailTrans()
 {
 	return cameraTrans_;
@@ -143,13 +134,14 @@ myMath::Quaternion& RailCamera::GetQuaternion()
 
 void RailCamera::ImGuiUpdate()
 {
-	ImGui::Begin("CameraFlag");
+	ImGui::Begin("RailCamera");
 	ImGui::Text("centerPos:%f,%f,%f", cameraCenter_.parentToTranslation.x, cameraCenter_.parentToTranslation.y, cameraCenter_.parentToTranslation.z);
 	ImGui::Text("frontPos:%f,%f,%f", cameraFront_.parentToTranslation.x, cameraFront_.parentToTranslation.y, cameraFront_.parentToTranslation.z);
 	ImGui::Text("backPos:%f,%f,%f", cameraBack_.parentToTranslation.x, cameraBack_.parentToTranslation.y, cameraBack_.parentToTranslation.z);
 	ImGui::Text("leftPos:%f,%f,%f", cameraLeft_.parentToTranslation.x, cameraLeft_.parentToTranslation.y, cameraLeft_.parentToTranslation.z);
 	ImGui::Text("rightPos:%f,%f,%f", cameraRight_.parentToTranslation.x, cameraRight_.parentToTranslation.y, cameraRight_.parentToTranslation.z);
 	ImGui::Text("targetPos:%f,%f,%f", target_.x, target_.y, target_.z);
+	//ImGui::SliderFloat("timer")
 	ImGui::End();
 }
 
@@ -165,5 +157,4 @@ void RailCamera::Load(const CameraData& cameraData)
 void RailCamera::Reset()
 {
 	controlPoints_.clear();
-	time_ = 0.0f;
 }

@@ -2,6 +2,7 @@
 #include"Camera.h"
 #include<memory>
 #include"Transform.h"
+#include"GameTimer.h"
 
 enum class CameraFlag
 {
@@ -23,6 +24,9 @@ class RailCamera
 {
 private:
 
+	//制御点
+	std::vector<myMath::Vector3> controlPoints_;
+
 	std::unique_ptr<Camera>camera_;
 	std::unique_ptr<Camera>camera2_;
 	Transform cameraTrans_;
@@ -31,11 +35,10 @@ private:
 	myMath::Vector3 target_;
 	myMath::Vector3 up_;
 
-	CameraFlag flag_ = CameraFlag::Back;
-
 	Transform railTrans_;
 	myMath::Quaternion q_;
 
+	CameraFlag flag_ = CameraFlag::Back;
 	Transform cameraCenter_;
 	Transform cameraFront_;
 	Transform cameraBack_;
@@ -45,21 +48,17 @@ private:
 	myMath::Vector3 frontVec_ = {};
 	myMath::Vector3 frontPos_ = {};
 
-	//制御点
-	std::vector<myMath::Vector3> controlPoints_;
-	float time_ = 0.0f;
-
 public:
 
 	void Initialize(const CameraData& cameraData);
 
-	void Update();
+	void BeginUpdate(GameTimer* gameTimer);
+
+	void Update(GameTimer* gameTimer);
 
 	void ReLoad(const CameraData& cameraData);
 
 	Camera* GetCameraPtr();
-
-	const float GetTime();
 
 	const Transform& GetRailTrans();
 

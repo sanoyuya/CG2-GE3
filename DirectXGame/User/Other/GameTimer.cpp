@@ -3,18 +3,12 @@
 void GameTimer::Update()
 {
 	flameCount_ += timeSpeed_;
-	floatTime_ += timeSpeed_;
 
-	if (floatTime_ >= 60.0f)
-	{
-		intTime_++;
-		floatTime_ = 0.0f;
-	}
+	intTime_ = static_cast<uint32_t>(flameCount_ / 60);
 }
 
 void GameTimer::Reset()
 {
-	floatTime_ = 0.0f;
 	intTime_ = 0;
 }
 
@@ -26,6 +20,11 @@ const float& GameTimer::GetFlameCount()
 const uint32_t& GameTimer::GetIntTime()
 {
 	return intTime_;
+}
+
+const uint32_t& GameTimer::GetGameTime()
+{
+	return gameTime_;
 }
 
 void GameTimer::SetTimeSpeed(const float timeSpeed)

@@ -2637,8 +2637,8 @@
                 ]
             },
             "timer": {
-                "spawn": 35.0,
-                "death": 60.0
+                "spawn": 30.0,
+                "death": 55.0
             },
             "enemy_move_properties": {
                 "spawnPosition": [
@@ -2750,8 +2750,8 @@
                 ]
             },
             "timer": {
-                "spawn": 35.0,
-                "death": 60.0
+                "spawn": 30.0,
+                "death": 55.0
             },
             "enemy_move_properties": {
                 "spawnPosition": [
@@ -2824,8 +2824,8 @@
                 ]
             },
             "timer": {
-                "spawn": 35.0,
-                "death": 60.0
+                "spawn": 30.0,
+                "death": 55.0
             },
             "enemy_move_properties": {
                 "spawnPosition": [
@@ -2898,7 +2898,7 @@
                 ]
             },
             "timer": {
-                "spawn": 50.0,
+                "spawn": 45.0,
                 "death": 100.0
             }
         },
@@ -2937,7 +2937,7 @@
                 ]
             },
             "timer": {
-                "spawn": 50.0,
+                "spawn": 45.0,
                 "death": 100.0
             }
         },
@@ -2976,7 +2976,7 @@
                 ]
             },
             "timer": {
-                "spawn": 50.0,
+                "spawn": 45.0,
                 "death": 100.0
             }
         },
@@ -3015,7 +3015,7 @@
                 ]
             },
             "timer": {
-                "spawn": 50.0,
+                "spawn": 45.0,
                 "death": 100.0
             }
         },
@@ -3054,7 +3054,7 @@
                 ]
             },
             "timer": {
-                "spawn": 50.0,
+                "spawn": 45.0,
                 "death": 100.0
             }
         }
