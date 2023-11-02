@@ -37,6 +37,7 @@ void GameLevelData::CreateModel()
 	playerTex_ = Model::CreateObjModel("Resources/greenDice");
 	sphereTex_ = Model::CreateObjModel("Resources/sphere");
 	groundTex_= Model::CreateObjModel("Resources/ground");
+	groundTex2_ = Model::CreateObjModel("Resources/ground2");
 	buildingTex_ = Model::CreateObjModel("Resources/building");
 	convenienceStoreTex_= Model::CreateObjModel("Resources/convenienceStore");
 	tex_ = Model::CreateObjModel("Resources/purpleDice");
@@ -100,11 +101,29 @@ void GameLevelData::Load()
 			//座標
 			model->SetPos(objectData.translation);
 			//拡縮
-			model->SetScale({ objectData.scaling.y ,objectData.scaling.x ,objectData.scaling.z });
+			model->SetScale({ objectData.scaling.x ,objectData.scaling.y ,objectData.scaling.z });
 			//名前
 			model->SetName(objectData.fileName);
 
 			model->SetModel(groundTex_);
+			model->SetShader(ShaderMode::Phong);
+
+			objects_.push_back(std::move(model));
+		}
+		else if (objectData.fileName == "ground2")
+		{
+			//ファイル名から登録済みモデルを検索
+			std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
+			model->Initialize();
+
+			//座標
+			model->SetPos(objectData.translation);
+			//拡縮
+			model->SetScale({ objectData.scaling.y ,objectData.scaling.x ,objectData.scaling.z });
+			//名前
+			model->SetName(objectData.fileName);
+
+			model->SetModel(groundTex2_);
 			model->SetShader(ShaderMode::Phong);
 
 			objects_.push_back(std::move(model));

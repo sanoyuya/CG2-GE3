@@ -15,7 +15,7 @@ float4 main(VSOutput input) : SV_TARGET
     //環境反射光
     float3 ambient = m_ambient;
     //シェーディングによる色
-    float4 shaderColor = float4(ambientColor * ambient * texcolor.rgb * color.rgb, color.a);
+    float4 shaderColor = float4(ambientColor * ambient * texcolor.rgb * color.rgb, color.a * texcolor.a);
     
     //平行光源
     [loop]
