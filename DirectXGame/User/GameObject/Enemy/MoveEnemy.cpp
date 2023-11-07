@@ -23,7 +23,8 @@ void MoveEnemy::Initialize()
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
 	enemyTrans_.translation = moveEnemyProperty_.spawnPos;
-	enemyTrans_.rotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
+	enemyTrans_.rotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
+	collisionData_.center = enemyTrans_.translation;
 
 	//死亡アニメーションパーティクル初期化
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();

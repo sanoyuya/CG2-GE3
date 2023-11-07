@@ -30,7 +30,7 @@ void GameScene::Initialize()
 	switch (Retention::GetInstance()->GetStageNum())
 	{
 	case Stage::Tutorial:
-		gameLevelData_->Initialize("stage2/stage0");
+		gameLevelData_->Initialize("stage2/stage");
 		break;
 	case Stage::Stage1:
 		gameLevelData_->Initialize("stage1/stage1");
