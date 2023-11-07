@@ -13,6 +13,7 @@
 #include"Radar.h"
 #include"GameTimer.h"
 #include"BulletManager.h"
+#include"Text.h"
 
 class GameScene :public BaseScene
 {
@@ -49,6 +50,8 @@ private:
 	uint32_t bgm_ = 0;
 
 	bool poseFlag_ = false;
+
+	std::unique_ptr<Text>moveText_;
 
 public:
 

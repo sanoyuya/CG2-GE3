@@ -64,6 +64,12 @@ void GameScene::Initialize()
 	radar_ = std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
 
+	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
+	{
+		moveText_ = std::make_unique<Text>();
+		moveText_->Initialize();
+	}
+
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
 }
@@ -135,6 +141,10 @@ void GameScene::Update()
 		bulletManager_->Update(camera_->GetCameraPtr());
 		ColliderManager::GetInstance()->Update(player_.get());
 		radar_->Update(camera_->GetCameraPtr());
+		if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
+		{
+			moveText_->Update(gameTimer_.get(), 3, 8);//Blender上で設定できるようにしたい
+		}
 	}
 #ifdef _DEBUG
 	gameTimer_->ImGuiUpdate();
@@ -152,6 +162,10 @@ void GameScene::Draw()
 	bulletManager_->Draw();
 	player_->Draw();
 	radar_->Draw(enemyManager_.get(), player_.get());
+	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
+	{
+		moveText_->Draw();
+	}
 	Pose::GetInstance()->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
 }

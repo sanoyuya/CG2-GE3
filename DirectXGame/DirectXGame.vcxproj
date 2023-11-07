@@ -104,6 +104,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Math\Quaternion.cpp" />
+    <ClCompile Include="User\Other\Text.cpp" />
     <ClCompile Include="User\Other\Pose.cpp" />
     <ClCompile Include="User\Other\Retention.cpp" />
     <ClCompile Include="User\Effect\HitEffect.cpp" />
@@ -350,6 +351,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Math\Quaternion.h" />
+    <ClInclude Include="User\Other\Text.h" />
     <ClInclude Include="User\Other\Pose.h" />
     <ClInclude Include="User\Other\Retention.h" />
     <ClInclude Include="User\Effect\HitEffect.h" />
