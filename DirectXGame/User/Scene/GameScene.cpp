@@ -23,7 +23,7 @@ void GameScene::Initialize()
 	skyDomeTex_ = Model::CreateObjModel("Resources/skydome");
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
-	skyDomeTrans_.scale = { 5.0f,5.0f ,5.0f };
+	skyDomeTrans_.scale = { 10.0f,10.0f ,10.0f };
 
 	//レベルエディタの初期化&読み込み
 	gameLevelData_ = std::make_unique<GameLevelData>();
@@ -64,11 +64,7 @@ void GameScene::Initialize()
 	radar_ = std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
 
-	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
-	{
-		moveText_ = std::make_unique<Text>();
-		moveText_->Initialize();
-	}
+	TextInitialize();
 
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
@@ -121,7 +117,7 @@ void GameScene::Update()
 	lightManager_->Update();
 
 	//ポイントライト
-	lightManager_->SetPointLightActive(0, true);
+	lightManager_->SetPointLightActive(0, false);
 	lightManager_->SetPointLightPos(0, lightPos_);
 	lightManager_->SetPointLightColor(0, lightColor_);
 	lightManager_->SetPointLightAtten(0, lightAtten_);
@@ -143,7 +139,7 @@ void GameScene::Update()
 		radar_->Update(camera_->GetCameraPtr());
 		if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
 		{
-			moveText_->Update(gameTimer_.get(), 3, 8);//Blender上で設定できるようにしたい
+			TextUpdate();
 		}
 	}
 #ifdef _DEBUG
@@ -164,8 +160,37 @@ void GameScene::Draw()
 	radar_->Draw(enemyManager_.get(), player_.get());
 	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
 	{
-		moveText_->Draw();
+		TextDraw();
 	}
 	Pose::GetInstance()->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
+}
+
+void GameScene::TextInitialize()
+{
+	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
+	{
+		moveText_ = std::make_unique<Text>();
+		moveText_->Initialize("Resources/move.png");
+
+		attackText_ = std::make_unique<Text>();
+		attackText_->Initialize("Resources/attack.png");
+
+		cameraText_ = std::make_unique<Text>();
+		cameraText_->Initialize("Resources/camera.png");
+	}
+}
+
+void GameScene::TextUpdate()
+{
+	moveText_->Update(gameTimer_.get(), 3, 7);//Blender上で設定できるようにしたい
+	attackText_->Update(gameTimer_.get(), 9, 13);
+	cameraText_->Update(gameTimer_.get(), 20, 25);
+}
+
+void GameScene::TextDraw()
+{
+	moveText_->Draw();
+	attackText_->Draw();
+	cameraText_->Draw();
 }

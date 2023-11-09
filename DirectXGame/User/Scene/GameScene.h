@@ -52,6 +52,8 @@ private:
 	bool poseFlag_ = false;
 
 	std::unique_ptr<Text>moveText_;
+	std::unique_ptr<Text>attackText_;
+	std::unique_ptr<Text>cameraText_;
 
 public:
 
@@ -66,4 +68,10 @@ public:
 
 	//描画処理
 	void Draw()override;
+
+private:
+
+	void TextInitialize();
+	void TextUpdate();
+	void TextDraw();
 };

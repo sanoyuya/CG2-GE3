@@ -66,6 +66,11 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			// ファイル名
 			objectData.fileName = object["file_name"];
 		}
+		if (object.contains("name"))
+		{
+			// オブジェクト名
+			objectData.objectName = object["name"];
+		}
 
 		//トランスフォームのパラメータ読み込み
 		nlohmann::json& transform = object["transform"];

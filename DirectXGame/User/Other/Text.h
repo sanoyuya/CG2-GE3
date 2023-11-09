@@ -10,6 +10,10 @@ private:
 	std::array<std::unique_ptr<Sprite2D>, 4>frame_;//縁
 	uint32_t frameTex_ = 0;
 
+	std::unique_ptr<Sprite2D>text_;//テキスト本体
+	uint32_t textTex_ = 0;
+	float textAlpha_ = 0.0f;
+
 	const myMath::Vector2 center_ = { Retention::GetInstance()->GetWindowsCenter().x,Retention::GetInstance()->GetWindowsCenter().y * 3 / 2 };
 
 	const myMath::Vector2 frameSize_ = { Retention::GetInstance()->GetWindowsCenter().x / 2,50.0f };
@@ -22,7 +26,7 @@ private:
 
 public:
 
-	void Initialize();
+	void Initialize(const std::string& filePath);
 
 	void Update(GameTimer* gameTimer, uint8_t startTime, uint8_t endTime);
 
@@ -34,4 +38,3 @@ private:
 
 	void End(GameTimer* gameTimer, uint8_t endTime);
 };
-

@@ -16,7 +16,7 @@ void Camera::Initialize(bool projectionFlag)
 	up_ = { 0,1,0 };//上方向ベクトル
 	aspect_ = sWidth_ / sHeight_;
 	nearClip_ = 0.1f;
-	farClip_ = 1000.0f;
+	farClip_ = 10000.0f;
 
 	UpdateMatView();
 	UpdateMatProjection(projectionFlag);
