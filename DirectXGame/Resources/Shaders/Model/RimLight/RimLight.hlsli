@@ -15,7 +15,8 @@ cbuffer cbuff1 : register(b1)
 
 cbuffer cbuff2 : register(b2)
 {
-    float4 color;
+    float4 color; //カラー
+    float2 tiling; //タイリング数
 }
 
 static const int DIRLIGHT_NUM = 3;

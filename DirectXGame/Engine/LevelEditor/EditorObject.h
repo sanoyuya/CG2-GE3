@@ -12,6 +12,8 @@ private:
 	myMath::Vector3 colliderCenter_ = { 0.0f,0.0f ,0.0f };
 	myMath::Vector3 colliderSize_ = { 0.0f,0.0f ,0.0f };
 
+	myMath::Vector2 tiling_ = { 1.0f,1.0f };
+
 public:
 
 	EditorObject() = default;
@@ -36,4 +38,5 @@ public:
 	void SetColliderCenter(const myMath::Vector3& colliderCenter);
 	void SetColliderSize(const myMath::Vector3& colliderSize);
 	void SetShader(const ShaderMode& mode);
+	void SetTiling(const myMath::Vector2 tiling);
 };

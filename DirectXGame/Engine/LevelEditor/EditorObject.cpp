@@ -17,7 +17,7 @@ void EditorObject::Update(Camera* camera)
 
 void EditorObject::Draw()
 {
-	model_->DrawModel(&transform_);
+	model_->DrawModel(&transform_, { 1.0f,1.0f ,1.0f ,1.0f }, tiling_);
 }
 
 const myMath::Vector3& EditorObject::GetPos()
@@ -88,4 +88,9 @@ void EditorObject::SetColliderSize(const myMath::Vector3& colliderSize)
 void EditorObject::SetShader(const ShaderMode& mode)
 {
 	model_->SetShaderMode(mode);
+}
+
+void EditorObject::SetTiling(const myMath::Vector2 tiling)
+{
+	tiling_ = tiling;
 }

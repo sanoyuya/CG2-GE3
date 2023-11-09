@@ -16,6 +16,7 @@ cbuffer cbuff1 : register(b1)
 cbuffer cbuff2 : register(b2)
 {
     float4 color; //カラー
+    float2 tiling; //タイリング数
 };
 
 // 頂点シェーダーからピクセルシェーダーへのやり取りに使用する構造体

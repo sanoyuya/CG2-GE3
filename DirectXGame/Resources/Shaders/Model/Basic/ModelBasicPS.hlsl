@@ -10,7 +10,7 @@ float4 main(VSOutput input) : SV_TARGET
     float3 shade_color;
     shade_color = m_ambient; //アンビエント項
     shade_color += m_diffuse * light_diffuse; //ディフューズ項
-    float4 texcolor = tex.Sample(smp, input.uv);
+    float4 texcolor = tex.Sample(smp, input.uv * tiling);
     //return float4(texcolor.rgb * shade_color, texcolor.a * m_alpha);
     return float4(texcolor.rgb * shade_color * color.rgb, texcolor.a * m_alpha * color.a);
 }

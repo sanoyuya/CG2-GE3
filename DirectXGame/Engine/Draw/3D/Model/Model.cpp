@@ -395,12 +395,13 @@ uint32_t Model::CreateAssimpModel(const std::string& filePath)
 	}
 }
 
-void Model::DrawModel(Transform* transform, myMath::Vector4 color)
+void Model::DrawModel(Transform* transform, myMath::Vector4 color, myMath::Vector2 tiling)
 {
 	D3D12_VERTEX_BUFFER_VIEW vbView = modelData_->vertexBuffer->GetView();
 	D3D12_INDEX_BUFFER_VIEW ibView = modelData_->indexBuffer->GetView();
 
-	tmp_ = color;
+	tmp_.color = color;
+	tmp_.tiling = tiling;
 	constantBuff_->Update(&tmp_);
 
 	PiplineSet(static_cast<BlendMode>(blendMode_), static_cast<ShaderMode>(shaderMode_));
@@ -484,7 +485,7 @@ void Model::SetStaticShaderMode(const ShaderMode& mode)
 Model::Model()
 {
 	constantBuff_ = std::make_unique<ConstantBuffer>();
-	constantBuff_->Create(sizeof(myMath::Vector4));
+	constantBuff_->Create(sizeof(TilingColor));
 }
 
 Model::~Model()

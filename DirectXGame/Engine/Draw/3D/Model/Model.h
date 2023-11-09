@@ -9,6 +9,12 @@
 #include"Pipeline.h"
 #include"LightManager.h"
 
+struct TilingColor
+{
+	myMath::Vector4 color;
+	myMath::Vector2 tiling;
+};
+
 struct ModelData
 {
 	ModelData() = default;
@@ -101,7 +107,7 @@ private:
 
 	std::unique_ptr<ConstantBuffer> constantBuff_;
 
-	myMath::Vector4 tmp_;
+	TilingColor tmp_;
 
 	//ライト
 	static LightManager* sLightManager_;
@@ -154,7 +160,7 @@ public:
 	/// </summary>
 	/// <param name="transform">Transformのデータ</param>
 	/// <param name="color">色(初期値:{ 1.0f,1.0f ,1.0f ,1.0f })</param>
-	void DrawModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f });
+	void DrawModel(Transform* transform, myMath::Vector4 color = { 1.0f,1.0f ,1.0f ,1.0f }, myMath::Vector2 tiling = { 1.0f,1.0f });
 
 	/// <summary>
 	/// モデルの生成

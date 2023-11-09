@@ -107,6 +107,7 @@ void GameLevelData::Load()
 
 			model->SetModel(groundTex_);
 			model->SetShader(ShaderMode::Phong);
+			model->SetTiling({ 200.0f,200.0f });
 
 			objects_.push_back(std::move(model));
 		}
