@@ -4,6 +4,12 @@
 #include"Transform.h"
 #include"GameTimer.h"
 
+struct ControlPoint
+{
+	std::string name;
+	myMath::Vector3 position;
+};
+
 enum class CameraFlag
 {
 	Back,
@@ -17,7 +23,7 @@ struct CameraData
 	myMath::Vector3 position;
 
 	//制御点
-	std::vector<myMath::Vector3> controlPoints;
+	std::vector<ControlPoint> controlPoints;
 };
 
 class RailCamera

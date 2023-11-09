@@ -67,5 +67,7 @@ public:
 	const CameraData& GetCameraData();
 	EnemyList& GetEnemyData();
 
+	static bool NumericStringCompare(const ControlPoint& a, const ControlPoint& b);
+
 	void SetFileName(const std::string& fileName);
 };

@@ -146,11 +146,10 @@ void RailCamera::ImGuiUpdate()
 
 void RailCamera::Load(const CameraData& cameraData)
 {
-	position_ = cameraData.position;
-
-	controlPoints_ = cameraData.controlPoints;
-	myMath::Vector3 startPoint = controlPoints_.front();
-	controlPoints_.push_back(startPoint);
+	for (auto it = cameraData.controlPoints.begin(); it != cameraData.controlPoints.end(); ++it)
+	{
+		controlPoints_.push_back(it->position);
+	}
 }
 
 void RailCamera::Reset()

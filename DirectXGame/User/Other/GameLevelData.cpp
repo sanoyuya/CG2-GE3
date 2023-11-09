@@ -57,12 +57,15 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "camera")
 		{
-			cameraData_.position = objectData.translation;
+			//cameraData_.position = objectData.translation;
 		}
 		else if (objectData.fileName == "cameraPoint")
 		{
+			ControlPoint tmp;
+			tmp.name = objectData.objectName;
+			tmp.position = objectData.translation;
 			//制御点を登録
-			cameraData_.controlPoints.push_back(objectData.translation);
+			cameraData_.controlPoints.push_back(tmp);
 		}
 		else if (objectData.fileName == "normalEnemy")
 		{
@@ -212,12 +215,22 @@ const PlayerData& GameLevelData::GetPlayerData()
 
 const CameraData& GameLevelData::GetCameraData()
 {
+	std::sort(cameraData_.controlPoints.begin(), cameraData_.controlPoints.end(), NumericStringCompare);
 	return cameraData_;
 }
 
 EnemyList& GameLevelData::GetEnemyData()
 {
 	return enemyData_;
+}
+
+bool GameLevelData::NumericStringCompare(const ControlPoint& a, const ControlPoint& b)
+{
+	// "cameraPoint"以降の部分を数値に変換して比較
+	uint16_t aNumber = static_cast<uint16_t>(std::stoi(a.name.substr(11)));
+	uint16_t bNumber = static_cast<uint16_t>(std::stoi(b.name.substr(11)));
+
+	return aNumber < bNumber;
 }
 
 void GameLevelData::SetFileName(const std::string& fileName)
