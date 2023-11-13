@@ -1,6 +1,7 @@
 #include "Reticle.h"
 #include <algorithm>
 #include "ColliderManager.h"
+#include"EasingFunction.h"
 myMath::Vector2 Reticle::addTargetAngle_;
 
 void Reticle::Initialize()
@@ -10,6 +11,7 @@ void Reticle::Initialize()
 	//スプライトの初期化
 	reticle_ = std::make_unique<Sprite>();
 	reticleTex_ = reticle_->LoadTexture("Resources/reticle.png");
+	reticleTex2_ = reticle_->LoadTexture("Resources/reticle2.png");
 	reticle_->Sprite3DInitialize(reticleTex_);
 	reticleTrans_.Initialize();
 	reticleTrans_.translation = { 0.0f,-reticleLimit_,100.0f };
@@ -48,6 +50,8 @@ void Reticle::Update()
 	Move();
 	//移動制限処理
 	ReticleLimit();
+	//ロックオン攻撃に切り替わった時の動き
+	ChangeReticleUpdate();
 
 	//スプライトの更新処理
 	reticleTrans_.TransUpdate(camera_);
@@ -58,7 +62,18 @@ void Reticle::Update()
 
 void Reticle::Draw()
 {
-	reticle_->DrawSprite3D(camera_, reticleTrans_);
+	if (lockOnAttackFlag_ == false)
+	{
+		if (lockOnFlag_ == false)
+		{
+			reticle_->SetTexture3D(reticleTex_);
+		}
+		else
+		{
+			reticle_->SetTexture3D(reticleTex2_);
+		}
+		reticle_->DrawSprite3D(camera_, reticleTrans_);
+	}
 }
 
 const bool Reticle::GetDeathAnimationFlag()
@@ -83,6 +98,10 @@ void Reticle::Reset()
 {
 	reticleTrans_.translation = { 0.0f,-reticleLimit_,100.0f };
 
+	lockOnFlag_ = false;
+	changeReticleFlag_ = false;
+	animationTimer_ = 0;
+
 	ColliderManager::GetInstance()->AddCollision(this);
 }
 
@@ -104,6 +123,21 @@ void Reticle::SetCamera(Camera* camera)
 const myMath::Vector2 Reticle::GetAddTargetAngle()
 {
 	return addTargetAngle_;
+}
+
+void Reticle::ChangeReticle()
+{
+	changeReticleFlag_ = true;
+}
+
+void Reticle::GetLockOnFlag(const bool flag)
+{
+	lockOnFlag_ = flag;
+}
+
+void Reticle::GetLockOnAttackFlag(const bool flag)
+{
+	lockOnAttackFlag_ = flag;
 }
 
 void Reticle::Move()
@@ -143,4 +177,35 @@ void Reticle::ReticleLimit()
 	reticleTrans_.translation.x = std::clamp(reticleTrans_.translation.x, -reticleLimit_, reticleLimit_);
 	//画面比率に合わせた制限処理(x:y,16:9)
 	reticleTrans_.translation.y = std::clamp(reticleTrans_.translation.y, -reticleLimit_ / 16 * 9, reticleLimit_ / 16 * 9);
+}
+
+void Reticle::ChangeReticleUpdate()
+{
+	if (changeReticleFlag_ == true)
+	{
+		animationTimer_++;
+
+		//拡縮演出
+		if (animationTimer_ <= maxAnimationTime_ / 2)
+		{
+			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutCubic(animationTimer_,0.25f,0.125f,maxAnimationTime_ / 2)),//まずは小さくなる
+			static_cast<float>(Easing::EaseOutCubic(animationTimer_,0.25f,0.125f,maxAnimationTime_ / 2)),
+			1.0f };
+		}
+		else
+		{
+  			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutBack(animationTimer_- maxAnimationTime_ / 2,0.125f,0.25f,maxAnimationTime_ / 2)),//まずは小さくなる
+			static_cast<float>(Easing::EaseOutBack(animationTimer_- maxAnimationTime_ / 2,0.125f,0.25f,maxAnimationTime_ / 2)),
+			1.0f };
+		}
+
+		//回転演出
+		reticleTrans_.rotation.z = static_cast<float>(Easing::EaseOutCirc(animationTimer_, 0.0f, -myMath::AX_2PIF, maxAnimationTime_));
+
+		if (animationTimer_ >= maxAnimationTime_)
+		{
+			animationTimer_ = 0;
+			changeReticleFlag_ = false;
+		}
+	}
 }

@@ -375,9 +375,6 @@
     <ClCompile Include="User\Effect\Particle\EnemySpawnParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Effect\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp">
-      <Filter>User\ソース ファイル\Object\Bullet</Filter>
-    </ClCompile>
     <ClCompile Include="User\GameObject\Bullet\BulletManager.cpp">
       <Filter>User\ソース ファイル\Object\Bullet</Filter>
     </ClCompile>

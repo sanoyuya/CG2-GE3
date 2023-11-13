@@ -91,6 +91,8 @@ void Player::Update()
 		}
 	}
 
+	reticle_->GetLockOnAttackFlag(isBulletAttack_);
+
 	//Transformの更新処理
 	playerTrans_.TransUpdate(camera_->GetCameraPtr());
 
@@ -321,10 +323,14 @@ void Player::LockOnAttack()
 {
 	if (input_->KeyboardKeepPush(DIK_SPACE) || input_->ControllerButtonKeepPush(A))
 	{
-		lockOnTimer_++;
-		if (lockOnTimer_ >= 30.0f)
+		if (lockOnAttackFlag_ == false)
 		{
-			lockOnAttackFlag_ = true;
+			lockOnTimer_++;
+			if (lockOnTimer_ >= 30.0f)
+			{
+				reticle_->ChangeReticle();
+				lockOnAttackFlag_ = true;
+			}
 		}
 	}
 	else
@@ -354,9 +360,12 @@ void Player::LockOnAttack()
 				//ロックオン敵listをリセット
 				ColliderManager::GetInstance()->ResetLockOnEnemy();
 			}
+			reticle_->ChangeReticle();
 			lockOnAttackFlag_ = false;
 		}
 	}
+
+	reticle_->GetLockOnFlag(lockOnAttackFlag_);
 }
 
 void Player::CameraRotation()

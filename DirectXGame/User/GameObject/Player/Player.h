@@ -62,7 +62,7 @@ private:
 	int8_t lockOnTimer_ = 0;
 
 	uint8_t coolTime_ = 0;
-	const uint8_t maxCoolTime_ = 60;
+	const uint8_t maxCoolTime_ = 80;
 	bool isBulletAttack_ = false;
 
 	Transform controlTrans_;

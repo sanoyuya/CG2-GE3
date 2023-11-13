@@ -112,7 +112,6 @@
     <ClCompile Include="User\Scene\StageSelectScene.cpp" />
     <ClCompile Include="User\GameObject\Bullet\LockOnBullet.cpp" />
     <ClCompile Include="User\GameObject\Bullet\NormalBullet.cpp" />
-    <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp" />
     <ClCompile Include="User\GameObject\Enemy\MoveEnemy.cpp" />
     <ClCompile Include="User\Effect\Particle\EnemySpawnParticleEmitter.cpp" />
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp" />

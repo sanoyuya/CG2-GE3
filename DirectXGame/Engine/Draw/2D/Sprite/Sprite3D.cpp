@@ -162,6 +162,11 @@ void Sprite3D::SetSprite3DBlendMode(const BlendMode& mode)
 	blendMode_ = mode;
 }
 
+void Sprite3D::SetTexture3D(uint32_t handle)
+{
+	texture_ = TextureManager::GetTextureData(handle);
+}
+
 void Sprite3D::CreateBuff()
 {
 	vertexBuffer_ = std::make_unique<VertexBuffer>();

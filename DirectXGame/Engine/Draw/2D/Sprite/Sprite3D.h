@@ -130,6 +130,12 @@ public:
 	/// <param name="mode">モード</param>
 	void SetSprite3DBlendMode(const BlendMode& mode);
 
+	/// <summary>
+	/// テクスチャの変更(3D)
+	/// </summary>
+	/// <param name="handle">テクスチャハンドル</param>
+	void SetTexture3D(uint32_t handle);
+
 private:
 
 	/// <summary>

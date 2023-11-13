@@ -135,6 +135,12 @@ public:
 	/// <param name="mode">モード</param>
 	void SetSprite2DBlendMode(const BlendMode& mode);
 
+	/// <summary>
+	/// テクスチャの変更(2D)
+	/// </summary>
+	/// <param name="handle">テクスチャハンドル</param>
+	void SetTexture2D(uint32_t handle);
+
 private:
 
 	/// <summary>

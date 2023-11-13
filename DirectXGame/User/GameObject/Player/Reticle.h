@@ -14,6 +14,7 @@ private:
 	std::unique_ptr<Sprite>reticle_;
 	Transform reticleTrans_;
 	uint32_t reticleTex_ = 0;
+	uint32_t reticleTex2_ = 0;
 
 	const float reticleSpeed_ = 1.5f;
 	const float reticleLimit_ = 45.0f;
@@ -24,6 +25,12 @@ private:
 	CollisionData collisionData;
 
 	static myMath::Vector2 addTargetAngle_;
+
+	bool changeReticleFlag_ = false;
+	uint8_t animationTimer_ = 0;
+	uint8_t maxAnimationTime_ = 30;
+	bool lockOnFlag_ = false;
+	bool lockOnAttackFlag_ = false;
 
 public:
 
@@ -71,9 +78,16 @@ public:
 
 	static const myMath::Vector2 GetAddTargetAngle();
 
+	void ChangeReticle();
+
+	void GetLockOnFlag(const bool flag);
+	void GetLockOnAttackFlag(const bool flag);
+
 private:
 
 	void Move();
 
 	void ReticleLimit();
+
+	void ChangeReticleUpdate();
 };

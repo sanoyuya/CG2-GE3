@@ -227,6 +227,11 @@ void Sprite2D::SetSprite2DBlendMode(const BlendMode& mode)
 	blendMode_ = mode;
 }
 
+void Sprite2D::SetTexture2D(uint32_t handle)
+{
+	texture_ = TextureManager::GetTextureData(handle);
+}
+
 void Sprite2D::CreateBuff()
 {
 	vertexBuffer_ = std::make_unique<VertexBuffer>();
