@@ -1,6 +1,7 @@
 #include "NormalEnemy.h"
 #include"ColliderManager.h"
 #include"EasingFunction.h"
+#include"PhysicsMath.h"
 
 NormalEnemy::~NormalEnemy()
 {
@@ -40,10 +41,16 @@ void NormalEnemy::Update()
 	//出現していたら
 	if (spawnFlag_ == true)
 	{
+		//単振動
+		addY = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.02f, 120.0f);
+		enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
+
+		actionTimer++;
+
 		//敵のモデルの更新処理
 		enemyTrans_.TransUpdate(camera_);
 		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
-		if (isAttack == false)
+		if (isAttack == true)
 		{
 			//弾の生成処理と更新処理
 			BulletUpdate();

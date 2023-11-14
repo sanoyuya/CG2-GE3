@@ -23,17 +23,20 @@ void GameScene::Initialize()
 	skyDomeTex_ = Model::CreateObjModel("Resources/skydome");
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
-	skyDomeTrans_.scale = { 10.0f,10.0f ,10.0f };
+	skyDomeTrans_.scale = { 20.0f,20.0f ,20.0f };
 
 	//レベルエディタの初期化&読み込み
 	gameLevelData_ = std::make_unique<GameLevelData>();
+	gameTimer_ = std::make_unique<GameTimer>();
 	switch (Retention::GetInstance()->GetStageNum())
 	{
 	case Stage::Tutorial:
 		gameLevelData_->Initialize("stage0/stage");
+		gameTimer_->SetGameTime(static_cast<uint32_t>(60 * 60 * 3.0));
 		break;
 	case Stage::Stage1:
 		gameLevelData_->Initialize("stage1/stage");
+		gameTimer_->SetGameTime(60 * 60 * 1);
 		break;
 	case Stage::Stage2:
 		gameLevelData_->Initialize("stage2");
@@ -44,8 +47,6 @@ void GameScene::Initialize()
 	default:
 		break;
 	}
-
-	gameTimer_ = std::make_unique<GameTimer>();
 
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
@@ -178,6 +179,9 @@ void GameScene::TextInitialize()
 
 		cameraText_ = std::make_unique<Text>();
 		cameraText_->Initialize("Resources/camera.png");
+
+		chargeAttackText_ = std::make_unique<Text>();
+		chargeAttackText_->Initialize("Resources/camera.png");
 	}
 }
 
@@ -186,6 +190,7 @@ void GameScene::TextUpdate()
 	moveText_->Update(gameTimer_.get(), 3, 7);//Blender上で設定できるようにしたい
 	attackText_->Update(gameTimer_.get(), 9, 13);
 	cameraText_->Update(gameTimer_.get(), 20, 25);
+	chargeAttackText_->Update(gameTimer_.get(), 50, 55);
 }
 
 void GameScene::TextDraw()
@@ -193,4 +198,5 @@ void GameScene::TextDraw()
 	moveText_->Draw();
 	attackText_->Draw();
 	cameraText_->Draw();
+	chargeAttackText_->Draw();
 }

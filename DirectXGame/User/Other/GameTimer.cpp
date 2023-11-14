@@ -41,3 +41,8 @@ void GameTimer::SetTimeSpeed(const float timeSpeed)
 {
 	timeSpeed_ = timeSpeed;
 }
+
+void GameTimer::SetGameTime(const uint32_t time)
+{
+	gameTime_ = time;
+}

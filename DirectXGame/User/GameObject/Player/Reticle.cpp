@@ -14,8 +14,8 @@ void Reticle::Initialize()
 	reticleTex2_ = reticle_->LoadTexture("Resources/reticle2.png");
 	reticle_->Sprite3DInitialize(reticleTex_);
 	reticleTrans_.Initialize();
-	reticleTrans_.translation = { 0.0f,-reticleLimit_,100.0f };
-	reticleTrans_.scale = { 0.25f,0.25f,1.0f };
+	reticleTrans_.translation = { 0.0f,-reticleLimit_,200.0f };
+	reticleTrans_.scale = { 0.5f,0.5f,1.0f };
 
 	ColliderManager::GetInstance()->AddCollision(this);
 }
@@ -96,7 +96,7 @@ void Reticle::CancelLockOn()
 
 void Reticle::Reset()
 {
-	reticleTrans_.translation = { 0.0f,-reticleLimit_,100.0f };
+	reticleTrans_.translation = { 0.0f,-reticleLimit_,200.0f };
 
 	lockOnFlag_ = false;
 	changeReticleFlag_ = false;
@@ -140,6 +140,11 @@ void Reticle::GetLockOnAttackFlag(const bool flag)
 	lockOnAttackFlag_ = flag;
 }
 
+void Reticle::GetCameraFlag(const int8_t flag)
+{
+	cameraFlag_ = flag;
+}
+
 void Reticle::Move()
 {
 #pragma region キーボード
@@ -169,7 +174,14 @@ void Reticle::Move()
 #pragma endregion コントローラー
 
 	addTargetAngle_.x = myMath::ChangeRadians(reticleTrans_.translation.x / 45.0f * 15.0f);
-	addTargetAngle_.y = -myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 15.0f);
+	if (cameraFlag_ == 2)
+	{
+		addTargetAngle_.y = myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 15.0f);
+	}
+	else
+	{
+		addTargetAngle_.y = -myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 15.0f);
+	}
 }
 
 void Reticle::ReticleLimit()
@@ -188,14 +200,14 @@ void Reticle::ChangeReticleUpdate()
 		//拡縮演出
 		if (animationTimer_ <= maxAnimationTime_ / 2)
 		{
-			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutCubic(animationTimer_,0.25f,0.125f,maxAnimationTime_ / 2)),//まずは小さくなる
-			static_cast<float>(Easing::EaseOutCubic(animationTimer_,0.25f,0.125f,maxAnimationTime_ / 2)),
+			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutCubic(animationTimer_,0.5f,0.25f,maxAnimationTime_ / 2)),//まずは小さくなる
+			static_cast<float>(Easing::EaseOutCubic(animationTimer_,0.5f,0.25f,maxAnimationTime_ / 2)),
 			1.0f };
 		}
 		else
 		{
-  			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutBack(animationTimer_- maxAnimationTime_ / 2,0.125f,0.25f,maxAnimationTime_ / 2)),//まずは小さくなる
-			static_cast<float>(Easing::EaseOutBack(animationTimer_- maxAnimationTime_ / 2,0.125f,0.25f,maxAnimationTime_ / 2)),
+  			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutBack(animationTimer_- maxAnimationTime_ / 2,0.25f,0.5f,maxAnimationTime_ / 2)),//まずは小さくなる
+			static_cast<float>(Easing::EaseOutBack(animationTimer_- maxAnimationTime_ / 2,0.25f,0.5f,maxAnimationTime_ / 2)),
 			1.0f };
 		}
 

@@ -54,6 +54,7 @@ private:
 	std::unique_ptr<Text>moveText_;
 	std::unique_ptr<Text>attackText_;
 	std::unique_ptr<Text>cameraText_;
+	std::unique_ptr<Text>chargeAttackText_;
 
 public:
 

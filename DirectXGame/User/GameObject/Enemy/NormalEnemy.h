@@ -7,6 +7,8 @@ class NormalEnemy:public Enemy
 private:
 
 	std::string name_ = "enemy";
+	float addY = 0.0f;
+	uint16_t actionTimer = 0;
 
 	std::unique_ptr<Model>enemy_;
 	uint32_t enemyTex_ = 0;

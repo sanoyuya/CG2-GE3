@@ -16,12 +16,13 @@ private:
 	uint32_t reticleTex_ = 0;
 	uint32_t reticleTex2_ = 0;
 
-	const float reticleSpeed_ = 1.5f;
-	const float reticleLimit_ = 45.0f;
+	const float reticleSpeed_ = 2.0f;
+	const float reticleLimit_ = 60.0f;
 
 	Transform cameraTrans_;
 
 	std::string name_ = "reticle";
+	Transform colliderTrans_;
 	CollisionData collisionData;
 
 	static myMath::Vector2 addTargetAngle_;
@@ -31,6 +32,8 @@ private:
 	uint8_t maxAnimationTime_ = 30;
 	bool lockOnFlag_ = false;
 	bool lockOnAttackFlag_ = false;
+
+	int8_t cameraFlag_ = 0;
 
 public:
 
@@ -82,6 +85,7 @@ public:
 
 	void GetLockOnFlag(const bool flag);
 	void GetLockOnAttackFlag(const bool flag);
+	void GetCameraFlag(const int8_t flag);
 
 private:
 

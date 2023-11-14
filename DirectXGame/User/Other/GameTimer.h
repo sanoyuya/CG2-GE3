@@ -12,7 +12,7 @@ private:
 	float timeSpeed_ = 1.0f;
 
 	//ゲーム全体のフレーム数
-	const uint32_t gameTime_ = 60 * 60 * 1;//1秒間のフレーム数*1分間の秒数*全体の時間(分)
+	uint32_t gameTime_ = 0;//1秒間のフレーム数*1分間の秒数*全体の時間(分)
 
 public:
 
@@ -32,4 +32,6 @@ public:
 	const uint32_t& GetGameTime();
 
 	void SetTimeSpeed(const float timeSpeed);
+
+	void SetGameTime(const uint32_t time);
 };

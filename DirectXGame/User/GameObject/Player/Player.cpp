@@ -388,6 +388,7 @@ void Player::CameraRotation()
 	}
 
 	cameraFlag_ = static_cast<CameraFlag>(cameraFlagNum_);
+	reticle_->GetCameraFlag(cameraFlagNum_);
 }
 
 void Player::ImGuiUpdate()

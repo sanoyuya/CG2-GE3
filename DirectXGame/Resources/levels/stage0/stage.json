@@ -157,7 +157,7 @@
         },
         {
             "type": "MESH",
-            "name": "cameraPoint14",
+            "name": "cameraPoint16",
             "transform": {
                 "translation": [
                     -400.0,
@@ -179,7 +179,7 @@
         },
         {
             "type": "MESH",
-            "name": "cameraPoint16",
+            "name": "cameraPoint17",
             "transform": {
                 "translation": [
                     -400.0,
@@ -358,7 +358,7 @@
             "name": "cameraPoint35",
             "transform": {
                 "translation": [
-                    -420.0,
+                    -400.0,
                     450.0,
                     15.0
                 ],
@@ -380,7 +380,7 @@
             "name": "cameraPoint37",
             "transform": {
                 "translation": [
-                    -430.0,
+                    -400.0,
                     500.0,
                     15.0
                 ],
@@ -402,74 +402,8 @@
             "name": "cameraPoint40",
             "transform": {
                 "translation": [
-                    -420.0,
+                    -500.0,
                     550.0,
-                    15.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "cameraPoint"
-        },
-        {
-            "type": "MESH",
-            "name": "cameraPoint41",
-            "transform": {
-                "translation": [
-                    -400.0,
-                    600.0,
-                    15.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "cameraPoint"
-        },
-        {
-            "type": "MESH",
-            "name": "cameraPoint42",
-            "transform": {
-                "translation": [
-                    -400.0,
-                    650.0,
-                    15.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "cameraPoint"
-        },
-        {
-            "type": "MESH",
-            "name": "cameraPoint43",
-            "transform": {
-                "translation": [
-                    -400.0,
-                    700.0,
                     15.0
                 ],
                 "rotation": [
@@ -520,8 +454,8 @@
                 ]
             },
             "timer": {
-                "spawn": 25.0,
-                "death": 45.0
+                "spawn": 30.0,
+                "death": 50.0
             },
             "isAttack": "false",
             "enemy_move_properties": {
@@ -590,6 +524,1869 @@
                     -280.0,
                     0.0,
                     15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy1",
+            "transform": {
+                "translation": [
+                    -360.0,
+                    0.0,
+                    20.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 13.0,
+                "death": 25.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint14",
+            "transform": {
+                "translation": [
+                    -320.0,
+                    0.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy2",
+            "transform": {
+                "translation": [
+                    -360.0,
+                    -20.0,
+                    20.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 13.0,
+                "death": 25.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy3",
+            "transform": {
+                "translation": [
+                    -360.0,
+                    20.0,
+                    20.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 13.0,
+                "death": 25.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint15",
+            "transform": {
+                "translation": [
+                    -360.0,
+                    0.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy4",
+            "transform": {
+                "translation": [
+                    -420.0,
+                    240.0,
+                    14.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 34.0,
+                "death": 51.0
+            },
+            "isAttack": "false",
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -420.0,
+                    240.0,
+                    12.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 12.0,
+                "movePosition": [
+                    -420.0,
+                    400.0,
+                    12.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -500.0,
+                    420.0,
+                    20.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -45.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint41",
+            "transform": {
+                "translation": [
+                    -550.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint42",
+            "transform": {
+                "translation": [
+                    -600.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint43",
+            "transform": {
+                "translation": [
+                    -650.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint45",
+            "transform": {
+                "translation": [
+                    -700.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint46",
+            "transform": {
+                "translation": [
+                    -750.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint47",
+            "transform": {
+                "translation": [
+                    -800.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint48",
+            "transform": {
+                "translation": [
+                    -850.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint49",
+            "transform": {
+                "translation": [
+                    -900.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint50",
+            "transform": {
+                "translation": [
+                    -950.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint51",
+            "transform": {
+                "translation": [
+                    -1000.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy5",
+            "transform": {
+                "translation": [
+                    -800.0,
+                    530.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 55.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy6",
+            "transform": {
+                "translation": [
+                    -800.0,
+                    520.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 55.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy7",
+            "transform": {
+                "translation": [
+                    -800.0,
+                    510.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 55.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy8",
+            "transform": {
+                "translation": [
+                    -800.0,
+                    520.0,
+                    45.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 55.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy9",
+            "transform": {
+                "translation": [
+                    -800.0,
+                    510.0,
+                    45.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 55.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy10",
+            "transform": {
+                "translation": [
+                    -800.0,
+                    530.0,
+                    45.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 55.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy11",
+            "transform": {
+                "translation": [
+                    -850.0,
+                    570.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 60.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy12",
+            "transform": {
+                "translation": [
+                    -850.0,
+                    580.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 60.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy13",
+            "transform": {
+                "translation": [
+                    -850.0,
+                    590.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 60.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy14",
+            "transform": {
+                "translation": [
+                    -850.0,
+                    570.0,
+                    45.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 60.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy15",
+            "transform": {
+                "translation": [
+                    -850.0,
+                    580.0,
+                    45.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 60.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy16",
+            "transform": {
+                "translation": [
+                    -850.0,
+                    590.0,
+                    45.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -1.3435247651818333e-13,
+                    -179.99998474121094
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 60.0,
+                "death": 80.0
+            },
+            "isAttack": "false"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint52",
+            "transform": {
+                "translation": [
+                    -1050.0,
+                    550.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint53",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    650.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint54",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    700.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint55",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    750.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint56",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    800.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint58",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    875.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint60",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    950.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint61",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    1025.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint62",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    1100.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint63",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    1175.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint64",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    1250.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint65",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    1325.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint66",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    1400.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint67",
+            "transform": {
+                "translation": [
+                    -1100.0,
+                    1475.0,
+                    15.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint69",
+            "transform": {
+                "translation": [
+                    -1050.0,
+                    1600.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint70",
+            "transform": {
+                "translation": [
+                    -990.0,
+                    1600.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint71",
+            "transform": {
+                "translation": [
+                    -925.0,
+                    1600.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint72",
+            "transform": {
+                "translation": [
+                    -850.0,
+                    1600.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint73",
+            "transform": {
+                "translation": [
+                    -775.0,
+                    1600.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint74",
+            "transform": {
+                "translation": [
+                    -700.0,
+                    1600.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint76",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    1550.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint77",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    1475.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint78",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    1400.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint79",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    1325.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint80",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    1250.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint81",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    1175.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint82",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    1100.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint83",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    1025.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint84",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    950.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint85",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    875.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint86",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    800.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint87",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    725.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint88",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    650.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint89",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    575.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint90",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    500.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint91",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    425.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint92",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    350.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint93",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    275.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint94",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    200.0,
+                    20.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint95",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    125.0,
+                    30.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint96",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    50.0,
+                    40.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "cameraPoint"
+        },
+        {
+            "type": "MESH",
+            "name": "cameraPoint97",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    -25.0,
+                    50.0
                 ],
                 "rotation": [
                     0.0,
