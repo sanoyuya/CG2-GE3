@@ -85,6 +85,8 @@ public:
 	virtual void SetDeathTimer(const float timer) = 0;
 	//blenderで出力したデータを読み込むときにMoveEnemyの情報をセットする関数
 	virtual void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty) = 0;
+	//blenderで出力したデータを読み込むときに攻撃フラグをセットする関数
+	virtual void SetIsAttack(const bool flag) = 0;
 
 	void SetCamera(Camera* camera);
 

@@ -523,6 +523,7 @@
                 "spawn": 25.0,
                 "death": 45.0
             },
+            "isAttack": "false",
             "enemy_move_properties": {
                 "spawnPosition": [
                     -400.0,

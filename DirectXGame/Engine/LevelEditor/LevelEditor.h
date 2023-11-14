@@ -35,6 +35,8 @@ struct LevelData {
 		Collider collider;
 		//タイマー
 		Timer timer;
+		//攻撃フラグ
+		bool isAttack;
 		//敵のプロパティ
 		MoveEnemyProperty enemyProperty;
 	};

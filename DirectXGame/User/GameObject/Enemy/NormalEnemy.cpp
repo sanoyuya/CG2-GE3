@@ -43,8 +43,11 @@ void NormalEnemy::Update()
 		//敵のモデルの更新処理
 		enemyTrans_.TransUpdate(camera_);
 		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
-		//弾の生成処理と更新処理
-		BulletUpdate();
+		if (isAttack == false)
+		{
+			//弾の生成処理と更新処理
+			BulletUpdate();
+		}
 		//死亡処理
 		DeathUpdate();
 	}
@@ -122,6 +125,11 @@ void NormalEnemy::SetDeathTimer(const float timer)
 void NormalEnemy::SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)
 {
 	moveEnemyProperty;
+}
+
+void NormalEnemy::SetIsAttack(const bool flag)
+{
+	isAttack = flag;
 }
 
 const bool NormalEnemy::GetIsDead()

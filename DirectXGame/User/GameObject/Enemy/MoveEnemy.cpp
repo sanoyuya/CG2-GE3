@@ -50,8 +50,11 @@ void MoveEnemy::Update()
 		enemyTrans_.TransUpdate(camera_);
 		collisionData_.center = enemyTrans_.translation;
 		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
-		//弾の生成処理と更新処理
-		BulletUpdate();
+		if (isAttack == true)
+		{
+			//弾の生成処理と更新処理
+			BulletUpdate();
+		}
 		//死亡処理
 		DeathUpdate();
 	}
@@ -189,6 +192,11 @@ void MoveEnemy::SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)
 	moveEnemyProperty_.spawnPosRotation = { myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.spawnPosRotation.z) - myMath::AX_PIF / 2 };
 	moveEnemyProperty_.movePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
 	moveEnemyProperty_.escapePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.z) - myMath::AX_PIF / 2 };
+}
+
+void MoveEnemy::SetIsAttack(const bool flag)
+{
+	isAttack = flag;
 }
 
 const bool MoveEnemy::GetIsDead()

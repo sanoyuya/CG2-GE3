@@ -78,6 +78,8 @@ void GameLevelData::Load()
 			//blender側で設定した時間を送る
 			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
 			enemy->SetDeathTimer(objectData.timer.deathTimer);
+			//blender側で設定した攻撃フラグを送る
+			enemy->SetIsAttack(objectData.isAttack);
 			//Enemyを登録
 			enemyData_.enemys.push_back(std::move(enemy));
 		}
@@ -90,6 +92,8 @@ void GameLevelData::Load()
 			//blender側で設定した時間を送る
 			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
 			enemy->SetDeathTimer(objectData.timer.deathTimer);
+			//blender側で設定した攻撃フラグを送る
+			enemy->SetIsAttack(objectData.isAttack);
 
 			enemy->SetMoveEnemyProperty(objectData.enemyProperty);
 			//Enemyを登録
