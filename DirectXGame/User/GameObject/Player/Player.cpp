@@ -276,7 +276,7 @@ void Player::Rotation()
 		playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 		playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-		float angleZ = -(reticle_->GetTransform().translation.x / 4 - playerTrans_.translation.x) / 8.0f;
+		float angleZ = -(reticle_->GetTransform().translation.x / 4 - playerTrans_.translation.x) / 10.0f;
 		//モデルのZ軸回転
 		PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
 	}
