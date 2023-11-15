@@ -8,7 +8,11 @@
 
 void MyGame::Initialize()
 {
+#ifdef _DEBUG
+	YFramework::SetWindowData("AirBattle(Debug)");
+#else
 	YFramework::SetWindowData("AirBattle");
+#endif
 	YFramework::SetWindowColor();
 
 	//基底クラスの初期化処理
