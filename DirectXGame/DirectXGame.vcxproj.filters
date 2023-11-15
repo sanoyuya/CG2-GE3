@@ -432,6 +432,9 @@
     <ClCompile Include="User\Other\Text.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="User\Other\GroundBack.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -791,6 +794,9 @@
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
     <ClInclude Include="User\Other\Text.h">
+      <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Other\GroundBack.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

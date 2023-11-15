@@ -14,6 +14,7 @@
 #include"GameTimer.h"
 #include"BulletManager.h"
 #include"Text.h"
+#include"GroundBack.h"
 
 class GameScene :public BaseScene
 {
@@ -55,6 +56,10 @@ private:
 	std::unique_ptr<Text>attackText_;
 	std::unique_ptr<Text>cameraText_;
 	std::unique_ptr<Text>chargeAttackText_;
+	std::unique_ptr<Text>readyText_;
+	std::unique_ptr<Text>goText_;
+
+	std::unique_ptr<GroundBack>groundBack_;
 
 public:
 

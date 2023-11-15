@@ -20,7 +20,7 @@ void GameScene::Initialize()
 
 	//天球
 	skyDome_ = std::make_unique<Model>();
-	skyDomeTex_ = Model::CreateObjModel("Resources/skydome");
+	skyDomeTex_ = Model::CreateObjModel("Resources/skydome3");
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
 	skyDomeTrans_.scale = { 20.0f,20.0f ,20.0f };
@@ -66,6 +66,9 @@ void GameScene::Initialize()
 	radar_->Initialize(enemyManager_.get());
 
 	TextInitialize();
+
+	groundBack_= std::make_unique<GroundBack>();
+	groundBack_->Initialize(gameLevelData_->GetGroundTranslation(), gameLevelData_->GetGroundSize());
 
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
@@ -132,6 +135,7 @@ void GameScene::Update()
 		player_->Update();
 		camera_->Update(gameTimer_.get());
 		gameLevelData_->Update(camera_->GetCameraPtr());
+		groundBack_->Update(camera_->GetCameraPtr(), gameTimer_.get());
 		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//天球
 		playerDamageEffect_->Update(player_.get());
 		enemyManager_->Update(camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
@@ -153,7 +157,8 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	skyDome_->DrawModel(&skyDomeTrans_);
+	skyDome_->DrawModel(&skyDomeTrans_, { 0.0125f,0.0125f,0.0125f,1.0f });
+	groundBack_->Draw();
 	gameLevelData_->Draw();
 	enemyManager_->Draw();
 	bulletManager_->Draw();
@@ -182,6 +187,12 @@ void GameScene::TextInitialize()
 
 		chargeAttackText_ = std::make_unique<Text>();
 		chargeAttackText_->Initialize("Resources/camera.png");
+
+		readyText_ = std::make_unique<Text>();
+		readyText_->Initialize("Resources/ready.png");
+
+		goText_ = std::make_unique<Text>();
+		goText_->Initialize("Resources/go.png");
 	}
 }
 
@@ -191,6 +202,8 @@ void GameScene::TextUpdate()
 	attackText_->Update(gameTimer_.get(), 9, 13);
 	cameraText_->Update(gameTimer_.get(), 20, 25);
 	chargeAttackText_->Update(gameTimer_.get(), 50, 55);
+	readyText_->Update(gameTimer_.get(), 81, 84);
+	goText_->Update(gameTimer_.get(), 84, 87);
 }
 
 void GameScene::TextDraw()
@@ -199,4 +212,6 @@ void GameScene::TextDraw()
 	attackText_->Draw();
 	cameraText_->Draw();
 	chargeAttackText_->Draw();
+	readyText_->Draw();
+	goText_->Draw();
 }

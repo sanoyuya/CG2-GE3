@@ -116,6 +116,9 @@ void GameLevelData::Load()
 			model->SetShader(ShaderMode::Phong);
 			model->SetTiling({ 100.0f,100.0f });
 
+			groundTranslation_ = { objectData.translation.x,objectData.translation.z };
+			groundSize_ = { objectData.scaling.x, objectData.scaling.z };
+
 			objects_.push_back(std::move(model));
 		}
 		else if (objectData.fileName == "ground2")
@@ -240,6 +243,16 @@ bool GameLevelData::NumericStringCompare(const ControlPoint& a, const ControlPoi
 void GameLevelData::SetFileName(const std::string& fileName)
 {
 	fileName_ = fileName;
+}
+
+const myMath::Vector2 GameLevelData::GetGroundSize()
+{
+	return groundSize_;
+}
+
+const myMath::Vector2 GameLevelData::GetGroundTranslation()
+{
+	return groundTranslation_;
 }
 
 void GameLevelData::ReLoad()

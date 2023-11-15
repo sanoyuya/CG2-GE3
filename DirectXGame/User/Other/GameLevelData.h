@@ -26,6 +26,9 @@ private:
 	uint32_t convenienceStoreTex_ = 0;
 	uint32_t tex_ = 0;
 
+	myMath::Vector2 groundTranslation_ = {};
+	myMath::Vector2 groundSize_ = {};
+
 	PlayerData playerData_;
 	CameraData cameraData_;
 	EnemyList enemyData_;
@@ -70,4 +73,7 @@ public:
 	static bool NumericStringCompare(const ControlPoint& a, const ControlPoint& b);
 
 	void SetFileName(const std::string& fileName);
+
+	const myMath::Vector2 GetGroundSize();
+	const myMath::Vector2 GetGroundTranslation();
 };
