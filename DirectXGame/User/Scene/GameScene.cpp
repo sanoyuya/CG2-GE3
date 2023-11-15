@@ -186,7 +186,7 @@ void GameScene::TextInitialize()
 		cameraText_->Initialize("Resources/camera.png");
 
 		chargeAttackText_ = std::make_unique<Text>();
-		chargeAttackText_->Initialize("Resources/camera.png");
+		chargeAttackText_->Initialize("Resources/chargeAttack.png");
 
 		readyText_ = std::make_unique<Text>();
 		readyText_->Initialize("Resources/ready.png");
@@ -203,7 +203,7 @@ void GameScene::TextUpdate()
 	cameraText_->Update(gameTimer_.get(), 20, 25);
 	chargeAttackText_->Update(gameTimer_.get(), 50, 55);
 	readyText_->Update(gameTimer_.get(), 81, 84);
-	goText_->Update(gameTimer_.get(), 84, 87);
+	goText_->Update(gameTimer_.get(), 84, 86);
 }
 
 void GameScene::TextDraw()
