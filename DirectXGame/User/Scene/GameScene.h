@@ -15,6 +15,7 @@
 #include"BulletManager.h"
 #include"Text.h"
 #include"GroundBack.h"
+#include"BuildingManager.h"
 
 class GameScene :public BaseScene
 {
@@ -48,6 +49,8 @@ private:
 	std::unique_ptr<Radar>radar_;
 
 	std::unique_ptr<GameTimer>gameTimer_;
+
+	std::unique_ptr<BuildingManager>buildingManager_;
 
 	uint32_t bgm_ = 0;
 

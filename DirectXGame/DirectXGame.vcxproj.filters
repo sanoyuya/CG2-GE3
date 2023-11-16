@@ -178,6 +178,12 @@
     <Filter Include="User\ヘッダー ファイル\Effect\Particle">
       <UniqueIdentifier>{a8ccdc58-cbd6-45cf-b9b4-bf9de8406dd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\Object\Building">
+      <UniqueIdentifier>{a5930e30-b526-40d0-8335-7c66d4756c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Object\Building">
+      <UniqueIdentifier>{67965122-d96b-40a4-bc42-4d7a09311524}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -434,6 +440,15 @@
     </ClCompile>
     <ClCompile Include="User\Other\GroundBack.cpp">
       <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject\Building\Building.cpp">
+      <Filter>User\ソース ファイル\Object\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject\Building\BuildingManager.cpp">
+      <Filter>User\ソース ファイル\Object\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject\Building\BuildingBase.cpp">
+      <Filter>User\ソース ファイル\Object\Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -798,6 +813,15 @@
     </ClInclude>
     <ClInclude Include="User\Other\GroundBack.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameObject\Building\Building.h">
+      <Filter>User\ヘッダー ファイル\Object\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameObject\Building\BuildingManager.h">
+      <Filter>User\ヘッダー ファイル\Object\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="User\GameObject\Building\BuildingBase.h">
+      <Filter>User\ヘッダー ファイル\Object\Building</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

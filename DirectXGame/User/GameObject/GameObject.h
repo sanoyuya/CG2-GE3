@@ -46,10 +46,10 @@ public:
 	virtual const bool GetDeathFlag() { return false; };
 
 	//死亡フラグの取得
-	virtual const bool GetIsDead() = 0;
+	virtual const bool GetIsDead() { return false; };
 
 	//死亡アニメーションフラグの取得
-	virtual const bool GetDeathAnimationFlag() = 0;
+	virtual const bool GetDeathAnimationFlag() { return false; };
 
 	//ロックオン
 	virtual void LockOn() = 0;
@@ -58,5 +58,5 @@ public:
 	virtual void CancelLockOn() = 0;
 
 	//ロックオンフラグの取得
-	virtual const bool GetLockOnFlag() = 0;
+	virtual const bool GetLockOnFlag() { return false; };
 };

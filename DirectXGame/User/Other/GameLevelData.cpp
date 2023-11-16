@@ -160,6 +160,22 @@ void GameLevelData::Load()
 
 			objects_.push_back(std::move(model));
 		}
+		else if (objectData.fileName == "building2")
+		{
+			//ファイル名から登録済みモデルを検索
+			std::unique_ptr<BuildingBase> model = std::make_unique<Building>();
+			model->Initialize();
+
+			//座標
+			model->SetPosition(objectData.translation);
+			//拡縮
+			model->SetScale(objectData.scaling);
+			//回転角
+			//blenderで出力された値を変換する
+			model->SetRotation({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y + 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
+
+			buildingData_.buildings.push_back(std::move(model));
+			}
 		else if (objectData.fileName == "convenienceStore")
 		{
 			//ファイル名から登録済みモデルを検索
@@ -231,6 +247,11 @@ EnemyList& GameLevelData::GetEnemyData()
 	return enemyData_;
 }
 
+BuildingList& GameLevelData::GetBuildingList()
+{
+	return buildingData_;
+}
+
 bool GameLevelData::NumericStringCompare(const ControlPoint& a, const ControlPoint& b)
 {
 	// "cameraPoint"以降の部分を数値に変換して比較
@@ -262,5 +283,6 @@ void GameLevelData::ReLoad()
 	objects_.clear();
 	cameraData_.controlPoints.clear();
 	enemyData_.enemys.clear();
+	buildingData_.buildings.clear();
 	Load();
 }

@@ -6,6 +6,7 @@
 #include"Player.h"
 #include"RailCamera.h"
 #include"EnemyManager.h"
+#include"BuildingManager.h"
 
 class GameLevelData
 {
@@ -32,6 +33,7 @@ private:
 	PlayerData playerData_;
 	CameraData cameraData_;
 	EnemyList enemyData_;
+	BuildingList buildingData_;
 
 public:
 
@@ -69,6 +71,7 @@ public:
 	const PlayerData& GetPlayerData();
 	const CameraData& GetCameraData();
 	EnemyList& GetEnemyData();
+	BuildingList& GetBuildingList();
 
 	static bool NumericStringCompare(const ControlPoint& a, const ControlPoint& b);
 

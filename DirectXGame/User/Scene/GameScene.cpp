@@ -72,6 +72,11 @@ void GameScene::Initialize()
 	groundBack_= std::make_unique<GroundBack>();
 	groundBack_->Initialize(gameLevelData_->GetGroundTranslation(), gameLevelData_->GetGroundSize());
 
+	buildingManager_ = std::make_unique<BuildingManager>();
+	buildingManager_->Initialize(gameLevelData_->GetBuildingList());
+	BuildingBase::SetCamera(camera_->GetCameraPtr());
+	BuildingBase::SetGameTimer(gameTimer_.get());
+
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
 }
@@ -108,6 +113,7 @@ void GameScene::Update()
 		player_->Reset();
 		enemyManager_->ReLoad(gameLevelData_->GetEnemyData());
 		bulletManager_->Reset();
+		buildingManager_->ReLoad(gameLevelData_->GetBuildingList());
 	}
 
 	if (input_->KeyboardTriggerPush(DIK_T))
@@ -147,6 +153,7 @@ void GameScene::Update()
 		gameLevelData_->Update(camera_->GetCameraPtr());
 		groundBack_->Update(camera_->GetCameraPtr(), gameTimer_.get());
 		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//天球
+		buildingManager_->Update();
 		playerDamageEffect_->Update(player_.get());
 		enemyManager_->Update(camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
 		bulletManager_->Update(camera_->GetCameraPtr());
@@ -169,7 +176,9 @@ void GameScene::Draw()
 {
 	skyDome_->DrawModel(&skyDomeTrans_, { 0.0125f,0.0125f,0.0125f,1.0f });
 	groundBack_->Draw();
+	bulletManager_->Draw();
 	gameLevelData_->Draw();
+	buildingManager_->Draw();
 	enemyManager_->Draw();
 	bulletManager_->Draw();
 	player_->Draw();
