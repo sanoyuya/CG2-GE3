@@ -137,10 +137,16 @@ void Player::Draw()
 		}
 		else
 		{
-			//機体のエンジンから火が出るパーティクルの描画
-			smokeEmitter_->Draw();
-			//プレイヤーのモデル描画
-			player_->DrawModel(&playerTrans_);
+			if (cameraFlag_ == CameraFlag::Front)
+			{
+				//プレイヤーのモデル描画
+				player_->DrawModel(&playerTrans_, { 1.0f,1.0f ,1.0f ,0.125f });
+			}
+			else
+			{
+				//プレイヤーのモデル描画
+				player_->DrawModel(&playerTrans_);
+			}
 		}
 		//HPバーの描画
 		hpBar_->Draw();
