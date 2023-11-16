@@ -201,7 +201,7 @@ void NormalEnemy::BulletUpdate()
 		bulletTimer++;
 		if (bulletTimer > maxBulletTime)
 		{
-			if (200.0f >= length)
+			if (150.0f >= length)
 			{
 				bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 			}
