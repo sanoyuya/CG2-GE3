@@ -18,6 +18,8 @@ private:
 
 	CollisionData collisionData_;
 
+	bool isSet = false;
+
 public:
 
 	Building() = default;

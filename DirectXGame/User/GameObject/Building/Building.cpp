@@ -19,9 +19,13 @@ void Building::Initialize()
 
 void Building::Update()
 {
-	buildingBackTrans_.translation = { buildingTrans_.translation.x,buildingTrans_.translation.y+20.0f,buildingTrans_.translation.z };
-	buildingBackTrans_.scale = { buildingTrans_.scale.x * 10.0f-0.5f,buildingTrans_.scale.y * 20.0f - 0.5f,buildingTrans_.scale.z * 10.0f - 0.5f };
-	buildingBackTrans_.rotation = buildingTrans_.rotation;
+	if (isSet == false)
+	{
+		buildingBackTrans_.translation = { buildingTrans_.translation.x,buildingTrans_.translation.y + 20.0f,buildingTrans_.translation.z };
+		buildingBackTrans_.scale = { buildingTrans_.scale.x * 10.0f - 0.5f,buildingTrans_.scale.y * 20.0f - 0.5f,buildingTrans_.scale.z * 10.0f - 0.5f };
+		buildingBackTrans_.rotation = buildingTrans_.rotation;
+		isSet = true;
+	}
 
 	buildingTrans_.TransUpdate(sCamera_);
 	buildingBackTrans_.TransUpdate(sCamera_);
