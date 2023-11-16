@@ -21,6 +21,7 @@ void NormalEnemy::Initialize()
 	enemyTex_ = enemy_->CreateObjModel("Resources/enemy");
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
+	maxBulletTime = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
 
 	//死亡アニメーションパーティクル初期化
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
@@ -206,6 +207,7 @@ void NormalEnemy::BulletUpdate()
 			}
 
 			bulletTimer = 0.0f;
+			maxBulletTime = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
 		}
 	}
 }

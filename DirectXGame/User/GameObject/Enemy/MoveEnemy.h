@@ -26,10 +26,10 @@ private:
 
 	bool spawnFlag_ = false;
 	bool isDead_ = false;
-	bool isAttack = false;
+	bool isAttack_ = false;
 
-	float bulletTimer = 0.0f;
-	const float maxBulletTime = 60.0f;
+	float bulletTimer_ = 0.0f;
+	float maxBulletTime_ = 60.0f;
 
 	bool spawnAnimationFlag_ = false;
 	uint8_t spawnAnimationTimer_ = 0;

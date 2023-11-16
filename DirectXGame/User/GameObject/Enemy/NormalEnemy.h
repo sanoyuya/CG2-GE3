@@ -21,7 +21,7 @@ private:
 	bool isAttack = false;
 
 	float bulletTimer = 0.0f;
-	const float maxBulletTime = 60.0f;
+	float maxBulletTime = 0.0f;
 
 	bool spawnAnimationFlag_ = false;
 	uint8_t spawnAnimationTimer_ = 0;

@@ -25,6 +25,7 @@ void MoveEnemy::Initialize()
 	enemyTrans_.translation = moveEnemyProperty_.spawnPos;
 	enemyTrans_.rotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
 	collisionData_.center = enemyTrans_.translation;
+	maxBulletTime_ = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
 
 	//死亡アニメーションパーティクル初期化
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
@@ -50,7 +51,7 @@ void MoveEnemy::Update()
 		enemyTrans_.TransUpdate(camera_);
 		collisionData_.center = enemyTrans_.translation;
 		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
-		if (isAttack == true)
+		if (isAttack_ == true)
 		{
 			//弾の生成処理と更新処理
 			BulletUpdate();
@@ -199,7 +200,7 @@ void MoveEnemy::SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)
 
 void MoveEnemy::SetIsAttack(const bool flag)
 {
-	isAttack = flag;
+	isAttack_ = flag;
 }
 
 const bool MoveEnemy::GetIsDead()
@@ -260,15 +261,16 @@ void MoveEnemy::BulletUpdate()
 	{
 		float length = sqrt((player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x) * (player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x)) +
 			sqrt((player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z) * (player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z));
-		bulletTimer++;
-		if (bulletTimer > maxBulletTime)
+		bulletTimer_++;
+		if (bulletTimer_ > maxBulletTime_)
 		{
 			if (200.0f >= length)
 			{
 				bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 			}
 
-			bulletTimer = 0.0f;
+			bulletTimer_ = 0.0f;
+			maxBulletTime_ = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
 		}
 	}
 }

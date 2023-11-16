@@ -3061,7 +3061,7 @@
             "transform": {
                 "translation": [
                     -600.0,
-                    700.0,
+                    600.0,
                     12.0
                 ],
                 "rotation": [
@@ -3093,11 +3093,11 @@
                 "spawn": 145.0,
                 "death": 160.0
             },
-            "isAttack": "false",
+            "isAttack": "true",
             "enemy_move_properties": {
                 "spawnPosition": [
                     -600.0,
-                    700.0,
+                    600.0,
                     12.0
                 ],
                 "spawnPositionRotation": [
@@ -3107,8 +3107,8 @@
                 ],
                 "toMovePositionTime": 5.0,
                 "movePosition": [
-                    -625.0,
-                    700.0,
+                    -550.0,
+                    400.0,
                     12.0
                 ],
                 "movePositionRotation": [
@@ -3119,9 +3119,9 @@
                 "waitTime": 5.0,
                 "toEscapePositionTime": 5.0,
                 "escapePosition": [
-                    -650.0,
-                    500.0,
-                    20.0
+                    -550.0,
+                    400.0,
+                    30.0
                 ],
                 "escapePositionRotation": [
                     90.0,
@@ -3129,6 +3129,591 @@
                     -90.0
                 ]
             }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy28",
+            "transform": {
+                "translation": [
+                    -550.0,
+                    600.0,
+                    12.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 145.0,
+                "death": 160.0
+            },
+            "isAttack": "true",
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -550.0,
+                    600.0,
+                    12.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 5.0,
+                "movePosition": [
+                    -550.0,
+                    400.0,
+                    30.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 5.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -600.0,
+                    400.0,
+                    30.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy29",
+            "transform": {
+                "translation": [
+                    -550.0,
+                    600.0,
+                    30.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 145.0,
+                "death": 160.0
+            },
+            "isAttack": "true",
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -550.0,
+                    600.0,
+                    30.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 5.0,
+                "movePosition": [
+                    -600.0,
+                    400.0,
+                    30.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 5.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -600.0,
+                    400.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy30",
+            "transform": {
+                "translation": [
+                    -600.0,
+                    600.0,
+                    30.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 145.0,
+                "death": 160.0
+            },
+            "isAttack": "true",
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -600.0,
+                    600.0,
+                    30.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 5.0,
+                "movePosition": [
+                    -600.0,
+                    400.0,
+                    12.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 5.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -550.0,
+                    400.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy31",
+            "transform": {
+                "translation": [
+                    -550.0,
+                    100.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy32",
+            "transform": {
+                "translation": [
+                    -600.0,
+                    100.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy33",
+            "transform": {
+                "translation": [
+                    -600.0,
+                    100.0,
+                    15.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy34",
+            "transform": {
+                "translation": [
+                    -550.0,
+                    100.0,
+                    15.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy35",
+            "transform": {
+                "translation": [
+                    -550.0,
+                    100.0,
+                    35.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy36",
+            "transform": {
+                "translation": [
+                    -600.0,
+                    100.0,
+                    35.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy37",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    100.0,
+                    35.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy38",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    100.0,
+                    25.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy39",
+            "transform": {
+                "translation": [
+                    -575.0,
+                    100.0,
+                    15.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    3.4150941701227566e-06,
+                    -90.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "normalEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "timer": {
+                "spawn": 155.0,
+                "death": 180.0
+            },
+            "isAttack": "true"
         }
     ]
 }
