@@ -40,6 +40,8 @@ private:
 
 	GameObject* lockOnEnemy_ = nullptr;
 
+	myMath::Vector3 endPos = {};
+
 public://BulletBaseで必要な奴
 
 	//デストラクタ

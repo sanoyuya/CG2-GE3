@@ -136,8 +136,12 @@ void LockOnBullet::SetControlPos(const myMath::Vector3& position)
 
 void LockOnBullet::BulletMove()
 {
+	if (lockOnEnemy_!=nullptr)
+	{
+		endPos = lockOnEnemy_->GetTransform().translation;
+	}
 	//弾の移動にベジエ補間をかける
-	bulletTrans_.translation = myMath::Beziers(startPos_, lockOnEnemy_->GetTransform().translation, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_));
+	bulletTrans_.translation = myMath::Beziers(startPos_, endPos, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_));
 
 	//ベジエ補間にイージング補間をかける
 	beziersTime_ = static_cast<float>(Easing::EaseInOutCubic(deathTimer_, 0.0f, static_cast<float>(maxDeathTime_), static_cast<float>(maxDeathTime_)));

@@ -14,10 +14,10 @@ private:
 
 	bool isDead_ = false;
 	uint8_t deathTimer_ = 0;
-	const uint8_t maxDeathTime_ = 60;
+	const uint8_t maxDeathTime_ = 120;
 
 	myMath::Vector3 directionVector_;//方向ベクトル
-	const float speed_ = 1.5f;
+	const float speed_ = 3.0f;
 
 	std::unique_ptr<Model>bullet_;
 	uint32_t bulletTex_ = 0;

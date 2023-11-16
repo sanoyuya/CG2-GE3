@@ -173,14 +173,14 @@ void Reticle::Move()
 
 #pragma endregion コントローラー
 
-	addTargetAngle_.x = myMath::ChangeRadians(reticleTrans_.translation.x / 45.0f * 15.0f);
+	addTargetAngle_.x = myMath::ChangeRadians(reticleTrans_.translation.x / 45.0f * 20.0f);
 	if (cameraFlag_ == 2)
 	{
-		addTargetAngle_.y = myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 15.0f);
+		addTargetAngle_.y = myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 20.0f);
 	}
 	else
 	{
-		addTargetAngle_.y = -myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 15.0f);
+		addTargetAngle_.y = -myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 20.0f);
 	}
 }
 

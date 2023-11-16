@@ -105,7 +105,10 @@ void MoveEnemy::PhaseUpdate()
 
 		if (moveEnemyProperty_.toEscapePosTime * 60 <= actionTimer)
 		{
-			isDead_ = true;
+			if (lockOnFlag_ == false)
+			{
+				isDead_ = true;
+			}
 		}
 
 		break;
@@ -260,7 +263,7 @@ void MoveEnemy::BulletUpdate()
 		bulletTimer++;
 		if (bulletTimer > maxBulletTime)
 		{
-			if (75.0f >= length)
+			if (200.0f >= length)
 			{
 				bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 			}
@@ -296,7 +299,10 @@ void MoveEnemy::DeathUpdate()
 	//死亡時間になったら死ぬ
 	if (deathTime_ <= gameTimer_->GetIntTime())
 	{
-		isDead_ = true;
+		if (lockOnFlag_ == false)
+		{
+			isDead_ = true;
+		}
 	}
 
 	//死亡演出の更新処理
@@ -309,6 +315,9 @@ void MoveEnemy::DeathUpdate()
 
 	if (deathAnimationTimer_ > maxDeathAnimationTime_)
 	{
-		isDead_ = true;
+		if (lockOnFlag_ == false)
+		{
+			isDead_ = true;
+		}
 	}
 }
