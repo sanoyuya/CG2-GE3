@@ -86,8 +86,4 @@ public://BulletBaseで必要な奴
 	void SetName(const std::string& name);
 	void SetTargetPos(GameObject* lockOnEnemy);
 	void SetControlPos(const myMath::Vector3& position);
-
-private:
-
-	void SmokeUpdate();
 };

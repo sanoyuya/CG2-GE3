@@ -21,7 +21,7 @@ void GameScene::Initialize()
 	//天球
 	skyDome_ = std::make_unique<Model>();
 	skyDomeTex_ = Model::CreateObjModel("Resources/skydome3");
-	skyDome_->SetModel(skyDomeTex_);
+	skyDomeTex2_ = Model::CreateObjModel("Resources/skydome");
 	skyDomeTrans_.Initialize();
 	skyDomeTrans_.scale = { 20.0f,20.0f ,20.0f };
 
@@ -32,10 +32,12 @@ void GameScene::Initialize()
 	{
 	case Stage::Tutorial:
 		gameLevelData_->Initialize("stage0/stage");
+		skyDome_->SetModel(skyDomeTex_);
 		gameTimer_->SetGameTime(static_cast<uint32_t>(60 * 60 * 3.0));
 		break;
 	case Stage::Stage1:
 		gameLevelData_->Initialize("stage1/stage");
+		skyDome_->SetModel(skyDomeTex2_);
 		gameTimer_->SetGameTime(60 * 60 * 1);
 		break;
 	case Stage::Stage2:
@@ -86,12 +88,14 @@ void GameScene::Update()
 	//プレイヤーのHPが0になったらゲームオーバー
 	if (player_->GetIsDead() == true)
 	{
+		ColliderManager::GetInstance()->Reset();
 		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");
 	}
 
 	//カメラが最後まで到達したらゲームクリア
 	if (gameTimer_->GetFlameCount() / gameTimer_->GetGameTime() >= 0.95f)
 	{
+		ColliderManager::GetInstance()->Reset();
 		SceneChangeAnimation::GetInstance()->Change("GAMECLEAR");
 	}
 
@@ -104,6 +108,12 @@ void GameScene::Update()
 		player_->Reset();
 		enemyManager_->ReLoad(gameLevelData_->GetEnemyData());
 		bulletManager_->Reset();
+	}
+
+	if (input_->KeyboardTriggerPush(DIK_T))
+	{
+		ColliderManager::GetInstance()->Reset();
+		SceneChangeAnimation::GetInstance()->Change("TITLE");
 	}
 
 	if (input_->KeyboardTriggerPush(DIK_P) || input_->ControllerButtonTriggerPush(START))

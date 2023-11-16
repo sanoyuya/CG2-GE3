@@ -34,6 +34,7 @@ private:
 	std::unique_ptr<Model>skyDome_;
 	Transform skyDomeTrans_;
 	uint32_t skyDomeTex_;
+	uint32_t skyDomeTex2_;
 
 	std::unique_ptr<GameLevelData> gameLevelData_;
 
