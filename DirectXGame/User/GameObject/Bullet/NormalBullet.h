@@ -14,7 +14,7 @@ private:
 
 	bool isDead_ = false;
 	uint8_t deathTimer_ = 0;
-	const uint8_t maxDeathTime_ = 120;
+	const uint8_t maxDeathTime_ = 60;
 
 	myMath::Vector3 directionVector_;//方向ベクトル
 	const float speed_ = 6.0f;

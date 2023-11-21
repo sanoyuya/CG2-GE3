@@ -26,7 +26,7 @@ private:
 
 	size_t maxSRV_ = 2048;
 	size_t maxUAV_ = 2048;
-	size_t maxCBV_ = 100000;
+	size_t maxCBV_ = 300000;
 
 	size_t countSRV_ = 0;
 	size_t countUAV_ = 0;
