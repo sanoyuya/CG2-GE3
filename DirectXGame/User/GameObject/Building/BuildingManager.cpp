@@ -11,7 +11,7 @@ BuildingManager::~BuildingManager()
 
 void BuildingManager::Initialize(BuildingList& buildingData)
 {
-	//敵をjsonファイルから読み込む
+	//jsonファイルから読み込む
 	Load(buildingData);
 
 	for (std::unique_ptr<BuildingBase>& building : buildings_)

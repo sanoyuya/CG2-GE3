@@ -1,6 +1,7 @@
 #include "SceneChangeAnimation.h"
 #include"SceneManager.h"
 #include"EasingFunction.h"
+#include"Retention.h"
 
 void SceneChangeAnimation::StaticInitialize()
 {
@@ -16,17 +17,17 @@ void SceneChangeAnimation::Update()
 		animationTimer_++;
 	}
 
-	if (animationTimer_ <= 90.0f)
+	if (animationTimer_ <= maxAnimationTime / 2)
 	{
-		alpha_ = static_cast<float>(Easing::EaseInQuint(static_cast<double>(animationTimer_), 0.0f, 1.0f, 90.0f));
+		alpha_ = static_cast<float>(Easing::EaseInQuint(static_cast<double>(animationTimer_), 0.0f, 1.0f, maxAnimationTime / 2));
 	}
-	else if (animationTimer_ == 91.0f)
+	else if (animationTimer_ == maxAnimationTime / 2 + 1)
 	{
 		SceneManager::GetInstance()->ChangeScene(sceneName_);
 	}
 	else
 	{
-		alpha_ = static_cast<float>(Easing::EaseInOutQuint(static_cast<double>(animationTimer_ - 90.0f), 1.0f, 0.0f, 90.0f));
+		alpha_ = static_cast<float>(Easing::EaseInOutQuint(static_cast<double>(animationTimer_ - maxAnimationTime / 2), 1.0f, 0.0f, maxAnimationTime / 2));
 	}
 
 	if (animationTimer_ >= maxAnimationTime)
@@ -43,7 +44,7 @@ void SceneChangeAnimation::Change(const std::string& sceneName)
 
 void SceneChangeAnimation::Draw()
 {
-	back_->DrawSprite2D({ 640.0f,360.0f }, { 0.0f,0.0f,0.0f ,alpha_ }, { 1280.0f,720.0f });
+	back_->DrawSprite2D(Retention::GetInstance()->GetWindowsCenter(), { 0.0f,0.0f,0.0f ,alpha_ }, Retention::GetInstance()->GetWindowsSize());
 }
 
 void SceneChangeAnimation::SetAnimationFlag(bool flag)

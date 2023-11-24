@@ -15,23 +15,23 @@ void PlayerDamageEffect::Update(Player* player)
 	{
 		damageFlag_ = true;
 		MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::GaussianBlur);
-		power_ = 10.0f;
+		power_ = maxPower_;
 		player->SetDamageFlag(false);
 	}
 
 	if (damageFlag_ == true)
 	{
-		if (power_ <= 0.0f)
+		if (power_ <= minPower_)
 		{
-			power_ = 0.0f;
+			power_ = minPower_;
 			damageFlag_ = false;
 			MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::None);
 		}
-		power_ -= 0.5f;
+		power_ -= subPower_;
 	}
 	else
 	{
-		power_ = 0.0f;
+		power_ = minPower_;
 	}
 	MultiTexturePostEffect::SetPower(power_);
 }

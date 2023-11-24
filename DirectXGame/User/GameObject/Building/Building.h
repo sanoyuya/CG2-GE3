@@ -16,6 +16,9 @@ private:
 	uint32_t buildingBackTex_ = 0;
 	Transform buildingBackTrans_;
 
+	const myMath::Vector3 buildingSize_ = { 10.0f,20.0f,10.0f };
+	const float backCubeSubSize_ = 0.5f;
+
 	CollisionData collisionData_;
 
 	bool isSet = false;
@@ -23,7 +26,7 @@ private:
 public:
 
 	Building() = default;
-	~Building();
+	~Building() {};
 
 	void Initialize();
 
@@ -39,14 +42,14 @@ public:
 	const CollisionData& GetCollisionData();
 
 	//オブジェクトの衝突判定処理
-	void OnCollision();
+	void OnCollision() {};
 
 	//弾の爆発処理
-	void BulletDeathAnimation();
+	void BulletDeathAnimation() {};
 
-	void LockOn();
+	void LockOn() {};
 
-	void CancelLockOn();
+	void CancelLockOn() {};
 
 	//blenderで出力したデータを読み込むときに初期座標をセットする関数
 	void SetPosition(const myMath::Vector3& position);

@@ -1,9 +1,5 @@
 #include "Building.h"
 
-Building::~Building()
-{
-}
-
 void Building::Initialize()
 {
 	builing_ = std::make_unique<Model>();
@@ -21,8 +17,8 @@ void Building::Update()
 {
 	if (isSet == false)
 	{
-		buildingBackTrans_.translation = { buildingTrans_.translation.x,buildingTrans_.translation.y + 20.0f,buildingTrans_.translation.z };
-		buildingBackTrans_.scale = { buildingTrans_.scale.x * 10.0f - 0.5f,buildingTrans_.scale.y * 20.0f - 0.5f,buildingTrans_.scale.z * 10.0f - 0.5f };
+		buildingBackTrans_.translation = { buildingTrans_.translation.x,buildingTrans_.translation.y + buildingSize_.y,buildingTrans_.translation.z };
+		buildingBackTrans_.scale = { buildingTrans_.scale.x * buildingSize_.x - backCubeSubSize_,buildingTrans_.scale.y * buildingSize_.y - backCubeSubSize_,buildingTrans_.scale.z * buildingSize_.z - backCubeSubSize_ };
 		buildingBackTrans_.rotation = buildingTrans_.rotation;
 		isSet = true;
 	}
@@ -50,22 +46,6 @@ const Transform& Building::GetTransform()
 const CollisionData& Building::GetCollisionData()
 {
 	return collisionData_;
-}
-
-void Building::OnCollision()
-{
-}
-
-void Building::BulletDeathAnimation()
-{
-}
-
-void Building::LockOn()
-{
-}
-
-void Building::CancelLockOn()
-{
 }
 
 void Building::SetPosition(const myMath::Vector3& position)

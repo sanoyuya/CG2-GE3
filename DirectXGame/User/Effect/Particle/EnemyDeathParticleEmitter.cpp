@@ -11,7 +11,7 @@ void EnemyDeathParticleEmitter::Initialize()
 void EnemyDeathParticleEmitter::Create(const myMath::Vector3 center)
 {
 	//黒色
-	for (int i = 0; i < 5; i++)
+	for (uint8_t i = 0; i < 5; i++)
 	{
 		//初期座標(生成する場所の中心座標)
 		myMath::Vector3 pos{};
@@ -28,11 +28,11 @@ void EnemyDeathParticleEmitter::Create(const myMath::Vector3 center)
 		myMath::Vector4 col = { 0 / 255.0f,0 / 255.0f,0 / 255.0f,1.0f };
 
 		//追加
-		particleMan_->Add(60.0f, pos, vel, acc, 3.0f, 10.0f, col);
+		particleMan_->Add(60.0f, pos, vel, acc, startScale_, endScale_, col);
 	}
 
 	//灰色
-	for (int i = 0; i < 5; i++)
+	for (uint8_t i = 0; i < 5; i++)
 	{
 		//初期座標(生成する場所の中心座標)
 		myMath::Vector3 pos{};
@@ -49,11 +49,11 @@ void EnemyDeathParticleEmitter::Create(const myMath::Vector3 center)
 		myMath::Vector4 col = { 108.0f / 255.0f,103.0f / 255.0f ,110.0f / 255.0f,1.0f };
 
 		//追加
-		particleMan_->Add(60.0f, pos, vel, acc, 3.0f, 10.0f, col);
+		particleMan_->Add(60.0f, pos, vel, acc, startScale_, endScale_, col);
 	}
 
 	//オレンジ色
-	for (int i = 0; i < 5; i++)
+	for (uint8_t i = 0; i < 5; i++)
 	{
 		//初期座標(生成する場所の中心座標)
 		myMath::Vector3 pos{};
@@ -70,7 +70,7 @@ void EnemyDeathParticleEmitter::Create(const myMath::Vector3 center)
 		myMath::Vector4 col = { 245.0f / 255.0f,130.0f / 255.0f,32.0f / 255.0f,1.0f };
 
 		//追加
-		particleMan_->Add(60.0f, pos, vel, acc, 3.0f, 10.0f, col);
+		particleMan_->Add(60.0f, pos, vel, acc, startScale_, endScale_, col);
 	}
 }
 

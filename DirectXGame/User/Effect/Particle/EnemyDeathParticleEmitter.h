@@ -8,6 +8,9 @@ private:
 	std::unique_ptr<ParticleManager>particleMan_;
 	uint32_t tex_;
 
+	const float startScale_ = 3.0f;
+	const float endScale_ = 10.0f;
+
 public:
 
 	/// <summary>
