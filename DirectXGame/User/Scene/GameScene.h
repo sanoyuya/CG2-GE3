@@ -16,6 +16,7 @@
 #include"Text.h"
 #include"GroundBack.h"
 #include"BuildingManager.h"
+#include"TutorialSkip.h"
 
 class GameScene :public BaseScene
 {
@@ -64,6 +65,8 @@ private:
 	std::unique_ptr<Text>goText_;
 
 	std::unique_ptr<GroundBack>groundBack_;
+
+	std::unique_ptr<TutorialSkip>tutorialSkip_;
 
 public:
 

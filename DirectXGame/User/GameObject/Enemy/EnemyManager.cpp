@@ -1,5 +1,6 @@
 #include "EnemyManager.h"
 #include"ColliderManager.h"
+#include<imgui.h>
 
 EnemyManager::EnemyManager()
 {

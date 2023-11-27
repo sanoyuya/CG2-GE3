@@ -77,6 +77,10 @@ void GameScene::Initialize()
 	BuildingBase::SetCamera(camera_->GetCameraPtr());
 	BuildingBase::SetGameTimer(gameTimer_.get());
 
+	tutorialSkip_ = std::make_unique<TutorialSkip>();
+	tutorialSkip_->Initialize(gameTimer_.get());
+	tutorialSkip_->SetGameStartTime(80);
+
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
 }
@@ -163,12 +167,36 @@ void GameScene::Update()
 		{
 			TextUpdate();
 		}
+		tutorialSkip_->Update();
 	}
 #ifdef _DEBUG
 	gameTimer_->ImGuiUpdate();
 	camera_->ImGuiUpdate();
 	player_->ImGuiUpdate();
 	ColliderManager::GetInstance()->ImGuiUpdate();
+	ImGui::Begin("EnemyReset");
+	if (ImGui::Button("EnemyReset"))
+	{
+		switch (Retention::GetInstance()->GetStageNum())
+		{
+		case Stage::Tutorial:
+			gameLevelData_->Initialize("stage0/stage");
+			break;
+		case Stage::Stage1:
+			gameLevelData_->Initialize("stage1/stage");
+			break;
+		case Stage::Stage2:
+			gameLevelData_->Initialize("stage2");
+			break;
+		case Stage::Stage3:  
+			gameLevelData_->Initialize("stage3");
+			break;
+		default:
+			break;
+		}
+		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
+	}
+	ImGui::End();
 #endif _DEBUG
 }
 
@@ -187,6 +215,7 @@ void GameScene::Draw()
 	{
 		TextDraw();
 	}
+	tutorialSkip_->Draw();
 	Pose::GetInstance()->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
 }

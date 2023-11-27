@@ -46,3 +46,8 @@ void GameTimer::SetGameTime(const uint32_t time)
 {
 	gameTime_ = time;
 }
+
+void GameTimer::SetFlameTime(const float time)
+{
+	flameCount_ = time;
+}

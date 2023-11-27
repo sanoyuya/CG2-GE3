@@ -450,6 +450,9 @@
     <ClCompile Include="User\GameObject\Building\BuildingBase.cpp">
       <Filter>User\ソース ファイル\Object\Building</Filter>
     </ClCompile>
+    <ClCompile Include="User\Other\TutorialSkip.cpp">
+      <Filter>User\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -822,6 +825,9 @@
     </ClInclude>
     <ClInclude Include="User\GameObject\Building\BuildingBase.h">
       <Filter>User\ヘッダー ファイル\Object\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Other\TutorialSkip.h">
+      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

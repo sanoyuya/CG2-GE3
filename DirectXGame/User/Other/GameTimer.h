@@ -34,4 +34,6 @@ public:
 	void SetTimeSpeed(const float timeSpeed);
 
 	void SetGameTime(const uint32_t time);
+
+	void SetFlameTime(const float time);
 };
