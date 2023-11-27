@@ -58,11 +58,11 @@ void GameScene::Initialize()
 	camera_->Initialize(gameLevelData_->GetCameraData());
 	camera_->Update(gameTimer_.get());
 
-	enemyManager_ = std::make_unique<EnemyManager>();
-	enemyManager_->Initialize(gameLevelData_->GetEnemyData());
-
 	bulletManager_ = std::make_unique<BulletManager>();
 	bulletManager_->Initialize();
+
+	enemyManager_ = std::make_unique<EnemyManager>();
+	enemyManager_->Initialize(gameLevelData_->GetEnemyData(),camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
 
 	radar_ = std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
@@ -111,7 +111,7 @@ void GameScene::Update()
 		gameTimer_->Reset();
 		camera_->ReLoad(gameLevelData_->GetCameraData());
 		player_->Reset();
-		enemyManager_->ReLoad(gameLevelData_->GetEnemyData());
+		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
 		bulletManager_->Reset();
 		buildingManager_->ReLoad(gameLevelData_->GetBuildingList());
 	}
@@ -155,7 +155,7 @@ void GameScene::Update()
 		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//天球
 		buildingManager_->Update();
 		playerDamageEffect_->Update(player_.get());
-		enemyManager_->Update(camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
+		enemyManager_->Update();
 		bulletManager_->Update(camera_->GetCameraPtr());
 		ColliderManager::GetInstance()->Update(player_.get());
 		radar_->Update(camera_->GetCameraPtr());

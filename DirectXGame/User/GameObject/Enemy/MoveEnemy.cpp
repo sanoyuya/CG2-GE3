@@ -31,7 +31,7 @@ void MoveEnemy::Initialize()
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
 	emitter_->Initialize();
 	//スポーンアニメーションパーティクル初期化
-	spawnEmitter_= std::make_unique<EnemySpawnParticleEmitter>();
+	spawnEmitter_ = std::make_unique<EnemySpawnParticleEmitter>();
 	spawnEmitter_->Initialize();
 
 	lockOnAnimation_ = std::make_unique<LockOnAnimation>();
@@ -67,52 +67,56 @@ void MoveEnemy::Update()
 
 void MoveEnemy::PhaseUpdate()
 {
-	switch (phase)
+	const uint16_t fps = 60;
+	if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * fps)
 	{
-	case ActionPhase::MOVE:
-
-		PhaseMove(moveEnemyProperty_.spawnPos, moveEnemyProperty_.movePos, moveEnemyProperty_.spawnPosRotation, moveEnemyProperty_.movePosRotation, moveEnemyProperty_.toMovePosTime * 60);
-
-		actionTimer++;
-
-		if (moveEnemyProperty_.toMovePosTime * 60 <= actionTimer)
+		switch (phase)
 		{
-			actionTimer = 0;
-			phase = ActionPhase::WAIT;
-		}
+		case ActionPhase::MOVE:
 
-		break;
-	case ActionPhase::WAIT:
+			PhaseMove(moveEnemyProperty_.spawnPos, moveEnemyProperty_.movePos, moveEnemyProperty_.spawnPosRotation, moveEnemyProperty_.movePosRotation, moveEnemyProperty_.toMovePosTime * 60);
 
-		if (moveEnemyProperty_.waitTime * 60 <= actionTimer)
-		{
-			actionTimer = 0;
-			waitFinishPos = enemyTrans_.translation;
-			waitFinishRot = enemyTrans_.rotation;
-			phase = ActionPhase::ESCAPE;
-		}
+			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps);
 
-		addY = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.02f, 120.0f);
-		enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
-
-		actionTimer++;
-
-		break;
-	case ActionPhase::ESCAPE:
-
-		PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * 60);
-
-		actionTimer++;
-
-		if (moveEnemyProperty_.toEscapePosTime * 60 <= actionTimer)
-		{
-			if (lockOnFlag_ == false)
+			if (moveEnemyProperty_.toMovePosTime * fps <= actionTimer)
 			{
-				isDead_ = true;
+				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps);
+				phase = ActionPhase::WAIT;
 			}
-		}
 
-		break;
+			break;
+		case ActionPhase::WAIT:
+
+			addY = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.5f, 2.0f * fps);
+			enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
+
+			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps);
+
+			if (moveEnemyProperty_.waitTime * fps <= actionTimer)
+			{
+				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps - moveEnemyProperty_.waitTime * fps);
+				waitFinishPos = enemyTrans_.translation;
+				waitFinishRot = enemyTrans_.rotation;
+				phase = ActionPhase::ESCAPE;
+			}
+
+			break;
+		case ActionPhase::ESCAPE:
+
+			PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * fps);
+
+			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps - moveEnemyProperty_.waitTime * fps);
+
+			if (moveEnemyProperty_.toEscapePosTime * fps <= actionTimer)
+			{
+				if (lockOnFlag_ == false)
+				{
+					isDead_ = true;
+				}
+			}
+
+			break;
+		}
 	}
 }
 

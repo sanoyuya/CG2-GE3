@@ -23,15 +23,15 @@ public:
 	EnemyManager();
 	~EnemyManager();
 
-	void Initialize(EnemyList& enemyData);
+	void Initialize(EnemyList& enemyData, Camera* camera, Player* player, GameTimer* gameTimer, BulletManager* bulletManager);
 
-	void Update(Camera* camera,Player* player, GameTimer* gameTimer, BulletManager* bulletManager);
+	void Update();
 
 	void Draw();
 
 	void Load(EnemyList& enemyData);
 
-	void ReLoad(EnemyList& enemyData);
+	void ReLoad(EnemyList& enemyData, Camera* camera, Player* player, GameTimer* gameTimer, BulletManager* bulletManager);
 
 	void Reset();
 
