@@ -74,7 +74,7 @@ void GameLevelData::Load()
 			//blender上と座標系が若干ずれているので若干修正して送る
 			enemy->SetRotation({ myMath::ChangeRadians(objectData.rotation.x), myMath::ChangeRadians(objectData.rotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(objectData.rotation.z) - myMath::AX_PIF / 2 });
 			//半径さえ分かれば良いのでxの値のみ送る
-			enemy->SetColliderSize(objectData.collider.size.x);
+			enemy->SetColliderSize(objectData.collider.size.x * objectData.scaling.x);
 			//blender側で設定した時間を送る
 			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
 			enemy->SetDeathTimer(objectData.timer.deathTimer);
@@ -88,7 +88,7 @@ void GameLevelData::Load()
 			std::unique_ptr<Enemy>enemy = std::make_unique<MoveEnemy>();
 			
 			//半径さえ分かれば良いのでxの値のみ送る
-			enemy->SetColliderSize(objectData.collider.size.x);
+			enemy->SetColliderSize(objectData.collider.size.x * objectData.scaling.x);
 			//blender側で設定した時間を送る
 			enemy->SetSpawnTimer(objectData.timer.spawnTimer);
 			enemy->SetDeathTimer(objectData.timer.deathTimer);
