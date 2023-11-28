@@ -67,24 +67,28 @@ void NormalEnemy::Update()
 
 void NormalEnemy::Draw()
 {
-	if (spawnFlag_ == false)
+	const uint16_t fps = 60;
+	if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * fps)
 	{
-		spawnEmitter_->Draw();
-	}
-	//死んでいないときのみ描画
-	if (spawnFlag_ == true && deathAnimationFlag_ == false)
-	{
-		enemy_->DrawModel(&enemyTrans_);
-		if (lockOnFlag_ == true)
+		if (spawnFlag_ == false)
 		{
-			lockOnAnimation_->Draw(camera_);
+			spawnEmitter_->Draw();
 		}
-	}
-	else
-	{
-		//死亡演出の描画処理
-		emitter_->Draw();
-		hitEffect_->Draw(camera_);
+		//死んでいないときのみ描画
+		if (spawnFlag_ == true && deathAnimationFlag_ == false)
+		{
+			enemy_->DrawModel(&enemyTrans_);
+			if (lockOnFlag_ == true)
+			{
+				lockOnAnimation_->Draw(camera_);
+			}
+		}
+		else
+		{
+			//死亡演出の描画処理
+			emitter_->Draw();
+			hitEffect_->Draw(camera_);
+		}
 	}
 }
 
@@ -234,15 +238,6 @@ void NormalEnemy::SpawnUpdate()
 
 void NormalEnemy::DeathUpdate()
 {
-	//死亡時間になったら死ぬ
-	if (deathTime_ <= gameTimer_->GetIntTime())
-	{
-		if (lockOnFlag_ == false)
-		{
-			isDead_ = true;
-		}
-	}
-
 	//死亡演出の更新処理
 	if (deathAnimationFlag_ == true)
 	{

@@ -70,6 +70,19 @@ void MoveEnemy::PhaseUpdate()
 	const uint16_t fps = 60;
 	if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * fps)
 	{
+		if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime) * fps)
+		{
+			phase = ActionPhase::MOVE;
+		}
+		else if ((spawnTime_ + moveEnemyProperty_.toMovePosTime) * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime + moveEnemyProperty_.waitTime) * fps + 1)
+		{
+			phase = ActionPhase::WAIT;
+		}
+		else
+		{
+			phase = ActionPhase::ESCAPE;
+		}
+
 		switch (phase)
 		{
 		case ActionPhase::MOVE:
@@ -81,7 +94,7 @@ void MoveEnemy::PhaseUpdate()
 			if (moveEnemyProperty_.toMovePosTime * fps <= actionTimer)
 			{
 				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps);
-				phase = ActionPhase::WAIT;
+				//phase = ActionPhase::WAIT;
 			}
 
 			break;
@@ -97,7 +110,7 @@ void MoveEnemy::PhaseUpdate()
 				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps - moveEnemyProperty_.waitTime * fps);
 				waitFinishPos = enemyTrans_.translation;
 				waitFinishRot = enemyTrans_.rotation;
-				phase = ActionPhase::ESCAPE;
+				//phase = ActionPhase::ESCAPE;
 			}
 
 			break;
@@ -106,14 +119,6 @@ void MoveEnemy::PhaseUpdate()
 			PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * fps);
 
 			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps - moveEnemyProperty_.waitTime * fps);
-
-			if (moveEnemyProperty_.toEscapePosTime * fps <= actionTimer)
-			{
-				if (lockOnFlag_ == false)
-				{
-					isDead_ = true;
-				}
-			}
 
 			break;
 		}
@@ -133,24 +138,28 @@ void MoveEnemy::PhaseMove(const myMath::Vector3& startPosition, const myMath::Ve
 
 void MoveEnemy::Draw()
 {
-	if (spawnFlag_ == false)
+	const uint16_t fps = 60;
+	if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * fps)
 	{
-		spawnEmitter_->Draw();
-	}
-	//死んでいないときのみ描画
-	if (spawnFlag_ == true && deathAnimationFlag_ == false)
-	{
-		enemy_->DrawModel(&enemyTrans_);
-		if (lockOnFlag_ == true)
+		if (spawnFlag_ == false)
 		{
-			lockOnAnimation_->Draw(camera_);
+			spawnEmitter_->Draw();
 		}
-	}
-	else
-	{
-		//死亡演出の描画処理
-		emitter_->Draw();
-		hitEffect_->Draw(camera_);
+		//死んでいないときのみ描画
+		if (spawnFlag_ == true && deathAnimationFlag_ == false)
+		{
+			enemy_->DrawModel(&enemyTrans_);
+			if (lockOnFlag_ == true)
+			{
+				lockOnAnimation_->Draw(camera_);
+			}
+		}
+		else
+		{
+			//死亡演出の描画処理
+			emitter_->Draw();
+			hitEffect_->Draw(camera_);
+		}
 	}
 }
 
@@ -302,15 +311,6 @@ void MoveEnemy::SpawnUpdate()
 
 void MoveEnemy::DeathUpdate()
 {
-	//死亡時間になったら死ぬ
-	if (deathTime_ <= gameTimer_->GetIntTime())
-	{
-		if (lockOnFlag_ == false)
-		{
-			isDead_ = true;
-		}
-	}
-
 	//死亡演出の更新処理
 	if (deathAnimationFlag_ == true)
 	{
