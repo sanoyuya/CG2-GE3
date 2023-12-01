@@ -4,6 +4,7 @@
 #include<wrl.h>
 #include "myMath.h"
 #include <xinput.h>
+#define DIRECTINOUT_VERSION 0x0800
 
 enum ControllerButton
 {

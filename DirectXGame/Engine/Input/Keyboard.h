@@ -2,6 +2,7 @@
 #include<dinput.h>
 #include<wrl.h>
 #include"WindowsApp.h"
+#define DIRECTINOUT_VERSION 0x0800
 
 class Keyboard
 {
