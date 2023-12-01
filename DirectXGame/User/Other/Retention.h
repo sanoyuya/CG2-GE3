@@ -11,6 +11,9 @@ enum class Stage
 	Stage3
 };
 
+/// <summary>
+/// シーンを跨いでも保持したいものを保持するクラス
+/// </summary>
 class Retention
 {
 private:

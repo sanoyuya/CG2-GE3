@@ -7,7 +7,6 @@ class TutorialSkip
 {
 private:
 
-
 	InputManager* input_ = nullptr;
 	GameTimer* gameTimer_ = nullptr;
 
