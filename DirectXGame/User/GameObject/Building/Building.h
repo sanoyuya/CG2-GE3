@@ -28,35 +28,35 @@ public:
 	Building() = default;
 	~Building() {};
 
-	void Initialize();
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
-	void Draw();
+	void Draw()override;
 
-	std::string GetName();
+	std::string GetName()override;
 
-	const Transform& GetTransform();
+	const Transform& GetTransform()override;
 
 	//オブジェクトの当たり判定取得処理
-	const CollisionData& GetCollisionData();
+	const CollisionData& GetCollisionData()override;
 
 	//オブジェクトの衝突判定処理
-	void OnCollision() {};
+	void OnCollision()override {};
 
 	//弾の爆発処理
-	void BulletDeathAnimation() {};
+	void BulletDeathAnimation()override {};
 
-	void LockOn() {};
+	void LockOn()override {};
 
-	void CancelLockOn() {};
+	void CancelLockOn()override {};
 
 	//blenderで出力したデータを読み込むときに初期座標をセットする関数
-	void SetPosition(const myMath::Vector3& position);
+	void SetPosition(const myMath::Vector3& position)override;
 	//blenderで出力したデータを読み込むときに初期角度をセットする関数
-	void SetRotation(const myMath::Vector3& rotation);
+	void SetRotation(const myMath::Vector3& rotation)override;
 	//blenderで出力したデータを読み込むときにスケールをセットする関数
-	void SetScale(const myMath::Vector3& scale);
+	void SetScale(const myMath::Vector3& scale)override;
 	//blenderで出力したデータを読み込むときに当たり判定の大きさをセットする関数
-	void SetColliderSize(const float size);
+	void SetColliderSize(const float size)override;
 };

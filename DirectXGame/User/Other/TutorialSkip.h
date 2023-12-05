@@ -3,6 +3,9 @@
 #include"GameTimer.h"
 #include"InputManager.h"
 
+/// <summary>
+/// チュートリアルスキップ
+/// </summary>
 class TutorialSkip
 {
 private:

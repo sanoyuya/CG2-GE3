@@ -1,6 +1,9 @@
 #pragma once
 #include"DrawOversight.h"
 
+/// <summary>
+/// ゲーム全体の時間を管理するクラス
+/// </summary>
 class GameTimer
 {
 private:

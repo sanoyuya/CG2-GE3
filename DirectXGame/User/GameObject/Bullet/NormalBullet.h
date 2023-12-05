@@ -43,47 +43,47 @@ public://BulletBaseで必要な奴
 	~NormalBullet();
 
 	//初期化処理
-	void Initialize();
+	void Initialize()override;
 
 	//更新処理
-	void Update();
+	void Update()override;
 
 	//描画処理
-	void Draw();
+	void Draw()override;
 
 	//オブジェクトの名前取得処理
-	std::string GetName();
+	std::string GetName()override;
 
-	const Transform& GetTransform();
+	const Transform& GetTransform()override;
 
 	//オブジェクトの当たり判定取得処理
-	const CollisionData& GetCollisionData();
+	const CollisionData& GetCollisionData()override;
 
 	//オブジェクトの衝突判定処理
-	void OnCollision();
+	void OnCollision()override;
 
-	void BulletDeathAnimation();
+	void BulletDeathAnimation()override;
 
-	const bool GetDeathFlag();
+	const bool GetDeathFlag()override;
 
 	//死亡フラグの取得
-	const bool GetIsDead();
+	const bool GetIsDead()override;
 
 	//死亡アニメーションフラグの取得
-	const bool GetDeathAnimationFlag();
+	const bool GetDeathAnimationFlag()override;
 
 	//ロックオン
-	void LockOn();
+	void LockOn()override;
 
-	void CancelLockOn();
+	void CancelLockOn()override;
 
-	const bool GetLockOnFlag();
+	const bool GetLockOnFlag()override;
 
-	void SetCamera(Camera* camera);
-	void SetPos(const myMath::Vector3& position);
-	void SetDirectionVector(const myMath::Vector3& directionVector);
-	void SetOwner(BulletOwner owner);
-	void SetName(const std::string& name);
-	void SetTargetPos(GameObject* lockOnEnemy);
-	void SetControlPos(const myMath::Vector3& position);
+	void SetCamera(Camera* camera)override;
+	void SetPos(const myMath::Vector3& position)override;
+	void SetDirectionVector(const myMath::Vector3& directionVector)override;
+	void SetOwner(BulletOwner owner)override;
+	void SetName(const std::string& name)override;
+	void SetTargetPos(GameObject* lockOnEnemy)override;
+	void SetControlPos(const myMath::Vector3& position)override;
 };

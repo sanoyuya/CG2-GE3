@@ -3,6 +3,9 @@
 #include"GameTimer.h"
 #include"Retention.h"
 
+/// <summary>
+/// テキスト
+/// </summary>
 class Text
 {
 private:

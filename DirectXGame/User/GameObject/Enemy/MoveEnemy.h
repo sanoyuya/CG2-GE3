@@ -68,59 +68,59 @@ public:
 	MoveEnemy() = default;
 	~MoveEnemy();
 
-	void Initialize();
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
 	void PhaseUpdate();
 
 	void PhaseMove(const myMath::Vector3& startPosition, const myMath::Vector3& endPosition, const myMath::Vector3& startRotation, const myMath::Vector3& endRotation,const float maxTime);
 
-	void Draw();
+	void Draw()override;
 
-	std::string GetName();
+	std::string GetName()override;
 
-	const Transform& GetTransform();
+	const Transform& GetTransform()override;
 
 	//オブジェクトの当たり判定取得処理
-	const CollisionData& GetCollisionData();
+	const CollisionData& GetCollisionData()override;
 
 	//オブジェクトの衝突判定処理
-	void OnCollision();
+	void OnCollision()override;
 
 	//死亡アニメーションフラグの取得
-	const bool GetDeathAnimationFlag();
+	const bool GetDeathAnimationFlag()override;
 
-	void LockOn();
+	void LockOn()override;
 
-	void CancelLockOn();
+	void CancelLockOn()override;
 
-	const bool GetLockOnFlag();
+	const bool GetLockOnFlag()override;
 
 public://セッター
 
 	//blenderで出力したデータを読み込むときに初期座標をセットする関数
-	void SetPosition(const myMath::Vector3& position);
+	void SetPosition(const myMath::Vector3& position)override;
 	//blenderで出力したデータを読み込むときに初期角度をセットする関数
-	void SetRotation(const myMath::Vector3& rotation);
+	void SetRotation(const myMath::Vector3& rotation)override;
 	//blenderで出力したデータを読み込むときに当たり判定の大きさをセットする関数
-	void SetColliderSize(const float size);
+	void SetColliderSize(const float size)override;
 	//blenderで出力したデータを読み込むときにスポーンタイマーをセットする関数
-	void SetSpawnTimer(const float timer);
+	void SetSpawnTimer(const float timer)override;
 	//blenderで出力したデータを読み込むときに死亡タイマーをセットする関数
-	void SetDeathTimer(const float timer);
+	void SetDeathTimer(const float timer)override;
 
-	void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty);
+	void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)override;
 
-	void SetIsAttack(const bool flag);
+	void SetIsAttack(const bool flag)override;
 
 public://ゲッター
 
-	const bool GetIsDead();
+	const bool GetIsDead()override;
 
-	bool GetSpawnFlag();
+	bool GetSpawnFlag()override;
 
-	const Transform& GetTrans();
+	const Transform& GetTrans()override;
 
 private:
 

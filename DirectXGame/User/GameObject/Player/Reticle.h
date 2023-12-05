@@ -4,7 +4,7 @@
 #include"InputManager.h"
 #include"GameObject.h"
 
-class Reticle:public GameObject
+class Reticle :public GameObject
 {
 private:
 
@@ -41,41 +41,41 @@ public:
 	~Reticle() = default;
 
 	//初期化処理
-	void Initialize();
+	void Initialize()override;
 
 	//更新処理
-	void Update();
+	void Update()override;
 
 	//描画処理
-	void Draw();
+	void Draw()override;
 
 	//オブジェクトの名前取得処理
-	std::string GetName();
+	std::string GetName()override;
 
 	//オブジェクトの当たり判定取得処理
-	const CollisionData& GetCollisionData();
+	const CollisionData& GetCollisionData()override;
 
 	//オブジェクトの衝突判定処理
-	void OnCollision();
+	void OnCollision()override;
 
 	//死亡フラグの取得
-	const bool GetIsDead();
+	const bool GetIsDead()override;
 
 	//死亡アニメーションフラグの取得
-	const bool GetDeathAnimationFlag();
+	const bool GetDeathAnimationFlag()override;
 
 	//ロックオンフラグの取得
-	const bool GetLockOnFlag();
+	const bool GetLockOnFlag()override;
 
-	void LockOn();
+	void LockOn()override;
 
-	void CancelLockOn();
+	void CancelLockOn()override;
+
+	const Transform& GetTransform()override;
 
 	void Reset();
 
 	const float GetReticleLimit();
-
-	const Transform& GetTransform();
 
 	void SetCamera(Camera* camera);
 

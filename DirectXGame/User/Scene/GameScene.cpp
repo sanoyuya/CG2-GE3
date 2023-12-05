@@ -7,6 +7,11 @@
 #include"Retention.h"
 #include"Pose.h"
 
+GameScene::~GameScene()
+{
+	ColliderManager::GetInstance()->Reset();
+}
+
 void GameScene::Initialize()
 {
 	input_ = InputManager::GetInstance();
@@ -97,14 +102,12 @@ void GameScene::Update()
 	//プレイヤーのHPが0になったらゲームオーバー
 	if (player_->GetIsDead() == true)
 	{
-		ColliderManager::GetInstance()->Reset();
 		SceneChangeAnimation::GetInstance()->Change("GAMEOVER");
 	}
 
 	//カメラが最後まで到達したらゲームクリア
 	if (gameTimer_->GetFlameCount() / gameTimer_->GetGameTime() >= 0.95f)
 	{
-		ColliderManager::GetInstance()->Reset();
 		SceneChangeAnimation::GetInstance()->Change("GAMECLEAR");
 	}
 

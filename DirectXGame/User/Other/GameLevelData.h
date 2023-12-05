@@ -8,6 +8,9 @@
 #include"EnemyManager.h"
 #include"BuildingManager.h"
 
+/// <summary>
+/// jsonファイルから読み取ったデータからオブジェクトを配置するクラス
+/// </summary>
 class GameLevelData
 {
 private:

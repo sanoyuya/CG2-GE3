@@ -77,36 +77,36 @@ public:
 	Player() = default;
 	~Player();
 
-	void Initialize();
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
-	void Draw();
+	void Draw()override;
 
-	std::string GetName();
+	std::string GetName()override;
 
 	//オブジェクトの当たり判定取得処理
-	const CollisionData& GetCollisionData();
+	const CollisionData& GetCollisionData()override;
 
-	void OnCollision();
+	void OnCollision()override;
 
 	//死亡フラグの取得
-	const bool GetIsDead();
+	const bool GetIsDead()override;
 
-	const bool GetDeathAnimationFlag();
+	const bool GetDeathAnimationFlag()override;
 
-	void LockOn();
+	void LockOn()override;
 
-	void CancelLockOn();
+	void CancelLockOn()override;
 
 	//ロックオンフラグの取得
-	const bool GetLockOnFlag();
+	const bool GetLockOnFlag()override;
+
+	const Transform& GetTransform()override;
 
 	void Reset();
 
 	const bool GetDamageFlag();
-
-	const Transform& GetTransform();
 
 	const uint8_t GetHp();
 

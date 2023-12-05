@@ -26,6 +26,9 @@ struct CameraData
 	std::vector<ControlPoint> controlPoints;
 };
 
+/// <summary>
+/// レールカメラ
+/// </summary>
 class RailCamera
 {
 private:
