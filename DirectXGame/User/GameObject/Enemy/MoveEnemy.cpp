@@ -44,34 +44,35 @@ void MoveEnemy::Initialize()
 
 void MoveEnemy::Update()
 {
-	//死亡時間を過ぎたらスポーンフラグをfalseにして描画を消す
-	if (gameTimer_->GetFlameCount() > deathTime_ * GameHeader::sFps_)
+	if (spawnTime_ * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 	{
-		spawnFlag_ = false;
-	}
-
-	//出現していたら
-	if (spawnFlag_ == true)
-	{
-		PhaseUpdate();
-		//敵のモデルの更新処理
-		enemyTrans_.TransUpdate(camera_);
-		collisionData_.center = enemyTrans_.translation;
-		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
-		if (isAttack_ == true)
+		//出現していたら
+		if (spawnFlag_ == true)
 		{
-			//弾の生成処理と更新処理
-			BulletUpdate();
+			PhaseUpdate();
+			//敵のモデルの更新処理
+			enemyTrans_.TransUpdate(camera_);
+			collisionData_.center = enemyTrans_.translation;
+			lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
+			if (isAttack_ == true)
+			{
+				//弾の生成処理と更新処理
+				BulletUpdate();
+			}
+			//死亡処理
+			DeathUpdate();
 		}
-		//死亡処理
-		DeathUpdate();
+		else
+		{
+			if (gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
+			{
+				SpawnUpdate();
+			}
+		}
 	}
 	else
 	{
-		if (gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
-		{
-			SpawnUpdate();
-		}
+		spawnFlag_ = false;
 	}
 }
 

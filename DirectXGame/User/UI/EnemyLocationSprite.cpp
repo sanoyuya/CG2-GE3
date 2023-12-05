@@ -40,9 +40,18 @@ void EnemyLocationSprite::Draw(EnemyManager* enemys, Camera* camera)
 
 	for (auto& enemy : enemys->GetEnemyList())
 	{
-		if ((enemy->GetSpawnFlag() == true&& enemy->GetIsDead()==false)&& myMath::ScreenCoordinateTransformation(camera, enemy->GetTransform().parentToTranslation).z > 0)
+		if (enemy->GetSpawnFlag() == true)
 		{
-			sprite_[count]->DrawSprite2D({ myMath::ScreenCoordinateTransformation(camera,enemy->GetTransform().parentToTranslation).x,myMath::ScreenCoordinateTransformation(camera,enemy->GetTransform().parentToTranslation).y });
+			myMath::Vector2 pos = { myMath::ScreenCoordinateTransformation(camera,enemy->GetTransform().parentToTranslation).x,myMath::ScreenCoordinateTransformation(camera,enemy->GetTransform().parentToTranslation).y };
+			pos.x = std::clamp(pos.x, 100.0f, GameHeader::windowsSize_.x - 100.0f);
+			pos.y = std::clamp(pos.y, 100.0f , GameHeader::windowsSize_.x - 100.0f);
+
+			if (myMath::ScreenCoordinateTransformation(camera, enemy->GetTransform().parentToTranslation).z < 0)
+			{
+				pos.y = 620.0f;
+			}
+
+			sprite_[count]->DrawSprite2D(pos);
 		}
 		count++;
 	}
