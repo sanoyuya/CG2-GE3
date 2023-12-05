@@ -5,6 +5,7 @@
 #include"HitEffect.h"
 #include"Pose.h"
 #include"Retention.h"
+#include"GameHeader.h"
 
 void MyGame::Initialize()
 {
@@ -18,11 +19,11 @@ void MyGame::Initialize()
 	//基底クラスの初期化処理
 	YFramework::Initialize();
 
+	GameHeader::SetApp(windowsApp_.get());
+
 	//ポストエフェクトの初期化
 	postEffect_ = std::make_unique<MultiTexturePostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
-
-	Retention::GetInstance()->SetWindowData(windowsApp_.get());
 
 	SceneChangeAnimation::GetInstance()->StaticInitialize();
 

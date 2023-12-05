@@ -1,5 +1,6 @@
 #include "Text.h"
 #include"EasingFunction.h"
+#include"GameHeader.h"
 
 void Text::Initialize(const std::string& filePath)
 {
@@ -11,6 +12,9 @@ void Text::Initialize(const std::string& filePath)
 		frame_[i] = std::make_unique<Sprite2D>();
 		frame_[i]->Sprite2DInitialize(frameTex_);
 	}
+
+	center_ = { GameHeader::windowsCenter_.x,GameHeader::windowsCenter_.y * 3 / 2 };
+	frameSize_ = { GameHeader::windowsCenter_.x / 2,50.0f };
 
 	framePos_[0] = { center_.x - frameSize_.x,center_.y - frameSize_.y };//上
 	framePos_[1] = { center_.x + frameSize_.x,center_.y - frameSize_.y };//右

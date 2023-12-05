@@ -103,6 +103,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Other\GameHeader.cpp" />
     <ClCompile Include="User\Other\TutorialSkip.cpp" />
     <ClCompile Include="User\GameObject\Building\BuildingBase.cpp" />
     <ClCompile Include="User\GameObject\Building\Building.cpp" />
@@ -354,6 +355,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Other\GameHeader.h" />
     <ClInclude Include="User\Other\TutorialSkip.h" />
     <ClInclude Include="User\GameObject\Building\BuildingBase.h" />
     <ClInclude Include="User\GameObject\Building\Building.h" />

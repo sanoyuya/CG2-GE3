@@ -6,6 +6,8 @@
 #include"Quaternion.h"
 #include<vector>
 
+class Camera;
+
 //2D変換行列(定数バッファ)
 struct ConstBufferDataTransform
 {
@@ -139,5 +141,15 @@ namespace myMath
 	//線形補完(1次関数補完)
 	const Vector3 lerp(const Vector3& start, const Vector3& end, const float t);
 
+	/// <summary>
+	/// ベクトルと行列の掛け算(W除算)
+	/// </summary>
+	/// <param name="vec">ベクトル</param>
+	/// <param name="mat">行列</param>
+	/// <returns>計算された値</returns>
+	Vector3& Vec3Mat4MulWdiv(Vector3& vec, Matrix4& mat);
+
 	Vector3 Beziers(Vector3 startPos, Vector3 endPos,Vector3 controlPoint, float t);
+
+	Vector3 ScreenCoordinateTransformation(Camera* camera, Vector3 WorldPos, myMath::Vector2 windowsSize = { 1280.0f,720.0f });
 }

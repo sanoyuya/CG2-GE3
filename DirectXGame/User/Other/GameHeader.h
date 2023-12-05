@@ -1,0 +1,13 @@
+#pragma once
+#include"myMath.h"
+#include"WindowsApp.h"
+
+class GameHeader
+{
+public:
+
+	static myMath::Vector2 windowsSize_;
+	static myMath::Vector2 windowsCenter_;
+
+	static void SetApp(WindowsApp* app);
+};

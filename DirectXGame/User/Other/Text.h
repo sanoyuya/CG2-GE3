@@ -1,7 +1,6 @@
 #pragma once
 #include"DrawOversight.h"
 #include"GameTimer.h"
-#include"Retention.h"
 
 /// <summary>
 /// テキスト
@@ -17,9 +16,9 @@ private:
 	uint32_t textTex_ = 0;
 	float textAlpha_ = 0.0f;
 
-	const myMath::Vector2 center_ = { Retention::GetInstance()->GetWindowsCenter().x,Retention::GetInstance()->GetWindowsCenter().y * 3 / 2 };
+	myMath::Vector2 center_ = {};
+	myMath::Vector2 frameSize_ = {};
 
-	const myMath::Vector2 frameSize_ = { Retention::GetInstance()->GetWindowsCenter().x / 2,50.0f };
 	std::array<myMath::Vector2, 4>framePos_;
 	std::array<float, 4>frameScale_;
 

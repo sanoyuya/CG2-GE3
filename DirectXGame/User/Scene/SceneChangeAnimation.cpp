@@ -1,7 +1,7 @@
 #include "SceneChangeAnimation.h"
 #include"SceneManager.h"
 #include"EasingFunction.h"
-#include"Retention.h"
+#include"GameHeader.h"
 
 void SceneChangeAnimation::StaticInitialize()
 {
@@ -44,7 +44,7 @@ void SceneChangeAnimation::Change(const std::string& sceneName)
 
 void SceneChangeAnimation::Draw()
 {
-	back_->DrawSprite2D(Retention::GetInstance()->GetWindowsCenter(), { 0.0f,0.0f,0.0f ,alpha_ }, Retention::GetInstance()->GetWindowsSize());
+	back_->DrawSprite2D(GameHeader::windowsCenter_, { 0.0f,0.0f,0.0f ,alpha_ }, GameHeader::windowsSize_);
 }
 
 void SceneChangeAnimation::SetAnimationFlag(bool flag)

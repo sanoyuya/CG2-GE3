@@ -18,16 +18,11 @@ class Retention
 {
 private:
 
-	myMath::Vector2 windowsSize_;
-	myMath::Vector2 windowsCenter_;
-
 	Stage stageNum_ = Stage::Tutorial;
 
 public:
 
 	void SetWindowData(WindowsApp* windowsApp);
-	myMath::Vector2 GetWindowsSize();
-	myMath::Vector2 GetWindowsCenter();
 	void SetStageNum(const Stage stageNum);
 
 	const Stage GetStageNum();

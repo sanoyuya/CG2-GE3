@@ -1,6 +1,8 @@
 #include "StageSelectScene.h"
+#include"Retention.h"
 #include <algorithm>
 #include"SceneChangeAnimation.h"
+#include"GameHeader.h"
 
 void StageSelectScene::Initialize()
 {
@@ -22,7 +24,7 @@ void StageSelectScene::Update()
 
 void StageSelectScene::Draw()
 {
-	stageNumSprite_->DrawAnimationSpriteX2D(Retention::GetInstance()->GetWindowsCenter(), 10, stageNum_);
+	stageNumSprite_->DrawAnimationSpriteX2D(GameHeader::windowsCenter_, 10, stageNum_);
 	SceneChangeAnimation::GetInstance()->Draw();
 }
 

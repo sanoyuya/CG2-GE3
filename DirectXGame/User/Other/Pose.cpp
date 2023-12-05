@@ -1,5 +1,5 @@
 #include "Pose.h"
-#include"Retention.h"
+#include"GameHeader.h"
 
 void Pose::Initialize()
 {
@@ -20,7 +20,7 @@ void Pose::Draw()
 {
 	if (poseFlag_ == true)
 	{
-		poseBack_->DrawSprite2D(Retention::GetInstance()->GetWindowsCenter(), { 0.0f,0.0f ,0.0f,0.70f }, Retention::GetInstance()->GetWindowsSize());
+		poseBack_->DrawSprite2D(GameHeader::windowsCenter_, { 0.0f,0.0f ,0.0f,0.70f }, GameHeader::windowsSize_);
 		poseSprite_->DrawSprite2D({ 150.0f,100.0f });
 	}
 }

@@ -1,6 +1,7 @@
 #include "myMath.h"
 #include<cMath>
 #include <random>
+#include"Camera.h"
 
 namespace myMath
 {
@@ -192,11 +193,11 @@ namespace myMath
 	// 二つの値がほぼ等しいか
 	bool Approximately(float a, float b)
 	{
-		float tmp = 1e-06f * std::max(abs(a), abs(b));
+		float tmp = 1e-06f * max(abs(a), abs(b));
 
 		float tmp2 = EPSILON * 8.0f;
 
-		if (abs(b - a) < std::max(tmp, tmp2))
+		if (abs(b - a) < max(tmp, tmp2))
 		{
 			return true;
 		}
@@ -260,14 +261,49 @@ namespace myMath
 		return start * (1.0f - t) + end * t;
 	}
 
+	Vector3& Vec3Mat4MulWdiv(Vector3& vec, Matrix4& mat)
+	{
+		Vector4 retVec = {};
+
+		retVec.x = vec.x * mat.m[0][0] + vec.y * mat.m[1][0] + vec.z * mat.m[2][0] + 1 * mat.m[3][0];
+
+		retVec.y = vec.x * mat.m[0][1] + vec.y * mat.m[1][1] + vec.z * mat.m[2][1] + 1 * mat.m[3][1];
+
+		retVec.z = vec.x * mat.m[0][2] + vec.y * mat.m[1][2] + vec.z * mat.m[2][2] + 1 * mat.m[3][2];
+
+		retVec.w = vec.x * mat.m[0][3] + vec.y * mat.m[1][3] + vec.z * mat.m[2][3] + 1 * mat.m[3][3];
+
+		Vector3 tmp = { retVec.x, retVec.y, retVec.z };
+
+		return tmp /= tmp.z;
+	}
+
 	Vector3 Beziers(Vector3 startPos, Vector3 endPos, Vector3 controlPoint, float t)
 	{
-		float timeRate = std::min(t / 1.0f, 1.0f);
+		float timeRate = min(t / 1.0f, 1.0f);
 
 		Vector3 a = lerp(startPos, controlPoint, timeRate);
 		Vector3 b = lerp(controlPoint, endPos, timeRate);
 		Vector3 position = lerp(a, b, timeRate);
 
 		return position;
+	}
+
+	Vector3 ScreenCoordinateTransformation(Camera* camera, Vector3 WorldPos, myMath::Vector2 windowsSize)
+	{
+		Vector3 positionReticle = WorldPos;
+
+		float winW = static_cast<float>(windowsSize.x / 2);
+		float winH = static_cast<float>(windowsSize.y / 2);
+
+		//ビューポート行列
+		Matrix4 matViewport = { winW, 0, 0, 0, 0, -winH, 0, 0, 0, 0, 1, 0, winW, winH, 0, 1 };
+
+		//ビュー行列とプロジェクション行列、ビューポート行列を合成する
+		Matrix4 matViewProjectionViewport =
+			camera->GetMatViewInverse() * camera->GetMatProjection() * matViewport;
+
+		//ワールド→スクリーン座標変換(ここで3Dから2Dになる)
+		return Vec3Mat4MulWdiv(WorldPos, matViewProjectionViewport);
 	}
 }
