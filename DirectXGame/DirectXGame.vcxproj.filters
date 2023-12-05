@@ -456,6 +456,9 @@
     <ClCompile Include="User\Other\GameHeader.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="User\UI\EnemyLocationSprite.cpp">
+      <Filter>User\ソース ファイル\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -834,6 +837,9 @@
     </ClInclude>
     <ClInclude Include="User\Other\GameHeader.h">
       <Filter>User\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="User\UI\EnemyLocationSprite.h">
+      <Filter>User\ヘッダー ファイル\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

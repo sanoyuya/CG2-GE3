@@ -6,6 +6,7 @@
 #include"Pose.h"
 #include"Retention.h"
 #include"GameHeader.h"
+#include"EnemyLocationSprite.h"
 
 void MyGame::Initialize()
 {
@@ -32,6 +33,8 @@ void MyGame::Initialize()
 	HitEffect::StaticInitialize();
 
 	Pose::GetInstance()->Initialize();
+
+	EnemyLocationSprite::StaticInitialize();
 
 #ifdef _DEBUG
 	//シーンマネージャーに最初のシーンをセット

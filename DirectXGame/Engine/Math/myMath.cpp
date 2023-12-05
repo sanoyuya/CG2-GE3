@@ -275,7 +275,11 @@ namespace myMath
 
 		Vector3 tmp = { retVec.x, retVec.y, retVec.z };
 
-		return tmp /= tmp.z;
+		if (retVec.z < 0)
+		{
+			tmp.z = -tmp.z;
+		}
+		return tmp /= retVec.w;
 	}
 
 	Vector3 Beziers(Vector3 startPos, Vector3 endPos, Vector3 controlPoint, float t)

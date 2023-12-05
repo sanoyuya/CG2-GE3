@@ -2,6 +2,7 @@
 #include"ColliderManager.h"
 #include"EasingFunction.h"
 #include"PhysicsMath.h"
+#include"GameHeader.h"
 
 NormalEnemy::~NormalEnemy()
 {
@@ -39,6 +40,12 @@ void NormalEnemy::Initialize()
 
 void NormalEnemy::Update()
 {
+	//死亡時間を過ぎたらスポーンフラグをfalseにして描画を消す
+	if (gameTimer_->GetFlameCount() > deathTime_ * GameHeader::sFps_)
+	{
+		spawnFlag_ = false;
+	}
+
 	//出現していたら
 	if (spawnFlag_ == true)
 	{
@@ -59,7 +66,10 @@ void NormalEnemy::Update()
 	}
 	else
 	{
-		SpawnUpdate();
+		if (gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
+		{
+			SpawnUpdate();
+		}
 	}
 
 	collisionData_.center = enemyTrans_.translation;

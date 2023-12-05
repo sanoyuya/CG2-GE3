@@ -86,6 +86,9 @@ void GameScene::Initialize()
 	tutorialSkip_->Initialize(gameTimer_.get());
 	tutorialSkip_->SetGameStartTime(80);
 
+	enemyLocationSprite_ = std::make_unique<EnemyLocationSprite>();
+	enemyLocationSprite_->Load(enemyManager_.get());
+
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
 }
@@ -121,6 +124,7 @@ void GameScene::Update()
 		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
 		bulletManager_->Reset();
 		buildingManager_->ReLoad(gameLevelData_->GetBuildingList());
+		enemyLocationSprite_->ReLoad(enemyManager_.get());
 	}
 
 	if (input_->KeyboardTriggerPush(DIK_T))
@@ -214,6 +218,7 @@ void GameScene::Draw()
 	bulletManager_->Draw();
 	player_->Draw();
 	radar_->Draw(enemyManager_.get(), player_.get());
+	enemyLocationSprite_->Draw(enemyManager_.get(), camera_->GetCameraPtr());
 	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
 	{
 		TextDraw();

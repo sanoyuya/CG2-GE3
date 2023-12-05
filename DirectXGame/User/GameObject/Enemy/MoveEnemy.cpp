@@ -3,6 +3,7 @@
 #include"ColliderManager.h"
 #include"EasingFunction.h"
 #include"AudioManager.h"
+#include"GameHeader.h"
 
 MoveEnemy::~MoveEnemy()
 {
@@ -43,6 +44,12 @@ void MoveEnemy::Initialize()
 
 void MoveEnemy::Update()
 {
+	//死亡時間を過ぎたらスポーンフラグをfalseにして描画を消す
+	if (gameTimer_->GetFlameCount() > deathTime_ * GameHeader::sFps_)
+	{
+		spawnFlag_ = false;
+	}
+
 	//出現していたら
 	if (spawnFlag_ == true)
 	{
@@ -61,20 +68,22 @@ void MoveEnemy::Update()
 	}
 	else
 	{
-		SpawnUpdate();
+		if (gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
+		{
+			SpawnUpdate();
+		}
 	}
 }
 
 void MoveEnemy::PhaseUpdate()
 {
-	const uint16_t fps = 60;
-	if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * fps)
+	if (spawnTime_ * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 	{
-		if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime) * fps)
+		if (spawnTime_ * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime) * GameHeader::sFps_)
 		{
 			phase = ActionPhase::MOVE;
 		}
-		else if ((spawnTime_ + moveEnemyProperty_.toMovePosTime) * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime + moveEnemyProperty_.waitTime) * fps + 1)
+		else if ((spawnTime_ + moveEnemyProperty_.toMovePosTime) * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime + moveEnemyProperty_.waitTime) * GameHeader::sFps_ + 1)
 		{
 			phase = ActionPhase::WAIT;
 		}
@@ -87,27 +96,27 @@ void MoveEnemy::PhaseUpdate()
 		{
 		case ActionPhase::MOVE:
 
-			PhaseMove(moveEnemyProperty_.spawnPos, moveEnemyProperty_.movePos, moveEnemyProperty_.spawnPosRotation, moveEnemyProperty_.movePosRotation, moveEnemyProperty_.toMovePosTime * 60);
+			PhaseMove(moveEnemyProperty_.spawnPos, moveEnemyProperty_.movePos, moveEnemyProperty_.spawnPosRotation, moveEnemyProperty_.movePosRotation, moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 
-			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps);
+			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_);
 
-			if (moveEnemyProperty_.toMovePosTime * fps <= actionTimer)
+			if (moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ <= actionTimer)
 			{
-				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps);
+				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 				//phase = ActionPhase::WAIT;
 			}
 
 			break;
 		case ActionPhase::WAIT:
 
-			addY = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.125f, 2.0f * fps);
+			addY = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.125f, 2.0f * GameHeader::sFps_);
 			enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
 
-			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps);
+			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 
-			if (moveEnemyProperty_.waitTime * fps <= actionTimer)
+			if (moveEnemyProperty_.waitTime * GameHeader::sFps_ <= actionTimer)
 			{
-				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps - moveEnemyProperty_.waitTime * fps);
+				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ - moveEnemyProperty_.waitTime * GameHeader::sFps_);
 				waitFinishPos = enemyTrans_.translation;
 				waitFinishRot = enemyTrans_.rotation;
 				//phase = ActionPhase::ESCAPE;
@@ -116,9 +125,9 @@ void MoveEnemy::PhaseUpdate()
 			break;
 		case ActionPhase::ESCAPE:
 
-			PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * fps);
+			PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * GameHeader::sFps_);
 
-			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * fps - moveEnemyProperty_.toMovePosTime * fps - moveEnemyProperty_.waitTime * fps);
+			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ - moveEnemyProperty_.waitTime * GameHeader::sFps_);
 
 			break;
 		}
@@ -138,8 +147,7 @@ void MoveEnemy::PhaseMove(const myMath::Vector3& startPosition, const myMath::Ve
 
 void MoveEnemy::Draw()
 {
-	const uint16_t fps = 60;
-	if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * fps)
+	if (spawnTime_ * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 	{
 		if (spawnFlag_ == false)
 		{

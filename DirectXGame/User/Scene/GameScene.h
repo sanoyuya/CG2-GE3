@@ -17,6 +17,7 @@
 #include"GroundBack.h"
 #include"BuildingManager.h"
 #include"TutorialSkip.h"
+#include"EnemyLocationSprite.h"
 
 class GameScene :public BaseScene
 {
@@ -67,6 +68,8 @@ private:
 	std::unique_ptr<GroundBack>groundBack_;
 
 	std::unique_ptr<TutorialSkip>tutorialSkip_;
+
+	std::unique_ptr<EnemyLocationSprite>enemyLocationSprite_;
 
 public:
 
