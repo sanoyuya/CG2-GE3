@@ -12,7 +12,7 @@ private:
 
 	std::vector<std::unique_ptr<Sprite2D>>sprite_;
 	static uint32_t spriteTex_;
-
+	const myMath::Vector2 texSize_ = { 100.0f,100.0f };
 
 public:
 

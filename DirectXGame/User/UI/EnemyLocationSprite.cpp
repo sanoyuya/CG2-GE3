@@ -42,16 +42,27 @@ void EnemyLocationSprite::Draw(EnemyManager* enemys, Camera* camera)
 	{
 		if (enemy->GetSpawnFlag() == true)
 		{
+			//画面内に収める処理
 			myMath::Vector2 pos = { myMath::ScreenCoordinateTransformation(camera,enemy->GetTransform().parentToTranslation).x,myMath::ScreenCoordinateTransformation(camera,enemy->GetTransform().parentToTranslation).y };
-			pos.x = std::clamp(pos.x, 100.0f, GameHeader::windowsSize_.x - 100.0f);
-			pos.y = std::clamp(pos.y, 100.0f , GameHeader::windowsSize_.x - 100.0f);
-
-			if (myMath::ScreenCoordinateTransformation(camera, enemy->GetTransform().parentToTranslation).z < 0)
+			bool isDraw = false;
+			if (0.0f > pos.x || pos.x > GameHeader::windowsSize_.x || 0.0f > pos.y || pos.y > GameHeader::windowsSize_.y)
 			{
-				pos.y = 620.0f;
+				isDraw = true;
 			}
 
-			sprite_[count]->DrawSprite2D(pos);
+			if (isDraw == true)
+			{
+				pos.x = std::clamp(pos.x, texSize_.x, GameHeader::windowsSize_.x - texSize_.x);
+				pos.y = std::clamp(pos.y, texSize_.y, GameHeader::windowsSize_.x - texSize_.y);
+
+				//後ろにいる敵は下に描画されるようにする
+				if (myMath::ScreenCoordinateTransformation(camera, enemy->GetTransform().parentToTranslation).z < 0.0f)
+				{
+					pos.y = GameHeader::windowsSize_.y - texSize_.y;
+				}
+
+				sprite_[count]->DrawSprite2D(pos);
+			}
 		}
 		count++;
 	}
