@@ -37,6 +37,15 @@ void main(
         //中心からのオフセットをビルボード回転
         offset = mul(matBillboard, offset);
         
+        matrix m = mat;
+        
+        //Z軸回転
+        m[0][0] = cos(input[0].rotation);
+        m[0][1] = sin(input[0].rotation);
+
+        m[1][0] = -sin(input[0].rotation);
+        m[1][1] = cos(input[0].rotation);
+        
         //ワールド座標ベースでずらす
         element.svpos = input[0].pos + offset;
         //ビュー、射影変換

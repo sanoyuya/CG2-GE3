@@ -17,10 +17,11 @@ struct PosNormalUv
 	myMath::Vector2 uv;//uv座標
 };
 
-struct PosScaleColor
+struct PosScaleRotColor
 {
 	myMath::Vector3 pos; // xyz座標
 	float scale;//スケール
+	float rotation;//回転
 	myMath::Vector4 color;//カラー
 };
 

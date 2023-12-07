@@ -30,6 +30,9 @@ struct OneParticle
 	float s_scale = 1.0f;
 	//最終値
 	float e_scale = 0.0f;
+	//回転
+	float rotation = 0.0f;
+	float rotationSpeed = 0.0f;
 	//カラー
 	myMath::Vector4 color = {};
 };
@@ -44,7 +47,7 @@ private:
 	std::forward_list<OneParticle>particles_; //頂点数
 	static const uint32_t vertexCount_ = 4096; //頂点数
 	//頂点データ配列
-	static PosScaleColor vertices_[vertexCount_];
+	static PosScaleRotColor vertices_[vertexCount_];
 
 	HRESULT result_ = S_FALSE;
 	char PADING_[4] = {};
@@ -79,7 +82,7 @@ public:
 
 	void RandomXMoveUpdate(Camera* camera, float xMoveMin, float xMoveMax);
 
-	void Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color);
+	void Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color, float angle = 0.0f, float rotSpeed = 1.0f);
 	
 	void Draw();
 

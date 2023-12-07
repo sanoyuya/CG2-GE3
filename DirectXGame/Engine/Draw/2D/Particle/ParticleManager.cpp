@@ -1,6 +1,6 @@
 #include "ParticleManager.h"
 
-PosScaleColor ParticleManager::vertices_[vertexCount_];
+PosScaleRotColor ParticleManager::vertices_[vertexCount_];
 Microsoft::WRL::ComPtr<ID3D12Device>ParticleManager::sDevice_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>ParticleManager::sCmdList_;
 Blob ParticleManager::sBlob_;//シェーダオブジェクト
@@ -56,11 +56,13 @@ void ParticleManager::Update(Camera* camera)
 		it->scale = (it->e_scale - it->s_scale) * f;
 		it->scale += it->s_scale;
 
+		it->rotation += it->rotationSpeed;
+
 		it->color.w = 1.0f - 1.0f * it->flame / it->num_flame;
 	}
 
 	//定数バッファへデータ転送
-	PosScaleColor* vertMap = nullptr;
+	PosScaleRotColor* vertMap = nullptr;
 	result_ = vertexBuffer_->GetResource()->Map(0, nullptr, (void**)&vertMap);
 	assert(SUCCEEDED(result_));
 
@@ -71,6 +73,8 @@ void ParticleManager::Update(Camera* camera)
 		vertMap->pos = it->position;
 		//スケール
 		vertMap->scale = it->scale;
+		//回転
+		vertMap->rotation = it->rotation;
 		//カラー
 		vertMap->color = it->color;
 		//次の頂点へ
@@ -114,7 +118,7 @@ void ParticleManager::RandomXMoveUpdate(Camera* camera,float xMoveMin, float xMo
 	}
 
 	//定数バッファへデータ転送
-	PosScaleColor* vertMap = nullptr;
+	PosScaleRotColor* vertMap = nullptr;
 	result_ = vertexBuffer_->GetResource()->Map(0, nullptr, (void**)&vertMap);
 	assert(SUCCEEDED(result_));
 
@@ -125,6 +129,8 @@ void ParticleManager::RandomXMoveUpdate(Camera* camera,float xMoveMin, float xMo
 		vertMap->pos = it->position;
 		//スケール
 		vertMap->scale = it->scale;
+		//回転
+		vertMap->rotation = it->rotation;
 		//カラー
 		vertMap->color = it->color;
 		//次の頂点へ
@@ -135,7 +141,7 @@ void ParticleManager::RandomXMoveUpdate(Camera* camera,float xMoveMin, float xMo
 	BillboardUpdate(camera);
 }
 
-void ParticleManager::Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color)
+void ParticleManager::Add(float life, myMath::Vector3 position, myMath::Vector3 velocity, myMath::Vector3 accel, float start_scale, float end_scale, myMath::Vector4 color, float angle, float rotSpeed)
 {
 	//リストに要素を追加
 	particles_.emplace_front();
@@ -148,6 +154,8 @@ void ParticleManager::Add(float life, myMath::Vector3 position, myMath::Vector3 
 	p.num_flame = life;
 	p.s_scale = start_scale;
 	p.e_scale = end_scale;
+	p.rotation = angle;
+	p.rotationSpeed = rotSpeed;
 	p.color = color;
 }
 
@@ -176,7 +184,7 @@ void ParticleManager::CreateBuff()
 	}
 
 	vertexBuffer_ = std::make_unique<VertexBuffer>();
-	vertexBuffer_->Create(vertexCount_, sizeof(PosScaleColor));
+	vertexBuffer_->Create(vertexCount_, sizeof(PosScaleRotColor));
 	vertexBuffer_->Update(vertices_);
 
 	constBuffer_ = std::make_unique<ConstantBuffer>();

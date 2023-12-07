@@ -9,6 +9,7 @@ struct VSOutput
 {
     float4 pos : POSITION; // システム用頂点座標
     float scale : SCALE; //スケール
+    float rotation : ROTATION;//回転
     float4 color : COLOR; //カラー
 };
 
