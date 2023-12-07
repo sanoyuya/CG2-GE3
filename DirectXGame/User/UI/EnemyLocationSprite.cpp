@@ -4,7 +4,7 @@ uint32_t EnemyLocationSprite::spriteTex_;
 
 void EnemyLocationSprite::StaticInitialize()
 {
-	spriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/reticle.png");
+	spriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/attention.png");
 }
 
 void EnemyLocationSprite::Load(EnemyManager* enemys)
@@ -61,7 +61,7 @@ void EnemyLocationSprite::Draw(EnemyManager* enemys, Camera* camera)
 					pos.y = GameHeader::windowsSize_.y - texSize_.y;
 				}
 
-				sprite_[count]->DrawSprite2D(pos);
+				sprite_[count]->DrawSprite2D(pos, { 1.0f,1.0f,1.0f,0.5f });
 			}
 		}
 		count++;
