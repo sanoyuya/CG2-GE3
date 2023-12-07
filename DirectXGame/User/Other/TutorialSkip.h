@@ -20,6 +20,15 @@ private:
 
 	uint16_t startTime_ = 0;
 
+	bool animationFlag_ = false;
+	uint8_t animationTimer_ = 0;
+	const uint8_t isSkipAnimationTime_ = 100;
+	const uint8_t maxAnimationTime_ = 180;
+	float alpha_ = 0.0f;
+
+	std::unique_ptr<Sprite2D>back_;
+	uint32_t backTex_ = 0;
+
 public:
 
 	void Initialize(GameTimer* gameTimer);
@@ -29,4 +38,6 @@ public:
 	void Draw();
 
 	void SetGameStartTime(uint16_t startTime);
+
+	void Reset();
 };

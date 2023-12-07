@@ -84,7 +84,7 @@ void GameScene::Initialize()
 
 	tutorialSkip_ = std::make_unique<TutorialSkip>();
 	tutorialSkip_->Initialize(gameTimer_.get());
-	tutorialSkip_->SetGameStartTime(80);
+	tutorialSkip_->SetGameStartTime(78);
 
 	enemyLocationSprite_ = std::make_unique<EnemyLocationSprite>();
 	enemyLocationSprite_->Load(enemyManager_.get());
@@ -125,6 +125,7 @@ void GameScene::Update()
 		bulletManager_->Reset();
 		buildingManager_->ReLoad(gameLevelData_->GetBuildingList());
 		enemyLocationSprite_->ReLoad(enemyManager_.get());
+		tutorialSkip_->Reset();
 	}
 
 	if (input_->KeyboardTriggerPush(DIK_T))
