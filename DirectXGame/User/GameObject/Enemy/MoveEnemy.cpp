@@ -24,7 +24,7 @@ void MoveEnemy::Initialize()
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
 	enemyTrans_.translation = moveEnemyProperty_.spawnPos;
-	enemyTrans_.rotation = { myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.y), myMath::ChangeRadians(moveEnemyProperty_.movePosRotation.z) - myMath::AX_PIF / 2 };
+	enemyTrans_.rotation = moveEnemyProperty_.movePosRotation;
 	collisionData_.center = enemyTrans_.translation;
 	maxBulletTime_ = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
 

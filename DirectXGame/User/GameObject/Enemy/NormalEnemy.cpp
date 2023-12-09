@@ -22,6 +22,7 @@ void NormalEnemy::Initialize()
 	enemyTex_ = enemy_->CreateObjModel("Resources/enemy");
 	enemy_->SetModel(enemyTex_);
 	enemyTrans_.Initialize();
+	enemyTrans_.TransUpdate(sCamera_);
 	maxBulletTime = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
 
 	//死亡アニメーションパーティクル初期化
