@@ -41,7 +41,7 @@ void NormalEnemy::Initialize()
 void NormalEnemy::Update()
 {
 	//死亡時間を過ぎたらスポーンフラグをfalseにして描画を消す
-	if (gameTimer_->GetFlameCount() > deathTime_ * GameHeader::sFps_)
+	if (sGameTimer_->GetFlameCount() > deathTime_ * GameHeader::sFps_)
 	{
 		spawnFlag_ = false;
 	}
@@ -49,13 +49,13 @@ void NormalEnemy::Update()
 	//出現していたら
 	if (spawnFlag_ == true)
 	{
-		actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_);
+		actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_);
 		//単振動
 		enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.5f, 120.0f)+ iniPos_.translation.y;
 
 		//敵のモデルの更新処理
-		enemyTrans_.TransUpdate(camera_);
-		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
+		enemyTrans_.TransUpdate(sCamera_);
+		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, sCamera_);
 		if (isAttack == true)
 		{
 			//弾の生成処理と更新処理
@@ -66,7 +66,7 @@ void NormalEnemy::Update()
 	}
 	else
 	{
-		if (gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
+		if (sGameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 		{
 			SpawnUpdate();
 		}
@@ -78,7 +78,7 @@ void NormalEnemy::Update()
 void NormalEnemy::Draw()
 {
 	const uint16_t fps = 60;
-	if (spawnTime_ * fps <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * fps)
+	if (spawnTime_ * fps <= sGameTimer_->GetFlameCount() && sGameTimer_->GetFlameCount() <= deathTime_ * fps)
 	{
 		if (spawnFlag_ == false)
 		{
@@ -90,14 +90,14 @@ void NormalEnemy::Draw()
 			enemy_->DrawModel(&enemyTrans_);
 			if (lockOnFlag_ == true)
 			{
-				lockOnAnimation_->Draw(camera_);
+				lockOnAnimation_->Draw(sCamera_);
 			}
 		}
 		else
 		{
 			//死亡演出の描画処理
 			emitter_->Draw();
-			hitEffect_->Draw(camera_);
+			hitEffect_->Draw(sCamera_);
 		}
 	}
 }
@@ -211,7 +211,7 @@ void NormalEnemy::BulletUpdate()
 	{
 		float length = sqrt((player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x) * (player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x)) +
 			sqrt((player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z) * (player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z));
-		bulletTimer++;
+		bulletTimer+= sGameTimer_->GetTimeSpeed();
 		if (bulletTimer > maxBulletTime)
 		{
 			if (150.0f >= length)
@@ -227,9 +227,9 @@ void NormalEnemy::BulletUpdate()
 
 void NormalEnemy::SpawnUpdate()
 {
-	if (spawnTime_ <= gameTimer_->GetIntTime())
+	if (spawnTime_ <= sGameTimer_->GetIntTime())
 	{
-		enemyTrans_.TransUpdate(camera_);
+		enemyTrans_.TransUpdate(sCamera_);
 
 		if (spawnAnimationTimer_ < maxSpawnAnimationTime_ / 2)
 		{
@@ -238,7 +238,7 @@ void NormalEnemy::SpawnUpdate()
 		spawnAnimationTimer_++;
 	}
 
-	spawnEmitter_->Update(camera_);
+	spawnEmitter_->Update(sCamera_);
 
 	if (spawnAnimationTimer_ > maxSpawnAnimationTime_)
 	{
@@ -251,8 +251,8 @@ void NormalEnemy::DeathUpdate()
 	//死亡演出の更新処理
 	if (deathAnimationFlag_ == true)
 	{
-		emitter_->Update(camera_);
-		hitEffect_->Update(camera_);
+		emitter_->Update(sCamera_);
+		hitEffect_->Update(sCamera_);
 		deathAnimationTimer_++;
 	}
 

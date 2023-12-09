@@ -354,9 +354,6 @@
     <ClCompile Include="User\Effect\Particle\PlayerEngineSmokeParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Effect\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="User\Scene\GameClearScene.cpp">
-      <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="User\Scene\GameOverScene.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
@@ -447,9 +444,6 @@
     <ClCompile Include="User\GameObject\Building\BuildingManager.cpp">
       <Filter>User\ソース ファイル\Object\Building</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameObject\Building\BuildingBase.cpp">
-      <Filter>User\ソース ファイル\Object\Building</Filter>
-    </ClCompile>
     <ClCompile Include="User\Other\TutorialSkip.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
@@ -458,6 +452,12 @@
     </ClCompile>
     <ClCompile Include="User\UI\EnemyLocationSprite.cpp">
       <Filter>User\ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Scene\GameClearScene.cpp">
+      <Filter>User\ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject\GameObject.cpp">
+      <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -67,40 +67,40 @@ void RailCamera::Update(GameTimer* gameTimer)
 	switch (Player::GetCameraFlag())
 	{
 	case CameraFlag::Front:
-		PhysicsMath::Complement(position_.x, cameraFront_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(position_.y, cameraFront_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(position_.z, cameraFront_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(position_.x, cameraFront_.parentToTranslation.x, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(position_.y, cameraFront_.parentToTranslation.y, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(position_.z, cameraFront_.parentToTranslation.z, 20.0f / gameTimer->GetTimeSpeed());
 
-		PhysicsMath::Complement(target_.x, cameraBack_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(target_.y, cameraBack_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(target_.z, cameraBack_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(target_.x, cameraBack_.parentToTranslation.x, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(target_.y, cameraBack_.parentToTranslation.y, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(target_.z, cameraBack_.parentToTranslation.z, 20.0f / gameTimer->GetTimeSpeed());
 		break;
 	case CameraFlag::Back:
-		PhysicsMath::Complement(position_.x, cameraBack_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(position_.y, cameraBack_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(position_.z, cameraBack_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(position_.x, cameraBack_.parentToTranslation.x, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(position_.y, cameraBack_.parentToTranslation.y, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(position_.z, cameraBack_.parentToTranslation.z, 20.0f / gameTimer->GetTimeSpeed());
 
-		PhysicsMath::Complement(target_.x, cameraFront_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(target_.y, cameraFront_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(target_.z, cameraFront_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(target_.x, cameraFront_.parentToTranslation.x, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(target_.y, cameraFront_.parentToTranslation.y, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(target_.z, cameraFront_.parentToTranslation.z, 20.0f / gameTimer->GetTimeSpeed());
 		break;
 	case CameraFlag::Left:
-		PhysicsMath::Complement(position_.x, cameraLeft_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(position_.y, cameraLeft_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(position_.z, cameraLeft_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(position_.x, cameraLeft_.parentToTranslation.x, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(position_.y, cameraLeft_.parentToTranslation.y, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(position_.z, cameraLeft_.parentToTranslation.z, 20.0f / gameTimer->GetTimeSpeed());
 
-		PhysicsMath::Complement(target_.x, cameraRight_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(target_.y, cameraRight_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(target_.z, cameraRight_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(target_.x, cameraRight_.parentToTranslation.x, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(target_.y, cameraRight_.parentToTranslation.y, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(target_.z, cameraRight_.parentToTranslation.z, 20.0f / gameTimer->GetTimeSpeed());
 		break;
 	case CameraFlag::Right:
-		PhysicsMath::Complement(position_.x, cameraRight_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(position_.y, cameraRight_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(position_.z, cameraRight_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(position_.x, cameraRight_.parentToTranslation.x, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(position_.y, cameraRight_.parentToTranslation.y, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(position_.z, cameraRight_.parentToTranslation.z, 20.0f / gameTimer->GetTimeSpeed());
 
-		PhysicsMath::Complement(target_.x, cameraLeft_.parentToTranslation.x, 20.0f);
-		PhysicsMath::Complement(target_.y, cameraLeft_.parentToTranslation.y, 20.0f);
-		PhysicsMath::Complement(target_.z, cameraLeft_.parentToTranslation.z, 20.0f);
+		PhysicsMath::Complement(target_.x, cameraLeft_.parentToTranslation.x, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(target_.y, cameraLeft_.parentToTranslation.y, 20.0f / gameTimer->GetTimeSpeed());
+		PhysicsMath::Complement(target_.z, cameraLeft_.parentToTranslation.z, 20.0f / gameTimer->GetTimeSpeed());
 		break;
 	default:
 		break;

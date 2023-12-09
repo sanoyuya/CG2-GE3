@@ -67,7 +67,7 @@ void Player::Update()
 	{
 		CameraRotation();
 		//カメラのセット
-		reticle_->SetCamera(camera_->GetCameraPtr());
+		reticle_->SetCamera(sCamera_);
 		//レティクルの更新処理
 		reticle_->Update();
 		//自機の移動処理
@@ -94,10 +94,10 @@ void Player::Update()
 	reticle_->GetLockOnAttackFlag(isBulletAttack_);
 
 	//Transformの更新処理
-	playerTrans_.TransUpdate(camera_->GetCameraPtr());
+	playerTrans_.TransUpdate(sCamera_);
 
 	controlTrans_.parent = &playerTrans_;
-	controlTrans_.TransUpdate(camera_->GetCameraPtr());
+	controlTrans_.TransUpdate(sCamera_);
 
 	collisionData_.center = playerTrans_.parentToTranslation;
 
@@ -115,9 +115,9 @@ void Player::Update()
 	Rotation();
 
 	//エンジンの煙の更新処理
-	SmokeUpdate(camera_->GetCameraPtr());
+	SmokeUpdate();
 	//死亡演出のパーティクルの更新処理
-	deathAnimation_->ParticleUpdate(camera_->GetCameraPtr());
+	deathAnimation_->ParticleUpdate(sCamera_);
 	//死亡演出で死亡させたときのフラグの値を貰う
 	deathFlag_ = deathAnimation_->GetDeathFlag();
 }
@@ -255,8 +255,8 @@ void Player::Move()
 		float reticleX = reticle_->GetTransform().translation.x / 4;
 		float reticleY = reticle_->GetTransform().translation.y / 4;
 		//そのまま移動させると動きが硬いので補完する
-		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
-		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
+		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f / sGameTimer_->GetTimeSpeed());
+		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f / sGameTimer_->GetTimeSpeed());
 	}
 	else
 	{
@@ -264,8 +264,8 @@ void Player::Move()
 		float reticleX = 0.0f;
 		float reticleY = 0.0f;
 		//そのまま移動させると動きが硬いので補完する
-		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f);
-		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f);
+		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f / sGameTimer_->GetTimeSpeed());
+		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f / sGameTimer_->GetTimeSpeed());
 	}
 }
 
@@ -284,17 +284,17 @@ void Player::Rotation()
 
 		float angleZ = -(reticle_->GetTransform().translation.x / 4 - playerTrans_.translation.x) / 10.0f;
 		//モデルのZ軸回転
-		PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f);
+		PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f / sGameTimer_->GetTimeSpeed());
 	}
 	else
 	{
 		float baseRot = 0.0f;
 		//レティクルの方向に向くように回転
-		playerTrans_.rotation.x = PhysicsMath::Complement(playerTrans_.rotation.x, baseRot, 30.0f);
-		playerTrans_.rotation.y = PhysicsMath::Complement(playerTrans_.rotation.y, baseRot, 30.0f);
+		playerTrans_.rotation.x = PhysicsMath::Complement(playerTrans_.rotation.x, baseRot, 30.0f / sGameTimer_->GetTimeSpeed());
+		playerTrans_.rotation.y = PhysicsMath::Complement(playerTrans_.rotation.y, baseRot, 30.0f / sGameTimer_->GetTimeSpeed());
 
 		//モデルのZ軸回転
-		PhysicsMath::Complement(playerTrans_.rotation.z, baseRot, 15.0f);
+		PhysicsMath::Complement(playerTrans_.rotation.z, baseRot, 15.0f / sGameTimer_->GetTimeSpeed());
 	}
 }
 
@@ -310,19 +310,19 @@ void Player::NormalBulletAttack()
 	}
 }
 
-void Player::SmokeUpdate(Camera* camera)
+void Player::SmokeUpdate()
 {
 	//エンジンの座標に合わせるため、モデルの中心座標から位置をずらせるように子を作成
 	smokeTrans_.parent = &playerTrans_;
 	//モデルの中心座標から位置をずらす
 	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
 	//子の更新処理
-	smokeTrans_.TransUpdate(camera);
+	smokeTrans_.TransUpdate(sCamera_);
 	//パーティクルを毎フレーム作成
 	smokeEmitter_->Create(smokeTrans_.parentToTranslation);
 	smokeEmitter_->SetSize(0.5f);
 	//パーティクルの更新
-	smokeEmitter_->Update(camera);
+	smokeEmitter_->Update(sCamera_);
 }
 
 void Player::LockOnAttack()

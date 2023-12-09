@@ -3,7 +3,6 @@
 #include <list>
 #include<memory>
 #include"Player.h"
-#include"GameTimer.h"
 #include"NormalEnemy.h"
 #include"MoveEnemy.h"
 
@@ -23,7 +22,7 @@ public:
 	EnemyManager();
 	~EnemyManager();
 
-	void Initialize(EnemyList& enemyData, Camera* camera, Player* player, GameTimer* gameTimer, BulletManager* bulletManager);
+	void Initialize(EnemyList& enemyData, Player* player, BulletManager* bulletManager);
 
 	void Update();
 
@@ -31,7 +30,7 @@ public:
 
 	void Load(EnemyList& enemyData);
 
-	void ReLoad(EnemyList& enemyData, Camera* camera, Player* player, GameTimer* gameTimer, BulletManager* bulletManager);
+	void ReLoad(EnemyList& enemyData, Player* player, BulletManager* bulletManager);
 
 	void Reset();
 

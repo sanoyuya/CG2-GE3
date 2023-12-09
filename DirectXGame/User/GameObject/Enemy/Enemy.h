@@ -26,9 +26,7 @@ class Enemy :public GameObject
 {
 protected:
 
-	Camera* camera_ = nullptr;
 	Player* player_ = nullptr;
-	GameTimer* gameTimer_ = nullptr;
 	BulletManager* bulletManager_ = nullptr;
 
 	static uint32_t sound_;

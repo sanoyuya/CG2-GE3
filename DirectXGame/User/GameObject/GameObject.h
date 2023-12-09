@@ -2,6 +2,8 @@
 #include"myMath.h"
 #include <string>
 #include"Transform.h"
+#include"Camera.h"
+#include"GameTimer.h"
 
 struct CollisionData
 {
@@ -15,6 +17,16 @@ struct CollisionData
 //オブジェクト基底クラス
 class GameObject
 {
+protected:
+
+	static Camera* sCamera_;
+	static GameTimer* sGameTimer_;
+
+public:
+
+	static void SetCamera(Camera* camera);
+	static void SetGameTimer(GameTimer* gameTimer);
+
 public:
 
 	//デストラクタ

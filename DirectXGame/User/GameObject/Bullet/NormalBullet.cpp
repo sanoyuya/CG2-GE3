@@ -42,18 +42,18 @@ void NormalBullet::Update()
 		{
 			isDead_ = true;
 		}
-		deathParticleEmitter_->Update(camera_);
+		deathParticleEmitter_->Update(sCamera_);
 		animationTimer_++;
 	}
-	bulletTrans_.translation += directionVector_ * speed_;
-	bulletTrans_.TransUpdate(camera_);
+	bulletTrans_.translation += directionVector_ * speed_ * sGameTimer_->GetTimeSpeed();
+	bulletTrans_.TransUpdate(sCamera_);
 
 	collisionData_.center = bulletTrans_.translation;
 
 	//パーティクルを毎フレーム作成
 	smokeEmitter_->Create(bulletTrans_.translation);
 	//パーティクルの更新
-	smokeEmitter_->Update(camera_);
+	smokeEmitter_->Update(sCamera_);
 }
 
 void NormalBullet::Draw()
@@ -124,11 +124,6 @@ void NormalBullet::CancelLockOn()
 const bool NormalBullet::GetLockOnFlag()
 {
 	return false;
-}
-
-void NormalBullet::SetCamera(Camera* camera)
-{
-	camera_ = camera;
 }
 
 void NormalBullet::SetPos(const myMath::Vector3& position)

@@ -7,8 +7,6 @@ class LockOnBullet :public BulletBase
 {
 private:
 
-	Camera* camera_ = nullptr;
-
 	std::string name_ = "lockOnBullet";
 
 	bool isDead_ = false;
@@ -80,7 +78,6 @@ public://BulletBaseで必要な奴
 
 	const bool GetLockOnFlag()override;
 
-	void SetCamera(Camera* camera)override;
 	void SetPos(const myMath::Vector3& position)override;
 	void SetDirectionVector(const myMath::Vector3& directionVector)override;
 	void SetOwner(BulletOwner owner)override;

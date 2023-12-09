@@ -18,6 +18,7 @@ void GameTimer::ImGuiUpdate()
 {
 	ImGui::Begin("GameTimer");
 	ImGui::SliderFloat("nowFlame", &flameCount_, 0, gameTime_ * 0.95f);
+	ImGui::SliderFloat("timeSpeed", &timeSpeed_, 0.1f, 5.0f);
 	ImGui::Text("nowTime:%d", intTime_);
 	ImGui::End();
 }
@@ -35,6 +36,11 @@ const uint32_t& GameTimer::GetIntTime()
 const uint32_t& GameTimer::GetGameTime()
 {
 	return gameTime_;
+}
+
+float GameTimer::GetTimeSpeed()
+{
+	return timeSpeed_;
 }
 
 void GameTimer::SetTimeSpeed(const float timeSpeed)

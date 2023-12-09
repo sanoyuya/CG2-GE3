@@ -10,7 +10,7 @@ EnemyManager::~EnemyManager()
 {
 }
 
-void EnemyManager::Initialize(EnemyList& enemyData, Camera* camera, Player* player, GameTimer* gameTimer, BulletManager* bulletManager)
+void EnemyManager::Initialize(EnemyList& enemyData, Player* player, BulletManager* bulletManager)
 {
 	//敵をjsonファイルから読み込む
 	Load(enemyData);
@@ -19,9 +19,7 @@ void EnemyManager::Initialize(EnemyList& enemyData, Camera* camera, Player* play
 	{
 		enemy->Initialize();
 		ColliderManager::GetInstance()->AddCollision(enemy.get());
-		enemy->SetCamera(camera);
 		enemy->SetPlayer(player);
-		enemy->SetGameTimer(gameTimer);
 		enemy->SetBulletManager(bulletManager);
 	}
 }
@@ -48,10 +46,10 @@ void EnemyManager::Load(EnemyList& enemyData)
 	std::swap(enemys_, enemyData.enemys);
 }
 
-void EnemyManager::ReLoad(EnemyList& enemyData, Camera* camera, Player* player, GameTimer* gameTimer, BulletManager* bulletManager)
+void EnemyManager::ReLoad(EnemyList& enemyData,Player* player, BulletManager* bulletManager)
 {
 	Reset();
-	Initialize(enemyData, camera, player, gameTimer, bulletManager);
+	Initialize(enemyData, player, bulletManager);
 }
 
 void EnemyManager::Reset()

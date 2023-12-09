@@ -44,16 +44,16 @@ void MoveEnemy::Initialize()
 
 void MoveEnemy::Update()
 {
-	if (spawnTime_ * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
+	if (spawnTime_ * GameHeader::sFps_ <= sGameTimer_->GetFlameCount() && sGameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 	{
 		//出現していたら
 		if (spawnFlag_ == true)
 		{
 			PhaseUpdate();
 			//敵のモデルの更新処理
-			enemyTrans_.TransUpdate(camera_);
+			enemyTrans_.TransUpdate(sCamera_);
 			collisionData_.center = enemyTrans_.translation;
-			lockOnAnimation_->Update(enemyTrans_.parentToTranslation, camera_);
+			lockOnAnimation_->Update(enemyTrans_.parentToTranslation, sCamera_);
 			if (isAttack_ == true)
 			{
 				//弾の生成処理と更新処理
@@ -64,7 +64,7 @@ void MoveEnemy::Update()
 		}
 		else
 		{
-			if (gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
+			if (sGameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 			{
 				SpawnUpdate();
 			}
@@ -78,13 +78,13 @@ void MoveEnemy::Update()
 
 void MoveEnemy::PhaseUpdate()
 {
-	if (spawnTime_ * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
+	if (spawnTime_ * GameHeader::sFps_ <= sGameTimer_->GetFlameCount() && sGameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 	{
-		if (spawnTime_ * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime) * GameHeader::sFps_)
+		if (spawnTime_ * GameHeader::sFps_ <= sGameTimer_->GetFlameCount() && sGameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime) * GameHeader::sFps_)
 		{
 			phase = ActionPhase::MOVE;
 		}
-		else if ((spawnTime_ + moveEnemyProperty_.toMovePosTime) * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime + moveEnemyProperty_.waitTime) * GameHeader::sFps_ + 1)
+		else if ((spawnTime_ + moveEnemyProperty_.toMovePosTime) * GameHeader::sFps_ <= sGameTimer_->GetFlameCount() && sGameTimer_->GetFlameCount() <= (spawnTime_ + moveEnemyProperty_.toMovePosTime + moveEnemyProperty_.waitTime) * GameHeader::sFps_ + 1)
 		{
 			phase = ActionPhase::WAIT;
 		}
@@ -99,11 +99,11 @@ void MoveEnemy::PhaseUpdate()
 
 			PhaseMove(moveEnemyProperty_.spawnPos, moveEnemyProperty_.movePos, moveEnemyProperty_.spawnPosRotation, moveEnemyProperty_.movePosRotation, moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 
-			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_);
+			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_);
 
 			if (moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ <= actionTimer)
 			{
-				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
+				actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 				//phase = ActionPhase::WAIT;
 			}
 
@@ -113,11 +113,11 @@ void MoveEnemy::PhaseUpdate()
 			addY = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.125f, 2.0f * GameHeader::sFps_);
 			enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
 
-			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
+			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 
 			if (moveEnemyProperty_.waitTime * GameHeader::sFps_ <= actionTimer)
 			{
-				actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ - moveEnemyProperty_.waitTime * GameHeader::sFps_);
+				actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ - moveEnemyProperty_.waitTime * GameHeader::sFps_);
 				waitFinishPos = enemyTrans_.translation;
 				waitFinishRot = enemyTrans_.rotation;
 				//phase = ActionPhase::ESCAPE;
@@ -128,7 +128,7 @@ void MoveEnemy::PhaseUpdate()
 
 			PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * GameHeader::sFps_);
 
-			actionTimer = static_cast<uint16_t>(gameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ - moveEnemyProperty_.waitTime * GameHeader::sFps_);
+			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ - moveEnemyProperty_.waitTime * GameHeader::sFps_);
 
 			break;
 		}
@@ -148,7 +148,7 @@ void MoveEnemy::PhaseMove(const myMath::Vector3& startPosition, const myMath::Ve
 
 void MoveEnemy::Draw()
 {
-	if (spawnTime_ * GameHeader::sFps_ <= gameTimer_->GetFlameCount() && gameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
+	if (spawnTime_ * GameHeader::sFps_ <= sGameTimer_->GetFlameCount() && sGameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 	{
 		if (spawnFlag_ == false)
 		{
@@ -160,14 +160,14 @@ void MoveEnemy::Draw()
 			enemy_->DrawModel(&enemyTrans_);
 			if (lockOnFlag_ == true)
 			{
-				lockOnAnimation_->Draw(camera_);
+				lockOnAnimation_->Draw(sCamera_);
 			}
 		}
 		else
 		{
 			//死亡演出の描画処理
 			emitter_->Draw();
-			hitEffect_->Draw(camera_);
+			hitEffect_->Draw(sCamera_);
 		}
 	}
 }
@@ -283,7 +283,7 @@ void MoveEnemy::BulletUpdate()
 	{
 		float length = sqrt((player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x) * (player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x)) +
 			sqrt((player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z) * (player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z));
-		bulletTimer_++;
+		bulletTimer_+= sGameTimer_->GetTimeSpeed();
 		if (bulletTimer_ > maxBulletTime_)
 		{
 			if (150.0f >= length)
@@ -299,9 +299,9 @@ void MoveEnemy::BulletUpdate()
 
 void MoveEnemy::SpawnUpdate()
 {
-	if (spawnTime_ <= gameTimer_->GetIntTime())
+	if (spawnTime_ <= sGameTimer_->GetIntTime())
 	{
-		enemyTrans_.TransUpdate(camera_);
+		enemyTrans_.TransUpdate(sCamera_);
 
 		if (spawnAnimationTimer_ < maxSpawnAnimationTime_ / 2)
 		{
@@ -310,7 +310,7 @@ void MoveEnemy::SpawnUpdate()
 		spawnAnimationTimer_++;
 	}
 
-	spawnEmitter_->Update(camera_);
+	spawnEmitter_->Update(sCamera_);
 
 	if (spawnAnimationTimer_ > maxSpawnAnimationTime_)
 	{
@@ -323,8 +323,8 @@ void MoveEnemy::DeathUpdate()
 	//死亡演出の更新処理
 	if (deathAnimationFlag_ == true)
 	{
-		emitter_->Update(camera_);
-		hitEffect_->Update(camera_);
+		emitter_->Update(sCamera_);
+		hitEffect_->Update(sCamera_);
 		deathAnimationTimer_++;
 	}
 

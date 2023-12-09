@@ -8,13 +8,12 @@ void BulletManager::Initialize()
 	sound_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/bullet.mp3", 0.1f);
 }
 
-void BulletManager::Update(Camera* camera)
+void BulletManager::Update()
 {
 	bullets_.remove_if([](std::unique_ptr<BulletBase>& bullet) { return bullet->GetIsDead(); });
 
 	for (const std::unique_ptr<BulletBase>& bullet : bullets_)
 	{
-		bullet->SetCamera(camera);
 		bullet->Update();
 	}
 }

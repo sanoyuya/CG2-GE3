@@ -45,7 +45,7 @@ void LockOnBullet::Update()
 	smokeEmitter_->Create(actualTrans_.parentToTranslation);
 	
 	//パーティクルの更新
-	smokeEmitter_->Update(camera_);
+	smokeEmitter_->Update(sCamera_);
 }
 
 void LockOnBullet::Draw()
@@ -98,11 +98,6 @@ const bool LockOnBullet::GetLockOnFlag()
 	return false;
 }
 
-void LockOnBullet::SetCamera(Camera* camera)
-{
-	camera_ = camera;
-}
-
 void LockOnBullet::SetPos(const myMath::Vector3& position)
 {
 	bulletTrans_.translation = position;//念のため
@@ -141,15 +136,15 @@ void LockOnBullet::BulletMove()
 		endPos = lockOnEnemy_->GetTransform().translation;
 	}
 	//弾の移動にベジエ補間をかける
-	bulletTrans_.translation = myMath::Beziers(startPos_, endPos, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_));
+	bulletTrans_.translation = myMath::Beziers(startPos_, endPos, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_ / sGameTimer_->GetTimeSpeed()));
 
 	//ベジエ補間にイージング補間をかける
-	beziersTime_ = static_cast<float>(Easing::EaseInOutCubic(deathTimer_, 0.0f, static_cast<float>(maxDeathTime_), static_cast<float>(maxDeathTime_)));
+	beziersTime_ = static_cast<float>(Easing::EaseInOutCubic(deathTimer_, 0.0f, static_cast<float>(maxDeathTime_ / sGameTimer_->GetTimeSpeed()), static_cast<float>(maxDeathTime_ / sGameTimer_->GetTimeSpeed())));
 
-	bulletTrans_.TransUpdate(camera_);
+	bulletTrans_.TransUpdate(sCamera_);
 
 	angle_ += 0.25f * myMath::GetRandPlusOrMinus();
 	actualTrans_.parent = &bulletTrans_;
-	actualTrans_.translation = { PhysicsMath::CircularMotion({},(1 - beziersTime_ * 1 / maxDeathTime_),angle_).x,PhysicsMath::CircularMotion({},(1 - beziersTime_ * 1 / maxDeathTime_),angle_).y,0.0f };
-	actualTrans_.TransUpdate(camera_);
+	actualTrans_.translation = { PhysicsMath::CircularMotion({},(1 - beziersTime_ / maxDeathTime_),angle_).x,PhysicsMath::CircularMotion({},(1 - beziersTime_ / maxDeathTime_),angle_).y,0.0f };
+	actualTrans_.TransUpdate(sCamera_);
 }

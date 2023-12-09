@@ -1,6 +1,5 @@
 #pragma once
 #include"GameObject.h"
-#include"Camera.h"
 
 enum class BulletOwner
 {
@@ -50,7 +49,7 @@ public://GameObjectで必要な奴
 	virtual const bool GetLockOnFlag() = 0;
 
 public://Bulletで必要な奴
-	virtual void SetCamera(Camera* camera) = 0;
+	
 	virtual void SetPos(const myMath::Vector3& position) = 0;
 	virtual void SetDirectionVector(const myMath::Vector3& directionVector) = 0;
 	virtual void SetOwner(BulletOwner owner) = 0;

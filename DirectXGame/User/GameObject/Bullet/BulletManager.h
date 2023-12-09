@@ -1,6 +1,5 @@
 #pragma once
 #include"NormalBullet.h"
-#include"Camera.h"
 
 class BulletManager
 {
@@ -14,7 +13,7 @@ public:
 
 	void Initialize();
 
-	void Update(Camera* camera);
+	void Update();
 
 	void Draw();
 

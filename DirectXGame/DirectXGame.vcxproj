@@ -103,10 +103,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\GameObject\GameObject.cpp" />
     <ClCompile Include="User\UI\EnemyLocationSprite.cpp" />
     <ClCompile Include="User\Other\GameHeader.cpp" />
     <ClCompile Include="User\Other\TutorialSkip.cpp" />
-    <ClCompile Include="User\GameObject\Building\BuildingBase.cpp" />
     <ClCompile Include="User\GameObject\Building\Building.cpp" />
     <ClCompile Include="User\GameObject\Building\BuildingManager.cpp" />
     <ClCompile Include="Engine\Math\Quaternion.cpp" />

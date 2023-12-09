@@ -34,6 +34,8 @@ public:
 
 	const uint32_t& GetGameTime();
 
+	float GetTimeSpeed();
+
 	void SetTimeSpeed(const float timeSpeed);
 
 	void SetGameTime(const uint32_t time);

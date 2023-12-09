@@ -9,7 +9,6 @@ class Reticle :public GameObject
 private:
 
 	InputManager* input_ = nullptr;
-	Camera* camera_ = nullptr;
 
 	std::unique_ptr<Sprite>reticle_;
 	Transform reticleTrans_;
@@ -76,8 +75,6 @@ public:
 	void Reset();
 
 	const float GetReticleLimit();
-
-	void SetCamera(Camera* camera);
 
 	static const myMath::Vector2 GetAddTargetAngle();
 

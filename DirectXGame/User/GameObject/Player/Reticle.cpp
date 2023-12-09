@@ -42,7 +42,7 @@ const bool Reticle::GetIsDead()
 void Reticle::Update()
 {
 	//カメラを親にする為に行列をTransformのmatWorldに登録
-	cameraTrans_.matWorld = camera_->GetMatView();
+	cameraTrans_.matWorld = sCamera_->GetMatView();
 	//レティクルの親にカメラを設定
 	reticleTrans_.parent = &cameraTrans_;
 
@@ -54,9 +54,9 @@ void Reticle::Update()
 	ChangeReticleUpdate();
 
 	//スプライトの更新処理
-	reticleTrans_.TransUpdate(camera_);
+	reticleTrans_.TransUpdate(sCamera_);
 
-	collisionData.rayStartPos = camera_->GetEye();
+	collisionData.rayStartPos = sCamera_->GetEye();
 	collisionData.rayEndPos = reticleTrans_.parentToTranslation;
 }
 
@@ -72,7 +72,7 @@ void Reticle::Draw()
 		{
 			reticle_->SetTexture3D(reticleTex2_);
 		}
-		reticle_->DrawSprite3D(camera_, reticleTrans_);
+		reticle_->DrawSprite3D(sCamera_, reticleTrans_);
 	}
 }
 
@@ -115,11 +115,6 @@ const Transform& Reticle::GetTransform()
 	return reticleTrans_;
 }
 
-void Reticle::SetCamera(Camera* camera)
-{
-	camera_ = camera;
-}
-
 const myMath::Vector2 Reticle::GetAddTargetAngle()
 {
 	return addTargetAngle_;
@@ -150,37 +145,37 @@ void Reticle::Move()
 #pragma region キーボード
 	if (input_->KeyboardKeepPush(DIK_UP))
 	{
-		reticleTrans_.translation += {0.0f, reticleSpeed_, 0.0f};
+		reticleTrans_.translation += {0.0f, reticleSpeed_* sGameTimer_->GetTimeSpeed(), 0.0f};
 	}
 	if (input_->KeyboardKeepPush(DIK_LEFT))
 	{
-		reticleTrans_.translation += {-reticleSpeed_, 0.0f, 0.0f};
+		reticleTrans_.translation += {-reticleSpeed_ * sGameTimer_->GetTimeSpeed(), 0.0f, 0.0f};
 	}
 	if (input_->KeyboardKeepPush(DIK_DOWN))
 	{
-		reticleTrans_.translation += {0.0f, -reticleSpeed_, 0.0f};
+		reticleTrans_.translation += {0.0f, -reticleSpeed_ * sGameTimer_->GetTimeSpeed(), 0.0f};
 	}
 	if (input_->KeyboardKeepPush(DIK_RIGHT))
 	{
-		reticleTrans_.translation += {reticleSpeed_, 0.0f, 0.0f};
+		reticleTrans_.translation += {reticleSpeed_* sGameTimer_->GetTimeSpeed(), 0.0f, 0.0f};
 	}
 #pragma endregion キーボード
 
 #pragma region コントローラー
 
 	//Lスティックを傾けることで移動できるようにする
-	reticleTrans_.translation += {reticleSpeed_* input_->GetLeftStickVec().x, -reticleSpeed_ * input_->GetLeftStickVec().y, 0.0f};
+	reticleTrans_.translation += {reticleSpeed_* sGameTimer_->GetTimeSpeed()* input_->GetLeftStickVec().x, -reticleSpeed_ * sGameTimer_->GetTimeSpeed() * input_->GetLeftStickVec().y, 0.0f};
 
 #pragma endregion コントローラー
 
-	addTargetAngle_.x = myMath::ChangeRadians(reticleTrans_.translation.x / 45.0f * 20.0f);
+	addTargetAngle_.x = myMath::ChangeRadians(reticleTrans_.translation.x / 45.0f * 20.0f / sGameTimer_->GetTimeSpeed());
 	if (cameraFlag_ == 2)
 	{
-		addTargetAngle_.y = myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 20.0f);
+		addTargetAngle_.y = myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 20.0f / sGameTimer_->GetTimeSpeed());
 	}
 	else
 	{
-		addTargetAngle_.y = -myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 20.0f);
+		addTargetAngle_.y = -myMath::ChangeRadians(reticleTrans_.translation.y / 45.0f * 20.0f / sGameTimer_->GetTimeSpeed());
 	}
 }
 
@@ -206,8 +201,8 @@ void Reticle::ChangeReticleUpdate()
 		}
 		else
 		{
-  			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutBack(animationTimer_- maxAnimationTime_ / 2,0.25f,0.5f,maxAnimationTime_ / 2)),//まずは小さくなる
-			static_cast<float>(Easing::EaseOutBack(animationTimer_- maxAnimationTime_ / 2,0.25f,0.5f,maxAnimationTime_ / 2)),
+			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutBack(animationTimer_ - maxAnimationTime_ / 2,0.25f,0.5f,maxAnimationTime_ / 2)),//まずは小さくなる
+			static_cast<float>(Easing::EaseOutBack(animationTimer_ - maxAnimationTime_ / 2,0.25f,0.5f,maxAnimationTime_ / 2)),
 			1.0f };
 		}
 

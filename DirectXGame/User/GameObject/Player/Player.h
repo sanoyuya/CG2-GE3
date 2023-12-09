@@ -134,7 +134,7 @@ private:
 
 	void NormalBulletAttack();
 
-	void SmokeUpdate(Camera* camera);
+	void SmokeUpdate();
 
 	void LockOnAttack();
 };

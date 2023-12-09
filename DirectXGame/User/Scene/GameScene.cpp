@@ -55,19 +55,24 @@ void GameScene::Initialize()
 		break;
 	}
 
-	player_ = std::make_unique<Player>();
-	player_->Initialize();
-	playerDamageEffect_ = std::make_unique<PlayerDamageEffect>();
-
 	camera_ = std::make_unique<RailCamera>();
 	camera_->Initialize(gameLevelData_->GetCameraData());
 	camera_->Update(gameTimer_.get());
 
+	GameObject::SetCamera(camera_->GetCameraPtr());
+	GameObject::SetGameTimer(gameTimer_.get());
+
 	bulletManager_ = std::make_unique<BulletManager>();
 	bulletManager_->Initialize();
 
+	player_ = std::make_unique<Player>();
+	player_->Initialize();
+	player_->SetCamera(camera_.get());
+	player_->SetBulletManager(bulletManager_.get());
+	playerDamageEffect_ = std::make_unique<PlayerDamageEffect>();
+
 	enemyManager_ = std::make_unique<EnemyManager>();
-	enemyManager_->Initialize(gameLevelData_->GetEnemyData(),camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
+	enemyManager_->Initialize(gameLevelData_->GetEnemyData(), player_.get(), bulletManager_.get());
 
 	radar_ = std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
@@ -79,8 +84,6 @@ void GameScene::Initialize()
 
 	buildingManager_ = std::make_unique<BuildingManager>();
 	buildingManager_->Initialize(gameLevelData_->GetBuildingList());
-	BuildingBase::SetCamera(camera_->GetCameraPtr());
-	BuildingBase::SetGameTimer(gameTimer_.get());
 
 	tutorialSkip_ = std::make_unique<TutorialSkip>();
 	tutorialSkip_->Initialize(gameTimer_.get());
@@ -121,7 +124,7 @@ void GameScene::Update()
 		gameTimer_->Reset();
 		camera_->ReLoad(gameLevelData_->GetCameraData());
 		player_->Reset();
-		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
+		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), player_.get(), bulletManager_.get());
 		bulletManager_->Reset();
 		buildingManager_->ReLoad(gameLevelData_->GetBuildingList());
 		enemyLocationSprite_->ReLoad(enemyManager_.get());
@@ -158,8 +161,6 @@ void GameScene::Update()
 	{
 		camera_->BeginUpdate(gameTimer_.get());
 		gameTimer_->Update();
-		player_->SetCamera(camera_.get());
-		player_->SetBulletManager(bulletManager_.get());
 		player_->Update();
 		camera_->Update(gameTimer_.get());
 		gameLevelData_->Update(camera_->GetCameraPtr());
@@ -168,7 +169,7 @@ void GameScene::Update()
 		buildingManager_->Update();
 		playerDamageEffect_->Update(player_.get());
 		enemyManager_->Update();
-		bulletManager_->Update(camera_->GetCameraPtr());
+		bulletManager_->Update();
 		ColliderManager::GetInstance()->Update(player_.get());
 		radar_->Update(camera_->GetCameraPtr());
 		if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
@@ -202,7 +203,7 @@ void GameScene::Update()
 		default:
 			break;
 		}
-		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), camera_->GetCameraPtr(), player_.get(), gameTimer_.get(), bulletManager_.get());
+		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), player_.get(), bulletManager_.get());
 	}
 	ImGui::End();
 #endif _DEBUG
