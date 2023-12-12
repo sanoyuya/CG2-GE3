@@ -7,6 +7,8 @@
 #include"Retention.h"
 #include"GameHeader.h"
 #include"EnemyLocationSprite.h"
+#include"TutorialSkip.h"
+#include"Text.h"
 
 void MyGame::Initialize()
 {
@@ -26,15 +28,7 @@ void MyGame::Initialize()
 	postEffect_ = std::make_unique<MultiTexturePostEffect>();
 	postEffect_->Initialize(windowsApp_.get());
 
-	SceneChangeAnimation::GetInstance()->StaticInitialize();
-
-	Enemy::StaticInitialize();
-
-	HitEffect::StaticInitialize();
-
-	Pose::GetInstance()->Initialize();
-
-	EnemyLocationSprite::StaticInitialize();
+	LoadAsset();
 
 #ifdef _DEBUG
 	//シーンマネージャーに最初のシーンをセット
@@ -75,4 +69,15 @@ void MyGame::SceneDraw()
 void MyGame::PostEffectDraw()
 {
 	postEffect_->Draw();
+}
+
+void MyGame::LoadAsset()
+{
+	SceneChangeAnimation::GetInstance()->StaticInitialize();
+	Enemy::StaticInitialize();
+	HitEffect::StaticInitialize();
+	Pose::GetInstance()->Initialize();
+	EnemyLocationSprite::StaticInitialize();
+	Text::LoadAsset();
+	TutorialSkip::LoadAsset();
 }

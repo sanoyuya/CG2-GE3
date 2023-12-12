@@ -235,22 +235,22 @@ void GameScene::TextInitialize()
 	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
 	{
 		moveText_ = std::make_unique<Text>();
-		moveText_->Initialize("Resources/move.png");
+		moveText_->Initialize(TextName::MOVE);
 
 		attackText_ = std::make_unique<Text>();
-		attackText_->Initialize("Resources/attack.png");
+		attackText_->Initialize(TextName::ATTACK);
 
 		cameraText_ = std::make_unique<Text>();
-		cameraText_->Initialize("Resources/camera.png");
+		cameraText_->Initialize(TextName::CAMERAMOVE);
 
 		chargeAttackText_ = std::make_unique<Text>();
-		chargeAttackText_->Initialize("Resources/chargeAttack.png");
+		chargeAttackText_->Initialize(TextName::CHARGEATTACK);
 
 		readyText_ = std::make_unique<Text>();
-		readyText_->Initialize("Resources/ready.png");
+		readyText_->Initialize(TextName::READY);
 
 		goText_ = std::make_unique<Text>();
-		goText_->Initialize("Resources/go.png");
+		goText_->Initialize(TextName::GO);
 	}
 }
 

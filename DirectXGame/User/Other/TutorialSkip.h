@@ -14,7 +14,7 @@ private:
 	GameTimer* gameTimer_ = nullptr;
 
 	std::unique_ptr<Sprite2D>text_;//テキスト
-	uint32_t textTex_ = 0;
+	static uint32_t sTextTex_;
 
 	bool drawFlag_ = false;
 
@@ -27,7 +27,7 @@ private:
 	float alpha_ = 0.0f;
 
 	std::unique_ptr<Sprite2D>back_;
-	uint32_t backTex_ = 0;
+	static uint32_t sBackTex_;
 
 public:
 
@@ -40,4 +40,6 @@ public:
 	void SetGameStartTime(uint16_t startTime);
 
 	void Reset();
+
+	static void LoadAsset();
 };

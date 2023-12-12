@@ -1,16 +1,17 @@
 #include "Text.h"
 #include"EasingFunction.h"
 #include"GameHeader.h"
+std::array<uint32_t, 6> Text::sTextTex_;
+uint32_t Text::sFrameTex_;
 
-void Text::Initialize(const std::string& filePath)
+void Text::Initialize(const TextName& textFlag)
 {
-	frameTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
-	textTex_= TextureManager::GetInstance()->LoadTexture(filePath);
+	textTex_ = sTextTex_[static_cast<uint8_t>(textFlag)];
 
 	for (uint8_t i = 0; i < frame_.size(); i++)
 	{
 		frame_[i] = std::make_unique<Sprite2D>();
-		frame_[i]->Sprite2DInitialize(frameTex_);
+		frame_[i]->Sprite2DInitialize(sFrameTex_);
 	}
 
 	center_ = { GameHeader::windowsCenter_.x,GameHeader::windowsCenter_.y * 3 / 2 };
@@ -27,15 +28,15 @@ void Text::Initialize(const std::string& filePath)
 
 void Text::Update(GameTimer* gameTimer, uint8_t startTime, uint8_t endTime)
 {
-	if (startTime*60 <= gameTimer->GetFlameCount() && gameTimer->GetFlameCount() <= endTime * 60)
+	if (startTime * GameHeader::sFps_ <= gameTimer->GetFlameCount() && gameTimer->GetFlameCount() <= endTime * GameHeader::sFps_)
 	{
 		drawFrag_ = true;
 
-		if (startTime * 60 <= gameTimer->GetFlameCount() && gameTimer->GetFlameCount()<= startTime * 60 + time_)
+		if (startTime * GameHeader::sFps_ <= gameTimer->GetFlameCount() && gameTimer->GetFlameCount() <= startTime * GameHeader::sFps_ + time_)
 		{
 			Begin(gameTimer, startTime);
 		}
-		else if (endTime * 60 - time_ <= gameTimer->GetFlameCount() && gameTimer->GetFlameCount() <= endTime * 60)
+		else if (endTime * GameHeader::sFps_ - time_ <= gameTimer->GetFlameCount() && gameTimer->GetFlameCount() <= endTime * GameHeader::sFps_)
 		{
 			End(gameTimer, endTime);
 		}
@@ -59,22 +60,33 @@ void Text::Draw()
 	}
 }
 
+void Text::LoadAsset()
+{
+	sFrameTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
+	sTextTex_[static_cast<uint8_t>(TextName::MOVE)] = TextureManager::GetInstance()->LoadTexture("Resources/move.png");
+	sTextTex_[static_cast<uint8_t>(TextName::ATTACK)] = TextureManager::GetInstance()->LoadTexture("Resources/attack.png");
+	sTextTex_[static_cast<uint8_t>(TextName::CAMERAMOVE)] = TextureManager::GetInstance()->LoadTexture("Resources/camera.png");
+	sTextTex_[static_cast<uint8_t>(TextName::CHARGEATTACK)] = TextureManager::GetInstance()->LoadTexture("Resources/chargeAttack.png");
+	sTextTex_[static_cast<uint8_t>(TextName::READY)] = TextureManager::GetInstance()->LoadTexture("Resources/ready.png");
+	sTextTex_[static_cast<uint8_t>(TextName::GO)] = TextureManager::GetInstance()->LoadTexture("Resources/go.png");
+}
+
 void Text::Begin(GameTimer* gameTimer, uint8_t startTime)
 {
-	frameScale_[0] = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * 60, 0.0f, frameSize_.x * 2, time_));
-	frameScale_[1] = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * 60, 0.0f, frameSize_.y * 2, time_));
-	frameScale_[2] = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * 60, 0.0f, frameSize_.x * 2, time_));
-	frameScale_[3] = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * 60, 0.0f, frameSize_.y * 2, time_));
+	frameScale_[0] = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * GameHeader::sFps_, 0.0f, frameSize_.x * 2, time_));
+	frameScale_[1] = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * GameHeader::sFps_, 0.0f, frameSize_.y * 2, time_));
+	frameScale_[2] = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * GameHeader::sFps_, 0.0f, frameSize_.x * 2, time_));
+	frameScale_[3] = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * GameHeader::sFps_, 0.0f, frameSize_.y * 2, time_));
 
-	textAlpha_ = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * 60, 0.0f, 1.0f, time_));
+	textAlpha_ = static_cast<float>(Easing::EaseOutCubic(gameTimer->GetFlameCount() - startTime * GameHeader::sFps_, 0.0f, 1.0f, time_));
 }
 
 void Text::End(GameTimer* gameTimer, uint8_t endTime)
 {
-	frameScale_[0] = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * 60, frameSize_.x * 2, 0.0f, time_));
-	frameScale_[1] = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * 60, frameSize_.y * 2, 0.0f, time_));
-	frameScale_[2] = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * 60, frameSize_.x * 2, 0.0f, time_));
-	frameScale_[3] = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * 60, frameSize_.y * 2, 0.0f, time_));
+	frameScale_[0] = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * GameHeader::sFps_, frameSize_.x * 2, 0.0f, time_));
+	frameScale_[1] = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * GameHeader::sFps_, frameSize_.y * 2, 0.0f, time_));
+	frameScale_[2] = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * GameHeader::sFps_, frameSize_.x * 2, 0.0f, time_));
+	frameScale_[3] = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * GameHeader::sFps_, frameSize_.y * 2, 0.0f, time_));
 
-	textAlpha_ = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * 60, 1.0f, 0.0f, time_));
+	textAlpha_ = static_cast<float>(Easing::EaseInCubic(gameTimer->GetFlameCount() - (endTime - 1) * GameHeader::sFps_, 1.0f, 0.0f, time_));
 }

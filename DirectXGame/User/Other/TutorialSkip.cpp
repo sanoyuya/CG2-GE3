@@ -1,18 +1,18 @@
 #include "TutorialSkip.h"
 #include"EasingFunction.h"
 #include"GameHeader.h"
+uint32_t TutorialSkip::sTextTex_;
+uint32_t TutorialSkip::sBackTex_;
 
 void TutorialSkip::Initialize(GameTimer* gameTimer)
 {
 	input_ = InputManager::GetInstance();
 
 	text_ = std::make_unique<Sprite2D>();
-	textTex_ = TextureManager::GetInstance()->LoadTexture("Resources/skip.png");
-	text_->Sprite2DInitialize(textTex_);
+	text_->Sprite2DInitialize(sTextTex_);
 
 	back_ = std::make_unique<Sprite2D>();
-	backTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
-	back_->Sprite2DInitialize(backTex_);
+	back_->Sprite2DInitialize(sBackTex_);
 
 	gameTimer_ = gameTimer;
 }
@@ -86,4 +86,10 @@ void TutorialSkip::Reset()
 	animationFlag_ = false;
 	animationTimer_ = 0;
 	alpha_ = 0.0f;
+}
+
+void TutorialSkip::LoadAsset()
+{
+	sTextTex_ = TextureManager::GetInstance()->LoadTexture("Resources/skip.png");
+	sBackTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
 }

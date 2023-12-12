@@ -28,4 +28,9 @@ public:
 	//描画処理
 	void SceneDraw()override;
 	void PostEffectDraw()override;
+
+private:
+
+	//アセットのロード
+	void LoadAsset();
 };

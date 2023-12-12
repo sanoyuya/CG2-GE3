@@ -2,6 +2,7 @@
 #include<cMath>
 #include <random>
 #include"Camera.h"
+#pragma warning(disable:4172)
 
 namespace myMath
 {

@@ -2,6 +2,16 @@
 #include"DrawOversight.h"
 #include"GameTimer.h"
 
+enum class TextName
+{
+	MOVE,
+	ATTACK,
+	CAMERAMOVE,
+	CHARGEATTACK,
+	READY,
+	GO
+};
+
 /// <summary>
 /// テキスト
 /// </summary>
@@ -10,7 +20,7 @@ class Text
 private:
 
 	std::array<std::unique_ptr<Sprite2D>, 4>frame_;//縁
-	uint32_t frameTex_ = 0;
+	static uint32_t sFrameTex_;
 
 	std::unique_ptr<Sprite2D>text_;//テキスト本体
 	uint32_t textTex_ = 0;
@@ -25,14 +35,17 @@ private:
 	const float time_ = 60.0f;
 
 	bool drawFrag_ = false;
+	static std::array<uint32_t,6> sTextTex_;
 
 public:
 
-	void Initialize(const std::string& filePath);
+	void Initialize(const TextName& textFlag);
 
 	void Update(GameTimer* gameTimer, uint8_t startTime, uint8_t endTime);
 
 	void Draw();
+
+	static void LoadAsset();
 
 private:
 

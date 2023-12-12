@@ -31,7 +31,7 @@ void EnemyLocationSprite::Initialize()
 
 void EnemyLocationSprite::Update()
 {
-	
+
 }
 
 void EnemyLocationSprite::Draw(EnemyManager* enemys, Camera* camera)
@@ -40,7 +40,7 @@ void EnemyLocationSprite::Draw(EnemyManager* enemys, Camera* camera)
 
 	for (auto& enemy : enemys->GetEnemyList())
 	{
-		if (enemy->GetSpawnFlag() == true)
+		if (enemy->GetSpawnFlag() == true && enemy->GetDeathAnimationFlag() == false)
 		{
 			//画面内に収める処理
 			myMath::Vector2 pos = { myMath::ScreenCoordinateTransformation(camera,enemy->GetTransform().parentToTranslation).x,myMath::ScreenCoordinateTransformation(camera,enemy->GetTransform().parentToTranslation).y };
