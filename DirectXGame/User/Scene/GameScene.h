@@ -13,11 +13,10 @@
 #include"Radar.h"
 #include"GameTimer.h"
 #include"BulletManager.h"
-#include"Text.h"
 #include"GroundBack.h"
 #include"BuildingManager.h"
-#include"TutorialSkip.h"
 #include"EnemyLocationSprite.h"
+#include"Tutorial.h"
 
 class GameScene :public BaseScene
 {
@@ -58,18 +57,11 @@ private:
 
 	bool poseFlag_ = false;
 
-	std::unique_ptr<Text>moveText_;
-	std::unique_ptr<Text>attackText_;
-	std::unique_ptr<Text>cameraText_;
-	std::unique_ptr<Text>chargeAttackText_;
-	std::unique_ptr<Text>readyText_;
-	std::unique_ptr<Text>goText_;
-
 	std::unique_ptr<GroundBack>groundBack_;
 
-	std::unique_ptr<TutorialSkip>tutorialSkip_;
-
 	std::unique_ptr<EnemyLocationSprite>enemyLocationSprite_;
+
+	std::unique_ptr<Tutorial>tutorial_;
 
 public:
 

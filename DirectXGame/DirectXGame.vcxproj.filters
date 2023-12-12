@@ -184,6 +184,12 @@
     <Filter Include="User\ヘッダー ファイル\Object\Building">
       <UniqueIdentifier>{67965122-d96b-40a4-bc42-4d7a09311524}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\ソース ファイル\Tutorial">
+      <UniqueIdentifier>{3fc37c47-f499-43d9-a769-9fcbc7981983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\ヘッダー ファイル\Tutorial">
+      <UniqueIdentifier>{89d1531c-f267-482a-af00-b7e85ecb6b3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Other\main.cpp">
@@ -432,9 +438,6 @@
     <ClCompile Include="Engine\Math\Quaternion.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="User\Other\Text.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="User\Other\GroundBack.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
@@ -443,9 +446,6 @@
     </ClCompile>
     <ClCompile Include="User\GameObject\Building\BuildingManager.cpp">
       <Filter>User\ソース ファイル\Object\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Other\TutorialSkip.cpp">
-      <Filter>User\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="User\Other\GameHeader.cpp">
       <Filter>User\ソース ファイル</Filter>
@@ -458,6 +458,15 @@
     </ClCompile>
     <ClCompile Include="User\GameObject\GameObject.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Other\Tutorial\Tutorial.cpp">
+      <Filter>User\ソース ファイル\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Other\Tutorial\TutorialSkip.cpp">
+      <Filter>User\ソース ファイル\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Other\Tutorial\Text.cpp">
+      <Filter>User\ソース ファイル\Tutorial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -817,9 +826,6 @@
     <ClInclude Include="Engine\Math\Quaternion.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="User\Other\Text.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="User\Other\GroundBack.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
@@ -832,14 +838,20 @@
     <ClInclude Include="User\GameObject\Building\BuildingBase.h">
       <Filter>User\ヘッダー ファイル\Object\Building</Filter>
     </ClInclude>
-    <ClInclude Include="User\Other\TutorialSkip.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="User\Other\GameHeader.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="User\UI\EnemyLocationSprite.h">
       <Filter>User\ヘッダー ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Other\Tutorial\TutorialSkip.h">
+      <Filter>User\ヘッダー ファイル\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Other\Tutorial\Text.h">
+      <Filter>User\ヘッダー ファイル\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Other\Tutorial\Tutorial.h">
+      <Filter>User\ヘッダー ファイル\Tutorial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

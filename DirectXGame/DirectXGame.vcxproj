@@ -66,7 +66,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\GameObject;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Effect\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh;$(ProjectDir)User\GameObject\Bullet;$(ProjectDir)User\GameObject\Enemy;$(ProjectDir)User\GameObject\Player;$(ProjectDir)User\Other;$(ProjectDir)User\Stage;$(ProjectDir)User\Effect;$(ProjectDir)User\GameObject\Building</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\GameObject;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Effect\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh;$(ProjectDir)User\GameObject\Bullet;$(ProjectDir)User\GameObject\Enemy;$(ProjectDir)User\GameObject\Player;$(ProjectDir)User\Other;$(ProjectDir)User\Stage;$(ProjectDir)User\Effect;$(ProjectDir)User\GameObject\Building;$(ProjectDir)User\Other\Tutorial</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -88,7 +88,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\GameObject;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Effect\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh;$(ProjectDir)User\GameObject\Bullet;$(ProjectDir)User\GameObject\Enemy;$(ProjectDir)User\GameObject\Player;$(ProjectDir)User\Other;$(ProjectDir)User\Stage;$(ProjectDir)User\Effect;$(ProjectDir)User\GameObject\Building</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DirectXCore;$(ProjectDir)Engine\DirectXCore\Buffer;$(ProjectDir)Engine\Draw;$(ProjectDir)Engine\Draw\3D\Model;$(ProjectDir)Engine\Draw\2D\Sprite;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine;$(ProjectDir)User;$(ProjectDir)Engine\ImGui;$(ProjectDir)Engine\Other;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Light;$(ProjectDir)Engine\Draw\2D\PostEffect;$(ProjectDir)Engine\Draw\3D;$(ProjectDir)Engine\LevelEditor;$(ProjectDir)User\GameObject;$(ProjectDir)User\Scene;$(ProjectDir)Engine\Draw\Common;$(ProjectDir)Engine\DirectXCore\Core;$(ProjectDir)Engine\Draw\2D\Particle;$(ProjectDir)User\Effect\Particle;$(ProjectDir)User\UI;$(ProjectDir)Engine\Draw\2D\Mesh\Mesh;$(ProjectDir)User\GameObject\Bullet;$(ProjectDir)User\GameObject\Enemy;$(ProjectDir)User\GameObject\Player;$(ProjectDir)User\Other;$(ProjectDir)User\Stage;$(ProjectDir)User\Effect;$(ProjectDir)User\GameObject\Building;$(ProjectDir)User\Other\Tutorial</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -103,15 +103,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Other\Tutorial\Tutorial.cpp" />
     <ClCompile Include="User\GameObject\GameObject.cpp" />
     <ClCompile Include="User\UI\EnemyLocationSprite.cpp" />
     <ClCompile Include="User\Other\GameHeader.cpp" />
-    <ClCompile Include="User\Other\TutorialSkip.cpp" />
+    <ClCompile Include="User\Other\Tutorial\TutorialSkip.cpp" />
     <ClCompile Include="User\GameObject\Building\Building.cpp" />
     <ClCompile Include="User\GameObject\Building\BuildingManager.cpp" />
     <ClCompile Include="Engine\Math\Quaternion.cpp" />
     <ClCompile Include="User\Other\GroundBack.cpp" />
-    <ClCompile Include="User\Other\Text.cpp" />
+    <ClCompile Include="User\Other\Tutorial\Text.cpp" />
     <ClCompile Include="User\Other\Pose.cpp" />
     <ClCompile Include="User\Other\Retention.cpp" />
     <ClCompile Include="User\Effect\HitEffect.cpp" />
@@ -356,15 +357,16 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Other\Tutorial\Tutorial.h" />
     <ClInclude Include="User\UI\EnemyLocationSprite.h" />
     <ClInclude Include="User\Other\GameHeader.h" />
-    <ClInclude Include="User\Other\TutorialSkip.h" />
+    <ClInclude Include="User\Other\Tutorial\TutorialSkip.h" />
     <ClInclude Include="User\GameObject\Building\BuildingBase.h" />
     <ClInclude Include="User\GameObject\Building\Building.h" />
     <ClInclude Include="User\GameObject\Building\BuildingManager.h" />
     <ClInclude Include="Engine\Math\Quaternion.h" />
     <ClInclude Include="User\Other\GroundBack.h" />
-    <ClInclude Include="User\Other\Text.h" />
+    <ClInclude Include="User\Other\Tutorial\Text.h" />
     <ClInclude Include="User\Other\Pose.h" />
     <ClInclude Include="User\Other\Retention.h" />
     <ClInclude Include="User\Effect\HitEffect.h" />

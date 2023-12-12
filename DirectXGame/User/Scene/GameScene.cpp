@@ -77,17 +77,14 @@ void GameScene::Initialize()
 	radar_ = std::make_unique<Radar>();
 	radar_->Initialize(enemyManager_.get());
 
-	TextInitialize();
+	tutorial_ = std::make_unique<Tutorial>();
+	tutorial_->Initialize(gameTimer_.get());
 
 	groundBack_= std::make_unique<GroundBack>();
 	groundBack_->Initialize(gameLevelData_->GetGroundTranslation(), gameLevelData_->GetGroundSize());
 
 	buildingManager_ = std::make_unique<BuildingManager>();
 	buildingManager_->Initialize(gameLevelData_->GetBuildingList());
-
-	tutorialSkip_ = std::make_unique<TutorialSkip>();
-	tutorialSkip_->Initialize(gameTimer_.get());
-	tutorialSkip_->SetGameStartTime(78);
 
 	enemyLocationSprite_ = std::make_unique<EnemyLocationSprite>();
 	enemyLocationSprite_->Load(enemyManager_.get());
@@ -128,7 +125,7 @@ void GameScene::Update()
 		bulletManager_->Reset();
 		buildingManager_->ReLoad(gameLevelData_->GetBuildingList());
 		enemyLocationSprite_->ReLoad(enemyManager_.get());
-		tutorialSkip_->Reset();
+		tutorial_->Rest();
 	}
 
 	if (input_->KeyboardTriggerPush(DIK_T))
@@ -172,11 +169,7 @@ void GameScene::Update()
 		bulletManager_->Update();
 		ColliderManager::GetInstance()->Update(player_.get());
 		radar_->Update(camera_->GetCameraPtr());
-		if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
-		{
-			TextUpdate();
-		}
-		tutorialSkip_->Update();
+		tutorial_->Update();
 	}
 #ifdef _DEBUG
 	gameTimer_->ImGuiUpdate();
@@ -221,55 +214,8 @@ void GameScene::Draw()
 	player_->Draw();
 	radar_->Draw(enemyManager_.get(), player_.get());
 	enemyLocationSprite_->Draw(enemyManager_.get(), camera_->GetCameraPtr());
-	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
-	{
-		TextDraw();
-	}
-	tutorialSkip_->Draw();
+	tutorial_->Draw();
+	
 	Pose::GetInstance()->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
-}
-
-void GameScene::TextInitialize()
-{
-	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
-	{
-		moveText_ = std::make_unique<Text>();
-		moveText_->Initialize(TextName::MOVE);
-
-		attackText_ = std::make_unique<Text>();
-		attackText_->Initialize(TextName::ATTACK);
-
-		cameraText_ = std::make_unique<Text>();
-		cameraText_->Initialize(TextName::CAMERAMOVE);
-
-		chargeAttackText_ = std::make_unique<Text>();
-		chargeAttackText_->Initialize(TextName::CHARGEATTACK);
-
-		readyText_ = std::make_unique<Text>();
-		readyText_->Initialize(TextName::READY);
-
-		goText_ = std::make_unique<Text>();
-		goText_->Initialize(TextName::GO);
-	}
-}
-
-void GameScene::TextUpdate()
-{
-	moveText_->Update(gameTimer_.get(), 3, 7);//Blender上で設定できるようにしたい
-	attackText_->Update(gameTimer_.get(), 9, 13);
-	cameraText_->Update(gameTimer_.get(), 20, 25);
-	chargeAttackText_->Update(gameTimer_.get(), 50, 55);
-	readyText_->Update(gameTimer_.get(), 81, 84);
-	goText_->Update(gameTimer_.get(), 84, 86);
-}
-
-void GameScene::TextDraw()
-{
-	moveText_->Draw();
-	attackText_->Draw();
-	cameraText_->Draw();
-	chargeAttackText_->Draw();
-	readyText_->Draw();
-	goText_->Draw();
 }
