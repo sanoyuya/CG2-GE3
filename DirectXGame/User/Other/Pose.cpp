@@ -1,19 +1,15 @@
 #include "Pose.h"
 #include"GameHeader.h"
+uint32_t Pose::sPoseTex_;
+uint32_t Pose::sPoseBackTex_;
 
 void Pose::Initialize()
 {
 	poseSprite_ = std::make_unique<Sprite>();
-	poseTex_ = poseSprite_->LoadTexture("Resources/pose.png");
-	poseSprite_->Sprite2DInitialize(poseTex_);
+	poseSprite_->Sprite2DInitialize(sPoseTex_);
 
 	poseBack_ = std::make_unique<Sprite>();
-	poseBackTex_ = poseBack_->LoadTexture("Resources/white1x1.png");
-	poseBack_->Sprite2DInitialize(poseBackTex_);
-}
-
-void Pose::Update()
-{
+	poseBack_->Sprite2DInitialize(sPoseBackTex_);
 }
 
 void Pose::Draw()
@@ -38,8 +34,8 @@ const bool Pose::GetPoseFlag()
 	return poseFlag_;
 }
 
-Pose* Pose::GetInstance()
+void Pose::LoadAsset()
 {
-	static Pose instance;
-	return &instance;
+	sPoseTex_ = TextureManager::GetInstance()->LoadTexture("Resources/pose.png");
+	sPoseBackTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
 }

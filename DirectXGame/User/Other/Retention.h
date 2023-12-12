@@ -22,7 +22,6 @@ private:
 
 public:
 
-	void SetWindowData(WindowsApp* windowsApp);
 	void SetStageNum(const Stage stageNum);
 
 	const Stage GetStageNum();

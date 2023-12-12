@@ -20,7 +20,7 @@ private:
 
 public:
 
-	static void StaticInitialize();
+	static void LoadAsset();
 
 	void Initialize();
 

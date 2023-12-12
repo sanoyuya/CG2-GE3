@@ -11,7 +11,6 @@ private:
 	uint16_t actionTimer = 0;
 
 	std::unique_ptr<Model>enemy_;
-	uint32_t enemyTex_ = 0;
 	Transform enemyTrans_;
 	float spawnTime_ = 0.0f;
 	float deathTime_ = 0.0f;

@@ -16,7 +16,7 @@ private:
 
 public:
 
-	static void StaticInitialize();
+	static void LoadAsset();
 
 	void Load(EnemyManager* enemys);
 

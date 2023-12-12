@@ -5,7 +5,6 @@
 #include"SceneChangeAnimation.h"
 #include"MultiTexturePostEffect.h"
 #include"Retention.h"
-#include"Pose.h"
 
 GameScene::~GameScene()
 {
@@ -89,6 +88,9 @@ void GameScene::Initialize()
 	enemyLocationSprite_ = std::make_unique<EnemyLocationSprite>();
 	enemyLocationSprite_->Load(enemyManager_.get());
 
+	pose_ = std::make_unique<Pose>();
+	pose_->Initialize();
+
 	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 	audioManager_->PlayWave(bgm_);
 }
@@ -136,13 +138,13 @@ void GameScene::Update()
 
 	if (input_->KeyboardTriggerPush(DIK_P) || input_->ControllerButtonTriggerPush(START))
 	{
-		if (Pose::GetInstance()->GetPoseFlag() == false)
+		if (pose_->GetPoseFlag() == false)
 		{
-			Pose::GetInstance()->SetPoseFlag(true);
+			pose_->SetPoseFlag(true);
 		}
 		else
 		{
-			Pose::GetInstance()->SetPoseFlag(false);
+			pose_->SetPoseFlag(false);
 		}
 	}
 
@@ -154,7 +156,7 @@ void GameScene::Update()
 	lightManager_->SetPointLightColor(0, lightColor_);
 	lightManager_->SetPointLightAtten(0, lightAtten_);
 
-	if (Pose::GetInstance()->GetPoseFlag() == false)
+	if (pose_->GetPoseFlag() == false)
 	{
 		camera_->BeginUpdate(gameTimer_.get());
 		gameTimer_->Update();
@@ -216,6 +218,6 @@ void GameScene::Draw()
 	enemyLocationSprite_->Draw(enemyManager_.get(), camera_->GetCameraPtr());
 	tutorial_->Draw();
 	
-	Pose::GetInstance()->Draw();
+	pose_->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
 }

@@ -9,6 +9,7 @@
 #include"EnemyLocationSprite.h"
 #include"TutorialSkip.h"
 #include"Text.h"
+#include"GroundBack.h"
 
 void MyGame::Initialize()
 {
@@ -74,10 +75,11 @@ void MyGame::PostEffectDraw()
 void MyGame::LoadAsset()
 {
 	SceneChangeAnimation::GetInstance()->StaticInitialize();
-	Enemy::StaticInitialize();
-	HitEffect::StaticInitialize();
-	Pose::GetInstance()->Initialize();
-	EnemyLocationSprite::StaticInitialize();
+	Enemy::LoadAsset();
+	HitEffect::LoadAsset();
+	Pose::LoadAsset();
+	EnemyLocationSprite::LoadAsset();
 	Text::LoadAsset();
 	TutorialSkip::LoadAsset();
+	GroundBack::LoadAsset();
 }

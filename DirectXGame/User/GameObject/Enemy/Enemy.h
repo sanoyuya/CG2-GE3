@@ -30,10 +30,12 @@ protected:
 	BulletManager* bulletManager_ = nullptr;
 
 	static uint32_t sound_;
+	static uint32_t enemyTex0_;
+	static uint32_t enemyTex1_;
 
 public:
 
-	static void StaticInitialize();
+	static void LoadAsset();
 
 public:
 

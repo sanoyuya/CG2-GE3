@@ -17,6 +17,7 @@
 #include"BuildingManager.h"
 #include"EnemyLocationSprite.h"
 #include"Tutorial.h"
+#include"Pose.h"
 
 class GameScene :public BaseScene
 {
@@ -63,6 +64,8 @@ private:
 
 	std::unique_ptr<Tutorial>tutorial_;
 
+	std::unique_ptr<Pose>pose_;
+
 public:
 
 	~GameScene();
@@ -78,10 +81,4 @@ public:
 
 	//描画処理
 	void Draw()override;
-
-private:
-
-	void TextInitialize();
-	void TextUpdate();
-	void TextDraw();
 };

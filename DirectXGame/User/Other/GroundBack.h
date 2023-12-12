@@ -9,7 +9,7 @@ private:
 
 	std::unique_ptr<Model>groundBack_;
 	Transform groundBackTrans_;
-	uint32_t groundBackTex_ = 0;
+	static uint32_t groundBackTex_;
 
 	float alpha_ = 1.0f;
 
@@ -20,4 +20,6 @@ public:
 	void Update(Camera* camera, GameTimer* gameTimer);
 
 	void Draw();
+
+	static void LoadAsset();
 };

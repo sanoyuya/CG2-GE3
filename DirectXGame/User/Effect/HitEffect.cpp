@@ -2,7 +2,7 @@
 #include"EasingFunction.h"
 uint32_t HitEffect::hitTex_ = 0;
 
-void HitEffect::StaticInitialize()
+void HitEffect::LoadAsset()
 {
 	hitTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Hit.png");
 }

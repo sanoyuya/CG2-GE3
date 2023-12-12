@@ -19,8 +19,7 @@ NormalEnemy::~NormalEnemy()
 void NormalEnemy::Initialize()
 {
 	enemy_ = std::make_unique<Model>();
-	enemyTex_ = enemy_->CreateObjModel("Resources/enemy");
-	enemy_->SetModel(enemyTex_);
+	enemy_->SetModel(enemyTex0_);
 	enemyTrans_.Initialize();
 	enemyTrans_.TransUpdate(sCamera_);
 	maxBulletTime = static_cast<float>(myMath::GetRand(40.0f, 80.0f));

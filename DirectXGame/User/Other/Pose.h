@@ -8,16 +8,14 @@ private:
 	bool poseFlag_ = false;
 
 	std::unique_ptr<Sprite>poseSprite_;
-	uint32_t poseTex_ = 0;
+	static uint32_t sPoseTex_;
 
 	std::unique_ptr<Sprite>poseBack_;
-	uint32_t poseBackTex_ = 0;
+	static uint32_t sPoseBackTex_;
 
 public:
 
 	void Initialize();
-
-	void Update();
 
 	void Draw();
 
@@ -25,16 +23,5 @@ public:
 
 	const bool GetPoseFlag();
 
-	//シングルトン
-	static Pose* GetInstance();
-
-private:
-
-	Pose() = default;
-	~Pose() = default;
-
-	//コピーコンストラクタ・代入演算子削除
-	Pose& operator=(const Pose&) = delete;
-	Pose(const Pose&) = delete;
+	static void LoadAsset();
 };
-

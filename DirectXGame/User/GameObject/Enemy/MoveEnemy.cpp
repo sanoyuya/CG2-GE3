@@ -20,8 +20,7 @@ MoveEnemy::~MoveEnemy()
 void MoveEnemy::Initialize()
 {
 	enemy_ = std::make_unique<Model>();
-	enemyTex_ = enemy_->CreateObjModel("Resources/enemy2");
-	enemy_->SetModel(enemyTex_);
+	enemy_->SetModel(enemyTex1_);
 	enemyTrans_.Initialize();
 	enemyTrans_.translation = moveEnemyProperty_.spawnPos;
 	enemyTrans_.rotation = moveEnemyProperty_.movePosRotation;

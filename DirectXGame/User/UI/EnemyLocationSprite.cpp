@@ -2,7 +2,7 @@
 #include"GameHeader.h"
 uint32_t EnemyLocationSprite::spriteTex_;
 
-void EnemyLocationSprite::StaticInitialize()
+void EnemyLocationSprite::LoadAsset()
 {
 	spriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/attention.png");
 }
