@@ -5,6 +5,9 @@
 #include"SceneChangeAnimation.h"
 #include"MultiTexturePostEffect.h"
 #include"Retention.h"
+uint32_t GameScene::sSkyDomeTex_;
+uint32_t GameScene::sSkyDomeTex2_;
+uint32_t GameScene::sBgm_;
 
 GameScene::~GameScene()
 {
@@ -24,8 +27,6 @@ void GameScene::Initialize()
 
 	//天球
 	skyDome_ = std::make_unique<Model>();
-	skyDomeTex_ = Model::CreateObjModel("Resources/skydome3");
-	skyDomeTex2_ = Model::CreateObjModel("Resources/skydome");
 	skyDomeTrans_.Initialize();
 	skyDomeTrans_.scale = { 20.0f,20.0f ,20.0f };
 
@@ -36,12 +37,12 @@ void GameScene::Initialize()
 	{
 	case Stage::Tutorial:
 		gameLevelData_->Initialize("stage0/stage");
-		skyDome_->SetModel(skyDomeTex_);
+		skyDome_->SetModel(sSkyDomeTex_);
 		gameTimer_->SetGameTime(static_cast<uint32_t>(60 * 60 * 3.0));
 		break;
 	case Stage::Stage1:
 		gameLevelData_->Initialize("stage1/stage");
-		skyDome_->SetModel(skyDomeTex2_);
+		skyDome_->SetModel(sSkyDomeTex2_);
 		gameTimer_->SetGameTime(60 * 60 * 1);
 		break;
 	case Stage::Stage2:
@@ -91,15 +92,14 @@ void GameScene::Initialize()
 	pose_ = std::make_unique<Pose>();
 	pose_->Initialize();
 
-	bgm_ = audioManager_->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
-	audioManager_->PlayWave(bgm_);
+	audioManager_->PlayWave(sBgm_);
 }
 
 void GameScene::Destroy()
 {
 	ColliderManager::GetInstance()->Reset();
 	MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::None);
-	audioManager_->StopWave(bgm_);
+	audioManager_->StopWave(sBgm_);
 }
 
 void GameScene::Update()
@@ -220,4 +220,12 @@ void GameScene::Draw()
 	
 	pose_->Draw();
 	SceneChangeAnimation::GetInstance()->Draw();
+}
+
+void GameScene::LoadAsset()
+{
+	sSkyDomeTex_ = Model::CreateObjModel("Resources/skydome3");
+	sSkyDomeTex2_ = Model::CreateObjModel("Resources/skydome");
+
+	sBgm_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 }

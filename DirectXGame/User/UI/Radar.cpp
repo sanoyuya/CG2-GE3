@@ -1,20 +1,20 @@
 #include "Radar.h"
+uint32_t Radar::sRadarTex_;
+uint32_t Radar::sPlayerTex_;
+uint32_t Radar::sEnemyTex_;
 
 void Radar::Initialize(EnemyManager* enemys)
 {
 	radar_ = std::make_unique<Sprite>();
-	radarTex_ = radar_->LoadTexture("Resources/radar.png");
-	radar_->Sprite2DInitialize(radarTex_);
+	radar_->Sprite2DInitialize(sRadarTex_);
 
 	player_ = std::make_unique<Sprite>();
-	playerTex_ = radar_->LoadTexture("Resources/radarPlayer.png");
-	player_->Sprite2DInitialize(playerTex_);
+	player_->Sprite2DInitialize(sPlayerTex_);
 
-	enemyTex = radar_->LoadTexture("Resources/radarEnemy.png");
 	for (uint8_t i = 0; i < enemys->GetEnemyList().size(); i++)
 	{
 		std::unique_ptr<Sprite>tmp = std::make_unique<Sprite>();
-		tmp->Sprite2DInitialize(enemyTex);
+		tmp->Sprite2DInitialize(sEnemyTex_);
 		radarEnemys_.push_back(std::move(tmp));
 	}
 }
@@ -51,4 +51,11 @@ void Radar::Draw(EnemyManager* enemys, Player* player)
 	}
 	player_->DrawSprite2D(center_, { 1.0f,1.0f,1.0f,1.0f }, { 1.0f ,1.0f }, 0.0f);
 	radar_->DrawSprite2D(center_);
+}
+
+void Radar::LoadAsset()
+{
+	sRadarTex_ = TextureManager::GetInstance()->LoadTexture("Resources/radar.png");
+	sPlayerTex_ = TextureManager::GetInstance()->LoadTexture("Resources/radarPlayer.png");
+	sEnemyTex_ = TextureManager::GetInstance()->LoadTexture("Resources/radarEnemy.png");
 }

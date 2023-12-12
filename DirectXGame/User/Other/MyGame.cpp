@@ -10,6 +10,17 @@
 #include"TutorialSkip.h"
 #include"Text.h"
 #include"GroundBack.h"
+#include"Radar.h"
+#include"Player.h"
+#include"HPBar.h"
+#include"Reticle.h"
+#include"BuildingBase.h"
+#include"LockOnAnimation.h"
+#include"TitleScene.h"
+#include"StageSelectScene.h"
+#include"GameScene.h"
+#include"GameClearScene.h"
+#include"GameOverScene.h"
 
 void MyGame::Initialize()
 {
@@ -75,6 +86,11 @@ void MyGame::PostEffectDraw()
 void MyGame::LoadAsset()
 {
 	SceneChangeAnimation::GetInstance()->StaticInitialize();
+	TitleScene::LoadAsset();
+	StageSelectScene::LoadAsset();
+	GameScene::LoadAsset();
+	GameClearScene::LoadAsset();
+	GameOverScene::LoadAsset();
 	Enemy::LoadAsset();
 	HitEffect::LoadAsset();
 	Pose::LoadAsset();
@@ -82,4 +98,10 @@ void MyGame::LoadAsset()
 	Text::LoadAsset();
 	TutorialSkip::LoadAsset();
 	GroundBack::LoadAsset();
+	Radar::LoadAsset();
+	Player::LoadAsset();
+	HPBar::LoadAsset();
+	Reticle::LoadAsset();
+	LockOnAnimation::LoadAsset();
+	BuildingBase::LoadAsset();
 }

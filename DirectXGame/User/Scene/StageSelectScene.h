@@ -19,7 +19,7 @@ private:
 	const uint16_t maxStage = 3;
 
 	std::unique_ptr<Sprite>stageNumSprite_;
-	uint32_t stageNumSpriteTex_ = 0;
+	static uint32_t sStageNumSpriteTex_;
 
 public:
 
@@ -34,6 +34,8 @@ public:
 
 	//描画処理
 	void Draw()override;
+
+	static void LoadAsset();
 
 private:
 

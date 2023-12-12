@@ -6,7 +6,7 @@ class HPBar
 private:
 
 	std::unique_ptr<Sprite>hpBar_;
-	uint32_t hpBarTex_ = 0;
+	static uint32_t sHpBarTex_;
 	myMath::Vector4 hpColor = {};
 
 	int8_t maxHp_ = 0;
@@ -30,4 +30,6 @@ public:
 	void Update(const int8_t hp);
 
 	void Draw();
+
+	static void LoadAsset();
 };

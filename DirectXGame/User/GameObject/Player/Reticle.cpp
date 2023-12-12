@@ -3,6 +3,8 @@
 #include "ColliderManager.h"
 #include"EasingFunction.h"
 myMath::Vector2 Reticle::addTargetAngle_;
+uint32_t Reticle::sReticleTex_;
+uint32_t Reticle::sReticleTex2_;
 
 void Reticle::Initialize()
 {
@@ -10,9 +12,7 @@ void Reticle::Initialize()
 
 	//スプライトの初期化
 	reticle_ = std::make_unique<Sprite>();
-	reticleTex_ = reticle_->LoadTexture("Resources/reticle.png");
-	reticleTex2_ = reticle_->LoadTexture("Resources/reticle2.png");
-	reticle_->Sprite3DInitialize(reticleTex_);
+	reticle_->Sprite3DInitialize(sReticleTex_);
 	reticleTrans_.Initialize();
 	reticleTrans_.translation = { 0.0f,-reticleLimit_,200.0f };
 	reticleTrans_.scale = { 0.5f,0.5f,1.0f };
@@ -66,11 +66,11 @@ void Reticle::Draw()
 	{
 		if (lockOnFlag_ == false)
 		{
-			reticle_->SetTexture3D(reticleTex_);
+			reticle_->SetTexture3D(sReticleTex_);
 		}
 		else
 		{
-			reticle_->SetTexture3D(reticleTex2_);
+			reticle_->SetTexture3D(sReticleTex2_);
 		}
 		reticle_->DrawSprite3D(sCamera_, reticleTrans_);
 	}
@@ -138,6 +138,12 @@ void Reticle::GetLockOnAttackFlag(const bool flag)
 void Reticle::GetCameraFlag(const int8_t flag)
 {
 	cameraFlag_ = flag;
+}
+
+void Reticle::LoadAsset()
+{
+	sReticleTex_ = TextureManager::GetInstance()->LoadTexture("Resources/reticle.png");
+	sReticleTex2_ = TextureManager::GetInstance()->LoadTexture("Resources/reticle2.png");
 }
 
 void Reticle::Move()

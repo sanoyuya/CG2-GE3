@@ -1,6 +1,9 @@
 #include "GameOverScene.h"
 #include"EasingFunction.h"
 #include"SceneChangeAnimation.h"
+uint32_t GameOverScene::sResultTex_;
+uint32_t GameOverScene::sSkyDomeTex_;
+uint32_t GameOverScene::sBgm_;
 
 void GameOverScene::Initialize()
 {
@@ -15,22 +18,19 @@ void GameOverScene::Initialize()
 	Model::SetLight(lightManager_.get());
 
 	result_ = std::make_unique<Sprite>();
-	resultTex_ = result_->LoadTexture("Resources/defaultGameOver.png");
-	result_->Sprite2DInitialize(resultTex_);
+	result_->Sprite2DInitialize(sResultTex_);
 
 	//天球
 	skyDome_ = std::make_unique<Model>();
-	skyDomeTex_ = Model::CreateObjModel("Resources/skydome2");
-	skyDome_->SetModel(skyDomeTex_);
+	skyDome_->SetModel(sSkyDomeTex_);
 	skyDomeTrans_.Initialize();
 
-	bgm_ = audioManager_->LoadAudio("Resources/Sound/Blinded.mp3", 0.1f);
-	audioManager_->PlayWave(bgm_);
+	audioManager_->PlayWave(sBgm_);
 }
 
 void GameOverScene::Destroy()
 {
-	audioManager_->StopWave(bgm_);
+	audioManager_->StopWave(sBgm_);
 }
 
 void GameOverScene::Update()
@@ -46,4 +46,11 @@ void GameOverScene::Draw()
 	skyDome_->DrawModel(&skyDomeTrans_);
 	result_->DrawSprite2D({ 640.0f,360.0f });
 	SceneChangeAnimation::GetInstance()->Draw();
+}
+
+void GameOverScene::LoadAsset()
+{
+	sResultTex_ = TextureManager::GetInstance()->LoadTexture("Resources/defaultGameOver.png");
+	sSkyDomeTex_ = Model::CreateObjModel("Resources/skydome2");
+	sBgm_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/Blinded.mp3", 0.1f);
 }

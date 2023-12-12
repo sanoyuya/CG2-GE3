@@ -9,11 +9,9 @@ private:
 	std::string name_ = "building";
 
 	std::unique_ptr<Model>builing_;
-	uint32_t buildingTex_ = 0;
 	Transform buildingTrans_;
 
 	std::unique_ptr<Model>buildingBack_;
-	uint32_t buildingBackTex_ = 0;
 	Transform buildingBackTrans_;
 
 	const myMath::Vector3 buildingSize_ = { 10.0f,20.0f,10.0f };

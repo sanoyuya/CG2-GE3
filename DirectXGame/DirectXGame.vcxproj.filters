@@ -453,9 +453,6 @@
     <ClCompile Include="User\UI\EnemyLocationSprite.cpp">
       <Filter>User\ソース ファイル\UI</Filter>
     </ClCompile>
-    <ClCompile Include="User\Scene\GameClearScene.cpp">
-      <Filter>User\ソース ファイル\UI</Filter>
-    </ClCompile>
     <ClCompile Include="User\GameObject\GameObject.cpp">
       <Filter>User\ソース ファイル\Object</Filter>
     </ClCompile>
@@ -467,6 +464,12 @@
     </ClCompile>
     <ClCompile Include="User\Other\Tutorial\Text.cpp">
       <Filter>User\ソース ファイル\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Scene\GameClearScene.cpp">
+      <Filter>User\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="User\GameObject\Building\BuildingBase.cpp">
+      <Filter>User\ソース ファイル\Object\Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

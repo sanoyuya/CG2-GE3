@@ -19,16 +19,16 @@ private:
 	//天球
 	std::unique_ptr<Model>skyDome_;
 	Transform skyDomeTrans_;
-	uint32_t skyDomeTex_;
+	static uint32_t sSkyDomeTex_;
 
 	myMath::Vector3 cameraPos_;
 	float angleX_ = 0.0f;
 	float angleY_ = 0.0f;
 	const float length_ = 50.0f;
 
-	uint32_t bgm_ = 0;
+	static uint32_t sBgm_;
 
-	uint32_t resultTex_ = 0;
+	static uint32_t sResultTex_;
 	std::unique_ptr<Sprite>result_;
 
 public:
@@ -44,4 +44,6 @@ public:
 
 	//描画処理
 	void Draw()override;
+
+	static void LoadAsset();
 };

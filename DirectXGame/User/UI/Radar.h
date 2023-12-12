@@ -13,12 +13,12 @@ private:
 	const float radarEnemySize = 5.0f;
 
 	std::unique_ptr<Sprite>radar_;
-	uint32_t radarTex_ = 0;
+	static uint32_t sRadarTex_;
 
 	std::unique_ptr<Sprite>player_;
-	uint32_t playerTex_ = 0;
+	static uint32_t sPlayerTex_;
 
-	uint32_t enemyTex = 0;
+	static uint32_t sEnemyTex_;
 	std::vector<std::unique_ptr<Sprite>>radarEnemys_;
 
 	myMath::Vector3 cameraFrontVec_ = {};
@@ -31,4 +31,6 @@ public:
 	void Initialize(EnemyManager* enemys);
 	void Update(Camera* camera);
 	void Draw(EnemyManager* enemys, Player* player);
+
+	static void LoadAsset();
 };

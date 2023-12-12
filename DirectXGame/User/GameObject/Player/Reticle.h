@@ -12,8 +12,8 @@ private:
 
 	std::unique_ptr<Sprite>reticle_;
 	Transform reticleTrans_;
-	uint32_t reticleTex_ = 0;
-	uint32_t reticleTex2_ = 0;
+	static uint32_t sReticleTex_;
+	static uint32_t sReticleTex2_;
 
 	const float reticleSpeed_ = 2.0f;
 	const float reticleLimit_ = 60.0f;
@@ -83,6 +83,8 @@ public:
 	void GetLockOnFlag(const bool flag);
 	void GetLockOnAttackFlag(const bool flag);
 	void GetCameraFlag(const int8_t flag);
+
+	static void LoadAsset();
 
 private:
 

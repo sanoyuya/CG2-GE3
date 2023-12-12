@@ -36,8 +36,8 @@ private:
 	//天球
 	std::unique_ptr<Model>skyDome_;
 	Transform skyDomeTrans_;
-	uint32_t skyDomeTex_;
-	uint32_t skyDomeTex2_;
+	static uint32_t sSkyDomeTex_;
+	static uint32_t sSkyDomeTex2_;
 
 	std::unique_ptr<GameLevelData> gameLevelData_;
 
@@ -54,7 +54,7 @@ private:
 
 	std::unique_ptr<BuildingManager>buildingManager_;
 
-	uint32_t bgm_ = 0;
+	static uint32_t sBgm_;
 
 	bool poseFlag_ = false;
 
@@ -81,4 +81,6 @@ public:
 
 	//描画処理
 	void Draw()override;
+
+	static void LoadAsset();
 };

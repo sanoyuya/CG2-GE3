@@ -4,6 +4,7 @@
 #include<imgui.h>
 myMath::Vector3 Player::targetPos_;
 CameraFlag Player::cameraFlag_;
+uint32_t Player::sPlayerTex_;
 
 Player::~Player()
 {
@@ -20,8 +21,7 @@ void Player::Initialize()
 
 	//プレイヤーの初期化
 	player_ = std::make_unique<Model>();
-	playerTex_ = player_->CreateObjModel("Resources/F-35E");
-	player_->SetModel(playerTex_);
+	player_->SetModel(sPlayerTex_);
 	playerTrans_.Initialize();
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,0.0f };
 
@@ -282,9 +282,9 @@ void Player::Rotation()
 		playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
 		playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
 
-		float angleZ = -(reticle_->GetTransform().translation.x / 4 - playerTrans_.translation.x) / 10.0f;
+		float angleZ = -(reticle_->GetTransform().translation.x / 4 - playerTrans_.translation.x) / 12.0f;
 		//モデルのZ軸回転
-		PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 15.0f / sGameTimer_->GetTimeSpeed());
+		PhysicsMath::Complement(playerTrans_.rotation.z, angleZ, 10.0f / sGameTimer_->GetTimeSpeed());
 	}
 	else
 	{
@@ -294,7 +294,7 @@ void Player::Rotation()
 		playerTrans_.rotation.y = PhysicsMath::Complement(playerTrans_.rotation.y, baseRot, 30.0f / sGameTimer_->GetTimeSpeed());
 
 		//モデルのZ軸回転
-		PhysicsMath::Complement(playerTrans_.rotation.z, baseRot, 15.0f / sGameTimer_->GetTimeSpeed());
+		PhysicsMath::Complement(playerTrans_.rotation.z, baseRot, 10.0f / sGameTimer_->GetTimeSpeed());
 	}
 }
 
@@ -407,4 +407,9 @@ void Player::ImGuiUpdate()
 	ImGui::InputInt("playerHP", &hp);
 	hp_ = static_cast<int8_t>(hp);
 	ImGui::End();
+}
+
+void Player::LoadAsset()
+{
+	sPlayerTex_ = Model::CreateObjModel("Resources/F-35E");
 }

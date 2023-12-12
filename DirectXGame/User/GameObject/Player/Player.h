@@ -30,7 +30,7 @@ private:
 
 	std::unique_ptr<Model>player_;
 	Transform playerTrans_;
-	uint32_t playerTex_ = 0;
+	static uint32_t sPlayerTex_;
 
 	Transform cameraTrans_;
 
@@ -123,6 +123,8 @@ public:
 	static const CameraFlag& GetCameraFlag();
 
 	void ImGuiUpdate();
+
+	static void LoadAsset();
 
 private:
 

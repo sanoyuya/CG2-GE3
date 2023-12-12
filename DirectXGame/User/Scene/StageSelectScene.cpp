@@ -3,14 +3,14 @@
 #include <algorithm>
 #include"SceneChangeAnimation.h"
 #include"GameHeader.h"
+uint32_t StageSelectScene::sStageNumSpriteTex_;
 
 void StageSelectScene::Initialize()
 {
 	input_ = InputManager::GetInstance();
 
 	stageNumSprite_ = std::make_unique<Sprite>();
-	stageNumSpriteTex_ = stageNumSprite_->LoadTexture("Resources/number.png");
-	stageNumSprite_->Sprite2DInitialize(stageNumSpriteTex_);
+	stageNumSprite_->Sprite2DInitialize(sStageNumSpriteTex_);
 }
 
 void StageSelectScene::Destroy()
@@ -26,6 +26,11 @@ void StageSelectScene::Draw()
 {
 	stageNumSprite_->DrawAnimationSpriteX2D(GameHeader::windowsCenter_, 10, stageNum_);
 	SceneChangeAnimation::GetInstance()->Draw();
+}
+
+void StageSelectScene::LoadAsset()
+{
+	sStageNumSpriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/number.png");
 }
 
 void StageSelectScene::Select()

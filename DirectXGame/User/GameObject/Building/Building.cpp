@@ -3,13 +3,11 @@
 void Building::Initialize()
 {
 	builing_ = std::make_unique<Model>();
-	buildingTex_ = builing_->CreateObjModel("Resources/building2");
-	builing_->SetModel(buildingTex_);
+	builing_->SetModel(sBuildingTex_);
 	buildingTrans_.Initialize();
 
 	buildingBack_= std::make_unique<Model>();
-	buildingBackTex_ = builing_->CreateObjModel("Resources/cube");
-	buildingBack_->SetModel(buildingBackTex_);
+	buildingBack_->SetModel(sCubeTex_);
 	buildingBackTrans_.Initialize();
 }
 

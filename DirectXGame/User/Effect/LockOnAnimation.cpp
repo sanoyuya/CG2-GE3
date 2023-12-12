@@ -1,11 +1,11 @@
 #include "LockOnAnimation.h"
 #include "EasingFunction.h"
+uint32_t LockOnAnimation::sLockOnTex_;
 
 void LockOnAnimation::Initialize()
 {
 	lockOnSprite_ = std::make_unique<Sprite>();
-	lockOnTex_ = lockOnSprite_->LoadTexture("Resources/reticle.png");
-	lockOnSprite_->Sprite3DInitialize(lockOnTex_);
+	lockOnSprite_->Sprite3DInitialize(sLockOnTex_);
 	lockOnTrans_.Initialize();
 	lockOnTrans_.scale = { 1.0f / 5.0f,1.0f / 5.0f ,1.0f / 5.0f };
 }
@@ -49,4 +49,9 @@ void LockOnAnimation::Update(const myMath::Vector3& position,Camera* camera)
 void LockOnAnimation::Draw(Camera* camera)
 {
 	lockOnSprite_->DrawSprite3D(camera, lockOnTrans_, BillboardFlag::AllBillboard);
+}
+
+void LockOnAnimation::LoadAsset()
+{
+	sLockOnTex_ = TextureManager::GetInstance()->LoadTexture("Resources/reticle.png");
 }

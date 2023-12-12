@@ -22,16 +22,16 @@ private:
 	//天球
 	std::unique_ptr<Model>skyDome_;
 	Transform skyDomeTrans_;
-	uint32_t skyDomeTex_;
+	static uint32_t sSkyDomeTex_;
 
 	myMath::Vector3 cameraPos_;
 
-	uint32_t bgm_ = 0;
+	static uint32_t sBgm_;
 
-	uint32_t titleTex_ = 0;
+	static uint32_t sTitleTex_;
 	std::unique_ptr<Sprite>title_;
 
-	uint32_t pressButtonTex_ = 0;
+	static uint32_t sPressButtonTex_;
 	std::unique_ptr<Sprite>pressButton_;
 
 	float time_ = 0.0f;
@@ -39,7 +39,7 @@ private:
 
 	std::unique_ptr<Model>player_;
 	Transform playerTrans_;
-	uint32_t playerTex_;
+	static uint32_t sPlayerTex_;
 
 	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
@@ -47,13 +47,13 @@ private:
 	bool animationFlag_ = false;
 	uint8_t animationTime_ = 0;
 
-	uint32_t animationBoxTex_ = 0;
+	static uint32_t sAnimationBoxTex_;
 	std::array<std::unique_ptr<Sprite>,2>animationBox_;
 	float animationBoxScale_ = 0.0f;
 
 	std::array<std::unique_ptr<Model>, 5>cloud_;
 	std::array<Transform, 5>cloudTrans_;
-	uint32_t cloudTex_ = 0;
+	static uint32_t sCloudTex_;
 
 public:
 
@@ -68,6 +68,8 @@ public:
 
 	//描画処理
 	void Draw()override;
+
+	static void LoadAsset();
 
 private:
 
