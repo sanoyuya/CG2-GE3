@@ -1,9 +1,12 @@
 #pragma once
 #include"DrawOversight.h"
+#include"InputManager.h"
 
 class Pose
 {
 private:
+
+	InputManager* input_ = nullptr;
 
 	bool poseFlag_ = false;
 

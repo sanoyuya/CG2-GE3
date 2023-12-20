@@ -110,17 +110,7 @@ void GameScene::Update()
 		SceneChangeAnimation::GetInstance()->Change("TITLE");
 	}
 
-	if (input_->KeyboardTriggerPush(DIK_P) || input_->ControllerButtonTriggerPush(START))
-	{
-		if (pose_->GetPoseFlag() == false)
-		{
-			pose_->SetPoseFlag(true);
-		}
-		else
-		{
-			pose_->SetPoseFlag(false);
-		}
-	}
+	pose_->Update();
 
 	lightManager_->Update();
 

@@ -5,6 +5,8 @@ uint32_t Pose::sPoseBackTex_;
 
 void Pose::Initialize()
 {
+	input_ = InputManager::GetInstance();
+
 	poseSprite_ = std::make_unique<Sprite>();
 	poseSprite_->Sprite2DInitialize(sPoseTex_);
 
@@ -14,7 +16,17 @@ void Pose::Initialize()
 
 void Pose::Update()
 {
-
+	if (input_->KeyboardTriggerPush(DIK_P) || input_->ControllerButtonTriggerPush(START))
+	{
+		if (poseFlag_ == false)
+		{
+			poseFlag_ = true;
+		}
+		else
+		{
+			poseFlag_ = false;
+		}
+	}
 }
 
 void Pose::Draw()
