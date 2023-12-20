@@ -92,7 +92,7 @@ public://セッター
 
 public://ゲッター
 
-	bool GetSpawnFlag()override;
+	const bool GetSpawnFlag()override;
 
 	const Transform& GetTrans()override;
 

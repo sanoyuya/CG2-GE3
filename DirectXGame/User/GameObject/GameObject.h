@@ -57,6 +57,7 @@ public:
 
 	virtual const bool GetDeathFlag() { return false; };
 
+	virtual const bool GetSpawnFlag() { return false; };
 	//死亡フラグの取得
 	virtual const bool GetIsDead() { return false; };
 

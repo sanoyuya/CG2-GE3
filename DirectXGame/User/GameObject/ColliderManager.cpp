@@ -37,7 +37,7 @@ void ColliderManager::Update(Player* player)
 					//playerと敵の当たり判定
 					if (object1->GetName() == "player" && object2->GetName() == "enemy")
 					{
-						if (object2->GetDeathAnimationFlag() == false)
+						if (object2->GetSpawnFlag()==true&&object2->GetDeathAnimationFlag() == false)
 						{
 							if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
 								object2->GetCollisionData().center, object2->GetCollisionData().radius))
@@ -52,7 +52,7 @@ void ColliderManager::Update(Player* player)
 				//レティクルと敵の当たり判定
 				if (object1->GetName() == "reticle" && object2->GetName() == "enemy")
 				{
-					if (player->GetLockOnFlag() == true && object2->GetDeathAnimationFlag() == false && object2->GetLockOnFlag() == false)
+					if (object2->GetSpawnFlag() == true && player->GetLockOnFlag() == true && object2->GetDeathAnimationFlag() == false && object2->GetLockOnFlag() == false)
 					{
 						if (Collision::RayToSphere(object1->GetCollisionData().rayStartPos, object1->GetCollisionData().rayEndPos,
 							object2->GetCollisionData().center, object2->GetCollisionData().radius))
@@ -71,7 +71,7 @@ void ColliderManager::Update(Player* player)
 				//playerの弾と敵の当たり判定
 				if (object1->GetName() == "playerBullet" && object2->GetName() == "enemy")
 				{
-					if (object2->GetDeathAnimationFlag() == false)
+					if (object2->GetSpawnFlag() == true && object2->GetDeathAnimationFlag() == false)
 					{
 						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
 							object2->GetCollisionData().center, object2->GetCollisionData().radius))
@@ -84,7 +84,7 @@ void ColliderManager::Update(Player* player)
 
 				if (object1->GetName() == "lockOnBullet" && object2->GetName() == "enemy")
 				{
-					if (object2->GetDeathAnimationFlag() == false)
+					if (object2->GetSpawnFlag() == true && object2->GetDeathAnimationFlag() == false)
 					{
 						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
 							object2->GetCollisionData().center, object2->GetCollisionData().radius))

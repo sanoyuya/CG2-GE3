@@ -88,15 +88,11 @@ public:
 	//blenderで出力したデータを読み込むときに攻撃フラグをセットする関数
 	virtual void SetIsAttack(const bool flag) = 0;
 
-	void SetCamera(Camera* camera);
-
 	void SetPlayer(Player* player);
-
-	void SetGameTimer(GameTimer* gameTimer);
 
 	void SetBulletManager(BulletManager* bulletManager);
 
-	virtual bool GetSpawnFlag() = 0;
+	virtual const bool GetSpawnFlag() = 0;
 
 	virtual const Transform& GetTrans() = 0;
 };

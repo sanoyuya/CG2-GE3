@@ -68,7 +68,7 @@ void TitleScene::Initialize()
 		cloudTrans_[i].scale = { static_cast<float>(myMath::GetRand(4.0f,8.0f)),static_cast<float>(myMath::GetRand(2.0f,4.0f)) ,static_cast<float>(myMath::GetRand(4.0f,8.0f)) };
 	}
 
-	audioManager_->PlayWave(sBgm_);
+	audioManager_->PlayWave(sBgm_, true);
 
 	MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::None);
 }

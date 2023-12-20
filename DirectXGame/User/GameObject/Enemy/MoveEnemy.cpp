@@ -227,7 +227,7 @@ const bool MoveEnemy::GetIsDead()
 	return isDead_;
 }
 
-bool MoveEnemy::GetSpawnFlag()
+const bool MoveEnemy::GetSpawnFlag()
 {
 	return spawnFlag_;
 }

@@ -66,7 +66,7 @@ void GameScene::Initialize()
 	pose_ = std::make_unique<Pose>();
 	pose_->Initialize();
 
-	audioManager_->PlayWave(sBgm_);
+	audioManager_->PlayWave(sBgm_, true);
 }
 
 void GameScene::Destroy()

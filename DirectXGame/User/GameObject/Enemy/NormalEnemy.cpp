@@ -158,7 +158,7 @@ const bool NormalEnemy::GetIsDead()
 	return isDead_;
 }
 
-bool NormalEnemy::GetSpawnFlag()
+const bool NormalEnemy::GetSpawnFlag()
 {
 	return spawnFlag_;
 }

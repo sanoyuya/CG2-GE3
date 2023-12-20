@@ -25,7 +25,7 @@ void GameOverScene::Initialize()
 	skyDome_->SetModel(sSkyDomeTex_);
 	skyDomeTrans_.Initialize();
 
-	audioManager_->PlayWave(sBgm_);
+	audioManager_->PlayWave(sBgm_, true);
 }
 
 void GameOverScene::Destroy()

@@ -117,7 +117,7 @@ public://ゲッター
 
 	const bool GetIsDead()override;
 
-	bool GetSpawnFlag()override;
+	const bool GetSpawnFlag()override;
 
 	const Transform& GetTrans()override;
 
