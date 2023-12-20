@@ -116,7 +116,7 @@ void TitleScene::Update()
 #ifdef _DEBUG
 			SceneChangeAnimation::GetInstance()->Change("STAGESELECT");
 #else
-			Retention::GetInstance()->SetStageNum(static_cast<Stage>(0));
+			Retention::GetInstance()->SetStageNum(0);
 			SceneChangeAnimation::GetInstance()->Change("GAME");
 #endif // DEBUG
 		}
