@@ -37,7 +37,7 @@ void StageSelectScene::Select()
 {
 	if (input_->KeyboardTriggerPush(DIK_SPACE) || input_->ControllerButtonTriggerPush(A))
 	{
-		Retention::GetInstance()->SetStageNum(static_cast<Stage>(stageNum_));
+		Retention::GetInstance()->SetStageNum(stageNum_);
 		SceneChangeAnimation::GetInstance()->Change("GAME");
 	}
 	else if (input_->KeyboardTriggerPush(DIK_RIGHT) || input_->ControllerStickTriggerPush(L_RIGHT))

@@ -12,6 +12,11 @@ void Pose::Initialize()
 	poseBack_->Sprite2DInitialize(sPoseBackTex_);
 }
 
+void Pose::Update()
+{
+
+}
+
 void Pose::Draw()
 {
 	if (poseFlag_ == true)

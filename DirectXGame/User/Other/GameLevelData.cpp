@@ -1,5 +1,6 @@
 #include "GameLevelData.h"
 #include"ColliderManager.h"
+#include"Retention.h"
 
 GameLevelData::GameLevelData()
 {
@@ -9,9 +10,9 @@ GameLevelData::~GameLevelData()
 {
 }
 
-void GameLevelData::Initialize(const std::string& fileName)
+void GameLevelData::Initialize()
 {
-	fileName_ = fileName;
+	ConvertToString();
 	CreateModel();
 	Load();
 }
@@ -41,6 +42,7 @@ void GameLevelData::CreateModel()
 	buildingTex_ = Model::CreateObjModel("Resources/building");
 	convenienceStoreTex_= Model::CreateObjModel("Resources/convenienceStore");
 	tex_ = Model::CreateObjModel("Resources/purpleDice");
+	skydomeTex_= Model::CreateObjModel("Resources/skydome3");
 }
 
 void GameLevelData::Load()
@@ -51,13 +53,17 @@ void GameLevelData::Load()
 	//レベルデータからオブジェクトを生成、配置
 	for (auto& objectData : levelData_->objects_)
 	{
-		if (objectData.fileName == "player")
+		if (objectData.fileName == "GameManager")
+		{
+			gameTimer_->SetGameTime(static_cast<uint32_t>(objectData.timer.deathTimer));
+		}
+		else if (objectData.fileName == "player")
 		{
 			continue;
 		}
 		else if (objectData.fileName == "camera")
 		{
-			//cameraData_.position = objectData.translation;
+			continue;
 		}
 		else if (objectData.fileName == "cameraPoint")
 		{
@@ -121,6 +127,25 @@ void GameLevelData::Load()
 
 			objects_.push_back(std::move(model));
 		}
+		else if (objectData.fileName == "skydome")
+		{
+			//ファイル名から登録済みモデルを検索
+			std::unique_ptr<EditorObject> model = std::make_unique<EditorObject>();
+			model->Initialize();
+
+			//座標
+			model->SetPos(objectData.translation);
+			//拡縮
+			model->SetScale({ objectData.scaling.x ,objectData.scaling.y ,objectData.scaling.z });
+			//名前
+			model->SetName(objectData.fileName);
+
+			model->SetModel(skydomeTex_);
+
+			model->SetColor({ 0.0125f,0.0125f,0.0125f,1.0f });
+
+			objects_.push_back(std::move(model));
+		}
 		else if (objectData.fileName == "ground2")
 		{
 			//ファイル名から登録済みモデルを検索
@@ -175,7 +200,7 @@ void GameLevelData::Load()
 			model->SetRotation({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y + 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
 
 			buildingData_.buildings.push_back(std::move(model));
-			}
+		}
 		else if (objectData.fileName == "convenienceStore")
 		{
 			//ファイル名から登録済みモデルを検索
@@ -229,6 +254,12 @@ void GameLevelData::Load()
 			objects_.push_back(std::move(model));
 		}
 	}
+}
+
+void GameLevelData::ConvertToString()
+{
+	std::string stageNum = std::to_string(Retention::GetInstance()->GetStageNum());
+	fileName_ = "stage" + stageNum + "/stage";
 }
 
 const PlayerData& GameLevelData::GetPlayerData()
@@ -285,4 +316,9 @@ void GameLevelData::ReLoad()
 	enemyData_.enemys.clear();
 	buildingData_.buildings.clear();
 	Load();
+}
+
+void GameLevelData::SetGameTimer(GameTimer* gameTimer)
+{
+	gameTimer_ = gameTimer;
 }

@@ -1,11 +1,11 @@
 #include "Retention.h"
 
-void Retention::SetStageNum(const Stage stageNum)
+void Retention::SetStageNum(const uint16_t stageNum)
 {
 	stageNum_ = stageNum;
 }
 
-const Stage Retention::GetStageNum()
+const uint16_t Retention::GetStageNum()
 {
 	return stageNum_;
 }

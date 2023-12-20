@@ -17,6 +17,8 @@ public:
 
 	void Initialize();
 
+	void Update();
+
 	void Draw();
 
 	void SetPoseFlag(const bool flag);

@@ -5,8 +5,6 @@
 #include"SceneChangeAnimation.h"
 #include"MultiTexturePostEffect.h"
 #include"Retention.h"
-uint32_t GameScene::sSkyDomeTex_;
-uint32_t GameScene::sSkyDomeTex2_;
 uint32_t GameScene::sBgm_;
 
 GameScene::~GameScene()
@@ -25,35 +23,11 @@ void GameScene::Initialize()
 	lightColor_ = { 1.0f,1.0f ,1.0f };
 	lightAtten_ = { 0.3f,0.1f,0.1f };
 
-	//天球
-	skyDome_ = std::make_unique<Model>();
-	skyDomeTrans_.Initialize();
-	skyDomeTrans_.scale = { 20.0f,20.0f ,20.0f };
-
+	gameTimer_ = std::make_unique<GameTimer>();
 	//レベルエディタの初期化&読み込み
 	gameLevelData_ = std::make_unique<GameLevelData>();
-	gameTimer_ = std::make_unique<GameTimer>();
-	switch (Retention::GetInstance()->GetStageNum())
-	{
-	case Stage::Tutorial:
-		gameLevelData_->Initialize("stage0/stage");
-		skyDome_->SetModel(sSkyDomeTex_);
-		gameTimer_->SetGameTime(static_cast<uint32_t>(60 * 60 * 3.0));
-		break;
-	case Stage::Stage1:
-		gameLevelData_->Initialize("stage1/stage");
-		skyDome_->SetModel(sSkyDomeTex2_);
-		gameTimer_->SetGameTime(60 * 60 * 1);
-		break;
-	case Stage::Stage2:
-		gameLevelData_->Initialize("stage2");
-		break;
-	case Stage::Stage3:
-		gameLevelData_->Initialize("stage3");
-		break;
-	default:
-		break;
-	}
+	gameLevelData_->SetGameTimer(gameTimer_.get());
+	gameLevelData_->Initialize();
 
 	camera_ = std::make_unique<RailCamera>();
 	camera_->Initialize(gameLevelData_->GetCameraData());
@@ -164,7 +138,6 @@ void GameScene::Update()
 		camera_->Update(gameTimer_.get());
 		gameLevelData_->Update(camera_->GetCameraPtr());
 		groundBack_->Update(camera_->GetCameraPtr(), gameTimer_.get());
-		skyDomeTrans_.TransUpdate(camera_->GetCameraPtr());//天球
 		buildingManager_->Update();
 		playerDamageEffect_->Update(player_.get());
 		enemyManager_->Update();
@@ -181,23 +154,7 @@ void GameScene::Update()
 	ImGui::Begin("EnemyReset");
 	if (ImGui::Button("EnemyReset"))
 	{
-		switch (Retention::GetInstance()->GetStageNum())
-		{
-		case Stage::Tutorial:
-			gameLevelData_->Initialize("stage0/stage");
-			break;
-		case Stage::Stage1:
-			gameLevelData_->Initialize("stage1/stage");
-			break;
-		case Stage::Stage2:
-			gameLevelData_->Initialize("stage2");
-			break;
-		case Stage::Stage3:  
-			gameLevelData_->Initialize("stage3");
-			break;
-		default:
-			break;
-		}
+		gameLevelData_->Initialize();
 		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), player_.get(), bulletManager_.get());
 	}
 	ImGui::End();
@@ -206,7 +163,6 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	skyDome_->DrawModel(&skyDomeTrans_, { 0.0125f,0.0125f,0.0125f,1.0f });
 	groundBack_->Draw();
 	bulletManager_->Draw();
 	gameLevelData_->Draw();
@@ -224,8 +180,5 @@ void GameScene::Draw()
 
 void GameScene::LoadAsset()
 {
-	sSkyDomeTex_ = Model::CreateObjModel("Resources/skydome3");
-	sSkyDomeTex2_ = Model::CreateObjModel("Resources/skydome");
-
 	sBgm_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
 }

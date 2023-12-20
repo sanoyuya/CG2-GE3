@@ -3956,6 +3956,54 @@
                 ]
             },
             "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "skydome",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    20.0,
+                    20.0,
+                    20.0
+                ]
+            },
+            "file_name": "skydome"
+        },
+        {
+            "type": "MESH",
+            "name": "GameManager",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    180.0
+                ],
+                "scaling": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "file_name": "GameManager",
+            "timer": {
+                "spawn": 0.0,
+                "death": 10800.0
+            }
         }
     ]
 }

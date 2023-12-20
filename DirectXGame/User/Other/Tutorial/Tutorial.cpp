@@ -3,7 +3,7 @@
 
 void Tutorial::Initialize(GameTimer* gameTimer)
 {
-	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
+	if (Retention::GetInstance()->GetStageNum() == 0)
 	{
 		gameTimer_ = gameTimer;
 
@@ -17,7 +17,7 @@ void Tutorial::Initialize(GameTimer* gameTimer)
 
 void Tutorial::Update()
 {
-	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
+	if (Retention::GetInstance()->GetStageNum() == 0)
 	{
 		TextUpdate();
 
@@ -27,7 +27,7 @@ void Tutorial::Update()
 
 void Tutorial::Draw()
 {
-	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
+	if (Retention::GetInstance()->GetStageNum() == 0)
 	{
 		for (uint8_t i = 0; i < textMaxNum_; i++)
 		{
@@ -40,7 +40,7 @@ void Tutorial::Draw()
 
 void Tutorial::Rest()
 {
-	if (Retention::GetInstance()->GetStageNum() == Stage::Tutorial)
+	if (Retention::GetInstance()->GetStageNum() == 0)
 	{
 		tutorialSkip_->Reset();
 	}

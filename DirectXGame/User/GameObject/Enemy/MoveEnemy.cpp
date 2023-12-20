@@ -103,7 +103,6 @@ void MoveEnemy::PhaseUpdate()
 			if (moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ <= actionTimer)
 			{
 				actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
-				//phase = ActionPhase::WAIT;
 			}
 
 			break;
@@ -119,7 +118,6 @@ void MoveEnemy::PhaseUpdate()
 				actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ - moveEnemyProperty_.waitTime * GameHeader::sFps_);
 				waitFinishPos = enemyTrans_.translation;
 				waitFinishRot = enemyTrans_.rotation;
-				//phase = ActionPhase::ESCAPE;
 			}
 
 			break;

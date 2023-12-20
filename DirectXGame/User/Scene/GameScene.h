@@ -33,12 +33,6 @@ private:
 	myMath::Vector3 lightColor_ = { 0.0f,0.0f ,0.0f };
 	myMath::Vector3 lightAtten_ = { 0.0f,0.0f ,0.0f };
 
-	//天球
-	std::unique_ptr<Model>skyDome_;
-	Transform skyDomeTrans_;
-	static uint32_t sSkyDomeTex_;
-	static uint32_t sSkyDomeTex2_;
-
 	std::unique_ptr<GameLevelData> gameLevelData_;
 
 	std::unique_ptr<Player>player_;

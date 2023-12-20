@@ -17,7 +17,7 @@ void EditorObject::Update(Camera* camera)
 
 void EditorObject::Draw()
 {
-	model_->DrawModel(&transform_, { 1.0f,1.0f ,1.0f ,1.0f }, tiling_);
+	model_->DrawModel(&transform_, color_, tiling_);
 }
 
 const myMath::Vector3& EditorObject::GetPos()
@@ -68,6 +68,11 @@ void EditorObject::SetRot(const myMath::Vector3& rotation)
 void EditorObject::SetScale(const myMath::Vector3& scale)
 {
 	transform_.scale = scale;
+}
+
+void EditorObject::SetColor(const myMath::Vector4& color)
+{
+	color_ = color;
 }
 
 void EditorObject::SetName(const std::string& name)

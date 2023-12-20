@@ -3057,6 +3057,54 @@
                 "spawn": 50.0,
                 "death": 100.0
             }
+        },
+        {
+            "type": "MESH",
+            "name": "GameManager",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    180.0
+                ],
+                "scaling": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "file_name": "GameManager",
+            "timer": {
+                "spawn": 0.0,
+                "death": 3600.0
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Sphere001",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "file_name": "skydome"
         }
     ]
 }

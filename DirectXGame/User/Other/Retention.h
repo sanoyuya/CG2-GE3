@@ -3,14 +3,6 @@
 #include"myMath.h"
 #include"WindowsApp.h"
 
-enum class Stage
-{
-	Tutorial,
-	Stage1,
-	Stage2,
-	Stage3
-};
-
 /// <summary>
 /// シーンを跨いでも保持したいものを保持するクラス
 /// </summary>
@@ -18,13 +10,13 @@ class Retention
 {
 private:
 
-	Stage stageNum_ = Stage::Tutorial;
+	uint16_t stageNum_ = 0;
 
 public:
 
-	void SetStageNum(const Stage stageNum);
+	void SetStageNum(const uint16_t stageNum);
 
-	const Stage GetStageNum();
+	const uint16_t GetStageNum();
 
 	//シングルトン
 	static Retention* GetInstance();
