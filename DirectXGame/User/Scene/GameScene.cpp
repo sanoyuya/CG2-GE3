@@ -90,28 +90,6 @@ void GameScene::Update()
 		SceneChangeAnimation::GetInstance()->Change("GAMECLEAR");
 	}
 
-	if (input_->KeyboardTriggerPush(DIK_R))
-	{
-		ColliderManager::GetInstance()->Reset();
-		gameLevelData_->ReLoad();
-		gameTimer_->Reset();
-		camera_->ReLoad(gameLevelData_->GetCameraData());
-		player_->Reset();
-		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), player_.get(), bulletManager_.get());
-		bulletManager_->Reset();
-		buildingManager_->ReLoad(gameLevelData_->GetBuildingList());
-		enemyLocationSprite_->ReLoad(enemyManager_.get());
-		tutorial_->Rest();
-	}
-
-	if (input_->KeyboardTriggerPush(DIK_T))
-	{
-		ColliderManager::GetInstance()->Reset();
-		SceneChangeAnimation::GetInstance()->Change("TITLE");
-	}
-
-	pose_->Update();
-
 	lightManager_->Update();
 
 	//ポイントライト
@@ -136,6 +114,7 @@ void GameScene::Update()
 		radar_->Update(camera_->GetCameraPtr());
 		tutorial_->Update();
 	}
+	pose_->Update();
 #ifdef _DEBUG
 	gameTimer_->ImGuiUpdate();
 	camera_->ImGuiUpdate();

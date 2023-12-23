@@ -50,8 +50,6 @@ private:
 
 	static uint32_t sBgm_;
 
-	bool poseFlag_ = false;
-
 	std::unique_ptr<GroundBack>groundBack_;
 
 	std::unique_ptr<EnemyLocationSprite>enemyLocationSprite_;

@@ -129,6 +129,26 @@ void ColliderManager::Update(Player* player)
 					}
 				}
 			}
+
+			//playerの弾と建物の当たり判定
+			if (object1->GetName() == "playerBullet" && object2->GetName() == "building")
+			{
+				if (Collision::AABBToSphere(object2->GetCollisionData().center, object2->GetCollisionData().scale,
+					object1->GetCollisionData().center, object1->GetCollisionData().radius))
+				{
+					object1->OnCollision();//弾の消滅
+				}
+			}
+
+			//敵の弾と建物の当たり判定
+			if (object1->GetName() == "enemyBullet" && object2->GetName() == "building")
+			{
+				if (Collision::AABBToSphere(object2->GetCollisionData().center, object2->GetCollisionData().scale,
+					object1->GetCollisionData().center, object1->GetCollisionData().radius))
+				{
+					object1->OnCollision();//弾の消滅
+				}
+			}
 		}
 	}
 }

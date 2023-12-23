@@ -104,7 +104,13 @@ public:
 
 	const Transform& GetTransform()override;
 
+	static void LoadAsset();
+
 	void Reset();
+
+	void SetCamera(RailCamera* camera);
+
+	void SetBulletManager(BulletManager* bulletManager);
 
 	const bool GetDamageFlag();
 
@@ -114,17 +120,11 @@ public:
 
 	static const myMath::Vector3& GetAddTargetPos();
 
-	void SetCamera(RailCamera* camera);
-
-	void SetBulletManager(BulletManager* bulletManager);
-
 	const bool GetIsBulletAttack();
 
 	static const CameraFlag& GetCameraFlag();
 
 	void ImGuiUpdate();
-
-	static void LoadAsset();
 
 private:
 
