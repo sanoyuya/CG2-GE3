@@ -10,7 +10,7 @@ private:
 
 	const float maxPower_ = 10.0f;
 	const float minPower_ = 0.0f;
-	const float subPower_ = 0.5f;
+	const float subPower_ = 0.125f;
 
 public:
 

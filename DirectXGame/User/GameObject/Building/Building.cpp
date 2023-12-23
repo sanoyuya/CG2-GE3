@@ -9,18 +9,16 @@ void Building::Initialize()
 	buildingBack_= std::make_unique<Model>();
 	buildingBack_->SetModel(sCubeTex_);
 	buildingBackTrans_.Initialize();
+
+	buildingBackTrans_.translation = { buildingTrans_.translation.x,buildingTrans_.translation.y + buildingSize_.y,buildingTrans_.translation.z };
+	buildingBackTrans_.scale = { buildingTrans_.scale.x * buildingSize_.x - backCubeSubSize_,buildingTrans_.scale.y * buildingSize_.y - backCubeSubSize_,buildingTrans_.scale.z * buildingSize_.z - backCubeSubSize_ };
+	buildingBackTrans_.rotation = buildingTrans_.rotation;
+
+	collisionData_.center = buildingTrans_.translation;
 }
 
 void Building::Update()
 {
-	if (isSet == false)
-	{
-		buildingBackTrans_.translation = { buildingTrans_.translation.x,buildingTrans_.translation.y + buildingSize_.y,buildingTrans_.translation.z };
-		buildingBackTrans_.scale = { buildingTrans_.scale.x * buildingSize_.x - backCubeSubSize_,buildingTrans_.scale.y * buildingSize_.y - backCubeSubSize_,buildingTrans_.scale.z * buildingSize_.z - backCubeSubSize_ };
-		buildingBackTrans_.rotation = buildingTrans_.rotation;
-		isSet = true;
-	}
-
 	buildingTrans_.TransUpdate(sCamera_);
 	buildingBackTrans_.TransUpdate(sCamera_);
 }
@@ -61,7 +59,7 @@ void Building::SetScale(const myMath::Vector3& scale)
 	buildingTrans_.scale = scale;
 }
 
-void Building::SetColliderSize(const float size)
+void Building::SetColliderSize(const myMath::Vector3 size)
 {
-	collisionData_.radius = size;
+	collisionData_.scale = size;
 }

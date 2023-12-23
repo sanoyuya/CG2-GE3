@@ -114,6 +114,21 @@ void ColliderManager::Update(Player* player)
 					}
 				}
 			}
+
+#ifdef _DEBUG
+			if (isPlayerToBuilding_ == true)
+#endif _DEBUG
+			{
+				//playerと建物の当たり判定
+				if (object1->GetName() == "player" && object2->GetName() == "building")
+				{
+					if (Collision::AABBToSphere(object2->GetCollisionData().center, object2->GetCollisionData().scale,
+						object1->GetCollisionData().center, object1->GetCollisionData().radius))
+					{
+						object1->OnCollision();//playerのHP減少
+					}
+				}
+			}
 		}
 	}
 }
@@ -140,6 +155,7 @@ void ColliderManager::ImGuiUpdate()
 	ImGui::Checkbox("isPlayerToEnemy_", &isPlayerToEnemy_);
 	ImGui::Checkbox("isPlayerBulletToEnemy_", &isPlayerBulletToEnemy_);
 	ImGui::Checkbox("isPlayerBulletToEnemyBullet_", &isPlayerBulletToEnemyBullet_);
+	ImGui::Checkbox("isPlayerToBuilding", &isPlayerToBuilding_);
 	ImGui::End();
 }
 

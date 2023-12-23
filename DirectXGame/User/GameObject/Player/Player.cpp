@@ -168,9 +168,12 @@ const CollisionData& Player::GetCollisionData()
 
 void Player::OnCollision()
 {
-	hp_--;//hp減少
-	hp_ = max(hp_, 0);//0を下回らない処理
-	damageFlag_ = true;//ダメージエフェクトを表示
+	if (damageFlag_ == false)
+	{
+		hp_--;//hp減少
+		hp_ = max(hp_, 0);//0を下回らない処理
+		damageFlag_ = true;//ダメージエフェクトを表示
+	}
 }
 
 const bool Player::GetIsDead()

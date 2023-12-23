@@ -50,7 +50,7 @@ public:
 	//blenderで出力したデータを読み込むときにスケールをセットする関数
 	virtual void SetScale(const myMath::Vector3& scale) = 0;
 	//blenderで出力したデータを読み込むときに当たり判定の大きさをセットする関数
-	virtual void SetColliderSize(const float size) = 0;
+	virtual void SetColliderSize(const myMath::Vector3 size) = 0;
 
 	static void LoadAsset();
 };

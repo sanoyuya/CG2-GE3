@@ -4004,6 +4004,63 @@
                 "spawn": 0.0,
                 "death": 10800.0
             }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.011",
+            "transform": {
+                "translation": [
+                    -305.4363708496094,
+                    95.97569274902344,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.012",
+            "transform": {
+                "translation": [
+                    -200.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
         }
     ]
 }

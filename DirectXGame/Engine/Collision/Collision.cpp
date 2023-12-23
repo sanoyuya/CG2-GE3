@@ -113,6 +113,19 @@ bool Collision::SphereToTriangle(const Sphere& sphere, const Triangle& triangle,
 	return true;
 }
 
+bool Collision::AABBToSphere(const myMath::Vector3& AABBCenter,const myMath::Vector3& AABBScale, const myMath::Vector3& sphereCenter, float sphereScale)
+{
+	float x = std::max(AABBCenter.x - AABBScale.x, std::min(sphereCenter.x, AABBCenter.x + AABBScale.x));
+	float y = std::max(AABBCenter.y - AABBScale.y, std::min(sphereCenter.y, AABBCenter.y + AABBScale.y));
+	float z = std::max(AABBCenter.z - AABBScale.z, std::min(sphereCenter.z, AABBCenter.z + AABBScale.z));
+
+	float distance = std::sqrt((x - sphereCenter.x) * (x - sphereCenter.x) +
+		(y - sphereCenter.y) * (y - sphereCenter.y) +
+		(z - sphereCenter.z) * (z - sphereCenter.z));
+
+	return distance < sphereScale;
+}
+
 bool Collision::RayToPlane(const Ray& ray, Plane& plane, float* distance, myMath::Vector3* inter)
 {
 	const float epsilon = 1.0e-5f;	// 誤差吸収用の微小な値

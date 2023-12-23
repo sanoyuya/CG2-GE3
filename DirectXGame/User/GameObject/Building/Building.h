@@ -56,5 +56,5 @@ public:
 	//blenderで出力したデータを読み込むときにスケールをセットする関数
 	void SetScale(const myMath::Vector3& scale)override;
 	//blenderで出力したデータを読み込むときに当たり判定の大きさをセットする関数
-	void SetColliderSize(const float size)override;
+	void SetColliderSize(const myMath::Vector3 size)override;
 };

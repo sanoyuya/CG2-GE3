@@ -10,6 +10,8 @@ struct CollisionData
 	myMath::Vector3 center = {};
 	float radius = 0.0f;
 
+	myMath::Vector3 scale;
+
 	myMath::Vector3 rayStartPos = {};
 	myMath::Vector3 rayEndPos = {};
 };

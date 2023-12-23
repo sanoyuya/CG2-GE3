@@ -162,6 +162,8 @@ void GameLevelData::Load()
 			model->SetModel(groundTex2_);
 			model->SetShader(ShaderMode::Phong);
 
+			model->SetColliderSize(objectData.collider.size);
+
 			objects_.push_back(std::move(model));
 		}
 		else if (objectData.fileName == "building")
@@ -198,6 +200,8 @@ void GameLevelData::Load()
 			//回転角
 			//blenderで出力された値を変換する
 			model->SetRotation({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y + 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
+
+			model->SetColliderSize({ objectData.collider.size.x / 2,objectData.collider.size.y / 2,objectData.collider.size.z / 2 });
 
 			buildingData_.buildings.push_back(std::move(model));
 		}

@@ -53,10 +53,13 @@ class Collision
 public:
 	static bool SphereToSphere(const myMath::Vector3& sphere1,float radius1, const myMath::Vector3& sphere2,float radius2);
 	static bool SphereToSphere(const Sphere* sphere1, const Sphere* sphere2);
-
 	static bool SphereToSphere(const Sphere& sphere1, const Sphere& sphere2);
+
 	static bool SphereToPlane(const Sphere& sphere, const Plane& plane, myMath::Vector3* inter = nullptr);
 	static bool SphereToTriangle(const Sphere& sphere, const Triangle& triangle, myMath::Vector3* inter = nullptr, myMath::Vector3* reject = nullptr);
+
+	static bool AABBToSphere(const myMath::Vector3& AABBCenter, const myMath::Vector3& scale, const myMath::Vector3& sphereCenter, float sphereScale);
+
 	static bool RayToPlane(const Ray& ray, Plane& plane, float* distance = nullptr, myMath::Vector3* inter = nullptr);
 	static bool RayToTriangle(const Ray& ray, const Triangle& triangle, float* distance = nullptr, myMath::Vector3* inter = nullptr);
 	static bool RayToSphere(const Ray& ray, const Sphere& sphere, float* distance = nullptr, myMath::Vector3* inter = nullptr);

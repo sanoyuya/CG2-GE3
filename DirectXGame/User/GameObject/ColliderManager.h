@@ -18,6 +18,7 @@ private:
 	bool isPlayerToEnemy_ = true;
 	bool isPlayerBulletToEnemy_ = true;
 	bool isPlayerBulletToEnemyBullet_ = true;
+	bool isPlayerToBuilding_ = true;
 
 public:
 

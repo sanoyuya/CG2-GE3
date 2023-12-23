@@ -17,7 +17,10 @@ void BuildingManager::Initialize(BuildingList& buildingData)
 	for (std::unique_ptr<BuildingBase>& building : buildings_)
 	{
 		building->Initialize();
-		//ColliderManager::GetInstance()->AddCollision(building.get());
+		if (building->GetCollisionData().scale.x != 0.0f)
+		{
+			ColliderManager::GetInstance()->AddCollision(building.get());
+		}
 	}
 }
 

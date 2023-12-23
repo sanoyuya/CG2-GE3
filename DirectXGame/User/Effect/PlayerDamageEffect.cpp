@@ -11,12 +11,14 @@ PlayerDamageEffect::~PlayerDamageEffect()
 
 void PlayerDamageEffect::Update(Player* player)
 {
-	if (player->GetDamageFlag() && player->GetHp() > 1)
+	if (damageFlag_ == false)
 	{
-		damageFlag_ = true;
-		MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::GaussianBlur);
-		power_ = maxPower_;
-		player->SetDamageFlag(false);
+		if (player->GetDamageFlag() && player->GetHp() > 1)
+		{
+			MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::GaussianBlur);
+			damageFlag_ = true;
+			power_ = maxPower_;
+		}
 	}
 
 	if (damageFlag_ == true)
@@ -24,6 +26,7 @@ void PlayerDamageEffect::Update(Player* player)
 		if (power_ <= minPower_)
 		{
 			power_ = minPower_;
+			player->SetDamageFlag(false);
 			damageFlag_ = false;
 			MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::None);
 		}
