@@ -201,7 +201,7 @@ void GameLevelData::Load()
 			//blenderで出力された値を変換する
 			model->SetRotation({ myMath::ChangeRadians(objectData.rotation.x),myMath::ChangeRadians(objectData.rotation.y + 90.0f),myMath::ChangeRadians(objectData.rotation.z - 90.0f) });
 
-			model->SetColliderSize({ objectData.collider.size.x / 2,objectData.collider.size.y / 2,objectData.collider.size.z / 2 });
+			model->SetColliderSize({ objectData.collider.size.y / 2.0f,objectData.collider.size.x / 2.0f,objectData.collider.size.z / 2.0f });
 
 			buildingData_.buildings.push_back(std::move(model));
 		}

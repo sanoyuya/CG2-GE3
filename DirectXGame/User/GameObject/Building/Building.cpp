@@ -14,7 +14,7 @@ void Building::Initialize()
 	buildingBackTrans_.scale = { buildingTrans_.scale.x * buildingSize_.x - backCubeSubSize_,buildingTrans_.scale.y * buildingSize_.y - backCubeSubSize_,buildingTrans_.scale.z * buildingSize_.z - backCubeSubSize_ };
 	buildingBackTrans_.rotation = buildingTrans_.rotation;
 
-	collisionData_.center = buildingTrans_.translation;
+	collisionData_.center = buildingBackTrans_.translation;
 }
 
 void Building::Update()
