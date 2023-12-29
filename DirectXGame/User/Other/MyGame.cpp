@@ -21,6 +21,7 @@
 #include"GameScene.h"
 #include"GameClearScene.h"
 #include"GameOverScene.h"
+#include"BulletBase.h"
 
 void MyGame::Initialize()
 {
@@ -104,4 +105,5 @@ void MyGame::LoadAsset()
 	Reticle::LoadAsset();
 	LockOnAnimation::LoadAsset();
 	BuildingBase::LoadAsset();
+	BulletBase::LoadAsset();
 }

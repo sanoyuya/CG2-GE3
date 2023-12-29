@@ -42,7 +42,7 @@ void GameLevelData::CreateModel()
 	buildingTex_ = Model::CreateObjModel("Resources/building");
 	convenienceStoreTex_= Model::CreateObjModel("Resources/convenienceStore");
 	tex_ = Model::CreateObjModel("Resources/purpleDice");
-	skydomeTex_= Model::CreateObjModel("Resources/skydome3");
+	skydomeTex_= Model::CreateObjModel("Resources/skydome");
 }
 
 void GameLevelData::Load()
@@ -142,7 +142,7 @@ void GameLevelData::Load()
 
 			model->SetModel(skydomeTex_);
 
-			model->SetColor({ 0.0125f,0.0125f,0.0125f,1.0f });
+			//model->SetColor({ 0.0125f,0.0125f,0.0125f,1.0f });
 
 			objects_.push_back(std::move(model));
 		}

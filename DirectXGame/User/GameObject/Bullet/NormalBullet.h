@@ -23,7 +23,6 @@ private:
 
 	BulletOwner owner_ = BulletOwner::Player;
 
-	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
 
 	CollisionData collisionData_;

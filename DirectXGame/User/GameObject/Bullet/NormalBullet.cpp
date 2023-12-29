@@ -13,11 +13,9 @@ void NormalBullet::Initialize()
 	bullet_->SetModel(bulletTex_);
 	bulletTrans_.Initialize();
 
-	//パーティクルの初期化
-	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
-	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
 	smokeEmitter_->SetSize(2.0f);
+	smokeEmitter_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 
 	//死亡アニメーションパーティクル初期化
 	deathParticleEmitter_ = std::make_unique<EnemyDeathParticleEmitter>();
@@ -52,14 +50,10 @@ void NormalBullet::Update()
 
 	//パーティクルを毎フレーム作成
 	smokeEmitter_->Create(bulletTrans_.translation);
-	//パーティクルの更新
-	smokeEmitter_->Update(sCamera_);
 }
 
 void NormalBullet::Draw()
 {
-	smokeEmitter_->Draw();
-
 	if (deathAnimationFlag_ == true)
 	{
 		deathParticleEmitter_->Draw();

@@ -48,8 +48,6 @@ private:
 
 	std::unique_ptr<BuildingManager>buildingManager_;
 
-	static uint32_t sBgm_;
-
 	std::unique_ptr<GroundBack>groundBack_;
 
 	std::unique_ptr<EnemyLocationSprite>enemyLocationSprite_;
@@ -57,6 +55,8 @@ private:
 	std::unique_ptr<Tutorial>tutorial_;
 
 	std::unique_ptr<Pose>pose_;
+
+	static uint32_t sBgm_;
 
 public:
 

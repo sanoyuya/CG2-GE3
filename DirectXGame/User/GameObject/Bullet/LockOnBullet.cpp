@@ -16,8 +16,6 @@ void LockOnBullet::Initialize()
 	bulletTrans_.Initialize();
 
 	//パーティクルの初期化
-	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
-	smokeEmitter_->Initialize();
 	smokeTrans_.Initialize();
 	smokeEmitter_->SetSize(2.0f);
 	smokeEmitter_->SetColor({ 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f });
@@ -43,16 +41,12 @@ void LockOnBullet::Update()
 
 	//パーティクルを毎フレーム作成
 	smokeEmitter_->Create(actualTrans_.parentToTranslation);
-	
-	//パーティクルの更新
-	smokeEmitter_->Update(sCamera_);
 }
 
 void LockOnBullet::Draw()
 {
 	//当たり判定用描画
 	//bullet_->DrawModel(&bulletTrans_, { 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f });
-	smokeEmitter_->Draw();
 }
 
 std::string LockOnBullet::GetName()

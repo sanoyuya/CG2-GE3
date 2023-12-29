@@ -2,13 +2,14 @@
 #include"ColliderManager.h"
 #include"LockOnBullet.h"
 #include"AudioManager.h"
+#include"BulletBase.h"
 
 void BulletManager::Initialize()
 {
 	sound_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/bullet.mp3", 0.1f);
 }
 
-void BulletManager::Update()
+void BulletManager::Update(Camera* camera)
 {
 	bullets_.remove_if([](std::unique_ptr<BulletBase>& bullet) { return bullet->GetIsDead(); });
 
@@ -16,6 +17,7 @@ void BulletManager::Update()
 	{
 		bullet->Update();
 	}
+	BulletBase::EmitterUpdate(camera);
 }
 
 void BulletManager::Draw()
@@ -24,6 +26,7 @@ void BulletManager::Draw()
 	{
 		bullet->Draw();
 	}
+	BulletBase::EmitterDraw();
 }
 
 void BulletManager::CreateNormalBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner)

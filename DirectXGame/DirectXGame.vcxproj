@@ -104,6 +104,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="User\GameObject\Building\BuildingBase.cpp" />
+    <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp" />
     <ClCompile Include="User\Other\Tutorial\Tutorial.cpp" />
     <ClCompile Include="User\GameObject\GameObject.cpp" />
     <ClCompile Include="User\UI\EnemyLocationSprite.cpp" />

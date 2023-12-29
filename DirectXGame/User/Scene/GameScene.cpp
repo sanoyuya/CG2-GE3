@@ -109,7 +109,7 @@ void GameScene::Update()
 		buildingManager_->Update();
 		playerDamageEffect_->Update(player_.get());
 		enemyManager_->Update();
-		bulletManager_->Update();
+		bulletManager_->Update(camera_->GetCameraPtr());
 		ColliderManager::GetInstance()->Update(player_.get());
 		radar_->Update(camera_->GetCameraPtr());
 		tutorial_->Update();

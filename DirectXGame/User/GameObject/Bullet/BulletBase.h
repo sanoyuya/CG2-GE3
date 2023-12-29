@@ -1,5 +1,7 @@
 #pragma once
 #include"GameObject.h"
+#include"PlayerEngineSmokeParticleEmitter.h"
+#include"Camera.h"
 
 enum class BulletOwner
 {
@@ -9,6 +11,10 @@ enum class BulletOwner
 
 class BulletBase :public GameObject
 {
+protected:
+
+	static std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
+
 public://GameObjectで必要な奴
 
 	//デストラクタ
@@ -47,6 +53,10 @@ public://GameObjectで必要な奴
 	virtual void CancelLockOn() = 0;
 
 	virtual const bool GetLockOnFlag() = 0;
+
+	static void LoadAsset();
+	static void EmitterUpdate(Camera* camera);
+	static void EmitterDraw();
 
 public://Bulletで必要な奴
 	

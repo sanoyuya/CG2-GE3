@@ -471,6 +471,9 @@
     <ClCompile Include="User\GameObject\Building\BuildingBase.cpp">
       <Filter>User\ソース ファイル\Object\Building</Filter>
     </ClCompile>
+    <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp">
+      <Filter>User\ソース ファイル\Object\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">

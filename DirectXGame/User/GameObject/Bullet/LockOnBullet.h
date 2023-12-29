@@ -21,7 +21,6 @@ private:
 
 	BulletOwner owner_ = BulletOwner::Player;
 
-	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
 	Transform actualTrans_;
 	float angle_ = 0.0f;
