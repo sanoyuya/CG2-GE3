@@ -1,7 +1,6 @@
 #pragma once
 #include"BulletBase.h"
 #include"DrawOversight.h"
-#include"PlayerEngineSmokeParticleEmitter.h"
 
 class LockOnBullet :public BulletBase
 {
@@ -21,7 +20,6 @@ private:
 
 	BulletOwner owner_ = BulletOwner::Player;
 
-	Transform smokeTrans_;
 	Transform actualTrans_;
 	float angle_ = 0.0f;
 	float isPlus_ = 0.0f;

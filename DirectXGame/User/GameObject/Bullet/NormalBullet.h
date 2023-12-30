@@ -1,7 +1,6 @@
 #pragma once
 #include"BulletBase.h"
 #include"DrawOversight.h"
-#include"PlayerEngineSmokeParticleEmitter.h"
 #include"EnemyDeathParticleEmitter.h"
 
 class NormalBullet :public BulletBase
@@ -22,8 +21,6 @@ private:
 	Transform bulletTrans_;
 
 	BulletOwner owner_ = BulletOwner::Player;
-
-	Transform smokeTrans_;
 
 	CollisionData collisionData_;
 

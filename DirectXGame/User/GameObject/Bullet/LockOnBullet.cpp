@@ -16,7 +16,6 @@ void LockOnBullet::Initialize()
 	bulletTrans_.Initialize();
 
 	//パーティクルの初期化
-	smokeTrans_.Initialize();
 	smokeEmitter_->SetSize(2.0f);
 
 	actualTrans_.Initialize();

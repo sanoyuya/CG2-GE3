@@ -13,7 +13,6 @@ void NormalBullet::Initialize()
 	bullet_->SetModel(bulletTex_);
 	bulletTrans_.Initialize();
 
-	smokeTrans_.Initialize();
 	smokeEmitter_->SetSize(2.0f);
 
 	//死亡アニメーションパーティクル初期化

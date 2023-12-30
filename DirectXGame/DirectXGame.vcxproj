@@ -103,6 +103,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\GameObject\Bullet\TripleBullet.cpp" />
     <ClCompile Include="User\GameObject\Building\BuildingBase.cpp" />
     <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp" />
     <ClCompile Include="User\Other\Tutorial\Tutorial.cpp" />
@@ -359,6 +360,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\GameObject\Bullet\TripleBullet.h" />
     <ClInclude Include="User\Other\Tutorial\Tutorial.h" />
     <ClInclude Include="User\UI\EnemyLocationSprite.h" />
     <ClInclude Include="User\Other\GameHeader.h" />

@@ -3,6 +3,7 @@
 #include"LockOnBullet.h"
 #include"AudioManager.h"
 #include"BulletBase.h"
+#include"TripleBullet.h"
 
 void BulletManager::Initialize()
 {
@@ -65,6 +66,16 @@ void BulletManager::CreateLockOnBullet(myMath::Vector3 startPos, GameObject* loc
 	bullets_.push_back(std::move(newBullet));
 
 	AudioManager::GetInstance()->PlayWave(sound_, false);
+}
+
+void BulletManager::CreateTripleBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner)
+{
+	//弾を生成し、初期化
+	std::unique_ptr<BulletBase> newBullet = std::make_unique<TripleBullet>();
+	newBullet->SetPos(position);
+	newBullet->SetDirectionVector(frontVec);
+	newBullet->SetOwner(owner);
+	newBullet->Initialize();
 }
 
 void BulletManager::Reset()
