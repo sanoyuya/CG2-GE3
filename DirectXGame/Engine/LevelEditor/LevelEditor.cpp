@@ -112,16 +112,19 @@ void LevelEditor::ObjectDataLoad(LevelData* levelData, nlohmann::json& object)
 			objectData.timer.deathTimer = static_cast<float>(timer["death"]);
 		}
 
-		if (object.contains("isAttack"))
+		//敵情報のパラメータ読み込み
+		nlohmann::json& attackProperty = object["attack_property"];
+		if (attackProperty != nullptr)
 		{
-			if (object["isAttack"] == "true")
+			if (attackProperty["attack_flag"] == "true")
 			{
-				objectData.isAttack = true;
+				objectData.attackProperty.isAttack = true;
 			}
 			else
 			{
-				objectData.isAttack = false;
+				objectData.attackProperty.isAttack = false;
 			}
+			objectData.attackProperty.type = attackProperty["attack_type"];
 		}
 
 		//敵情報のパラメータ読み込み

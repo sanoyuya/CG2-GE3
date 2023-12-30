@@ -50,7 +50,7 @@ void MoveEnemy::Update()
 			enemyTrans_.TransUpdate(sCamera_);
 			collisionData_.center = enemyTrans_.translation;
 			lockOnAnimation_->Update(enemyTrans_.parentToTranslation, sCamera_);
-			if (isAttack_ == true)
+			if (attackProperty_.isAttack == true)
 			{
 				//弾の生成処理と更新処理
 				BulletUpdate();
@@ -213,9 +213,9 @@ void MoveEnemy::SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)
 	moveEnemyProperty_.escapePosRotation = { myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.x), myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.y) - myMath::AX_PIF / 2, myMath::ChangeRadians(moveEnemyProperty_.escapePosRotation.z) - myMath::AX_PIF / 2 };
 }
 
-void MoveEnemy::SetIsAttack(const bool flag)
+void MoveEnemy::SetAttackProperty(const AttackProperty property)
 {
-	isAttack_ = flag;
+	attackProperty_ = property;
 }
 
 const bool MoveEnemy::GetIsDead()
@@ -281,7 +281,14 @@ void MoveEnemy::BulletUpdate()
 		{
 			if (distance_ >= length)
 			{
-				bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+				if (attackProperty_.type == "normal")
+				{
+					bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+				}
+				else
+				{
+					bulletManager_->Create3WayBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+				}
 			}
 
 			bulletTimer_ = 0.0f;

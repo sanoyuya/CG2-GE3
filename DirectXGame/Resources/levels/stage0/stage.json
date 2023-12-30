@@ -457,7 +457,10 @@
                 "spawn": 30.0,
                 "death": 50.0
             },
-            "isAttack": "false",
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -400.0,
@@ -576,7 +579,10 @@
                 "spawn": 13.0,
                 "death": 25.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -638,7 +644,10 @@
                 "spawn": 13.0,
                 "death": 25.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -678,7 +687,10 @@
                 "spawn": 13.0,
                 "death": 25.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -740,7 +752,10 @@
                 "spawn": 34.0,
                 "death": 51.0
             },
-            "isAttack": "false",
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -420.0,
@@ -1035,7 +1050,10 @@
                 "spawn": 55.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1075,7 +1093,10 @@
                 "spawn": 55.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1115,7 +1136,10 @@
                 "spawn": 55.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1146,16 +1170,19 @@
                     0.0
                 ],
                 "size": [
-                    2.0,
-                    2.0,
-                    2.0
+                    3.0,
+                    3.0,
+                    3.0
                 ]
             },
             "timer": {
                 "spawn": 55.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1195,7 +1222,10 @@
                 "spawn": 55.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1235,7 +1265,10 @@
                 "spawn": 55.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1275,7 +1308,10 @@
                 "spawn": 60.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1315,7 +1351,10 @@
                 "spawn": 60.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1355,7 +1394,10 @@
                 "spawn": 60.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1395,7 +1437,10 @@
                 "spawn": 60.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1435,7 +1480,10 @@
                 "spawn": 60.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -1475,7 +1523,10 @@
                 "spawn": 60.0,
                 "death": 80.0
             },
-            "isAttack": "false"
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -2483,7 +2534,10 @@
                 "spawn": 30.0,
                 "death": 50.0
             },
-            "isAttack": "false",
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -320.0,
@@ -2558,7 +2612,10 @@
                 "spawn": 86.0,
                 "death": 106.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -2598,7 +2655,10 @@
                 "spawn": 86.0,
                 "death": 106.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -2638,7 +2698,10 @@
                 "spawn": 92.0,
                 "death": 112.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -2678,7 +2741,10 @@
                 "spawn": 92.0,
                 "death": 112.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "3way"
+            }
         },
         {
             "type": "MESH",
@@ -2718,7 +2784,10 @@
                 "spawn": 105.0,
                 "death": 123.0
             },
-            "isAttack": "true",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -1000.0,
@@ -2793,7 +2862,10 @@
                 "spawn": 105.0,
                 "death": 123.0
             },
-            "isAttack": "true",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -1000.0,
@@ -2868,7 +2940,10 @@
                 "spawn": 129.0,
                 "death": 143.0
             },
-            "isAttack": "false",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -600.0,
@@ -2943,7 +3018,10 @@
                 "spawn": 127.0,
                 "death": 141.0
             },
-            "isAttack": "false",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -615.1259765625,
@@ -3018,7 +3096,10 @@
                 "spawn": 125.0,
                 "death": 139.0
             },
-            "isAttack": "false",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -603.3350219726562,
@@ -3084,16 +3165,19 @@
                     0.0
                 ],
                 "size": [
-                    2.0,
-                    2.0,
-                    2.0
+                    3.0,
+                    3.0,
+                    3.0
                 ]
             },
             "timer": {
                 "spawn": 145.0,
                 "death": 160.0
             },
-            "isAttack": "true",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -600.0,
@@ -3168,7 +3252,10 @@
                 "spawn": 145.0,
                 "death": 160.0
             },
-            "isAttack": "true",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -550.0,
@@ -3243,7 +3330,10 @@
                 "spawn": 145.0,
                 "death": 160.0
             },
-            "isAttack": "true",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -550.0,
@@ -3318,7 +3408,10 @@
                 "spawn": 145.0,
                 "death": 160.0
             },
-            "isAttack": "true",
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
             "enemy_move_properties": {
                 "spawnPosition": [
                     -600.0,
@@ -3393,7 +3486,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -3433,7 +3529,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -3473,7 +3572,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -3513,7 +3615,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -3553,7 +3658,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -3593,7 +3701,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -3633,7 +3744,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -3673,7 +3787,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",
@@ -3713,7 +3830,10 @@
                 "spawn": 155.0,
                 "death": 180.0
             },
-            "isAttack": "true"
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            }
         },
         {
             "type": "MESH",

@@ -17,7 +17,7 @@ private:
 
 	bool spawnFlag_ = false;
 	bool isDead_ = false;
-	bool isAttack = false;
+	AttackProperty attackProperty_;
 
 	float bulletTimer = 0.0f;
 	float maxBulletTime = 0.0f;
@@ -86,7 +86,7 @@ public://セッター
 
 	void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty)override;
 
-	void SetIsAttack(const bool flag)override;
+	void SetAttackProperty(const AttackProperty property)override;
 
 public://ゲッター
 

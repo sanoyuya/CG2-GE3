@@ -53,7 +53,7 @@ void NormalEnemy::Update()
 		//敵のモデルの更新処理
 		enemyTrans_.TransUpdate(sCamera_);
 		lockOnAnimation_->Update(enemyTrans_.parentToTranslation, sCamera_);
-		if (isAttack == true)
+		if (attackProperty_.isAttack == true)
 		{
 			//弾の生成処理と更新処理
 			BulletUpdate();
@@ -144,9 +144,9 @@ void NormalEnemy::SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyPropert
 	moveEnemyProperty;
 }
 
-void NormalEnemy::SetIsAttack(const bool flag)
+void NormalEnemy::SetAttackProperty(const AttackProperty property)
 {
-	isAttack = flag;
+	attackProperty_ = property;
 }
 
 const bool NormalEnemy::GetIsDead()
@@ -212,7 +212,14 @@ void NormalEnemy::BulletUpdate()
 		{
 			if (distance_ >= length)
 			{
-				bulletManager_->Create3WayBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+				if (attackProperty_.type == "normal")
+				{
+					bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+				}
+				else
+				{
+					bulletManager_->Create3WayBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+				}
 			}
 
 			bulletTimer = 0.0f;

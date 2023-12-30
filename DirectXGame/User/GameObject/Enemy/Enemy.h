@@ -22,6 +22,12 @@ struct MoveEnemyProperty
 	myMath::Vector3 escapePosRotation;
 };
 
+struct AttackProperty
+{
+	bool isAttack;
+	std::string type;
+};
+
 class Enemy :public GameObject
 {
 protected:
@@ -93,7 +99,7 @@ public:
 	//blenderで出力したデータを読み込むときにMoveEnemyの情報をセットする関数
 	virtual void SetMoveEnemyProperty(const MoveEnemyProperty& moveEnemyProperty) = 0;
 	//blenderで出力したデータを読み込むときに攻撃フラグをセットする関数
-	virtual void SetIsAttack(const bool flag) = 0;
+	virtual void SetAttackProperty(const AttackProperty property) = 0;
 
 	void SetPlayer(Player* player);
 
