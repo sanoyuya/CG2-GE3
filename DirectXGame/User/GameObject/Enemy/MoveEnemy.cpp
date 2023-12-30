@@ -105,8 +105,7 @@ void MoveEnemy::PhaseUpdate()
 			break;
 		case ActionPhase::WAIT:
 
-			addY = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.125f, 2.0f * GameHeader::sFps_);
-			enemyTrans_.translation.y = enemyTrans_.translation.y + addY;
+			enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.5f, 120.0f) + moveEnemyProperty_.movePos.y;
 
 			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 

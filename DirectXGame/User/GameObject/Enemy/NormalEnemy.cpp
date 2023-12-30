@@ -48,7 +48,7 @@ void NormalEnemy::Update()
 	{
 		actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_);
 		//単振動
-		enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.5f, 120.0f)+ iniPos_.translation.y;
+		enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.5f, 120.0f)+ iniPos_.y;
 
 		//敵のモデルの更新処理
 		enemyTrans_.TransUpdate(sCamera_);
@@ -117,7 +117,7 @@ const CollisionData& NormalEnemy::GetCollisionData()
 void NormalEnemy::SetPosition(const myMath::Vector3& position)
 {
 	enemyTrans_.translation = position;
-	iniPos_.translation = position;
+	iniPos_ = position;
 }
 
 void NormalEnemy::SetRotation(const myMath::Vector3& rotation)

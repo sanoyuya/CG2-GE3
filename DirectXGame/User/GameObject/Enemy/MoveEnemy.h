@@ -46,9 +46,6 @@ private:
 	Transform lockOnTrans_;
 	uint32_t lockOnTex_ = 0;
 
-	float time_ = 0.0f;
-	float addY = 0.0f;
-
 	CollisionData collisionData_;
 
 	MoveEnemyProperty moveEnemyProperty_;

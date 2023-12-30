@@ -7,7 +7,7 @@ class NormalEnemy:public Enemy
 private:
 
 	std::string name_ = "enemy";
-	Transform iniPos_;
+	myMath::Vector3 iniPos_;
 	uint16_t actionTimer = 0;
 
 	std::unique_ptr<Model>enemy_;
