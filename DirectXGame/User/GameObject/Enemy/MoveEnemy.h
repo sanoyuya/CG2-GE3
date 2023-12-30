@@ -32,11 +32,9 @@ private:
 
 	bool spawnAnimationFlag_ = false;
 	uint8_t spawnAnimationTimer_ = 0;
-	const uint8_t maxSpawnAnimationTime_ = 60;
 
 	bool deathAnimationFlag_ = false;
 	uint8_t deathAnimationTimer_ = 0;
-	const uint8_t maxDeathAnimationTime_ = 60;
 
 	std::unique_ptr<EnemyDeathParticleEmitter>emitter_;
 	std::unique_ptr<EnemySpawnParticleEmitter>spawnEmitter_;
@@ -52,6 +50,7 @@ private:
 
 	ActionPhase phase = ActionPhase::MOVE;
 	uint16_t actionTimer = 0;
+	
 	myMath::Vector3 waitFinishPos = {};
 	myMath::Vector3 waitFinishRot = {};
 

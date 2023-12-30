@@ -33,6 +33,13 @@ protected:
 	static uint32_t enemyTex0_;
 	static uint32_t enemyTex1_;
 
+	const uint8_t maxSpawnAnimationTime_ = 60;
+	const uint8_t maxDeathAnimationTime_ = 60;
+
+	const float delayBulletTime_ = 20.0f;
+	const float distance_ = 150.0f;
+	const float amplitude_ = 0.5f;
+
 public:
 
 	static void LoadAsset();

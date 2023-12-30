@@ -19,7 +19,7 @@ void NormalEnemy::Initialize()
 	enemy_->SetModel(enemyTex0_);
 	enemyTrans_.Initialize();
 	enemyTrans_.TransUpdate(sCamera_);
-	maxBulletTime = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
+	maxBulletTime = static_cast<float>(myMath::GetRand(GameHeader::sFps_ - delayBulletTime_, GameHeader::sFps_ + delayBulletTime_));
 
 	//死亡アニメーションパーティクル初期化
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
@@ -28,7 +28,7 @@ void NormalEnemy::Initialize()
 	spawnEmitter_ = std::make_unique<EnemySpawnParticleEmitter>();
 	spawnEmitter_->Initialize();
 
-	lockOnAnimation_= std::make_unique<LockOnAnimation>();
+	lockOnAnimation_ = std::make_unique<LockOnAnimation>();
 	lockOnAnimation_->Initialize();
 
 	hitEffect_ = std::make_unique<HitEffect>();
@@ -48,7 +48,7 @@ void NormalEnemy::Update()
 	{
 		actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_);
 		//単振動
-		enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.5f, 120.0f)+ iniPos_.y;
+		enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, amplitude_, GameHeader::sFps_ * 2) + iniPos_.y;
 
 		//敵のモデルの更新処理
 		enemyTrans_.TransUpdate(sCamera_);
@@ -74,8 +74,7 @@ void NormalEnemy::Update()
 
 void NormalEnemy::Draw()
 {
-	const uint16_t fps = 60;
-	if (spawnTime_ * fps <= sGameTimer_->GetFlameCount() && sGameTimer_->GetFlameCount() <= deathTime_ * fps)
+	if (spawnTime_ * GameHeader::sFps_ <= sGameTimer_->GetFlameCount() && sGameTimer_->GetFlameCount() <= deathTime_ * GameHeader::sFps_)
 	{
 		if (spawnFlag_ == false)
 		{
@@ -208,16 +207,16 @@ void NormalEnemy::BulletUpdate()
 	{
 		float length = sqrt((player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x) * (player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x)) +
 			sqrt((player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z) * (player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z));
-		bulletTimer+= sGameTimer_->GetTimeSpeed();
+		bulletTimer += sGameTimer_->GetTimeSpeed();
 		if (bulletTimer > maxBulletTime)
 		{
-			if (150.0f >= length)
+			if (distance_ >= length)
 			{
-				bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
+				bulletManager_->Create3WayBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 			}
 
 			bulletTimer = 0.0f;
-			maxBulletTime = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
+			maxBulletTime = static_cast<float>(myMath::GetRand(GameHeader::sFps_ - delayBulletTime_, GameHeader::sFps_ + delayBulletTime_));
 		}
 	}
 }

@@ -474,9 +474,6 @@
     <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp">
       <Filter>User\ソース ファイル\Object\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="User\GameObject\Bullet\TripleBullet.cpp">
-      <Filter>User\ソース ファイル\Object\Bullet</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -861,9 +858,6 @@
     </ClInclude>
     <ClInclude Include="User\Other\Tutorial\Tutorial.h">
       <Filter>User\ヘッダー ファイル\Tutorial</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Bullet\TripleBullet.h">
-      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@ public:
 
 	void CreateNormalBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner);
 	void CreateLockOnBullet(myMath::Vector3 startPos, GameObject* lockOnEnemy, myMath::Vector3 controlPos);
-	void CreateTripleBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner);
+	void Create3WayBullet(myMath::Vector3 position, myMath::Vector3 frontVec, BulletOwner owner);
 
 	void Reset();
 };

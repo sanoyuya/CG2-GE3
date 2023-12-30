@@ -22,7 +22,7 @@ void MoveEnemy::Initialize()
 	enemyTrans_.translation = moveEnemyProperty_.spawnPos;
 	enemyTrans_.rotation = moveEnemyProperty_.movePosRotation;
 	collisionData_.center = enemyTrans_.translation;
-	maxBulletTime_ = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
+	maxBulletTime_ = static_cast<float>(myMath::GetRand(GameHeader::sFps_ - delayBulletTime_, GameHeader::sFps_ + delayBulletTime_));
 
 	//死亡アニメーションパーティクル初期化
 	emitter_ = std::make_unique<EnemyDeathParticleEmitter>();
@@ -105,7 +105,7 @@ void MoveEnemy::PhaseUpdate()
 			break;
 		case ActionPhase::WAIT:
 
-			enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, 0.5f, 120.0f) + moveEnemyProperty_.movePos.y;
+			enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, amplitude_, GameHeader::sFps_ * 2) + moveEnemyProperty_.movePos.y;
 
 			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 
@@ -276,16 +276,16 @@ void MoveEnemy::BulletUpdate()
 	{
 		float length = sqrt((player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x) * (player_->GetTransform().parentToTranslation.x - enemyTrans_.parentToTranslation.x)) +
 			sqrt((player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z) * (player_->GetTransform().parentToTranslation.z - enemyTrans_.parentToTranslation.z));
-		bulletTimer_+= sGameTimer_->GetTimeSpeed();
+		bulletTimer_ += sGameTimer_->GetTimeSpeed();
 		if (bulletTimer_ > maxBulletTime_)
 		{
-			if (150.0f >= length)
+			if (distance_ >= length)
 			{
 				bulletManager_->CreateNormalBullet(enemyTrans_.translation, frontVec, BulletOwner::Enemy);
 			}
 
 			bulletTimer_ = 0.0f;
-			maxBulletTime_ = static_cast<float>(myMath::GetRand(40.0f, 80.0f));
+			maxBulletTime_ = static_cast<float>(myMath::GetRand(GameHeader::sFps_ - delayBulletTime_, GameHeader::sFps_ + delayBulletTime_));
 		}
 	}
 }
