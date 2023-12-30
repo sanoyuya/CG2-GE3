@@ -23,6 +23,7 @@ void Player::Initialize()
 	player_ = std::make_unique<Model>();
 	player_->SetModel(sPlayerTex_);
 	playerTrans_.Initialize();
+	//調整値
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,0.0f };
 
 	playerTrans_.scale = { 0.5f,0.5f,0.5f };
@@ -202,7 +203,7 @@ const bool Player::GetLockOnFlag()
 void Player::Reset()
 {
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,0.0f };
-	hp_ = 10;
+	hp_ = maxHp_;
 	//レティクルのリセット
 	reticle_->Reset();
 	lockOnAttackFlag_ = false;
@@ -252,14 +253,19 @@ const bool Player::GetIsBulletAttack()
 
 void Player::Move()
 {
+	//補間座標調整値
+	float adjustedValue = 4.0f;
+	//補間時間調整値
+	float adjustedTimeValue = 30.0f;
+
 	if (cameraFlag_ == CameraFlag::Back)
 	{
 		//先に補間先の座標を定義する
-		float reticleX = reticle_->GetTransform().translation.x / 4;
-		float reticleY = reticle_->GetTransform().translation.y / 4;
+		float reticleX = reticle_->GetTransform().translation.x / adjustedValue;
+		float reticleY = reticle_->GetTransform().translation.y / adjustedValue;
 		//そのまま移動させると動きが硬いので補完する
-		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f / sGameTimer_->GetTimeSpeed());
-		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f / sGameTimer_->GetTimeSpeed());
+		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, adjustedTimeValue / sGameTimer_->GetTimeSpeed());
+		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, adjustedTimeValue / sGameTimer_->GetTimeSpeed());
 	}
 	else
 	{
@@ -267,8 +273,8 @@ void Player::Move()
 		float reticleX = 0.0f;
 		float reticleY = 0.0f;
 		//そのまま移動させると動きが硬いので補完する
-		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, 30.0f / sGameTimer_->GetTimeSpeed());
-		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, 30.0f / sGameTimer_->GetTimeSpeed());
+		PhysicsMath::Complement(playerTrans_.translation.x, reticleX, adjustedTimeValue / sGameTimer_->GetTimeSpeed());
+		PhysicsMath::Complement(playerTrans_.translation.y, reticleY, adjustedTimeValue / sGameTimer_->GetTimeSpeed());
 	}
 }
 
@@ -282,8 +288,8 @@ void Player::Rotation()
 	if (cameraFlag_ == CameraFlag::Back)
 	{
 		//レティクルの方向に向くように回転
-		playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z);
-		playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2;
+		playerTrans_.rotation.x = -std::atan2(directionVector_.y, directionVector_.z) * 2.0f;
+		playerTrans_.rotation.y = -std::atan2(directionVector_.z, directionVector_.x) + myMath::AX_PIF / 2.0f;
 
 		float angleZ = -(reticle_->GetTransform().translation.x / 4 - playerTrans_.translation.x) / 12.0f;
 		//モデルのZ軸回転
@@ -356,7 +362,7 @@ void Player::LockOnAttack()
 				//制御点を設定
 				myMath::Vector3 controlPoint = { static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(controlTrans_.parentToTranslation.x + 0.1f,controlTrans_.parentToTranslation.x + 0.2f)),
 				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(controlTrans_.parentToTranslation.y + 0.1f,controlTrans_.parentToTranslation.y + 0.2f)) ,
-				static_cast<float>(myMath::GetRandPlusOrMinus() * myMath::GetRand(controlTrans_.parentToTranslation.z + 0.1f,controlTrans_.parentToTranslation.z + 0.2f)) };
+				controlTrans_.parentToTranslation.z };
 
 				//弾を生成
 				bulletManager_->CreateLockOnBullet(playerTrans_.parentToTranslation, lockOnEnemy, controlPoint);

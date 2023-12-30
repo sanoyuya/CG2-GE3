@@ -40,7 +40,7 @@ void LockOnBullet::Update()
 
 	//パーティクルを毎フレーム作成
 	smokeEmitter_->SetColor({ 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f });
-	smokeEmitter_->Create(actualTrans_.parentToTranslation);
+	smokeEmitter_->Create(bulletTrans_.parentToTranslation);
 }
 
 void LockOnBullet::Draw()
@@ -133,12 +133,7 @@ void LockOnBullet::BulletMove()
 	bulletTrans_.translation = myMath::Beziers(startPos_, endPos, controlPos_, beziersTime_ / static_cast<float>(maxDeathTime_ / sGameTimer_->GetTimeSpeed()));
 
 	//ベジエ補間にイージング補間をかける
-	beziersTime_ = static_cast<float>(Easing::EaseInOutCubic(deathTimer_, 0.0f, static_cast<float>(maxDeathTime_ / sGameTimer_->GetTimeSpeed()), static_cast<float>(maxDeathTime_ / sGameTimer_->GetTimeSpeed())));
+	beziersTime_ = static_cast<float>(Easing::EaseInOutSine(deathTimer_, 0.0f, static_cast<float>(maxDeathTime_ / sGameTimer_->GetTimeSpeed()), static_cast<float>(maxDeathTime_ / sGameTimer_->GetTimeSpeed())));
 
 	bulletTrans_.TransUpdate(sCamera_);
-
-	angle_ += 0.25f * myMath::GetRandPlusOrMinus();
-	actualTrans_.parent = &bulletTrans_;
-	actualTrans_.translation = { PhysicsMath::CircularMotion({},(1 - beziersTime_ / maxDeathTime_),angle_).x,PhysicsMath::CircularMotion({},(1 - beziersTime_ / maxDeathTime_),angle_).y,0.0f };
-	actualTrans_.TransUpdate(sCamera_);
 }

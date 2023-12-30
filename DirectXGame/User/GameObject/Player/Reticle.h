@@ -15,7 +15,7 @@ private:
 	static uint32_t sReticleTex_;
 	static uint32_t sReticleTex2_;
 
-	const float reticleSpeed_ = 2.0f;
+	const float reticleSpeed_ = 1.5f;
 	const float reticleLimit_ = 60.0f;
 
 	Transform cameraTrans_;
