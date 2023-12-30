@@ -15,7 +15,6 @@ void NormalBullet::Initialize()
 
 	smokeTrans_.Initialize();
 	smokeEmitter_->SetSize(2.0f);
-	smokeEmitter_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 
 	//死亡アニメーションパーティクル初期化
 	deathParticleEmitter_ = std::make_unique<EnemyDeathParticleEmitter>();
@@ -49,6 +48,7 @@ void NormalBullet::Update()
 	collisionData_.center = bulletTrans_.translation;
 
 	//パーティクルを毎フレーム作成
+	smokeEmitter_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 	smokeEmitter_->Create(bulletTrans_.translation);
 }
 

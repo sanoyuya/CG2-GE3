@@ -6,10 +6,7 @@
 
 NormalEnemy::~NormalEnemy()
 {
-	if (deathAnimationFlag_ == false)
-	{
-		ColliderManager::GetInstance()->SubCollision(this);
-	}
+	ColliderManager::GetInstance()->SubCollision(this);
 	if (lockOnFlag_ == true)
 	{
 		ColliderManager::GetInstance()->SubLockOnEnemy(this);

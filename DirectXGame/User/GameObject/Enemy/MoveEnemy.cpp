@@ -7,10 +7,7 @@
 
 MoveEnemy::~MoveEnemy()
 {
-	if (deathAnimationFlag_ == false)
-	{
-		ColliderManager::GetInstance()->SubCollision(this);
-	}
+	ColliderManager::GetInstance()->SubCollision(this);
 	if (lockOnFlag_ == true)
 	{
 		ColliderManager::GetInstance()->SubLockOnEnemy(this);
@@ -134,9 +131,9 @@ void MoveEnemy::PhaseUpdate()
 
 void MoveEnemy::PhaseMove(const myMath::Vector3& startPosition, const myMath::Vector3& endPosition, const myMath::Vector3& startRotation, const myMath::Vector3& endRotation, const float maxTime)
 {
-	enemyTrans_.translation = { static_cast<float>(Easing::EaseInOutCubic(actionTimer, startPosition.x, endPosition.x, maxTime)),
-	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startPosition.y, endPosition.y, maxTime)),
-	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startPosition.z, endPosition.z, maxTime)) };
+	enemyTrans_.translation = { static_cast<float>(Easing::EaseInOutQuad(actionTimer, startPosition.x, endPosition.x, maxTime)),
+	static_cast<float>(Easing::EaseInOutQuad(actionTimer, startPosition.y, endPosition.y, maxTime)),
+	static_cast<float>(Easing::EaseInOutQuad(actionTimer, startPosition.z, endPosition.z, maxTime)) };
 
 	enemyTrans_.rotation = { static_cast<float>(Easing::EaseInOutCubic(actionTimer, startRotation.x, endRotation.x, maxTime)),
 	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startRotation.y, endRotation.y, maxTime)),
@@ -309,7 +306,7 @@ void MoveEnemy::SpawnUpdate()
 
 	spawnEmitter_->Update(sCamera_);
 
-	if (spawnAnimationTimer_ > maxSpawnAnimationTime_)
+	if (spawnAnimationTimer_ >= maxSpawnAnimationTime_)
 	{
 		spawnFlag_ = true;
 	}

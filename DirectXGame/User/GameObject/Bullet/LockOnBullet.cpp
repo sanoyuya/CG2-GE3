@@ -18,7 +18,6 @@ void LockOnBullet::Initialize()
 	//パーティクルの初期化
 	smokeTrans_.Initialize();
 	smokeEmitter_->SetSize(2.0f);
-	smokeEmitter_->SetColor({ 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f });
 
 	actualTrans_.Initialize();
 	isPlus_ = myMath::GetRandPlusOrMinus();
@@ -40,6 +39,7 @@ void LockOnBullet::Update()
 	collisionData_.center = bulletTrans_.translation;
 
 	//パーティクルを毎フレーム作成
+	smokeEmitter_->SetColor({ 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f });
 	smokeEmitter_->Create(actualTrans_.parentToTranslation);
 }
 
