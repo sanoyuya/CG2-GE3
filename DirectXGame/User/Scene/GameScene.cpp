@@ -19,14 +19,13 @@ void GameScene::Initialize()
 
 	lightManager_.reset(lightManager_->Create());
 	Model::SetLight(lightManager_.get());
-	lightPos_ = { 0.0f,0.0f,-2.0f };
-	lightColor_ = { 1.0f,1.0f ,1.0f };
-	lightAtten_ = { 0.3f,0.1f,0.1f };
 
 	gameTimer_ = std::make_unique<GameTimer>();
 	//レベルエディタの初期化&読み込み
 	gameLevelData_ = std::make_unique<GameLevelData>();
 	gameLevelData_->SetGameTimer(gameTimer_.get());
+	gameLevelData_->ConvertToString();
+	gameLevelData_->SetGroundTiling({ 100.0f,100.0f });
 	gameLevelData_->Initialize();
 
 	camera_ = std::make_unique<RailCamera>();
@@ -92,12 +91,6 @@ void GameScene::Update()
 
 	lightManager_->Update();
 
-	//ポイントライト
-	lightManager_->SetPointLightActive(0, false);
-	lightManager_->SetPointLightPos(0, lightPos_);
-	lightManager_->SetPointLightColor(0, lightColor_);
-	lightManager_->SetPointLightAtten(0, lightAtten_);
-
 	if (pose_->GetPoseFlag() == false)
 	{
 		camera_->BeginUpdate(gameTimer_.get());
@@ -123,6 +116,7 @@ void GameScene::Update()
 	ImGui::Begin("EnemyReset");
 	if (ImGui::Button("EnemyReset"))
 	{
+		gameLevelData_->ConvertToString();
 		gameLevelData_->Initialize();
 		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), player_.get(), bulletManager_.get());
 	}

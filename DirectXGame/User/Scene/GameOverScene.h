@@ -4,6 +4,10 @@
 #include"DrawOversight.h"
 #include"Camera.h"
 #include"AudioManager.h"
+#include"GameLevelData.h"
+#include"GroundBack.h"
+#include"BuildingManager.h"
+#include"PlayerEngineSmokeParticleEmitter.h"
 
 class GameOverScene :public BaseScene
 {
@@ -12,19 +16,34 @@ private:
 	//クラス読み込み
 	InputManager* input_ = nullptr;
 	AudioManager* audioManager_ = nullptr;
-	std::unique_ptr<LightManager>lightManager_;
 
+	std::unique_ptr<LightManager>lightManager_;
 	std::unique_ptr<Camera>camera_;
 
-	//天球
-	std::unique_ptr<Model>skyDome_;
-	Transform skyDomeTrans_;
-	static uint32_t sSkyDomeTex_;
+	std::unique_ptr<GameTimer>gameTimer_;
+
+	std::unique_ptr<GameLevelData> gameLevelData_;
+	std::unique_ptr<BuildingManager>buildingManager_;
+	std::unique_ptr<GroundBack>groundBack_;
 
 	myMath::Vector3 cameraPos_;
 	float angleX_ = 0.0f;
 	float angleY_ = 0.0f;
 	const float length_ = 50.0f;
+
+	//制御点
+	std::vector<myMath::Vector3> controlPoints_;
+	myMath::Vector3 playerPos_ = {};
+	myMath::Vector3 frontPos_ = {};
+	myMath::Vector3 up_ = { 0,1,0 };//上方向ベクトル
+	Transform controlTrans_;
+
+	std::unique_ptr<Model>player_;
+	Transform playerTrans_;
+	static uint32_t sPlayerTex_;
+
+	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
+	Transform smokeTrans_;
 
 	static uint32_t sBgm_;
 
@@ -46,4 +65,10 @@ public:
 	void Draw()override;
 
 	static void LoadAsset();
+
+private:
+
+	void Load(const CameraData& cameraData);
+
+	void SmokeUpdate();
 };

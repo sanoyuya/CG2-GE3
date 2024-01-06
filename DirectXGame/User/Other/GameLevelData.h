@@ -35,6 +35,7 @@ private:
 
 	myMath::Vector2 groundTranslation_ = {};
 	myMath::Vector2 groundSize_ = {};
+	myMath::Vector2 groundTiling_ = {};
 
 	PlayerData playerData_;
 	CameraData cameraData_;
@@ -77,7 +78,6 @@ private:
 
 	void CreateModel();
 	void Load();
-	void ConvertToString();
 
 public:
 
@@ -89,6 +89,9 @@ public:
 	static bool NumericStringCompare(const ControlPoint& a, const ControlPoint& b);
 
 	void SetFileName(const std::string& fileName);
+	void ConvertToString();
+
+	void SetGroundTiling(const myMath::Vector2 tiling);
 
 	const myMath::Vector2 GetGroundSize();
 	const myMath::Vector2 GetGroundTranslation();

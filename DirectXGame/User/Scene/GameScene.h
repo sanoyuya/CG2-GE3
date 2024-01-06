@@ -11,7 +11,6 @@
 #include"EnemyManager.h"
 #include"PlayerDamageEffect.h"
 #include"Radar.h"
-#include"GameTimer.h"
 #include"BulletManager.h"
 #include"GroundBack.h"
 #include"BuildingManager.h"
@@ -29,11 +28,13 @@ private:
 
 	std::unique_ptr<RailCamera>camera_;
 	std::unique_ptr<LightManager>lightManager_;
-	myMath::Vector3 lightPos_ = { 0.0f,0.0f ,0.0f };
-	myMath::Vector3 lightColor_ = { 0.0f,0.0f ,0.0f };
-	myMath::Vector3 lightAtten_ = { 0.0f,0.0f ,0.0f };
 
+	std::unique_ptr<GameTimer>gameTimer_;
+
+	//オブジェクト及び背景
 	std::unique_ptr<GameLevelData> gameLevelData_;
+	std::unique_ptr<BuildingManager>buildingManager_;
+	std::unique_ptr<GroundBack>groundBack_;
 
 	std::unique_ptr<Player>player_;
 	std::unique_ptr<PlayerDamageEffect>playerDamageEffect_;
@@ -42,14 +43,8 @@ private:
 
 	std::unique_ptr<BulletManager>bulletManager_;
 
+	//UI
 	std::unique_ptr<Radar>radar_;
-
-	std::unique_ptr<GameTimer>gameTimer_;
-
-	std::unique_ptr<BuildingManager>buildingManager_;
-
-	std::unique_ptr<GroundBack>groundBack_;
-
 	std::unique_ptr<EnemyLocationSprite>enemyLocationSprite_;
 
 	std::unique_ptr<Tutorial>tutorial_;

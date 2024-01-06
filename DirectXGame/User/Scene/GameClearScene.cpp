@@ -44,7 +44,7 @@ void GameClearScene::Update()
 void GameClearScene::Draw()
 {
 	skyDome_->DrawModel(&skyDomeTrans_);
-	result_->DrawSprite2D({ 640.0f,360.0f });
+	//result_->DrawSprite2D({ 640.0f,360.0f });
 	SceneChangeAnimation::GetInstance()->Draw();
 }
 

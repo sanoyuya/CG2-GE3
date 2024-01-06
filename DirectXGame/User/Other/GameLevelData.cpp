@@ -12,7 +12,6 @@ GameLevelData::~GameLevelData()
 
 void GameLevelData::Initialize()
 {
-	ConvertToString();
 	CreateModel();
 	Load();
 }
@@ -63,7 +62,7 @@ void GameLevelData::Load()
 		}
 		else if (objectData.fileName == "camera")
 		{
-			continue;
+			cameraData_.position = objectData.translation;
 		}
 		else if (objectData.fileName == "cameraPoint")
 		{
@@ -120,7 +119,7 @@ void GameLevelData::Load()
 
 			model->SetModel(groundTex_);
 			model->SetShader(ShaderMode::Phong);
-			model->SetTiling({ 100.0f,100.0f });
+			model->SetTiling(groundTiling_);
 
 			groundTranslation_ = { objectData.translation.x,objectData.translation.z };
 			groundSize_ = { objectData.scaling.x, objectData.scaling.z };
@@ -141,8 +140,6 @@ void GameLevelData::Load()
 			model->SetName(objectData.fileName);
 
 			model->SetModel(skydomeTex_);
-
-			//model->SetColor({ 0.0125f,0.0125f,0.0125f,1.0f });
 
 			objects_.push_back(std::move(model));
 		}
@@ -264,6 +261,11 @@ void GameLevelData::ConvertToString()
 {
 	std::string stageNum = std::to_string(Retention::GetInstance()->GetStageNum());
 	fileName_ = "stage" + stageNum + "/stage";
+}
+
+void GameLevelData::SetGroundTiling(const myMath::Vector2 tiling)
+{
+	groundTiling_ = tiling;
 }
 
 const PlayerData& GameLevelData::GetPlayerData()
