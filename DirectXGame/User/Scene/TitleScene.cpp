@@ -38,6 +38,7 @@ void TitleScene::Initialize()
 	skyDome_ = std::make_unique<Model>();
 	skyDome_->SetModel(sSkyDomeTex_);
 	skyDomeTrans_.Initialize();
+	skyDomeTrans_.scale = { 2.0f,2.0f,2.0f };
 
 	//戦闘機
 	player_ = std::make_unique<Model>();
@@ -45,6 +46,7 @@ void TitleScene::Initialize()
 	playerTrans_.Initialize();
 	playerTrans_.parent = &skyDomeTrans_;
 	playerTrans_.rotation.y = myMath::AX_PIF / 2;
+	playerTrans_.scale={ 0.5f,0.5f ,0.5f };
 
 	//パーティクルの初期化
 	smokeEmitter_ = std::make_unique<PlayerEngineSmokeParticleEmitter>();
@@ -59,13 +61,12 @@ void TitleScene::Initialize()
 		animationBox_[i]->Sprite2DInitialize(sAnimationBoxTex_);
 	}
 
-	for (uint8_t i = 0; i < 5; i++)
+	for (uint8_t i = 0; i < 3; i++)
 	{
 		cloud_[i] = std::make_unique<Model>();
 		cloud_[i]->SetModel(sCloudTex_);
 		cloudTrans_[i].Initialize();
-		cloudTrans_[i].translation = { static_cast<float>(myMath::GetRand(-50.0f,50.0f)),static_cast<float>(myMath::GetRand(-7.5f,-5.0f)) ,static_cast<float>(myMath::GetRand(-5.0f,5.0f)) };
-		cloudTrans_[i].scale = { static_cast<float>(myMath::GetRand(4.0f,8.0f)),static_cast<float>(myMath::GetRand(2.0f,4.0f)) ,static_cast<float>(myMath::GetRand(4.0f,8.0f)) };
+		cloudTrans_[i].translation = { static_cast<float>(myMath::GetRand(-100.0f,200.0f)),-50.0f ,static_cast<float>(myMath::GetRand(25.0f,50.0f)) };
 	}
 
 	audioManager_->PlayWave(sBgm_, true);
@@ -123,25 +124,18 @@ void TitleScene::Update()
 		animationTime_++;
 	}
 
-	for (uint8_t i = 0; i < 5; i++)
+	for (uint8_t i = 0; i < 3; i++)
 	{
 		if (animationFlag_ == false)
 		{
-			if (cloudTrans_[i].translation.x < playerTrans_.parentToTranslation.x - 50.0f)
+			if (cloudTrans_[i].translation.x < playerTrans_.parentToTranslation.x - 100.0f)
 			{
-				cloudTrans_[i].translation = { playerTrans_.parentToTranslation.x + 75.0f,static_cast<float>(myMath::GetRand(-7.5f,-5.0f)) ,static_cast<float>(myMath::GetRand(-5.0f,5.0f)) };
-				cloudTrans_[i].scale = { static_cast<float>(myMath::GetRand(4.0f,8.0f)),static_cast<float>(myMath::GetRand(2.0f,4.0f)) ,static_cast<float>(myMath::GetRand(4.0f,8.0f)) };
+				cloudTrans_[i].translation = { playerTrans_.parentToTranslation.x + 100.0f,-50.0f ,static_cast<float>(myMath::GetRand(25.0f,50.0f)) };
 			}
 		}
 
 		cloudTrans_[i].TransUpdate(camera_.get());
 	}
-
-	//ポイントライト
-	/*lightManager_->SetPointLightActive(0, true);
-	lightManager_->SetPointLightPos(0, { 0.0f,0.0f ,0.0f });
-	lightManager_->SetPointLightColor(0, { 1.0f,1.0f,1.0f });
-	lightManager_->SetPointLightAtten(0, { 0.3f,0.1f,0.1f });*/
 }
 
 void TitleScene::Draw()
@@ -150,9 +144,9 @@ void TitleScene::Draw()
 	smokeEmitter_->Draw();
 	player_->DrawModel(&playerTrans_);
 
-	for (uint8_t i = 0; i < 5; i++)
+	for (uint8_t i = 0; i < 3; i++)
 	{
-		cloud_[i]->DrawModel(&cloudTrans_[i], { 1.0f,1.0f,1.0f,0.5f });
+		cloud_[i]->DrawModel(&cloudTrans_[i]);
 	}
 
 	if (animationFlag_ == false)
@@ -176,7 +170,7 @@ void TitleScene::LoadAsset()
 	sSkyDomeTex_ = Model::CreateObjModel("Resources/skydome");
 	sPlayerTex_ = Model::CreateObjModel("Resources/F-35E");
 	sAnimationBoxTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
-	sCloudTex_ = Model::CreateObjModel("Resources/cube");
+	sCloudTex_ = Model::CreateObjModel("Resources/building3");
 	sBgm_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/title.mp3", 0.1f);
 }
 

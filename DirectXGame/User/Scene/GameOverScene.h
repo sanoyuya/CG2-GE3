@@ -20,15 +20,15 @@ private:
 	AudioManager* audioManager_ = nullptr;
 
 	std::unique_ptr<LightManager>lightManager_;
+
 	std::unique_ptr<Camera>camera_;
+	myMath::Vector3 cameraPos_;
 
 	std::unique_ptr<GameTimer>gameTimer_;
 
 	std::unique_ptr<GameLevelData> gameLevelData_;
 	std::unique_ptr<BuildingManager>buildingManager_;
 	std::unique_ptr<GroundBack>groundBack_;
-
-	myMath::Vector3 cameraPos_;
 
 	//制御点
 	std::vector<myMath::Vector3> controlPoints_;
