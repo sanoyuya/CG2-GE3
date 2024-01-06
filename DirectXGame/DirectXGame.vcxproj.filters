@@ -474,6 +474,9 @@
     <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp">
       <Filter>User\ソース ファイル\Object\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="User\Effect\Particle\BigBang.cpp">
+      <Filter>User\ソース ファイル\Effect\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Model\Basic\ModelBasicPS.hlsl">
@@ -858,6 +861,9 @@
     </ClInclude>
     <ClInclude Include="User\Other\Tutorial\Tutorial.h">
       <Filter>User\ヘッダー ファイル\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Effect\Particle\BigBang.h">
+      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,8 @@
 #include"GroundBack.h"
 #include"BuildingManager.h"
 #include"PlayerEngineSmokeParticleEmitter.h"
+#include"EnemyDeathParticleEmitter.h"
+#include"BigBang.h"
 
 class GameOverScene :public BaseScene
 {
@@ -27,9 +29,6 @@ private:
 	std::unique_ptr<GroundBack>groundBack_;
 
 	myMath::Vector3 cameraPos_;
-	float angleX_ = 0.0f;
-	float angleY_ = 0.0f;
-	const float length_ = 50.0f;
 
 	//制御点
 	std::vector<myMath::Vector3> controlPoints_;
@@ -44,11 +43,16 @@ private:
 
 	std::unique_ptr<PlayerEngineSmokeParticleEmitter>smokeEmitter_;
 	Transform smokeTrans_;
+	std::unique_ptr<EnemyDeathParticleEmitter>deathParticleEmitter_;
+	std::unique_ptr<BigBang>bigBangEmitter_;
 
 	static uint32_t sBgm_;
 
 	static uint32_t sResultTex_;
 	std::unique_ptr<Sprite>result_;
+	float resultAlpha_ = 0.0f;
+
+	float angle_ = 0.0f;
 
 public:
 

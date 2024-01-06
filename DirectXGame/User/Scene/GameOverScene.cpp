@@ -1,6 +1,8 @@
 #include "GameOverScene.h"
 #include"EasingFunction.h"
 #include"SceneChangeAnimation.h"
+#include"GameHeader.h"
+#include"PhysicsMath.h"
 uint32_t GameOverScene::sResultTex_;
 uint32_t GameOverScene::sPlayerTex_;
 uint32_t GameOverScene::sBgm_;
@@ -22,7 +24,10 @@ void GameOverScene::Initialize()
 
 	camera_ = std::make_unique<Camera>();
 	camera_->Initialize(true);
-	camera_->SetEye(gameLevelData_->GetCameraData().position);
+	cameraPos_ = gameLevelData_->GetCameraData().position;
+	camera_->SetEye(cameraPos_);
+
+	GameObject::SetCamera(camera_.get());
 
 	lightManager_.reset(lightManager_->Create());
 	Model::SetLight(lightManager_.get());
@@ -55,6 +60,13 @@ void GameOverScene::Initialize()
 	//モデルの中心座標から位置をずらす
 	smokeTrans_.translation = { 0.0f,-0.3f,-4.0f };
 
+	//死亡演出の初期化
+	deathParticleEmitter_ = std::make_unique<EnemyDeathParticleEmitter>();
+	deathParticleEmitter_->Initialize();
+
+	bigBangEmitter_= std::make_unique<BigBang>();
+	bigBangEmitter_->Initialize();
+
 	audioManager_->PlayWave(sBgm_, true);
 }
 
@@ -74,21 +86,53 @@ void GameOverScene::Update()
 	{
 		//自機を自機の向かう方向に向ける処理
 		playerPos_ = myMath::CatmullRomSpline(controlPoints_, gameTimer_->GetFlameCount() / gameTimer_->GetGameTime());
-		frontPos_ = myMath::CatmullRomSpline(controlPoints_, (gameTimer_->GetFlameCount() + 1.0f) / gameTimer_->GetGameTime());
+		frontPos_ = myMath::CatmullRomSpline(controlPoints_, min((gameTimer_->GetFlameCount() + 0.1f) / gameTimer_->GetGameTime(),1.0f));
 		myMath::MakeLookL(playerPos_, frontPos_, up_, controlTrans_.matWorld);
+
+		playerTrans_.rotation.z = -0.0125f * gameTimer_->GetFlameCount();
 
 		//パーティクルを毎フレーム作成
 		smokeEmitter_->Create(smokeTrans_.parentToTranslation);
+
+		//1秒に一回爆発演出を出す
+		if (static_cast<uint8_t>(gameTimer_->GetFlameCount()) % static_cast<uint8_t>(GameHeader::sFps_) == 0)
+		{
+			deathParticleEmitter_->Create(myMath::CatmullRomSpline(controlPoints_, min((gameTimer_->GetFlameCount() + 5.0f) / gameTimer_->GetGameTime(), 1.0f)));
+		}
 	}
+	else
+	{
+		deathParticleEmitter_->Create(playerTrans_.parentToTranslation);
+
+		cameraPos_.x = PhysicsMath::CircularMotion({ 0.0f,0.0f }, 30.0f, angle_).x;
+		cameraPos_.z = PhysicsMath::CircularMotion({ 0.0f,0.0f }, 30.0f, angle_).y;
+		camera_->SetEye(cameraPos_);
+
+		angle_ = (gameTimer_->GetFlameCount() - gameTimer_->GetGameTime()) * 0.005f;
+	}
+
+	//地面に着地したら大爆発するように
+	if (gameTimer_->GetFlameCount() == gameTimer_->GetGameTime())
+	{
+		bigBangEmitter_->Create(playerTrans_.parentToTranslation);
+	}
+
+	resultAlpha_ = min((gameTimer_->GetFlameCount() - gameTimer_->GetGameTime()) / (GameHeader::sFps_ * 3.0f), 1.0f);
 
 	camera_->SetTarget(playerPos_);
 	camera_->Update(true);
 	playerTrans_.TransUpdate(camera_.get());
 	SmokeUpdate();
+	//死亡演出のパーティクルの更新処理
+	deathParticleEmitter_->Update(camera_.get());
+	bigBangEmitter_->Update(camera_.get());
+
 	gameLevelData_->Update(camera_.get());
 	groundBack_->Update(camera_.get(), gameTimer_.get());
 	buildingManager_->Update();
 	gameTimer_->Update();
+
+	gameTimer_->ImGuiUpdate();
 }
 
 void GameOverScene::Draw()
@@ -98,8 +142,11 @@ void GameOverScene::Draw()
 	buildingManager_->Draw();
 	player_->DrawModel(&playerTrans_);
 	smokeEmitter_->Draw();
+	//死亡演出の描画
+	deathParticleEmitter_->Draw();
+	bigBangEmitter_->Draw();
 
-	//result_->DrawSprite2D({ 640.0f,360.0f });
+	result_->DrawSprite2D(GameHeader::windowsCenter_, { 1.0f,1.0f ,1.0f,resultAlpha_ }, { 0.5f,0.5f });
 	SceneChangeAnimation::GetInstance()->Draw();
 }
 

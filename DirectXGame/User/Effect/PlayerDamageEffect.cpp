@@ -13,7 +13,7 @@ void PlayerDamageEffect::Update(Player* player)
 {
 	if (damageFlag_ == false)
 	{
-		if (player->GetDamageFlag() && player->GetHp() > 1)
+		if (player->GetDamageFlag() && player->GetHp() > 0)
 		{
 			MultiTexturePostEffect::SetEffectMode(MultiTextureEffectMode::GaussianBlur);
 			damageFlag_ = true;
