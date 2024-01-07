@@ -4,7 +4,7 @@ void EnemySpawnParticleEmitter::Initialize()
 {
 	// パーティクル生成
 	particleMan_ = std::make_unique<ParticleManager>();
-	tex_ = particleMan_->LoadTexture("Resources/particle.png");
+	tex_ = particleMan_->LoadTexture("Resources/Texture/particle.png");
 	particleMan_->Initialize(tex_);
 }
 

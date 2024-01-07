@@ -4,7 +4,7 @@ uint32_t EnemyLocationSprite::spriteTex_;
 
 void EnemyLocationSprite::LoadAsset()
 {
-	spriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/attention.png");
+	spriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/attention.png");
 }
 
 void EnemyLocationSprite::Load(EnemyManager* enemys)

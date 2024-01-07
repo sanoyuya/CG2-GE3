@@ -90,6 +90,6 @@ void TutorialSkip::Reset()
 
 void TutorialSkip::LoadAsset()
 {
-	sTextTex_ = TextureManager::GetInstance()->LoadTexture("Resources/skip.png");
-	sBackTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
+	sTextTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/skip.png");
+	sBackTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/white1x1.png");
 }

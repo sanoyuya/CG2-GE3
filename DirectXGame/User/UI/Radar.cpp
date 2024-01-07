@@ -55,7 +55,7 @@ void Radar::Draw(EnemyManager* enemys, Player* player)
 
 void Radar::LoadAsset()
 {
-	sRadarTex_ = TextureManager::GetInstance()->LoadTexture("Resources/radar.png");
-	sPlayerTex_ = TextureManager::GetInstance()->LoadTexture("Resources/radarPlayer.png");
-	sEnemyTex_ = TextureManager::GetInstance()->LoadTexture("Resources/radarEnemy.png");
+	sRadarTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/radar.png");
+	sPlayerTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/radarPlayer.png");
+	sEnemyTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/radarEnemy.png");
 }

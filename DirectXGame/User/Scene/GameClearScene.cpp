@@ -122,7 +122,7 @@ void GameClearScene::Draw()
 
 void GameClearScene::LoadAsset()
 {
-	sResultTex_ = TextureManager::GetInstance()->LoadTexture("Resources/defaultGameClear.png");
+	sResultTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/defaultGameClear.png");
 	sPlayerTex_ = Model::CreateObjModel("Resources/F-35E");
 	sBgm_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/Blinded.mp3", 0.1f);
 }

@@ -4,7 +4,7 @@ uint32_t HitEffect::hitTex_ = 0;
 
 void HitEffect::LoadAsset()
 {
-	hitTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Hit.png");
+	hitTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/Hit.png");
 }
 
 void HitEffect::Initialize()

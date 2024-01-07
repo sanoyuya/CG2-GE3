@@ -53,5 +53,5 @@ void LockOnAnimation::Draw(Camera* camera)
 
 void LockOnAnimation::LoadAsset()
 {
-	sLockOnTex_ = TextureManager::GetInstance()->LoadTexture("Resources/reticle.png");
+	sLockOnTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/reticle.png");
 }

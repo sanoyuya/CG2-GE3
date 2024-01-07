@@ -4,7 +4,7 @@ void ParticleEmitter::Initialize()
 {
 	// パーティクル生成
 	particleMan_ = std::make_unique<ParticleManager>();
-	tex_ = particleMan_->LoadTexture("Resources/reticle.png");
+	tex_ = particleMan_->LoadTexture("Resources/Texture/reticle.png");
 	particleMan_->Initialize(tex_);
 }
 

@@ -30,7 +30,7 @@ void StageSelectScene::Draw()
 
 void StageSelectScene::LoadAsset()
 {
-	sStageNumSpriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/number.png");
+	sStageNumSpriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/number.png");
 }
 
 void StageSelectScene::Select()

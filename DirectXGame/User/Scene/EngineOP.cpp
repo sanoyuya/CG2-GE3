@@ -5,12 +5,12 @@
 void EngineOP::Initialize()
 {
 	engineLogo_ = std::make_unique<Sprite>();
-	engineLogoTex_ = engineLogo_->LoadTexture("Resources/EngineLogo.png");
+	engineLogoTex_ = engineLogo_->LoadTexture("Resources/Texture/EngineLogo.png");
 	engineLogo_->Sprite2DInitialize(engineLogoTex_);
 	logoColor_ = { 1.0f,1.0f,1.0f,0.0f };
 
 	back_ = std::make_unique<Sprite>();
-	backTex_ = back_->LoadTexture("Resources/white1x1.png");
+	backTex_ = back_->LoadTexture("Resources/Texture/white1x1.png");
 	back_->Sprite2DInitialize(backTex_);
 }
 

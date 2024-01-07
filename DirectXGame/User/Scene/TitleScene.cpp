@@ -165,11 +165,11 @@ void TitleScene::Draw()
 
 void TitleScene::LoadAsset()
 {
-	sTitleTex_ = TextureManager::GetInstance()->LoadTexture("Resources/gameLogo.png");
-	sPressButtonTex_ = TextureManager::GetInstance()->LoadTexture("Resources/pressAButton.png");
+	sTitleTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/gameLogo.png");
+	sPressButtonTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/pressAButton.png");
 	sSkyDomeTex_ = Model::CreateObjModel("Resources/skydome");
 	sPlayerTex_ = Model::CreateObjModel("Resources/F-35E");
-	sAnimationBoxTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
+	sAnimationBoxTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/white1x1.png");
 	sCloudTex_ = Model::CreateObjModel("Resources/building3");
 	sBgm_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/title.mp3", 0.1f);
 }

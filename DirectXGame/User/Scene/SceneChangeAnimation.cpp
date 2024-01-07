@@ -6,7 +6,7 @@
 void SceneChangeAnimation::StaticInitialize()
 {
 	back_ = std::make_unique<Sprite>();
-	backTex_ = back_->LoadTexture("Resources/white1x1.png");
+	backTex_ = back_->LoadTexture("Resources/Texture/white1x1.png");
 	back_->Sprite2DInitialize(backTex_);
 }
 

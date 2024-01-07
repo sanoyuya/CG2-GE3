@@ -45,8 +45,7 @@ void MyGame::Initialize()
 
 #ifdef _DEBUG
 	//シーンマネージャーに最初のシーンをセット
-	//SceneManager::GetInstance()->ChangeScene("TITLE");
-	SceneManager::GetInstance()->ChangeScene("GAMEOVER");
+	SceneManager::GetInstance()->ChangeScene("TITLE");
 #else
 	//シーンマネージャーに最初のシーンをセット
 	SceneManager::GetInstance()->ChangeScene("EngineOP");

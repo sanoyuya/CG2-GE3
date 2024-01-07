@@ -62,13 +62,13 @@ void Text::Draw()
 
 void Text::LoadAsset()
 {
-	sFrameTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
-	sTextTex_[static_cast<uint8_t>(TextName::MOVE)] = TextureManager::GetInstance()->LoadTexture("Resources/move.png");
-	sTextTex_[static_cast<uint8_t>(TextName::ATTACK)] = TextureManager::GetInstance()->LoadTexture("Resources/attack.png");
-	sTextTex_[static_cast<uint8_t>(TextName::CAMERAMOVE)] = TextureManager::GetInstance()->LoadTexture("Resources/camera.png");
-	sTextTex_[static_cast<uint8_t>(TextName::CHARGEATTACK)] = TextureManager::GetInstance()->LoadTexture("Resources/chargeAttack.png");
-	sTextTex_[static_cast<uint8_t>(TextName::READY)] = TextureManager::GetInstance()->LoadTexture("Resources/ready.png");
-	sTextTex_[static_cast<uint8_t>(TextName::GO)] = TextureManager::GetInstance()->LoadTexture("Resources/go.png");
+	sFrameTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/white1x1.png");
+	sTextTex_[static_cast<uint8_t>(TextName::MOVE)] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/move.png");
+	sTextTex_[static_cast<uint8_t>(TextName::ATTACK)] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/attack.png");
+	sTextTex_[static_cast<uint8_t>(TextName::CAMERAMOVE)] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/camera.png");
+	sTextTex_[static_cast<uint8_t>(TextName::CHARGEATTACK)] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/chargeAttack.png");
+	sTextTex_[static_cast<uint8_t>(TextName::READY)] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/ready.png");
+	sTextTex_[static_cast<uint8_t>(TextName::GO)] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/go.png");
 }
 
 void Text::Begin(GameTimer* gameTimer, uint8_t startTime)

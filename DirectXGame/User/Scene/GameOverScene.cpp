@@ -152,7 +152,7 @@ void GameOverScene::Draw()
 
 void GameOverScene::LoadAsset()
 {
-	sResultTex_ = TextureManager::GetInstance()->LoadTexture("Resources/defaultGameOver.png");
+	sResultTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/defaultGameOver.png");
 	sPlayerTex_ = Model::CreateObjModel("Resources/F-35E");
 	sBgm_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/Blinded.mp3", 0.1f);
 }

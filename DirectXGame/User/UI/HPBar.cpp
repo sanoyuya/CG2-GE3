@@ -53,5 +53,5 @@ void HPBar::Draw()
 
 void HPBar::LoadAsset()
 {
-	sHpBarTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
+	sHpBarTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/white1x1.png");
 }

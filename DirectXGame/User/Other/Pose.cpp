@@ -71,13 +71,13 @@ void Pose::SetResetFlag(const bool flag)
 
 void Pose::LoadAsset()
 {
-	sPoseTex_ = TextureManager::GetInstance()->LoadTexture("Resources/pose.png");
-	sPoseBackTex_ = TextureManager::GetInstance()->LoadTexture("Resources/white1x1.png");
+	sPoseTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/pose.png");
+	sPoseBackTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/white1x1.png");
 
-	sPoseSelectFlameSpriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/poseSelectFlame.png");
-	sPoseSelectTex_[0] = TextureManager::GetInstance()->LoadTexture("Resources/resume.png");
-	sPoseSelectTex_[1] = TextureManager::GetInstance()->LoadTexture("Resources/restart.png");
-	sPoseSelectTex_[2] = TextureManager::GetInstance()->LoadTexture("Resources/returnTitle.png");
+	sPoseSelectFlameSpriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/poseSelectFlame.png");
+	sPoseSelectTex_[0] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/resume.png");
+	sPoseSelectTex_[1] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/restart.png");
+	sPoseSelectTex_[2] = TextureManager::GetInstance()->LoadTexture("Resources/Texture/returnTitle.png");
 }
 
 void Pose::OpenPose()

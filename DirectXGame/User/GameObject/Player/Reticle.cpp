@@ -142,8 +142,8 @@ void Reticle::GetCameraFlag(const int8_t flag)
 
 void Reticle::LoadAsset()
 {
-	sReticleTex_ = TextureManager::GetInstance()->LoadTexture("Resources/reticle.png");
-	sReticleTex2_ = TextureManager::GetInstance()->LoadTexture("Resources/reticle2.png");
+	sReticleTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/reticle.png");
+	sReticleTex2_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/reticle2.png");
 }
 
 void Reticle::Move()

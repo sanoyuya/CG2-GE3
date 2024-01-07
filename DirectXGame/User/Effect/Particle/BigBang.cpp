@@ -4,7 +4,7 @@ void BigBang::Initialize()
 {
 	// パーティクル生成
 	particleMan_ = std::make_unique<ParticleManager>();
-	tex_ = particleMan_->LoadTexture("Resources/particle2.png");
+	tex_ = particleMan_->LoadTexture("Resources/Texture/particle2.png");
 	particleMan_->Initialize(tex_);
 }
 
