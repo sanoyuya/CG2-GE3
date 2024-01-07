@@ -200,7 +200,7 @@ const Transform& NormalEnemy::GetTrans()
 
 void NormalEnemy::BulletUpdate()
 {
-	myMath::Vector3 frontVec = player_->GetTransform().parentToTranslation - enemyTrans_.translation;
+	myMath::Vector3 frontVec = player_->GetPredictionPoint() + player_->GetTransform().translation - enemyTrans_.translation;
 	frontVec = frontVec.normalization();
 
 	if (deathAnimationFlag_ == false)

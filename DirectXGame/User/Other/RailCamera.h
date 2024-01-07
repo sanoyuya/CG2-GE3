@@ -56,6 +56,7 @@ private:
 
 	myMath::Vector3 frontVec_ = {};
 	myMath::Vector3 frontPos_ = {};
+	myMath::Vector3 predictionPoint_ = {};
 
 public:
 
@@ -71,7 +72,9 @@ public:
 
 	const Transform& GetRailTrans();
 
-	myMath::Quaternion& GetQuaternion();
+	const myMath::Quaternion& GetQuaternion();
+
+	const myMath::Vector3& GetPredictionPoint();
 
 	void ImGuiUpdate();
 

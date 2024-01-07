@@ -124,6 +124,8 @@ public:
 
 	static const CameraFlag& GetCameraFlag();
 
+	const myMath::Vector3& GetPredictionPoint();
+
 	void ImGuiUpdate();
 
 private:

@@ -46,6 +46,8 @@ void RailCamera::BeginUpdate(GameTimer* gameTimer)
 void RailCamera::Update(GameTimer* gameTimer)
 {
 	frontPos_ = myMath::CatmullRomSpline(controlPoints_, gameTimer->GetFlameCount() / gameTimer->GetGameTime());
+	//敵の弾を動き続けている自機に当てるために、20f先の予測地点を算出しておく
+	predictionPoint_ = myMath::CatmullRomSpline(controlPoints_, (gameTimer->GetFlameCount() + 20.0f) / gameTimer->GetGameTime());
 
 	camera2_->SetTarget(frontPos_);
 	camera2_->Update(true);
@@ -127,9 +129,14 @@ const Transform& RailCamera::GetRailTrans()
 	return cameraTrans_;
 }
 
-myMath::Quaternion& RailCamera::GetQuaternion()
+const myMath::Quaternion& RailCamera::GetQuaternion()
 {
 	return q_;
+}
+
+const myMath::Vector3& RailCamera::GetPredictionPoint()
+{
+	return predictionPoint_;
 }
 
 void RailCamera::ImGuiUpdate()

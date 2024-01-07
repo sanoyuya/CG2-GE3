@@ -418,6 +418,11 @@ void Player::ImGuiUpdate()
 	ImGui::End();
 }
 
+const myMath::Vector3& Player::GetPredictionPoint()
+{
+	return camera_->GetPredictionPoint();
+}
+
 void Player::LoadAsset()
 {
 	sPlayerTex_ = Model::CreateObjModel("Resources/F-35E");

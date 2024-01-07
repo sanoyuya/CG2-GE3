@@ -93,21 +93,21 @@ void MoveEnemy::PhaseUpdate()
 		{
 		case ActionPhase::MOVE:
 
-			PhaseMove(moveEnemyProperty_.spawnPos, moveEnemyProperty_.movePos, moveEnemyProperty_.spawnPosRotation, moveEnemyProperty_.movePosRotation, moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
+			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - maxSpawnAnimationTime_);
 
-			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_);
+			PhaseMove(moveEnemyProperty_.spawnPos, moveEnemyProperty_.movePos, moveEnemyProperty_.spawnPosRotation, moveEnemyProperty_.movePosRotation, moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
 
 			if (moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ <= actionTimer)
 			{
-				actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
+				actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_- maxSpawnAnimationTime_);
 			}
 
 			break;
 		case ActionPhase::WAIT:
 
-			enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, amplitude_, GameHeader::sFps_ * 2) + moveEnemyProperty_.movePos.y;
-
 			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_);
+
+			enemyTrans_.translation.y = PhysicsMath::SimpleHarmonicMotion(actionTimer, amplitude_, GameHeader::sFps_ * 2) + moveEnemyProperty_.movePos.y;
 
 			if (moveEnemyProperty_.waitTime * GameHeader::sFps_ <= actionTimer)
 			{
@@ -119,9 +119,9 @@ void MoveEnemy::PhaseUpdate()
 			break;
 		case ActionPhase::ESCAPE:
 
-			PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * GameHeader::sFps_);
-
 			actionTimer = static_cast<uint16_t>(sGameTimer_->GetFlameCount() - spawnTime_ * GameHeader::sFps_ - moveEnemyProperty_.toMovePosTime * GameHeader::sFps_ - moveEnemyProperty_.waitTime * GameHeader::sFps_);
+
+			PhaseMove(waitFinishPos, moveEnemyProperty_.escapePos, waitFinishRot, moveEnemyProperty_.escapePosRotation, moveEnemyProperty_.toEscapePosTime * GameHeader::sFps_);
 
 			break;
 		}
@@ -134,9 +134,9 @@ void MoveEnemy::PhaseMove(const myMath::Vector3& startPosition, const myMath::Ve
 	static_cast<float>(Easing::EaseInOutQuad(actionTimer, startPosition.y, endPosition.y, maxTime)),
 	static_cast<float>(Easing::EaseInOutQuad(actionTimer, startPosition.z, endPosition.z, maxTime)) };
 
-	enemyTrans_.rotation = { static_cast<float>(Easing::EaseInOutCubic(actionTimer, startRotation.x, endRotation.x, maxTime)),
-	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startRotation.y, endRotation.y, maxTime)),
-	static_cast<float>(Easing::EaseInOutCubic(actionTimer, startRotation.z, endRotation.z, maxTime)) };
+	enemyTrans_.rotation = { static_cast<float>(Easing::EaseOutCubic(actionTimer, startRotation.x, endRotation.x, maxTime)),
+	static_cast<float>(Easing::EaseOutCubic(actionTimer, startRotation.y, endRotation.y, maxTime)),
+	static_cast<float>(Easing::EaseOutCubic(actionTimer, startRotation.z, endRotation.z, maxTime)) };
 }
 
 void MoveEnemy::Draw()
@@ -269,7 +269,7 @@ const Transform& MoveEnemy::GetTrans()
 
 void MoveEnemy::BulletUpdate()
 {
-	myMath::Vector3 frontVec = player_->GetTransform().parentToTranslation - enemyTrans_.translation;
+	myMath::Vector3 frontVec = player_->GetPredictionPoint() + player_->GetTransform().translation - enemyTrans_.translation;
 	frontVec = frontVec.normalization();
 
 	if (deathAnimationFlag_ == false)
