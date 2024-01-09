@@ -5,10 +5,16 @@ void ColliderManager::Update(Player* player)
 {
 	objects.remove_if([](GameObject* object) { return object->GetIsDead(); });
 
-	for (auto& object1 : objects)
+	itA = objects.begin();
+	for (; itA !=objects.end();++itA)
 	{
-		for (auto& object2 : objects)
+		itB = itA;
+		++itB;
+		for (; itB != objects.end(); ++itB)
 		{
+			GameObject* object1 = *itA;
+			GameObject* object2 = *itB;
+
 			if (player->GetHp() > 0)
 			{
 #ifdef _DEBUG
@@ -25,6 +31,18 @@ void ColliderManager::Update(Player* player)
 							{
 								object1->OnCollision();//playerのHP減少
 								object2->OnCollision();//敵の弾を消滅させる
+							}
+						}
+					}
+					else if (object1->GetName() == "enemyBullet" && object2->GetName() == "player")
+					{
+						if (object1->GetDeathFlag() == false)
+						{
+							if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+								object2->GetCollisionData().center, object2->GetCollisionData().radius))
+							{
+								object1->OnCollision();//敵の弾を消滅させる
+								object2->OnCollision();//playerのHP減少
 							}
 						}
 					}
@@ -47,6 +65,18 @@ void ColliderManager::Update(Player* player)
 							}
 						}
 					}
+					else if (object1->GetName() == "enemy" && object2->GetName() == "player")
+					{
+						if (object1->GetSpawnFlag() == true && object1->GetDeathAnimationFlag() == false)
+						{
+							if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+								object2->GetCollisionData().center, object2->GetCollisionData().radius))
+							{
+								object1->OnCollision();//敵を消滅させる
+								object2->OnCollision();//playerのHP減少
+							}
+						}
+					}
 				}
 
 				//レティクルと敵の当たり判定
@@ -59,6 +89,18 @@ void ColliderManager::Update(Player* player)
 						{
 							object2->LockOn();//ロックオン
 							AddLockOnEnemy(object2);//ロックオン敵listに敵を追加
+						}
+					}
+				}
+				else if (object1->GetName() == "enemy" && object2->GetName() == "reticle")
+				{
+					if (object1->GetSpawnFlag() == true && player->GetLockOnFlag() == true && object1->GetDeathAnimationFlag() == false && object1->GetLockOnFlag() == false)
+					{
+						if (Collision::RayToSphere(object2->GetCollisionData().rayStartPos, object2->GetCollisionData().rayEndPos,
+							object1->GetCollisionData().center, object1->GetCollisionData().radius))
+						{
+							object1->LockOn();//ロックオン
+							AddLockOnEnemy(object1);//ロックオン敵listに敵を追加
 						}
 					}
 				}
@@ -81,6 +123,18 @@ void ColliderManager::Update(Player* player)
 						}
 					}
 				}
+				else if (object1->GetName() == "enemy" && object2->GetName() == "playerBullet")
+				{
+					if (object1->GetSpawnFlag() == true && object1->GetDeathAnimationFlag() == false)
+					{
+						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						{
+							object1->OnCollision();//敵を消滅させる
+							object2->OnCollision();//playerの弾を消滅させる
+						}
+					}
+				}
 
 				if (object1->GetName() == "lockOnBullet" && object2->GetName() == "enemy")
 				{
@@ -91,6 +145,18 @@ void ColliderManager::Update(Player* player)
 						{
 							object1->OnCollision();//playerの弾を消滅させる
 							object2->OnCollision();//敵を消滅させる
+						}
+					}
+				}
+				else if (object1->GetName() == "enemy" && object2->GetName() == "lockOnBullet")
+				{
+					if (object1->GetSpawnFlag() == true && object1->GetDeathAnimationFlag() == false)
+					{
+						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						{
+							object1->OnCollision();//敵を消滅させる
+							object2->OnCollision();//playerの弾を消滅させる
 						}
 					}
 				}
@@ -113,6 +179,18 @@ void ColliderManager::Update(Player* player)
 						}
 					}
 				}
+				else if (object1->GetName() == "enemyBullet" && object2->GetName() == "playerBullet")
+				{
+					if (object1->GetDeathAnimationFlag() == false && object1->GetDeathFlag() == false)
+					{
+						if (Collision::SphereToSphere(object1->GetCollisionData().center, object1->GetCollisionData().radius,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
+						{
+							object1->OnCollision();//敵の弾を消滅させる
+							object2->BulletDeathAnimation();//playerの弾を消滅させる
+						}
+					}
+				}
 			}
 
 #ifdef _DEBUG
@@ -128,6 +206,14 @@ void ColliderManager::Update(Player* player)
 						object1->OnCollision();//playerのHP減少
 					}
 				}
+				else if (object1->GetName() == "building" && object2->GetName() == "player")
+				{
+					if (Collision::AABBToSphere(object2->GetCollisionData().center, object2->GetCollisionData().scale,
+						object1->GetCollisionData().center, object1->GetCollisionData().radius))
+					{
+						object2->OnCollision();//playerのHP減少
+					}
+				}
 			}
 
 			//playerの弾と建物の当たり判定
@@ -137,6 +223,14 @@ void ColliderManager::Update(Player* player)
 					object1->GetCollisionData().center, object1->GetCollisionData().radius))
 				{
 					object1->OnCollision();//弾の消滅
+				}
+			}
+			else if (object1->GetName() == "building" && object2->GetName() == "playerBullet")
+			{
+				if (Collision::AABBToSphere(object2->GetCollisionData().center, object2->GetCollisionData().scale,
+					object1->GetCollisionData().center, object1->GetCollisionData().radius))
+				{
+					object2->OnCollision();//弾の消滅
 				}
 			}
 
@@ -149,13 +243,21 @@ void ColliderManager::Update(Player* player)
 					object1->OnCollision();//弾の消滅
 				}
 			}
+			else if (object1->GetName() == "building" && object2->GetName() == "enemyBullet")
+			{
+				if (Collision::AABBToSphere(object2->GetCollisionData().center, object2->GetCollisionData().scale,
+					object1->GetCollisionData().center, object1->GetCollisionData().radius))
+				{
+					object2->OnCollision();//弾の消滅
+				}
+			}
 		}
 	}
 }
 
 void ColliderManager::AddCollision(GameObject* object)
 {
-	objects.push_back(object);
+	objects.push_front(object);
 }
 
 void ColliderManager::SubCollision(GameObject* object)

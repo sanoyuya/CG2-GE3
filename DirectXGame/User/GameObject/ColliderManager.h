@@ -10,9 +10,12 @@ class ColliderManager
 {
 private:
 
-	std::list<GameObject*>objects;
+	std::forward_list<GameObject*>objects;
 
 	std::list<GameObject*>lockOnEnemys;
+
+	std::forward_list<GameObject*>::iterator itA;
+	std::forward_list<GameObject*>::iterator itB;
 
 	bool isEnemyBulletToPlayer_ = true;
 	bool isPlayerToEnemy_ = true;

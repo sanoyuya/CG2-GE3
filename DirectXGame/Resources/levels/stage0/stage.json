@@ -4181,6 +4181,162 @@
                     20.0
                 ]
             }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy40",
+            "transform": {
+                "translation": [
+                    -530.0,
+                    520.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 150.0,
+                "death": 165.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -530.0,
+                    520.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 10.0,
+                "movePosition": [
+                    -530.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -480.0,
+                    300.0,
+                    6.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    130.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy41",
+            "transform": {
+                "translation": [
+                    -620.0,
+                    520.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 150.0,
+                "death": 165.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -620.0,
+                    520.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 10.0,
+                "movePosition": [
+                    -620.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -670.0,
+                    300.0,
+                    6.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    50.0
+                ]
+            }
         }
     ]
 }
