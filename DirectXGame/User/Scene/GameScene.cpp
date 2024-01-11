@@ -5,6 +5,7 @@
 #include"SceneChangeAnimation.h"
 #include"MultiTexturePostEffect.h"
 #include"Retention.h"
+#include"GameHeader.h"
 uint32_t GameScene::sBgm_;
 
 GameScene::~GameScene()
@@ -136,19 +137,7 @@ void GameScene::LoadAsset()
 
 void GameScene::ImGuiUpdate()
 {
-	if (input_->KeyboardTriggerPush(DIK_F11))
-	{
-		if (isImgui_ == false)
-		{
-			isImgui_ = true;
-		}
-		else
-		{
-			isImgui_ = false;
-		}
-	}
-
-	if (isImgui_ == true)
+	if (GameHeader::isImgui_ == true)
 	{
 		gameTimer_->ImGuiUpdate();
 		camera_->ImGuiUpdate();

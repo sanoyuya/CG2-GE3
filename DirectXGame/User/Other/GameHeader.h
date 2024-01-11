@@ -11,5 +11,8 @@ public:
 	static myMath::Vector2 windowsSize_;
 	static myMath::Vector2 windowsCenter_;
 
+	static bool isImgui_;
+
 	static void SetApp(WindowsApp* app);
+	static void ImGuiUpdate();
 };

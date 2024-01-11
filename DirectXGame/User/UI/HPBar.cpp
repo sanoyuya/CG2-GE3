@@ -52,8 +52,8 @@ void HPBar::Update(const int8_t hp)
 
 void HPBar::Draw()
 {
-	hpBar_->DrawSprite2D(leftUpPoint_, hpColor, { 25.0f * hpBarScale_,25.0f }, 0.0f, { 0.0f,0.0f });
-	hpBarFlame_->DrawSprite2D({ leftUpPoint_.x + 25.0f * 5.0f ,leftUpPoint_.y + 12.5f });
+	hpBar_->DrawSprite2D(leftUpPoint_, hpColor, { 25.0f * hpBarScale_,14.0f }, 0.0f, { 0.0f,0.0f });
+	hpBarFlame_->DrawSprite2D({ leftUpPoint_.x + 25.0f * 5.0f ,leftUpPoint_.y + 7.0f });
 }
 
 void HPBar::LoadAsset()

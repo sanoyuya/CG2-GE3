@@ -132,7 +132,10 @@ void GameOverScene::Update()
 	buildingManager_->Update();
 	gameTimer_->Update();
 
-	gameTimer_->ImGuiUpdate();
+	if (GameHeader::isImgui_ == true)
+	{
+		gameTimer_->ImGuiUpdate();
+	}
 }
 
 void GameOverScene::Draw()

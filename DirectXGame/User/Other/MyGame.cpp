@@ -70,6 +70,8 @@ void MyGame::Update()
 
 	//シーンマネージャーの更新処理
 	SceneManager::GetInstance()->Update();
+
+	GameHeader::ImGuiUpdate();
 }
 
 void MyGame::SceneDraw()

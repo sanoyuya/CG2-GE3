@@ -19,7 +19,7 @@ private:
 
 	bool animationFlag_ = false;
 	uint8_t animationTimer_ = 0;
-	uint8_t maxAnimationTimer_ = 30;
+	uint8_t maxAnimationTimer_ = 60;
 
 	float hpBarScale_ = 0.0f;
 
