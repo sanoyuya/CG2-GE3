@@ -9,6 +9,9 @@ private:
 	static uint32_t sHpBarTex_;
 	myMath::Vector4 hpColor = {};
 
+	std::unique_ptr<Sprite>hpBarFlame_;
+	static uint32_t sHpBarFlameTex_;
+
 	int8_t maxHp_ = 0;
 	int8_t hp_ = 0;
 

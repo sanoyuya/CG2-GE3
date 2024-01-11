@@ -17,6 +17,7 @@ private:
 	std::forward_list<GameObject*>::iterator itA;
 	std::forward_list<GameObject*>::iterator itB;
 
+	bool isCollision_ = true;
 	bool isEnemyBulletToPlayer_ = true;
 	bool isPlayerToEnemy_ = true;
 	bool isPlayerBulletToEnemy_ = true;

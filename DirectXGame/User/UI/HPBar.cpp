@@ -1,11 +1,15 @@
 #include "HPBar.h"
 #include"EasingFunction.h"
 uint32_t HPBar::sHpBarTex_;
+uint32_t HPBar::sHpBarFlameTex_;
 
 void HPBar::Initialize(const int8_t maxHp, const myMath::Vector2 leftUpPoint)
 {
 	hpBar_ = std::make_unique<Sprite>();
 	hpBar_->Sprite2DInitialize(sHpBarTex_);
+	hpBarFlame_ = std::make_unique<Sprite>();
+	hpBarFlame_->Sprite2DInitialize(sHpBarFlameTex_);
+
 	maxHp_ = maxHp;
 	hp_ = maxHp;
 	leftUpPoint_ = leftUpPoint;
@@ -48,10 +52,12 @@ void HPBar::Update(const int8_t hp)
 
 void HPBar::Draw()
 {
-	hpBar_->DrawSprite2D(leftUpPoint_, hpColor, { 20.0f * hpBarScale_,20.0f }, 0.0f, { 0.0f,0.0f });
+	hpBar_->DrawSprite2D(leftUpPoint_, hpColor, { 25.0f * hpBarScale_,25.0f }, 0.0f, { 0.0f,0.0f });
+	hpBarFlame_->DrawSprite2D({ leftUpPoint_.x + 25.0f * 5.0f ,leftUpPoint_.y + 12.5f });
 }
 
 void HPBar::LoadAsset()
 {
 	sHpBarTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/white1x1.png");
+	sHpBarFlameTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/hpFlame.png");
 }
