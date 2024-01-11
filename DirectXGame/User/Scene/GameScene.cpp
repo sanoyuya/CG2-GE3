@@ -108,20 +108,8 @@ void GameScene::Update()
 		tutorial_->Update();
 	}
 	pose_->Update();
-#ifdef _DEBUG
-	gameTimer_->ImGuiUpdate();
-	camera_->ImGuiUpdate();
-	player_->ImGuiUpdate();
-	ColliderManager::GetInstance()->ImGuiUpdate();
-	ImGui::Begin("EnemyReset");
-	if (ImGui::Button("EnemyReset"))
-	{
-		gameLevelData_->ConvertToString();
-		gameLevelData_->Initialize();
-		enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), player_.get(), bulletManager_.get());
-	}
-	ImGui::End();
-#endif _DEBUG
+
+	ImGuiUpdate();
 }
 
 void GameScene::Draw()
@@ -144,4 +132,35 @@ void GameScene::Draw()
 void GameScene::LoadAsset()
 {
 	sBgm_ = AudioManager::GetInstance()->LoadAudio("Resources/Sound/1~10.mp3", 0.1f);
+}
+
+void GameScene::ImGuiUpdate()
+{
+	if (input_->KeyboardTriggerPush(DIK_F11))
+	{
+		if (isImgui_ == false)
+		{
+			isImgui_ = true;
+		}
+		else
+		{
+			isImgui_ = false;
+		}
+	}
+
+	if (isImgui_ == true)
+	{
+		gameTimer_->ImGuiUpdate();
+		camera_->ImGuiUpdate();
+		player_->ImGuiUpdate();
+		ColliderManager::GetInstance()->ImGuiUpdate();
+		ImGui::Begin("EnemyReset");
+		if (ImGui::Button("EnemyReset"))
+		{
+			gameLevelData_->ConvertToString();
+			gameLevelData_->Initialize();
+			enemyManager_->ReLoad(gameLevelData_->GetEnemyData(), player_.get(), bulletManager_.get());
+		}
+		ImGui::End();
+	}
 }

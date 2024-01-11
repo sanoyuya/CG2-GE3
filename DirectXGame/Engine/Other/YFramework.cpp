@@ -118,11 +118,7 @@ void YFramework::Run()
 		//描画処理
 		PostEffectDraw();
 
-#ifdef _DEBUG
-
 		ImGuiManager::GetInstance()->Draw();
-
-#endif _DEBUG
 
 		DirectXBase::GetInstance()->PostDraw();
 

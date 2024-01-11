@@ -51,6 +51,8 @@ private:
 
 	std::unique_ptr<Pose>pose_;
 
+	bool isImgui_ = false;
+
 	static uint32_t sBgm_;
 
 public:
@@ -70,4 +72,8 @@ public:
 	void Draw()override;
 
 	static void LoadAsset();
+
+private:
+
+	void ImGuiUpdate();
 };
