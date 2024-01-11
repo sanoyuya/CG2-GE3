@@ -11,13 +11,9 @@ private:
 	std::unique_ptr<Model>builing_;
 	Transform buildingTrans_;
 
-	std::unique_ptr<Model>buildingBack_;
-	Transform buildingBackTrans_;
+	CollisionData collisionData_;
 
 	const myMath::Vector3 buildingSize_ = { 10.0f,20.0f,10.0f };
-	const float backCubeSubSize_ = 0.5f;
-
-	CollisionData collisionData_;
 
 	bool isSet = false;
 

@@ -6,26 +6,16 @@ void Building::Initialize()
 	builing_->SetModel(sBuildingTex_);
 	buildingTrans_.Initialize();
 
-	buildingBack_= std::make_unique<Model>();
-	buildingBack_->SetModel(sCubeTex_);
-	buildingBackTrans_.Initialize();
-
-	buildingBackTrans_.translation = { buildingTrans_.translation.x,buildingTrans_.translation.y + buildingSize_.y,buildingTrans_.translation.z };
-	buildingBackTrans_.scale = { buildingTrans_.scale.x * buildingSize_.x - backCubeSubSize_,buildingTrans_.scale.y * buildingSize_.y - backCubeSubSize_,buildingTrans_.scale.z * buildingSize_.z - backCubeSubSize_ };
-	buildingBackTrans_.rotation = buildingTrans_.rotation;
-
-	collisionData_.center = buildingBackTrans_.translation;
+	collisionData_.center = { buildingTrans_.translation.x,buildingTrans_.translation.y - buildingSize_.y,buildingTrans_.translation.z };
 }
 
 void Building::Update()
 {
 	buildingTrans_.TransUpdate(sCamera_);
-	buildingBackTrans_.TransUpdate(sCamera_);
 }
 
 void Building::Draw()
 {
-	buildingBack_->DrawModel(&buildingBackTrans_, { 78.0f / 255.0f, 175.0f / 255.0f, 254.0f / 255.0f,1.0f });
 	builing_->DrawModel(&buildingTrans_);
 }
 

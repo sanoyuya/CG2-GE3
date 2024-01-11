@@ -332,6 +332,15 @@ void Player::SmokeUpdate()
 	smokeEmitter_->SetSize(0.5f);
 	//パーティクルの更新
 	smokeEmitter_->Update(sCamera_);
+
+	if (hp_ <= 5 && hp_ > 3)
+	{
+		smokeEmitter_->SetColor({ 0.5f,0.5f ,0.5f ,1.0f });
+	}
+	else if (hp_ <= 3)
+	{
+		smokeEmitter_->SetColor({ 0.0f,0.0f ,0.0f ,1.0f });
+	}
 }
 
 void Player::LockOnAttack()

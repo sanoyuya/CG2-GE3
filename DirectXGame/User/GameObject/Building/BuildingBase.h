@@ -9,7 +9,6 @@ class BuildingBase :public GameObject
 protected:
 
 	static uint32_t sBuildingTex_;
-	static uint32_t sCubeTex_;
 
 public:
 
