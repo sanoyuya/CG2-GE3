@@ -2576,92 +2576,6 @@
         },
         {
             "type": "MESH",
-            "name": "enemy18",
-            "transform": {
-                "translation": [
-                    -1125.0,
-                    1100.0,
-                    25.0
-                ],
-                "rotation": [
-                    90.00000762939453,
-                    -3.4150941701227566e-06,
-                    90.0
-                ],
-                "scaling": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            },
-            "file_name": "normalEnemy",
-            "collider": {
-                "type": "BOX",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    3.0,
-                    3.0,
-                    3.0
-                ]
-            },
-            "timer": {
-                "spawn": 86.0,
-                "death": 106.0
-            },
-            "attack_property": {
-                "attack_flag": "true",
-                "attack_type": "normal"
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "enemy19",
-            "transform": {
-                "translation": [
-                    -1075.0,
-                    1100.0,
-                    25.0
-                ],
-                "rotation": [
-                    90.00000762939453,
-                    -3.4150941701227566e-06,
-                    90.0
-                ],
-                "scaling": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            },
-            "file_name": "normalEnemy",
-            "collider": {
-                "type": "BOX",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    3.0,
-                    3.0,
-                    3.0
-                ]
-            },
-            "timer": {
-                "spawn": 86.0,
-                "death": 106.0
-            },
-            "attack_property": {
-                "attack_flag": "true",
-                "attack_type": "normal"
-            }
-        },
-        {
-            "type": "MESH",
             "name": "enemy20",
             "transform": {
                 "translation": [
@@ -2811,7 +2725,7 @@
                     -180.0
                 ],
                 "waitTime": 0.0,
-                "toEscapePositionTime": 5.0,
+                "toEscapePositionTime": 8.0,
                 "escapePosition": [
                     -500.0,
                     1550.0,
@@ -2829,7 +2743,7 @@
             "name": "enemy23",
             "transform": {
                 "translation": [
-                    -1000.0,
+                    -968.5800170898438,
                     1650.0,
                     12.0
                 ],
@@ -3176,7 +3090,7 @@
             },
             "attack_property": {
                 "attack_flag": "true",
-                "attack_type": "normal"
+                "attack_type": "3way"
             },
             "enemy_move_properties": {
                 "spawnPosition": [
@@ -3254,7 +3168,7 @@
             },
             "attack_property": {
                 "attack_flag": "true",
-                "attack_type": "normal"
+                "attack_type": "3way"
             },
             "enemy_move_properties": {
                 "spawnPosition": [
@@ -3332,7 +3246,7 @@
             },
             "attack_property": {
                 "attack_flag": "true",
-                "attack_type": "normal"
+                "attack_type": "3way"
             },
             "enemy_move_properties": {
                 "spawnPosition": [
@@ -3410,7 +3324,7 @@
             },
             "attack_property": {
                 "attack_flag": "true",
-                "attack_type": "normal"
+                "attack_type": "3way"
             },
             "enemy_move_properties": {
                 "spawnPosition": [
@@ -3455,7 +3369,7 @@
                 "translation": [
                     -550.0,
                     100.0,
-                    25.0
+                    32.106353759765625
                 ],
                 "rotation": [
                     90.00000762939453,
@@ -3488,7 +3402,7 @@
             },
             "attack_property": {
                 "attack_flag": "true",
-                "attack_type": "normal"
+                "attack_type": "3way"
             }
         },
         {
@@ -3496,7 +3410,7 @@
             "name": "enemy32",
             "transform": {
                 "translation": [
-                    -600.0,
+                    -616.945556640625,
                     100.0,
                     25.0
                 ],
@@ -3574,7 +3488,7 @@
             },
             "attack_property": {
                 "attack_flag": "true",
-                "attack_type": "normal"
+                "attack_type": "3way"
             }
         },
         {
@@ -3582,7 +3496,7 @@
             "name": "enemy34",
             "transform": {
                 "translation": [
-                    -550.0,
+                    -537.8103637695312,
                     100.0,
                     15.0
                 ],
@@ -3625,9 +3539,9 @@
             "name": "enemy35",
             "transform": {
                 "translation": [
-                    -550.0,
+                    -527.41845703125,
                     100.0,
-                    35.0
+                    49.42202377319336
                 ],
                 "rotation": [
                     90.00000762939453,
@@ -3668,9 +3582,9 @@
             "name": "enemy36",
             "transform": {
                 "translation": [
-                    -600.0,
+                    -609.1536865234375,
                     100.0,
-                    35.0
+                    43.11847686767578
                 ],
                 "rotation": [
                     90.00000762939453,
@@ -3703,7 +3617,7 @@
             },
             "attack_property": {
                 "attack_flag": "true",
-                "attack_type": "normal"
+                "attack_type": "3way"
             }
         },
         {
@@ -3711,9 +3625,9 @@
             "name": "enemy37",
             "transform": {
                 "translation": [
-                    -575.0,
+                    -565.127197265625,
                     100.0,
-                    35.0
+                    43.72051239013672
                 ],
                 "rotation": [
                     90.00000762939453,
@@ -3754,9 +3668,9 @@
             "name": "enemy38",
             "transform": {
                 "translation": [
-                    -575.0,
+                    -585.9759521484375,
                     100.0,
-                    25.0
+                    31.597448348999023
                 ],
                 "rotation": [
                     90.00000762939453,
@@ -3906,7 +3820,7 @@
             "name": "Cube.003",
             "transform": {
                 "translation": [
-                    -693.0987548828125,
+                    -721.9500122070312,
                     449.527099609375,
                     0.0
                 ],
@@ -3951,7 +3865,7 @@
             "transform": {
                 "translation": [
                     -702.6845703125,
-                    1483.06298828125,
+                    1452.494384765625,
                     0.0
                 ],
                 "rotation": [
@@ -3972,8 +3886,8 @@
             "name": "Cube.006",
             "transform": {
                 "translation": [
-                    -1012.2437744140625,
-                    1356.355224609375,
+                    -1018.933349609375,
+                    1320.6160888671875,
                     0.0
                 ],
                 "rotation": [
@@ -4153,7 +4067,7 @@
             "transform": {
                 "translation": [
                     -849.4395141601562,
-                    1598.1002197265625,
+                    1570.1409912109375,
                     0.0
                 ],
                 "rotation": [
@@ -4188,7 +4102,7 @@
             "transform": {
                 "translation": [
                     -530.0,
-                    520.0,
+                    850.0,
                     6.0
                 ],
                 "rotation": [
@@ -4217,8 +4131,8 @@
                 ]
             },
             "timer": {
-                "spawn": 150.0,
-                "death": 165.0
+                "spawn": 135.0,
+                "death": 155.0
             },
             "attack_property": {
                 "attack_flag": "false",
@@ -4227,7 +4141,7 @@
             "enemy_move_properties": {
                 "spawnPosition": [
                     -530.0,
-                    520.0,
+                    850.0,
                     6.0
                 ],
                 "spawnPositionRotation": [
@@ -4235,7 +4149,7 @@
                     0.0,
                     90.0
                 ],
-                "toMovePositionTime": 10.0,
+                "toMovePositionTime": 15.0,
                 "movePosition": [
                     -530.0,
                     350.0,
@@ -4249,9 +4163,9 @@
                 "waitTime": 0.0,
                 "toEscapePositionTime": 5.0,
                 "escapePosition": [
-                    -480.0,
-                    300.0,
-                    6.0
+                    -430.0,
+                    250.0,
+                    12.0
                 ],
                 "escapePositionRotation": [
                     90.0,
@@ -4262,11 +4176,11 @@
         },
         {
             "type": "MESH",
-            "name": "enemy41",
+            "name": "enemy45",
             "transform": {
                 "translation": [
                     -620.0,
-                    520.0,
+                    850.0,
                     6.0
                 ],
                 "rotation": [
@@ -4295,8 +4209,8 @@
                 ]
             },
             "timer": {
-                "spawn": 150.0,
-                "death": 165.0
+                "spawn": 135.0,
+                "death": 155.0
             },
             "attack_property": {
                 "attack_flag": "false",
@@ -4305,7 +4219,7 @@
             "enemy_move_properties": {
                 "spawnPosition": [
                     -620.0,
-                    520.0,
+                    850.0,
                     6.0
                 ],
                 "spawnPositionRotation": [
@@ -4313,7 +4227,7 @@
                     0.0,
                     90.0
                 ],
-                "toMovePositionTime": 10.0,
+                "toMovePositionTime": 15.0,
                 "movePosition": [
                     -620.0,
                     350.0,
@@ -4327,9 +4241,9 @@
                 "waitTime": 0.0,
                 "toEscapePositionTime": 5.0,
                 "escapePosition": [
-                    -670.0,
-                    300.0,
-                    6.0
+                    -720.0,
+                    250.0,
+                    12.0
                 ],
                 "escapePositionRotation": [
                     90.0,
@@ -4337,6 +4251,2815 @@
                     50.0
                 ]
             }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy41",
+            "transform": {
+                "translation": [
+                    -530.0,
+                    850.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 136.0,
+                "death": 156.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -530.0,
+                    850.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 15.0,
+                "movePosition": [
+                    -530.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -430.0,
+                    250.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    130.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy42",
+            "transform": {
+                "translation": [
+                    -530.0,
+                    850.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 137.0,
+                "death": 157.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -530.0,
+                    850.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 15.0,
+                "movePosition": [
+                    -530.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -430.0,
+                    250.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    130.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy43",
+            "transform": {
+                "translation": [
+                    -530.0,
+                    850.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 138.0,
+                "death": 158.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -530.0,
+                    850.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 15.0,
+                "movePosition": [
+                    -530.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -430.0,
+                    250.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    130.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy44",
+            "transform": {
+                "translation": [
+                    -530.0,
+                    850.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 139.0,
+                "death": 159.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -530.0,
+                    850.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 15.0,
+                "movePosition": [
+                    -530.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -430.0,
+                    250.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    130.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy46",
+            "transform": {
+                "translation": [
+                    -620.0,
+                    850.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 136.0,
+                "death": 156.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -620.0,
+                    850.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 15.0,
+                "movePosition": [
+                    -620.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -720.0,
+                    250.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    50.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy47",
+            "transform": {
+                "translation": [
+                    -620.0,
+                    850.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 137.0,
+                "death": 157.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -620.0,
+                    850.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 15.0,
+                "movePosition": [
+                    -620.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -720.0,
+                    250.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    50.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy48",
+            "transform": {
+                "translation": [
+                    -620.0,
+                    850.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 138.0,
+                "death": 158.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -620.0,
+                    850.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 15.0,
+                "movePosition": [
+                    -620.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -720.0,
+                    250.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    50.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy49",
+            "transform": {
+                "translation": [
+                    -620.0,
+                    850.0,
+                    6.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -3.4150941701227566e-06,
+                    90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 139.0,
+                "death": 159.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -620.0,
+                    850.0,
+                    6.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "toMovePositionTime": 15.0,
+                "movePosition": [
+                    -620.0,
+                    350.0,
+                    6.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 5.0,
+                "escapePosition": [
+                    -720.0,
+                    250.0,
+                    12.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    50.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.014",
+            "transform": {
+                "translation": [
+                    -916.3692016601562,
+                    1570.1409912109375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.015",
+            "transform": {
+                "translation": [
+                    -949.6954956054688,
+                    1570.1409912109375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.016",
+            "transform": {
+                "translation": [
+                    -816.43798828125,
+                    1570.1409912109375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.013",
+            "transform": {
+                "translation": [
+                    -782.2979736328125,
+                    1570.1409912109375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.017",
+            "transform": {
+                "translation": [
+                    -879.7359008789062,
+                    1626.739990234375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.018",
+            "transform": {
+                "translation": [
+                    -850.1044311523438,
+                    1626.739990234375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.019",
+            "transform": {
+                "translation": [
+                    -914.4359130859375,
+                    1626.739990234375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.020",
+            "transform": {
+                "translation": [
+                    -746.751708984375,
+                    1626.3377685546875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.021",
+            "transform": {
+                "translation": [
+                    -711.2772827148438,
+                    1626.3377685546875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy22.001",
+            "transform": {
+                "translation": [
+                    -975.0,
+                    1525.0,
+                    12.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    1.3435247651818333e-13,
+                    179.99998474121094
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 106.0,
+                "death": 124.0
+            },
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -975.0,
+                    1525.0,
+                    12.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ],
+                "toMovePositionTime": 10.0,
+                "movePosition": [
+                    -750.0,
+                    1525.0,
+                    12.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 8.0,
+                "escapePosition": [
+                    -500.0,
+                    1525.0,
+                    20.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy22.002",
+            "transform": {
+                "translation": [
+                    -975.0,
+                    1500.0,
+                    15.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    1.3435247651818333e-13,
+                    179.99998474121094
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 106.0,
+                "death": 124.0
+            },
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -975.0,
+                    1500.0,
+                    15.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ],
+                "toMovePositionTime": 10.0,
+                "movePosition": [
+                    -750.0,
+                    1500.0,
+                    15.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 8.0,
+                "escapePosition": [
+                    -500.0,
+                    1500.0,
+                    23.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.022",
+            "transform": {
+                "translation": [
+                    -1061.704345703125,
+                    1508.8779296875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.023",
+            "transform": {
+                "translation": [
+                    -1062.2806396484375,
+                    1458.2442626953125,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.024",
+            "transform": {
+                "translation": [
+                    -989.7748413085938,
+                    1416.89599609375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.029",
+            "transform": {
+                "translation": [
+                    -1088.599853515625,
+                    1369.79443359375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy19.001",
+            "transform": {
+                "translation": [
+                    -1030.0,
+                    1000.0,
+                    10.0
+                ],
+                "rotation": [
+                    90.0,
+                    -0.0,
+                    -90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 86.0,
+                "death": 106.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -1030.0,
+                    1000.0,
+                    10.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 20.0,
+                "movePosition": [
+                    -1030.0,
+                    2000.0,
+                    10.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 0.0,
+                "escapePosition": [
+                    -1030.0,
+                    1500.0,
+                    10.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy19.002",
+            "transform": {
+                "translation": [
+                    -1170.0,
+                    1000.0,
+                    10.0
+                ],
+                "rotation": [
+                    90.0,
+                    -0.0,
+                    -90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 86.0,
+                "death": 106.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -1170.0,
+                    1000.0,
+                    10.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 20.0,
+                "movePosition": [
+                    -1170.0,
+                    2000.0,
+                    10.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 0.0,
+                "escapePosition": [
+                    -1170.0,
+                    1500.0,
+                    10.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy19.003",
+            "transform": {
+                "translation": [
+                    -1030.0,
+                    1000.0,
+                    10.0
+                ],
+                "rotation": [
+                    90.0,
+                    -0.0,
+                    -90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 87.0,
+                "death": 107.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -1030.0,
+                    1000.0,
+                    10.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 20.0,
+                "movePosition": [
+                    -1030.0,
+                    2000.0,
+                    10.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 0.0,
+                "escapePosition": [
+                    -1030.0,
+                    1500.0,
+                    10.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy19.004",
+            "transform": {
+                "translation": [
+                    -1030.0,
+                    1000.0,
+                    10.0
+                ],
+                "rotation": [
+                    90.0,
+                    -0.0,
+                    -90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 88.0,
+                "death": 108.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -1030.0,
+                    1000.0,
+                    10.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 20.0,
+                "movePosition": [
+                    -1030.0,
+                    2000.0,
+                    10.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 0.0,
+                "escapePosition": [
+                    -1030.0,
+                    1500.0,
+                    10.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy19.005",
+            "transform": {
+                "translation": [
+                    -1170.0,
+                    1000.0,
+                    10.0
+                ],
+                "rotation": [
+                    90.0,
+                    -0.0,
+                    -90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 87.0,
+                "death": 107.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -1170.0,
+                    1000.0,
+                    10.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 20.0,
+                "movePosition": [
+                    -1170.0,
+                    2000.0,
+                    10.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 0.0,
+                "escapePosition": [
+                    -1170.0,
+                    1500.0,
+                    10.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy19.006",
+            "transform": {
+                "translation": [
+                    -1170.0,
+                    1000.0,
+                    10.0
+                ],
+                "rotation": [
+                    90.0,
+                    -0.0,
+                    -90.0
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 88.0,
+                "death": 108.0
+            },
+            "attack_property": {
+                "attack_flag": "false",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -1170.0,
+                    1000.0,
+                    10.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "toMovePositionTime": 20.0,
+                "movePosition": [
+                    -1170.0,
+                    2000.0,
+                    10.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 0.0,
+                "escapePosition": [
+                    -1170.0,
+                    1500.0,
+                    10.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -90.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.031",
+            "transform": {
+                "translation": [
+                    -1015.6587524414062,
+                    1663.7283935546875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.033",
+            "transform": {
+                "translation": [
+                    -1135.0791015625,
+                    1623.4189453125,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2",
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    20.0,
+                    0.0
+                ],
+                "size": [
+                    20.0,
+                    40.0,
+                    20.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.026",
+            "transform": {
+                "translation": [
+                    -1172.1995849609375,
+                    1507.067626953125,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.027",
+            "transform": {
+                "translation": [
+                    -1220.19580078125,
+                    1412.617919921875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.025",
+            "transform": {
+                "translation": [
+                    -1170.3018798828125,
+                    1348.930419921875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.028",
+            "transform": {
+                "translation": [
+                    -985.83544921875,
+                    1066.294189453125,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.030",
+            "transform": {
+                "translation": [
+                    -1000.1961669921875,
+                    1176.7210693359375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.032",
+            "transform": {
+                "translation": [
+                    -992.2518310546875,
+                    944.1760864257812,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.034",
+            "transform": {
+                "translation": [
+                    -987.1527709960938,
+                    795.32861328125,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.035",
+            "transform": {
+                "translation": [
+                    -1215.68798828125,
+                    882.3912963867188,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.036",
+            "transform": {
+                "translation": [
+                    -1188.1024169921875,
+                    725.56884765625,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.037",
+            "transform": {
+                "translation": [
+                    -1266.0775146484375,
+                    1045.6905517578125,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.038",
+            "transform": {
+                "translation": [
+                    -1232.72802734375,
+                    1167.9613037109375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.039",
+            "transform": {
+                "translation": [
+                    -1240.0260009765625,
+                    1278.6982421875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.040",
+            "transform": {
+                "translation": [
+                    -928.9156494140625,
+                    479.8857116699219,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.041",
+            "transform": {
+                "translation": [
+                    -826.248046875,
+                    418.83636474609375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.042",
+            "transform": {
+                "translation": [
+                    -1050.3016357421875,
+                    418.83636474609375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.043",
+            "transform": {
+                "translation": [
+                    -262.8554382324219,
+                    178.9069366455078,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.044",
+            "transform": {
+                "translation": [
+                    -239.98257446289062,
+                    331.0494384765625,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.045",
+            "transform": {
+                "translation": [
+                    -239.98257446289062,
+                    456.35528564453125,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.046",
+            "transform": {
+                "translation": [
+                    -485.69683837890625,
+                    434.5594482421875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.047",
+            "transform": {
+                "translation": [
+                    -485.69683837890625,
+                    336.41302490234375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.048",
+            "transform": {
+                "translation": [
+                    -448.2457580566406,
+                    631.9734497070312,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.049",
+            "transform": {
+                "translation": [
+                    -700.7196655273438,
+                    631.9734497070312,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.050",
+            "transform": {
+                "translation": [
+                    -847.2244873046875,
+                    654.6195068359375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.051",
+            "transform": {
+                "translation": [
+                    -480.7061767578125,
+                    1591.3016357421875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "enemy23.001",
+            "transform": {
+                "translation": [
+                    -950.0,
+                    1670.0,
+                    8.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    1.3435247651818333e-13,
+                    179.99998474121094
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 105.0,
+                "death": 123.0
+            },
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    950.0,
+                    1670.0,
+                    8.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ],
+                "toMovePositionTime": 10.0,
+                "movePosition": [
+                    -700.0,
+                    1670.0,
+                    8.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 8.0,
+                "escapePosition": [
+                    -450.0,
+                    1670.0,
+                    16.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "enemy23.002",
+            "transform": {
+                "translation": [
+                    -950.0,
+                    1690.0,
+                    12.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    1.3435247651818333e-13,
+                    179.99998474121094
+                ],
+                "scaling": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "moveEnemy",
+            "collider": {
+                "type": "Sphere",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            },
+            "timer": {
+                "spawn": 105.0,
+                "death": 123.0
+            },
+            "attack_property": {
+                "attack_flag": "true",
+                "attack_type": "normal"
+            },
+            "enemy_move_properties": {
+                "spawnPosition": [
+                    -950.0,
+                    1690.0,
+                    12.0
+                ],
+                "spawnPositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ],
+                "toMovePositionTime": 10.0,
+                "movePosition": [
+                    -700.0,
+                    1690.0,
+                    12.0
+                ],
+                "movePositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ],
+                "waitTime": 0.0,
+                "toEscapePositionTime": 8.0,
+                "escapePosition": [
+                    -450.0,
+                    1690.0,
+                    20.0
+                ],
+                "escapePositionRotation": [
+                    90.0,
+                    0.0,
+                    -180.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.052",
+            "transform": {
+                "translation": [
+                    -852.1819458007812,
+                    1452.494384765625,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.053",
+            "transform": {
+                "translation": [
+                    -852.1819458007812,
+                    1726.0145263671875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.054",
+            "transform": {
+                "translation": [
+                    -741.4943237304688,
+                    1726.0145263671875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.055",
+            "transform": {
+                "translation": [
+                    -590.6513671875,
+                    1726.0145263671875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.056",
+            "transform": {
+                "translation": [
+                    -452.43255615234375,
+                    1376.3280029296875,
+                    0.44804054498672485
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.057",
+            "transform": {
+                "translation": [
+                    -444.4239501953125,
+                    1188.4847412109375,
+                    0.44804054498672485
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.058",
+            "transform": {
+                "translation": [
+                    -413.7890319824219,
+                    998.5548095703125,
+                    0.44804054498672485
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.059",
+            "transform": {
+                "translation": [
+                    -732.93701171875,
+                    1336.080810546875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.060",
+            "transform": {
+                "translation": [
+                    -702.9743041992188,
+                    1194.7801513671875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.061",
+            "transform": {
+                "translation": [
+                    -733.9837036132812,
+                    1034.64404296875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.062",
+            "transform": {
+                "translation": [
+                    -724.2382202148438,
+                    888.7030029296875,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.063",
+            "transform": {
+                "translation": [
+                    -712.459716796875,
+                    739.3047485351562,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.064",
+            "transform": {
+                "translation": [
+                    -489.4259033203125,
+                    739.3047485351562,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.065",
+            "transform": {
+                "translation": [
+                    -744.229248046875,
+                    275.4007568359375,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.066",
+            "transform": {
+                "translation": [
+                    -786.9658813476562,
+                    136.54498291015625,
+                    1.6891472339630127
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.067",
+            "transform": {
+                "translation": [
+                    -761.7398071289062,
+                    -23.9659423828125,
+                    1.6891472339630127
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "building2"
         }
     ]
 }

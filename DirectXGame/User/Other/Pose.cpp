@@ -97,11 +97,11 @@ void Pose::OpenPose()
 
 void Pose::PoseSelect()
 {
-	if (input_->KeyboardTriggerPush(DIK_UP) || input_->ControllerStickTriggerPush(L_UP))
+	if (input_->KeyboardTriggerPush(DIK_UP) || input_->ControllerStickTriggerPush(L_UP, 0.0f))
 	{
 		poseModeNum_--;
 	}
-	if (input_->KeyboardTriggerPush(DIK_DOWN) || input_->ControllerStickTriggerPush(L_DOWN))
+	if (input_->KeyboardTriggerPush(DIK_DOWN) || input_->ControllerStickTriggerPush(L_DOWN, 0.0f))
 	{
 		poseModeNum_++;
 	}

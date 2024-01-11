@@ -6,7 +6,7 @@ void Building::Initialize()
 	builing_->SetModel(sBuildingTex_);
 	buildingTrans_.Initialize();
 
-	collisionData_.center = { buildingTrans_.translation.x,buildingTrans_.translation.y - buildingSize_.y,buildingTrans_.translation.z };
+	collisionData_.center = { buildingTrans_.translation.x,buildingTrans_.translation.y + buildingSize_.y,buildingTrans_.translation.z };
 }
 
 void Building::Update()

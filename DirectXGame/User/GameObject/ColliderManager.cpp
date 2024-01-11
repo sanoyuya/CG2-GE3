@@ -5,9 +5,7 @@ void ColliderManager::Update(Player* player)
 {
 	objects.remove_if([](GameObject* object) { return object->GetIsDead(); });
 
-#ifdef _DEBUG
 	if (isCollision_ == true)
-#endif _DEBUG
 	{
 		itA = objects.begin();
 		for (; itA != objects.end(); ++itA)
@@ -21,9 +19,7 @@ void ColliderManager::Update(Player* player)
 
 				if (player->GetHp() > 0)
 				{
-#ifdef _DEBUG
 					if (isEnemyBulletToPlayer_ == true)
-#endif _DEBUG
 					{
 						//playerと敵の弾の当たり判定
 						if (object1->GetName() == "player" && object2->GetName() == "enemyBullet")
@@ -52,9 +48,7 @@ void ColliderManager::Update(Player* player)
 						}
 					}
 
-#ifdef _DEBUG
 					if (isPlayerToEnemy_ == true)
-#endif _DEBUG
 					{
 						//playerと敵の当たり判定
 						if (object1->GetName() == "player" && object2->GetName() == "enemy")
@@ -110,9 +104,7 @@ void ColliderManager::Update(Player* player)
 					}
 				}
 
-#ifdef _DEBUG
 				if (isPlayerBulletToEnemy_ == true)
-#endif _DEBUG
 				{
 					//playerの弾と敵の当たり判定
 					if (object1->GetName() == "playerBullet" && object2->GetName() == "enemy")
@@ -166,9 +158,7 @@ void ColliderManager::Update(Player* player)
 					}
 				}
 
-#ifdef _DEBUG
 				if (isPlayerBulletToEnemyBullet_ == true)
-#endif _DEBUG
 				{
 					//playerの弾と敵の弾の当たり判定
 					if (object1->GetName() == "playerBullet" && object2->GetName() == "enemyBullet")
@@ -197,9 +187,7 @@ void ColliderManager::Update(Player* player)
 					}
 				}
 
-#ifdef _DEBUG
 				if (isPlayerToBuilding_ == true)
-#endif _DEBUG
 				{
 					//playerと建物の当たり判定
 					if (object1->GetName() == "player" && object2->GetName() == "building")
@@ -210,10 +198,10 @@ void ColliderManager::Update(Player* player)
 							object1->OnCollision();//playerのHP減少
 						}
 					}
-					else if (object1->GetName() == "building" && object2->GetName() == "player")
+					if (object1->GetName() == "building" && object2->GetName() == "player")
 					{
-						if (Collision::AABBToSphere(object2->GetCollisionData().center, object2->GetCollisionData().scale,
-							object1->GetCollisionData().center, object1->GetCollisionData().radius))
+						if (Collision::AABBToSphere(object1->GetCollisionData().center, object1->GetCollisionData().scale,
+							object2->GetCollisionData().center, object2->GetCollisionData().radius))
 						{
 							object2->OnCollision();//playerのHP減少
 						}
