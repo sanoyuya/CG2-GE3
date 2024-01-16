@@ -10,19 +10,22 @@ private:
 
 	bool isDead_ = false;
 	uint8_t deathTimer_ = 0;
-	const uint8_t maxDeathTime_ = 80;
+	const uint8_t maxDeathTime_ = 60;
 
 	myMath::Vector3 directionVector_;//方向ベクトル
 
 	std::unique_ptr<Model>bullet_;
 	uint32_t bulletTex_ = 0;
 	Transform bulletTrans_;
+	const float scale_ = 2.0f;
 
 	BulletOwner owner_ = BulletOwner::Player;
 
 	Transform actualTrans_;
 	float angle_ = 0.0f;
 	float isPlus_ = 0.0f;
+
+	const myMath::Vector4 color_ = { 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f };
 
 	CollisionData collisionData_;
 

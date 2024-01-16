@@ -19,8 +19,8 @@ void PlayerDeathAnimation::Update(const myMath::Vector3 position)
 	else
 	{
 		deathAnimationTimer++;
-		MultiTexturePostEffect::SetGrayScale(deathAnimationTimer / 60);
-		if (deathAnimationTimer >= 60.0f)
+		MultiTexturePostEffect::SetGrayScale(deathAnimationTimer / maxDeathAnimationTimer_);
+		if (deathAnimationTimer >= maxDeathAnimationTimer_)
 		{
 			deathFlag_ = true;
 		}

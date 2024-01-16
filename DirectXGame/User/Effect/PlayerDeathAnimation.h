@@ -12,6 +12,7 @@ private:
 	bool deathFlag_ = false;
 	bool animationFlag_ = false;
 	float deathAnimationTimer = 0.0f;
+	const float maxDeathAnimationTimer_ = 60.0f;
 
 public:
 

@@ -14,8 +14,8 @@ void Reticle::Initialize()
 	reticle_ = std::make_unique<Sprite>();
 	reticle_->Sprite3DInitialize(sReticleTex_);
 	reticleTrans_.Initialize();
-	reticleTrans_.translation = { 0.0f,-reticleLimit_,200.0f };
-	reticleTrans_.scale = { 0.5f,0.5f,1.0f };
+	reticleTrans_.translation = { 0.0f,-reticleLimit_,distance_ };
+	reticleTrans_.scale = { reticleScale_,reticleScale_,1.0f };
 
 	ColliderManager::GetInstance()->AddCollision(this);
 }
@@ -96,7 +96,7 @@ void Reticle::CancelLockOn()
 
 void Reticle::Reset()
 {
-	reticleTrans_.translation = { 0.0f,-reticleLimit_,200.0f };
+	reticleTrans_.translation = { 0.0f,-reticleLimit_,distance_ };
 
 	lockOnFlag_ = false;
 	changeReticleFlag_ = false;
@@ -201,14 +201,14 @@ void Reticle::ChangeReticleUpdate()
 		//拡縮演出
 		if (animationTimer_ <= maxAnimationTime_ / 2)
 		{
-			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutCubic(animationTimer_,0.5f,0.25f,maxAnimationTime_ / 2)),//まずは小さくなる
-			static_cast<float>(Easing::EaseOutCubic(animationTimer_,0.5f,0.25f,maxAnimationTime_ / 2)),
+			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutCubic(animationTimer_,reticleScale_,reticleScale_/2,maxAnimationTime_ / 2)),//まずは小さくなる
+			static_cast<float>(Easing::EaseOutCubic(animationTimer_,reticleScale_,reticleScale_/2,maxAnimationTime_ / 2)),
 			1.0f };
 		}
 		else
 		{
-			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutBack(animationTimer_ - maxAnimationTime_ / 2,0.25f,0.5f,maxAnimationTime_ / 2)),//まずは小さくなる
-			static_cast<float>(Easing::EaseOutBack(animationTimer_ - maxAnimationTime_ / 2,0.25f,0.5f,maxAnimationTime_ / 2)),
+			reticleTrans_.scale = { static_cast<float>(Easing::EaseOutBack(animationTimer_ - maxAnimationTime_ / 2,reticleScale_/2,reticleScale_,maxAnimationTime_ / 2)),//まずは小さくなる
+			static_cast<float>(Easing::EaseOutBack(animationTimer_ - maxAnimationTime_ / 2,reticleScale_/2,reticleScale_,maxAnimationTime_ / 2)),
 			1.0f };
 		}
 

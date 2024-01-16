@@ -38,22 +38,24 @@ void HPBar::Update(const int8_t hp)
 
 	if (hp_ > maxHp_ / 2)
 	{
-		hpColor = { 130.0f / 255.0f,174.0f / 255.0f,70.0f / 255.0f,1.0f };
+		hpColor = greenColor_;
 	}
+	//HPが半分以下になったら黄色に
 	else if (hp_ > maxHp_ / 4 && hp_ <= maxHp_ / 2)
 	{
-		hpColor = { 255.0f / 255.0f,217.0f / 255.0f,0.0f / 255.0f,1.0f };
+		hpColor = yellowColor_;
 	}
+	//HPが1/4以下になったら赤色に
 	else
 	{
-		hpColor = { 255.0f / 255.0f,0.0f / 255.0f,0.0f / 255.0f,1.0f };
+		hpColor = redColor_;
 	}
 }
 
 void HPBar::Draw()
 {
-	hpBar_->DrawSprite2D(leftUpPoint_, hpColor, { 25.0f * hpBarScale_,14.0f }, 0.0f, { 0.0f,0.0f });
-	hpBarFlame_->DrawSprite2D({ leftUpPoint_.x + 25.0f * 5.0f ,leftUpPoint_.y + 7.0f });
+	hpBar_->DrawSprite2D(leftUpPoint_, hpColor, { hpScale_.x * hpBarScale_,hpScale_.y }, 0.0f, { 0.0f,0.0f });
+	hpBarFlame_->DrawSprite2D({ leftUpPoint_.x + hpScale_.x * maxHp_ / 2 ,leftUpPoint_.y + hpScale_.y / 2 });
 }
 
 void HPBar::LoadAsset()

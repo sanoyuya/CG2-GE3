@@ -16,12 +16,12 @@ void LockOnBullet::Initialize()
 	bulletTrans_.Initialize();
 
 	//パーティクルの初期化
-	smokeEmitter_->SetSize(2.0f);
+	smokeEmitter_->SetSize(scale_);
 
 	actualTrans_.Initialize();
 	isPlus_ = myMath::GetRandPlusOrMinus();
 
-	collisionData_.radius = 0.1f;
+	collisionData_.radius = 1.0f;
 }
 
 void LockOnBullet::Update()
@@ -38,14 +38,14 @@ void LockOnBullet::Update()
 	collisionData_.center = bulletTrans_.translation;
 
 	//パーティクルを毎フレーム作成
-	smokeEmitter_->SetColor({ 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f });
+	smokeEmitter_->SetColor(color_);
 	smokeEmitter_->Create(bulletTrans_.parentToTranslation);
 }
 
 void LockOnBullet::Draw()
 {
 	//当たり判定用描画
-	//bullet_->DrawModel(&bulletTrans_, { 0.0f / 255.0f,183.0f / 255.0f,206.0f / 255.0f,1.0f });
+	//bullet_->DrawModel(&bulletTrans_, color_);
 }
 
 std::string LockOnBullet::GetName()

@@ -19,10 +19,13 @@ private:
 	std::unique_ptr<Model>bullet_;
 	uint32_t bulletTex_ = 0;
 	Transform bulletTrans_;
+	const float scale_ = 2.0f;
 
 	BulletOwner owner_ = BulletOwner::Player;
 
 	CollisionData collisionData_;
+
+	const myMath::Vector4 color_ = { 1.0f,1.0f ,1.0f ,1.0f };
 
 	bool deathAnimationFlag_ = false;
 	uint8_t animationTimer_ = 0;

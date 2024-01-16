@@ -26,7 +26,7 @@ void Player::Initialize()
 	//調整値
 	playerTrans_.translation = { 0.0f,-reticle_->GetReticleLimit() / 9,0.0f };
 
-	playerTrans_.scale = { 0.5f,0.5f,0.5f };
+	playerTrans_.scale = { scale_,scale_,scale_ };
 	cameraTrans_.Initialize();
 
 	//HPバーの初期化

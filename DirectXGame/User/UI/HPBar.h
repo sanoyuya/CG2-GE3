@@ -8,6 +8,11 @@ private:
 	std::unique_ptr<Sprite>hpBar_;
 	static uint32_t sHpBarTex_;
 	myMath::Vector4 hpColor = {};
+	myMath::Vector2 hpScale_ = { 25.0f,14.0f };
+
+	myMath::Vector4 greenColor_ = { 130.0f / 255.0f,174.0f / 255.0f,70.0f / 255.0f,1.0f };
+	myMath::Vector4 yellowColor_ = { 255.0f / 255.0f,217.0f / 255.0f,0.0f / 255.0f,1.0f };
+	myMath::Vector4 redColor_ = { 255.0f / 255.0f,0.0f / 255.0f,0.0f / 255.0f,1.0f };
 
 	std::unique_ptr<Sprite>hpBarFlame_;
 	static uint32_t sHpBarFlameTex_;

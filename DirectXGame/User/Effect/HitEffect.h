@@ -17,6 +17,8 @@ private:
 
 	myMath::Vector3 pos_ = {};
 	float alpha_ = 1.0f;
+	const float scale_ = 25.0f;
+	const float upPosAmount_ = 4.0f;
 
 public:
 

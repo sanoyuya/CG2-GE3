@@ -12,7 +12,7 @@ void HitEffect::Initialize()
 	hit_ = std::make_unique<Sprite>();
 	hit_->Sprite3DInitialize(hitTex_);
 	hitTrans_.Initialize();
-	hitTrans_.scale = { 1.0f / 25.0f,1.0f / 25.0f ,1.0f / 25.0f };
+	hitTrans_.scale = { 1.0f / scale_,1.0f / scale_ ,1.0f / scale_ };
 }
 
 void HitEffect::Create(const myMath::Vector3& pos)
@@ -29,7 +29,7 @@ void HitEffect::Update(Camera* camera)
 	{
 		animationTimer_++;
 
-		hitTrans_.translation.y = static_cast<float>(Easing::EaseOutQuint(animationTimer_, pos_.y, pos_.y + 4.0f, maxAnimationTime_));
+		hitTrans_.translation.y = static_cast<float>(Easing::EaseOutQuint(animationTimer_, pos_.y, pos_.y + upPosAmount_, maxAnimationTime_));
 		alpha_= static_cast<float>(Easing::EaseInCirc(animationTimer_, 1.0f, 0.0f, maxAnimationTime_));
 	}
 

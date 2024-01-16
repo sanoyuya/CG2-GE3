@@ -31,6 +31,7 @@ private:
 	std::unique_ptr<Model>player_;
 	Transform playerTrans_;
 	static uint32_t sPlayerTex_;
+	const float scale_ = 0.5f;
 
 	Transform cameraTrans_;
 
