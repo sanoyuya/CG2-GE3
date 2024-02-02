@@ -5,14 +5,12 @@
 #include "WindowsApp.h"
 #include"FPS.h"
 #include"myMath.h"
-#include"GameScene.h"
 #include <memory>
 #include"TextureManager.h"
 #include"Sprite2D.h"
 #include "AudioManager.h"
 #include"Model.h"
 #include"SpriteCommon.h"
-#include<memory>
 #include"ImGuiManager.h"
 
 //ゲーム全体

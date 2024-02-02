@@ -3,10 +3,6 @@
 #include <map>
 #include"EditorObject.h"
 #include"Camera.h"
-#include"Player.h"
-#include"RailCamera.h"
-#include"EnemyManager.h"
-#include"BuildingManager.h"
 #include"GameTimer.h"
 
 /// <summary>
@@ -18,29 +14,6 @@ private:
 
 	GameTimer* gameTimer_ = nullptr;
 	std::string fileName_ = {};
-
-	std::map<std::string, EditorObject*>models_;
-	std::vector<std::unique_ptr<EditorObject>>objects_;
-
-	myMath::Vector3 pos_;
-
-	uint32_t playerTex_ = 0;
-	uint32_t sphereTex_ = 0;
-	uint32_t groundTex_ = 0;
-	uint32_t groundTex2_ = 0;
-	uint32_t buildingTex_ = 0;
-	uint32_t convenienceStoreTex_ = 0;
-	uint32_t tex_ = 0;
-	uint32_t skydomeTex_ = 0;
-
-	myMath::Vector2 groundTranslation_ = {};
-	myMath::Vector2 groundSize_ = {};
-	myMath::Vector2 groundTiling_ = {};
-
-	PlayerData playerData_;
-	CameraData cameraData_;
-	EnemyList enemyData_;
-	BuildingList buildingData_;
 
 public:
 
@@ -80,18 +53,6 @@ private:
 	void Load();
 
 public:
-
-	const PlayerData& GetPlayerData();
-	const CameraData& GetCameraData();
-	EnemyList& GetEnemyData();
-	BuildingList& GetBuildingList();
-
-	static bool NumericStringCompare(const ControlPoint& a, const ControlPoint& b);
-
-	void SetFileName(const std::string& fileName);
-	void ConvertToString();
-
-	void SetGroundTiling(const myMath::Vector2 tiling);
 
 	const myMath::Vector2 GetGroundSize();
 	const myMath::Vector2 GetGroundTranslation();

@@ -142,30 +142,6 @@
     <Filter Include="Engine\リソース ファイル\Particle">
       <UniqueIdentifier>{f9b797fa-c9fc-4e10-999d-9978cd0749d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="User\ソース ファイル\UI">
-      <UniqueIdentifier>{f5d1c6b7-49dd-44c7-9da9-98d045efd00e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\UI">
-      <UniqueIdentifier>{2c3fac6c-85d4-4344-90de-0433972ef691}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\Object">
-      <UniqueIdentifier>{eff3171f-06eb-46ac-9178-33086d5b9a9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ソース ファイル\Object">
-      <UniqueIdentifier>{06c67e16-a22f-44bb-b1a5-8837b7bc669e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ソース ファイル\Object\Bullet">
-      <UniqueIdentifier>{2044a206-4123-453d-8394-411a1ffcd958}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\Object\Bullet">
-      <UniqueIdentifier>{06f73f22-8819-4055-b27c-734b500186a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\Object\Enemy">
-      <UniqueIdentifier>{2060a3c3-8208-4e86-abc0-962719b5285a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ソース ファイル\Object\Enemy">
-      <UniqueIdentifier>{77a267b7-7ed6-48ec-86f1-35c51d3c057c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="User\ソース ファイル\Effect">
       <UniqueIdentifier>{a39a1a1b-7e46-417f-be4f-7c9400f50192}</UniqueIdentifier>
     </Filter>
@@ -177,18 +153,6 @@
     </Filter>
     <Filter Include="User\ヘッダー ファイル\Effect\Particle">
       <UniqueIdentifier>{a8ccdc58-cbd6-45cf-b9b4-bf9de8406dd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ソース ファイル\Object\Building">
-      <UniqueIdentifier>{a5930e30-b526-40d0-8335-7c66d4756c50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\Object\Building">
-      <UniqueIdentifier>{67965122-d96b-40a4-bc42-4d7a09311524}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ソース ファイル\Tutorial">
-      <UniqueIdentifier>{3fc37c47-f499-43d9-a769-9fcbc7981983}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\ヘッダー ファイル\Tutorial">
-      <UniqueIdentifier>{89d1531c-f267-482a-af00-b7e85ecb6b3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -330,44 +294,14 @@
     <ClCompile Include="User\Scene\EngineOP.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\Scene\GameScene.cpp">
-      <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Scene\SceneFactory.cpp">
-      <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Scene\TitleScene.cpp">
-      <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Other\RailCamera.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Draw\2D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Math\EasingFunction.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="User\Scene\SceneChangeAnimation.cpp">
-      <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Effect\Particle\EnemyDeathParticleEmitter.cpp">
-      <Filter>User\ソース ファイル\Effect\Particle</Filter>
-    </ClCompile>
     <ClCompile Include="User\Effect\Particle\ParticleEmitter.cpp">
       <Filter>User\ソース ファイル\Effect\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Effect\Particle\PlayerEngineSmokeParticleEmitter.cpp">
-      <Filter>User\ソース ファイル\Effect\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Scene\GameOverScene.cpp">
-      <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\UI\Radar.cpp">
-      <Filter>User\ソース ファイル\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="User\UI\HPBar.cpp">
-      <Filter>User\ソース ファイル\UI</Filter>
     </ClCompile>
     <ClCompile Include="User\Other\GameLevelData.cpp">
       <Filter>User\ソース ファイル</Filter>
@@ -381,101 +315,14 @@
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp">
       <Filter>Engine\ソースファイル\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="User\Effect\Particle\EnemySpawnParticleEmitter.cpp">
-      <Filter>User\ソース ファイル\Effect\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Bullet\BulletManager.cpp">
-      <Filter>User\ソース ファイル\Object\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Bullet\NormalBullet.cpp">
-      <Filter>User\ソース ファイル\Object\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Enemy\Enemy.cpp">
-      <Filter>User\ソース ファイル\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Enemy\EnemyManager.cpp">
-      <Filter>User\ソース ファイル\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Enemy\NormalEnemy.cpp">
-      <Filter>User\ソース ファイル\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Enemy\MoveEnemy.cpp">
-      <Filter>User\ソース ファイル\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Bullet\LockOnBullet.cpp">
-      <Filter>User\ソース ファイル\Object\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Player\Reticle.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Scene\StageSelectScene.cpp">
-      <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Effect\HitEffect.cpp">
-      <Filter>User\ソース ファイル\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Effect\LockOnAnimation.cpp">
-      <Filter>User\ソース ファイル\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Effect\PlayerDamageEffect.cpp">
-      <Filter>User\ソース ファイル\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Effect\PlayerDeathAnimation.cpp">
-      <Filter>User\ソース ファイル\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Player\Player.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Other\Retention.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\ColliderManager.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Other\Pose.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Math\Quaternion.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Other\GroundBack.cpp">
-      <Filter>User\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Building\Building.cpp">
-      <Filter>User\ソース ファイル\Object\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Building\BuildingManager.cpp">
-      <Filter>User\ソース ファイル\Object\Building</Filter>
     </ClCompile>
     <ClCompile Include="User\Other\GameHeader.cpp">
       <Filter>User\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="User\UI\EnemyLocationSprite.cpp">
-      <Filter>User\ソース ファイル\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\GameObject.cpp">
-      <Filter>User\ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Other\Tutorial\Tutorial.cpp">
-      <Filter>User\ソース ファイル\Tutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Other\Tutorial\TutorialSkip.cpp">
-      <Filter>User\ソース ファイル\Tutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Other\Tutorial\Text.cpp">
-      <Filter>User\ソース ファイル\Tutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Scene\GameClearScene.cpp">
+    <ClCompile Include="User\Scene\SceneFactory.cpp">
       <Filter>User\ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Building\BuildingBase.cpp">
-      <Filter>User\ソース ファイル\Object\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="User\GameObject\Bullet\BulletBase.cpp">
-      <Filter>User\ソース ファイル\Object\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Effect\Particle\BigBang.cpp">
-      <Filter>User\ソース ファイル\Effect\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -718,29 +565,11 @@
     <ClInclude Include="User\Scene\EngineOP.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\Scene\GameScene.h">
-      <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Other\SceneFactory.h">
-      <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Other\RailCamera.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Scene\TitleScene.h">
-      <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Draw\2D\Particle\ParticleManager.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Math\EasingFunction.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Scene\SceneChangeAnimation.h">
-      <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Effect\Particle\EnemyDeathParticleEmitter.h">
-      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
     <ClInclude Include="User\Effect\Particle\ParticleBase.h">
       <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
@@ -748,122 +577,20 @@
     <ClInclude Include="User\Effect\Particle\ParticleEmitter.h">
       <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="User\Effect\Particle\PlayerEngineSmokeParticleEmitter.h">
-      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Scene\GameClearScene.h">
-      <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Scene\GameOverScene.h">
-      <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="User\UI\HPBar.h">
-      <Filter>User\ヘッダー ファイル\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="User\UI\Radar.h">
-      <Filter>User\ヘッダー ファイル\UI</Filter>
-    </ClInclude>
     <ClInclude Include="User\Other\GameTimer.h">
       <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="User\Scene\DemoScene.h">
       <Filter>User\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\GameObject\Player\Player.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\GameObject.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h">
       <Filter>Engine\ヘッダーファイル\Draw</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Effect\Particle\EnemySpawnParticleEmitter.h">
-      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Bullet\BulletBase.h">
-      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Bullet\BulletManager.h">
-      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Bullet\NormalBullet.h">
-      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Enemy\Enemy.h">
-      <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Enemy\EnemyManager.h">
-      <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Enemy\MoveEnemy.h">
-      <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Enemy\NormalEnemy.h">
-      <Filter>User\ヘッダー ファイル\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Bullet\LockOnBullet.h">
-      <Filter>User\ヘッダー ファイル\Object\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Player\Reticle.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Scene\StageSelectScene.h">
-      <Filter>User\ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Effect\HitEffect.h">
-      <Filter>User\ヘッダー ファイル\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Effect\LockOnAnimation.h">
-      <Filter>User\ヘッダー ファイル\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Effect\PlayerDamageEffect.h">
-      <Filter>User\ヘッダー ファイル\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Effect\PlayerDeathAnimation.h">
-      <Filter>User\ヘッダー ファイル\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Other\Retention.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\ColliderManager.h">
-      <Filter>User\ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Other\Pose.h">
-      <Filter>User\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Math\Quaternion.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="User\Other\GroundBack.h">
-      <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Building\Building.h">
-      <Filter>User\ヘッダー ファイル\Object\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Building\BuildingManager.h">
-      <Filter>User\ヘッダー ファイル\Object\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="User\GameObject\Building\BuildingBase.h">
-      <Filter>User\ヘッダー ファイル\Object\Building</Filter>
-    </ClInclude>
     <ClInclude Include="User\Other\GameHeader.h">
       <Filter>User\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="User\UI\EnemyLocationSprite.h">
-      <Filter>User\ヘッダー ファイル\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Other\Tutorial\TutorialSkip.h">
-      <Filter>User\ヘッダー ファイル\Tutorial</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Other\Tutorial\Text.h">
-      <Filter>User\ヘッダー ファイル\Tutorial</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Other\Tutorial\Tutorial.h">
-      <Filter>User\ヘッダー ファイル\Tutorial</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Effect\Particle\BigBang.h">
-      <Filter>User\ヘッダー ファイル\Effect\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
