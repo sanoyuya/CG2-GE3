@@ -21,14 +21,14 @@ void DemoScene::Initialize()
 	skyDomeTrans_.scale = { 5.0f,5.0f ,5.0f };
 
 	sprite_ = std::make_unique<Sprite3D>();
-	spriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/attention.png");
+	spriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/Hit.png");
 	sprite_->Sprite3DInitialize(spriteTex_);
 	spriteTrans_.Initialize();
 	spriteTrans_.scale = { 0.1f,0.1f ,1.0f };
 	spriteTrans_.translation = { -10.0f,30.0f,0.0f };
 
 	ddsSprite_ = std::make_unique<Sprite3D>();
-	ddsSpriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/attention.dds");
+	ddsSpriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/Hit.dds");
 	ddsSprite_->Sprite3DInitialize(ddsSpriteTex_);
 	ddsSpriteTrans_.Initialize();
 	ddsSpriteTrans_.scale = { 0.1f,0.1f ,1.0f };
