@@ -8,13 +8,20 @@ void TextureManager::LoadFile(const std::string& path, DirectX::TexMetadata& met
 {
 	wchar_t wfilepath[256];
 	HRESULT result = 0;
+	std::string fileExt = path.substr(path.length() - 3, 3);
 
 	MultiByteToWideChar(CP_ACP, 0, path.c_str(), -1, wfilepath, _countof(wfilepath));
-	// WICテクスチャのロード
-	result = LoadFromWICFile(
-		wfilepath,
-		DirectX::WIC_FLAGS_NONE,
-		&metadata, scratchImg);
+
+	if (fileExt == "dds")
+	{
+		// DDSテクスチャのロード
+		result = LoadFromDDSFile(wfilepath, DirectX::DDS_FLAGS_NONE, &metadata, scratchImg);
+	}
+	else
+	{
+		// WICテクスチャのロード
+		result = LoadFromWICFile(wfilepath, DirectX::WIC_FLAGS_NONE, &metadata, scratchImg);
+	}
 	assert(SUCCEEDED(result));
 }
 

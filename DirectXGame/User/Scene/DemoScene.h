@@ -19,6 +19,15 @@ private:
 	Transform skyDomeTrans_;
 	uint32_t skyDomeTex_;
 
+	//スプライト
+	std::unique_ptr<Sprite3D>sprite_;
+	Transform spriteTrans_;
+	uint32_t spriteTex_ = 0;
+
+	std::unique_ptr<Sprite3D>ddsSprite_;
+	Transform ddsSpriteTrans_;
+	uint32_t ddsSpriteTex_ = 0;
+
 public:
 
 	//初期化処理

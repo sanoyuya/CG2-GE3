@@ -19,6 +19,20 @@ void DemoScene::Initialize()
 	skyDome_->SetModel(skyDomeTex_);
 	skyDomeTrans_.Initialize();
 	skyDomeTrans_.scale = { 5.0f,5.0f ,5.0f };
+
+	sprite_ = std::make_unique<Sprite3D>();
+	spriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/attention.png");
+	sprite_->Sprite3DInitialize(spriteTex_);
+	spriteTrans_.Initialize();
+	spriteTrans_.scale = { 0.1f,0.1f ,1.0f };
+	spriteTrans_.translation = { -10.0f,30.0f,0.0f };
+
+	ddsSprite_ = std::make_unique<Sprite3D>();
+	ddsSpriteTex_ = TextureManager::GetInstance()->LoadTexture("Resources/Texture/attention.dds");
+	ddsSprite_->Sprite3DInitialize(ddsSpriteTex_);
+	ddsSpriteTrans_.Initialize();
+	ddsSpriteTrans_.scale = { 0.1f,0.1f ,1.0f };
+	ddsSpriteTrans_.translation= { 10.0f,30.0f,0.0f };
 }
 
 void DemoScene::Destroy()
@@ -28,6 +42,8 @@ void DemoScene::Destroy()
 
 void DemoScene::Update()
 {
+	spriteTrans_.TransUpdate(camera_.get());
+	ddsSpriteTrans_.TransUpdate(camera_.get());
 	skyDomeTrans_.TransUpdate(camera_.get());
 
 	ImGuiUpdate();
@@ -36,6 +52,8 @@ void DemoScene::Update()
 void DemoScene::Draw()
 {
 	skyDome_->DrawModel(&skyDomeTrans_);
+	sprite_->DrawSprite3D(camera_.get(), spriteTrans_);
+	ddsSprite_->DrawSprite3D(camera_.get(), ddsSpriteTrans_);
 }
 
 void DemoScene::ImGuiUpdate()
