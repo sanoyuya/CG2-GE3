@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #include<json.hpp>
-#include"Enemy.h"
 
 //レベルデータ
 struct LevelData {
@@ -35,10 +34,6 @@ struct LevelData {
 		Collider collider;
 		//タイマー
 		Timer timer;
-		//攻撃プロパティ
-		AttackProperty attackProperty;
-		//敵のプロパティ
-		MoveEnemyProperty enemyProperty;
 	};
 
 	// オブジェクト配列

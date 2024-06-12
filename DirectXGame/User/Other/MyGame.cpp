@@ -1,34 +1,13 @@
 #include "MyGame.h"
 #include"SceneManager.h"
-#include"SceneChangeAnimation.h"
-#include"Enemy.h"
-#include"HitEffect.h"
-#include"Pose.h"
-#include"Retention.h"
 #include"GameHeader.h"
-#include"EnemyLocationSprite.h"
-#include"TutorialSkip.h"
-#include"Text.h"
-#include"GroundBack.h"
-#include"Radar.h"
-#include"Player.h"
-#include"HPBar.h"
-#include"Reticle.h"
-#include"BuildingBase.h"
-#include"LockOnAnimation.h"
-#include"TitleScene.h"
-#include"StageSelectScene.h"
-#include"GameScene.h"
-#include"GameClearScene.h"
-#include"GameOverScene.h"
-#include"BulletBase.h"
 
 void MyGame::Initialize()
 {
 #ifdef _DEBUG
-	YFramework::SetWindowData("AirBattle(Debug)");
+	YFramework::SetWindowData("YamoEngine(Debug)");
 #else
-	YFramework::SetWindowData("AirBattle");
+	YFramework::SetWindowData("YamoEngine");
 #endif
 	YFramework::SetWindowColor();
 
@@ -45,10 +24,10 @@ void MyGame::Initialize()
 
 #ifdef _DEBUG
 	//シーンマネージャーに最初のシーンをセット
-	SceneManager::GetInstance()->ChangeScene("TITLE");
+	SceneManager::GetInstance()->ChangeScene("DEMO");
 #else
 	//シーンマネージャーに最初のシーンをセット
-	SceneManager::GetInstance()->ChangeScene("EngineOP");
+	SceneManager::GetInstance()->ChangeScene("DEMO");
 #endif
 }
 
@@ -64,9 +43,6 @@ void MyGame::Update()
 {
 	//基底クラスの更新処理
 	YFramework::Update();
-
-	//シーンチェンジアニメーションの更新処理
-	SceneChangeAnimation::GetInstance()->Update();
 
 	//シーンマネージャーの更新処理
 	SceneManager::GetInstance()->Update();
@@ -88,24 +64,5 @@ void MyGame::PostEffectDraw()
 
 void MyGame::LoadAsset()
 {
-	SceneChangeAnimation::GetInstance()->StaticInitialize();
-	TitleScene::LoadAsset();
-	StageSelectScene::LoadAsset();
-	GameScene::LoadAsset();
-	GameClearScene::LoadAsset();
-	GameOverScene::LoadAsset();
-	Enemy::LoadAsset();
-	HitEffect::LoadAsset();
-	Pose::LoadAsset();
-	EnemyLocationSprite::LoadAsset();
-	Text::LoadAsset();
-	TutorialSkip::LoadAsset();
-	GroundBack::LoadAsset();
-	Radar::LoadAsset();
-	Player::LoadAsset();
-	HPBar::LoadAsset();
-	Reticle::LoadAsset();
-	LockOnAnimation::LoadAsset();
-	BuildingBase::LoadAsset();
-	BulletBase::LoadAsset();
+	
 }

@@ -19,39 +19,14 @@ private:
 	Transform skyDomeTrans_;
 	uint32_t skyDomeTex_;
 
-	std::unique_ptr<Sprite>sprite_;
+	//スプライト
+	std::unique_ptr<Sprite3D>sprite_;
+	Transform spriteTrans_;
 	uint32_t spriteTex_ = 0;
-	float angle_ = 0.0f;
 
-	std::unique_ptr<Model>model_;
-	Transform modelTrans_;
-	uint32_t modelTex_;
-
-	std::unique_ptr<Model>point_;
-	Transform pointTrans_;
-	uint32_t pointTex_;
-
-	myMath::Vector3 baseVec_ = { 0,0,1 };
-	myMath::Vector3 frontVec_ = {};
-
-	float flame_;
-	uint16_t num_ = 0;
-
-	std::unique_ptr<Sprite>ground_;
-	Transform groundTrans_;
-	uint32_t groundTex_ = 0;
-
-	std::unique_ptr<Sprite>ground2_;
-	Transform ground2Trans_;
-	uint32_t ground2Tex_ = 0;
-
-	std::unique_ptr<Sprite>ground3_;
-	Transform ground3Trans_;
-	uint32_t ground3Tex_ = 0;
-
-	std::unique_ptr<Sprite>ground4_;
-	Transform ground4Trans_;
-	uint32_t ground4Tex_ = 0;
+	std::unique_ptr<Sprite3D>ddsSprite_;
+	Transform ddsSpriteTrans_;
+	uint32_t ddsSpriteTex_ = 0;
 
 public:
 
