@@ -103,6 +103,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="User\Scene\SceneChangeAnimation.cpp" />
+    <ClCompile Include="User\Scene\GameScene.cpp" />
+    <ClCompile Include="User\Scene\TitleScene.cpp" />
     <ClCompile Include="User\Other\GameHeader.cpp" />
     <ClCompile Include="Engine\Math\Quaternion.cpp" />
     <ClCompile Include="Engine\Draw\2D\Mesh\Mesh2D.cpp" />
@@ -321,6 +324,9 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User\Scene\SceneChangeAnimation.h" />
+    <ClInclude Include="User\Scene\GameScene.h" />
+    <ClInclude Include="User\Scene\TitleScene.h" />
     <ClInclude Include="User\Other\GameHeader.h" />
     <ClInclude Include="Engine\Math\Quaternion.h" />
     <ClInclude Include="Engine\Draw\2D\Mesh\Mesh2D.h" />

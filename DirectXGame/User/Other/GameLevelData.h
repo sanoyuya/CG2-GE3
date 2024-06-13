@@ -51,9 +51,4 @@ private:
 
 	void CreateModel();
 	void Load();
-
-public:
-
-	const myMath::Vector2 GetGroundSize();
-	const myMath::Vector2 GetGroundTranslation();
 };

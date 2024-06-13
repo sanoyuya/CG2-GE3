@@ -1,6 +1,7 @@
 #include "MyGame.h"
 #include"SceneManager.h"
 #include"GameHeader.h"
+#include"SceneChangeAnimation.h"
 
 void MyGame::Initialize()
 {
@@ -24,10 +25,10 @@ void MyGame::Initialize()
 
 #ifdef _DEBUG
 	//シーンマネージャーに最初のシーンをセット
-	SceneManager::GetInstance()->ChangeScene("DEMO");
+	SceneManager::GetInstance()->ChangeScene("TITLE");
 #else
 	//シーンマネージャーに最初のシーンをセット
-	SceneManager::GetInstance()->ChangeScene("DEMO");
+	SceneManager::GetInstance()->ChangeScene("TITLE");
 #endif
 }
 
@@ -43,6 +44,9 @@ void MyGame::Update()
 {
 	//基底クラスの更新処理
 	YFramework::Update();
+
+	//シーンチェンジアニメーションの更新処理
+	SceneChangeAnimation::GetInstance()->Update();
 
 	//シーンマネージャーの更新処理
 	SceneManager::GetInstance()->Update();
@@ -64,5 +68,5 @@ void MyGame::PostEffectDraw()
 
 void MyGame::LoadAsset()
 {
-	
+	SceneChangeAnimation::GetInstance()->StaticInitialize();
 }

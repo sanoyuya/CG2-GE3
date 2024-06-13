@@ -17,7 +17,7 @@ void GameTimer::Reset()
 void GameTimer::ImGuiUpdate()
 {
 	ImGui::Begin("GameTimer");
-	ImGui::SliderFloat("nowFlame", &flameCount_, 0, gameTime_ * 0.95f);
+	ImGui::SliderFloat("nowFlame", &flameCount_, 0, 1800);
 	ImGui::SliderFloat("timeSpeed", &timeSpeed_, 0.1f, 5.0f);
 	ImGui::Text("nowTime:%d", intTime_);
 	ImGui::End();
