@@ -44,6 +44,11 @@ private:
 	int32_t score_ = 0;
 	char scoreStrNum_[7];
 
+	//通信関係
+	bool isConect = false;
+
+	int ranking[5];
+
 public:
 
 	//初期化処理

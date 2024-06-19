@@ -3,6 +3,57 @@
 #include"SceneChangeAnimation.h"
 #include"EasingFunction.h"
 #include <algorithm>
+#include<cpprest/filestream.h>
+#include<cpprest/http_client.h>
+#include<imgui.h>
+
+using namespace utility;//文字列変換などの一般的なユーティリティ
+using namespace web;//URIのような共通な機能
+using namespace web::http;//共通のHTTP機能
+using namespace web::http::client;//HTTPクライアントの機能
+using namespace concurrency::streams;//非同期ストリーム
+
+template<class T>
+pplx::task<T>Get(const std::wstring& url)
+{
+	return pplx::create_task([=]
+		{
+			http_client client(url);
+			return client.request(methods::GET);
+		}).then([](http_response response)
+			{
+				if (response.status_code() == status_codes::OK)
+				{
+					return response.extract_json();
+				}
+				else
+				{
+					throw std::runtime_error("Received non-OK HTTP status code");
+				}
+			});
+}
+
+pplx::task<int>Post(const std::wstring& url,int32_t score)
+{
+	return pplx::create_task([=]
+		{
+			json::value postData;
+			postData[L"score"] = score;
+
+			http_client client(url);
+			return client.request(methods::POST, L"", postData.serialize(), L"application/json"); }).then([](http_response response)
+				{
+					if (response.status_code() == status_codes::OK)
+					{
+						return response.extract_json();
+					}
+					else
+					{
+						throw std::runtime_error("Received non-OK HTTP status code");
+					}}).then([](json::value json) {
+						return json[L"status_code"].as_integer();
+						});	
+}
 
 void GameScene::Initialize()
 {
@@ -87,6 +138,34 @@ void GameScene::Update()
 
 		alpha_ = 1.0f;
 
+		//APIに通信する
+		if (isConect == false)
+		{
+			try
+			{
+				auto serverStatusCode = Post(L"http://localhost:3000/scores/", score_).wait();
+
+				//スコアの登録が完了したら、ランキングを取得する。POSTがうまくいくと1が返ってくる
+				if (serverStatusCode == 1)
+				{
+					//投稿に成功したらGET通信でランキングを取得する
+					auto task = Get<json::value>(L"http://localhost:3000/scores/");
+					const json::value j = task.get();
+					auto array = j.as_array();
+
+					//JSONオブジェクトから必要部分を切り出してint型の配列に代入
+					for (int i = 0; i < array.size(); i++)
+					{
+						ranking[i] = array[i].at(U("score")).as_integer();
+					}
+				}
+			}
+			catch (const std::exception& e)
+			{
+				ImGui::Text("Error exception:%s\n", e.what());
+			}
+		}
+
 		break;
 	default:
 		break;
@@ -110,6 +189,12 @@ void GameScene::Draw()
 	scale = 1.0f;
 	interval = 40.0f * scale;
 
+	for (uint8_t i = 0; i < maxDig_-1; i++)
+	{
+		num = time2StrNum[i] - 48;
+		time2Sprite_[i]->DrawAnimationSpriteX2D({ i * interval + 1000.0f - interval * maxDig_,GameHeader::windowsCenter_.y +12.0f }, 10, num, { 1.0f,1.0f ,1.0f ,alpha_ }, { scale ,scale });
+	}
+
 	period->DrawSprite2D({ 700.0f ,GameHeader::windowsCenter_.y + 24.0f }, { 1.0f,1.0f ,1.0f ,alpha_ }, { scale ,scale });
 
 	if (modeFlag_ == Mode::END)
@@ -119,11 +204,6 @@ void GameScene::Draw()
 			num = scoreStrNum_[i] - 48;
 			scoreSprite_[i]->DrawAnimationSpriteX2D({ i * interval + 700.0f - interval * scoreDig_,GameHeader::windowsCenter_.y +300.0f }, 10, num, { 1.0f,1.0f ,1.0f ,1.0f }, { scale ,scale });
 		}
-	}
-	for (uint8_t i = 0; i < scoreDig_; i++)
-	{
-		num = scoreStrNum_[i] - 48;
-		scoreSprite_[i]->DrawAnimationSpriteX2D({ i * interval + 700.0f - interval * scoreDig_,GameHeader::windowsCenter_.y + 300.0f }, 10, num, { 1.0f,1.0f ,1.0f ,1.0f }, { scale ,scale });
 	}
 
 	SceneChangeAnimation::GetInstance()->Draw();
