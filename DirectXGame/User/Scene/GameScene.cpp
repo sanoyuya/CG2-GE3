@@ -158,6 +158,8 @@ void GameScene::Update()
 					{
 						ranking[i] = array[i].at(U("score")).as_integer();
 					}
+
+					isConect = true;
 				}
 			}
 			catch (const std::exception& e)
