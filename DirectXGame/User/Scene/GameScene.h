@@ -45,7 +45,8 @@ private:
 	char scoreStrNum_[7];
 
 	//通信関係
-	bool isConect = false;
+	bool isConect_ = false;
+	bool isLogin_ = false;
 
 	int ranking[5];
 

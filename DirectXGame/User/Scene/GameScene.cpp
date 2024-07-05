@@ -55,6 +55,29 @@ pplx::task<int>Post(const std::wstring& url,int32_t score)
 						});	
 }
 
+pplx::task<int>Login(const std::wstring& url)
+{
+	return pplx::create_task([=]
+		{
+			json::value postData;
+
+			postData[L"name"] = json::value::string(L"sano");
+			postData[L"password"] = json::value::string(L"password");
+
+			http_client client(url);
+			return client.request(methods::POST, L"", postData.serialize(), L"application/json");
+		}).then([](http_response response)
+			{
+				if (response.status_code() == status_codes::OK)
+				{
+					return response.extract_json();
+				}
+			}).then([](json::value json)
+				{
+					return json[L"login_status"].as_integer();
+				});
+}
+
 void GameScene::Initialize()
 {
 	input_ = InputManager::GetInstance();
@@ -138,9 +161,32 @@ void GameScene::Update()
 
 		alpha_ = 1.0f;
 
-		//APIに通信する
-		if (isConect == false)
+		if (isLogin_ == false)
 		{
+			if (input_->KeyboardTriggerPush(DIK_SPACE))
+			{
+				isConect_ = true;
+			}
+		}
+
+		//APIに通信する
+		if (isConect_ == true)
+		{
+			try 
+			{
+				auto loginStatus = Login(L"http://localhost:3000/users/login").wait();
+				if (loginStatus == 1)
+				{
+					isLogin_ = true;
+					isConect_ = false;
+					ImGui::Text("SUCCESS\n");
+				}
+			}
+			catch (const std::exception& e)
+			{
+				ImGui::Text("Error exception:%s\n", e.what());
+			}
+
 			try
 			{
 				auto serverStatusCode = Post(L"http://localhost:3000/scores/", score_).wait();
@@ -159,12 +205,19 @@ void GameScene::Update()
 						ranking[i] = array[i].at(U("score")).as_integer();
 					}
 
-					isConect = true;
+					isConect_ = true;
 				}
 			}
 			catch (const std::exception& e)
 			{
 				ImGui::Text("Error exception:%s\n", e.what());
+			}
+		}
+		else
+		{
+			if (input_->KeyboardTriggerPush(DIK_SPACE))
+			{
+				isLogin_ = false;
 			}
 		}
 
