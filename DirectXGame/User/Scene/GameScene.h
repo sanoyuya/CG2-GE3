@@ -4,6 +4,7 @@
 #include"myMath.h"
 #include"GameTimer.h"
 #include"InputManager.h"
+#include"Player.h"
 
 class GameScene:public BaseScene
 {
@@ -13,6 +14,8 @@ private:
 	InputManager* input_ = nullptr;
 
 	std::unique_ptr<GameTimer>gameTimer_;
+
+	std::unique_ptr<Player>player_;
 
 public:
 
