@@ -26,7 +26,7 @@ pplx::task<T>Get(const std::wstring& url, std::wstring& token_)
 		{
 			http_client client(url);
 			http_request req(methods::GET);
-			req.headers().add(L"Authorization",L"Bearer" + token_);
+			req.headers().add(L"Authorization",L"Bearer " + token_);
 			return client.request(req);
 		}).then([](http_response response)
 			{
@@ -49,7 +49,7 @@ pplx::task<int>Post(const std::wstring& url,int32_t score, std::wstring& token_)
 			postData[L"score"] = score;
 
 			http_request req(methods::POST);
-			req.headers().add(L"Authorization", L"Bearer" + token_);
+			req.headers().add(L"Authorization", L"Bearer " + token_);
 			req.headers().add(L"Content-Type", L"application/json");
 			req.set_body(postData.serialize());
 
@@ -228,8 +228,7 @@ void GameScene::Update()
 							rank_[i].name = wstringToString(array[i].at(U("user")).at(U("name")).as_string());
 							rank_[i].score = array[i].at(U("score")).as_integer();
 						}
-
-						isConect_ = true;
+						isConect_ = false;
 					}
 				}
 				catch (const std::exception& e)
@@ -242,7 +241,6 @@ void GameScene::Update()
 		{
 			if (input_->KeyboardTriggerPush(DIK_SPACE))
 			{
-				isLogin_ = false;
 				modeFlag_ = Mode::RESULT;
 			}
 		}
@@ -255,10 +253,11 @@ void GameScene::Update()
 			SceneChangeAnimation::GetInstance()->Change("TITLE");
 		}
 
-		for (uint8_t i = 0; i < 5; i++)
-		{
-			ImGui::Text("ranking:%d",rank_[i].score);
-		}
+		ImGui::Text("1st : %d", rank_[0].score);
+		ImGui::Text("2nd : %d", rank_[1].score);
+		ImGui::Text("3rd : %d", rank_[2].score);
+		ImGui::Text("4th : %d", rank_[3].score);
+		ImGui::Text("5th : %d", rank_[4].score);
 		break;
 	default:
 		break;
