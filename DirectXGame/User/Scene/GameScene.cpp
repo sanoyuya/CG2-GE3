@@ -6,6 +6,7 @@
 #include<cpprest/filestream.h>
 #include<cpprest/http_client.h>
 #include<imgui.h>
+#include <codecvt>
 
 using namespace utility;//文字列変換などの一般的なユーティリティ
 using namespace web;//URIのような共通な機能
@@ -13,13 +14,20 @@ using namespace web::http;//共通のHTTP機能
 using namespace web::http::client;//HTTPクライアントの機能
 using namespace concurrency::streams;//非同期ストリーム
 
+std::string wstringToString(const std::wstring& wstr) {
+	std::string str(wstr.begin(), wstr.end());
+	return str;
+}
+
 template<class T>
-pplx::task<T>Get(const std::wstring& url)
+pplx::task<T>Get(const std::wstring& url, std::wstring& token_)
 {
 	return pplx::create_task([=]
 		{
 			http_client client(url);
-			return client.request(methods::GET);
+			http_request req(methods::GET);
+			req.headers().add(L"Authorization",L"Bearer" + token_);
+			return client.request(req);
 		}).then([](http_response response)
 			{
 				if (response.status_code() == status_codes::OK)
@@ -33,15 +41,20 @@ pplx::task<T>Get(const std::wstring& url)
 			});
 }
 
-pplx::task<int>Post(const std::wstring& url,int32_t score)
+pplx::task<int>Post(const std::wstring& url,int32_t score, std::wstring& token_)
 {
 	return pplx::create_task([=]
 		{
 			json::value postData;
 			postData[L"score"] = score;
 
+			http_request req(methods::POST);
+			req.headers().add(L"Authorization", L"Bearer" + token_);
+			req.headers().add(L"Content-Type", L"application/json");
+			req.set_body(postData.serialize());
+
 			http_client client(url);
-			return client.request(methods::POST, L"", postData.serialize(), L"application/json"); }).then([](http_response response)
+			return client.request(req); }).then([&](http_response response)
 				{
 					if (response.status_code() == status_codes::OK)
 					{
@@ -55,13 +68,13 @@ pplx::task<int>Post(const std::wstring& url,int32_t score)
 						});	
 }
 
-pplx::task<int>Login(const std::wstring& url)
+pplx::task<int>Login(const std::wstring& url, std::wstring& token)
 {
 	return pplx::create_task([=]
 		{
 			json::value postData;
 
-			postData[L"name"] = json::value::string(L"sano");
+			postData[L"name"] = json::value::string(L"sano100");
 			postData[L"password"] = json::value::string(L"password");
 
 			http_client client(url);
@@ -72,9 +85,22 @@ pplx::task<int>Login(const std::wstring& url)
 				{
 					return response.extract_json();
 				}
-			}).then([](json::value json)
+				else
 				{
-					return json[L"login_status"].as_integer();
+					throw std::runtime_error("Received non-OK HTTP status code");
+				}
+			}).then([&](json::value json)
+				{
+					token = json[L"token"].as_string();
+					std::wstring status = json[L"login_status"].as_string();
+					if (status == L"success")
+					{
+						return 1;
+					}
+					else
+					{
+						return 0;
+					}
 				});
 }
 
@@ -154,11 +180,6 @@ void GameScene::Update()
 		break;
 	case Mode::END:
 
-		if (input_->KeyboardTriggerPush(DIK_SPACE))
-		{
-			SceneChangeAnimation::GetInstance()->Change("TITLE");
-		}
-
 		alpha_ = 1.0f;
 
 		if (isLogin_ == false)
@@ -174,7 +195,7 @@ void GameScene::Update()
 		{
 			try 
 			{
-				auto loginStatus = Login(L"http://localhost:3000/users/login").wait();
+				auto loginStatus = Login(L"https://swgame-sanoyuyas-projects.vercel.app/users/login",token_).wait();
 				if (loginStatus == 1)
 				{
 					isLogin_ = true;
@@ -187,30 +208,34 @@ void GameScene::Update()
 				ImGui::Text("Error exception:%s\n", e.what());
 			}
 
-			try
+			if (isLogin_ == true)
 			{
-				auto serverStatusCode = Post(L"http://localhost:3000/scores/", score_).wait();
-
-				//スコアの登録が完了したら、ランキングを取得する。POSTがうまくいくと1が返ってくる
-				if (serverStatusCode == 1)
+				try
 				{
-					//投稿に成功したらGET通信でランキングを取得する
-					auto task = Get<json::value>(L"http://localhost:3000/scores/");
-					const json::value j = task.get();
-					auto array = j.as_array();
+					auto serverStatusCode = Post(L"https://swgame-sanoyuyas-projects.vercel.app/scores", score_,token_).wait();
 
-					//JSONオブジェクトから必要部分を切り出してint型の配列に代入
-					for (int i = 0; i < array.size(); i++)
+					//スコアの登録が完了したら、ランキングを取得する。POSTがうまくいくと1が返ってくる
+					if (serverStatusCode == 1)
 					{
-						ranking[i] = array[i].at(U("score")).as_integer();
-					}
+						//投稿に成功したらGET通信でランキングを取得する
+						auto task = Get<json::value>(L"https://swgame-sanoyuyas-projects.vercel.app/scores", token_);
+						const json::value j = task.get();
+						auto array = j.as_array();
 
-					isConect_ = true;
+						//JSONオブジェクトから必要部分を切り出してint型の配列に代入
+						for (int i = 0; i < array.size(); i++)
+						{
+							rank_[i].name = wstringToString(array[i].at(U("user")).at(U("name")).as_string());
+							rank_[i].score = array[i].at(U("score")).as_integer();
+						}
+
+						isConect_ = true;
+					}
 				}
-			}
-			catch (const std::exception& e)
-			{
-				ImGui::Text("Error exception:%s\n", e.what());
+				catch (const std::exception& e)
+				{
+					ImGui::Text("Error exception:%s\n", e.what());
+				}
 			}
 		}
 		else
@@ -218,9 +243,22 @@ void GameScene::Update()
 			if (input_->KeyboardTriggerPush(DIK_SPACE))
 			{
 				isLogin_ = false;
+				modeFlag_ = Mode::RESULT;
 			}
 		}
 
+		break;
+	case Mode::RESULT:
+
+		if (input_->KeyboardTriggerPush(DIK_SPACE))
+		{
+			SceneChangeAnimation::GetInstance()->Change("TITLE");
+		}
+
+		for (uint8_t i = 0; i < 5; i++)
+		{
+			ImGui::Text("ranking:%d",rank_[i].score);
+		}
 		break;
 	default:
 		break;

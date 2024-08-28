@@ -9,7 +9,14 @@ enum class Mode
 {
 	START,
 	GAME,
-	END
+	END,
+	RESULT
+};
+
+struct Ranking
+{
+	int score;
+	std::string name;
 };
 
 class GameScene:public BaseScene
@@ -48,7 +55,8 @@ private:
 	bool isConect_ = false;
 	bool isLogin_ = false;
 
-	int ranking[5];
+	Ranking rank_[5];
+	std::wstring token_;
 
 public:
 
