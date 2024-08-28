@@ -253,11 +253,13 @@ void GameScene::Update()
 			SceneChangeAnimation::GetInstance()->Change("TITLE");
 		}
 
+		ImGui::Begin("ranking");
 		ImGui::Text("1st : %d", rank_[0].score);
 		ImGui::Text("2nd : %d", rank_[1].score);
 		ImGui::Text("3rd : %d", rank_[2].score);
 		ImGui::Text("4th : %d", rank_[3].score);
 		ImGui::Text("5th : %d", rank_[4].score);
+		ImGui::End();
 		break;
 	default:
 		break;
